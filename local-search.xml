@@ -4,6 +4,25 @@
   
   
   <entry>
+    <title>第三方层面</title>
+    <link href="/2022/07/22/%E7%AC%AC%E4%B8%89%E6%96%B9%E5%B1%82%E9%9D%A2/"/>
+    <url>/2022/07/22/%E7%AC%AC%E4%B8%89%E6%96%B9%E5%B1%82%E9%9D%A2/</url>
+    
+    <content type="html"><![CDATA[<h1 id="第三方层面"><a href="#第三方层面" class="headerlink" title="第三方层面"></a>第三方层面</h1><h2 id="1-常见的第三方"><a href="#1-常见的第三方" class="headerlink" title="1.常见的第三方"></a>1.常见的第三方</h2><ul><li>Jboss</li><li>PHPmyadmin</li><li>vsftpd</li><li>teamview</li><li>自己下载的其他软件（比如谷歌浏览器）</li></ul><h2 id="2-如何判断第三方平台"><a href="#2-如何判断第三方平台" class="headerlink" title="2.如何判断第三方平台"></a>2.如何判断第三方平台</h2><p>不同的第三方平台所判断的方法和标准都不相同，譬如phpmyadmin的判定是可以通过网站扫描其目录来判定，如果网站扫描不出来，可以尝试端口等方法去判断。如果nmap扫描不出来，可能是有第三方防护软件（安全狗）等拦截。还有可能是对方服务部署在内网。</p><p>总而言之，判断第三方层面需要多层面多方法的进行，需要进行积累和沉淀。</p><h2 id="3-为什么要识别第三方平台或软件"><a href="#3-为什么要识别第三方平台或软件" class="headerlink" title="3.为什么要识别第三方平台或软件"></a>3.为什么要识别第三方平台或软件</h2><p>不同的第三方软件或工具存在不同的漏洞、识别到更多的信息对收集到的漏洞也就越多。</p><h2 id="4-第三方平台或软件被攻击的危害"><a href="#4-第三方平台或软件被攻击的危害" class="headerlink" title="4.第三方平台或软件被攻击的危害"></a>4.第三方平台或软件被攻击的危害</h2><p>  直接获取到软件的权限便于进一步的提权和攻击。</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>web</category>
+      
+    </categories>
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>数据库层面</title>
     <link href="/2022/07/13/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%B1%82%E9%9D%A2/"/>
     <url>/2022/07/13/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%B1%82%E9%9D%A2/</url>
