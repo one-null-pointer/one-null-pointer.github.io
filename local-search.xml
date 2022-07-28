@@ -4,6 +4,44 @@
   
   
   <entry>
+    <title>（一）基于表单的暴力破解</title>
+    <link href="/2022/07/28/%EF%BC%88%E4%B8%80%EF%BC%89%E5%9F%BA%E4%BA%8E%E8%A1%A8%E5%8D%95%E7%9A%84%E6%9A%B4%E5%8A%9B%E7%A0%B4%E8%A7%A3/"/>
+    <url>/2022/07/28/%EF%BC%88%E4%B8%80%EF%BC%89%E5%9F%BA%E4%BA%8E%E8%A1%A8%E5%8D%95%E7%9A%84%E6%9A%B4%E5%8A%9B%E7%A0%B4%E8%A7%A3/</url>
+    
+    <content type="html"><![CDATA[<h1 id="（一）基于表单的暴力破解"><a href="#（一）基于表单的暴力破解" class="headerlink" title="（一）基于表单的暴力破解"></a>（一）基于表单的暴力破解</h1><h4 id="1-表单登录界面"><a href="#1-表单登录界面" class="headerlink" title="1.  表单登录界面"></a>1.  表单登录界面</h4><p><img src="/img/%EF%BC%88%E4%B8%80%EF%BC%89%E5%9F%BA%E4%BA%8E%E8%A1%A8%E5%8D%95%E7%9A%84%E6%9A%B4%E5%8A%9B%E7%A0%B4%E8%A7%A3/1.png"></p><p>通过登录界面可以看到没有验证码要求，可以直接使用暴力破解</p><h4 id="2-随意输入账号密码查看反馈情况"><a href="#2-随意输入账号密码查看反馈情况" class="headerlink" title="2. 随意输入账号密码查看反馈情况"></a>2. 随意输入账号密码查看反馈情况</h4><p><img src="/img/%EF%BC%88%E4%B8%80%EF%BC%89%E5%9F%BA%E4%BA%8E%E8%A1%A8%E5%8D%95%E7%9A%84%E6%9A%B4%E5%8A%9B%E7%A0%B4%E8%A7%A3/2.png"></p><p>发现会提示显示账号密码并不存在</p><h4 id="3-使用burp进行抓包查看"><a href="#3-使用burp进行抓包查看" class="headerlink" title="3.使用burp进行抓包查看"></a>3.使用burp进行抓包查看</h4><p><img src="/img/%EF%BC%88%E4%B8%80%EF%BC%89%E5%9F%BA%E4%BA%8E%E8%A1%A8%E5%8D%95%E7%9A%84%E6%9A%B4%E5%8A%9B%E7%A0%B4%E8%A7%A3/3.png"></p><h4 id="4-发送给intruder板块进行暴力破解操作"><a href="#4-发送给intruder板块进行暴力破解操作" class="headerlink" title="4.发送给intruder板块进行暴力破解操作"></a>4.发送给intruder板块进行暴力破解操作</h4><p><img src="/img/%EF%BC%88%E4%B8%80%EF%BC%89%E5%9F%BA%E4%BA%8E%E8%A1%A8%E5%8D%95%E7%9A%84%E6%9A%B4%E5%8A%9B%E7%A0%B4%E8%A7%A3/4-16590182420151.png"></p><p>注意使用类别，根据情况点击并使用add$设置变量</p><h4 id="5-buro选择字典形式"><a href="#5-buro选择字典形式" class="headerlink" title="5.buro选择字典形式"></a>5.buro选择字典形式</h4><p>可以使用Simple list手动在下面添加，也可以使用Runtime file添加字典，这里使用Runtime file。</p><p><img src="/img/%EF%BC%88%E4%B8%80%EF%BC%89%E5%9F%BA%E4%BA%8E%E8%A1%A8%E5%8D%95%E7%9A%84%E6%9A%B4%E5%8A%9B%E7%A0%B4%E8%A7%A3/5.png"></p><h4 id="6-构建用户名和密码字典"><a href="#6-构建用户名和密码字典" class="headerlink" title="6.构建用户名和密码字典"></a>6.构建用户名和密码字典</h4><p><img src="/img/%EF%BC%88%E4%B8%80%EF%BC%89%E5%9F%BA%E4%BA%8E%E8%A1%A8%E5%8D%95%E7%9A%84%E6%9A%B4%E5%8A%9B%E7%A0%B4%E8%A7%A3/7.png"></p><p><img src="/img/%EF%BC%88%E4%B8%80%EF%BC%89%E5%9F%BA%E4%BA%8E%E8%A1%A8%E5%8D%95%E7%9A%84%E6%9A%B4%E5%8A%9B%E7%A0%B4%E8%A7%A3/6.png" alt="6"></p><h4 id="7-开始字典攻击"><a href="#7-开始字典攻击" class="headerlink" title="7.开始字典攻击"></a>7.开始字典攻击</h4><p><img src="/img/%EF%BC%88%E4%B8%80%EF%BC%89%E5%9F%BA%E4%BA%8E%E8%A1%A8%E5%8D%95%E7%9A%84%E6%9A%B4%E5%8A%9B%E7%A0%B4%E8%A7%A3/8.png"></p><p>然后单击length可以看到一个长度比较小的，因为密码错误（username or password is not exists）和密码正确（login success）所弹出的字符串长度不一样，所以可以根据返回页面的长度来判断是否成功。</p><h4 id="8-查看对应response里的内容"><a href="#8-查看对应response里的内容" class="headerlink" title="8.查看对应response里的内容"></a>8.查看对应response里的内容</h4><p><img src="/img/%EF%BC%88%E4%B8%80%EF%BC%89%E5%9F%BA%E4%BA%8E%E8%A1%A8%E5%8D%95%E7%9A%84%E6%9A%B4%E5%8A%9B%E7%A0%B4%E8%A7%A3/9.png"></p><p>可以看见显示成功。</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>web</category>
+      
+    </categories>
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>暴力破解概述</title>
+    <link href="/2022/07/28/%E6%9A%B4%E5%8A%9B%E7%A0%B4%E8%A7%A3%E6%A6%82%E8%BF%B0/"/>
+    <url>/2022/07/28/%E6%9A%B4%E5%8A%9B%E7%A0%B4%E8%A7%A3%E6%A6%82%E8%BF%B0/</url>
+    
+    <content type="html"><![CDATA[<h1 id="暴力破解概述"><a href="#暴力破解概述" class="headerlink" title="暴力破解概述"></a>暴力破解概述</h1><h4 id="一、概述："><a href="#一、概述：" class="headerlink" title="一、概述："></a>一、概述：</h4><p>“暴力破解”是一攻击具手段，在web攻击中，一般会使用这种手段对应用系统的认证信息进行获取。 其过程就是使用大量的认证信息在认证接口进行尝试登录，直到得到正确的结果。 为了提高效率，暴力破解一般会使用带有字典的工具来进行自动化操作。理论上来说，大多数系统都是可以被暴力破解的，只要攻击者有足够强大的计算能力和时间。</p><h4 id="二、对象："><a href="#二、对象：" class="headerlink" title="二、对象："></a>二、对象：</h4><p>需要账号密码登录的端口</p><h4 id="三、组成："><a href="#三、组成：" class="headerlink" title="三、组成："></a>三、组成：</h4><p>连续性尝试+字典+自动化</p><h4 id="四、字典来源："><a href="#四、字典来源：" class="headerlink" title="四、字典来源："></a>四、字典来源：</h4><ul><li>常用的账号密码（弱口令）</li><li>互联网上被脱库后的账号密码（譬如当初csdn泄露的600w用户信息，也就是所谓的撞库）</li><li>使用特定的字符使用工具按照指定的规则进行排列组合算法生成不同的密码</li></ul><h4 id="五、暴力破解漏洞："><a href="#五、暴力破解漏洞：" class="headerlink" title="五、暴力破解漏洞："></a>五、暴力破解漏洞：</h4><p>如果一个网站没有对登录接口实施暴力破解的措施，或者实施了不合理的措施，则称该网站存在暴力破解漏洞。</p><h4 id="六、漏洞判断标准："><a href="#六、漏洞判断标准：" class="headerlink" title="六、漏洞判断标准："></a>六、漏洞判断标准：</h4><ul><li>是否要求用户设置了复杂的密码；</li><li>是否每次认证都使用了安全的验证码；</li><li>是否对尝试登录的行为进行判断和限制；</li><li>是否在必要的情况下采用了双因素认证；</li><li>等等</li></ul><h4 id="七、暴力破解漏洞测试流程："><a href="#七、暴力破解漏洞测试流程：" class="headerlink" title="七、暴力破解漏洞测试流程："></a>七、暴力破解漏洞测试流程：</h4><ol><li><p>确认登录端口的脆弱性</p><p>​        可以通过登录抓包的形式，观察验证元素和response信息等，判断是否存在被暴力破解的可能</p></li><li><p>对字典进行优化</p><p>​        根据实际情况选择不同的字典并对字典进行优化，提高爆破过程的效率。优化技巧：</p><ul><li>技巧一：根据注册提示信息进行优化，对目标站点进行注册，了解账号密码的限制条件，通过限制条件对字典进行相关优化</li><li>技巧二：如果爆破的是管理后台，往往这类系统的管理员是admin/administrator/root的可能性较高。，可以使用这三个账号+随机的密码进行登录尝试，并且根据反馈的结果确定用户名。譬如当返回“用户名或密码错误”时，则需要修改用户名和密码，若仅返回“密码错误”则基本可以确定用户名的准确性</li></ul></li><li><p>工具自动化操作</p><p>​        配置自动化工具（通过现成、超时时间、重复次数等），实现自动化爆破操作</p></li></ol><h4 id="八、Burp暴力破解板块（intruder）功能："><a href="#八、Burp暴力破解板块（intruder）功能：" class="headerlink" title="八、Burp暴力破解板块（intruder）功能："></a>八、Burp暴力破解板块（intruder）功能：</h4><ol><li>target：<ul><li>设置攻击目标，可以通过proxy发送</li></ul></li><li>pasition：<ul><li>niper（单字典，单position替换尝试）</li><li>Battering ram（单字典，多个Position同个秘钥尝试）</li><li>Pitchfork（多个字典，同序号进行替换）</li><li>Cluster bomb（多字典，多行对应多行的尝试）</li></ul></li><li>payloads：<ul><li>设置字典，并可以对字典进行统一的策略处理</li></ul></li><li>options：<ul><li>对扫描的线程、失败重试等进行配置</li><li>对结果设置设置匹配的flag：通过一个标识符来区别结果，并在结果栏中flag出来</li></ul></li></ol><p><img src="/img/%E6%9A%B4%E5%8A%9B%E7%A0%B4%E8%A7%A3%E6%A6%82%E8%BF%B0/1.jpg"></p>]]></content>
+    
+    
+    <categories>
+      
+      <category>web</category>
+      
+    </categories>
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>web漏洞类型</title>
     <link href="/2022/07/23/web%E6%BC%8F%E6%B4%9E%E7%B1%BB%E5%9E%8B/"/>
     <url>/2022/07/23/web%E6%BC%8F%E6%B4%9E%E7%B1%BB%E5%9E%8B/</url>
