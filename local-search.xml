@@ -4,11 +4,11 @@
   
   
   <entry>
-    <title>（一）基于表单的暴力破解</title>
-    <link href="/2022/07/28/%EF%BC%88%E4%B8%80%EF%BC%89%E5%9F%BA%E4%BA%8E%E8%A1%A8%E5%8D%95%E7%9A%84%E6%9A%B4%E5%8A%9B%E7%A0%B4%E8%A7%A3/"/>
-    <url>/2022/07/28/%EF%BC%88%E4%B8%80%EF%BC%89%E5%9F%BA%E4%BA%8E%E8%A1%A8%E5%8D%95%E7%9A%84%E6%9A%B4%E5%8A%9B%E7%A0%B4%E8%A7%A3/</url>
+    <title>基于表单的暴力破解</title>
+    <link href="/2022/07/28/%E5%9F%BA%E4%BA%8E%E8%A1%A8%E5%8D%95%E7%9A%84%E6%9A%B4%E5%8A%9B%E7%A0%B4%E8%A7%A3/"/>
+    <url>/2022/07/28/%E5%9F%BA%E4%BA%8E%E8%A1%A8%E5%8D%95%E7%9A%84%E6%9A%B4%E5%8A%9B%E7%A0%B4%E8%A7%A3/</url>
     
-    <content type="html"><![CDATA[<h1 id="（一）基于表单的暴力破解"><a href="#（一）基于表单的暴力破解" class="headerlink" title="（一）基于表单的暴力破解"></a>（一）基于表单的暴力破解</h1><h4 id="1-表单登录界面"><a href="#1-表单登录界面" class="headerlink" title="1.  表单登录界面"></a>1.  表单登录界面</h4><p><img src="/img/%EF%BC%88%E4%B8%80%EF%BC%89%E5%9F%BA%E4%BA%8E%E8%A1%A8%E5%8D%95%E7%9A%84%E6%9A%B4%E5%8A%9B%E7%A0%B4%E8%A7%A3/1.png"></p><p>通过登录界面可以看到没有验证码要求，可以直接使用暴力破解</p><h4 id="2-随意输入账号密码查看反馈情况"><a href="#2-随意输入账号密码查看反馈情况" class="headerlink" title="2. 随意输入账号密码查看反馈情况"></a>2. 随意输入账号密码查看反馈情况</h4><p><img src="/img/%EF%BC%88%E4%B8%80%EF%BC%89%E5%9F%BA%E4%BA%8E%E8%A1%A8%E5%8D%95%E7%9A%84%E6%9A%B4%E5%8A%9B%E7%A0%B4%E8%A7%A3/2.png"></p><p>发现会提示显示账号密码并不存在</p><h4 id="3-使用burp进行抓包查看"><a href="#3-使用burp进行抓包查看" class="headerlink" title="3.使用burp进行抓包查看"></a>3.使用burp进行抓包查看</h4><p><img src="/img/%EF%BC%88%E4%B8%80%EF%BC%89%E5%9F%BA%E4%BA%8E%E8%A1%A8%E5%8D%95%E7%9A%84%E6%9A%B4%E5%8A%9B%E7%A0%B4%E8%A7%A3/3.png"></p><h4 id="4-发送给intruder板块进行暴力破解操作"><a href="#4-发送给intruder板块进行暴力破解操作" class="headerlink" title="4.发送给intruder板块进行暴力破解操作"></a>4.发送给intruder板块进行暴力破解操作</h4><p><img src="/img/%EF%BC%88%E4%B8%80%EF%BC%89%E5%9F%BA%E4%BA%8E%E8%A1%A8%E5%8D%95%E7%9A%84%E6%9A%B4%E5%8A%9B%E7%A0%B4%E8%A7%A3/4-16590182420151.png"></p><p>注意使用类别，根据情况点击并使用add$设置变量</p><h4 id="5-buro选择字典形式"><a href="#5-buro选择字典形式" class="headerlink" title="5.buro选择字典形式"></a>5.buro选择字典形式</h4><p>可以使用Simple list手动在下面添加，也可以使用Runtime file添加字典，这里使用Runtime file。</p><p><img src="/img/%EF%BC%88%E4%B8%80%EF%BC%89%E5%9F%BA%E4%BA%8E%E8%A1%A8%E5%8D%95%E7%9A%84%E6%9A%B4%E5%8A%9B%E7%A0%B4%E8%A7%A3/5.png"></p><h4 id="6-构建用户名和密码字典"><a href="#6-构建用户名和密码字典" class="headerlink" title="6.构建用户名和密码字典"></a>6.构建用户名和密码字典</h4><p><img src="/img/%EF%BC%88%E4%B8%80%EF%BC%89%E5%9F%BA%E4%BA%8E%E8%A1%A8%E5%8D%95%E7%9A%84%E6%9A%B4%E5%8A%9B%E7%A0%B4%E8%A7%A3/7.png"></p><p><img src="/img/%EF%BC%88%E4%B8%80%EF%BC%89%E5%9F%BA%E4%BA%8E%E8%A1%A8%E5%8D%95%E7%9A%84%E6%9A%B4%E5%8A%9B%E7%A0%B4%E8%A7%A3/6.png" alt="6"></p><h4 id="7-开始字典攻击"><a href="#7-开始字典攻击" class="headerlink" title="7.开始字典攻击"></a>7.开始字典攻击</h4><p><img src="/img/%EF%BC%88%E4%B8%80%EF%BC%89%E5%9F%BA%E4%BA%8E%E8%A1%A8%E5%8D%95%E7%9A%84%E6%9A%B4%E5%8A%9B%E7%A0%B4%E8%A7%A3/8.png"></p><p>然后单击length可以看到一个长度比较小的，因为密码错误（username or password is not exists）和密码正确（login success）所弹出的字符串长度不一样，所以可以根据返回页面的长度来判断是否成功。</p><h4 id="8-查看对应response里的内容"><a href="#8-查看对应response里的内容" class="headerlink" title="8.查看对应response里的内容"></a>8.查看对应response里的内容</h4><p><img src="/img/%EF%BC%88%E4%B8%80%EF%BC%89%E5%9F%BA%E4%BA%8E%E8%A1%A8%E5%8D%95%E7%9A%84%E6%9A%B4%E5%8A%9B%E7%A0%B4%E8%A7%A3/9.png"></p><p>可以看见显示成功。</p>]]></content>
+    <content type="html"><![CDATA[<h1 id="基于表单的暴力破解"><a href="#基于表单的暴力破解" class="headerlink" title="基于表单的暴力破解"></a>基于表单的暴力破解</h1><h4 id="1-表单登录界面"><a href="#1-表单登录界面" class="headerlink" title="1.  表单登录界面"></a>1.  表单登录界面</h4><p><img src="/img/%EF%BC%88%E4%B8%80%EF%BC%89%E5%9F%BA%E4%BA%8E%E8%A1%A8%E5%8D%95%E7%9A%84%E6%9A%B4%E5%8A%9B%E7%A0%B4%E8%A7%A3/1.png"></p><p>通过登录界面可以看到没有验证码要求，可以直接使用暴力破解</p><h4 id="2-随意输入账号密码查看反馈情况"><a href="#2-随意输入账号密码查看反馈情况" class="headerlink" title="2. 随意输入账号密码查看反馈情况"></a>2. 随意输入账号密码查看反馈情况</h4><p><img src="/img/%EF%BC%88%E4%B8%80%EF%BC%89%E5%9F%BA%E4%BA%8E%E8%A1%A8%E5%8D%95%E7%9A%84%E6%9A%B4%E5%8A%9B%E7%A0%B4%E8%A7%A3/2.png"></p><p>发现会提示显示账号密码并不存在</p><h4 id="3-使用burp进行抓包查看"><a href="#3-使用burp进行抓包查看" class="headerlink" title="3.使用burp进行抓包查看"></a>3.使用burp进行抓包查看</h4><p><img src="/img/%EF%BC%88%E4%B8%80%EF%BC%89%E5%9F%BA%E4%BA%8E%E8%A1%A8%E5%8D%95%E7%9A%84%E6%9A%B4%E5%8A%9B%E7%A0%B4%E8%A7%A3/3.png"></p><h4 id="4-发送给intruder板块进行暴力破解操作"><a href="#4-发送给intruder板块进行暴力破解操作" class="headerlink" title="4.发送给intruder板块进行暴力破解操作"></a>4.发送给intruder板块进行暴力破解操作</h4><p><img src="/img/%EF%BC%88%E4%B8%80%EF%BC%89%E5%9F%BA%E4%BA%8E%E8%A1%A8%E5%8D%95%E7%9A%84%E6%9A%B4%E5%8A%9B%E7%A0%B4%E8%A7%A3/4-16590182420151.png"></p><p>注意使用类别，根据情况点击并使用add$设置变量</p><h4 id="5-buro选择字典形式"><a href="#5-buro选择字典形式" class="headerlink" title="5.buro选择字典形式"></a>5.buro选择字典形式</h4><p>可以使用Simple list手动在下面添加，也可以使用Runtime file添加字典，这里使用Runtime file。</p><p><img src="/img/%EF%BC%88%E4%B8%80%EF%BC%89%E5%9F%BA%E4%BA%8E%E8%A1%A8%E5%8D%95%E7%9A%84%E6%9A%B4%E5%8A%9B%E7%A0%B4%E8%A7%A3/5.png"></p><h4 id="6-构建用户名和密码字典"><a href="#6-构建用户名和密码字典" class="headerlink" title="6.构建用户名和密码字典"></a>6.构建用户名和密码字典</h4><p><img src="/img/%EF%BC%88%E4%B8%80%EF%BC%89%E5%9F%BA%E4%BA%8E%E8%A1%A8%E5%8D%95%E7%9A%84%E6%9A%B4%E5%8A%9B%E7%A0%B4%E8%A7%A3/7.png"></p><p><img src="/img/%EF%BC%88%E4%B8%80%EF%BC%89%E5%9F%BA%E4%BA%8E%E8%A1%A8%E5%8D%95%E7%9A%84%E6%9A%B4%E5%8A%9B%E7%A0%B4%E8%A7%A3/6.png" alt="6"></p><h4 id="7-开始字典攻击"><a href="#7-开始字典攻击" class="headerlink" title="7.开始字典攻击"></a>7.开始字典攻击</h4><p><img src="/img/%EF%BC%88%E4%B8%80%EF%BC%89%E5%9F%BA%E4%BA%8E%E8%A1%A8%E5%8D%95%E7%9A%84%E6%9A%B4%E5%8A%9B%E7%A0%B4%E8%A7%A3/8.png"></p><p>然后单击length可以看到一个长度比较小的，因为密码错误（username or password is not exists）和密码正确（login success）所弹出的字符串长度不一样，所以可以根据返回页面的长度来判断是否成功。</p><h4 id="8-查看对应response里的内容"><a href="#8-查看对应response里的内容" class="headerlink" title="8.查看对应response里的内容"></a>8.查看对应response里的内容</h4><p><img src="/img/%EF%BC%88%E4%B8%80%EF%BC%89%E5%9F%BA%E4%BA%8E%E8%A1%A8%E5%8D%95%E7%9A%84%E6%9A%B4%E5%8A%9B%E7%A0%B4%E8%A7%A3/9.png"></p><p>可以看见显示成功。</p>]]></content>
     
     
     <categories>
@@ -81,8 +81,8 @@
   
   <entry>
     <title>数据库层面</title>
-    <link href="/2022/07/13/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%B1%82%E9%9D%A2/"/>
-    <url>/2022/07/13/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%B1%82%E9%9D%A2/</url>
+    <link href="/2022/07/21/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%B1%82%E9%9D%A2/"/>
+    <url>/2022/07/21/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%B1%82%E9%9D%A2/</url>
     
     <content type="html"><![CDATA[<h1 id="数据库层面"><a href="#数据库层面" class="headerlink" title="数据库层面"></a>数据库层面</h1><h2 id="1-常见的数据库类型"><a href="#1-常见的数据库类型" class="headerlink" title="1.常见的数据库类型"></a>1.常见的数据库类型</h2><h5 id="1-小型数据库"><a href="#1-小型数据库" class="headerlink" title="1)小型数据库"></a>1)小型数据库</h5><p>​    Access</p><h5 id="2）中型数据库"><a href="#2）中型数据库" class="headerlink" title="2）中型数据库"></a>2）中型数据库</h5><p>​    MySQL</p><h5 id="3）大型数据库"><a href="#3）大型数据库" class="headerlink" title="3）大型数据库"></a>3）大型数据库</h5><p>​    Oracle、SQL Server</p><h2 id="2-数据库区分"><a href="#2-数据库区分" class="headerlink" title="2.数据库区分"></a>2.数据库区分</h2><h5 id="1）数据库常见搭配"><a href="#1）数据库常见搭配" class="headerlink" title="1）数据库常见搭配"></a>1）数据库常见搭配</h5><p>往往由于兼容性的问题，不同数据库所配合的搭建语言是不一样的，一般都是选取兼容性比较高的搭配，比如：</p><p>ASP+Access，sql server （windows）</p><p>PHP+Mysql（linux、windows） 端口：3306</p><p>ASPX+Mssql(windows) 端口：1433</p><p>Jsp+Mssql（windows）,oracle （linux、windows）端口：1521</p><p>Python+Mongodb （linux、windows）</p><p>  注：其中的access和mssql是windows官方的数据库，所以是不支持Liunx系统的。</p><h5 id="2）常见的数据库端口号（默认）"><a href="#2）常见的数据库端口号（默认）" class="headerlink" title="2）常见的数据库端口号（默认）"></a>2）常见的数据库端口号（默认）</h5><h6 id="关系型数据库："><a href="#关系型数据库：" class="headerlink" title="关系型数据库："></a>关系型数据库：</h6><p>sql server——–端口：1433</p><p>Mysql————-端口：3306</p><p>Oracle————-端口：1521</p><p>PostgreSQL——–端口：5432</p><p>SM达梦————-端口：5236</p><h6 id="非关系型数据库："><a href="#非关系型数据库：" class="headerlink" title="非关系型数据库："></a>非关系型数据库：</h6><p>Mongodb———端口：27017</p><p>Redis—————端口：6379</p><p>Memcached——–端口：11211</p><h5 id="3）nmap扫描识别数据库类型"><a href="#3）nmap扫描识别数据库类型" class="headerlink" title="3）nmap扫描识别数据库类型"></a>3）nmap扫描识别数据库类型</h5><p><img src="/img/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%B1%82%E9%9D%A2/1.png"></p><p>其中的STATE是代表端口的状态，状态主要就分为几种：</p><p>  Open：端口处于开放状态</p><p>  Closed：端口处于关闭状态</p><p>  Filtered：端口处于过了无法收到返回的probe状态</p><p>  UnFiltered：端口收到返回的probe，但无法确认</p><p>  Open/UnFiltered：端口处于开放或者未过滤状态</p><h2 id="3-数据库创建漏洞类型及攻击"><a href="#3-数据库创建漏洞类型及攻击" class="headerlink" title="3.数据库创建漏洞类型及攻击"></a>3.数据库创建漏洞类型及攻击</h2><p>数据库的不同代表其结构和相关的编译语言不同，每个数据库，他的安全机制和写法结构都有少许的不一样，所以他产生和存在的漏洞也就不同。比如以Access与Mysql数据库进行比较，不仅仅有存储方式上的区别，也有结构方面的区别。数据库的结构，架构的不同，决定了我们所攻击的方法和入手的地方。</p>]]></content>
     
@@ -99,16 +99,16 @@
   
   
   <entry>
-    <title>夕阳</title>
-    <link href="/2022/07/12/%E5%A4%95%E9%98%B3/"/>
-    <url>/2022/07/12/%E5%A4%95%E9%98%B3/</url>
+    <title>等保暂更</title>
+    <link href="/2022/07/13/%E7%AD%89%E4%BF%9D%E6%9A%82%E6%9B%B4/"/>
+    <url>/2022/07/13/%E7%AD%89%E4%BF%9D%E6%9A%82%E6%9B%B4/</url>
     
-    <content type="html"><![CDATA[<h1 id="夕阳"><a href="#夕阳" class="headerlink" title="夕阳"></a>夕阳</h1><p>跑完步后浅拍下五所的夕阳，确实是个养老的好地方。在夕阳下，两个人坐在太师椅上，也不说话，就摇啊摇，多是一件美事啊</p><p><img src="/img/%E5%A4%95%E9%98%B3/0.jpg"></p><p><img src="/img/%E5%A4%95%E9%98%B3/1.jpg"></p><p><img src="/img/%E5%A4%95%E9%98%B3/2.jpg"></p>]]></content>
+    <content type="html"><![CDATA[<h1 id="等保暂更"><a href="#等保暂更" class="headerlink" title="等保暂更"></a>等保暂更</h1><p>等保文字内容比较多，现在还没太多时间更新（要看的东西太多了，又不像技术层面，要整理太耗费时间了），主要研究方向还是web安全的渗透部分，等以后有可以时间再更吧，一定会更的，不更是小狗（汪汪汪）！</p><ul><li><img src="/img/%E7%AD%89%E4%BF%9D%E6%9A%82%E6%9B%B4/1.png" style="zoom: 150%;" /></li></ul>]]></content>
     
     
     <categories>
       
-      <category>日记</category>
+      <category>web</category>
       
     </categories>
     
@@ -166,6 +166,25 @@
     <categories>
       
       <category>web</category>
+      
+    </categories>
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>夕阳</title>
+    <link href="/2022/07/11/%E5%A4%95%E9%98%B3/"/>
+    <url>/2022/07/11/%E5%A4%95%E9%98%B3/</url>
+    
+    <content type="html"><![CDATA[<h1 id="夕阳"><a href="#夕阳" class="headerlink" title="夕阳"></a>夕阳</h1><p>跑完步后浅拍下五所的夕阳，确实是个养老的好地方。在夕阳下，两个人坐在太师椅上，也不说话，就摇啊摇，多是一件美事啊</p><p><img src="/img/%E5%A4%95%E9%98%B3/0.jpg"></p><p><img src="/img/%E5%A4%95%E9%98%B3/1.jpg"></p><p><img src="/img/%E5%A4%95%E9%98%B3/2.jpg"></p>]]></content>
+    
+    
+    <categories>
+      
+      <category>日记</category>
       
     </categories>
     
