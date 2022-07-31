@@ -4,6 +4,25 @@
   
   
   <entry>
+    <title>基于验证码绕过（no server）的暴力破解</title>
+    <link href="/2022/07/30/%E5%9F%BA%E4%BA%8E%E9%AA%8C%E8%AF%81%E7%A0%81%E7%BB%95%E8%BF%87%EF%BC%88no%20server%EF%BC%89%E7%9A%84%E6%9A%B4%E5%8A%9B%E7%A0%B4%E8%A7%A3/"/>
+    <url>/2022/07/30/%E5%9F%BA%E4%BA%8E%E9%AA%8C%E8%AF%81%E7%A0%81%E7%BB%95%E8%BF%87%EF%BC%88no%20server%EF%BC%89%E7%9A%84%E6%9A%B4%E5%8A%9B%E7%A0%B4%E8%A7%A3/</url>
+    
+    <content type="html"><![CDATA[<h1 id="基于验证码绕过（no-server）的暴力破解"><a href="#基于验证码绕过（no-server）的暴力破解" class="headerlink" title="基于验证码绕过（no server）的暴力破解"></a>基于验证码绕过（no server）的暴力破解</h1><h4 id="1-打开登录界面"><a href="#1-打开登录界面" class="headerlink" title="1.打开登录界面"></a>1.打开登录界面</h4><center><img src="/img/%E5%9F%BA%E4%BA%8E%E9%AA%8C%E8%AF%81%E7%A0%81%E7%BB%95%E8%BF%87%EF%BC%88no%20server%EF%BC%89%E7%9A%84%E6%9A%B4%E5%8A%9B%E7%A0%B4%E8%A7%A3/1.jpg" style="zoom:80%;" /></center><p>可以看见存在验证码识别</p><h4 id="2-随意输入账号密码查看反馈情况"><a href="#2-随意输入账号密码查看反馈情况" class="headerlink" title="2.随意输入账号密码查看反馈情况"></a>2.随意输入账号密码查看反馈情况</h4><ul><li><p>用户密码输入错误情况</p><center><img src="/img/%E5%9F%BA%E4%BA%8E%E9%AA%8C%E8%AF%81%E7%A0%81%E7%BB%95%E8%BF%87%EF%BC%88no%20server%EF%BC%89%E7%9A%84%E6%9A%B4%E5%8A%9B%E7%A0%B4%E8%A7%A3/2.jpg" style="zoom: 67%;" /></center></li><li><p>验证码错误的情况：</p><center><img src="/img/%E5%9F%BA%E4%BA%8E%E9%AA%8C%E8%AF%81%E7%A0%81%E7%BB%95%E8%BF%87%EF%BC%88no%20server%EF%BC%89%E7%9A%84%E6%9A%B4%E5%8A%9B%E7%A0%B4%E8%A7%A3/3.jpg" style="zoom:67%;" /></center></li><li><p>验证码为空的情况：</p><center><img src="/img/%E5%9F%BA%E4%BA%8E%E9%AA%8C%E8%AF%81%E7%A0%81%E7%BB%95%E8%BF%87%EF%BC%88no%20server%EF%BC%89%E7%9A%84%E6%9A%B4%E5%8A%9B%E7%A0%B4%E8%A7%A3/4.jpg" style="zoom: 50%;" /></center></li></ul><h4 id="3-使用burp进行抓包查看"><a href="#3-使用burp进行抓包查看" class="headerlink" title="3.使用burp进行抓包查看"></a>3.使用burp进行抓包查看</h4><p><img src="/img/%E5%9F%BA%E4%BA%8E%E9%AA%8C%E8%AF%81%E7%A0%81%E7%BB%95%E8%BF%87%EF%BC%88no%20server%EF%BC%89%E7%9A%84%E6%9A%B4%E5%8A%9B%E7%A0%B4%E8%A7%A3/5.jpg"></p><h4 id="4-尝试操作包中的验证码内容"><a href="#4-尝试操作包中的验证码内容" class="headerlink" title="4.尝试操作包中的验证码内容"></a>4.尝试操作包中的验证码内容</h4><p>删除验证码：</p><p><img src="/img/%E5%9F%BA%E4%BA%8E%E9%AA%8C%E8%AF%81%E7%A0%81%E7%BB%95%E8%BF%87%EF%BC%88no%20server%EF%BC%89%E7%9A%84%E6%9A%B4%E5%8A%9B%E7%A0%B4%E8%A7%A3/6.jpg"></p><p>删除后发现反馈和不填验证码的效果是一样的。这说明后台对验证码进行了验证。</p><h4 id="5-使用Repeater模块"><a href="#5-使用Repeater模块" class="headerlink" title="5.使用Repeater模块"></a>5.使用Repeater模块</h4><p>尝试保证当前界面的验证码不变的情况下进行不同账户密码的登录情况</p><p><img src="/img/%E5%9F%BA%E4%BA%8E%E9%AA%8C%E8%AF%81%E7%A0%81%E7%BB%95%E8%BF%87%EF%BC%88no%20server%EF%BC%89%E7%9A%84%E6%9A%B4%E5%8A%9B%E7%A0%B4%E8%A7%A3/7.jpg"></p><p><img src="/img/%E5%9F%BA%E4%BA%8E%E9%AA%8C%E8%AF%81%E7%A0%81%E7%BB%95%E8%BF%87%EF%BC%88no%20server%EF%BC%89%E7%9A%84%E6%9A%B4%E5%8A%9B%E7%A0%B4%E8%A7%A3/8.jpg"></p><p>我们可以看见，在使用liaoyue和yue作为登录的账号密码时，验证码不改变，依旧反馈的是用户和密码错误。说明验证码并不是一码一用，只要不点击刷新这个验证码，就能一直用，生存期非常长。所以我们只需要固定验证码这个字符串，替换账号和密码就可以进行暴力破解。话不多说，开干！</p><h4 id="6-开始爆破"><a href="#6-开始爆破" class="headerlink" title="6.开始爆破"></a>6.开始爆破</h4><p>（具体过程不作更多阐述，可参考上一篇的基于表单的暴力破解，形式基本一样。）</p><p><img src="/img/%E5%9F%BA%E4%BA%8E%E9%AA%8C%E8%AF%81%E7%A0%81%E7%BB%95%E8%BF%87%EF%BC%88no%20server%EF%BC%89%E7%9A%84%E6%9A%B4%E5%8A%9B%E7%A0%B4%E8%A7%A3/9.jpg"></p><p>可以看见显示成功。</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>web</category>
+      
+    </categories>
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>基于表单的暴力破解</title>
     <link href="/2022/07/29/%E5%9F%BA%E4%BA%8E%E8%A1%A8%E5%8D%95%E7%9A%84%E6%9A%B4%E5%8A%9B%E7%A0%B4%E8%A7%A3/"/>
     <url>/2022/07/29/%E5%9F%BA%E4%BA%8E%E8%A1%A8%E5%8D%95%E7%9A%84%E6%9A%B4%E5%8A%9B%E7%A0%B4%E8%A7%A3/</url>
