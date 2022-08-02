@@ -16,23 +16,23 @@
   <meta name="author" content="liaoyue">
   <meta name="keywords" content="">
   
-    <meta name="description" content="基于验证码绕过（on client）的暴力破解1.打开登录界面可以看见存在验证码识别:   2.输入账号密码查看反馈情况 用户密码输入错误情况:  验证码错误的情况：  验证码为空的情况：   3.使用burp进行抓包 4.尝试操作包中的验证码内容  删除后发现反馈和验证码输入正确的效果是一样的。这说明前台对验证码进行了验证。 5.网页代码查看这里还提供一个思路就是使用开发者插件查看网页代码">
+    <meta name="description" content="实习相关内容梳理签了保密协议的啦。这是保密内容，不能看哦，看看其他的把！接下来这几天实习的活都是这个了，干就完了！ 保密协议，是指协议当事人之间就一方告知另一方的书面或口头信息，约定不得向任何第三方披露该等信息的协议。负有保密义务的当事人违反协议约定，将保密信息披露给第三方，将要承担民事责任甚至刑事责任。保密协议一般包括保密内容、责任主体、保密期限、保密义务及违约责任等条款。保密协议可以分为单方保">
 <meta property="og:type" content="article">
-<meta property="og:title" content="基于验证码绕过（on client）的暴力破解">
-<meta property="og:url" content="https://one-null-pointer.github.io/2022/07/30/%E5%9F%BA%E4%BA%8E%E9%AA%8C%E8%AF%81%E7%A0%81%E7%BB%95%E8%BF%87%EF%BC%88no%20client%EF%BC%89%E7%9A%84%E6%9A%B4%E5%8A%9B%E7%A0%B4%E8%A7%A3/index.html">
+<meta property="og:title" content="实习相关内容梳理">
+<meta property="og:url" content="https://one-null-pointer.github.io/2022/07/29/%E6%95%B0%E6%8D%AE%E5%AE%89%E5%85%A8%E6%97%A5%E8%AE%B0%E4%B8%89/index.html">
 <meta property="og:site_name" content="one-null-poniter">
-<meta property="og:description" content="基于验证码绕过（on client）的暴力破解1.打开登录界面可以看见存在验证码识别:   2.输入账号密码查看反馈情况 用户密码输入错误情况:  验证码错误的情况：  验证码为空的情况：   3.使用burp进行抓包 4.尝试操作包中的验证码内容  删除后发现反馈和验证码输入正确的效果是一样的。这说明前台对验证码进行了验证。 5.网页代码查看这里还提供一个思路就是使用开发者插件查看网页代码">
+<meta property="og:description" content="实习相关内容梳理签了保密协议的啦。这是保密内容，不能看哦，看看其他的把！接下来这几天实习的活都是这个了，干就完了！ 保密协议，是指协议当事人之间就一方告知另一方的书面或口头信息，约定不得向任何第三方披露该等信息的协议。负有保密义务的当事人违反协议约定，将保密信息披露给第三方，将要承担民事责任甚至刑事责任。保密协议一般包括保密内容、责任主体、保密期限、保密义务及违约责任等条款。保密协议可以分为单方保">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://one-null-pointer.github.io/img/web1.png">
-<meta property="article:published_time" content="2022-07-30T03:17:51.000Z">
-<meta property="article:modified_time" content="2022-08-02T15:38:20.496Z">
+<meta property="og:image" content="https://one-null-pointer.github.io/img/data.png">
+<meta property="article:published_time" content="2022-07-29T15:25:20.000Z">
+<meta property="article:modified_time" content="2022-08-02T15:40:43.411Z">
 <meta property="article:author" content="liaoyue">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://one-null-pointer.github.io/img/web1.png">
+<meta name="twitter:image" content="https://one-null-pointer.github.io/img/data.png">
   
   
   
-  <title>基于验证码绕过（on client）的暴力破解 - one-null-poniter</title>
+  <title>实习相关内容梳理 - one-null-poniter</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -185,7 +185,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="基于验证码绕过（on client）的暴力破解"></span>
+            <span id="subtitle" data-typed-text="实习相关内容梳理"></span>
           
         </div>
 
@@ -196,8 +196,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2022-07-30 11:17" pubdate>
-          July 30, 2022 am
+        <time datetime="2022-07-29 23:25" pubdate>
+          July 29, 2022 pm
         </time>
       </span>
     
@@ -208,7 +208,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          348 words
+          237 words
         
       </span>
     
@@ -219,7 +219,7 @@
         
         
         
-          3 mins
+          2 mins
         
       </span>
     
@@ -257,34 +257,14 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">基于验证码绕过（on client）的暴力破解</h1>
+            <h1 style="display: none">实习相关内容梳理</h1>
             
             
               <div class="markdown-body">
                 
-                <h1 id="基于验证码绕过（on-client）的暴力破解"><a href="#基于验证码绕过（on-client）的暴力破解" class="headerlink" title="基于验证码绕过（on client）的暴力破解"></a>基于验证码绕过（on client）的暴力破解</h1><h4 id="1-打开登录界面"><a href="#1-打开登录界面" class="headerlink" title="1.打开登录界面"></a>1.打开登录界面</h4><p>可以看见存在验证码识别:</p>
-<center><img src="/img/%E5%9F%BA%E4%BA%8E%E9%AA%8C%E8%AF%81%E7%A0%81%E7%BB%95%E8%BF%87%EF%BC%88no%20client%EF%BC%89%E7%9A%84%E6%9A%B4%E5%8A%9B%E7%A0%B4%E8%A7%A3/1.jpg" srcset="/img/loading.gif" lazyload style="zoom: 67%;" /></center>
-
-<h4 id="2-输入账号密码查看反馈情况"><a href="#2-输入账号密码查看反馈情况" class="headerlink" title="2.输入账号密码查看反馈情况"></a>2.输入账号密码查看反馈情况</h4><ul>
-<li><p>用户密码输入错误情况:</p>
-<center><img src="/img/%E5%9F%BA%E4%BA%8E%E9%AA%8C%E8%AF%81%E7%A0%81%E7%BB%95%E8%BF%87%EF%BC%88no%20client%EF%BC%89%E7%9A%84%E6%9A%B4%E5%8A%9B%E7%A0%B4%E8%A7%A3/4.jpg" srcset="/img/loading.gif" lazyload style="zoom:67%;" /></center></li>
-<li><p>验证码错误的情况：</p>
-<center><img src="/img/%E5%9F%BA%E4%BA%8E%E9%AA%8C%E8%AF%81%E7%A0%81%E7%BB%95%E8%BF%87%EF%BC%88no%20client%EF%BC%89%E7%9A%84%E6%9A%B4%E5%8A%9B%E7%A0%B4%E8%A7%A3/2.jpg" srcset="/img/loading.gif" lazyload style="zoom: 67%;" /></center></li>
-<li><p>验证码为空的情况：</p>
-<center><img src="/img/%E5%9F%BA%E4%BA%8E%E9%AA%8C%E8%AF%81%E7%A0%81%E7%BB%95%E8%BF%87%EF%BC%88no%20client%EF%BC%89%E7%9A%84%E6%9A%B4%E5%8A%9B%E7%A0%B4%E8%A7%A3/3.jpg" srcset="/img/loading.gif" lazyload style="zoom: 67%;" /></center></li>
-</ul>
-<h4 id="3-使用burp进行抓包"><a href="#3-使用burp进行抓包" class="headerlink" title="3.使用burp进行抓包"></a>3.使用burp进行抓包</h4><p><img src="/img/%E5%9F%BA%E4%BA%8E%E9%AA%8C%E8%AF%81%E7%A0%81%E7%BB%95%E8%BF%87%EF%BC%88no%20client%EF%BC%89%E7%9A%84%E6%9A%B4%E5%8A%9B%E7%A0%B4%E8%A7%A3/5.jpg" srcset="/img/loading.gif" lazyload alt="image-20220801115855834"></p>
-<h4 id="4-尝试操作包中的验证码内容"><a href="#4-尝试操作包中的验证码内容" class="headerlink" title="4.尝试操作包中的验证码内容"></a>4.尝试操作包中的验证码内容</h4><p><img src="/img/%E5%9F%BA%E4%BA%8E%E9%AA%8C%E8%AF%81%E7%A0%81%E7%BB%95%E8%BF%87%EF%BC%88no%20client%EF%BC%89%E7%9A%84%E6%9A%B4%E5%8A%9B%E7%A0%B4%E8%A7%A3/6.jpg" srcset="/img/loading.gif" lazyload></p>
-<p><img src="/img/%E5%9F%BA%E4%BA%8E%E9%AA%8C%E8%AF%81%E7%A0%81%E7%BB%95%E8%BF%87%EF%BC%88no%20client%EF%BC%89%E7%9A%84%E6%9A%B4%E5%8A%9B%E7%A0%B4%E8%A7%A3/7.jpg" srcset="/img/loading.gif" lazyload></p>
-<p>删除后发现反馈和验证码输入正确的效果是一样的。这说明前台对验证码进行了验证。</p>
-<h4 id="5-网页代码查看"><a href="#5-网页代码查看" class="headerlink" title="5.网页代码查看"></a>5.网页代码查看</h4><p>这里还提供一个思路就是使用开发者插件查看网页代码</p>
-<p><img src="/img/%E5%9F%BA%E4%BA%8E%E9%AA%8C%E8%AF%81%E7%A0%81%E7%BB%95%E8%BF%87%EF%BC%88no%20client%EF%BC%89%E7%9A%84%E6%9A%B4%E5%8A%9B%E7%A0%B4%E8%A7%A3/8.jpg" srcset="/img/loading.gif" lazyload></p>
-<p><img src="/img/%E5%9F%BA%E4%BA%8E%E9%AA%8C%E8%AF%81%E7%A0%81%E7%BB%95%E8%BF%87%EF%BC%88no%20client%EF%BC%89%E7%9A%84%E6%9A%B4%E5%8A%9B%E7%A0%B4%E8%A7%A3/9.jpg" srcset="/img/loading.gif" lazyload></p>
-<p>这里发现一段用js写的函数，实现了验证码的产生和判断。那么可以猜测后端那边根本就没有验证验证码，所有关于验证码的东西全在前端上。</p>
-<p>（首先使用开发者工具查看代码是最正确的办法，我这里直接删是为了偷懒！，结果想了想还是算了，不偷懒了）</p>
-<h4 id="6-开始爆破"><a href="#6-开始爆破" class="headerlink" title="6.开始爆破"></a>6.开始爆破</h4><p>（具体过程不作更多阐述，可参考上一篇的基于表单的暴力破解，形式基本一样。）</p>
-<p><img src="/img/%E5%9F%BA%E4%BA%8E%E9%AA%8C%E8%AF%81%E7%A0%81%E7%BB%95%E8%BF%87%EF%BC%88no%20client%EF%BC%89%E7%9A%84%E6%9A%B4%E5%8A%9B%E7%A0%B4%E8%A7%A3/10.jpg" srcset="/img/loading.gif" lazyload></p>
-<p>可以看见显示爆破成功</p>
+                <h1 id="实习相关内容梳理"><a href="#实习相关内容梳理" class="headerlink" title="实习相关内容梳理"></a>实习相关内容梳理</h1><p>签了保密协议的啦。这是保密内容，不能看哦，看看其他的把！接下来这几天实习的活都是这个了，干就完了！</p>
+<p>保密协议，是指协议当事人之间就一方告知另一方的书面或口头信息，约定不得向任何第三方披露该等信息的协议。负有保密义务的当事人违反协议约定，将保密信息披露给第三方，将要承担民事责任甚至刑事责任。保密协议一般包括保密内容、责任主体、保密期限、保密义务及违约责任等条款。保密协议可以分为单方保密协议和双方保密协议。单方保密协议是指一方对另一方单方面负有保密义务的协议。</p>
+<center><img src="/img/%E6%95%B0%E6%8D%AE%E5%AE%89%E5%85%A8%E6%97%A5%E8%AE%B0%E4%B8%89/1.png" srcset="/img/loading.gif" lazyload style="zoom:100%;" /></center>
 
                 
               </div>
@@ -303,7 +283,7 @@
     
       <span class="category-chain">
         
-  <a href="/categories/web/" class="category-chain-item">web</a>
+  <a href="/categories/%E4%BA%94%E6%89%80%E5%AE%9E%E4%B9%A0%E4%B9%8B%E6%95%B0%E6%8D%AE%E5%AE%89%E5%85%A8/" class="category-chain-item">五所实习之数据安全</a>
   
   
 
@@ -323,8 +303,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>基于验证码绕过（on client）的暴力破解</div>
-      <div>https://one-null-pointer.github.io/2022/07/30/基于验证码绕过（no client）的暴力破解/</div>
+      <div>实习相关内容梳理</div>
+      <div>https://one-null-pointer.github.io/2022/07/29/数据安全日记三/</div>
     </div>
     <div class="license-meta">
       
@@ -336,7 +316,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>Posted on</div>
-          <div>July 30, 2022</div>
+          <div>July 29, 2022</div>
         </div>
       
       
@@ -366,9 +346,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2022/07/31/%E5%9F%BA%E4%BA%8E%E9%AA%8C%E8%AF%81%E7%A0%81%E7%BB%95%E8%BF%87%EF%BC%88no%20server%EF%BC%89%E7%9A%84%E6%9A%B4%E5%8A%9B%E7%A0%B4%E8%A7%A3/" title="基于验证码绕过（on server）的暴力破解">
+                      <a href="/2022/07/30/%E5%9F%BA%E4%BA%8E%E9%AA%8C%E8%AF%81%E7%A0%81%E7%BB%95%E8%BF%87%EF%BC%88no%20client%EF%BC%89%E7%9A%84%E6%9A%B4%E5%8A%9B%E7%A0%B4%E8%A7%A3/" title="基于验证码绕过（on client）的暴力破解">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">基于验证码绕过（on server）的暴力破解</span>
+                        <span class="hidden-mobile">基于验证码绕过（on client）的暴力破解</span>
                         <span class="visible-mobile">Previous</span>
                       </a>
                     
@@ -376,8 +356,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2022/07/29/%E6%95%B0%E6%8D%AE%E5%AE%89%E5%85%A8%E6%97%A5%E8%AE%B0%E4%B8%89/" title="实习相关内容梳理">
-                        <span class="hidden-mobile">实习相关内容梳理</span>
+                      <a href="/2022/07/29/%E5%9F%BA%E4%BA%8E%E8%A1%A8%E5%8D%95%E7%9A%84%E6%9A%B4%E5%8A%9B%E7%A0%B4%E8%A7%A3/" title="基于表单的暴力破解">
+                        <span class="hidden-mobile">基于表单的暴力破解</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
