@@ -16,23 +16,23 @@
   <meta name="author" content="liaoyue">
   <meta name="keywords" content="">
   
-    <meta name="description" content="基于验证码绕过（on client）的暴力破解1.打开登录界面可以看见存在验证码识别:   2.输入账号密码查看反馈情况 用户密码输入错误情况:  验证码错误的情况：  验证码为空的情况：   3.使用burp进行抓包 4.尝试操作包中的验证码内容  删除后发现反馈和验证码输入正确的效果是一样的。这说明前台对验证码进行了验证。 5.网页代码查看这里还提供一个思路就是使用开发者插件查看网页代码">
+    <meta name="description" content="基于token防爆破的暴力破解前言：token防爆破原理① 当客户端发送请求时，服务器会对用户信息使用HS256算法及密钥进行签名，再将这个签名和数据一起作为Token一起返回给客户端 ② 服务器不保存Token，客户端保存Token ③ 当客户端再次发送请求时，在请求信息中将Token一起发给服务器 ④  服务器用同样的HS256算法和同样的密钥，对数据再进行一次签名，和客户端返回的Token的">
 <meta property="og:type" content="article">
-<meta property="og:title" content="基于验证码绕过（on client）的暴力破解">
-<meta property="og:url" content="https://one-null-pointer.github.io/2022/07/30/%E5%9F%BA%E4%BA%8E%E9%AA%8C%E8%AF%81%E7%A0%81%E7%BB%95%E8%BF%87%EF%BC%88no%20client%EF%BC%89%E7%9A%84%E6%9A%B4%E5%8A%9B%E7%A0%B4%E8%A7%A3/index.html">
+<meta property="og:title" content="基于token防爆破的暴力破解">
+<meta property="og:url" content="https://one-null-pointer.github.io/2022/08/01/%E5%9F%BA%E4%BA%8Etoken%E9%98%B2%E7%88%86%E7%A0%B4%E7%9A%84%E6%9A%B4%E5%8A%9B%E7%A0%B4%E8%A7%A3/index.html">
 <meta property="og:site_name" content="one-null-poniter">
-<meta property="og:description" content="基于验证码绕过（on client）的暴力破解1.打开登录界面可以看见存在验证码识别:   2.输入账号密码查看反馈情况 用户密码输入错误情况:  验证码错误的情况：  验证码为空的情况：   3.使用burp进行抓包 4.尝试操作包中的验证码内容  删除后发现反馈和验证码输入正确的效果是一样的。这说明前台对验证码进行了验证。 5.网页代码查看这里还提供一个思路就是使用开发者插件查看网页代码">
+<meta property="og:description" content="基于token防爆破的暴力破解前言：token防爆破原理① 当客户端发送请求时，服务器会对用户信息使用HS256算法及密钥进行签名，再将这个签名和数据一起作为Token一起返回给客户端 ② 服务器不保存Token，客户端保存Token ③ 当客户端再次发送请求时，在请求信息中将Token一起发给服务器 ④  服务器用同样的HS256算法和同样的密钥，对数据再进行一次签名，和客户端返回的Token的">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://one-null-pointer.github.io/img/web1.png">
-<meta property="article:published_time" content="2022-07-30T03:17:51.000Z">
-<meta property="article:modified_time" content="2022-08-02T10:07:27.452Z">
+<meta property="article:published_time" content="2022-08-01T08:52:47.000Z">
+<meta property="article:modified_time" content="2022-08-02T11:53:42.281Z">
 <meta property="article:author" content="liaoyue">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://one-null-pointer.github.io/img/web1.png">
   
   
   
-  <title>基于验证码绕过（on client）的暴力破解 - one-null-poniter</title>
+  <title>基于token防爆破的暴力破解 - one-null-poniter</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -185,7 +185,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="基于验证码绕过（on client）的暴力破解"></span>
+            <span id="subtitle" data-typed-text="基于token防爆破的暴力破解"></span>
           
         </div>
 
@@ -196,8 +196,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2022-07-30 11:17" pubdate>
-          July 30, 2022 am
+        <time datetime="2022-08-01 16:52" pubdate>
+          August 1, 2022 pm
         </time>
       </span>
     
@@ -208,7 +208,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          348 words
+          1k words
         
       </span>
     
@@ -219,7 +219,7 @@
         
         
         
-          3 mins
+          9 mins
         
       </span>
     
@@ -257,34 +257,46 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">基于验证码绕过（on client）的暴力破解</h1>
+            <h1 style="display: none">基于token防爆破的暴力破解</h1>
             
             
               <div class="markdown-body">
                 
-                <h1 id="基于验证码绕过（on-client）的暴力破解"><a href="#基于验证码绕过（on-client）的暴力破解" class="headerlink" title="基于验证码绕过（on client）的暴力破解"></a>基于验证码绕过（on client）的暴力破解</h1><h4 id="1-打开登录界面"><a href="#1-打开登录界面" class="headerlink" title="1.打开登录界面"></a>1.打开登录界面</h4><p>可以看见存在验证码识别:</p>
-<center><img src="/img/%E5%9F%BA%E4%BA%8E%E9%AA%8C%E8%AF%81%E7%A0%81%E7%BB%95%E8%BF%87%EF%BC%88no%20client%EF%BC%89%E7%9A%84%E6%9A%B4%E5%8A%9B%E7%A0%B4%E8%A7%A3/1.jpg" srcset="/img/loading.gif" lazyload style="zoom: 67%;" /></center>
+                <h1 id="基于token防爆破的暴力破解"><a href="#基于token防爆破的暴力破解" class="headerlink" title="基于token防爆破的暴力破解"></a>基于token防爆破的暴力破解</h1><h4 id="前言：token防爆破原理"><a href="#前言：token防爆破原理" class="headerlink" title="前言：token防爆破原理"></a>前言：token防爆破原理</h4><p>① 当客户端发送请求时，服务器会对用户信息使用HS256算法及密钥进行签名，再将这个签名和数据一起作为Token一起返回给客户端</p>
+<p>② 服务器不保存Token，客户端保存Token</p>
+<p>③ 当客户端再次发送请求时，在请求信息中将Token一起发给服务器</p>
+<p>④  服务器用同样的HS256算法和同样的密钥，对数据再进行一次签名，和客户端返回的Token的签名进行比较，如果验证成功，就向客户端返回请求的数据</p>
+<p><img src="/img/%E5%9F%BA%E4%BA%8Etoken%E9%98%B2%E7%88%86%E7%A0%B4%E7%9A%84%E6%9A%B4%E5%8A%9B%E7%A0%B4%E8%A7%A3/1.jpg" srcset="/img/loading.gif" lazyload></p>
+<p>简单来说，就是在High里面添加了一个token，用户每次访问改密页面时，服务器会返回一个随机的token，向服务器发起请求时，需要提交token参数，而服务器在收到请求时，会先检查token，只有token正确，才会处理客户端的请求。</p>
+<h4 id="1-打开登录界面"><a href="#1-打开登录界面" class="headerlink" title="1.打开登录界面"></a>1.打开登录界面</h4><p>可以看见没有验证码：</p>
+<center><img src="/img/%E5%9F%BA%E4%BA%8Etoken%E9%98%B2%E7%88%86%E7%A0%B4%E7%9A%84%E6%9A%B4%E5%8A%9B%E7%A0%B4%E8%A7%A3/2.jpg" srcset="/img/loading.gif" lazyload style="zoom:67%;" /></center>
 
-<h4 id="2-输入账号密码查看反馈情况"><a href="#2-输入账号密码查看反馈情况" class="headerlink" title="2.输入账号密码查看反馈情况"></a>2.输入账号密码查看反馈情况</h4><ul>
+<h4 id="2-输-入账号密码查看反馈情况"><a href="#2-输-入账号密码查看反馈情况" class="headerlink" title="2.输/入账号密码查看反馈情况"></a>2.输/入账号密码查看反馈情况</h4><ul>
 <li><p>用户密码输入错误情况:</p>
-<center><img src="/img/%E5%9F%BA%E4%BA%8E%E9%AA%8C%E8%AF%81%E7%A0%81%E7%BB%95%E8%BF%87%EF%BC%88no%20client%EF%BC%89%E7%9A%84%E6%9A%B4%E5%8A%9B%E7%A0%B4%E8%A7%A3/4.jpg" srcset="/img/loading.gif" lazyload style="zoom:67%;" /></center></li>
-<li><p>验证码错误的情况：</p>
-<center><img src="/img/%E5%9F%BA%E4%BA%8E%E9%AA%8C%E8%AF%81%E7%A0%81%E7%BB%95%E8%BF%87%EF%BC%88no%20client%EF%BC%89%E7%9A%84%E6%9A%B4%E5%8A%9B%E7%A0%B4%E8%A7%A3/2.jpg" srcset="/img/loading.gif" lazyload style="zoom: 67%;" /></center></li>
-<li><p>验证码为空的情况：</p>
-<center><img src="/img/%E5%9F%BA%E4%BA%8E%E9%AA%8C%E8%AF%81%E7%A0%81%E7%BB%95%E8%BF%87%EF%BC%88no%20client%EF%BC%89%E7%9A%84%E6%9A%B4%E5%8A%9B%E7%A0%B4%E8%A7%A3/3.jpg" srcset="/img/loading.gif" lazyload style="zoom: 67%;" /></center></li>
+<center><img src="/img/%E5%9F%BA%E4%BA%8Etoken%E9%98%B2%E7%88%86%E7%A0%B4%E7%9A%84%E6%9A%B4%E5%8A%9B%E7%A0%B4%E8%A7%A3/3.jpg" srcset="/img/loading.gif" lazyload style="zoom: 80%;" /></center></li>
+<li><p>简单暴力破解的情况：</p>
+<center><img src="/img/%E5%9F%BA%E4%BA%8Etoken%E9%98%B2%E7%88%86%E7%A0%B4%E7%9A%84%E6%9A%B4%E5%8A%9B%E7%A0%B4%E8%A7%A3/4.jpg" srcset="/img/loading.gif" lazyload style="zoom:67%;" /></center></li>
 </ul>
-<h4 id="3-使用burp进行抓包"><a href="#3-使用burp进行抓包" class="headerlink" title="3.使用burp进行抓包"></a>3.使用burp进行抓包</h4><p><img src="/img/%E5%9F%BA%E4%BA%8E%E9%AA%8C%E8%AF%81%E7%A0%81%E7%BB%95%E8%BF%87%EF%BC%88no%20client%EF%BC%89%E7%9A%84%E6%9A%B4%E5%8A%9B%E7%A0%B4%E8%A7%A3/5.jpg" srcset="/img/loading.gif" lazyload alt="image-20220801115855834"></p>
-<h4 id="4-尝试操作包中的验证码内容"><a href="#4-尝试操作包中的验证码内容" class="headerlink" title="4.尝试操作包中的验证码内容"></a>4.尝试操作包中的验证码内容</h4><p><img src="/img/%E5%9F%BA%E4%BA%8E%E9%AA%8C%E8%AF%81%E7%A0%81%E7%BB%95%E8%BF%87%EF%BC%88no%20client%EF%BC%89%E7%9A%84%E6%9A%B4%E5%8A%9B%E7%A0%B4%E8%A7%A3/6.jpg" srcset="/img/loading.gif" lazyload></p>
-<p><img src="/img/%E5%9F%BA%E4%BA%8E%E9%AA%8C%E8%AF%81%E7%A0%81%E7%BB%95%E8%BF%87%EF%BC%88no%20client%EF%BC%89%E7%9A%84%E6%9A%B4%E5%8A%9B%E7%A0%B4%E8%A7%A3/7.jpg" srcset="/img/loading.gif" lazyload></p>
-<p>删除后发现反馈和验证码输入正确的效果是一样的。这说明前台对验证码进行了验证。</p>
-<h4 id="5-网页代码查看"><a href="#5-网页代码查看" class="headerlink" title="5.网页代码查看"></a>5.网页代码查看</h4><p>这里还提供一个思路就是使用开发者插件查看网页代码</p>
-<p><img src="/img/%E5%9F%BA%E4%BA%8E%E9%AA%8C%E8%AF%81%E7%A0%81%E7%BB%95%E8%BF%87%EF%BC%88no%20client%EF%BC%89%E7%9A%84%E6%9A%B4%E5%8A%9B%E7%A0%B4%E8%A7%A3/8.jpg" srcset="/img/loading.gif" lazyload></p>
-<p><img src="/img/%E5%9F%BA%E4%BA%8E%E9%AA%8C%E8%AF%81%E7%A0%81%E7%BB%95%E8%BF%87%EF%BC%88no%20client%EF%BC%89%E7%9A%84%E6%9A%B4%E5%8A%9B%E7%A0%B4%E8%A7%A3/9.jpg" srcset="/img/loading.gif" lazyload></p>
-<p>这里发现一段用js写的函数，实现了验证码的产生和判断。那么可以猜测后端那边根本就没有验证验证码，所有关于验证码的东西全在前端上。</p>
-<p>（首先使用开发者工具查看代码是最正确的办法，我这里直接删是为了偷懒！，结果想了想还是算了，不偷懒了）</p>
-<h4 id="6-开始爆破"><a href="#6-开始爆破" class="headerlink" title="6.开始爆破"></a>6.开始爆破</h4><p>（具体过程不作更多阐述，可参考上一篇的基于表单的暴力破解，形式基本一样。）</p>
-<p><img src="/img/%E5%9F%BA%E4%BA%8E%E9%AA%8C%E8%AF%81%E7%A0%81%E7%BB%95%E8%BF%87%EF%BC%88no%20client%EF%BC%89%E7%9A%84%E6%9A%B4%E5%8A%9B%E7%A0%B4%E8%A7%A3/10.jpg" srcset="/img/loading.gif" lazyload></p>
-<p>可以看见显示爆破成功</p>
+<h4 id="3-使用burp进行抓包"><a href="#3-使用burp进行抓包" class="headerlink" title="3.使用burp进行抓包"></a>3.使用burp进行抓包</h4><p><img src="/img/%E5%9F%BA%E4%BA%8Etoken%E9%98%B2%E7%88%86%E7%A0%B4%E7%9A%84%E6%9A%B4%E5%8A%9B%E7%A0%B4%E8%A7%A3/1.jpg" srcset="/img/loading.gif" lazyload></p>
+<p>可以看见在数据包中存在token的使用来防止暴力破解，结合原理和前面的反馈，我们可以得知taken是每次提交都会发生变化的，所以如果我们想进行暴力破解的话要不就是把token给弄掉，要不就是每次破解自动获取新的token，当然第一种方法不现实（不攻击服务器没权限的话），所以我们尝试第二种办法。</p>
+<h4 id="4-设置字典"><a href="#4-设置字典" class="headerlink" title="4.设置字典"></a>4.设置字典</h4><p>记住一定要forward数据包，在history中送到intruder板块，不然后面在设置Options递归内容的时候就看不到回应包的内容！！！！！！！！！！</p>
+<p>（淦，我就吃了这个亏，一直没找到原因，我是傻呗！）</p>
+<p>设置用户名和密码字典：</p>
+<p><img src="/img/%E5%9F%BA%E4%BA%8Etoken%E9%98%B2%E7%88%86%E7%A0%B4%E7%9A%84%E6%9A%B4%E5%8A%9B%E7%A0%B4%E8%A7%A3/6.jpg" srcset="/img/loading.gif" lazyload></p>
+<p><img src="/img/%E5%9F%BA%E4%BA%8Etoken%E9%98%B2%E7%88%86%E7%A0%B4%E7%9A%84%E6%9A%B4%E5%8A%9B%E7%A0%B4%E8%A7%A3/7.jpg" srcset="/img/loading.gif" lazyload></p>
+<h4 id="5-设置token的循环模式"><a href="#5-设置token的循环模式" class="headerlink" title="5.设置token的循环模式"></a>5.设置token的循环模式</h4><p>而token这里把type值修改为Recursive grep，也就是递归模式（也就是接着上一个的服务器个id值一直接力下去）</p>
+<p><img src="/img/%E5%9F%BA%E4%BA%8Etoken%E9%98%B2%E7%88%86%E7%A0%B4%E7%9A%84%E6%9A%B4%E5%8A%9B%E7%A0%B4%E8%A7%A3/10.jpg" srcset="/img/loading.gif" lazyload></p>
+<p>在Options设置递归内容，要复制token此时的value内容</p>
+<p><img src="/img/%E5%9F%BA%E4%BA%8Etoken%E9%98%B2%E7%88%86%E7%A0%B4%E7%9A%84%E6%9A%B4%E5%8A%9B%E7%A0%B4%E8%A7%A3/8.jpg" srcset="/img/loading.gif" lazyload></p>
+<p>复制到对应地方,位置就是在type值修改为Recursive grep的界面往下拉</p>
+<p><img src="/img/%E5%9F%BA%E4%BA%8Etoken%E9%98%B2%E7%88%86%E7%A0%B4%E7%9A%84%E6%9A%B4%E5%8A%9B%E7%A0%B4%E8%A7%A3/9.jpg" srcset="/img/loading.gif" lazyload></p>
+<h4 id="6-设置线程数量"><a href="#6-设置线程数量" class="headerlink" title="6.设置线程数量"></a>6.设置线程数量</h4><p>必须把number of threads（线程）设置为1（因为，每次都需要去查看token的值，所以一次发一个，并且查看一个token）我用的burp pro 所以在Resource Pool里面设置，在burp版本中是在Options中设置，自己看着来吧。</p>
+<p><img src="/img/%E5%9F%BA%E4%BA%8Etoken%E9%98%B2%E7%88%86%E7%A0%B4%E7%9A%84%E6%9A%B4%E5%8A%9B%E7%A0%B4%E8%A7%A3/11.jpg" srcset="/img/loading.gif" lazyload></p>
+<p>然后在Options中设置始终追随重定向</p>
+<p><img src="/img/%E5%9F%BA%E4%BA%8Etoken%E9%98%B2%E7%88%86%E7%A0%B4%E7%9A%84%E6%9A%B4%E5%8A%9B%E7%A0%B4%E8%A7%A3/12.jpg" srcset="/img/loading.gif" lazyload></p>
+<h4 id="7-暴力就完事"><a href="#7-暴力就完事" class="headerlink" title="7.暴力就完事"></a>7.暴力就完事</h4><p>做完一切准备工作了，开始爆破</p>
+<p><img src="/img/%E5%9F%BA%E4%BA%8Etoken%E9%98%B2%E7%88%86%E7%A0%B4%E7%9A%84%E6%9A%B4%E5%8A%9B%E7%A0%B4%E8%A7%A3/13.jpg" srcset="/img/loading.gif" lazyload></p>
+<p>可以看见显示爆破成功。</p>
 
                 
               </div>
@@ -323,8 +335,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>基于验证码绕过（on client）的暴力破解</div>
-      <div>https://one-null-pointer.github.io/2022/07/30/基于验证码绕过（no client）的暴力破解/</div>
+      <div>基于token防爆破的暴力破解</div>
+      <div>https://one-null-pointer.github.io/2022/08/01/基于token防爆破的暴力破解/</div>
     </div>
     <div class="license-meta">
       
@@ -336,7 +348,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>Posted on</div>
-          <div>July 30, 2022</div>
+          <div>August 1, 2022</div>
         </div>
       
       
@@ -366,9 +378,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2022/07/31/%E5%9F%BA%E4%BA%8E%E9%AA%8C%E8%AF%81%E7%A0%81%E7%BB%95%E8%BF%87%EF%BC%88no%20server%EF%BC%89%E7%9A%84%E6%9A%B4%E5%8A%9B%E7%A0%B4%E8%A7%A3/" title="基于验证码绕过（on server）的暴力破解">
+                      <a href="/2022/08/02/%E5%A6%82%E4%BD%95%E9%98%B2%E8%8C%83%E6%9A%B4%E5%8A%9B%E7%A0%B4%E8%A7%A3/" title="如何防范暴力破解">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">基于验证码绕过（on server）的暴力破解</span>
+                        <span class="hidden-mobile">如何防范暴力破解</span>
                         <span class="visible-mobile">Previous</span>
                       </a>
                     
@@ -376,8 +388,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2022/07/29/%E5%9F%BA%E4%BA%8E%E8%A1%A8%E5%8D%95%E7%9A%84%E6%9A%B4%E5%8A%9B%E7%A0%B4%E8%A7%A3/" title="基于表单的暴力破解">
-                        <span class="hidden-mobile">基于表单的暴力破解</span>
+                      <a href="/2022/07/31/%E5%9F%BA%E4%BA%8E%E9%AA%8C%E8%AF%81%E7%A0%81%E7%BB%95%E8%BF%87%EF%BC%88no%20server%EF%BC%89%E7%9A%84%E6%9A%B4%E5%8A%9B%E7%A0%B4%E8%A7%A3/" title="基于验证码绕过（on server）的暴力破解">
+                        <span class="hidden-mobile">基于验证码绕过（on server）的暴力破解</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
