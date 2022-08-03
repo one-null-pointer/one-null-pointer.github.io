@@ -4,6 +4,25 @@
   
   
   <entry>
+    <title>web漏洞类型</title>
+    <link href="/2022/08/03/web%E6%BC%8F%E6%B4%9E%E7%B1%BB%E5%9E%8B/"/>
+    <url>/2022/08/03/web%E6%BC%8F%E6%B4%9E%E7%B1%BB%E5%9E%8B/</url>
+    
+    <content type="html"><![CDATA[<h1 id="web漏洞类型"><a href="#web漏洞类型" class="headerlink" title="web漏洞类型"></a>web漏洞类型</h1><h4 id="1、漏洞类型导图"><a href="#1、漏洞类型导图" class="headerlink" title="1、漏洞类型导图"></a>1、漏洞类型导图</h4><h4 id=""><a href="#" class="headerlink" title=""></a><img src="/img/web%E6%BC%8F%E6%B4%9E%E7%B1%BB%E5%9E%8B/1-16585448959291.png" style="zoom:67%;" /></h4><h4 id="2、漏洞等级划分"><a href="#2、漏洞等级划分" class="headerlink" title="2、漏洞等级划分"></a>2、漏洞等级划分</h4><p>&emsp;&emsp;漏洞等级取决于漏洞的危害程度，所以越威胁的漏洞，等级越高</p><p>&emsp;&emsp;（感觉自己说的是个屁，不确定，再闻闻）</p><h5 id="emsp-emsp-高危漏洞："><a href="#emsp-emsp-高危漏洞：" class="headerlink" title="&emsp;&emsp;高危漏洞："></a>&emsp;&emsp;高危漏洞：</h5><ul><li>SQL注入</li><li>文件上传</li><li>代码执行</li><li>未授权访问</li><li>命令执行</li></ul><h5 id="emsp-emsp-中危漏洞："><a href="#emsp-emsp-中危漏洞：" class="headerlink" title="&emsp;&emsp;中危漏洞："></a>&emsp;&emsp;中危漏洞：</h5><ul><li>反序列化</li><li>逻辑安全</li></ul><h5 id="emsp-emsp-低危漏洞："><a href="#emsp-emsp-低危漏洞：" class="headerlink" title="&emsp;&emsp;低危漏洞："></a>&emsp;&emsp;低危漏洞：</h5><ul><li>XXS攻击</li><li>目录遍历</li><li>文件读取</li></ul><h4 id="3、漏洞的简单介绍"><a href="#3、漏洞的简单介绍" class="headerlink" title="3、漏洞的简单介绍"></a>3、漏洞的简单介绍</h4><p>&emsp;&emsp;简单介绍下各个漏洞混个脸熟先，搞技术没有操作过程进行讲解就是耍流氓，后续会通过题目讲解</p><h5 id="1）SQL注入"><a href="#1）SQL注入" class="headerlink" title="1）SQL注入"></a>1）SQL注入</h5><p>&emsp;&emsp;SQL 注入是一种非常常见的数据库攻击手段，SQL 注入漏洞也是网络世界中最普遍的漏洞 之一。是指web应用程序对用户输入数据的合法性没有判断或过滤不严，攻击者可以在web应用程序中事先定义好的查询语句的结尾上添加额外的SQL语句]，在管理员不知情的情况下实现非法操作，以此来实现欺骗数据库服务器执行非授权的任意查询，从而进一步得到相应的数据信息。</p><p>&emsp;&emsp;（简单来说就是利用查库的变量伪造出数据库的语句进行增删改查的操作，一般查的实现比较多，所以能够泄漏得到数据库的信息）</p><p>&emsp;&emsp;危害：</p><ul><li>访问数据库数据，盗取信息</li><li>对数据库进行增删改查</li><li>如果网站目录存在写入权限，可以写入网页木马</li><li>提权</li><li>等等</li></ul><p>&emsp;</p><h5 id="2）文件上传"><a href="#2）文件上传" class="headerlink" title="2）文件上传"></a>2）文件上传</h5><p>&emsp;&emsp;文件上传是大部分Web应用都具备的功能，例如用户上传附件、修改头像、分享图片/视频等。正常的文件一般是文档、图片、视频等，Web应用收集之后放入后台存储，需要的时候再调用出来返回。</p><p>&emsp;&emsp;如果恶意文件如PHP、ASP等执行文件绕过Web应用，并顺利执行，则相当于黑客直接拿到了Webshell，则可以拿到Web应用的数据，删除Web文件，本地提权，进一步拿下整个服务器甚至内网。</p><p>&emsp;&emsp;危害：</p><ul><li>上传webshell，控制服务器，远程命令执行</li><li>上传系统百度、木马文件、构造僵尸网络</li><li>修改web界面</li><li>网络挂马和钓鱼</li><li>内网渗透</li><li>等等</li></ul><p>&emsp;</p><h5 id="3）XSS攻击（跨站脚本攻击）"><a href="#3）XSS攻击（跨站脚本攻击）" class="headerlink" title="3）XSS攻击（跨站脚本攻击）"></a>3）XSS攻击（跨站脚本攻击）</h5><p>&emsp;&emsp;XSS通常指的是通过利用网页开发时留下的漏洞，通过巧妙的方法注入恶意指令代码到网页，使用户加载并执行攻击者恶意制造的网页程序。这些恶意网页程序通常是JavaScript，但实际上也可以包括Java，VBScript，ActiveX，Flash或者甚至是普通的HTML。</p><p>&emsp;&emsp;（简单来讲，就是在输入的地方，将输入的值变成恶意指令代码，让后台去执行，我一直觉得其实和SQL差不多的想法，只是面向对象和实现的语言不同）</p><p>&emsp;&emsp;危害：</p><ul><li>窃取Cookie</li><li>未授权操作</li><li>网络挂马和钓鱼</li><li>植入广告和垃圾信息</li><li>等等</li></ul><p>&emsp;</p><h5 id="4）文件包含"><a href="#4）文件包含" class="headerlink" title="4）文件包含"></a>4）文件包含</h5><p>&emsp;&emsp;文件包含漏洞主要是程序员把一些公用的代码写在一个单独的文件中，然后使用其他文件进行包含调用，如果需要包含的文件使用硬编码，一般是不会出现安全问题，但是有时可能不确定需要包含哪些具体文件，所以就会采用变量的形式来传递需要包含的文件，但是在使用包含文件的过程中，未对包含的变量进行检查及过滤，导致外部提交的恶意数据作为变量进入到了文件包含的过程中，从而导致提交的恶意数据被执行。</p><p>&emsp;&emsp;（单纯的描述其实有点绕，还是后续实践来讲清楚吧）</p><p>&emsp;&emsp;危害：</p><ul><li>web服务器的文件信息泄露</li><li>脚本被执行（篡改网站、非法操作、攻击其他网站等）</li><li>等等</li></ul><p>&emsp;</p><h5 id="5）反序列化"><a href="#5）反序列化" class="headerlink" title="5）反序列化"></a>5）反序列化</h5><p>&emsp;&emsp;序列化就是把对象转换成一种数据格式，如Json、XML等文本格式或二进制字节流格式，便于保存在内存、文件、数据库中或者在网络通信中进行传输。反序列化是序列化的逆过程，即由保存的文本格式或字节流格式还原成对象。</p><p>&emsp;&emsp;很多编程语言都提供了这一功能，但不幸的是，如果应用代码允许接受不可信的序列化数据，在进行反序列化操作时，可能会产生反序列化漏洞，远程攻击者利用漏洞可在未经任何身份验证的服务器主机上执行任意代码，被攻击者间接控制服务器</p><p>&emsp;&emsp;危害：</p><ul><li>拒绝服务</li><li>访问控制</li><li>远程命令执行</li><li>等等</li></ul><p>&emsp;</p><h5 id="6）代码执行"><a href="#6）代码执行" class="headerlink" title="6）代码执行"></a>6）代码执行</h5><p>&emsp;&emsp;由于服务器端没有针对执行函数做过滤，导致在没有指定绝对路径的情况下就执行命令，可能会允许攻击者通过改变 $PATH 或程序执行环境的其他方面来执行一个恶意构造的代码。造成代码执行相关的函数分别是：eval、assert函数</p><p>&emsp;&emsp;危害：</p><ul><li>泄露服务器信息</li><li>木马植入</li><li>敏感文件暴露</li><li>远程命令执行</li><li>等等</li></ul><p>&emsp;</p><h5 id="7）逻辑漏洞"><a href="#7）逻辑漏洞" class="headerlink" title="7）逻辑漏洞"></a>7）逻辑漏洞</h5><p>&emsp;&emsp;逻辑漏洞就是指攻击者利用业务的设计缺陷，获取敏感信息或破坏业务的完整性。一般出现在密码修改、越权访问、密码找回、交易支付金额等功能处。其中越权访问又有水平越权和垂直越权两种。</p><p>&emsp;&emsp;危害：</p><ul><li>修改前端代码（比如改订单的金额）</li><li>密码修改或找回</li><li>等等（类型比较多）</li></ul><p>&emsp;</p><h5 id="8）未授权访问"><a href="#8）未授权访问" class="headerlink" title="8）未授权访问"></a>8）未授权访问</h5><p>&emsp;&emsp;未授权访问，顾名思义不进行请求授权的情况下对需要权限的功能进行访问执行。通常是由于认证页面存在缺陷，无认证，安全配置不当导致。常见于服务端口，接口无限制开放，网页功能通过链接无限制用户访问，低权限用户越权访问高权限功能。所以是系统对用户限制不全，或者无限制，可以让任意用户或者限制访问用户。</p><p>&emsp;&emsp;危害：</p><ul><li>信息泄露</li><li>系统功能执行</li><li>等等</li></ul><p>&emsp;</p><h5 id="9）CSRF攻击（跨站点请求伪造）"><a href="#9）CSRF攻击（跨站点请求伪造）" class="headerlink" title="9）CSRF攻击（跨站点请求伪造）"></a>9）CSRF攻击（跨站点请求伪造）</h5><p>&emsp;&emsp;攻击者通过伪造用户的浏览器的请求，向访问一个用户自己曾经认证访问过的网站发送出去，使目标网站接收并误以为是用户的真实操作而去执行命令。攻击者利用网站对请求的验证漏洞而实现这样的攻击行为，网站能够确认请求来源于用户的浏览器，却不能验证请求是否源于用户的真实意愿下的操作行为。</p><p>&emsp;&emsp;（就是伪造成别人，拿着别人的认证信息混过网站的验证）</p><p>&emsp;&emsp;危害：</p><ul><li>盗取账号</li><li>转账</li><li>发送虚假消息</li><li>等等</li></ul><p>&emsp;</p><h5 id="10）SSRF攻击（服务器端请求伪造）"><a href="#10）SSRF攻击（服务器端请求伪造）" class="headerlink" title="10）SSRF攻击（服务器端请求伪造）"></a>10）SSRF攻击（服务器端请求伪造）</h5><p>&emsp;&emsp;大部分的web应用都提供了从其他的服务器上获取数据的功能。通过使用指定的URL，web应用便可以获取图片，下载文件，读取文件内容等。SSRF的实质是利用存在缺陷的web应用作为代理攻击远程和本地的服务器。</p><p>&emsp;&emsp;一般情况下， SSRF攻击的目标是外网无法访问的内部系统，黑客可以利用SSRF漏洞获取内部系统的一些信息（正是因为它是由服务端发起的，所以它能够请求到与它相连而与外网隔离的内部系统）。SSRF形成的原因大都是由于服务端提供了从其他服务器应用获取数据的功能且没有对目标地址做过滤与限制。</p><p>&emsp;&emsp;危害：</p><ul><li>内外网的端口和服务扫描</li><li>攻击运行在内网或本地的应用程序</li><li>攻击内网的web应用</li><li>读取本地敏感信息</li><li>等等</li></ul><p>&emsp;</p><h5 id="11）目录遍历"><a href="#11）目录遍历" class="headerlink" title="11）目录遍历"></a>11）目录遍历</h5><p>&emsp;&emsp;攻击者通过访问网站某一目录时，该目录没有默认首页文件或没有正确设置默认首页文件，将会把整个目录结构列出来，将网站结构完全暴露给攻击者； 攻击者可能通过浏览目录结构，访问到某些隐秘文件</p><p>&emsp;&emsp;（就是麻瓜构建网络吧把整个目录结构给直接列出来了，这不是纯笨比吗，有目录了，信息收集的东西就越多，就越好搞攻击）</p><p>&emsp;&emsp;危害：</p><ul><li>访问敏感文件</li><li>等等</li></ul><p>&emsp;</p><h5 id="12）文件读取"><a href="#12）文件读取" class="headerlink" title="12）文件读取"></a>12）文件读取</h5><p>&emsp;&emsp;任意文件读取是属于文件操作漏洞的一种，通过提交专门设计的输入，攻击者就可以在被访问的文件系统中读取或写入任意内容，往往能够使攻击者从服务器上获取敏感文件，正常读取的文件没有经过校验或者校验不严格，用户可以控制这个变量或者变量读取任意文件。</p><p>&emsp;&emsp;危害：</p><ul><li>获取敏感文件</li><li>等等</li></ul><p>&emsp;</p><h5 id="13）文件下载"><a href="#13）文件下载" class="headerlink" title="13）文件下载"></a>13）文件下载</h5><p>&emsp;&emsp;很多网站由于业务需求，往往需要提供文件(附件)下载的功能块，但是如果对下载的文件没有做限制，直接通过绝对路径对其文件进行下载，那么，恶意用户就可以利用这种方式下载服务器的敏感文件，对服务器进行进一步的威胁和攻击。</p><p>&emsp;&emsp;危害：</p><ul><li>获取敏感文件</li><li>等等</li></ul><p>&emsp;</p><h5 id="14）命令执行"><a href="#14）命令执行" class="headerlink" title="14）命令执行"></a>14）命令执行</h5><p>&emsp;&emsp;当用户可以控制命令执行函数中的参数时，将可注入恶意系统命令到正常命令中，造成命令执行攻击</p><p>&emsp;&emsp;危害：</p><ul><li>获取web服务程序的权限</li><li>执行系统命令</li><li>反弹shell</li><li>内网渗透</li><li>等等</li></ul><p>&emsp;</p><h5 id="15）XXE攻击（XML外部实体注入）"><a href="#15）XXE攻击（XML外部实体注入）" class="headerlink" title="15）XXE攻击（XML外部实体注入）"></a>15）XXE攻击（XML外部实体注入）</h5><p>&emsp;&emsp;从安全角度理解成XML External Entity attack 外部实体注入攻击。由于程序在解析输入的XML数据时，解析了攻击者伪造的外部实体而产生的。</p><p>&emsp;&emsp;（这玩意还是实践比较容易弄清楚）</p><h4 id="-1"><a href="#-1" class="headerlink" title=""></a></h4>]]></content>
+    
+    
+    <categories>
+      
+      <category>web</category>
+      
+    </categories>
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>实习相关内容梳理（二）</title>
     <link href="/2022/08/03/%E6%95%B0%E6%8D%AE%E5%AE%89%E5%85%A8%E6%97%A5%E8%AE%B0%E5%9B%9B/"/>
     <url>/2022/08/03/%E6%95%B0%E6%8D%AE%E5%AE%89%E5%85%A8%E6%97%A5%E8%AE%B0%E5%9B%9B/</url>
@@ -185,25 +204,6 @@
     <categories>
       
       <category>五所实习之数据安全</category>
-      
-    </categories>
-    
-    
-  </entry>
-  
-  
-  
-  <entry>
-    <title>web漏洞类型</title>
-    <link href="/2022/07/23/web%E6%BC%8F%E6%B4%9E%E7%B1%BB%E5%9E%8B/"/>
-    <url>/2022/07/23/web%E6%BC%8F%E6%B4%9E%E7%B1%BB%E5%9E%8B/</url>
-    
-    <content type="html"><![CDATA[<h1 id="web漏洞类型"><a href="#web漏洞类型" class="headerlink" title="web漏洞类型"></a>web漏洞类型</h1><p><img src="/img/web%E6%BC%8F%E6%B4%9E%E7%B1%BB%E5%9E%8B/1-16585448959291.png"></p>]]></content>
-    
-    
-    <categories>
-      
-      <category>web</category>
       
     </categories>
     
