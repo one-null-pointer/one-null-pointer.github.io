@@ -16,16 +16,16 @@
   <meta name="author" content="liaoyue">
   <meta name="keywords" content="">
   
-    <meta name="description" content="加密编码算法1.前言在渗透测试中，一般的敏感信息都会采用加密编码的方式进行处理，所以需要我们了解到常用的一些加密方式。加密解密可以通过第三方平台、工具软件、自己代码编写等方式进行。 参考加解密网站：  https:&#x2F;&#x2F;www.sojson.com&#x2F;encrypt&#x2F; http:&#x2F;&#x2F;tool.chacuo.net&#x2F;cryptaes   2.常见加密编码解析MD5：（https:&#x2F;&#x2F;www.sojson">
+    <meta name="description" content="加密编码算法1.前言&amp;emsp;&amp;emsp;在渗透测试中，一般的敏感信息都会采用加密编码的方式进行处理，所以需要我们了解到常用的一些加密方式。加密解密可以通过第三方平台、工具软件、自己代码编写等方式进行。 &amp;emsp;&amp;emsp;参考加解密网站：  https:&#x2F;&#x2F;www.sojson.com&#x2F;encrypt&#x2F; http:&#x2F;&#x2F;tool.chacuo.net&#x2F;cryptaes   2.常见加密编码解">
 <meta property="og:type" content="article">
 <meta property="og:title" content="加密编码算法">
 <meta property="og:url" content="https://one-null-pointer.github.io/2022/07/10/%E5%8A%A0%E5%AF%86%E7%BC%96%E7%A0%81%E7%AE%97%E6%B3%95/index.html">
 <meta property="og:site_name" content="one-null-poniter">
-<meta property="og:description" content="加密编码算法1.前言在渗透测试中，一般的敏感信息都会采用加密编码的方式进行处理，所以需要我们了解到常用的一些加密方式。加密解密可以通过第三方平台、工具软件、自己代码编写等方式进行。 参考加解密网站：  https:&#x2F;&#x2F;www.sojson.com&#x2F;encrypt&#x2F; http:&#x2F;&#x2F;tool.chacuo.net&#x2F;cryptaes   2.常见加密编码解析MD5：（https:&#x2F;&#x2F;www.sojson">
+<meta property="og:description" content="加密编码算法1.前言&amp;emsp;&amp;emsp;在渗透测试中，一般的敏感信息都会采用加密编码的方式进行处理，所以需要我们了解到常用的一些加密方式。加密解密可以通过第三方平台、工具软件、自己代码编写等方式进行。 &amp;emsp;&amp;emsp;参考加解密网站：  https:&#x2F;&#x2F;www.sojson.com&#x2F;encrypt&#x2F; http:&#x2F;&#x2F;tool.chacuo.net&#x2F;cryptaes   2.常见加密编码解">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://one-null-pointer.github.io/img/web1.png">
 <meta property="article:published_time" content="2022-07-10T10:40:24.000Z">
-<meta property="article:modified_time" content="2022-07-30T13:13:57.244Z">
+<meta property="article:modified_time" content="2022-08-03T11:16:09.156Z">
 <meta property="article:author" content="liaoyue">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://one-null-pointer.github.io/img/web1.png">
@@ -208,7 +208,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.8k words
+          2.3k words
         
       </span>
     
@@ -219,7 +219,7 @@
         
         
         
-          15 mins
+          20 mins
         
       </span>
     
@@ -262,44 +262,44 @@
             
               <div class="markdown-body">
                 
-                <h1 id="加密编码算法"><a href="#加密编码算法" class="headerlink" title="加密编码算法"></a>加密编码算法</h1><h4 id="1-前言"><a href="#1-前言" class="headerlink" title="1.前言"></a>1.前言</h4><p>在渗透测试中，一般的敏感信息都会采用加密编码的方式进行处理，所以需要我们了解到常用的一些加密方式。加密解密可以通过第三方平台、工具软件、自己代码编写等方式进行。</p>
-<p>参考加解密网站：</p>
+                <h1 id="加密编码算法"><a href="#加密编码算法" class="headerlink" title="加密编码算法"></a>加密编码算法</h1><h4 id="1-前言"><a href="#1-前言" class="headerlink" title="1.前言"></a>1.前言</h4><p>&emsp;&emsp;在渗透测试中，一般的敏感信息都会采用加密编码的方式进行处理，所以需要我们了解到常用的一些加密方式。加密解密可以通过第三方平台、工具软件、自己代码编写等方式进行。</p>
+<p>&emsp;&emsp;参考加解密网站：</p>
 <ul>
 <li><a target="_blank" rel="noopener" href="https://www.sojson.com/encrypt/">https://www.sojson.com/encrypt/</a></li>
 <li><a target="_blank" rel="noopener" href="http://tool.chacuo.net/cryptaes">http://tool.chacuo.net/cryptaes</a></li>
 </ul>
 <p><img src="/img/%E5%8A%A0%E5%AF%86%E7%BC%96%E7%A0%81%E7%AE%97%E6%B3%95/0.jpg" srcset="/img/loading.gif" lazyload></p>
-<h4 id="2-常见加密编码解析"><a href="#2-常见加密编码解析" class="headerlink" title="2.常见加密编码解析"></a>2.常见加密编码解析</h4><h5 id="MD5："><a href="#MD5：" class="headerlink" title="MD5："></a>MD5：</h5><p>（<a target="_blank" rel="noopener" href="https://www.sojson.com/encrypt_md5.html%EF%BC%89">https://www.sojson.com/encrypt_md5.html）</a></p>
-<p>MD5是不可逆的加密方式，分为16位和32位，加密密文字符串由A-Z,0-9随机分配，80%-90%网站管理员或用户密码加采取MD5加密。</p>
+<h4 id="2-常见加密编码解析"><a href="#2-常见加密编码解析" class="headerlink" title="2.常见加密编码解析"></a>2.常见加密编码解析</h4><h5 id="emsp-emsp-MD5："><a href="#emsp-emsp-MD5：" class="headerlink" title="&emsp;&emsp;MD5："></a>&emsp;&emsp;MD5：</h5><p>&emsp;&emsp;（<a target="_blank" rel="noopener" href="https://www.sojson.com/encrypt_md5.html%EF%BC%89">https://www.sojson.com/encrypt_md5.html）</a></p>
+<p>&emsp;&emsp;MD5是不可逆的加密方式，分为16位和32位，加密密文字符串由A-Z,0-9随机分配，80%-90%网站管理员或用户密码加采取MD5加密。</p>
 <p><img src="/img/%E5%8A%A0%E5%AF%86%E7%BC%96%E7%A0%81%E7%AE%97%E6%B3%95/1.jpg" srcset="/img/loading.gif" lazyload></p>
-<p>值得一提的是MD5具有解密，但是解密形式的本质其实是通过枚举的办法，所以这也导致了解密的困难性（不可逆不代表不能解密）</p>
+<p>&emsp;&emsp;值得一提的是MD5具有解密，但是解密形式的本质其实是通过枚举的办法，所以这也导致了解密的困难性（不可逆不代表不能解密）</p>
 <p><img src="/img/%E5%8A%A0%E5%AF%86%E7%BC%96%E7%A0%81%E7%AE%97%E6%B3%95/2.jpg" srcset="/img/loading.gif" lazyload></p>
-<h5 id="SHA："><a href="#SHA：" class="headerlink" title="SHA："></a>SHA：</h5><p>（<a target="_blank" rel="noopener" href="https://www.mklab.cn/utils/sha%EF%BC%89">https://www.mklab.cn/utils/sha）</a></p>
-<p>​         SHA同样是不可逆的加密方式，由A-Z，0-9随机组合，SHA1，SHA256，SHA384，SHA512长度固定</p>
+<h5 id="emsp-emsp-SHA："><a href="#emsp-emsp-SHA：" class="headerlink" title="&emsp;&emsp;SHA："></a>&emsp;&emsp;SHA：</h5><p>&emsp;&emsp;（<a target="_blank" rel="noopener" href="https://www.mklab.cn/utils/sha%EF%BC%89">https://www.mklab.cn/utils/sha）</a></p>
+<p>&emsp;&emsp;SHA同样是不可逆的加密方式，由A-Z，0-9随机组合，SHA1，SHA256，SHA384，SHA512长度固定</p>
 <p><img src="/img/%E5%8A%A0%E5%AF%86%E7%BC%96%E7%A0%81%E7%AE%97%E6%B3%95/3.jpg" srcset="/img/loading.gif" lazyload></p>
-<p>不同的编码格式，所对应的加密长度是不相同的</p>
-<h5 id="ASC："><a href="#ASC：" class="headerlink" title="ASC："></a>ASC：</h5><p>（<a target="_blank" rel="noopener" href="https://www.matools.com/code-convert-ascii%EF%BC%89">https://www.matools.com/code-convert-ascii）</a></p>
+<p>&emsp;&emsp;不同的编码格式，所对应的加密长度是不相同的</p>
+<h5 id="emsp-emsp-ASC："><a href="#emsp-emsp-ASC：" class="headerlink" title="&emsp;&emsp;ASC："></a>&emsp;&emsp;ASC：</h5><p>&emsp;&emsp;（<a target="_blank" rel="noopener" href="https://www.matools.com/code-convert-ascii%EF%BC%89">https://www.matools.com/code-convert-ascii）</a></p>
 <p><img src="/img/%E5%8A%A0%E5%AF%86%E7%BC%96%E7%A0%81%E7%AE%97%E6%B3%95/4.jpg" srcset="/img/loading.gif" lazyload></p>
-<h5 id="进制"><a href="#进制" class="headerlink" title="进制:"></a>进制:</h5><p>(<a target="_blank" rel="noopener" href="https://www.sojson.com/hexconvert.html">https://www.sojson.com/hexconvert.html</a>)</p>
-<p>数学上的进制转换，基本不会使用（毕竟用的太low了）</p>
-<h5 id="时间戳："><a href="#时间戳：" class="headerlink" title="时间戳："></a>时间戳：</h5><p>（<a target="_blank" rel="noopener" href="https://shijianchuo.net/%EF%BC%89">https://shijianchuo.net/）</a></p>
-<p>网站或者服务器经常会使用到的加密方式，以及数据库里用户登录和注销等。采用的不是常规的时间格式，而是特定的数字串。</p>
+<h5 id="emsp-emsp-进制"><a href="#emsp-emsp-进制" class="headerlink" title="&emsp;&emsp;进制:"></a>&emsp;&emsp;进制:</h5><p>&emsp;&emsp;(<a target="_blank" rel="noopener" href="https://www.sojson.com/hexconvert.html">https://www.sojson.com/hexconvert.html</a>)</p>
+<p>&emsp;&emsp;数学上的进制转换，基本不会使用（毕竟用的太low了）</p>
+<h5 id="emsp-emsp-时间戳："><a href="#emsp-emsp-时间戳：" class="headerlink" title="&emsp;&emsp;时间戳："></a>&emsp;&emsp;时间戳：</h5><p>&emsp;&emsp;（<a target="_blank" rel="noopener" href="https://shijianchuo.net/%EF%BC%89">https://shijianchuo.net/）</a></p>
+<p>&emsp;&emsp;网站或者服务器经常会使用到的加密方式，以及数据库里用户登录和注销等。采用的不是常规的时间格式，而是特定的数字串。</p>
 <p><img src="/img/%E5%8A%A0%E5%AF%86%E7%BC%96%E7%A0%81%E7%AE%97%E6%B3%95/5.jpg" srcset="/img/loading.gif" lazyload></p>
-<h5 id="URL："><a href="#URL：" class="headerlink" title="URL："></a>URL：</h5><p>（<a target="_blank" rel="noopener" href="https://www.sojson.com/encodeurl.html%EF%BC%89">https://www.sojson.com/encodeurl.html）</a></p>
-<p>url编码加密就是将播放地址自定义算法编码，创建私有协议的播放地址。 播放需要专用的播放器进行地址解码。 浏览器只做一次加密，在渗透绕过的时候可能会使用二次，三次加密方式。</p>
+<h5 id="emsp-emsp-URL："><a href="#emsp-emsp-URL：" class="headerlink" title="&emsp;&emsp;URL："></a>&emsp;&emsp;URL：</h5><p>&emsp;&emsp;（<a target="_blank" rel="noopener" href="https://www.sojson.com/encodeurl.html%EF%BC%89">https://www.sojson.com/encodeurl.html）</a></p>
+<p>&emsp;&emsp;url编码加密就是将播放地址自定义算法编码，创建私有协议的播放地址。 播放需要专用的播放器进行地址解码。 浏览器只做一次加密，在渗透绕过的时候可能会使用二次，三次加密方式。</p>
 <p><img src="/img/%E5%8A%A0%E5%AF%86%E7%BC%96%E7%A0%81%E7%AE%97%E6%B3%95/6.jpg" srcset="/img/loading.gif" lazyload></p>
-<h5 id="BASE64："><a href="#BASE64：" class="headerlink" title="BASE64："></a>BASE64：</h5><p>（<a target="_blank" rel="noopener" href="https://www.sojson.com/base64.html%EF%BC%89">https://www.sojson.com/base64.html）</a></p>
-<p>Base64是一种直接利用64位可打印字符来表示二进制数据的编码算法。大小写随机组合，在字符串后面经常出现一个或两个等号；明文越长，密文越长。常见应用与代码、密码、参数。</p>
-<p>加密例子：大葱蘸酱最牛逼</p>
+<h5 id="emsp-emsp-BASE64："><a href="#emsp-emsp-BASE64：" class="headerlink" title="&emsp;&emsp;BASE64："></a>&emsp;&emsp;BASE64：</h5><p>&emsp;&emsp;（<a target="_blank" rel="noopener" href="https://www.sojson.com/base64.html%EF%BC%89">https://www.sojson.com/base64.html）</a></p>
+<p>&emsp;&emsp;Base64是一种直接利用64位可打印字符来表示二进制数据的编码算法。大小写随机组合，在字符串后面经常出现一个或两个等号；明文越长，密文越长。常见应用与代码、密码、参数。</p>
+<p>&emsp;&emsp;加密例子：大葱蘸酱最牛逼</p>
 <p><img src="/img/%E5%8A%A0%E5%AF%86%E7%BC%96%E7%A0%81%E7%AE%97%E6%B3%95/7.jpg" srcset="/img/loading.gif" lazyload></p>
-<h5 id="Unescape："><a href="#Unescape：" class="headerlink" title="Unescape："></a>Unescape：</h5><p>（<a target="_blank" rel="noopener" href="http://web.chacuo.net/charsetescape%EF%BC%89">http://web.chacuo.net/charsetescape）</a></p>
-<p>Escape编码/加密,就是字符对应UTF-16 16进制表示方式前面加%u。 Unescape解码/解密 ，就是<strong>去掉”%u”后，将16进制字符还原后，由utf-16转码到自己目标字符</strong>。 如：字符“中”，UTF-16BE是：“6d93”，因此Escape是“%u6d93”，反之也一样！</p>
+<h5 id="emsp-emsp-Unescape："><a href="#emsp-emsp-Unescape：" class="headerlink" title="&emsp;&emsp;Unescape："></a>&emsp;&emsp;Unescape：</h5><p>&emsp;&emsp;（<a target="_blank" rel="noopener" href="http://web.chacuo.net/charsetescape%EF%BC%89">http://web.chacuo.net/charsetescape）</a></p>
+<p>&emsp;&emsp;Escape编码/加密,就是字符对应UTF-16 16进制表示方式前面加%u。 Unescape解码/解密 ，就是<strong>去掉”%u”后，将16进制字符还原后，由utf-16转码到自己目标字符</strong>。 如：字符“中”，UTF-16BE是：“6d93”，因此Escape是“%u6d93”，反之也一样！</p>
 <p><img src="/img/%E5%8A%A0%E5%AF%86%E7%BC%96%E7%A0%81%E7%AE%97%E6%B3%95/8.jpg" srcset="/img/loading.gif" lazyload></p>
-<h5 id="AES："><a href="#AES：" class="headerlink" title="AES："></a>AES：</h5><p>（<a target="_blank" rel="noopener" href="https://www.mklab.cn/utils/aes%EF%BC%89">https://www.mklab.cn/utils/aes）</a></p>
-<p>是相对安全的加密方式，在加密的过程中涉及到了密码、偏移量、数据块、填充四种方式的随机选择和搭配，解压的难度很大。一般用base64解密出来是乱码，有很大可能是AES加密。在比较重视安全的网站和比赛中都会使用。</p>
+<h5 id="emsp-emsp-AES："><a href="#emsp-emsp-AES：" class="headerlink" title="&emsp;&emsp;AES："></a>&emsp;&emsp;AES：</h5><p>&emsp;&emsp;（<a target="_blank" rel="noopener" href="https://www.mklab.cn/utils/aes%EF%BC%89">https://www.mklab.cn/utils/aes）</a></p>
+<p>&emsp;&emsp;是相对安全的加密方式，在加密的过程中涉及到了密码、偏移量、数据块、填充四种方式的随机选择和搭配，解压的难度很大。一般用base64解密出来是乱码，有很大可能是AES加密。在比较重视安全的网站和比赛中都会使用。</p>
 <p><img src="/img/%E5%8A%A0%E5%AF%86%E7%BC%96%E7%A0%81%E7%AE%97%E6%B3%95/9.jpg" srcset="/img/loading.gif" lazyload></p>
-<h5 id="DES："><a href="#DES：" class="headerlink" title="DES："></a>DES：</h5><p>（<a target="_blank" rel="noopener" href="https://www.sojson.com/encrypt_des.html%EF%BC%89">https://www.sojson.com/encrypt_des.html）</a></p>
-<p>DES是目前最为流行的加密算法之一。DES是对称的，也就是说它使用同一个密钥来加密和解密数据。 DES还是一种分组加密算法，该算法每次处理固定长度的数据段，称之为分组。DES分组的大小是64位，如果加密的数据长度不是64位的倍数，可以按照某种具体的规则来填充位。</p>
+<h5 id="emsp-emsp-DES："><a href="#emsp-emsp-DES：" class="headerlink" title="&emsp;&emsp;DES："></a>&emsp;&emsp;DES：</h5><p>&emsp;&emsp;（<a target="_blank" rel="noopener" href="https://www.sojson.com/encrypt_des.html%EF%BC%89">https://www.sojson.com/encrypt_des.html）</a></p>
+<p>&emsp;&emsp;DES是目前最为流行的加密算法之一。DES是对称的，也就是说它使用同一个密钥来加密和解密数据。 DES还是一种分组加密算法，该算法每次处理固定长度的数据段，称之为分组。DES分组的大小是64位，如果加密的数据长度不是64位的倍数，可以按照某种具体的规则来填充位。</p>
 <p><img src="/img/%E5%8A%A0%E5%AF%86%E7%BC%96%E7%A0%81%E7%AE%97%E6%B3%95/10.jpg" srcset="/img/loading.gif" lazyload></p>
 <h4 id="3-加密形式算法解析"><a href="#3-加密形式算法解析" class="headerlink" title="3.加密形式算法解析"></a>3.加密形式算法解析</h4><ul>
 <li>直接加密</li>
@@ -324,13 +324,13 @@
 <li>搜索获取</li>
 <li>等</li>
 </ul>
-<h4 id="6-其他相关涉及资源"><a href="#6-其他相关涉及资源" class="headerlink" title="6.其他相关涉及资源"></a>6.其他相关涉及资源</h4><p><a target="_blank" rel="noopener" href="https://www.mozhe.cn/">https://www.mozhe.cn</a></p>
-<p><a target="_blank" rel="noopener" href="https://www.cmd5.com/">https://www.cmd5.com</a></p>
-<p><a target="_blank" rel="noopener" href="http://tool.chacuo.net/cryptaes">http://tool.chacuo.net/cryptaes</a></p>
-<p><a target="_blank" rel="noopener" href="https://ctf.bugku.com/challenges">https://ctf.bugku.com/challenges</a></p>
-<p><a target="_blank" rel="noopener" href="https://www.cr173.com/soft/21692.html">https://www.cr173.com/soft/21692.html</a></p>
-<p><a target="_blank" rel="noopener" href="https://gitee.com/ComsenzDiscuz/Discuzx">https://gitee.com/ComsenzDiscuz/Discuzx</a></p>
-<h4 id="7-意义"><a href="#7-意义" class="headerlink" title="7.意义"></a>7.意义</h4><p>个人理解，看似加密编码算法是密码学的知识，但是我们只需要了解相关的加密方式，在实践相关的sql注入等渗透攻击时，我们输入的并不一定是直白的代码，还需要进行一定的加密运作才能。</p>
+<h4 id="6-其他相关涉及资源"><a href="#6-其他相关涉及资源" class="headerlink" title="6.其他相关涉及资源"></a>6.其他相关涉及资源</h4><p>&emsp;&emsp;<a target="_blank" rel="noopener" href="https://www.mozhe.cn/">https://www.mozhe.cn</a></p>
+<p>&emsp;&emsp;<a target="_blank" rel="noopener" href="https://www.cmd5.com/">https://www.cmd5.com</a></p>
+<p>&emsp;&emsp;<a target="_blank" rel="noopener" href="http://tool.chacuo.net/cryptaes">http://tool.chacuo.net/cryptaes</a></p>
+<p>&emsp;&emsp;<a target="_blank" rel="noopener" href="https://ctf.bugku.com/challenges">https://ctf.bugku.com/challenges</a></p>
+<p>&emsp;&emsp;<a target="_blank" rel="noopener" href="https://www.cr173.com/soft/21692.html">https://www.cr173.com/soft/21692.html</a></p>
+<p>&emsp;&emsp;<a target="_blank" rel="noopener" href="https://gitee.com/ComsenzDiscuz/Discuzx">https://gitee.com/ComsenzDiscuz/Discuzx</a></p>
+<h4 id="7-意义"><a href="#7-意义" class="headerlink" title="7.意义"></a>7.意义</h4><p>&emsp;&emsp;个人理解，看似加密编码算法是密码学的知识，但是我们只需要了解相关的加密方式，在实践相关的sql注入等渗透攻击时，我们输入的并不一定是直白的代码，还需要进行一定的加密运作才能。</p>
 
                 
               </div>
