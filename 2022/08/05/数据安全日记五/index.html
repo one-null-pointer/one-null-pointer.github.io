@@ -1,0 +1,609 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="liaoyue">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="数据安全技术前沿研究笔记（一）1.前言&amp;emsp;&amp;emsp;最近在看绿盟出的《拥抱合规、超越合规：数据安全技术前沿研究报告》，书是本好书，接下来也会分享自己的阅读笔记，但是这个名字又臭又长是谁想出来的。对于后续的技术学习其实我心里也没什么底，毕竟差分计算，联邦学习有接触过，感觉挺难的，冲！ 2.为什么要关注数据安全&amp;emsp;&amp;emsp;现在随着时代的发展，在大数据时代，数据的作用和重要性越来越">
+<meta property="og:type" content="article">
+<meta property="og:title" content="实习相关内容梳理（三）">
+<meta property="og:url" content="https://one-null-pointer.github.io/2022/08/05/%E6%95%B0%E6%8D%AE%E5%AE%89%E5%85%A8%E6%97%A5%E8%AE%B0%E4%BA%94/index.html">
+<meta property="og:site_name" content="one-null-poniter">
+<meta property="og:description" content="数据安全技术前沿研究笔记（一）1.前言&amp;emsp;&amp;emsp;最近在看绿盟出的《拥抱合规、超越合规：数据安全技术前沿研究报告》，书是本好书，接下来也会分享自己的阅读笔记，但是这个名字又臭又长是谁想出来的。对于后续的技术学习其实我心里也没什么底，毕竟差分计算，联邦学习有接触过，感觉挺难的，冲！ 2.为什么要关注数据安全&amp;emsp;&amp;emsp;现在随着时代的发展，在大数据时代，数据的作用和重要性越来越">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://one-null-pointer.github.io/img/data.png">
+<meta property="article:published_time" content="2022-08-05T13:29:43.000Z">
+<meta property="article:modified_time" content="2022-08-05T13:31:22.823Z">
+<meta property="article:author" content="liaoyue">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://one-null-pointer.github.io/img/data.png">
+  
+  
+  
+  <title>实习相关内容梳理（三） - one-null-poniter</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"one-null-pointer.github.io","root":"/","version":"1.9.2","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 5.4.2"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>one null pointer</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                吾
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                學
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                類
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="实习相关内容梳理（三）"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2022-08-05 21:29" pubdate>
+          August 5, 2022 pm
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          2.4k words
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          21 mins
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">实习相关内容梳理（三）</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="数据安全技术前沿研究笔记（一）"><a href="#数据安全技术前沿研究笔记（一）" class="headerlink" title="数据安全技术前沿研究笔记（一）"></a>数据安全技术前沿研究笔记（一）</h1><h4 id="1-前言"><a href="#1-前言" class="headerlink" title="1.前言"></a>1.前言</h4><p>&emsp;&emsp;最近在看绿盟出的《拥抱合规、超越合规：数据安全技术前沿研究报告》，书是本好书，接下来也会分享自己的阅读笔记，但是这个名字又臭又长是谁想出来的。对于后续的技术学习其实我心里也没什么底，毕竟差分计算，联邦学习有接触过，感觉挺难的，冲！</p>
+<h4 id="2-为什么要关注数据安全"><a href="#2-为什么要关注数据安全" class="headerlink" title="2.为什么要关注数据安全"></a>2.为什么要关注数据安全</h4><p>&emsp;&emsp;现在随着时代的发展，在大数据时代，数据的作用和重要性越来越大，数据的国家战略性资源地位也被确立。但是近年来，大规模的数据泄露事件频频发生。”大数据杀熟“、数据歧视、个人信息非法采集和窃取等现象发生得越来越多。因此，为了应对这种挑战，全国掀起了数据安全与隐私的立法和技术热潮。（可以看数据安全的第一篇文章，里面就摘抄出了很多不同国家不同机构出台的数据安全法律法规）</p>
+<p>&emsp;&emsp;随着安全的重视，许多国家陆陆续续的出台了比较具有代表性的法案。欧盟的《通用数据保护条例》（GDPR）、美国的《加州消费者隐私法案》（CCPA）以及我国基于总体国家安全观指导下的《数据安全法》和对公民隐私和个人信息进行安全保护的《个人信息保护法》。</p>
+<h4 id="3-为什么要先关注数据安全的法律"><a href="#3-为什么要先关注数据安全的法律" class="headerlink" title="3.为什么要先关注数据安全的法律"></a>3.为什么要先关注数据安全的法律</h4><p>&emsp;&emsp;全国数据安全法规的监管在不断的完善，这就涉及到了一个合规性的问题，企业的建设是否符合要求，重要的数据是否得到保护，这都是我们需要研究的的问题。在绿盟的这本书中，主要是针对用户隐私数据安全合规、企业内部数据安全治理和企业间数据安全共享与计算进行合规需求的梳理分析，同时选取了十周种比较前言的数据安全技术手段进行讲解好分析（一开始粗略瞅了一眼，看得头皮发麻）</p>
+<p>&emsp;&emsp;其实，一开始给自己的定位是作为一个追求技术操作，但是如果没有法律法规的铺垫和研究，我们没办法明白我们最终技术所要实现的目标和作用，所以阅读法律法规是比较有必要的事情。</p>
+<h4 id="4-国内外立法与执法趋势"><a href="#4-国内外立法与执法趋势" class="headerlink" title="4.国内外立法与执法趋势"></a>4.国内外立法与执法趋势</h4><h6 id="国外："><a href="#国外：" class="headerlink" title="国外："></a>国外：</h6><p>&emsp;&emsp;在立法方面，比较有代表性的就算欧盟2018年5月25日实施的《通用数据保护条例》（GDPR），在该条例的影响下，其他国家也陆陆续续推出了各自相关的法案。</p>
+<p>&emsp;&emsp;在执法方面，欧盟由于立法比较早，所以相较于其他国家而言，欧盟已经进入到了全面执法的阶段并开出了违反GDPR的相关罚单（比如英国航空公司的1.83亿英镑和万豪国际集团的9900万英镑）。</p>
+<h6 id="国内："><a href="#国内：" class="headerlink" title="国内："></a>国内：</h6><p>&emsp;&emsp;在立法方面，从2017年的《网络安全法》、2020的《民法典》到2021年的《数据安全法》等等，越来越多关注数据安全的法律规出台。这也表明了我国对数据安全的高度重视。</p>
+<p>&emsp;&emsp;在执法方面，我国监管部门重视的方面主要有两个，一个是针对APP个人信息授权专项治理（滴滴事件等），一个是针对个人信息非法交易与黑灰产的整治。（净网行动）</p>
+<h4 id="5-数据安全合规热点与解读"><a href="#5-数据安全合规热点与解读" class="headerlink" title="5.数据安全合规热点与解读"></a>5.数据安全合规热点与解读</h4><h6 id="emsp-0）前言"><a href="#emsp-0）前言" class="headerlink" title="&emsp;0）前言"></a>&emsp;0）前言</h6><p>&emsp;&emsp;&emsp;由于欧盟的《GDPR》出台具有很大的代表性，所以绿盟的报告才将该法作为典型与我国的法律进行比较，获得共同点和差异处（个人理解）</p>
+<h6 id="emsp-1）保护对象："><a href="#emsp-1）保护对象：" class="headerlink" title="&emsp;1）保护对象："></a>&emsp;1）保护对象：</h6><p>&emsp;&emsp;&emsp;《GDPR》保护对象是公民的“个人数据”，值得一提的是其对个人数据的定义是比较广泛的。涵盖信息十分丰富，包括了指纹、虹膜和DNA数据等特殊的数据。</p>
+<p>&emsp;&emsp;&emsp;《网络安全法》明确了保护的重点数据对象是“个人信息”。相比 GDPR来说，我国罗列的个人信息范畴并不大，并不包括由个人关联的信息（比如用户的行为 / 习惯等识别性不高的信息），这在一定程度缩小了“个人信息”的范围，降低敏感信息分类分级及保护的成本。当然，在个人信息保护法中有了更加宽泛定义的倾向</p>
+<h6 id="emsp-2）用户的数据权利："><a href="#emsp-2）用户的数据权利：" class="headerlink" title="&emsp;2）用户的数据权利："></a>&emsp;2）用户的数据权利：</h6><p>&emsp;&emsp;&emsp;《GDPR》赋予了“数据主体”（或称用户）知情权、访问权、修改权、限制处理权、<br>删除权（也称“被遗忘权”）、可携带权、拒绝权等多项权利。 “被遗忘权”和“可携带权”是 GDPR新增两项用户“特权”。</p>
+<p>&emsp;&emsp;&emsp;《网络安全法》赋予了用户一定程度的“删除权”和“修改权”，而在《个人信息保护法》中则赋予了用户更丰富更具体的数据权利（知情权、访问权、被解释权等）</p>
+<h6 id="emsp-3）企业的安全义务"><a href="#emsp-3）企业的安全义务" class="headerlink" title="&emsp;3）企业的安全义务"></a>&emsp;3）企业的安全义务</h6><p>&emsp;&emsp;&emsp;《GDPR》规定了企业必须响应和履行卫用户行使权利提供方便的义务，另外还要求了企业必须保存数据处理活动的记录和针对数据的安全措施</p>
+<p>&emsp;&emsp;&emsp;在我国法律中同样要求企业要配合用户行使数据的权利，此外，企业在防止数据泄露、窃取篡改等数据安全事件上，需履行安全管理制度、组织和规范建设，落实有效的网络安全措施。</p>
+<p>&emsp;&emsp;&emsp;确实对企业的要求不管是哪个国家都要求的差不多，在满足用户数据使用权利的前提下，保障用户数据的安全性。</p>
+<h6 id="emsp-4）违法违规的处罚"><a href="#emsp-4）违法违规的处罚" class="headerlink" title="&emsp;4）违法违规的处罚"></a>&emsp;4）违法违规的处罚</h6><p>&emsp;&emsp;&emsp;《GDPR》可被处以最高 2000 万欧元的行政罚款，或对企业以最高占上一财政年度全球总营业额 4% 的行政罚款，取两者最高值。违反数据处理规定被处罚的代价是十分高昂的（贵的一批）</p>
+<p>&emsp;&emsp;&emsp;我国的《网络安全法》中最高可处罚 100 万元的罚款，对直接负责的主管人员处罚最高 10 万元罚款。除罚款以外，还有责令暂停相关业务、关闭网站、吊销营业执照等严厉的行政处罚措施。在最近发布《个人信息保护法》中，对于个人信息的违法犯罪加大了处罚与罚款力度，对于违法情节严重的最高可以处罚 5000 万元以下或者上一年度营业额 5% 罚款，同时对直接负责的主管人员最高可罚款 100万元（看滴滴就知道了）</p>
+<h6 id="emsp-5）小结"><a href="#emsp-5）小结" class="headerlink" title="&emsp;5）小结"></a>&emsp;5）小结</h6><p>&emsp;&emsp;&emsp;法律越来越完善，对于很多定义和行为也有了清楚的讲解，处罚也会越来越重视</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E4%BA%94%E6%89%80%E5%AE%9E%E4%B9%A0%E4%B9%8B%E6%95%B0%E6%8D%AE%E5%AE%89%E5%85%A8/" class="category-chain-item">五所实习之数据安全</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>实习相关内容梳理（三）</div>
+      <div>https://one-null-pointer.github.io/2022/08/05/数据安全日记五/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>Author</div>
+          <div>liaoyue</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>Posted on</div>
+          <div>August 5, 2022</div>
+        </div>
+      
+      
+      <div class="license-meta-item">
+        <div>传送口</div>
+        <div>
+          
+            
+            
+              <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+              <span class="hint--top hint--rounded" aria-label="点击进行传送">
+                <i class="iconfont icon-by"></i>
+              </span>
+              </a>
+            
+          
+        </div>
+      </div>
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2022/08/04/SQL%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/" title="SQL基础知识">
+                        <span class="hidden-mobile">SQL基础知识</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;Table of Contents</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">Keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://github.com/" target="_blank" rel="nofollow noopener"><span>pointer</span></a> <i class="iconfont icon-love"></i> <a href="https://mp.weixin.qq.com/s/6ncLUtaiJ9j_sMjZT5z-2w" target="_blank" rel="nofollow noopener"><span>一个爱学习的空指针</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      headingSelector : CONFIG.toc.headingSelector || 'h1,h2,h3,h4,h5,h6',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      collapseDepth   : CONFIG.toc.collapseDepth || 0,
+      scrollSmooth    : true,
+      headingsOffset  : -boardTop
+    });
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.10/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">Blog works best with JavaScript enabled</div>
+  </noscript>
+</body>
+</html>
