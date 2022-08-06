@@ -16,21 +16,23 @@
   <meta name="author" content="liaoyue">
   <meta name="keywords" content="">
   
-    <meta property="og:type" content="article">
-<meta property="og:title" content="SQL基础知识">
+    <meta name="description" content="SQL注入基础知识1.SQL的简介&amp;emsp;&amp;emsp;SQL (结构化查询语言) 是用于管理关系数据库管理系统（RDBMS）。 SQL 的范围包括数据插入、查询、更新和删除，数据库模式创建和修改，以及数据访问控制。 &amp;emsp;&amp;emsp;&amp;emsp;虽然㓟洗涤盆不同版本的SQL语言，但是为了ANSI标准的兼容性，它们必须以相似的方式来支持一些主要的命令（SELECT、UPDATE、DELET">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SQL注入基础知识">
 <meta property="og:url" content="https://one-null-pointer.github.io/2022/08/04/SQL%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/index.html">
 <meta property="og:site_name" content="one-null-poniter">
+<meta property="og:description" content="SQL注入基础知识1.SQL的简介&amp;emsp;&amp;emsp;SQL (结构化查询语言) 是用于管理关系数据库管理系统（RDBMS）。 SQL 的范围包括数据插入、查询、更新和删除，数据库模式创建和修改，以及数据访问控制。 &amp;emsp;&amp;emsp;&amp;emsp;虽然㓟洗涤盆不同版本的SQL语言，但是为了ANSI标准的兼容性，它们必须以相似的方式来支持一些主要的命令（SELECT、UPDATE、DELET">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://one-null-pointer.github.io/img/web1.png">
 <meta property="article:published_time" content="2022-08-04T14:30:44.000Z">
-<meta property="article:modified_time" content="2022-08-04T14:30:45.009Z">
+<meta property="article:modified_time" content="2022-08-06T08:50:50.226Z">
 <meta property="article:author" content="liaoyue">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://one-null-pointer.github.io/img/web1.png">
   
   
   
-  <title>SQL基础知识 - one-null-poniter</title>
+  <title>SQL注入基础知识 - one-null-poniter</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -183,7 +185,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="SQL基础知识"></span>
+            <span id="subtitle" data-typed-text="SQL注入基础知识"></span>
           
         </div>
 
@@ -206,7 +208,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          0 words
+          1.2k words
         
       </span>
     
@@ -217,7 +219,7 @@
         
         
         
-          1 mins
+          11 mins
         
       </span>
     
@@ -255,12 +257,66 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">SQL基础知识</h1>
+            <h1 style="display: none">SQL注入基础知识</h1>
             
             
               <div class="markdown-body">
                 
-                
+                <h1 id="SQL注入基础知识"><a href="#SQL注入基础知识" class="headerlink" title="SQL注入基础知识"></a>SQL注入基础知识</h1><h4 id="1-SQL的简介"><a href="#1-SQL的简介" class="headerlink" title="1.SQL的简介"></a>1.SQL的简介</h4><p>&emsp;&emsp;SQL (结构化查询语言) 是用于管理关系数据库管理系统（RDBMS）。 SQL 的范围包括数据插入、查询、更新和删除，数据库模式创建和修改，以及数据访问控制。</p>
+<p>&emsp;&emsp;&emsp;虽然㓟洗涤盆不同版本的SQL语言，但是为了ANSI标准的兼容性，它们必须以相似的方式来支持一些主要的命令（SELECT、UPDATE、DELETE、INSERT、WHERE 等等），当然除了这些标准外，大部分SQL数据库都拥有它们自己的专有扩展。</p>
+<p>&emsp;</p>
+<h4 id="2-SQL注入的定义"><a href="#2-SQL注入的定义" class="headerlink" title="2.SQL注入的定义"></a>2.SQL注入的定义</h4><p>&emsp;&emsp;SQL 注入是一种非常常见的数据库攻击手段，是一种通过操作输入来修改后台SQL语句达到代码执行进行攻击目的的技术。</p>
+<p>&emsp;</p>
+<h4 id="3-SQL注入的原理"><a href="#3-SQL注入的原理" class="headerlink" title="3.SQL注入的原理"></a>3.SQL注入的原理</h4><p>&emsp;&emsp;web应用程序对用户输入数据的合法性没有判断或过滤不严，攻击者可以在web应用程序中事先定义好的查询语句的结尾上添加额外的SQL语句]，在管理员不知情的情况下实现非法操作，以此来实现欺骗数据库服务器执行非授权的任意查询，从而进一步得到相应的数据信息。</p>
+<p>&emsp;&emsp;（简单来说就是利用查库的变量伪造出数据库的语句进行增删改查的操作，一般查的实现比较多，所以能够泄漏得到数据库的信息）</p>
+<p>&emsp;</p>
+<h4 id="4-SQL注入的种类"><a href="#4-SQL注入的种类" class="headerlink" title="4.SQL注入的种类"></a>4.SQL注入的种类</h4><ol>
+<li>注入手法分类：<ul>
+<li>联合查询注入</li>
+<li>报错型注入</li>
+<li>布尔型注入</li>
+<li>延时注入</li>
+<li>堆叠注入</li>
+</ul>
+</li>
+<li>数据类型分类：<ul>
+<li>字符型</li>
+<li>数值型</li>
+</ul>
+</li>
+<li>注入位置分类：<ul>
+<li>GET数据（地址栏）</li>
+<li>POST数据（输入框）</li>
+<li>HTTP头部</li>
+<li>Cookie数据</li>
+</ul>
+</li>
+</ol>
+<p>&emsp;</p>
+<h4 id="5-SQL注入的危害"><a href="#5-SQL注入的危害" class="headerlink" title="5.SQL注入的危害"></a>5.SQL注入的危害</h4><ol>
+<li>访问数据库数据，盗取信息</li>
+<li>对数据库进行增删改查</li>
+<li>如果网站目录存在写入权限，可以写入网页木马</li>
+<li>提权</li>
+<li>等等</li>
+</ol>
+<p>&emsp;</p>
+<h4 id="6-MySQL数据库相关知识"><a href="#6-MySQL数据库相关知识" class="headerlink" title="6.MySQL数据库相关知识"></a>6.MySQL数据库相关知识</h4><h6 id="基础小知识点1："><a href="#基础小知识点1：" class="headerlink" title="基础小知识点1："></a>基础小知识点1：</h6><p>&emsp;&emsp;由于数据库的类型中，MySQL类型数据库是比较主流的，所以需要了解一些MySQL的相关知识。</p>
+<p>&emsp;&emsp;在MYSQL5.0以上版本中，存在着名为information_schema的库，在这个库中存储记录了所有数据库名，表名，列名。也就是说我们可以通过查询它获取指定数据库下面的表名或者列名信息。</p>
+<h6 id="基础小知识点2："><a href="#基础小知识点2：" class="headerlink" title="基础小知识点2："></a>基础小知识点2：</h6><p>&emsp;&emsp;在数据库中符号“.”代表下一级，譬如liaoyue.use代表的意思是liaoyue数据下名为user的表。</p>
+<h6 id="基础小知识点3："><a href="#基础小知识点3：" class="headerlink" title="基础小知识点3："></a>基础小知识点3：</h6><p>&emsp;&emsp;常用的相关参数有</p>
+<ul>
+<li>information_schema.tables：记录所有表名信息的表</li>
+<li>information_schema.columns：记录所有列名信息的表</li>
+<li>table_name：表名</li>
+<li>column_name：列名</li>
+<li>table_schema：数据库名</li>
+<li>user()  查看当前MySQL登录的用户名</li>
+<li>database()   查看当前使用MySQL数据库名</li>
+<li>version()  查看当前MySQL版本</li>
+</ul>
+<p>&emsp;</p>
+
                 
               </div>
             
@@ -298,7 +354,7 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>SQL基础知识</div>
+      <div>SQL注入基础知识</div>
       <div>https://one-null-pointer.github.io/2022/08/04/SQL基础知识/</div>
     </div>
     <div class="license-meta">
@@ -340,6 +396,12 @@
                 <div class="post-prevnext my-3">
                   <article class="post-prev col-6">
                     
+                    
+                      <a href="/2022/08/06/SQL%E6%B3%A8%E5%85%A5%E2%80%94%E8%81%94%E5%90%88%E6%9F%A5%E8%AF%A2%E6%B3%A8%E5%85%A5/" title="SQL注入——联合查询注入">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">SQL注入——联合查询注入</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
                     
                   </article>
                   <article class="post-next col-6">
