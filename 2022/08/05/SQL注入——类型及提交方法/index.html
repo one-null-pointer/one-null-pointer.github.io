@@ -16,23 +16,23 @@
   <meta name="author" content="liaoyue">
   <meta name="keywords" content="">
   
-    <meta name="description" content="SQL注入基础知识1.SQL的简介&amp;emsp;&amp;emsp;SQL (结构化查询语言) 是用于管理关系数据库管理系统（RDBMS）。 SQL 的范围包括数据插入、查询、更新和删除，数据库模式创建和修改，以及数据访问控制。 &amp;emsp;&amp;emsp;&amp;emsp;虽然㓟洗涤盆不同版本的SQL语言，但是为了ANSI标准的兼容性，它们必须以相似的方式来支持一些主要的命令（SELECT、UPDATE、DELET">
+    <meta name="description" content="SQL注入——类型及提交方法1.前言&amp;emsp;&amp;emsp;在现实的SQL注入安全测试中，我们首先要明确提交数据及提交方法后再进行相关的注入，其中提交数据类型和提交方法可以通过抓包分析获取，后续的安全测试中我们也必须满足同等的操作才能进行注入。   &amp;emsp; 2.数据类型 数字型语句：  1select * from user where id     字符型语句：  1select * fr">
 <meta property="og:type" content="article">
-<meta property="og:title" content="SQL注入基础知识">
-<meta property="og:url" content="https://one-null-pointer.github.io/2022/08/04/SQL%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/index.html">
+<meta property="og:title" content="SQL注入——类型及提交方法">
+<meta property="og:url" content="https://one-null-pointer.github.io/2022/08/05/SQL%E6%B3%A8%E5%85%A5%E2%80%94%E2%80%94%E7%B1%BB%E5%9E%8B%E5%8F%8A%E6%8F%90%E4%BA%A4%E6%96%B9%E6%B3%95/index.html">
 <meta property="og:site_name" content="one-null-poniter">
-<meta property="og:description" content="SQL注入基础知识1.SQL的简介&amp;emsp;&amp;emsp;SQL (结构化查询语言) 是用于管理关系数据库管理系统（RDBMS）。 SQL 的范围包括数据插入、查询、更新和删除，数据库模式创建和修改，以及数据访问控制。 &amp;emsp;&amp;emsp;&amp;emsp;虽然㓟洗涤盆不同版本的SQL语言，但是为了ANSI标准的兼容性，它们必须以相似的方式来支持一些主要的命令（SELECT、UPDATE、DELET">
+<meta property="og:description" content="SQL注入——类型及提交方法1.前言&amp;emsp;&amp;emsp;在现实的SQL注入安全测试中，我们首先要明确提交数据及提交方法后再进行相关的注入，其中提交数据类型和提交方法可以通过抓包分析获取，后续的安全测试中我们也必须满足同等的操作才能进行注入。   &amp;emsp; 2.数据类型 数字型语句：  1select * from user where id     字符型语句：  1select * fr">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://one-null-pointer.github.io/img/web1.png">
-<meta property="article:published_time" content="2022-08-04T14:30:44.000Z">
-<meta property="article:modified_time" content="2022-08-06T12:21:52.641Z">
+<meta property="article:published_time" content="2022-08-05T07:46:28.000Z">
+<meta property="article:modified_time" content="2022-08-07T13:57:37.278Z">
 <meta property="article:author" content="liaoyue">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://one-null-pointer.github.io/img/web1.png">
   
   
   
-  <title>SQL注入基础知识 - one-null-poniter</title>
+  <title>SQL注入——类型及提交方法 - one-null-poniter</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -185,7 +185,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="SQL注入基础知识"></span>
+            <span id="subtitle" data-typed-text="SQL注入——类型及提交方法"></span>
           
         </div>
 
@@ -196,8 +196,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2022-08-04 22:30" pubdate>
-          August 4, 2022 pm
+        <time datetime="2022-08-05 15:46" pubdate>
+          August 5, 2022 pm
         </time>
       </span>
     
@@ -208,7 +208,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          723 words
+          1.4k words
         
       </span>
     
@@ -219,7 +219,7 @@
         
         
         
-          7 mins
+          12 mins
         
       </span>
     
@@ -257,50 +257,67 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">SQL注入基础知识</h1>
+            <h1 style="display: none">SQL注入——类型及提交方法</h1>
             
             
               <div class="markdown-body">
                 
-                <h1 id="SQL注入基础知识"><a href="#SQL注入基础知识" class="headerlink" title="SQL注入基础知识"></a>SQL注入基础知识</h1><h4 id="1-SQL的简介"><a href="#1-SQL的简介" class="headerlink" title="1.SQL的简介"></a>1.SQL的简介</h4><p>&emsp;&emsp;SQL (结构化查询语言) 是用于管理关系数据库管理系统（RDBMS）。 SQL 的范围包括数据插入、查询、更新和删除，数据库模式创建和修改，以及数据访问控制。</p>
-<p>&emsp;&emsp;&emsp;虽然㓟洗涤盆不同版本的SQL语言，但是为了ANSI标准的兼容性，它们必须以相似的方式来支持一些主要的命令（SELECT、UPDATE、DELETE、INSERT、WHERE 等等），当然除了这些标准外，大部分SQL数据库都拥有它们自己的专有扩展。</p>
+                <h1 id="SQL注入——类型及提交方法"><a href="#SQL注入——类型及提交方法" class="headerlink" title="SQL注入——类型及提交方法"></a>SQL注入——类型及提交方法</h1><h4 id="1-前言"><a href="#1-前言" class="headerlink" title="1.前言"></a>1.前言</h4><p>&emsp;&emsp;在现实的SQL注入安全测试中，我们首先要明确提交数据及提交方法后再进行相关的注入，其中提交数据类型和提交方法可以通过抓包分析获取，后续的安全测试中我们也必须满足同等的操作才能进行注入。</p>
+<center><img src="/img/SQL%E6%B3%A8%E5%85%A5%E2%80%94%E2%80%94%E7%B1%BB%E5%9E%8B%E5%8F%8A%E6%8F%90%E4%BA%A4%E6%96%B9%E6%B3%95/1.png" srcset="/img/loading.gif" lazyload style="zoom:67%;" /></center>
+
 <p>&emsp;</p>
-<h4 id="2-SQL注入的定义"><a href="#2-SQL注入的定义" class="headerlink" title="2.SQL注入的定义"></a>2.SQL注入的定义</h4><p>&emsp;&emsp;SQL 注入是一种非常常见的数据库攻击手段，是一种通过操作输入来修改后台SQL语句达到代码执行进行攻击目的的技术。</p>
-<p>&emsp;</p>
-<h4 id="3-SQL注入的原理"><a href="#3-SQL注入的原理" class="headerlink" title="3.SQL注入的原理"></a>3.SQL注入的原理</h4><p>&emsp;&emsp;web应用程序对用户输入数据的合法性没有判断或过滤不严，攻击者可以在web应用程序中事先定义好的查询语句的结尾上添加额外的SQL语句]，在管理员不知情的情况下实现非法操作，以此来实现欺骗数据库服务器执行非授权的任意查询，从而进一步得到相应的数据信息。</p>
-<p>&emsp;&emsp;（简单来说就是利用查库的变量伪造出数据库的语句进行增删改查的操作，一般查的实现比较多，所以能够泄漏得到数据库的信息）</p>
-<p>&emsp;</p>
-<h4 id="4-SQL注入的种类"><a href="#4-SQL注入的种类" class="headerlink" title="4.SQL注入的种类"></a>4.SQL注入的种类</h4><ol>
-<li>注入手法分类：<ul>
-<li>联合查询注入</li>
-<li>报错型注入</li>
-<li>布尔型注入</li>
-<li>延时注入</li>
-<li>堆叠注入</li>
+<h4 id="2-数据类型"><a href="#2-数据类型" class="headerlink" title="2.数据类型"></a>2.数据类型</h4><ul>
+<li>数字型语句：</li>
 </ul>
-</li>
-<li>数据类型分类：<ul>
-<li>字符型</li>
-<li>数值型</li>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> <span class="hljs-operator">*</span> <span class="hljs-keyword">from</span> <span class="hljs-keyword">user</span> <span class="hljs-keyword">where</span> id  <br></code></pre></td></tr></table></figure>
+
+<ul>
+<li>字符型语句：</li>
 </ul>
-</li>
-<li>注入位置分类：<ul>
-<li>GET数据（地址栏）</li>
-<li>POST数据（输入框）</li>
-<li>HTTP头部</li>
-<li>Cookie数据</li>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> <span class="hljs-operator">*</span> <span class="hljs-keyword">from</span> <span class="hljs-keyword">user</span> <span class="hljs-keyword">where</span> name <span class="hljs-operator">=</span> <span class="hljs-string">&#x27;liaoyue&#x27;</span><br></code></pre></td></tr></table></figure>
+
+<ul>
+<li>搜索型语句：（like）</li>
 </ul>
-</li>
-</ol>
-<p>&emsp;</p>
-<h4 id="5-SQL注入的危害"><a href="#5-SQL注入的危害" class="headerlink" title="5.SQL注入的危害"></a>5.SQL注入的危害</h4><ol>
-<li>访问数据库数据，盗取信息</li>
-<li>对数据库进行增删改查</li>
-<li>如果网站目录存在写入权限，可以写入网页木马</li>
-<li>提权</li>
-<li>等等</li>
-</ol>
-<p>&emsp;</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> <span class="hljs-operator">*</span> <span class="hljs-keyword">from</span> users <span class="hljs-keyword">where</span> name <span class="hljs-keyword">like</span> ‘<span class="hljs-operator">%</span>liaoyue<span class="hljs-operator">%</span>’<br><span class="hljs-keyword">select</span> <span class="hljs-operator">*</span> <span class="hljs-keyword">from</span> users <span class="hljs-keyword">where</span> name <span class="hljs-keyword">like</span>  (’<span class="hljs-operator">%</span>xihua<span class="hljs-operator">%</span>’)<br></code></pre></td></tr></table></figure>
+
+<p>&emsp;&emsp;通过三种语句的对比可以看见，在字符型语句中变量是需要使用到引号的，而在搜索类型中则需要注释单引号’、百分号%、括号等，这个需要自己进行多次尝试，搜索语句的类型并不多。因此我们的参数值在注入的时候需要去注意类型的判别。</p>
+<p>&emsp;&emsp;json类型：</p>
+<h4 id="3-请求方法"><a href="#3-请求方法" class="headerlink" title="3.请求方法"></a>3.请求方法</h4><p>&emsp;&emsp;不同的请求方式，上传的数据类型和大小是有区别的。我们不在上传的时候要根据请求的发送进行提交相关的语句，因此同的请求方法可能会有着不同注入的写法和方式。</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-meta">&lt;?php</span><br><span class="hljs-variable">$get</span>=<span class="hljs-variable">$_GET</span>[<span class="hljs-string">&#x27;g&#x27;</span>];       <span class="hljs-comment">//get接受参数名为g的值赋值给变量get</span><br><span class="hljs-keyword">echo</span> <span class="hljs-variable">$get</span>;             <span class="hljs-comment">//输出变量g的数据</span><br><br><span class="hljs-variable">$post</span>=<span class="hljs-variable">$_POST</span>[<span class="hljs-string">&#x27;p&#x27;</span>];     <span class="hljs-comment">//post接受参数名为p的值赋值给变量post</span><br><span class="hljs-keyword">echo</span> <span class="hljs-variable">$post</span>;            <span class="hljs-comment">//输出变量p的数据</span><br><br><span class="hljs-variable">$c</span>=<span class="hljs-variable">$_COOKIE</span>[<span class="hljs-string">&#x27;c&#x27;</span>];<br><span class="hljs-keyword">echo</span> <span class="hljs-variable">$c</span>;<br><br><span class="hljs-variable">$r</span>=<span class="hljs-variable">$_REQUEST</span>[<span class="hljs-string">&#x27;r&#x27;</span>]<br><span class="hljs-keyword">echo</span> <span class="hljs-variable">$r</span>;<br> <br><span class="hljs-variable">$s</span>=<span class="hljs-variable">$_SERVER</span>[<span class="hljs-string">&#x27;HTTP_USER_AGENT&#x27;</span>];<br><span class="hljs-keyword">echo</span> <span class="hljs-variable">$s</span>;<br><span class="hljs-meta">?&gt;</span><br></code></pre></td></tr></table></figure>
+
+<p>&emsp;&emsp;（注：在java、python等语言的框架中基本也是一样的思路，只是写法可能会有细微的出入）</p>
+<ul>
+<li><h6 id="GET与POST："><a href="#GET与POST：" class="headerlink" title="GET与POST："></a>GET与POST：</h6></li>
+</ul>
+<p>&emsp;&emsp;我们尝试发送数据<a target="_blank" rel="noopener" href="http://127.0.0.1/liaoyue.php/?g=123&amp;p=456">http://127.0.0.1/liaoyue.php/?g=123&amp;p=456</a></p>
+<center><img src="/img/SQL%E6%B3%A8%E5%85%A5%E2%80%94%E2%80%94%E7%B1%BB%E5%9E%8B%E5%8F%8A%E6%8F%90%E4%BA%A4%E6%96%B9%E6%B3%95/2.jpg" srcset="/img/loading.gif" lazyload style="zoom:67%;" />
+</center>
+
+
+<center><img src="/img/SQL%E6%B3%A8%E5%85%A5%E2%80%94%E2%80%94%E7%B1%BB%E5%9E%8B%E5%8F%8A%E6%8F%90%E4%BA%A4%E6%96%B9%E6%B3%95/3.jpg" srcset="/img/loading.gif" lazyload alt="3" style="zoom: 67%;" />
+</center>
+&emsp;&emsp;可以看见，在数据包传输过后，界面显示的只有g的内容，p的内容传送失败了。这是因为在burp的抓包中，我们的数据是用GET的形式去请求的，而p是用POST进行接收，所以p并没有接收最终导致了只有g的内容被打印出来。
+
+<p>&emsp;&emsp;接下来修改传送方法，通过火狐插件 HackBar 在post提交p。</p>
+<center><img src="/img/SQL%E6%B3%A8%E5%85%A5%E2%80%94%E2%80%94%E7%B1%BB%E5%9E%8B%E5%8F%8A%E6%8F%90%E4%BA%A4%E6%96%B9%E6%B3%95/6.jpg" srcset="/img/loading.gif" lazyload style="zoom:67%;" />
+</center>
+
+
+
+<center><img src="/img/SQL%E6%B3%A8%E5%85%A5%E2%80%94%E2%80%94%E7%B1%BB%E5%9E%8B%E5%8F%8A%E6%8F%90%E4%BA%A4%E6%96%B9%E6%B3%95/4.jpg" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<p>&emsp;&emsp;最终效果：</p>
+<center><img src="/img/SQL%E6%B3%A8%E5%85%A5%E2%80%94%E2%80%94%E7%B1%BB%E5%9E%8B%E5%8F%8A%E6%8F%90%E4%BA%A4%E6%96%B9%E6%B3%95/5.jpg" srcset="/img/loading.gif" lazyload style="zoom: 67%;" />
+</center>
+
+<p>&emsp;&emsp;成功显示123456，在网址后面传参为get请求，不论是否为POST的请求类型，主要是在网址后面，get就能接收到，所以这样子用了POST的请求方式可以同时把GET和POST两个参数都传上去。</p>
+<p>&emsp;&emsp;这也就是说我们注入的位置是有要求和限制的，不同的请求方式会导致我们注入位置形成影响</p>
+<ul>
+<li><h6 id="COOKIE"><a href="#COOKIE" class="headerlink" title="COOKIE"></a>COOKIE</h6></li>
+</ul>
+<p>&emsp;&emsp;首先明确cookie并不是请求方法，是在数据包中cookie可以通过修改数据包中的cookie进行注入</p>
 
                 
               </div>
@@ -339,8 +356,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>SQL注入基础知识</div>
-      <div>https://one-null-pointer.github.io/2022/08/04/SQL基础知识/</div>
+      <div>SQL注入——类型及提交方法</div>
+      <div>https://one-null-pointer.github.io/2022/08/05/SQL注入——类型及提交方法/</div>
     </div>
     <div class="license-meta">
       
@@ -352,7 +369,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>Posted on</div>
-          <div>August 4, 2022</div>
+          <div>August 5, 2022</div>
         </div>
       
       
@@ -382,9 +399,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2022/08/05/SQL%E6%B3%A8%E5%85%A5%E2%80%94%E2%80%94%E7%B1%BB%E5%9E%8B%E5%8F%8A%E6%8F%90%E4%BA%A4%E6%96%B9%E6%B3%95/" title="SQL注入——类型及提交方法">
+                      <a href="/2022/08/05/SQL%E6%B3%A8%E5%85%A5%E2%80%94%E2%80%94MySQL/" title="SQL注入——MySQL">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">SQL注入——类型及提交方法</span>
+                        <span class="hidden-mobile">SQL注入——MySQL</span>
                         <span class="visible-mobile">Previous</span>
                       </a>
                     
@@ -392,8 +409,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2022/08/04/%E6%95%B0%E6%8D%AE%E5%AE%89%E5%85%A8%E6%97%A5%E8%AE%B0%E4%BA%94/" title="实习相关内容梳理（三）">
-                        <span class="hidden-mobile">实习相关内容梳理（三）</span>
+                      <a href="/2022/08/04/SQL%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/" title="SQL注入基础知识">
+                        <span class="hidden-mobile">SQL注入基础知识</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
