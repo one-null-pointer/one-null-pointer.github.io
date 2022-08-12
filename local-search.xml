@@ -99,6 +99,25 @@
   
   
   <entry>
+    <title>数据安全技术前沿研究笔记（二）</title>
+    <link href="/2022/08/06/%E6%95%B0%E6%8D%AE%E5%AE%89%E5%85%A8%E6%97%A5%E8%AE%B0%E5%85%AD/"/>
+    <url>/2022/08/06/%E6%95%B0%E6%8D%AE%E5%AE%89%E5%85%A8%E6%97%A5%E8%AE%B0%E5%85%AD/</url>
+    
+    <content type="html"><![CDATA[<h1 id="数据安全技术前沿研究笔记（二）"><a href="#数据安全技术前沿研究笔记（二）" class="headerlink" title="数据安全技术前沿研究笔记（二）"></a>数据安全技术前沿研究笔记（二）</h1><h4 id="1-前言"><a href="#1-前言" class="headerlink" title="1.前言"></a>1.前言</h4><p>&emsp;&emsp;由于第二章没啥好总结的，大多都是一些合规下数据安全类的文字阐述，和第一章的中心思路基本不差，我们就直接开始第三章的“前沿技术赋能用户隐私数据安全合规”。在该文章中，企业的用户隐私数据安全合规场景主要是是三种典型也对应了三种前沿技术（差分隐私、知识图谱和流程自动化）</p><p>&emsp;&emsp;（以下是第三章的部分摘抄）</p><p>&emsp;</p><h4 id="2-数据采集中隐私保护"><a href="#2-数据采集中隐私保护" class="headerlink" title="2.数据采集中隐私保护"></a>2.数据采集中隐私保护</h4><ul><li><h6 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h6></li></ul><p>&emsp;&emsp;在保护用户的个人隐私前提下，对大量用户的隐私数据进行采集，在服务器中完成数据的聚合和分析,挖掘大规模用户数据的整体趋势和统计信息。</p><ul><li><h6 id="合约条款"><a href="#合约条款" class="headerlink" title="合约条款"></a>合约条款</h6></li></ul><p>&emsp;&emsp;GDPR：为了应对隐私问题带来的风险的挑战，GDPR 指出数据控制者与处理者“应当执行合适的技术措施和有组织性的措施来保证合理应对风险的安全水平”。</p><p>&emsp;&emsp;《网络安全法》：“网络运营者应当采取技术措施和其他必要措施，确保其收集的个人信息安全，防止信息泄露、毁损、丢失”。即要求企业采取一定的技术与管理措施，确保用户个人信息与隐私安全。</p><ul><li><h6 id="挑战"><a href="#挑战" class="headerlink" title="挑战"></a>挑战</h6></li></ul><p>&emsp;&emsp;在传统的数据安全处理技术——去标识化（数据脱敏），在企业部分主要场景中一般可应对合规性，符合GDPR和《网络安全法》要求采取的必要措施。但是，在一些内部环境（如大部分内部用户可以访问和下载）或外部共享环境总，它处理后的数据仍然面临多种多样的隐私攻击，包括背景知识攻击、差分攻击和重标识攻击等。经过攻击后，个人隐私仍然有可能会被泄露，若对数据进行多度脱敏，虽然数据的隐私攻击风险降低，但数据的可用性也就大幅度降低。如何有效的防范隐私攻击又保留数据的可用性，也就是获取数据的聚合信息但无法获得单个记录的信息，这就是需要更高的技术。</p><ul><li><h6 id="对应技术"><a href="#对应技术" class="headerlink" title="对应技术"></a>对应技术</h6></li></ul><p>&emsp;&emsp;差分隐私</p><p>&emsp;</p><h4 id="3-个人信息治理与可视化"><a href="#3-个人信息治理与可视化" class="headerlink" title="3.个人信息治理与可视化"></a>3.个人信息治理与可视化</h4><ul><li><h6 id="背景-1"><a href="#背景-1" class="headerlink" title="背景"></a>背景</h6></li></ul><p>&emsp;&emsp;同一个企业的多个应用中，可能通过收集用户的多个 维度的个人信息与隐私数据。 此外，数据采集可能分布存储在多种多个数据库（ 如Oracle、MySQL/ElasticSearch）以及各种大数据平台中（HDFS 和 Hbase）。企业需要摸清企业内部有多少个独立的数据实体（数据主体），每一个实体包括哪些数据与属性维度，这些数据分别存储在哪些系统中和业务应用，以及数据共享给哪些第三方企业。</p><ul><li><h6 id="合约条款-1"><a href="#合约条款-1" class="headerlink" title="合约条款"></a>合约条款</h6></li></ul><p>&emsp;&emsp;GDPR：如 1.2.2 节所述，GDPR 赋予了用户知情权、访问权、修改权、限制处理权、 被遗忘权、可携带权、拒绝权等多项权利。相应地，企业必须履行和响应用户提出的权利请求。比如用户发起数据查看请求，那么企业必须完整呈现数据主体个人数据报告，包括收集了用户哪些结构化数据、哪些非结构化数据（包括网络浏览、点击等信息）、以及将数据共享给了哪些第三方企业。企业在实施用户权利请求响应的合规，个人信息治理与可视化是实现目标的关键。</p><p>&emsp;&emsp;《网络安全法》：如 1.2.2 节所述，法规赋予了用户一定程度的“删除权”和“修改权”，响应地，企业须履行和配合用户完成数据权利请求的流程。同样地，企业在具体实施合规落地时，个人信息治理与可视化是基础与前提。</p><ul><li><h6 id="挑战-1"><a href="#挑战-1" class="headerlink" title="挑战"></a>挑战</h6></li></ul><p>&emsp;&emsp;多源异构数据源分布同一个使用主体的信息和维度，对于企业复杂多变的数据环境来说，不同数据源实体ID表示显示不同或者缺失，如何识别与关联同一个实体是一个不小的挑战。</p><ul><li><h6 id="对应技术-1"><a href="#对应技术-1" class="headerlink" title="对应技术"></a>对应技术</h6></li></ul><p>&emsp;&emsp;知识图谱</p><p>&emsp;</p><h4 id="4-用户数据权利全球响应"><a href="#4-用户数据权利全球响应" class="headerlink" title="4.用户数据权利全球响应"></a>4.用户数据权利全球响应</h4><ul><li><h6 id="背景-2"><a href="#背景-2" class="headerlink" title="背景"></a>背景</h6></li></ul><p>&emsp;&emsp;全球一些隐私法规赋予数据主体（用户）自由访问、修改和删除个人数据等权利，相应地，要求企业必须在规定的时间内对用户提出的请求进行响应，比如向用户提供收集个人数据明细及使用目的报告。</p><ul><li><h6 id="合约条款-2"><a href="#合约条款-2" class="headerlink" title="合约条款"></a>合约条款</h6></li></ul><p>&emsp;&emsp;GDPR：规定企业“必须在一个月内对所有的请求进行响应和处理，若请求过于复杂，可延长至“两个月”。</p><p>&emsp;&emsp;《网络安全法》：法规赋予了用户一定程度的“删除权”和“修改权”，但未具体到响应时间的规定。但在国家标准《个人信息安全规范》（GB/T 35273-2020），明确规定从请求到响应的时间是 30 天内。</p><ul><li><h6 id="挑战-2"><a href="#挑战-2" class="headerlink" title="挑战"></a>挑战</h6></li></ul><p>&emsp;&emsp;许多企业无法应对数据主体权利请求，约有三分之二企业对当个SSR的回复需要出国两周以上的时间，且这些流程通常是人工完成，平均成本很高。因此，对于拥有一定用户数量规模的企业，如何应对多个用户并发请求的随时响应。</p><ul><li><h6 id="应对技术"><a href="#应对技术" class="headerlink" title="应对技术"></a>应对技术</h6></li></ul><p>&emsp;&emsp;流程自动化</p><p>&emsp;</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>五所实习之数据安全</category>
+      
+    </categories>
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>SQL注入——MySQL</title>
     <link href="/2022/08/05/SQL%E6%B3%A8%E5%85%A5%E2%80%94%E2%80%94MySQL/"/>
     <url>/2022/08/05/SQL%E6%B3%A8%E5%85%A5%E2%80%94%E2%80%94MySQL/</url>
@@ -141,7 +160,7 @@
     <link href="/2022/08/04/SQL%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/"/>
     <url>/2022/08/04/SQL%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/</url>
     
-    <content type="html"><![CDATA[<h1 id="SQL注入基础知识"><a href="#SQL注入基础知识" class="headerlink" title="SQL注入基础知识"></a>SQL注入基础知识</h1><h4 id="1-SQL的简介"><a href="#1-SQL的简介" class="headerlink" title="1.SQL的简介"></a>1.SQL的简介</h4><p>&emsp;&emsp;SQL (结构化查询语言) 是用于管理关系数据库管理系统（RDBMS）。 SQL 的范围包括数据插入、查询、更新和删除，数据库模式创建和修改，以及数据访问控制。</p><p>&emsp;&emsp;虽然存在着不同版本的SQL语言，但是为了ANSI标准的兼容性，它们必须以相似的方式来支持一些主要的命令（SELECT、UPDATE、DELETE、INSERT、WHERE 等等），当然除了这些标准外，大部分SQL数据库都拥有它们自己的专有扩展。</p><p>&emsp;</p><h4 id="2-SQL注入的定义"><a href="#2-SQL注入的定义" class="headerlink" title="2.SQL注入的定义"></a>2.SQL注入的定义</h4><p>&emsp;&emsp;SQL 注入是一种非常常见的数据库攻击手段，是一种通过操作输入来修改后台SQL语句达到代码执行进行攻击目的的技术。</p><p>&emsp;</p><h4 id="3-SQL注入的原理"><a href="#3-SQL注入的原理" class="headerlink" title="3.SQL注入的原理"></a>3.SQL注入的原理</h4><p>&emsp;&emsp;web应用程序对用户输入数据的合法性没有判断或过滤不严，攻击者可以在web应用程序中事先定义好的查询语句的结尾上添加额外的SQL语句]，在管理员不知情的情况下实现非法操作，以此来实现欺骗数据库服务器执行非授权的任意查询，从而进一步得到相应的数据信息。</p><p>&emsp;&emsp;（简单来说就是利用查库的变量伪造出数据库的语句进行增删改查的操作，一般查的实现比较多，所以能够泄漏得到数据库的信息）</p><p>&emsp;</p><h4 id="4-SQL注入的种类"><a href="#4-SQL注入的种类" class="headerlink" title="4.SQL注入的种类"></a>4.SQL注入的种类</h4><ol><li>注入手法分类：<ul><li>联合查询注入</li><li>报错型注入</li><li>布尔型注入</li><li>延时注入</li><li>堆叠注入</li></ul></li><li>数据类型分类：<ul><li>字符型</li><li>数值型</li></ul></li><li>注入位置分类：<ul><li>GET数据（地址栏）</li><li>POST数据（输入框）</li><li>HTTP头部</li><li>Cookie数据</li></ul></li></ol><p>&emsp;</p><h4 id="5-SQL注入的危害"><a href="#5-SQL注入的危害" class="headerlink" title="5.SQL注入的危害"></a>5.SQL注入的危害</h4><ol><li>访问数据库数据，盗取信息</li><li>对数据库进行增删改查</li><li>如果网站目录存在写入权限，可以写入网页木马</li><li>提权</li><li>等等</li></ol><p>&emsp;</p>]]></content>
+    <content type="html"><![CDATA[<h1 id="SQL注入基础知识"><a href="#SQL注入基础知识" class="headerlink" title="SQL注入基础知识"></a>SQL注入基础知识</h1><h4 id="1-SQL的简介"><a href="#1-SQL的简介" class="headerlink" title="1.SQL的简介"></a>1.SQL的简介</h4><p>&emsp;&emsp;SQL (结构化查询语言) 是用于管理关系数据库管理系统（RDBMS）。 SQL 的范围包括数据插入、查询、更新和删除，数据库模式创建和修改，以及数据访问控制。</p><p>&emsp;&emsp;虽然存在着不同版本的SQL语言，但是为了ANSI标准的兼容性，它们必须以相似的方式来支持一些主要的命令（SELECT、UPDATE、DELETE、INSERT、WHERE 等等），当然除了这些标准外，大部分SQL数据库都拥有它们自己的专有扩展。</p><p>&emsp;</p><h4 id="2-SQL注入的定义"><a href="#2-SQL注入的定义" class="headerlink" title="2.SQL注入的定义"></a>2.SQL注入的定义</h4><p>&emsp;&emsp;SQL 注入是一种非常常见的数据库攻击手段，是一种通过操作输入来修改后台SQL语句达到代码执行进行攻击目的的技术。</p><p>&emsp;</p><h4 id="3-SQL注入的原理"><a href="#3-SQL注入的原理" class="headerlink" title="3.SQL注入的原理"></a>3.SQL注入的原理</h4><p>&emsp;&emsp;web应用程序对用户输入数据的合法性没有判断或过滤不严，攻击者可以在web应用程序中事先定义好的查询语句的结尾上添加额外的SQL语句]，在管理员不知情的情况下实现非法操作，以此来实现欺骗数据库服务器执行非授权的任意查询，从而进一步得到相应的数据信息。</p><p>&emsp;&emsp;（简单来说就是利用查库的变量伪造出数据库的语句进行增删改查的操作，一般查的实现比较多，所以能够泄漏得到数据库的信息）</p><center><img src="/img/SQL%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/1-16602818120541.png" style="zoom:100%;" /></center><p>&emsp;</p><h4 id="4-SQL注入的种类"><a href="#4-SQL注入的种类" class="headerlink" title="4.SQL注入的种类"></a>4.SQL注入的种类</h4><ol><li>注入手法分类：<ul><li>联合查询注入</li><li>报错型注入</li><li>布尔型注入</li><li>延时注入</li><li>堆叠注入</li></ul></li><li>数据类型分类：<ul><li>字符型</li><li>数值型</li></ul></li><li>注入位置分类：<ul><li>GET数据（地址栏）</li><li>POST数据（输入框）</li><li>HTTP头部</li><li>Cookie数据</li></ul></li></ol><p>&emsp;</p><h4 id="5-SQL注入的危害"><a href="#5-SQL注入的危害" class="headerlink" title="5.SQL注入的危害"></a>5.SQL注入的危害</h4><ol><li>访问数据库数据，盗取信息</li><li>对数据库进行增删改查</li><li>如果网站目录存在写入权限，可以写入网页木马</li><li>提权</li><li>等等</li></ol><p>&emsp;</p>]]></content>
     
     
     <categories>
@@ -156,7 +175,7 @@
   
   
   <entry>
-    <title>实习相关内容梳理（三）</title>
+    <title>数据安全技术前沿研究笔记（一）</title>
     <link href="/2022/08/04/%E6%95%B0%E6%8D%AE%E5%AE%89%E5%85%A8%E6%97%A5%E8%AE%B0%E4%BA%94/"/>
     <url>/2022/08/04/%E6%95%B0%E6%8D%AE%E5%AE%89%E5%85%A8%E6%97%A5%E8%AE%B0%E4%BA%94/</url>
     

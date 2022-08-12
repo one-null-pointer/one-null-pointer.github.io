@@ -16,23 +16,23 @@
   <meta name="author" content="liaoyue">
   <meta name="keywords" content="">
   
-    <meta name="description" content="数据安全技术前沿研究笔记（一）1.前言&amp;emsp;&amp;emsp;最近在看绿盟出的《拥抱合规、超越合规：数据安全技术前沿研究报告》，书是本好书，接下来也会分享自己的阅读笔记，但是这个名字又臭又长是谁想出来的。对于后续的技术学习其实我心里也没什么底，毕竟差分计算，联邦学习有接触过，感觉挺难的，冲！ &amp;emsp; 2.为什么要关注数据安全&amp;emsp;&amp;emsp;现在随着时代的发展，在大数据时代，数据的作用">
+    <meta name="description" content="数据安全技术前沿研究笔记（二）1.前言&amp;emsp;&amp;emsp;由于第二章没啥好总结的，大多都是一些合规下数据安全类的文字阐述，和第一章的中心思路基本不差，我们就直接开始第三章的“前沿技术赋能用户隐私数据安全合规”。在该文章中，企业的用户隐私数据安全合规场景主要是是三种典型也对应了三种前沿技术（差分隐私、知识图谱和流程自动化） &amp;emsp;&amp;emsp;（以下是第三章的部分摘抄） &amp;emsp; 2.数">
 <meta property="og:type" content="article">
-<meta property="og:title" content="数据安全技术前沿研究笔记（一）">
-<meta property="og:url" content="https://one-null-pointer.github.io/2022/08/04/%E6%95%B0%E6%8D%AE%E5%AE%89%E5%85%A8%E6%97%A5%E8%AE%B0%E4%BA%94/index.html">
+<meta property="og:title" content="数据安全技术前沿研究笔记（二）">
+<meta property="og:url" content="https://one-null-pointer.github.io/2022/08/06/%E6%95%B0%E6%8D%AE%E5%AE%89%E5%85%A8%E6%97%A5%E8%AE%B0%E5%85%AD/index.html">
 <meta property="og:site_name" content="one-null-poniter">
-<meta property="og:description" content="数据安全技术前沿研究笔记（一）1.前言&amp;emsp;&amp;emsp;最近在看绿盟出的《拥抱合规、超越合规：数据安全技术前沿研究报告》，书是本好书，接下来也会分享自己的阅读笔记，但是这个名字又臭又长是谁想出来的。对于后续的技术学习其实我心里也没什么底，毕竟差分计算，联邦学习有接触过，感觉挺难的，冲！ &amp;emsp; 2.为什么要关注数据安全&amp;emsp;&amp;emsp;现在随着时代的发展，在大数据时代，数据的作用">
+<meta property="og:description" content="数据安全技术前沿研究笔记（二）1.前言&amp;emsp;&amp;emsp;由于第二章没啥好总结的，大多都是一些合规下数据安全类的文字阐述，和第一章的中心思路基本不差，我们就直接开始第三章的“前沿技术赋能用户隐私数据安全合规”。在该文章中，企业的用户隐私数据安全合规场景主要是是三种典型也对应了三种前沿技术（差分隐私、知识图谱和流程自动化） &amp;emsp;&amp;emsp;（以下是第三章的部分摘抄） &amp;emsp; 2.数">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://one-null-pointer.github.io/img/data.png">
-<meta property="article:published_time" content="2022-08-04T13:29:43.000Z">
-<meta property="article:modified_time" content="2022-08-12T05:11:56.743Z">
+<meta property="article:published_time" content="2022-08-06T05:12:33.000Z">
+<meta property="article:modified_time" content="2022-08-12T05:13:52.558Z">
 <meta property="article:author" content="liaoyue">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://one-null-pointer.github.io/img/data.png">
   
   
   
-  <title>数据安全技术前沿研究笔记（一） - one-null-poniter</title>
+  <title>数据安全技术前沿研究笔记（二） - one-null-poniter</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -185,7 +185,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="数据安全技术前沿研究笔记（一）"></span>
+            <span id="subtitle" data-typed-text="数据安全技术前沿研究笔记（二）"></span>
           
         </div>
 
@@ -196,8 +196,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2022-08-04 21:29" pubdate>
-          August 4, 2022 pm
+        <time datetime="2022-08-06 13:12" pubdate>
+          August 6, 2022 pm
         </time>
       </span>
     
@@ -208,7 +208,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          2.5k words
+          1.9k words
         
       </span>
     
@@ -219,7 +219,7 @@
         
         
         
-          21 mins
+          16 mins
         
       </span>
     
@@ -257,41 +257,68 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">数据安全技术前沿研究笔记（一）</h1>
+            <h1 style="display: none">数据安全技术前沿研究笔记（二）</h1>
             
             
               <div class="markdown-body">
                 
-                <h1 id="数据安全技术前沿研究笔记（一）"><a href="#数据安全技术前沿研究笔记（一）" class="headerlink" title="数据安全技术前沿研究笔记（一）"></a>数据安全技术前沿研究笔记（一）</h1><h4 id="1-前言"><a href="#1-前言" class="headerlink" title="1.前言"></a>1.前言</h4><p>&emsp;&emsp;最近在看绿盟出的《拥抱合规、超越合规：数据安全技术前沿研究报告》，书是本好书，接下来也会分享自己的阅读笔记，但是这个名字又臭又长是谁想出来的。对于后续的技术学习其实我心里也没什么底，毕竟差分计算，联邦学习有接触过，感觉挺难的，冲！</p>
+                <h1 id="数据安全技术前沿研究笔记（二）"><a href="#数据安全技术前沿研究笔记（二）" class="headerlink" title="数据安全技术前沿研究笔记（二）"></a>数据安全技术前沿研究笔记（二）</h1><h4 id="1-前言"><a href="#1-前言" class="headerlink" title="1.前言"></a>1.前言</h4><p>&emsp;&emsp;由于第二章没啥好总结的，大多都是一些合规下数据安全类的文字阐述，和第一章的中心思路基本不差，我们就直接开始第三章的“前沿技术赋能用户隐私数据安全合规”。在该文章中，企业的用户隐私数据安全合规场景主要是是三种典型也对应了三种前沿技术（差分隐私、知识图谱和流程自动化）</p>
+<p>&emsp;&emsp;（以下是第三章的部分摘抄）</p>
 <p>&emsp;</p>
-<h4 id="2-为什么要关注数据安全"><a href="#2-为什么要关注数据安全" class="headerlink" title="2.为什么要关注数据安全"></a>2.为什么要关注数据安全</h4><p>&emsp;&emsp;现在随着时代的发展，在大数据时代，数据的作用和重要性越来越大，数据的国家战略性资源地位也被确立。但是近年来，大规模的数据泄露事件频频发生。”大数据杀熟“、数据歧视、个人信息非法采集和窃取等现象发生得越来越多。因此，为了应对这种挑战，全国掀起了数据安全与隐私的立法和技术热潮。（可以看数据安全的第一篇文章，里面就摘抄出了很多不同国家不同机构出台的数据安全法律法规）</p>
-<p>&emsp;&emsp;随着安全的重视，许多国家陆陆续续的出台了比较具有代表性的法案。欧盟的《通用数据保护条例》（GDPR）、美国的《加州消费者隐私法案》（CCPA）以及我国基于总体国家安全观指导下的《数据安全法》和对公民隐私和个人信息进行安全保护的《个人信息保护法》。</p>
+<h4 id="2-数据采集中隐私保护"><a href="#2-数据采集中隐私保护" class="headerlink" title="2.数据采集中隐私保护"></a>2.数据采集中隐私保护</h4><ul>
+<li><h6 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h6></li>
+</ul>
+<p>&emsp;&emsp;在保护用户的个人隐私前提下，对大量用户的隐私数据进行采集，在服务器中完成数据的聚合和分析,挖掘大规模用户数据的整体趋势和统计信息。</p>
+<ul>
+<li><h6 id="合约条款"><a href="#合约条款" class="headerlink" title="合约条款"></a>合约条款</h6></li>
+</ul>
+<p>&emsp;&emsp;GDPR：为了应对隐私问题带来的风险的挑战，GDPR 指出数据控制者与处理者“应当执行合适的技术措施和有组织性的措施来保证合理应对风险的安全水平”。</p>
+<p>&emsp;&emsp;《网络安全法》：“网络运营者应当采取技术措施和其他必要措施，确保其收集的个人信息安全，防止信息泄露、毁损、丢失”。即要求企业采取一定的技术与管理措施，确保用户个人信息与隐私安全。</p>
+<ul>
+<li><h6 id="挑战"><a href="#挑战" class="headerlink" title="挑战"></a>挑战</h6></li>
+</ul>
+<p>&emsp;&emsp;在传统的数据安全处理技术——去标识化（数据脱敏），在企业部分主要场景中一般可应对合规性，符合GDPR和《网络安全法》要求采取的必要措施。但是，在一些内部环境（如大部分内部用户可以访问和下载）或外部共享环境总，它处理后的数据仍然面临多种多样的隐私攻击，包括背景知识攻击、差分攻击和重标识攻击等。经过攻击后，个人隐私仍然有可能会被泄露，若对数据进行多度脱敏，虽然数据的隐私攻击风险降低，但数据的可用性也就大幅度降低。如何有效的防范隐私攻击又保留数据的可用性，也就是获取数据的聚合信息但无法获得单个记录的信息，这就是需要更高的技术。</p>
+<ul>
+<li><h6 id="对应技术"><a href="#对应技术" class="headerlink" title="对应技术"></a>对应技术</h6></li>
+</ul>
+<p>&emsp;&emsp;差分隐私</p>
 <p>&emsp;</p>
-<h4 id="3-为什么要先关注数据安全的法律"><a href="#3-为什么要先关注数据安全的法律" class="headerlink" title="3.为什么要先关注数据安全的法律"></a>3.为什么要先关注数据安全的法律</h4><p>&emsp;&emsp;全国数据安全法规的监管在不断的完善，这就涉及到了一个合规性的问题，企业的建设是否符合要求，重要的数据是否得到保护，这都是我们需要研究的的问题。在绿盟的这本书中，主要是针对用户隐私数据安全合规、企业内部数据安全治理和企业间数据安全共享与计算进行合规需求的梳理分析，同时选取了十周种比较前言的数据安全技术手段进行讲解好分析（一开始粗略瞅了一眼，看得头皮发麻）</p>
-<p>&emsp;&emsp;其实，一开始给自己的定位是作为一个追求技术操作，但是如果没有法律法规的铺垫和研究，我们没办法明白我们最终技术所要实现的目标和作用，所以阅读法律法规是比较有必要的事情。</p>
+<h4 id="3-个人信息治理与可视化"><a href="#3-个人信息治理与可视化" class="headerlink" title="3.个人信息治理与可视化"></a>3.个人信息治理与可视化</h4><ul>
+<li><h6 id="背景-1"><a href="#背景-1" class="headerlink" title="背景"></a>背景</h6></li>
+</ul>
+<p>&emsp;&emsp;同一个企业的多个应用中，可能通过收集用户的多个 维度的个人信息与隐私数据。 此外，数据采集可能分布存储在多种多个数据库（ 如Oracle、MySQL/ElasticSearch）以及各种大数据平台中（HDFS 和 Hbase）。企业需要摸清企业内部有多少个独立的数据实体（数据主体），每一个实体包括哪些数据与属性维度，这些数据分别存储在哪些系统中和业务应用，以及数据共享给哪些第三方企业。</p>
+<ul>
+<li><h6 id="合约条款-1"><a href="#合约条款-1" class="headerlink" title="合约条款"></a>合约条款</h6></li>
+</ul>
+<p>&emsp;&emsp;GDPR：如 1.2.2 节所述，GDPR 赋予了用户知情权、访问权、修改权、限制处理权、 被遗忘权、可携带权、拒绝权等多项权利。相应地，企业必须履行和响应用户提出的权利请求。比如用户发起数据查看请求，那么企业必须完整呈现数据主体个人数据报告，包括收集了用户哪些结构化数据、哪些非结构化数据（包括网络浏览、点击等信息）、以及将数据共享给了哪些第三方企业。企业在实施用户权利请求响应的合规，个人信息治理与可视化是实现目标的关键。</p>
+<p>&emsp;&emsp;《网络安全法》：如 1.2.2 节所述，法规赋予了用户一定程度的“删除权”和“修改权”，响应地，企业须履行和配合用户完成数据权利请求的流程。同样地，企业在具体实施合规落地时，个人信息治理与可视化是基础与前提。</p>
+<ul>
+<li><h6 id="挑战-1"><a href="#挑战-1" class="headerlink" title="挑战"></a>挑战</h6></li>
+</ul>
+<p>&emsp;&emsp;多源异构数据源分布同一个使用主体的信息和维度，对于企业复杂多变的数据环境来说，不同数据源实体ID表示显示不同或者缺失，如何识别与关联同一个实体是一个不小的挑战。</p>
+<ul>
+<li><h6 id="对应技术-1"><a href="#对应技术-1" class="headerlink" title="对应技术"></a>对应技术</h6></li>
+</ul>
+<p>&emsp;&emsp;知识图谱</p>
 <p>&emsp;</p>
-<h4 id="4-国内外立法与执法趋势"><a href="#4-国内外立法与执法趋势" class="headerlink" title="4.国内外立法与执法趋势"></a>4.国内外立法与执法趋势</h4><h6 id="国外："><a href="#国外：" class="headerlink" title="国外："></a>国外：</h6><p>&emsp;&emsp;在立法方面，比较有代表性的就算欧盟2018年5月25日实施的《通用数据保护条例》（GDPR），在该条例的影响下，其他国家也陆陆续续推出了各自相关的法案。</p>
-<p>&emsp;&emsp;在执法方面，欧盟由于立法比较早，所以相较于其他国家而言，欧盟已经进入到了全面执法的阶段并开出了违反GDPR的相关罚单（比如英国航空公司的1.83亿英镑和万豪国际集团的9900万英镑）。</p>
-<h6 id="国内："><a href="#国内：" class="headerlink" title="国内："></a>国内：</h6><p>&emsp;&emsp;在立法方面，从2017年的《网络安全法》、2020的《民法典》到2021年的《数据安全法》等等，越来越多关注数据安全的法律规出台。这也表明了我国对数据安全的高度重视。</p>
-<p>&emsp;&emsp;在执法方面，我国监管部门重视的方面主要有两个，一个是针对APP个人信息授权专项治理（滴滴事件等），一个是针对个人信息非法交易与黑灰产的整治。（净网行动）</p>
+<h4 id="4-用户数据权利全球响应"><a href="#4-用户数据权利全球响应" class="headerlink" title="4.用户数据权利全球响应"></a>4.用户数据权利全球响应</h4><ul>
+<li><h6 id="背景-2"><a href="#背景-2" class="headerlink" title="背景"></a>背景</h6></li>
+</ul>
+<p>&emsp;&emsp;全球一些隐私法规赋予数据主体（用户）自由访问、修改和删除个人数据等权利，相应地，要求企业必须在规定的时间内对用户提出的请求进行响应，比如向用户提供收集个人数据明细及使用目的报告。</p>
+<ul>
+<li><h6 id="合约条款-2"><a href="#合约条款-2" class="headerlink" title="合约条款"></a>合约条款</h6></li>
+</ul>
+<p>&emsp;&emsp;GDPR：规定企业“必须在一个月内对所有的请求进行响应和处理，若请求过于复杂，可延长至“两个月”。</p>
+<p>&emsp;&emsp;《网络安全法》：法规赋予了用户一定程度的“删除权”和“修改权”，但未具体到响应时间的规定。但在国家标准《个人信息安全规范》（GB/T 35273-2020），明确规定从请求到响应的时间是 30 天内。</p>
+<ul>
+<li><h6 id="挑战-2"><a href="#挑战-2" class="headerlink" title="挑战"></a>挑战</h6></li>
+</ul>
+<p>&emsp;&emsp;许多企业无法应对数据主体权利请求，约有三分之二企业对当个SSR的回复需要出国两周以上的时间，且这些流程通常是人工完成，平均成本很高。因此，对于拥有一定用户数量规模的企业，如何应对多个用户并发请求的随时响应。</p>
+<ul>
+<li><h6 id="应对技术"><a href="#应对技术" class="headerlink" title="应对技术"></a>应对技术</h6></li>
+</ul>
+<p>&emsp;&emsp;流程自动化</p>
 <p>&emsp;</p>
-<h4 id="5-数据安全合规热点与解读"><a href="#5-数据安全合规热点与解读" class="headerlink" title="5.数据安全合规热点与解读"></a>5.数据安全合规热点与解读</h4><p>&emsp;</p>
-<h6 id="emsp-0）前言"><a href="#emsp-0）前言" class="headerlink" title="&emsp;0）前言"></a>&emsp;0）前言</h6><p>&emsp;&emsp;&emsp;由于欧盟的《GDPR》出台具有很大的代表性，所以绿盟的报告才将该法作为典型与我国的法律进行比较，获得共同点和差异处（个人理解）</p>
-<p>&emsp;</p>
-<h6 id="emsp-1）保护对象："><a href="#emsp-1）保护对象：" class="headerlink" title="&emsp;1）保护对象："></a>&emsp;1）保护对象：</h6><p>&emsp;&emsp;&emsp;《GDPR》保护对象是公民的“个人数据”，值得一提的是其对个人数据的定义是比较广泛的。涵盖信息十分丰富，包括了指纹、虹膜和DNA数据等特殊的数据。</p>
-<p>&emsp;&emsp;&emsp;《网络安全法》明确了保护的重点数据对象是“个人信息”。相比 GDPR来说，我国罗列的个人信息范畴并不大，并不包括由个人关联的信息（比如用户的行为 / 习惯等识别性不高的信息），这在一定程度缩小了“个人信息”的范围，降低敏感信息分类分级及保护的成本。当然，在个人信息保护法中有了更加宽泛定义的倾向。</p>
-<p>&emsp;</p>
-<h6 id="emsp-2）用户的数据权利："><a href="#emsp-2）用户的数据权利：" class="headerlink" title="&emsp;2）用户的数据权利："></a>&emsp;2）用户的数据权利：</h6><p>&emsp;&emsp;&emsp;《GDPR》赋予了“数据主体”（或称用户）知情权、访问权、修改权、限制处理权、<br>删除权（也称“被遗忘权”）、可携带权、拒绝权等多项权利。 “被遗忘权”和“可携带权”是 GDPR新增两项用户“特权”。</p>
-<p>&emsp;&emsp;&emsp;《网络安全法》赋予了用户一定程度的“删除权”和“修改权”，而在《个人信息保护法》中则赋予了用户更丰富更具体的数据权利（知情权、访问权、被解释权等）</p>
-<p>&emsp;</p>
-<h6 id="emsp-3）企业的安全义务"><a href="#emsp-3）企业的安全义务" class="headerlink" title="&emsp;3）企业的安全义务"></a>&emsp;3）企业的安全义务</h6><p>&emsp;&emsp;&emsp;《GDPR》规定了企业必须响应和履行卫用户行使权利提供方便的义务，另外还要求了企业必须保存数据处理活动的记录和针对数据的安全措施</p>
-<p>&emsp;&emsp;&emsp;在我国法律中同样要求企业要配合用户行使数据的权利，此外，企业在防止数据泄露、窃取篡改等数据安全事件上，需履行安全管理制度、组织和规范建设，落实有效的网络安全措施。</p>
-<p>&emsp;&emsp;&emsp;确实对企业的要求不管是哪个国家都要求的差不多，在满足用户数据使用权利的前提下，保障用户数据的安全性。</p>
-<p>&emsp;</p>
-<h6 id="emsp-4）违法违规的处罚"><a href="#emsp-4）违法违规的处罚" class="headerlink" title="&emsp;4）违法违规的处罚"></a>&emsp;4）违法违规的处罚</h6><p>&emsp;&emsp;&emsp;《GDPR》可被处以最高 2000 万欧元的行政罚款，或对企业以最高占上一财政年度全球总营业额 4% 的行政罚款，取两者最高值。违反数据处理规定被处罚的代价是十分高昂的（贵的一批）</p>
-<p>&emsp;&emsp;&emsp;我国的《网络安全法》中最高可处罚 100 万元的罚款，对直接负责的主管人员处罚最高 10 万元罚款。除罚款以外，还有责令暂停相关业务、关闭网站、吊销营业执照等严厉的行政处罚措施。在最近发布《个人信息保护法》中，对于个人信息的违法犯罪加大了处罚与罚款力度，对于违法情节严重的最高可以处罚 5000 万元以下或者上一年度营业额 5% 罚款，同时对直接负责的主管人员最高可罚款 100万元（看滴滴就知道了）</p>
-<p>&emsp;</p>
-<h6 id="emsp-5）小结"><a href="#emsp-5）小结" class="headerlink" title="&emsp;5）小结"></a>&emsp;5）小结</h6><p>&emsp;&emsp;&emsp;法律越来越完善，对于很多定义和行为也有了清楚的讲解，处罚也会越来越重视</p>
 
                 
               </div>
@@ -330,8 +357,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>数据安全技术前沿研究笔记（一）</div>
-      <div>https://one-null-pointer.github.io/2022/08/04/数据安全日记五/</div>
+      <div>数据安全技术前沿研究笔记（二）</div>
+      <div>https://one-null-pointer.github.io/2022/08/06/数据安全日记六/</div>
     </div>
     <div class="license-meta">
       
@@ -343,7 +370,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>Posted on</div>
-          <div>August 4, 2022</div>
+          <div>August 6, 2022</div>
         </div>
       
       
@@ -373,9 +400,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2022/08/04/SQL%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/" title="SQL注入基础知识">
+                      <a href="/2022/08/06/SQL%E6%B3%A8%E5%85%A5%E2%80%94%E8%81%94%E5%90%88%E6%9F%A5%E8%AF%A2%E6%B3%A8%E5%85%A5/" title="SQL注入——联合查询注入">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">SQL注入基础知识</span>
+                        <span class="hidden-mobile">SQL注入——联合查询注入</span>
                         <span class="visible-mobile">Previous</span>
                       </a>
                     
@@ -383,8 +410,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2022/08/03/web%E6%BC%8F%E6%B4%9E%E7%B1%BB%E5%9E%8B/" title="web漏洞类型">
-                        <span class="hidden-mobile">web漏洞类型</span>
+                      <a href="/2022/08/05/SQL%E6%B3%A8%E5%85%A5%E2%80%94%E2%80%94MySQL/" title="SQL注入——MySQL">
+                        <span class="hidden-mobile">SQL注入——MySQL</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
