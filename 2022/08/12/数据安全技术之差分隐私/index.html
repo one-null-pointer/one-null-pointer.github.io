@@ -16,16 +16,16 @@
   <meta name="author" content="liaoyue">
   <meta name="keywords" content="">
   
-    <meta name="description" content="数据安全技术之差分隐私1.差分隐私的定义&amp;emsp;&amp;emsp;差分隐私技术由于无需假设攻击者能力或知识背景，安全性可通过数学模型证明，作为一种前沿的隐私保护技术受到广泛的关注。它可以确保数据库插入或删除一条记录不会对查询或统计的结果造成显著性的影响 &amp;emsp;&amp;emsp;$$\frac{Pr(f(D))&#x3D;C}{Pr(f(D^{’} ))&#x3D;C} \le e^{\varepsilon }$$&amp;em">
+    <meta name="description" content="数据安全技术之差分隐私1.差分隐私的定义&amp;emsp;&amp;emsp;差分隐私技术由于无需假设攻击者能力或知识背景，安全性可通过数学模型证明，作为一种前沿的隐私保护技术受到广泛的关注。它可以确保数据库插入或删除一条记录不会对查询或统计的结果造成显著性的影响    &amp;emsp;&amp;emsp;其中D 和 D′分别指相邻的数据集（差别只有一条建立），函数f是某种操作或算法（比如查询、求平均、总和等），对于输出C">
 <meta property="og:type" content="article">
 <meta property="og:title" content="数据安全技术前沿研究笔记（三）">
 <meta property="og:url" content="https://one-null-pointer.github.io/2022/08/12/%E6%95%B0%E6%8D%AE%E5%AE%89%E5%85%A8%E6%8A%80%E6%9C%AF%E4%B9%8B%E5%B7%AE%E5%88%86%E9%9A%90%E7%A7%81/index.html">
 <meta property="og:site_name" content="one-null-poniter">
-<meta property="og:description" content="数据安全技术之差分隐私1.差分隐私的定义&amp;emsp;&amp;emsp;差分隐私技术由于无需假设攻击者能力或知识背景，安全性可通过数学模型证明，作为一种前沿的隐私保护技术受到广泛的关注。它可以确保数据库插入或删除一条记录不会对查询或统计的结果造成显著性的影响 &amp;emsp;&amp;emsp;$$\frac{Pr(f(D))&#x3D;C}{Pr(f(D^{’} ))&#x3D;C} \le e^{\varepsilon }$$&amp;em">
+<meta property="og:description" content="数据安全技术之差分隐私1.差分隐私的定义&amp;emsp;&amp;emsp;差分隐私技术由于无需假设攻击者能力或知识背景，安全性可通过数学模型证明，作为一种前沿的隐私保护技术受到广泛的关注。它可以确保数据库插入或删除一条记录不会对查询或统计的结果造成显著性的影响    &amp;emsp;&amp;emsp;其中D 和 D′分别指相邻的数据集（差别只有一条建立），函数f是某种操作或算法（比如查询、求平均、总和等），对于输出C">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://one-null-pointer.github.io/img/data.png">
 <meta property="article:published_time" content="2022-08-12T02:57:01.000Z">
-<meta property="article:modified_time" content="2022-08-12T12:02:07.242Z">
+<meta property="article:modified_time" content="2022-08-13T06:42:29.973Z">
 <meta property="article:author" content="liaoyue">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://one-null-pointer.github.io/img/data.png">
@@ -208,7 +208,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          791 words
+          724 words
         
       </span>
     
@@ -263,7 +263,10 @@
               <div class="markdown-body">
                 
                 <h1 id="数据安全技术之差分隐私"><a href="#数据安全技术之差分隐私" class="headerlink" title="数据安全技术之差分隐私"></a>数据安全技术之差分隐私</h1><h4 id="1-差分隐私的定义"><a href="#1-差分隐私的定义" class="headerlink" title="1.差分隐私的定义"></a>1.差分隐私的定义</h4><p>&emsp;&emsp;差分隐私技术由于无需假设攻击者能力或知识背景，安全性可通过数学模型证明，作为一种前沿的隐私保护技术受到广泛的关注。它可以确保数据库插入或删除一条记录不会对查询或统计的结果造成显著性的影响</p>
-<p>&emsp;&emsp;<br>$$<br>\frac{Pr(f(D))=C}{Pr(f(D^{’} ))=C} \le e^{\varepsilon }<br>$$<br>&emsp;&emsp;其中D 和 D′分别指相邻的数据集（差别只有一条建立），函数f是某种操作或算法（比如查询、求平均、总和等），对于输出C，两个数据集输出这样结果的概率几乎是接近的，即两者概率比值小于 e^ε ，那么称为满足 ε −ε隐私。一般来说，通过在查询结果中加入噪声，比如Laplace 类型的噪声，使得查询结果在一定范围内失真，并且保持两个相邻数据库概率分布几乎相同。ε 参数通常被称为隐私预算，ε 越小，两次查询的结果越接近，即隐私保护程度越高。</p>
+<center><img src="/img/%E6%95%B0%E6%8D%AE%E5%AE%89%E5%85%A8%E6%8A%80%E6%9C%AF%E4%B9%8B%E5%B7%AE%E5%88%86%E9%9A%90%E7%A7%81/2.jpg" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<p>&emsp;&emsp;其中D 和 D′分别指相邻的数据集（差别只有一条建立），函数f是某种操作或算法（比如查询、求平均、总和等），对于输出C，两个数据集输出这样结果的概率几乎是接近的，即两者概率比值小于 e^ε ，那么称为满足 ε −ε隐私。一般来说，通过在查询结果中加入噪声，比如Laplace 类型的噪声，使得查询结果在一定范围内失真，并且保持两个相邻数据库概率分布几乎相同。ε 参数通常被称为隐私预算，ε 越小，两次查询的结果越接近，即隐私保护程度越高。</p>
 <p>&emsp;</p>
 <h4 id="2-通俗解释"><a href="#2-通俗解释" class="headerlink" title="2.通俗解释"></a>2.通俗解释</h4><p>&emsp;&emsp;用通俗的例子来描述，可能会更好了解一些。假设存在一个数据库，这个数据库可以查询到人员的婚恋情况，如果一开始查询到有4个废物单身，只有2个有对象；这时跑来了个“诺”登记自己的婚姻状况，再查数据库发现5个人是单身，所以能够得出结论——“诺”也是废物。（这也就是差分的由来）</p>
 <center><img src="/img/%E6%95%B0%E6%8D%AE%E5%AE%89%E5%85%A8%E6%8A%80%E6%9C%AF%E4%B9%8B%E5%B7%AE%E5%88%86%E9%9A%90%E7%A7%81/1.jpg" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
