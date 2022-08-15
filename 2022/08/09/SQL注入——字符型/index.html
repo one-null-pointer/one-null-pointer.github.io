@@ -16,23 +16,23 @@
   <meta name="author" content="liaoyue">
   <meta name="keywords" content="">
   
-    <meta name="description" content="SQL注入——字符型注入1.查看界面&amp;emsp;&amp;emsp;初始界面：   &amp;emsp;&amp;emsp;查询成功反馈:   &amp;emsp;查询失败反馈：   &amp;emsp;&amp;emsp;可以看见，这次是直接在框中进行输入内容，并且对输入内容均有反馈，在该类型的输入框中，我们可以直接在输入框中进行注入操作，当然， 你喜欢用bp也行，反正我是懒狗。 &amp;emsp;&amp;emsp;（当然，在真实的情况中，我们是不知道查">
+    <meta name="description" content="联合查询注入——字符型注入1.查看界面&amp;emsp;&amp;emsp;初始界面：   &amp;emsp;&amp;emsp;查询成功反馈:   &amp;emsp;查询失败反馈：   &amp;emsp;&amp;emsp;可以看见，这次是直接在框中进行输入内容，并且对输入内容均有反馈，在该类型的输入框中，我们可以直接在输入框中进行注入操作，当然， 你喜欢用bp也行，反正我是懒狗。 &amp;emsp;&amp;emsp;（当然，在真实的情况中，我们是不知道">
 <meta property="og:type" content="article">
-<meta property="og:title" content="SQL注入——字符型">
+<meta property="og:title" content="联合查询注入——字符型">
 <meta property="og:url" content="https://one-null-pointer.github.io/2022/08/09/SQL%E6%B3%A8%E5%85%A5%E2%80%94%E2%80%94%E5%AD%97%E7%AC%A6%E5%9E%8B/index.html">
 <meta property="og:site_name" content="one-null-poniter">
-<meta property="og:description" content="SQL注入——字符型注入1.查看界面&amp;emsp;&amp;emsp;初始界面：   &amp;emsp;&amp;emsp;查询成功反馈:   &amp;emsp;查询失败反馈：   &amp;emsp;&amp;emsp;可以看见，这次是直接在框中进行输入内容，并且对输入内容均有反馈，在该类型的输入框中，我们可以直接在输入框中进行注入操作，当然， 你喜欢用bp也行，反正我是懒狗。 &amp;emsp;&amp;emsp;（当然，在真实的情况中，我们是不知道查">
+<meta property="og:description" content="联合查询注入——字符型注入1.查看界面&amp;emsp;&amp;emsp;初始界面：   &amp;emsp;&amp;emsp;查询成功反馈:   &amp;emsp;查询失败反馈：   &amp;emsp;&amp;emsp;可以看见，这次是直接在框中进行输入内容，并且对输入内容均有反馈，在该类型的输入框中，我们可以直接在输入框中进行注入操作，当然， 你喜欢用bp也行，反正我是懒狗。 &amp;emsp;&amp;emsp;（当然，在真实的情况中，我们是不知道">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://one-null-pointer.github.io/img/web1.png">
 <meta property="article:published_time" content="2022-08-09T14:43:07.000Z">
-<meta property="article:modified_time" content="2022-08-09T15:22:50.923Z">
+<meta property="article:modified_time" content="2022-08-15T13:20:42.732Z">
 <meta property="article:author" content="liaoyue">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://one-null-pointer.github.io/img/web1.png">
   
   
   
-  <title>SQL注入——字符型 - one-null-poniter</title>
+  <title>联合查询注入——字符型 - one-null-poniter</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -185,7 +185,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="SQL注入——字符型"></span>
+            <span id="subtitle" data-typed-text="联合查询注入——字符型"></span>
           
         </div>
 
@@ -257,12 +257,12 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">SQL注入——字符型</h1>
+            <h1 style="display: none">联合查询注入——字符型</h1>
             
             
               <div class="markdown-body">
                 
-                <h1 id="SQL注入——字符型注入"><a href="#SQL注入——字符型注入" class="headerlink" title="SQL注入——字符型注入"></a>SQL注入——字符型注入</h1><h4 id="1-查看界面"><a href="#1-查看界面" class="headerlink" title="1.查看界面"></a>1.查看界面</h4><p>&emsp;&emsp;初始界面：</p>
+                <h1 id="联合查询注入——字符型注入"><a href="#联合查询注入——字符型注入" class="headerlink" title="联合查询注入——字符型注入"></a>联合查询注入——字符型注入</h1><h4 id="1-查看界面"><a href="#1-查看界面" class="headerlink" title="1.查看界面"></a>1.查看界面</h4><p>&emsp;&emsp;初始界面：</p>
 <center><img src="/img/SQL%E6%B3%A8%E5%85%A5%E2%80%94%E2%80%94%E5%AD%97%E7%AC%A6%E5%9E%8B/2.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" /></center>
 
 <p>&emsp;&emsp;查询成功反馈:</p>
@@ -365,7 +365,7 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>SQL注入——字符型</div>
+      <div>联合查询注入——字符型</div>
       <div>https://one-null-pointer.github.io/2022/08/09/SQL注入——字符型/</div>
     </div>
     <div class="license-meta">
@@ -418,8 +418,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2022/08/08/SQL%E6%B3%A8%E5%85%A5%E2%80%94%E2%80%94%E6%95%B0%E5%AD%97%E5%9E%8B/" title="SQL注入——数字型">
-                        <span class="hidden-mobile">SQL注入——数字型</span>
+                      <a href="/2022/08/08/SQL%E6%B3%A8%E5%85%A5%E2%80%94%E2%80%94%E6%95%B0%E5%AD%97%E5%9E%8B/" title="联合查询注入——数字型">
+                        <span class="hidden-mobile">联合查询注入——数字型</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

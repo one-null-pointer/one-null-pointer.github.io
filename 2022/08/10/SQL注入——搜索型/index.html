@@ -16,16 +16,16 @@
   <meta name="author" content="liaoyue">
   <meta name="keywords" content="">
   
-    <meta name="description" content="SQL注入——搜索型0.前言&amp;emsp;&amp;emsp;like语法：”%”匹配任何字符, “like”的意思就是像, “$” 变量。 1select username,id from admin where username like &amp;#x27;%$name%&amp;#x27;  &amp;emsp; 1.查看界面&amp;emsp;&amp;emsp;初始界面：     &amp;emsp;&amp;emsp;搜索失败界面：   &amp;emsp">
+    <meta name="description" content="联合查询注入——搜索型0.前言&amp;emsp;&amp;emsp;like语法：”%”匹配任何字符, “like”的意思就是像, “$” 变量。 1select username,id from admin where username like &amp;#x27;%$name%&amp;#x27;  &amp;emsp; 1.查看界面&amp;emsp;&amp;emsp;初始界面：     &amp;emsp;&amp;emsp;搜索失败界面：   &amp;ems">
 <meta property="og:type" content="article">
 <meta property="og:title" content="SQL注入——搜索型">
 <meta property="og:url" content="https://one-null-pointer.github.io/2022/08/10/SQL%E6%B3%A8%E5%85%A5%E2%80%94%E2%80%94%E6%90%9C%E7%B4%A2%E5%9E%8B/index.html">
 <meta property="og:site_name" content="one-null-poniter">
-<meta property="og:description" content="SQL注入——搜索型0.前言&amp;emsp;&amp;emsp;like语法：”%”匹配任何字符, “like”的意思就是像, “$” 变量。 1select username,id from admin where username like &amp;#x27;%$name%&amp;#x27;  &amp;emsp; 1.查看界面&amp;emsp;&amp;emsp;初始界面：     &amp;emsp;&amp;emsp;搜索失败界面：   &amp;emsp">
+<meta property="og:description" content="联合查询注入——搜索型0.前言&amp;emsp;&amp;emsp;like语法：”%”匹配任何字符, “like”的意思就是像, “$” 变量。 1select username,id from admin where username like &amp;#x27;%$name%&amp;#x27;  &amp;emsp; 1.查看界面&amp;emsp;&amp;emsp;初始界面：     &amp;emsp;&amp;emsp;搜索失败界面：   &amp;ems">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://one-null-pointer.github.io/img/web1.png">
 <meta property="article:published_time" content="2022-08-10T15:16:39.000Z">
-<meta property="article:modified_time" content="2022-08-11T04:11:12.776Z">
+<meta property="article:modified_time" content="2022-08-15T13:20:54.489Z">
 <meta property="article:author" content="liaoyue">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://one-null-pointer.github.io/img/web1.png">
@@ -262,7 +262,7 @@
             
               <div class="markdown-body">
                 
-                <h1 id="SQL注入——搜索型"><a href="#SQL注入——搜索型" class="headerlink" title="SQL注入——搜索型"></a>SQL注入——搜索型</h1><h4 id="0-前言"><a href="#0-前言" class="headerlink" title="0.前言"></a>0.前言</h4><p>&emsp;&emsp;like语法：”%”匹配任何字符, “like”的意思就是像, “$” 变量。</p>
+                <h1 id="联合查询注入——搜索型"><a href="#联合查询注入——搜索型" class="headerlink" title="联合查询注入——搜索型"></a>联合查询注入——搜索型</h1><h4 id="0-前言"><a href="#0-前言" class="headerlink" title="0.前言"></a>0.前言</h4><p>&emsp;&emsp;like语法：”%”匹配任何字符, “like”的意思就是像, “$” 变量。</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> username,id <span class="hljs-keyword">from</span> admin <span class="hljs-keyword">where</span> username <span class="hljs-keyword">like</span> <span class="hljs-string">&#x27;%$name%&#x27;</span><br></code></pre></td></tr></table></figure>
 
 <p>&emsp;</p>
@@ -416,8 +416,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2022/08/09/SQL%E6%B3%A8%E5%85%A5%E2%80%94%E2%80%94%E5%AD%97%E7%AC%A6%E5%9E%8B/" title="SQL注入——字符型">
-                        <span class="hidden-mobile">SQL注入——字符型</span>
+                      <a href="/2022/08/09/SQL%E6%B3%A8%E5%85%A5%E2%80%94%E2%80%94%E5%AD%97%E7%AC%A6%E5%9E%8B/" title="联合查询注入——字符型">
+                        <span class="hidden-mobile">联合查询注入——字符型</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

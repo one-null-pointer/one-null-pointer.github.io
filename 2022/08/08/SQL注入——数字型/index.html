@@ -16,23 +16,23 @@
   <meta name="author" content="liaoyue">
   <meta name="keywords" content="">
   
-    <meta name="description" content="SQL注入——数字型注入1.查看界面    &amp;emsp;&amp;emsp;可以看见在界面中有下拉框，包含了1到6的数字，我们只能够选择数字，点击对应的数字回馈对应的用户信息，无法进行输入，所以我们需要将注意力放到报文当中 2.分析报文&amp;emsp;&amp;emsp;点击数字1进行查询，得到如下报文：   &amp;emsp;&amp;emsp;在报文中显示中可以看见传送了id&#x3D;1的内容，可以判断出该处为注入点。 3.进行注入&amp;">
+    <meta name="description" content="联合查询注入——数字型注入1.查看界面    &amp;emsp;&amp;emsp;可以看见在界面中有下拉框，包含了1到6的数字，我们只能够选择数字，点击对应的数字回馈对应的用户信息，无法进行输入，所以我们需要将注意力放到报文当中 2.分析报文&amp;emsp;&amp;emsp;点击数字1进行查询，得到如下报文：   &amp;emsp;&amp;emsp;在报文中显示中可以看见传送了id&#x3D;1的内容，可以判断出该处为注入点。 3.进行注入">
 <meta property="og:type" content="article">
-<meta property="og:title" content="SQL注入——数字型">
+<meta property="og:title" content="联合查询注入——数字型">
 <meta property="og:url" content="https://one-null-pointer.github.io/2022/08/08/SQL%E6%B3%A8%E5%85%A5%E2%80%94%E2%80%94%E6%95%B0%E5%AD%97%E5%9E%8B/index.html">
 <meta property="og:site_name" content="one-null-poniter">
-<meta property="og:description" content="SQL注入——数字型注入1.查看界面    &amp;emsp;&amp;emsp;可以看见在界面中有下拉框，包含了1到6的数字，我们只能够选择数字，点击对应的数字回馈对应的用户信息，无法进行输入，所以我们需要将注意力放到报文当中 2.分析报文&amp;emsp;&amp;emsp;点击数字1进行查询，得到如下报文：   &amp;emsp;&amp;emsp;在报文中显示中可以看见传送了id&#x3D;1的内容，可以判断出该处为注入点。 3.进行注入&amp;">
+<meta property="og:description" content="联合查询注入——数字型注入1.查看界面    &amp;emsp;&amp;emsp;可以看见在界面中有下拉框，包含了1到6的数字，我们只能够选择数字，点击对应的数字回馈对应的用户信息，无法进行输入，所以我们需要将注意力放到报文当中 2.分析报文&amp;emsp;&amp;emsp;点击数字1进行查询，得到如下报文：   &amp;emsp;&amp;emsp;在报文中显示中可以看见传送了id&#x3D;1的内容，可以判断出该处为注入点。 3.进行注入">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://one-null-pointer.github.io/img/web1.png">
 <meta property="article:published_time" content="2022-08-08T11:27:46.000Z">
-<meta property="article:modified_time" content="2022-08-09T13:47:38.941Z">
+<meta property="article:modified_time" content="2022-08-15T13:21:02.370Z">
 <meta property="article:author" content="liaoyue">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://one-null-pointer.github.io/img/web1.png">
   
   
   
-  <title>SQL注入——数字型 - one-null-poniter</title>
+  <title>联合查询注入——数字型 - one-null-poniter</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -185,7 +185,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="SQL注入——数字型"></span>
+            <span id="subtitle" data-typed-text="联合查询注入——数字型"></span>
           
         </div>
 
@@ -257,12 +257,12 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">SQL注入——数字型</h1>
+            <h1 style="display: none">联合查询注入——数字型</h1>
             
             
               <div class="markdown-body">
                 
-                <h1 id="SQL注入——数字型注入"><a href="#SQL注入——数字型注入" class="headerlink" title="SQL注入——数字型注入"></a>SQL注入——数字型注入</h1><h4 id="1-查看界面"><a href="#1-查看界面" class="headerlink" title="1.查看界面"></a>1.查看界面</h4><center><img src="/img/SQL%E6%B3%A8%E5%85%A5%E2%80%94%E2%80%94%E6%95%B0%E5%AD%97%E5%9E%8B/1.jpg" srcset="/img/loading.gif" lazyload style="zoom: 80%;" /></center>
+                <h1 id="联合查询注入——数字型注入"><a href="#联合查询注入——数字型注入" class="headerlink" title="联合查询注入——数字型注入"></a>联合查询注入——数字型注入</h1><h4 id="1-查看界面"><a href="#1-查看界面" class="headerlink" title="1.查看界面"></a>1.查看界面</h4><center><img src="/img/SQL%E6%B3%A8%E5%85%A5%E2%80%94%E2%80%94%E6%95%B0%E5%AD%97%E5%9E%8B/1.jpg" srcset="/img/loading.gif" lazyload style="zoom: 80%;" /></center>
 
 <center><img src="/img/SQL%E6%B3%A8%E5%85%A5%E2%80%94%E2%80%94%E6%95%B0%E5%AD%97%E5%9E%8B/2.jpg" srcset="/img/loading.gif" lazyload style="zoom:80%;" /></center>
 
@@ -403,7 +403,7 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>SQL注入——数字型</div>
+      <div>联合查询注入——数字型</div>
       <div>https://one-null-pointer.github.io/2022/08/08/SQL注入——数字型/</div>
     </div>
     <div class="license-meta">
@@ -446,9 +446,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2022/08/09/SQL%E6%B3%A8%E5%85%A5%E2%80%94%E2%80%94%E5%AD%97%E7%AC%A6%E5%9E%8B/" title="SQL注入——字符型">
+                      <a href="/2022/08/09/SQL%E6%B3%A8%E5%85%A5%E2%80%94%E2%80%94%E5%AD%97%E7%AC%A6%E5%9E%8B/" title="联合查询注入——字符型">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">SQL注入——字符型</span>
+                        <span class="hidden-mobile">联合查询注入——字符型</span>
                         <span class="visible-mobile">Previous</span>
                       </a>
                     
