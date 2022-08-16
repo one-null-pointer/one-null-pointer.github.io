@@ -16,23 +16,23 @@
   <meta name="author" content="liaoyue">
   <meta name="keywords" content="">
   
-    <meta name="description" content="SQL注入——盲注1.盲注概述&amp;emsp;&amp;emsp;在SQL的注入中，并不是所有的注入都能像联合查询注入和报错注入那样子获得回显信息的，有时候，在SQL语句执行完查询后，查询数据并不能回显到页面，当中，这个时候就需要用一些特殊的方法来判断或者尝试，这个过程称之为盲注。 &amp;emsp;&amp;emsp;如果数据库运行反馈的结果反馈出的内容是对错等相类似的逻辑信息，那我们就可以根据逻辑信息的变化来获取我们想">
+    <meta name="description" content="盲注——布尔型">
 <meta property="og:type" content="article">
-<meta property="og:title" content="SQL注入——盲注">
-<meta property="og:url" content="https://one-null-pointer.github.io/2022/08/16/SQL%E6%B3%A8%E5%85%A5%E2%80%94%E2%80%94%E7%9B%B2%E6%B3%A8/index.html">
+<meta property="og:title" content="盲注——布尔型">
+<meta property="og:url" content="https://one-null-pointer.github.io/2022/08/16/%E7%9B%B2%E6%B3%A8%E2%80%94%E2%80%94%E5%B8%83%E5%B0%94%E5%9E%8B/index.html">
 <meta property="og:site_name" content="one-null-poniter">
-<meta property="og:description" content="SQL注入——盲注1.盲注概述&amp;emsp;&amp;emsp;在SQL的注入中，并不是所有的注入都能像联合查询注入和报错注入那样子获得回显信息的，有时候，在SQL语句执行完查询后，查询数据并不能回显到页面，当中，这个时候就需要用一些特殊的方法来判断或者尝试，这个过程称之为盲注。 &amp;emsp;&amp;emsp;如果数据库运行反馈的结果反馈出的内容是对错等相类似的逻辑信息，那我们就可以根据逻辑信息的变化来获取我们想">
+<meta property="og:description" content="盲注——布尔型">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://one-null-pointer.github.io/img/web1.png">
-<meta property="article:published_time" content="2022-08-16T11:29:30.000Z">
-<meta property="article:modified_time" content="2022-08-16T14:03:45.260Z">
+<meta property="article:published_time" content="2022-08-16T13:58:39.000Z">
+<meta property="article:modified_time" content="2022-08-16T13:59:25.271Z">
 <meta property="article:author" content="liaoyue">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://one-null-pointer.github.io/img/web1.png">
   
   
   
-  <title>SQL注入——盲注 - one-null-poniter</title>
+  <title>盲注——布尔型 - one-null-poniter</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -185,7 +185,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="SQL注入——盲注"></span>
+            <span id="subtitle" data-typed-text="盲注——布尔型"></span>
           
         </div>
 
@@ -196,7 +196,7 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2022-08-16 19:29" pubdate>
+        <time datetime="2022-08-16 21:58" pubdate>
           August 16, 2022 pm
         </time>
       </span>
@@ -208,7 +208,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          731 words
+          7 words
         
       </span>
     
@@ -219,7 +219,7 @@
         
         
         
-          7 mins
+          1 mins
         
       </span>
     
@@ -257,65 +257,12 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">SQL注入——盲注</h1>
+            <h1 style="display: none">盲注——布尔型</h1>
             
             
               <div class="markdown-body">
                 
-                <h1 id="SQL注入——盲注"><a href="#SQL注入——盲注" class="headerlink" title="SQL注入——盲注"></a>SQL注入——盲注</h1><h4 id="1-盲注概述"><a href="#1-盲注概述" class="headerlink" title="1.盲注概述"></a>1.盲注概述</h4><p>&emsp;&emsp;在SQL的注入中，并不是所有的注入都能像联合查询注入和报错注入那样子获得回显信息的，有时候，在SQL语句执行完查询后，查询数据并不能回显到页面，当中，这个时候就需要用一些特殊的方法来判断或者尝试，这个过程称之为盲注。</p>
-<p>&emsp;&emsp;如果数据库运行反馈的结果反馈出的内容是对错等相类似的逻辑信息，那我们就可以根据逻辑信息的变化来获取我们想要的内容。</p>
-<p>&emsp;</p>
-<h4 id="2-盲注的分类"><a href="#2-盲注的分类" class="headerlink" title="2.盲注的分类"></a>2.盲注的分类</h4><ul>
-<li><p>&emsp;&emsp;布尔类型：</p>
-<p>&emsp;&emsp;布尔型是计算机里的一种数据类型，只有True和False两个值，一般也称为逻辑型。布尔类型顾名思义就是反馈的信息只存在Ture和Fales，不论注入的内容是什么，他都只会返回正确或者错误</p>
-</li>
-<li><p>&emsp;&emsp;时间类型：</p>
-<p>&emsp;&emsp;时间类型的返回值只有Ture，返回的情况都会按照正确来处理，但是由于加入了特定的时间函数，所以可以通过web页面返回的时间来判断注入语句是否正确和成功</p>
-</li>
-</ul>
-<p>&emsp;</p>
-<h4 id="3-盲注的部分函数"><a href="#3-盲注的部分函数" class="headerlink" title="3.盲注的部分函数"></a>3.盲注的部分函数</h4><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs sql">#返回字符串的长度<br>Length（）<br>  <br>#截取字符串<br>Substr（）<br><br>#返回字符的ascii码<br>Ascii（）  <br> <br>#将程序挂起一段时间 n为n秒<br>sleep(n)<br><br>#判断语句 如果第一个语句正确就执行第二个语句如果错误执行第三个语句<br>if(expr1,expr2,expr3):<br></code></pre></td></tr></table></figure>
-
-<ul>
-<li>&emsp;&emsp;Length（）:</li>
-</ul>
-<center><img src="/img/SQL%E6%B3%A8%E5%85%A5%E2%80%94%E2%80%94%E7%9B%B2%E6%B3%A8/1.jpg" srcset="/img/loading.gif" lazyload style="zoom: 80%;" />
-</center>
-
-<ul>
-<li>&emsp;&emsp;Substr（）:</li>
-</ul>
-<center><img src="/img/SQL%E6%B3%A8%E5%85%A5%E2%80%94%E2%80%94%E7%9B%B2%E6%B3%A8/2.jpg" srcset="/img/loading.gif" lazyload style="zoom: 80%;" />
-</center>
-
-<ul>
-<li>&emsp;&emsp;Ascii（） :</li>
-</ul>
-<center><img src="/img/SQL%E6%B3%A8%E5%85%A5%E2%80%94%E2%80%94%E7%9B%B2%E6%B3%A8/3.jpg" srcset="/img/loading.gif" lazyload style="zoom: 67%;" />
-</center>
-
-<ul>
-<li>&emsp;&emsp;sleep(n):</li>
-</ul>
-<center><img src="/img/SQL%E6%B3%A8%E5%85%A5%E2%80%94%E2%80%94%E7%9B%B2%E6%B3%A8/4.jpg" srcset="/img/loading.gif" lazyload style="zoom: 80%;" />
-</center>
-
-<ul>
-<li><p>&emsp;&emsp;if(expr1,expr2,expr3):</p>
-<ul>
-<li>错误情况：</li>
-</ul>
-</li>
-</ul>
-  <center><img src="/img/SQL%E6%B3%A8%E5%85%A5%E2%80%94%E2%80%94%E7%9B%B2%E6%B3%A8/5.jpg" srcset="/img/loading.gif" lazyload style="zoom: 80%;" />
-  </center>
-
-<ul>
-<li>正确情况：</li>
-</ul>
-  <center><img src="/img/SQL%E6%B3%A8%E5%85%A5%E2%80%94%E2%80%94%E7%9B%B2%E6%B3%A8/6.jpg" srcset="/img/loading.gif" lazyload style="zoom: 80%;" />
-  </center>
-
+                <h1 id="盲注——布尔型"><a href="#盲注——布尔型" class="headerlink" title="盲注——布尔型"></a>盲注——布尔型</h1>
                 
               </div>
             
@@ -353,8 +300,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>SQL注入——盲注</div>
-      <div>https://one-null-pointer.github.io/2022/08/16/SQL注入——盲注/</div>
+      <div>盲注——布尔型</div>
+      <div>https://one-null-pointer.github.io/2022/08/16/盲注——布尔型/</div>
     </div>
     <div class="license-meta">
       
@@ -396,18 +343,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2022/08/16/%E7%9B%B2%E6%B3%A8%E2%80%94%E2%80%94%E5%B8%83%E5%B0%94%E5%9E%8B/" title="盲注——布尔型">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">盲注——布尔型</span>
-                        <span class="visible-mobile">Previous</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2022/08/15/%E6%95%B0%E6%8D%AE%E5%AE%89%E5%85%A8%E5%AE%9E%E4%B9%A0%E6%97%A5%E8%AE%B0/" title="数据安全工作日记">
-                        <span class="hidden-mobile">数据安全工作日记</span>
+                      <a href="/2022/08/16/SQL%E6%B3%A8%E5%85%A5%E2%80%94%E2%80%94%E7%9B%B2%E6%B3%A8/" title="SQL注入——盲注">
+                        <span class="hidden-mobile">SQL注入——盲注</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
