@@ -16,23 +16,23 @@
   <meta name="author" content="liaoyue">
   <meta name="keywords" content="">
   
-    <meta name="description" content="工作日记7.25日: &amp;emsp;&amp;emsp;阅读法律法规（三法一条）  7.26日: &amp;emsp;&amp;emsp;阅读数据安全治理白皮书及相应的数据安全报刊  7.27日: &amp;emsp;&amp;emsp;整理数据安全相关法律清单及相关内容  7月28日: &amp;emsp;&amp;emsp;熟悉了业务，梳理的工作依据包含方向并尝试行业数据安全工作依据梳理  7月29日: &amp;emsp;&amp;emsp;行业数据安全相关法律法">
+    <meta name="description" content="SQL注入——盲注1.盲注概述&amp;emsp;&amp;emsp;在SQL的注入中，并不是所有的注入都能像联合查询注入和报错注入那样子获得回显信息的，有时候，在SQL语句执行完查询后，查询数据并不能回显到页面，当中，这个时候就需要用一些特殊的方法来判断或者尝试，这个过程称之为盲注。 &amp;emsp;&amp;emsp;如果数据库运行反馈的结果反馈出的内容是对错等相类似的逻辑信息，那我们就可以根据逻辑信息的变化来获取我们想">
 <meta property="og:type" content="article">
-<meta property="og:title" content="数据安全工作日记">
-<meta property="og:url" content="https://one-null-pointer.github.io/2022/08/15/%E6%95%B0%E6%8D%AE%E5%AE%89%E5%85%A8%E5%AE%9E%E4%B9%A0%E6%97%A5%E8%AE%B0/index.html">
+<meta property="og:title" content="SQL注入——盲注">
+<meta property="og:url" content="https://one-null-pointer.github.io/2022/08/16/SQL%E6%B3%A8%E5%85%A5%E2%80%94%E2%80%94%E7%9B%B2%E6%B3%A8/index.html">
 <meta property="og:site_name" content="one-null-poniter">
-<meta property="og:description" content="工作日记7.25日: &amp;emsp;&amp;emsp;阅读法律法规（三法一条）  7.26日: &amp;emsp;&amp;emsp;阅读数据安全治理白皮书及相应的数据安全报刊  7.27日: &amp;emsp;&amp;emsp;整理数据安全相关法律清单及相关内容  7月28日: &amp;emsp;&amp;emsp;熟悉了业务，梳理的工作依据包含方向并尝试行业数据安全工作依据梳理  7月29日: &amp;emsp;&amp;emsp;行业数据安全相关法律法">
+<meta property="og:description" content="SQL注入——盲注1.盲注概述&amp;emsp;&amp;emsp;在SQL的注入中，并不是所有的注入都能像联合查询注入和报错注入那样子获得回显信息的，有时候，在SQL语句执行完查询后，查询数据并不能回显到页面，当中，这个时候就需要用一些特殊的方法来判断或者尝试，这个过程称之为盲注。 &amp;emsp;&amp;emsp;如果数据库运行反馈的结果反馈出的内容是对错等相类似的逻辑信息，那我们就可以根据逻辑信息的变化来获取我们想">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://one-null-pointer.github.io/img/data.png">
-<meta property="article:published_time" content="2022-08-15T14:14:03.000Z">
-<meta property="article:modified_time" content="2022-08-15T14:18:40.051Z">
+<meta property="og:image" content="https://one-null-pointer.github.io/img/web1.png">
+<meta property="article:published_time" content="2022-08-16T11:29:30.000Z">
+<meta property="article:modified_time" content="2022-08-16T11:47:47.449Z">
 <meta property="article:author" content="liaoyue">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://one-null-pointer.github.io/img/data.png">
+<meta name="twitter:image" content="https://one-null-pointer.github.io/img/web1.png">
   
   
   
-  <title>数据安全工作日记 - one-null-poniter</title>
+  <title>SQL注入——盲注 - one-null-poniter</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -185,7 +185,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="数据安全工作日记"></span>
+            <span id="subtitle" data-typed-text="SQL注入——盲注"></span>
           
         </div>
 
@@ -196,8 +196,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2022-08-15 22:14" pubdate>
-          August 15, 2022 pm
+        <time datetime="2022-08-16 19:29" pubdate>
+          August 16, 2022 pm
         </time>
       </span>
     
@@ -208,7 +208,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.1k words
+          690 words
         
       </span>
     
@@ -219,7 +219,7 @@
         
         
         
-          9 mins
+          6 mins
         
       </span>
     
@@ -257,83 +257,66 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">数据安全工作日记</h1>
+            <h1 style="display: none">SQL注入——盲注</h1>
             
             
               <div class="markdown-body">
                 
-                <h1 id="工作日记"><a href="#工作日记" class="headerlink" title="工作日记"></a>工作日记</h1><h6 id="7-25日"><a href="#7-25日" class="headerlink" title="7.25日:"></a>7.25日:</h6><ul>
-<li>&emsp;&emsp;阅读法律法规（三法一条）</li>
-</ul>
-<h6 id="7-26日"><a href="#7-26日" class="headerlink" title="7.26日:"></a>7.26日:</h6><ul>
-<li>&emsp;&emsp;阅读数据安全治理白皮书及相应的数据安全报刊</li>
-</ul>
-<h6 id="7-27日"><a href="#7-27日" class="headerlink" title="7.27日:"></a>7.27日:</h6><ul>
-<li>&emsp;&emsp;整理数据安全相关法律清单及相关内容</li>
-</ul>
-<h6 id="7月28日"><a href="#7月28日" class="headerlink" title="7月28日:"></a>7月28日:</h6><ul>
-<li>&emsp;&emsp;熟悉了业务，梳理的工作依据包含方向并尝试行业数据安全工作依据梳理</li>
-</ul>
-<h6 id="7月29日"><a href="#7月29日" class="headerlink" title="7月29日:"></a>7月29日:</h6><ul>
-<li>&emsp;&emsp;行业数据安全相关法律法规(政务行业方向)整理出了excel形式的业务依据</li>
-</ul>
-<h6 id="7月30日-7月31"><a href="#7月30日-7月31" class="headerlink" title="7月30日-7月31:"></a>7月30日-7月31:</h6><ul>
-<li>&emsp;&emsp;周末</li>
-</ul>
-<h6 id="8月1日"><a href="#8月1日" class="headerlink" title="8月1日:"></a>8月1日:</h6><ul>
-<li>&emsp;&emsp;同步相关信息内容</li>
-<li>&emsp;&emsp;《数据安全技术前沿研究笔记》第一章阅读</li>
-</ul>
-<h6 id="8月2日"><a href="#8月2日" class="headerlink" title="8月2日:"></a>8月2日:</h6><ul>
-<li>&emsp;&emsp;数据出（跨）境的基础法律、行政法规、部门规章、要求及其联系的查找</li>
-<li>&emsp;&emsp;继续整理政务行业的相关法律法规</li>
-</ul>
-<h6 id="8月3日："><a href="#8月3日：" class="headerlink" title="8月3日："></a>8月3日：</h6><ul>
-<li>&emsp;&emsp;行业数据安全相关法律法规(卫健行业方向)整理出了excel形式的业务依据</li>
-<li>&emsp;&emsp;数据出境100问的知识梳理</li>
-</ul>
-<h6 id="8月4日："><a href="#8月4日：" class="headerlink" title="8月4日："></a>8月4日：</h6><ul>
-<li>&emsp;&emsp;继续整理政务行业的相关法律法规</li>
-<li>&emsp;&emsp;数据出境安全评估研讨会（记录内容）</li>
-</ul>
-<h6 id="8月5日："><a href="#8月5日：" class="headerlink" title="8月5日："></a>8月5日：</h6><ul>
-<li>&emsp;&emsp;整理政务行业和卫健行业word形式的相关法律法规全文</li>
-<li>&emsp;&emsp;《数据安全技术前沿研究笔记》第一章总结</li>
-</ul>
-<h6 id="8月6日-8月7日："><a href="#8月6日-8月7日：" class="headerlink" title="8月6日-8月7日："></a>8月6日-8月7日：</h6><ul>
-<li>&emsp;&emsp;周末</li>
-</ul>
-<h6 id="8月8日："><a href="#8月8日：" class="headerlink" title="8月8日："></a>8月8日：</h6><ul>
-<li>&emsp;&emsp;数据安全相关研讨会的查找</li>
-<li>&emsp;&emsp;《数据安全技术前沿研究笔记》第二章阅读</li>
-</ul>
-<h6 id="8月9日："><a href="#8月9日：" class="headerlink" title="8月9日："></a>8月9日：</h6><ul>
-<li><p>&emsp;&emsp;行业数据安全相关法律法规(教育行业方向)整理出了excel形式的业务依据</p>
+                <h1 id="SQL注入——盲注"><a href="#SQL注入——盲注" class="headerlink" title="SQL注入——盲注"></a>SQL注入——盲注</h1><h4 id="1-盲注概述"><a href="#1-盲注概述" class="headerlink" title="1.盲注概述"></a>1.盲注概述</h4><p>&emsp;&emsp;在SQL的注入中，并不是所有的注入都能像联合查询注入和报错注入那样子获得回显信息的，有时候，在SQL语句执行完查询后，查询数据并不能回显到页面，当中，这个时候就需要用一些特殊的方法来判断或者尝试，这个过程称之为盲注。</p>
+<p>&emsp;&emsp;如果数据库运行反馈的结果反馈出的内容是对错等相类似的逻辑信息，那我们就可以根据逻辑信息的变化来获取我们想要的内容。</p>
+<p>&emsp;</p>
+<h4 id="2-盲注的分类"><a href="#2-盲注的分类" class="headerlink" title="2.盲注的分类"></a>2.盲注的分类</h4><ul>
+<li><p>&emsp;&emsp;布尔类型：</p>
+<p>&emsp;&emsp;布尔类型顾名思义就是反馈的信息只存在Ture和Fales，不论注入的内容是什么，他都只会返回正确或者错误</p>
 </li>
-<li><p>&emsp;&emsp;整理教育行业word形式的相关法律法规全文</p>
+<li><p>&emsp;&emsp;时间类型：</p>
+<p>&emsp;&emsp;时间类型的返回值只有Ture，返回的情况都会按照正确来处理，但是由于加入了特定的时间函数，所以可以通过web页面返回的时间来判断注入语句是否正确和成功</p>
 </li>
 </ul>
-<h6 id="8月10："><a href="#8月10：" class="headerlink" title="8月10："></a>8月10：</h6><ul>
-<li>&emsp;&emsp;查找后续相关讲座与研讨会</li>
-<li>&emsp;&emsp;整理医疗行业法律法规规定一些角色的责任义务</li>
-<li>&emsp;&emsp;《数据安全技术前沿研究笔记》第三章阅读</li>
+<p>&emsp;</p>
+<h4 id="3-盲注的部分函数"><a href="#3-盲注的部分函数" class="headerlink" title="3.盲注的部分函数"></a>3.盲注的部分函数</h4><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs sql">#返回字符串的长度<br>Length（）<br>  <br>#截取字符串<br>Substr（）<br><br>#返回字符的ascii码<br>Ascii（）  <br> <br>#将程序挂起一段时间 n为n秒<br>sleep(n)<br><br>#判断语句 如果第一个语句正确就执行第二个语句如果错误执行第三个语句<br>if(expr1,expr2,expr3):<br></code></pre></td></tr></table></figure>
+
+<ul>
+<li>&emsp;&emsp;Length（）:</li>
 </ul>
-<h6 id="8月11："><a href="#8月11：" class="headerlink" title="8月11："></a>8月11：</h6><ul>
-<li>&emsp;&emsp;差分隐私学习和理解</li>
-<li>&emsp;&emsp;《数据安全技术前沿研究笔记》第三章总结</li>
+<center><img src="/img/SQL%E6%B3%A8%E5%85%A5%E2%80%94%E2%80%94%E7%9B%B2%E6%B3%A8/1.jpg" srcset="/img/loading.gif" lazyload style="zoom: 80%;" />
+</center>
+
+<ul>
+<li>&emsp;&emsp;Substr（）:</li>
 </ul>
-<h6 id="8月12："><a href="#8月12：" class="headerlink" title="8月12："></a>8月12：</h6><ul>
-<li>&emsp;&emsp;整理研讨会资料——《数据安全与数据要素治理研讨会》</li>
-<li>&emsp;&emsp;自我总结研讨会心得</li>
+<center><img src="/img/SQL%E6%B3%A8%E5%85%A5%E2%80%94%E2%80%94%E7%9B%B2%E6%B3%A8/2.jpg" srcset="/img/loading.gif" lazyload style="zoom: 80%;" />
+</center>
+
+<ul>
+<li>&emsp;&emsp;Ascii（） :</li>
 </ul>
-<h6 id="8月13日-8月14日："><a href="#8月13日-8月14日：" class="headerlink" title="8月13日-8月14日："></a>8月13日-8月14日：</h6><ul>
-<li>&emsp;&emsp;周末</li>
+<center><img src="/img/SQL%E6%B3%A8%E5%85%A5%E2%80%94%E2%80%94%E7%9B%B2%E6%B3%A8/3.jpg" srcset="/img/loading.gif" lazyload style="zoom: 67%;" />
+</center>
+
+<ul>
+<li>&emsp;&emsp;sleep(n):</li>
 </ul>
-<h6 id="8月15日："><a href="#8月15日：" class="headerlink" title="8月15日："></a>8月15日：</h6><ul>
-<li>&emsp;&emsp;整理研讨会资料——《网络空间安全高峰论坛》</li>
-<li>&emsp;&emsp;自我总结研讨会心得（感觉罗里吧嗦讲了一堆）</li>
+<center><img src="/img/SQL%E6%B3%A8%E5%85%A5%E2%80%94%E2%80%94%E7%9B%B2%E6%B3%A8/4.jpg" srcset="/img/loading.gif" lazyload style="zoom: 80%;" />
+</center>
+
+<ul>
+<li><p>&emsp;&emsp;if(expr1,expr2,expr3):</p>
+<ul>
+<li>错误情况：</li>
 </ul>
-<h6 id=""><a href="#" class="headerlink" title=""></a></h6>
+</li>
+</ul>
+  <center><img src="/img/SQL%E6%B3%A8%E5%85%A5%E2%80%94%E2%80%94%E7%9B%B2%E6%B3%A8/5.jpg" srcset="/img/loading.gif" lazyload style="zoom: 80%;" />
+  </center>
+
+<ul>
+<li>正确情况：</li>
+</ul>
+  <center><img src="/img/SQL%E6%B3%A8%E5%85%A5%E2%80%94%E2%80%94%E7%9B%B2%E6%B3%A8/6.jpg" srcset="/img/loading.gif" lazyload style="zoom: 80%;" />
+  </center>
+
+
                 
               </div>
             
@@ -351,7 +334,7 @@
     
       <span class="category-chain">
         
-  <a href="/categories/%E4%BA%94%E6%89%80%E5%AE%9E%E4%B9%A0%E4%B9%8B%E6%95%B0%E6%8D%AE%E5%AE%89%E5%85%A8/" class="category-chain-item">五所实习之数据安全</a>
+  <a href="/categories/web/" class="category-chain-item">web</a>
   
   
 
@@ -371,8 +354,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>数据安全工作日记</div>
-      <div>https://one-null-pointer.github.io/2022/08/15/数据安全实习日记/</div>
+      <div>SQL注入——盲注</div>
+      <div>https://one-null-pointer.github.io/2022/08/16/SQL注入——盲注/</div>
     </div>
     <div class="license-meta">
       
@@ -384,7 +367,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>Posted on</div>
-          <div>August 15, 2022</div>
+          <div>August 16, 2022</div>
         </div>
       
       
@@ -414,18 +397,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2022/08/16/SQL%E6%B3%A8%E5%85%A5%E2%80%94%E2%80%94%E7%9B%B2%E6%B3%A8/" title="SQL注入——盲注">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">SQL注入——盲注</span>
-                        <span class="visible-mobile">Previous</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2022/08/15/SQL%E6%B3%A8%E5%85%A5%E2%80%94%E2%80%94HTTP%E5%A4%B4%E5%9E%8B/" title="SQL注入——HTTP头型">
-                        <span class="hidden-mobile">SQL注入——HTTP头型</span>
+                      <a href="/2022/08/15/%E6%95%B0%E6%8D%AE%E5%AE%89%E5%85%A8%E5%AE%9E%E4%B9%A0%E6%97%A5%E8%AE%B0/" title="数据安全工作日记">
+                        <span class="hidden-mobile">数据安全工作日记</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

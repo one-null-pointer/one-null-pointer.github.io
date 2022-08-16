@@ -4,6 +4,25 @@
   
   
   <entry>
+    <title>SQL注入——盲注</title>
+    <link href="/2022/08/16/SQL%E6%B3%A8%E5%85%A5%E2%80%94%E2%80%94%E7%9B%B2%E6%B3%A8/"/>
+    <url>/2022/08/16/SQL%E6%B3%A8%E5%85%A5%E2%80%94%E2%80%94%E7%9B%B2%E6%B3%A8/</url>
+    
+    <content type="html"><![CDATA[<h1 id="SQL注入——盲注"><a href="#SQL注入——盲注" class="headerlink" title="SQL注入——盲注"></a>SQL注入——盲注</h1><h4 id="1-盲注概述"><a href="#1-盲注概述" class="headerlink" title="1.盲注概述"></a>1.盲注概述</h4><p>&emsp;&emsp;在SQL的注入中，并不是所有的注入都能像联合查询注入和报错注入那样子获得回显信息的，有时候，在SQL语句执行完查询后，查询数据并不能回显到页面，当中，这个时候就需要用一些特殊的方法来判断或者尝试，这个过程称之为盲注。</p><p>&emsp;&emsp;如果数据库运行反馈的结果反馈出的内容是对错等相类似的逻辑信息，那我们就可以根据逻辑信息的变化来获取我们想要的内容。</p><p>&emsp;</p><h4 id="2-盲注的分类"><a href="#2-盲注的分类" class="headerlink" title="2.盲注的分类"></a>2.盲注的分类</h4><ul><li><p>&emsp;&emsp;布尔类型：</p><p>&emsp;&emsp;布尔类型顾名思义就是反馈的信息只存在Ture和Fales，不论注入的内容是什么，他都只会返回正确或者错误</p></li><li><p>&emsp;&emsp;时间类型：</p><p>&emsp;&emsp;时间类型的返回值只有Ture，返回的情况都会按照正确来处理，但是由于加入了特定的时间函数，所以可以通过web页面返回的时间来判断注入语句是否正确和成功</p></li></ul><p>&emsp;</p><h4 id="3-盲注的部分函数"><a href="#3-盲注的部分函数" class="headerlink" title="3.盲注的部分函数"></a>3.盲注的部分函数</h4><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs sql">#返回字符串的长度<br>Length（）<br>  <br>#截取字符串<br>Substr（）<br><br>#返回字符的ascii码<br>Ascii（）  <br> <br>#将程序挂起一段时间 n为n秒<br>sleep(n)<br><br>#判断语句 如果第一个语句正确就执行第二个语句如果错误执行第三个语句<br>if(expr1,expr2,expr3):<br></code></pre></td></tr></table></figure><ul><li>&emsp;&emsp;Length（）:</li></ul><center><img src="/img/SQL%E6%B3%A8%E5%85%A5%E2%80%94%E2%80%94%E7%9B%B2%E6%B3%A8/1.jpg" style="zoom: 80%;" /></center><ul><li>&emsp;&emsp;Substr（）:</li></ul><center><img src="/img/SQL%E6%B3%A8%E5%85%A5%E2%80%94%E2%80%94%E7%9B%B2%E6%B3%A8/2.jpg" style="zoom: 80%;" /></center><ul><li>&emsp;&emsp;Ascii（） :</li></ul><center><img src="/img/SQL%E6%B3%A8%E5%85%A5%E2%80%94%E2%80%94%E7%9B%B2%E6%B3%A8/3.jpg" style="zoom: 67%;" /></center><ul><li>&emsp;&emsp;sleep(n):</li></ul><center><img src="/img/SQL%E6%B3%A8%E5%85%A5%E2%80%94%E2%80%94%E7%9B%B2%E6%B3%A8/4.jpg" style="zoom: 80%;" /></center><ul><li><p>&emsp;&emsp;if(expr1,expr2,expr3):</p><ul><li>错误情况：</li></ul></li></ul>  <center><img src="/img/SQL%E6%B3%A8%E5%85%A5%E2%80%94%E2%80%94%E7%9B%B2%E6%B3%A8/5.jpg" style="zoom: 80%;" />  </center><ul><li>正确情况：</li></ul>  <center><img src="/img/SQL%E6%B3%A8%E5%85%A5%E2%80%94%E2%80%94%E7%9B%B2%E6%B3%A8/6.jpg" style="zoom: 80%;" />  </center>]]></content>
+    
+    
+    <categories>
+      
+      <category>web</category>
+      
+    </categories>
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>数据安全工作日记</title>
     <link href="/2022/08/15/%E6%95%B0%E6%8D%AE%E5%AE%89%E5%85%A8%E5%AE%9E%E4%B9%A0%E6%97%A5%E8%AE%B0/"/>
     <url>/2022/08/15/%E6%95%B0%E6%8D%AE%E5%AE%89%E5%85%A8%E5%AE%9E%E4%B9%A0%E6%97%A5%E8%AE%B0/</url>
