@@ -16,23 +16,23 @@
   <meta name="author" content="liaoyue">
   <meta name="keywords" content="">
   
-    <meta name="description" content="SQL注入——类型及提交方法1.前言&amp;emsp;&amp;emsp;在现实的SQL注入安全测试中，我们首先要明确提交数据及提交方法后再进行相关的注入，其中提交数据类型和提交方法可以通过抓包分析获取，后续的安全测试中我们也必须满足同等的操作才能进行注入。   &amp;emsp; 2.数据类型 数字型语句：  1select * from user where id     字符型语句：  1select * fr">
+    <meta name="description" content="文件上传——基础知识1.文件上传的简介&amp;emsp;&amp;emsp;由于开发源在对用户文件上传功能的实现代码中没有严格限制用户上传的文件后缀、文件类型或者相关的处理缺陷，导致了攻击者能够越过其本身的权限向服务器上传可执行的动态脚本文件 &amp;emsp;&amp;emsp;简单而言，就是开发员的检验不严谨，使得攻击者能够通过上传可执行脚本从而获取到执行服务器端命令的能力 &amp;emsp; 2.文件上传的原理&amp;emsp;&amp;">
 <meta property="og:type" content="article">
-<meta property="og:title" content="SQL注入——类型及提交方法">
-<meta property="og:url" content="https://one-null-pointer.github.io/2022/08/05/SQL%E6%B3%A8%E5%85%A5%E2%80%94%E2%80%94%E7%B1%BB%E5%9E%8B%E5%8F%8A%E6%8F%90%E4%BA%A4%E6%96%B9%E6%B3%95/index.html">
+<meta property="og:title" content="文件上传——基础知识">
+<meta property="og:url" content="https://one-null-pointer.github.io/2022/09/06/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E2%80%94%E2%80%94%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/index.html">
 <meta property="og:site_name" content="one-null-poniter">
-<meta property="og:description" content="SQL注入——类型及提交方法1.前言&amp;emsp;&amp;emsp;在现实的SQL注入安全测试中，我们首先要明确提交数据及提交方法后再进行相关的注入，其中提交数据类型和提交方法可以通过抓包分析获取，后续的安全测试中我们也必须满足同等的操作才能进行注入。   &amp;emsp; 2.数据类型 数字型语句：  1select * from user where id     字符型语句：  1select * fr">
+<meta property="og:description" content="文件上传——基础知识1.文件上传的简介&amp;emsp;&amp;emsp;由于开发源在对用户文件上传功能的实现代码中没有严格限制用户上传的文件后缀、文件类型或者相关的处理缺陷，导致了攻击者能够越过其本身的权限向服务器上传可执行的动态脚本文件 &amp;emsp;&amp;emsp;简单而言，就是开发员的检验不严谨，使得攻击者能够通过上传可执行脚本从而获取到执行服务器端命令的能力 &amp;emsp; 2.文件上传的原理&amp;emsp;&amp;">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://one-null-pointer.github.io/img/web1.png">
-<meta property="article:published_time" content="2022-08-05T07:46:28.000Z">
-<meta property="article:modified_time" content="2022-08-11T04:05:18.652Z">
+<meta property="article:published_time" content="2022-09-06T13:32:08.000Z">
+<meta property="article:modified_time" content="2022-09-06T15:38:49.121Z">
 <meta property="article:author" content="liaoyue">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://one-null-pointer.github.io/img/web1.png">
   
   
   
-  <title>SQL注入——类型及提交方法 - one-null-poniter</title>
+  <title>文件上传——基础知识 - one-null-poniter</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -185,7 +185,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="SQL注入——类型及提交方法"></span>
+            <span id="subtitle" data-typed-text="文件上传——基础知识"></span>
           
         </div>
 
@@ -196,8 +196,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2022-08-05 15:46" pubdate>
-          August 5, 2022 pm
+        <time datetime="2022-09-06 21:32" pubdate>
+          September 6, 2022 pm
         </time>
       </span>
     
@@ -257,92 +257,125 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">SQL注入——类型及提交方法</h1>
+            <h1 style="display: none">文件上传——基础知识</h1>
             
             
               <div class="markdown-body">
                 
-                <h1 id="SQL注入——类型及提交方法"><a href="#SQL注入——类型及提交方法" class="headerlink" title="SQL注入——类型及提交方法"></a>SQL注入——类型及提交方法</h1><h4 id="1-前言"><a href="#1-前言" class="headerlink" title="1.前言"></a>1.前言</h4><p>&emsp;&emsp;在现实的SQL注入安全测试中，我们首先要明确提交数据及提交方法后再进行相关的注入，其中提交数据类型和提交方法可以通过抓包分析获取，后续的安全测试中我们也必须满足同等的操作才能进行注入。</p>
-<center><img src="/img/SQL%E6%B3%A8%E5%85%A5%E2%80%94%E2%80%94%E7%B1%BB%E5%9E%8B%E5%8F%8A%E6%8F%90%E4%BA%A4%E6%96%B9%E6%B3%95/1.png" srcset="/img/loading.gif" lazyload style="zoom:67%;" /></center>
+                <h1 id="文件上传——基础知识"><a href="#文件上传——基础知识" class="headerlink" title="文件上传——基础知识"></a>文件上传——基础知识</h1><h4 id="1-文件上传的简介"><a href="#1-文件上传的简介" class="headerlink" title="1.文件上传的简介"></a>1.文件上传的简介</h4><p>&emsp;&emsp;由于开发源在对用户文件上传功能的实现代码中没有严格限制用户上传的文件后缀、文件类型或者相关的处理缺陷，导致了攻击者能够越过其本身的权限向服务器上传可执行的动态脚本文件</p>
+<p>&emsp;&emsp;简单而言，就是开发员的检验不严谨，使得攻击者能够通过上传可执行脚本从而获取到执行服务器端命令的能力</p>
+<p>&emsp;</p>
+<h4 id="2-文件上传的原理"><a href="#2-文件上传的原理" class="headerlink" title="2.文件上传的原理"></a>2.文件上传的原理</h4><p>&emsp;&emsp;在文件上传的功能处，如果服务器脚本语言并没有对上传的文件进行严格的验证、检验以及过滤的话，就会导致攻击者能够上传一个Webshell到Web可访问的目录上，并将恶意文件传递给语言解释器去执行，之后就能够才服务器上获取命令权限，从而就行数据库执行，文件管理等相关的恶意操作。也有一部分是攻击者通过Web服务器的解析漏洞来突破Web应用程序的防护</p>
+<p>&emsp;</p>
+<h4 id="3-文件上传的查找与判断"><a href="#3-文件上传的查找与判断" class="headerlink" title="3.文件上传的查找与判断"></a>3.文件上传的查找与判断</h4><ul>
+<li><p>黑盒测试</p>
+<ul>
+<li><p>文件后台</p>
+<p>&emsp;&emsp;进入网站后台后，不一定能获取网站权限</p>
+</li>
+<li><p>个人中心</p>
+<p>&emsp;&emsp;通过图片上传</p>
+</li>
+<li><p>文件扫描</p>
+<p>&emsp;&emsp;使用工具进行扫描，得出相应的后台路径</p>
+</li>
+</ul>
+</li>
+<li><p>白盒测试</p>
+<ul>
+<li>进行代码分析</li>
+<li>查找文件上传功能</li>
+</ul>
+</li>
+</ul>
+<p>&emsp;</p>
+<h4 id="4-文件上传漏洞危害"><a href="#4-文件上传漏洞危害" class="headerlink" title="4.文件上传漏洞危害"></a>4.文件上传漏洞危害</h4><ul>
+<li>上传webshell，控制服务器，远程命令执行</li>
+<li>上传系统百度、木马文件、构造僵尸网络</li>
+<li>修改web界面</li>
+<li>网络挂马和钓鱼</li>
+<li>内网渗透</li>
+<li>等等</li>
+</ul>
+<p>&emsp;</p>
+<h4 id="5-文件上传漏洞注意事项"><a href="#5-文件上传漏洞注意事项" class="headerlink" title="5.文件上传漏洞注意事项"></a>5.文件上传漏洞注意事项</h4><p>&emsp;&emsp;在文件上传的类型中， 我们需要去判别对应的文件上传利用方向，不同的方向有着不同的思路与渗透方法，如何判是在利用漏洞中的注意事项</p>
+<center><img src="/img/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E2%80%94%E2%80%94%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/3.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
 
 <p>&emsp;</p>
-<h4 id="2-数据类型"><a href="#2-数据类型" class="headerlink" title="2.数据类型"></a>2.数据类型</h4><ul>
-<li>数字型语句：</li>
+<h4 id="6-文件上传在实际应用的说明"><a href="#6-文件上传在实际应用的说明" class="headerlink" title="6.文件上传在实际应用的说明"></a>6.文件上传在实际应用的说明</h4><h6 id="方法一"><a href="#方法一" class="headerlink" title="方法一"></a>方法一</h6><ul>
+<li>​     先直接传一个PHP，实战先传马。</li>
+<li>​    实战先传一个正常的图片，看看有无返回存储地址。</li>
+<li>​    如果能直接上传并解析，已离成功不远。</li>
 </ul>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> <span class="hljs-operator">*</span> <span class="hljs-keyword">from</span> <span class="hljs-keyword">user</span> <span class="hljs-keyword">where</span> id  <br></code></pre></td></tr></table></figure>
-
+<h6 id="方法二"><a href="#方法二" class="headerlink" title="方法二"></a>方法二</h6><p>&emsp;&emsp;先传一个shell，然后进行修改。connect-Type:image/jpeg，看看是否可以进行绕过，如果不行，在上传内容添加GIF89a。当然上传了还得看是否能够被解析为php，所有的上传都要考虑是否能够被解析。</p>
+<h6 id="方法三"><a href="#方法三" class="headerlink" title="方法三"></a>方法三</h6><ul>
+<li><p>上传一个abc.abcd，目的只是为了查看是否为白名单还是黑名单绕过。黑名单限制一般为此文件类型不允许上传，考虑双写，大小写，空格，php2,php3,php4,php5,phtphtml,等方式</p>
+</li>
+<li><p>继续上传一个/htaccess文件，查看.htaccess文件能够设置服务器的解析文件的格式，匹配到dudu就已php的格式来解析，继而上传马</p>
+</li>
+<li><p>如果说.htaccess不能上传，接下来上传一个.user.ini，继而上传一个马</p>
+</li>
+</ul>
+<h6 id="方法四"><a href="#方法四" class="headerlink" title="方法四"></a>方法四</h6><p>​    如果白名单限制上传</p>
 <ul>
-<li>字符型语句：</li>
+<li>考虑00截断上传</li>
+<li>文件包含漏洞+图片马</li>
+<li>文件包含漏洞+二次渲染+图片马</li>
 </ul>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> <span class="hljs-operator">*</span> <span class="hljs-keyword">from</span> <span class="hljs-keyword">user</span> <span class="hljs-keyword">where</span> name <span class="hljs-operator">=</span> <span class="hljs-string">&#x27;liaoyue&#x27;</span><br></code></pre></td></tr></table></figure>
-
-<ul>
-<li>搜索型语句：（like）</li>
+<h6 id="方法五"><a href="#方法五" class="headerlink" title="方法五"></a>方法五</h6><p>&emsp;&emsp;上传的东西是否被服务器很快的删除或者移除，或者说上传成功，但是无法访问，这里就需要考虑条件竞争。</p>
+<p>&emsp;</p>
+<h4 id="7-相关案例演示"><a href="#7-相关案例演示" class="headerlink" title="7.相关案例演示"></a>7.相关案例演示</h4><p>&emsp;&emsp;（图片均来源于小迪安全）</p>
+<h5 id="（1）常规文件上传地址的获取"><a href="#（1）常规文件上传地址的获取" class="headerlink" title="（1）常规文件上传地址的获取"></a>（1）常规文件上传地址的获取</h5><ul>
+<li>使用搜索引擎进行该网站的搜索inurl:upload.php</li>
 </ul>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> <span class="hljs-operator">*</span> <span class="hljs-keyword">from</span> users <span class="hljs-keyword">where</span> name <span class="hljs-keyword">like</span> ‘<span class="hljs-operator">%</span>liaoyue<span class="hljs-operator">%</span>’<br><span class="hljs-keyword">select</span> <span class="hljs-operator">*</span> <span class="hljs-keyword">from</span> users <span class="hljs-keyword">where</span> name <span class="hljs-keyword">like</span>  (’<span class="hljs-operator">%</span>xihua<span class="hljs-operator">%</span>’)<br></code></pre></td></tr></table></figure>
-
-<p>&emsp;&emsp;通过三种语句的对比可以看见，在字符型语句中变量是需要使用到引号的，而在搜索类型中则需要注释单引号’、百分号%、括号等，这个需要自己进行多次尝试，搜索语句的类型并不多。因此我们的参数值在注入的时候需要去注意类型的判别。</p>
-<p>&emsp;&emsp;json类型：</p>
-<h4 id="3-请求方法"><a href="#3-请求方法" class="headerlink" title="3.请求方法"></a>3.请求方法</h4><p>&emsp;&emsp;不同的请求方式，上传的数据类型和大小是有区别的。我们不在上传的时候要根据请求的发送进行提交相关的语句，因此同的请求方法可能会有着不同注入的写法和方式。</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-meta">&lt;?php</span><br><span class="hljs-variable">$get</span>=<span class="hljs-variable">$_GET</span>[<span class="hljs-string">&#x27;g&#x27;</span>];       <span class="hljs-comment">//get接受参数名为g的值赋值给变量get</span><br><span class="hljs-keyword">echo</span> <span class="hljs-variable">$get</span>;             <span class="hljs-comment">//输出变量g的数据</span><br><br><span class="hljs-variable">$post</span>=<span class="hljs-variable">$_POST</span>[<span class="hljs-string">&#x27;p&#x27;</span>];     <span class="hljs-comment">//post接受参数名为p的值赋值给变量post</span><br><span class="hljs-keyword">echo</span> <span class="hljs-variable">$post</span>;            <span class="hljs-comment">//输出变量p的数据</span><br><br><span class="hljs-variable">$c</span>=<span class="hljs-variable">$_COOKIE</span>[<span class="hljs-string">&#x27;c&#x27;</span>];<br><span class="hljs-keyword">echo</span> <span class="hljs-variable">$c</span>;<br><br><span class="hljs-variable">$r</span>=<span class="hljs-variable">$_REQUEST</span>[<span class="hljs-string">&#x27;r&#x27;</span>];<br><span class="hljs-keyword">echo</span> <span class="hljs-variable">$r</span>;<br> <br><span class="hljs-variable">$s</span>=<span class="hljs-variable">$_SERVER</span>[<span class="hljs-string">&#x27;HTTP_USER_AGENT&#x27;</span>];<br><span class="hljs-keyword">echo</span> <span class="hljs-variable">$s</span>;<br><span class="hljs-meta">?&gt;</span><br></code></pre></td></tr></table></figure>
-
-<p>&emsp;&emsp;（注：在java、python等语言的框架中基本也是一样的思路，只是写法可能会有细微的出入）</p>
-<ul>
-<li><h5 id="GET与POST："><a href="#GET与POST：" class="headerlink" title="GET与POST："></a>GET与POST：</h5></li>
-</ul>
-<p>&emsp;&emsp;我们尝试发送数据<a target="_blank" rel="noopener" href="http://127.0.0.1/liaoyue.php/?g=123&amp;p=456">http://127.0.0.1/liaoyue.php/?g=123&amp;p=456</a></p>
-<center><img src="/img/SQL%E6%B3%A8%E5%85%A5%E2%80%94%E2%80%94%E7%B1%BB%E5%9E%8B%E5%8F%8A%E6%8F%90%E4%BA%A4%E6%96%B9%E6%B3%95/2.jpg" srcset="/img/loading.gif" lazyload style="zoom:67%;" />
-</center>
-
-
-<center><img src="/img/SQL%E6%B3%A8%E5%85%A5%E2%80%94%E2%80%94%E7%B1%BB%E5%9E%8B%E5%8F%8A%E6%8F%90%E4%BA%A4%E6%96%B9%E6%B3%95/3.jpg" srcset="/img/loading.gif" lazyload alt="3" style="zoom: 67%;" />
-</center>
-&emsp;&emsp;可以看见，在数据包传输过后，界面显示的只有g的内容，p的内容传送失败了。这是因为在burp的抓包中，我们的数据是用GET的形式去请求的，而p是用POST进行接收，所以p并没有接收最终导致了只有g的内容被打印出来。
-
-<p>&emsp;&emsp;接下来修改传送方法，通过火狐插件 HackBar 在post提交p。</p>
-<center><img src="/img/SQL%E6%B3%A8%E5%85%A5%E2%80%94%E2%80%94%E7%B1%BB%E5%9E%8B%E5%8F%8A%E6%8F%90%E4%BA%A4%E6%96%B9%E6%B3%95/6.jpg" srcset="/img/loading.gif" lazyload style="zoom:67%;" />
-</center>
-
-
-
-<center><img src="/img/SQL%E6%B3%A8%E5%85%A5%E2%80%94%E2%80%94%E7%B1%BB%E5%9E%8B%E5%8F%8A%E6%8F%90%E4%BA%A4%E6%96%B9%E6%B3%95/4.jpg" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
-</center>
-
-<p>&emsp;&emsp;最终效果：</p>
-<center><img src="/img/SQL%E6%B3%A8%E5%85%A5%E2%80%94%E2%80%94%E7%B1%BB%E5%9E%8B%E5%8F%8A%E6%8F%90%E4%BA%A4%E6%96%B9%E6%B3%95/5.jpg" srcset="/img/loading.gif" lazyload style="zoom: 67%;" />
-</center>
-&emsp;&emsp;成功显示123456，在网址后面传参为get请求，不论是否为POST的请求类型，主要是在网址后面，get就能接收到，所以这样子用了POST的请求方式可以同时把GET和POST两个参数都传上去。
-
-<center><img src="/img/SQL%E6%B3%A8%E5%85%A5%E2%80%94%E2%80%94%E7%B1%BB%E5%9E%8B%E5%8F%8A%E6%8F%90%E4%BA%A4%E6%96%B9%E6%B3%95/6.jpg" srcset="/img/loading.gif" lazyload style="zoom: 60%;" />
-</center>
-
-<p>&emsp;&emsp;这也就是说我们注入的位置是有要求和限制的，不同的请求方式会导致我们注入位置形成影响</p>
-<ul>
-<li><h5 id="COOKIE"><a href="#COOKIE" class="headerlink" title="COOKIE"></a>COOKIE</h5></li>
-</ul>
-<p>&emsp;&emsp;首先明确cookie并不是请求方法，是在数据包中cookie可以通过修改数据包中的cookie进行注入</p>
-<center><img src="/img/SQL%E6%B3%A8%E5%85%A5%E2%80%94%E2%80%94%E7%B1%BB%E5%9E%8B%E5%8F%8A%E6%8F%90%E4%BA%A4%E6%96%B9%E6%B3%95/7.jpg" srcset="/img/loading.gif" lazyload style="zoom: 100%;" />
+<center><img src="/img/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E2%80%94%E2%80%94%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/1.jpg" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
 </center>
 
 <ul>
-<li><h5 id="REQUEST"><a href="#REQUEST" class="headerlink" title="REQUEST"></a>REQUEST</h5></li>
+<li>使用工具扫描该该网址</li>
 </ul>
-<p>&emsp;&emsp;既可以通过GET请求，也可以通过POST请求，基本可以说可以REQUST能在所有方法的位置提交。</p>
-<center><img src="/img/SQL%E6%B3%A8%E5%85%A5%E2%80%94%E2%80%94%E7%B1%BB%E5%9E%8B%E5%8F%8A%E6%8F%90%E4%BA%A4%E6%96%B9%E6%B3%95/8.jpg" srcset="/img/loading.gif" lazyload style="zoom: 100%;" />
+<center><img src="/img/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E2%80%94%E2%80%94%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/2.jpg" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
 </center>
 
-<p>&emsp;&emsp;当然，在post请求的方法中也只是将位置接在post传输的数据后面，其他没有区别。</p>
-<ul>
-<li><h5 id="HTTP-头"><a href="#HTTP-头" class="headerlink" title="HTTP 头"></a>HTTP 头</h5></li>
-</ul>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-comment">#$_SERVER详解</span><br><span class="hljs-variable">$_SERVER</span>[<span class="hljs-string">&#x27;HTTP_ACCEPT_LANGUAGE&#x27;</span>]       <span class="hljs-comment">//浏览器语言 </span><br><span class="hljs-variable">$_SERVER</span>[<span class="hljs-string">&#x27;REMOTE_ADDR&#x27;</span>]               <span class="hljs-comment">//当前用户 IP</span><br><span class="hljs-comment">#其余的相关内容可以参考网站：https://www.cainiaoxueyuan.com/bc/9910.html</span><br></code></pre></td></tr></table></figure>
-
-<p>&emsp;&emsp;测试网址：<a target="_blank" rel="noopener" href="http://ip.tool.chinaz.com/">http://ip.tool.chinaz.com/</a></p>
-<center><img src="/img/SQL%E6%B3%A8%E5%85%A5%E2%80%94%E2%80%94%E7%B1%BB%E5%9E%8B%E5%8F%8A%E6%8F%90%E4%BA%A4%E6%96%B9%E6%B3%95/9.jpg" srcset="/img/loading.gif" lazyload style="zoom: 100%;" />
+<p>&emsp;</p>
+<h5 id="（2）不同格式下的文件类型后门测试"><a href="#（2）不同格式下的文件类型后门测试" class="headerlink" title="（2）不同格式下的文件类型后门测试"></a>（2）不同格式下的文件类型后门测试</h5><p>&emsp;&emsp;要遵守上传的格式，不同的格式对应着相对格式的渗透与上传漏洞利用</p>
+<center><img src="/img/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E2%80%94%E2%80%94%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/4.jpg" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
 </center>
 
-<center><img src="/img/SQL%E6%B3%A8%E5%85%A5%E2%80%94%E2%80%94%E7%B1%BB%E5%9E%8B%E5%8F%8A%E6%8F%90%E4%BA%A4%E6%96%B9%E6%B3%95/10.jpg" srcset="/img/loading.gif" lazyload style="zoom: 100%;" />
+<center><img src="/img/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E2%80%94%E2%80%94%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/5.jpg" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
 </center>
+
+<p>&emsp;&emsp;改变文件后缀名为jpg，再次访问</p>
+<center><img src="/img/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E2%80%94%E2%80%94%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/6.jpg" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<p>&emsp;&emsp;可以看见，访问该格式，里面的代码内容并不会被执行</p>
+<p>&emsp;</p>
+<h5 id="（3）配合解析漏洞下的文件类型后门测试"><a href="#（3）配合解析漏洞下的文件类型后门测试" class="headerlink" title="（3）配合解析漏洞下的文件类型后门测试"></a>（3）配合解析漏洞下的文件类型后门测试</h5><p>相关靶场：</p>
+<p>&emsp;&emsp;<a target="_blank" rel="noopener" href="https://vulhub.org/#/environments/nginx/nginx_parsing_vulnerabilit">https://vulhub.org/#/environments/nginx/nginx_parsing_vulnerabilit</a></p>
+<center><img src="/img/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E2%80%94%E2%80%94%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/12.jpg" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<p>&emsp;</p>
+<h5 id="（4）本地文件上传漏洞靶场环境搭建"><a href="#（4）本地文件上传漏洞靶场环境搭建" class="headerlink" title="（4）本地文件上传漏洞靶场环境搭建"></a>（4）本地文件上传漏洞靶场环境搭建</h5><p><a target="_blank" rel="noopener" href="https://github.com/c0ny1/upload-labs%EF%BC%88%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E9%9D%B6%E5%9C%BA%EF%BC%89">https://github.com/c0ny1/upload-labs（文件上传靶场）</a></p>
+<center><img src="/img/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E2%80%94%E2%80%94%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/7.jpg" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<p>&emsp;</p>
+<h5 id="（5）某CMS及CVE编号文件上传漏洞"><a href="#（5）某CMS及CVE编号文件上传漏洞" class="headerlink" title="（5）某CMS及CVE编号文件上传漏洞"></a>（5）某CMS及CVE编号文件上传漏洞</h5><h6 id="CMS"><a href="#CMS" class="headerlink" title="CMS :"></a>CMS :</h6><center><img src="/img/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E2%80%94%E2%80%94%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/8.jpg" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<center><img src="/img/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E2%80%94%E2%80%94%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/9.jpg" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<center><img src="/img/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E2%80%94%E2%80%94%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/10.jpg" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<center><img src="/img/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E2%80%94%E2%80%94%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/11.jpg" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<p>&emsp;&emsp;虽然这里显示上传失败，但是后台的文件中依旧是有我们上传的文件，也就是说，其实如何去判断后台是否成功是很关键的，所以不能轻易下结论。</p>
 
                 
               </div>
@@ -381,8 +414,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>SQL注入——类型及提交方法</div>
-      <div>https://one-null-pointer.github.io/2022/08/05/SQL注入——类型及提交方法/</div>
+      <div>文件上传——基础知识</div>
+      <div>https://one-null-pointer.github.io/2022/09/06/文件上传——基础知识/</div>
     </div>
     <div class="license-meta">
       
@@ -394,7 +427,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>Posted on</div>
-          <div>August 5, 2022</div>
+          <div>September 6, 2022</div>
         </div>
       
       
@@ -424,18 +457,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2022/08/05/SQL%E6%B3%A8%E5%85%A5%E2%80%94%E2%80%94MySQL/" title="SQL注入——MySQL">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">SQL注入——MySQL</span>
-                        <span class="visible-mobile">Previous</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2022/08/04/SQL%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/" title="SQL注入——基础知识">
-                        <span class="hidden-mobile">SQL注入——基础知识</span>
+                      <a href="/2022/08/29/SQL%E6%B3%A8%E5%85%A5%E2%80%94%E2%80%94WAF%E7%BB%95%E8%BF%87%EF%BC%88%E4%BA%8C%EF%BC%89/" title="SQL注入——WAF绕过（二）">
+                        <span class="hidden-mobile">SQL注入——WAF绕过（二）</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

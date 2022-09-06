@@ -16,23 +16,23 @@
   <meta name="author" content="liaoyue">
   <meta name="keywords" content="">
   
-    <meta name="description" content="SQL注入基础知识1.SQL的简介&amp;emsp;&amp;emsp;SQL (结构化查询语言) 是用于管理关系数据库管理系统（RDBMS）。 SQL 的范围包括数据插入、查询、更新和删除，数据库模式创建和修改，以及数据访问控制。 &amp;emsp;&amp;emsp;虽然存在着不同版本的SQL语言，但是为了ANSI标准的兼容性，它们必须以相似的方式来支持一些主要的命令（SELECT、UPDATE、DELETE、INSER">
+    <meta name="description" content="SQL注入——基础知识1.SQL的简介&amp;emsp;&amp;emsp;SQL (结构化查询语言) 是用于管理关系数据库管理系统（RDBMS）。 SQL 的范围包括数据插入、查询、更新和删除，数据库模式创建和修改，以及数据访问控制。 &amp;emsp;&amp;emsp;虽然存在着不同版本的SQL语言，但是为了ANSI标准的兼容性，它们必须以相似的方式来支持一些主要的命令（SELECT、UPDATE、DELETE、INS">
 <meta property="og:type" content="article">
-<meta property="og:title" content="SQL注入基础知识">
+<meta property="og:title" content="SQL注入——基础知识">
 <meta property="og:url" content="https://one-null-pointer.github.io/2022/08/04/SQL%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/index.html">
 <meta property="og:site_name" content="one-null-poniter">
-<meta property="og:description" content="SQL注入基础知识1.SQL的简介&amp;emsp;&amp;emsp;SQL (结构化查询语言) 是用于管理关系数据库管理系统（RDBMS）。 SQL 的范围包括数据插入、查询、更新和删除，数据库模式创建和修改，以及数据访问控制。 &amp;emsp;&amp;emsp;虽然存在着不同版本的SQL语言，但是为了ANSI标准的兼容性，它们必须以相似的方式来支持一些主要的命令（SELECT、UPDATE、DELETE、INSER">
+<meta property="og:description" content="SQL注入——基础知识1.SQL的简介&amp;emsp;&amp;emsp;SQL (结构化查询语言) 是用于管理关系数据库管理系统（RDBMS）。 SQL 的范围包括数据插入、查询、更新和删除，数据库模式创建和修改，以及数据访问控制。 &amp;emsp;&amp;emsp;虽然存在着不同版本的SQL语言，但是为了ANSI标准的兼容性，它们必须以相似的方式来支持一些主要的命令（SELECT、UPDATE、DELETE、INS">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://one-null-pointer.github.io/img/web1.png">
 <meta property="article:published_time" content="2022-08-04T14:30:44.000Z">
-<meta property="article:modified_time" content="2022-08-12T05:24:02.755Z">
+<meta property="article:modified_time" content="2022-09-06T13:36:10.758Z">
 <meta property="article:author" content="liaoyue">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://one-null-pointer.github.io/img/web1.png">
   
   
   
-  <title>SQL注入基础知识 - one-null-poniter</title>
+  <title>SQL注入——基础知识 - one-null-poniter</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -185,7 +185,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="SQL注入基础知识"></span>
+            <span id="subtitle" data-typed-text="SQL注入——基础知识"></span>
           
         </div>
 
@@ -208,7 +208,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          716 words
+          718 words
         
       </span>
     
@@ -257,12 +257,12 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">SQL注入基础知识</h1>
+            <h1 style="display: none">SQL注入——基础知识</h1>
             
             
               <div class="markdown-body">
                 
-                <h1 id="SQL注入基础知识"><a href="#SQL注入基础知识" class="headerlink" title="SQL注入基础知识"></a>SQL注入基础知识</h1><h4 id="1-SQL的简介"><a href="#1-SQL的简介" class="headerlink" title="1.SQL的简介"></a>1.SQL的简介</h4><p>&emsp;&emsp;SQL (结构化查询语言) 是用于管理关系数据库管理系统（RDBMS）。 SQL 的范围包括数据插入、查询、更新和删除，数据库模式创建和修改，以及数据访问控制。</p>
+                <h1 id="SQL注入——基础知识"><a href="#SQL注入——基础知识" class="headerlink" title="SQL注入——基础知识"></a>SQL注入——基础知识</h1><h4 id="1-SQL的简介"><a href="#1-SQL的简介" class="headerlink" title="1.SQL的简介"></a>1.SQL的简介</h4><p>&emsp;&emsp;SQL (结构化查询语言) 是用于管理关系数据库管理系统（RDBMS）。 SQL 的范围包括数据插入、查询、更新和删除，数据库模式创建和修改，以及数据访问控制。</p>
 <p>&emsp;&emsp;虽然存在着不同版本的SQL语言，但是为了ANSI标准的兼容性，它们必须以相似的方式来支持一些主要的命令（SELECT、UPDATE、DELETE、INSERT、WHERE 等等），当然除了这些标准外，大部分SQL数据库都拥有它们自己的专有扩展。</p>
 <p>&emsp;</p>
 <h4 id="2-SQL注入的定义"><a href="#2-SQL注入的定义" class="headerlink" title="2.SQL注入的定义"></a>2.SQL注入的定义</h4><p>&emsp;&emsp;SQL 注入是一种非常常见的数据库攻击手段，是一种通过操作输入来修改后台SQL语句达到代码执行进行攻击目的的技术。</p>
@@ -343,7 +343,7 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>SQL注入基础知识</div>
+      <div>SQL注入——基础知识</div>
       <div>https://one-null-pointer.github.io/2022/08/04/SQL基础知识/</div>
     </div>
     <div class="license-meta">
