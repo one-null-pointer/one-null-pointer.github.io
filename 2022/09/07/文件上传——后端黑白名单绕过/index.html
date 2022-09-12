@@ -1,0 +1,722 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="liaoyue">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="文件上传——验证&#x2F;绕过0.前言&amp;emsp;&amp;emsp;一般而言，在文件上传的常见验证中分为客户端验证和服务端验证，客户端验证主要是写入JavaScript脚本，校验上传文件的后缀名，可以通过在浏览加载文件，单但没有点击上传按钮就弹出警报窗，这一般就是前端的验证。（注：一般不提交是不会有报文的）    &amp;emsp; 1.文件上传常见验证 后缀名  黑名单  &amp;emsp;&amp;emsp;黑名单明确了不允许">
+<meta property="og:type" content="article">
+<meta property="og:title" content="文件上传——验证&#x2F;绕过">
+<meta property="og:url" content="https://one-null-pointer.github.io/2022/09/07/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E2%80%94%E2%80%94%E5%90%8E%E7%AB%AF%E9%BB%91%E7%99%BD%E5%90%8D%E5%8D%95%E7%BB%95%E8%BF%87/index.html">
+<meta property="og:site_name" content="one-null-poniter">
+<meta property="og:description" content="文件上传——验证&#x2F;绕过0.前言&amp;emsp;&amp;emsp;一般而言，在文件上传的常见验证中分为客户端验证和服务端验证，客户端验证主要是写入JavaScript脚本，校验上传文件的后缀名，可以通过在浏览加载文件，单但没有点击上传按钮就弹出警报窗，这一般就是前端的验证。（注：一般不提交是不会有报文的）    &amp;emsp; 1.文件上传常见验证 后缀名  黑名单  &amp;emsp;&amp;emsp;黑名单明确了不允许">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://one-null-pointer.github.io/img/web1.png">
+<meta property="article:published_time" content="2022-09-07T15:06:08.000Z">
+<meta property="article:modified_time" content="2022-09-11T08:03:52.576Z">
+<meta property="article:author" content="liaoyue">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://one-null-pointer.github.io/img/web1.png">
+  
+  
+  
+  <title>文件上传——验证/绕过 - one-null-poniter</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"one-null-pointer.github.io","root":"/","version":"1.9.2","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 5.4.2"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>one null pointer</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                吾
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                學
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                類
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="文件上传——验证/绕过"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2022-09-07 23:06" pubdate>
+          September 7, 2022 pm
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          1.2k words
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          10 mins
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">文件上传——验证/绕过</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="文件上传——验证-绕过"><a href="#文件上传——验证-绕过" class="headerlink" title="文件上传——验证/绕过"></a>文件上传——验证/绕过</h1><h4 id="0-前言"><a href="#0-前言" class="headerlink" title="0.前言"></a>0.前言</h4><p>&emsp;&emsp;一般而言，在文件上传的常见验证中分为客户端验证和服务端验证，客户端验证主要是写入JavaScript脚本，校验上传文件的后缀名，可以通过在浏览加载文件，单但没有点击上传按钮就弹出警报窗，这一般就是前端的验证。（注：一般不提交是不会有报文的）</p>
+<center><img src="/img/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E2%80%94%E2%80%94%E5%90%8E%E7%AB%AF%E9%BB%91%E7%99%BD%E5%90%8D%E5%8D%95%E7%BB%95%E8%BF%87/1.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<p>&emsp;</p>
+<h4 id="1-文件上传常见验证"><a href="#1-文件上传常见验证" class="headerlink" title="1.文件上传常见验证"></a>1.文件上传常见验证</h4><ul>
+<li><p>后缀名</p>
+<ul>
+<li>黑名单</li>
+</ul>
+<p>&emsp;&emsp;黑名单明确了不允许上传的格式和后缀，例如不允许上传带有asp,php,jjsp等格式的后缀，因此我们可以寻找没有限制到的格式进行文件上传漏洞的利用。</p>
+<ul>
+<li>白名单</li>
+</ul>
+<p>&emsp;&emsp;白名单是明确了上传文件的后缀格式，例如明确要求是jpg、png、zip等格式，因为相对于黑名单而言，由于无法寻找到没有限制的格式，所以白名单会相对更加安全。</p>
+</li>
+<li><p>文件类型：</p>
+<p>&emsp;&emsp;MIME是描述消息内容类型的因特网标准。其消息能包含文本、图像、音频、视频以及其他应用程序专用的数据。Content-Type中的内容也就是MIME，不同的应用程序支持不同的 MIME 类型。</p>
+<p><a target="_blank" rel="noopener" href="https://www.w3school.com.cn/media/media_mimeref.asp">https://www.w3school.com.cn/media/media_mimeref.asp</a></p>
+<center><img src="/img/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E2%80%94%E2%80%94%E5%90%8E%E7%AB%AF%E9%BB%91%E7%99%BD%E5%90%8D%E5%8D%95%E7%BB%95%E8%BF%87/2.jpg" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center></li>
+<li><p>文件头（内容头信息）：</p>
+</li>
+</ul>
+<p>&emsp;&emsp;&emsp;&emsp;<a target="_blank" rel="noopener" href="https://blog.csdn.net/ccj2020/article/details/87603903">https://blog.csdn.net/ccj2020/article/details/87603903</a></p>
+<table>
+<thead>
+<tr>
+<th align="center">文件类型</th>
+<th align="center">文件头</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">JPEG（jpg）</td>
+<td align="center">FFD8FFE1</td>
+</tr>
+<tr>
+<td align="center">PNG（png）</td>
+<td align="center">89504E47</td>
+</tr>
+<tr>
+<td align="center">GIF（gif）</td>
+<td align="center">47494638</td>
+</tr>
+<tr>
+<td align="center">TIFF</td>
+<td align="center">49492A00</td>
+</tr>
+<tr>
+<td align="center">Windows Bitmap</td>
+<td align="center">424DC001</td>
+</tr>
+<tr>
+<td align="center">ZIP Archive</td>
+<td align="center">504B0304</td>
+</tr>
+<tr>
+<td align="center">RAR Archive（rar）</td>
+<td align="center">5261721</td>
+</tr>
+<tr>
+<td align="center">Adobe Photoshop（psd）</td>
+<td align="center">38425053</td>
+</tr>
+<tr>
+<td align="center">Rich Text Format（rtf）</td>
+<td align="center">7B5C727466</td>
+</tr>
+<tr>
+<td align="center">XML（xml）</td>
+<td align="center">3C3F786D6C</td>
+</tr>
+<tr>
+<td align="center">HTML（html）</td>
+<td align="center">68746D6C3E</td>
+</tr>
+<tr>
+<td align="center">Adobe Acrobat（pdf）</td>
+<td align="center">255044462D312E</td>
+</tr>
+<tr>
+<td align="center">Wave （wav）</td>
+<td align="center">57415654</td>
+</tr>
+</tbody></table>
+<p>&emsp;</p>
+<p>（接下来以upload——labs为例）</p>
+<h4 id="2-Pass-01（前端验证）"><a href="#2-Pass-01（前端验证）" class="headerlink" title="2.Pass-01（前端验证）"></a>2.Pass-01（前端验证）</h4><p>&emsp;&emsp;查看提交界面：</p>
+<center><img src="/img/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E2%80%94%E2%80%94%E5%90%8E%E7%AB%AF%E9%BB%91%E7%99%BD%E5%90%8D%E5%8D%95%E7%BB%95%E8%BF%87/3.jpg" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<p>&emsp;&emsp;接下来查看前端代码：</p>
+<center><img src="/img/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E2%80%94%E2%80%94%E5%90%8E%E7%AB%AF%E9%BB%91%E7%99%BD%E5%90%8D%E5%8D%95%E7%BB%95%E8%BF%87/4.jpg" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+
+<p>&emsp;&emsp;可以看见在前端的js代码中存在相关的验证，我们只需要修改相关验证即可：</p>
+<center><img src="/img/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E2%80%94%E2%80%94%E5%90%8E%E7%AB%AF%E9%BB%91%E7%99%BD%E5%90%8D%E5%8D%95%E7%BB%95%E8%BF%87/5.jpg" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+
+<p>&emsp;&emsp;点击进行webshell文件上传：</p>
+<center><img src="/img/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E2%80%94%E2%80%94%E5%90%8E%E7%AB%AF%E9%BB%91%E7%99%BD%E5%90%8D%E5%8D%95%E7%BB%95%E8%BF%87/6.jpg" srcset="/img/loading.gif" lazyload style="zoom:60%;" />
+</center>
+
+
+<p>&emsp;&emsp;可以看见上传成功。</p>
+<p>&emsp;</p>
+<h4 id="3-Pass-02（MIME验证）"><a href="#3-Pass-02（MIME验证）" class="headerlink" title="3.Pass-02（MIME验证）"></a>3.Pass-02（MIME验证）</h4><p>&emsp;&emsp;根据提示，该文件上传是MIME类型，也就是需要使用抓包工具进行抓包处理，先看提交界面：</p>
+<center><img src="/img/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E2%80%94%E2%80%94%E5%90%8E%E7%AB%AF%E9%BB%91%E7%99%BD%E5%90%8D%E5%8D%95%E7%BB%95%E8%BF%87/7.jpg" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+
+<p>&emsp;&emsp;抓包查看MIME值：</p>
+<center><img src="/img/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E2%80%94%E2%80%94%E5%90%8E%E7%AB%AF%E9%BB%91%E7%99%BD%E5%90%8D%E5%8D%95%E7%BB%95%E8%BF%87/8.jpg" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+
+<p>&emsp;&emsp;修改MIME值：</p>
+<center><img src="/img/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E2%80%94%E2%80%94%E5%90%8E%E7%AB%AF%E9%BB%91%E7%99%BD%E5%90%8D%E5%8D%95%E7%BB%95%E8%BF%87/9.jpg" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+
+<p>&emsp;&emsp;文件上传成功</p>
+<center><img src="/img/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E2%80%94%E2%80%94%E5%90%8E%E7%AB%AF%E9%BB%91%E7%99%BD%E5%90%8D%E5%8D%95%E7%BB%95%E8%BF%87/10.jpg" srcset="/img/loading.gif" lazyload style="zoom:60%;" />
+</center>
+
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/web/" class="category-chain-item">web</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>文件上传——验证/绕过</div>
+      <div>https://one-null-pointer.github.io/2022/09/07/文件上传——后端黑白名单绕过/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>Author</div>
+          <div>liaoyue</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>Posted on</div>
+          <div>September 7, 2022</div>
+        </div>
+      
+      
+      <div class="license-meta-item">
+        <div>传送口</div>
+        <div>
+          
+            
+            
+              <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+              <span class="hint--top hint--rounded" aria-label="点击进行传送">
+                <i class="iconfont icon-by"></i>
+              </span>
+              </a>
+            
+          
+        </div>
+      </div>
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2022/09/08/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E2%80%94%E2%80%94%E9%BB%91%E5%90%8D%E5%8D%95%E9%AA%8C%E8%AF%81%E7%BB%95%E8%BF%87%E6%A1%88%E4%BE%8B/" title="文件上传——黑名单验证绕过案例">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">文件上传——黑名单验证绕过案例</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2022/09/06/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E2%80%94%E2%80%94%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/" title="文件上传——基础知识">
+                        <span class="hidden-mobile">文件上传——基础知识</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;Table of Contents</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">Keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://github.com/" target="_blank" rel="nofollow noopener"><span>pointer</span></a> <i class="iconfont icon-love"></i> <a href="https://mp.weixin.qq.com/s/6ncLUtaiJ9j_sMjZT5z-2w" target="_blank" rel="nofollow noopener"><span>一个爱学习的空指针</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      headingSelector : CONFIG.toc.headingSelector || 'h1,h2,h3,h4,h5,h6',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      collapseDepth   : CONFIG.toc.collapseDepth || 0,
+      scrollSmooth    : true,
+      headingsOffset  : -boardTop
+    });
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.10/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">Blog works best with JavaScript enabled</div>
+  </noscript>
+</body>
+</html>

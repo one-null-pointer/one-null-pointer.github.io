@@ -25,7 +25,7 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://one-null-pointer.github.io/img/web1.png">
 <meta property="article:published_time" content="2022-09-06T13:32:08.000Z">
-<meta property="article:modified_time" content="2022-09-06T15:38:49.121Z">
+<meta property="article:modified_time" content="2022-09-07T14:32:50.363Z">
 <meta property="article:author" content="liaoyue">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://one-null-pointer.github.io/img/web1.png">
@@ -304,11 +304,11 @@
 
 <p>&emsp;</p>
 <h4 id="6-文件上传在实际应用的说明"><a href="#6-文件上传在实际应用的说明" class="headerlink" title="6.文件上传在实际应用的说明"></a>6.文件上传在实际应用的说明</h4><h6 id="方法一"><a href="#方法一" class="headerlink" title="方法一"></a>方法一</h6><ul>
-<li>​     先直接传一个PHP，实战先传马。</li>
-<li>​    实战先传一个正常的图片，看看有无返回存储地址。</li>
-<li>​    如果能直接上传并解析，已离成功不远。</li>
+<li>​     先直接传一个PHP文件，实战先传简单的试试。</li>
+<li>​    然后传一个正常的图片，看看有无返回存储地址。</li>
+<li>​    如果能上传就直接解析。</li>
 </ul>
-<h6 id="方法二"><a href="#方法二" class="headerlink" title="方法二"></a>方法二</h6><p>&emsp;&emsp;先传一个shell，然后进行修改。connect-Type:image/jpeg，看看是否可以进行绕过，如果不行，在上传内容添加GIF89a。当然上传了还得看是否能够被解析为php，所有的上传都要考虑是否能够被解析。</p>
+<h6 id="方法二"><a href="#方法二" class="headerlink" title="方法二"></a>方法二</h6><p>&emsp;&emsp;先传一个shell，然后进行修改。查看报文里面的内容connect-Type:image/jpeg，看看是否可以进行绕过，如果不行，在上传内容添加GIF89a（这个是图片相关格式的文件头）。当然上传了还得看是否能够被解析为php，所有的上传都要考虑是否能够被解析。</p>
 <h6 id="方法三"><a href="#方法三" class="headerlink" title="方法三"></a>方法三</h6><ul>
 <li><p>上传一个abc.abcd，目的只是为了查看是否为白名单还是黑名单绕过。黑名单限制一般为此文件类型不允许上传，考虑双写，大小写，空格，php2,php3,php4,php5,phtphtml,等方式</p>
 </li>
@@ -456,6 +456,12 @@
                 <div class="post-prevnext my-3">
                   <article class="post-prev col-6">
                     
+                    
+                      <a href="/2022/09/07/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E2%80%94%E2%80%94%E5%90%8E%E7%AB%AF%E9%BB%91%E7%99%BD%E5%90%8D%E5%8D%95%E7%BB%95%E8%BF%87/" title="文件上传——验证/绕过">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">文件上传——验证/绕过</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
                     
                   </article>
                   <article class="post-next col-6">
