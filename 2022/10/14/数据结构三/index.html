@@ -16,23 +16,23 @@
   <meta name="author" content="liaoyue">
   <meta name="keywords" content="">
   
-    <meta name="description" content="绪论1.知识框架   &amp;emsp; 2.结构的基本术语数据：信息的载体 数据元素：数据的基本单位 数据对象：具有系统性质的数据元素的集合，是数据的一个子集 数据类型：原子类型、结构类型、抽象数据类型 &amp;emsp; 3.结构三要素 逻辑结构  &amp;emsp;&amp;emsp;逻辑结构是指数据元素之间的逻辑关系，它与数据的存储无关，是独立与计算机的。     存储结构  &amp;emsp;&amp;emsp;存储结构是指数">
+    <meta name="description" content="栈1.栈的定义&amp;emsp;&amp;emsp;简单的理解，栈是只允许在一端进行插入或者操作的线性表    &amp;emsp; 2.栈的基本操作 InitStack(&amp;S)：初始化栈。构造一个空栈，分配内存空间。 DestroyStack(&amp;L)：销毁栈。销毁并释放栈S所占用的内存空间 Push(&amp;S,x)：进栈，若栈S未满，则将x加入栈中成为新的栈顶 Pop(&amp;S,&amp;x)">
 <meta property="og:type" content="article">
-<meta property="og:title" content="绪论">
-<meta property="og:url" content="https://one-null-pointer.github.io/2022/09/16/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%80/index.html">
+<meta property="og:title" content="栈">
+<meta property="og:url" content="https://one-null-pointer.github.io/2022/10/14/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%89/index.html">
 <meta property="og:site_name" content="one-null-poniter">
-<meta property="og:description" content="绪论1.知识框架   &amp;emsp; 2.结构的基本术语数据：信息的载体 数据元素：数据的基本单位 数据对象：具有系统性质的数据元素的集合，是数据的一个子集 数据类型：原子类型、结构类型、抽象数据类型 &amp;emsp; 3.结构三要素 逻辑结构  &amp;emsp;&amp;emsp;逻辑结构是指数据元素之间的逻辑关系，它与数据的存储无关，是独立与计算机的。     存储结构  &amp;emsp;&amp;emsp;存储结构是指数">
+<meta property="og:description" content="栈1.栈的定义&amp;emsp;&amp;emsp;简单的理解，栈是只允许在一端进行插入或者操作的线性表    &amp;emsp; 2.栈的基本操作 InitStack(&amp;S)：初始化栈。构造一个空栈，分配内存空间。 DestroyStack(&amp;L)：销毁栈。销毁并释放栈S所占用的内存空间 Push(&amp;S,x)：进栈，若栈S未满，则将x加入栈中成为新的栈顶 Pop(&amp;S,&amp;x)">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://one-null-pointer.github.io/img/datastructure.png">
-<meta property="article:published_time" content="2022-09-16T07:11:27.000Z">
-<meta property="article:modified_time" content="2022-09-21T00:53:20.447Z">
+<meta property="article:published_time" content="2022-10-14T08:02:44.000Z">
+<meta property="article:modified_time" content="2022-10-15T13:32:22.781Z">
 <meta property="article:author" content="liaoyue">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://one-null-pointer.github.io/img/datastructure.png">
   
   
   
-  <title>绪论 - one-null-poniter</title>
+  <title>栈 - one-null-poniter</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -185,7 +185,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="绪论"></span>
+            <span id="subtitle" data-typed-text="栈"></span>
           
         </div>
 
@@ -196,8 +196,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2022-09-16 15:11" pubdate>
-          September 16, 2022 pm
+        <time datetime="2022-10-14 16:02" pubdate>
+          October 14, 2022 pm
         </time>
       </span>
     
@@ -208,7 +208,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.1k words
+          799 words
         
       </span>
     
@@ -219,7 +219,7 @@
         
         
         
-          10 mins
+          7 mins
         
       </span>
     
@@ -257,86 +257,55 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">绪论</h1>
+            <h1 style="display: none">栈</h1>
             
             
               <div class="markdown-body">
                 
-                <h1 id="绪论"><a href="#绪论" class="headerlink" title="绪论"></a>绪论</h1><h4 id="1-知识框架"><a href="#1-知识框架" class="headerlink" title="1.知识框架"></a>1.知识框架</h4><center><img src="/img/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%80/1.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+                <h1 id="栈"><a href="#栈" class="headerlink" title="栈"></a>栈</h1><h4 id="1-栈的定义"><a href="#1-栈的定义" class="headerlink" title="1.栈的定义"></a>1.栈的定义</h4><p>&emsp;&emsp;简单的理解，栈是只允许在一端进行插入或者操作的线性表</p>
+<center><img src="/img/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%89/1.jpg" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
 </center>
 
 <p>&emsp;</p>
-<h4 id="2-结构的基本术语"><a href="#2-结构的基本术语" class="headerlink" title="2.结构的基本术语"></a>2.结构的基本术语</h4><p><strong>数据：</strong>信息的载体</p>
-<p><strong>数据元素：</strong>数据的基本单位</p>
-<p><strong>数据对象：</strong>具有系统性质的数据元素的集合，是数据的一个子集</p>
-<p><strong>数据类型：</strong>原子类型、结构类型、抽象数据类型</p>
-<p>&emsp;</p>
-<h4 id="3-结构三要素"><a href="#3-结构三要素" class="headerlink" title="3.结构三要素"></a>3.结构三要素</h4><ul>
-<li><h5 id="逻辑结构"><a href="#逻辑结构" class="headerlink" title="逻辑结构"></a>逻辑结构</h5></li>
+<h4 id="2-栈的基本操作"><a href="#2-栈的基本操作" class="headerlink" title="2.栈的基本操作"></a>2.栈的基本操作</h4><ul>
+<li>InitStack(&amp;S)：初始化栈。构造一个空栈，分配内存空间。</li>
+<li>DestroyStack(&amp;L)：销毁栈。销毁并释放栈S所占用的内存空间</li>
+<li>Push(&amp;S,x)：进栈，若栈S未满，则将x加入栈中成为新的栈顶</li>
+<li>Pop(&amp;S,&amp;x)：出栈，若栈S非空，则弹出栈顶元素，并用x返回</li>
+<li>GetTop(S,&amp;x)：读栈顶元素，用x返回栈顶元素</li>
 </ul>
-<p>&emsp;&emsp;逻辑结构是指数据元素之间的逻辑关系，它与数据的存储无关，是独立与计算机的。</p>
-<center><img src="/img/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%80/2.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+<center><img src="/img/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%89/2.jpg" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
 </center>
 
-<ul>
-<li><h5 id="存储结构"><a href="#存储结构" class="headerlink" title="存储结构"></a>存储结构</h5></li>
+<p>&emsp;</p>
+<h4 id="3-顺序栈"><a href="#3-顺序栈" class="headerlink" title="3.顺序栈"></a>3.顺序栈</h4><ul>
+<li>定义</li>
 </ul>
-<p>&emsp;&emsp;存储结构是指数据在计算机中的表示（又称映像），也称为物理结构。数据的存储结构是用计算机语言实现的逻辑结构，依赖于计算机语言</p>
-<center><img src="/img/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%80/3.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
-</center>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-meta">#<span class="hljs-keyword">define</span> MaxSize 10</span><br>typrdef <span class="hljs-class"><span class="hljs-keyword">struct</span></span><br><span class="hljs-class">&#123;</span><br>    ElemType data[MaxSize];    <span class="hljs-comment">//静态数组存放栈中的元素</span><br>    <span class="hljs-type">int</span> top;<br>&#125;SqStack;<br></code></pre></td></tr></table></figure>
 
 <ul>
-<li><h5 id="数据的运算："><a href="#数据的运算：" class="headerlink" title="数据的运算："></a>数据的运算：</h5></li>
+<li>初始化</li>
 </ul>
-<p>&emsp;&emsp;施加在数据上的运算的定义和实现。运算的定义是针对逻辑结构的，指出运算的功能；运算的实现是针对存储结构的，指出运算的具体操作步骤</p>
-<p>&emsp;&emsp;</p>
-<h4 id="4-算法的基本概念"><a href="#4-算法的基本概念" class="headerlink" title="4.算法的基本概念"></a>4.算法的基本概念</h4><p>&emsp;&emsp;算法是对特定问题求解步骤的一种描述。是指令的有限序列。一个算法应该具备的5个重要特征：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs c">voif <span class="hljs-title function_">InitStack</span><span class="hljs-params">(SqStack &amp;s)</span><br>&#123;<br>    s.top=<span class="hljs-number">-1</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+
 <ul>
-<li><strong>有穷性：</strong>一个算法必须总在执行有穷步之后结束，且每一步都可在有穷时间内完成</li>
-<li><strong>确定性：</strong>算法中的每个指令都必须有确切的含义，对于相同的输入只能得出相同的输出</li>
-<li><strong>可行性：</strong>算法中描述的操作都可以通过研究实现的基本运算执行有限次来实现</li>
-<li><strong>输入：</strong>一个算法有零个或多个输入，这些输入取自于某中特定的对象的集合</li>
-<li><strong>输出：</strong>一个算法有一个或多个输出，这些输出是与输入有着某种特定关系的量</li>
+<li>进栈</li>
 </ul>
-<p>&emsp;</p>
-<h4 id="5-算法的目标"><a href="#5-算法的目标" class="headerlink" title="5.算法的目标"></a>5.算法的目标</h4><ul>
-<li><strong>正确性：</strong>能够正确的解决求解问题</li>
-<li><strong>可读性：</strong>简洁可读，以帮助人理解</li>
-<li><strong>健壮性：</strong>当输入非法数据时，算法能适当地作出反应或进行处理，二不会产生奇怪的输出结果</li>
-<li><strong>效率与低存储量需求：</strong>效率是指算法执行的时间，存储量需求是指算法执行过程中所需要的最大存储空间</li>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-type">bool</span> <span class="hljs-title function_">Push</span><span class="hljs-params">(SqStack &amp;S,ElemType x)</span><br>&#123;<br>     <span class="hljs-keyword">if</span>(S.top==MaxSize<span class="hljs-number">-1</span>)<br>         <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>    S.top = S.top + <span class="hljs-number">1</span>;<br>    S.data[S.top]=x;<br>    <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;     <br>&#125;<br></code></pre></td></tr></table></figure>
+
+<ul>
+<li>出栈</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-type">bool</span> <span class="hljs-title function_">Pop</span><span class="hljs-params">(SqStack &amp;S,ElemType &amp;x)</span><br>&#123;<br>     <span class="hljs-keyword">if</span>(S.top==<span class="hljs-number">-1</span>)<br>         <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>    x=S.data[S.top];<br>    S.top = S.top<span class="hljs-number">-1</span>;<br>    <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;     <br>&#125;<br></code></pre></td></tr></table></figure>
+
+<ul>
+<li>共享栈</li>
 </ul>
 <p>&emsp;</p>
-<h4 id="6-算法效率的度量"><a href="#6-算法效率的度量" class="headerlink" title="6.算法效率的度量"></a>6.算法效率的度量</h4><p>&emsp;&emsp;算法效率的度量是通过时间复杂度和空间复杂度来描述的</p>
-<ul>
-<li><h5 id="时间复杂度"><a href="#时间复杂度" class="headerlink" title="时间复杂度"></a>时间复杂度</h5></li>
-</ul>
-<p>&emsp;&emsp;一个语句的频度是指该语句在算法中被重复执行的次数，算法中所有语句的频度之和记为*T(n)<em>，它是该算法问题规模n的函数，时间复杂度主要分析</em>T(n)<em>的数量级，算法中基本运算的频度与</em>T(n)<em>同数量级，因此通常采用算法中基本运算的频度</em>f(n)*来分析算法的时间复杂度：</p>
-<center>
-    T(n)=O(f(n))
-</center>
+<h4 id="4-链栈"><a href="#4-链栈" class="headerlink" title="4.链栈"></a>4.链栈</h4><p>&emsp;&emsp;使用链式存储方式实现的栈，实现头插和后删的单链表</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-keyword">typedef</span> <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">Linknode</span></span><br><span class="hljs-class">&#123;</span><br>    ElemType data;<br>    <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">Linknode</span> *<span class="hljs-title">next</span>;</span><br>&#125;*LiStack;<br></code></pre></td></tr></table></figure>
 
-<center><img src="/img/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%80/4.jpg" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
-</center>
-
-<p>&emsp;&emsp;时间复杂度加法规则：</p>
-<center>
-    T(n) = T1(n) + T2(n) = O(f(n)) + O(g(n)) = O(max(f(n), g(n)))
-</center>
-
-<p>&emsp;&emsp;时间复杂度乘法规则：</p>
-<center>T(n) = T1(n)×T2(n) = O(f(n))×O(g(n)) = O(f(n)×g(n))</center>
-
-<p>&emsp;&emsp;常见的渐近时间复杂度为：</p>
-<center><img src="/img/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%80/5.jpg" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
-</center>
-
-<ul>
-<li><h5 id="空间复杂度"><a href="#空间复杂度" class="headerlink" title="空间复杂度"></a>空间复杂度</h5></li>
-</ul>
-<p>&emsp;&emsp;算法的空间复杂度S(n)定义为该算法所耗费的存储时间，它是问题规模n的函数，记为：</p>
-<center>
-    S(n)=O(g(n))
-</center>
+<p>&emsp;</p>
 
                 
               </div>
@@ -375,8 +344,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>绪论</div>
-      <div>https://one-null-pointer.github.io/2022/09/16/数据结构一/</div>
+      <div>栈</div>
+      <div>https://one-null-pointer.github.io/2022/10/14/数据结构三/</div>
     </div>
     <div class="license-meta">
       
@@ -388,7 +357,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>Posted on</div>
-          <div>September 16, 2022</div>
+          <div>October 14, 2022</div>
         </div>
       
       
@@ -418,9 +387,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2022/09/17/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%BA%8C/" title="线性表">
+                      <a href="/2022/10/15/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%9B%9B/" title="队列">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">线性表</span>
+                        <span class="hidden-mobile">队列</span>
                         <span class="visible-mobile">Previous</span>
                       </a>
                     
@@ -428,8 +397,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2022/09/15/%E9%AB%98%E7%AD%89%E6%95%B0%E5%AD%A6%E7%AC%94%E8%AE%B0%E4%BA%8C/" title="高等数学笔记二">
-                        <span class="hidden-mobile">高等数学笔记二</span>
+                      <a href="/2022/09/17/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%BA%8C/" title="线性表">
+                        <span class="hidden-mobile">线性表</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

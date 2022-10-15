@@ -16,21 +16,33 @@
   <meta name="author" content="liaoyue">
   <meta name="keywords" content="">
   
-    <meta property="og:type" content="website">
-<meta property="og:title" content="學">
-<meta property="og:url" content="https://one-null-pointer.github.io/archives/2022/08/page/2/index.html">
+    <meta name="description" content="队列1.队列&amp;emsp;&amp;emsp;简单的理解，队列是只允许在一端进行插入，在另外一端删除的线性表    &amp;emsp; 2.队列的基本操作 InitQueue(&amp;Q)：初始化队列。构造一个队列，分配内存空间。 DestroyQueue(&amp;Q)：销毁队列。销毁并释放队列Q所占用的内存空间 EnQueue(&amp;Q,x)：入队，若队列Q未满，则将x加入栈中成为新的队尾 DeQueu">
+<meta property="og:type" content="article">
+<meta property="og:title" content="队列">
+<meta property="og:url" content="https://one-null-pointer.github.io/2022/10/15/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%9B%9B/index.html">
 <meta property="og:site_name" content="one-null-poniter">
+<meta property="og:description" content="队列1.队列&amp;emsp;&amp;emsp;简单的理解，队列是只允许在一端进行插入，在另外一端删除的线性表    &amp;emsp; 2.队列的基本操作 InitQueue(&amp;Q)：初始化队列。构造一个队列，分配内存空间。 DestroyQueue(&amp;Q)：销毁队列。销毁并释放队列Q所占用的内存空间 EnQueue(&amp;Q,x)：入队，若队列Q未满，则将x加入栈中成为新的队尾 DeQueu">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://one-null-pointer.github.io/img/datastructure.png">
+<meta property="article:published_time" content="2022-10-15T13:26:13.000Z">
+<meta property="article:modified_time" content="2022-10-15T13:50:19.625Z">
 <meta property="article:author" content="liaoyue">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://one-null-pointer.github.io/img/datastructure.png">
   
   
   
-  <title>學 - one-null-poniter</title>
+  <title>队列 - one-null-poniter</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
 
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
 
 
 
@@ -80,7 +92,7 @@
   <header>
     
 
-<div class="header-inner" style="height: 60vh;">
+<div class="header-inner" style="height: 70vh;">
   <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
     <a class="navbar-brand" href="/">
@@ -173,9 +185,49 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="每一个不曾起舞的日子，都是对生命的辜负"></span>
+            <span id="subtitle" data-typed-text="队列"></span>
           
         </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2022-10-15 21:26" pubdate>
+          October 15, 2022 pm
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          268 words
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          3 mins
+        
+      </span>
+    
+
+    
+    
+  </div>
+
 
         
       </div>
@@ -191,100 +243,184 @@
 
   <main>
     
-      <div class="container nopadding-x-md">
-        <div id="board"
-          >
-          
-          <div class="container">
-            <div class="row">
-              <div class="col-12 col-md-10 m-auto">
-                
-
-<div class="list-group">
-  <p class="h4">64 posts in total</p>
-  <hr>
-  
-  
-    
       
-      <p class="h5">2022</p>
-    
-    <a href="/2022/08/15/%E6%95%B0%E6%8D%AE%E5%AE%89%E5%85%A8%E5%AE%9E%E4%B9%A0%E6%97%A5%E8%AE%B0/" class="list-group-item list-group-item-action">
-      <time>08-15</time>
-      <div class="list-group-item-title">数据安全工作日记</div>
-    </a>
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">队列</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="队列"><a href="#队列" class="headerlink" title="队列"></a>队列</h1><h4 id="1-队列"><a href="#1-队列" class="headerlink" title="1.队列"></a>1.队列</h4><p>&emsp;&emsp;简单的理解，队列是只允许在一端进行插入，在另外一端删除的线性表</p>
+<center><img src="/img/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%89/3.jpg" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<p>&emsp;</p>
+<h4 id="2-队列的基本操作"><a href="#2-队列的基本操作" class="headerlink" title="2.队列的基本操作"></a>2.队列的基本操作</h4><ul>
+<li>InitQueue(&amp;Q)：初始化队列。构造一个队列，分配内存空间。</li>
+<li>DestroyQueue(&amp;Q)：销毁队列。销毁并释放队列Q所占用的内存空间</li>
+<li>EnQueue(&amp;Q,x)：入队，若队列Q未满，则将x加入栈中成为新的队尾</li>
+<li>DeQueue(&amp;Q,&amp;x)：出队，若队列Q非空，则将队头元素付给x</li>
+<li>GetHead(Q,&amp;x)：读队头元素，若队列Q非空，则将队头元素赋值给x</li>
+</ul>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
   
     
-    <a href="/2022/08/15/SQL%E6%B3%A8%E5%85%A5%E2%80%94%E2%80%94HTTP%E5%A4%B4%E5%9E%8B/" class="list-group-item list-group-item-action">
-      <time>08-15</time>
-      <div class="list-group-item-title">报错注入——HTTP头型</div>
-    </a>
+      <span class="category-chain">
+        
+  <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" class="category-chain-item">数据结构</a>
   
-    
-    <a href="/2022/08/14/SQL%E6%B3%A8%E5%85%A5%E2%80%94%E2%80%94delete%E5%9E%8B/" class="list-group-item list-group-item-action">
-      <time>08-14</time>
-      <div class="list-group-item-title">报错注入——delete型</div>
-    </a>
   
+
+      </span>
     
-    <a href="/2022/08/13/SQL%E6%B3%A8%E5%85%A5%E2%80%94%E2%80%94update%E5%9E%8B/" class="list-group-item list-group-item-action">
-      <time>08-13</time>
-      <div class="list-group-item-title">报错注入——update型</div>
-    </a>
   
-    
-    <a href="/2022/08/12/SQL%E6%B3%A8%E5%85%A5%E2%80%94%E2%80%94%E6%8A%A5%E9%94%99%E6%B3%A8%E5%85%A5/" class="list-group-item list-group-item-action">
-      <time>08-12</time>
-      <div class="list-group-item-title">SQL注入——报错注入</div>
-    </a>
+</span>
+
+    </div>
   
-    
-    <a href="/2022/08/12/%E6%95%B0%E6%8D%AE%E5%AE%89%E5%85%A8%E6%8A%80%E6%9C%AF%E4%B9%8B%E5%B7%AE%E5%88%86%E9%9A%90%E7%A7%81/" class="list-group-item list-group-item-action">
-      <time>08-12</time>
-      <div class="list-group-item-title">数据安全技术前沿研究笔记（三）</div>
-    </a>
-  
-    
-    <a href="/2022/08/11/SQL%E6%B3%A8%E5%85%A5%E2%80%94%E2%80%94%E6%8B%AC%E5%8F%B7%E5%9E%8B/" class="list-group-item list-group-item-action">
-      <time>08-11</time>
-      <div class="list-group-item-title">联合查询注入——括号型</div>
-    </a>
-  
-    
-    <a href="/2022/08/10/SQL%E6%B3%A8%E5%85%A5%E2%80%94%E2%80%94%E6%90%9C%E7%B4%A2%E5%9E%8B/" class="list-group-item list-group-item-action">
-      <time>08-10</time>
-      <div class="list-group-item-title">联合查询注入——搜索型</div>
-    </a>
-  
-    
-    <a href="/2022/08/09/SQL%E6%B3%A8%E5%85%A5%E2%80%94%E2%80%94%E5%AD%97%E7%AC%A6%E5%9E%8B/" class="list-group-item list-group-item-action">
-      <time>08-09</time>
-      <div class="list-group-item-title">联合查询注入——字符型</div>
-    </a>
-  
-    
-    <a href="/2022/08/08/SQL%E6%B3%A8%E5%85%A5%E2%80%94%E2%80%94%E6%95%B0%E5%AD%97%E5%9E%8B/" class="list-group-item list-group-item-action">
-      <time>08-08</time>
-      <div class="list-group-item-title">联合查询注入——数字型</div>
-    </a>
   
 </div>
 
 
-  <nav aria-label="navigation">
-    <span class="pagination" id="pagination">
-      <a class="extend prev" rel="prev" href="/archives/2022/08/"><i class="iconfont icon-arrowleft"></i></a><a class="page-number" href="/archives/2022/08/">1</a><span class="page-number current">2</span><a class="page-number" href="/archives/2022/08/page/3/#board">3</a><a class="extend next" rel="next" href="/archives/2022/08/page/3/#board"><i class="iconfont icon-arrowright"></i></a>
-    </span>
-  </nav>
+              
+  
 
-
-
-
-              </div>
-            </div>
-          </div>
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>队列</div>
+      <div>https://one-null-pointer.github.io/2022/10/15/数据结构四/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>Author</div>
+          <div>liaoyue</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>Posted on</div>
+          <div>October 15, 2022</div>
+        </div>
+      
+      
+      <div class="license-meta-item">
+        <div>传送口</div>
+        <div>
+          
+            
+            
+              <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+              <span class="hint--top hint--rounded" aria-label="点击进行传送">
+                <i class="iconfont icon-by"></i>
+              </span>
+              </a>
+            
+          
         </div>
       </div>
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2022/10/14/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%89/" title="栈">
+                        <span class="hidden-mobile">栈</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;Table of Contents</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
     
 
     
@@ -378,6 +514,72 @@
 
 
 
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      headingSelector : CONFIG.toc.headingSelector || 'h1,h2,h3,h4,h5,h6',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      collapseDepth   : CONFIG.toc.collapseDepth || 0,
+      scrollSmooth    : true,
+      headingsOffset  : -boardTop
+    });
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.10/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
 
   <script  src="/js/local-search.js" ></script>
 
