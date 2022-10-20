@@ -4,6 +4,25 @@
   
   
   <entry>
+    <title>数组压缩存储</title>
+    <link href="/2022/10/20/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%BA%94/"/>
+    <url>/2022/10/20/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%BA%94/</url>
+    
+    <content type="html"><![CDATA[<h1 id="数组压缩存储"><a href="#数组压缩存储" class="headerlink" title="数组压缩存储"></a>数组压缩存储</h1><h4 id="1-一维数组的存储结构"><a href="#1-一维数组的存储结构" class="headerlink" title="1.一维数组的存储结构"></a>1.一维数组的存储结构</h4><p>&emsp;&emsp;一般而言，如果没有特别强调，数组下标默认从零开始，各个数组元素大小相同，且物理上连续存放</p><center><img src="/img/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%BA%94/1.jpg" style="zoom:100%;" />    </center><p>&emsp;&emsp;由上图可知，数组元素a[i]的存放地址为LOC+i*sizeof(ElemType)</p><p>&emsp;</p><h4 id="2-二维数组的存储结构"><a href="#2-二维数组的存储结构" class="headerlink" title="2.二维数组的存储结构"></a>2.二维数组的存储结构</h4><p>&emsp;&emsp; 二维数组其实就是在一维数组的基础上多加了一个维度，分出了行和列的区别，这也导致二维数组的存储结构存在两种方式，行优先和列优先。</p><center><img src="/img/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%BA%94/2.jpg" style="zoom:100%;" /></center><p>&emsp;&emsp;列优先时，数组元素a[i]的存放地址为LOC+(j * m+i) * sizeof(ElemType)</p><p>&emsp;&emsp;行优先时，数组元素a[i]的存放地址为LOC+(i * n+j) * sizeof(ElemType)</p><h4 id="3-特殊矩阵的压缩存储方式"><a href="#3-特殊矩阵的压缩存储方式" class="headerlink" title="3.特殊矩阵的压缩存储方式"></a>3.特殊矩阵的压缩存储方式</h4><ul><li><h6 id="对称矩阵的压缩存储"><a href="#对称矩阵的压缩存储" class="headerlink" title="对称矩阵的压缩存储"></a>对称矩阵的压缩存储</h6></li></ul><center><img src="/img/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%BA%94/3.jpg" style="zoom:100%;" /></center><p>&emsp;&emsp;由于对称矩阵的对称特性，实现确认存储的数组大小为（1+2+3+…+n）=(1+n)*n/2</p><center><img src="/img/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%BA%94/4.jpg" style="zoom:100%;" /></center><ul><li><h6 id="三角矩阵的压缩存储"><a href="#三角矩阵的压缩存储" class="headerlink" title="三角矩阵的压缩存储"></a>三角矩阵的压缩存储</h6></li></ul><center><img src="/img/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%BA%94/5.jpg" style="zoom:100%;" /></center><center><img src="/img/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%BA%94/6.jpg" style="zoom:100%;" /></center><center><img src="/img/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%BA%94/7.jpg" style="zoom:100%;" /></center><ul><li><h6 id="三对角矩阵的压缩存储"><a href="#三对角矩阵的压缩存储" class="headerlink" title="三对角矩阵的压缩存储"></a>三对角矩阵的压缩存储</h6></li></ul><center><img src="/img/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%BA%94/8.jpg" style="zoom:100%;" /></center><ul><li>稀疏矩阵的压缩存储</li></ul><center><img src="/img/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%BA%94/9.jpg" style="zoom:100%;" /></center><center><img src="/img/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%BA%94/10.jpg" style="zoom:100%;" /></center><p>&emsp;</p><h4 id="4-常见考试类型"><a href="#4-常见考试类型" class="headerlink" title="4.常见考试类型"></a>4.常见考试类型</h4><center><img src="/img/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%BA%94/11.jpg" style="zoom:100%;" /></center>]]></content>
+    
+    
+    <categories>
+      
+      <category>数据结构笔记（王道）</category>
+      
+    </categories>
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>队列</title>
     <link href="/2022/10/15/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%9B%9B/"/>
     <url>/2022/10/15/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%9B%9B/</url>
@@ -13,7 +32,7 @@
     
     <categories>
       
-      <category>数据结构</category>
+      <category>数据结构笔记（王道）</category>
       
     </categories>
     
@@ -32,7 +51,7 @@
     
     <categories>
       
-      <category>数据结构</category>
+      <category>数据结构笔记（王道）</category>
       
     </categories>
     
@@ -51,7 +70,7 @@
     
     <categories>
       
-      <category>数据结构</category>
+      <category>数据结构笔记（王道）</category>
       
     </categories>
     
@@ -70,7 +89,7 @@
     
     <categories>
       
-      <category>数据结构</category>
+      <category>数据结构笔记（王道）</category>
       
     </categories>
     
