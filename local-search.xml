@@ -99,6 +99,25 @@
   
   
   <entry>
+    <title>物理层</title>
+    <link href="/2022/09/18/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E4%B8%89/"/>
+    <url>/2022/09/18/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E4%B8%89/</url>
+    
+    <content type="html"><![CDATA[<h1 id="物理层"><a href="#物理层" class="headerlink" title="物理层"></a>物理层</h1><p>未上传</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>计算机网络学习笔记</category>
+      
+    </categories>
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>前言</title>
     <link href="/2022/09/17/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E4%B8%80/"/>
     <url>/2022/09/17/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E4%B8%80/</url>
@@ -118,30 +137,11 @@
   
   
   <entry>
-    <title>物理层</title>
-    <link href="/2022/09/17/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E4%B8%89/"/>
-    <url>/2022/09/17/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E4%B8%89/</url>
-    
-    <content type="html"><![CDATA[<h1 id="物理层"><a href="#物理层" class="headerlink" title="物理层"></a>物理层</h1><p>未上传</p>]]></content>
-    
-    
-    <categories>
-      
-      <category>计算机网络学习笔记</category>
-      
-    </categories>
-    
-    
-  </entry>
-  
-  
-  
-  <entry>
     <title>计算机网络体系结构</title>
     <link href="/2022/09/17/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E4%BA%8C/"/>
     <url>/2022/09/17/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E4%BA%8C/</url>
     
-    <content type="html"><![CDATA[<h1 id="计算机网络体系结构"><a href="#计算机网络体系结构" class="headerlink" title="计算机网络体系结构"></a>计算机网络体系结构</h1><h4 id="1-计算机网络概述"><a href="#1-计算机网络概述" class="headerlink" title="1.计算机网络概述"></a>1.计算机网络概述</h4><ul><li>概念</li></ul><p>&emsp;&emsp;计算机网络是一个将分散的、具有独立功能的计算机系统，通过<strong>通信设备与线路</strong>连接起来，由功能完善的<strong>软件</strong>实现资源共享和信息传递的系统，是互连的、自治的计算机集合</p><center><img src="/img/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E4%BA%8C/1.jpg" style="zoom:80%;" /></center><center><img src="/img/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E4%BA%8C/2.jpg" style="zoom:80%;" /></center><ul><li>功能</li></ul><p>&emsp;&emsp;同一个计算机网络上的其他计算机可使用某台计算机的计算机资源的行为，可共享硬件、软件、数据。功能包括了<strong>数据通信、资源共享</strong>、分布式处理(可靠性和负载均衡）等</p><ul><li>多层次ISP结构</li></ul><p>&emsp;&emsp;因特网服务提供者/因特网 服务提供商，是一个向广大用户 综合提供互联网接入业务、信息 业务、和增值业务的公司，如中国电信、中国联动、中国移动等。分为主干ISP、地区ISP和本地ISP。</p><center><img src="/img/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E4%BA%8C/3.jpg" style="zoom:80%;" /></center>]]></content>
+    <content type="html"><![CDATA[<h1 id="计算机网络体系结构"><a href="#计算机网络体系结构" class="headerlink" title="计算机网络体系结构"></a>计算机网络体系结构</h1><h4 id="1-计算机网络概述"><a href="#1-计算机网络概述" class="headerlink" title="1.计算机网络概述"></a>1.计算机网络概述</h4><ul><li>概念</li></ul><p>&emsp;&emsp;计算机网络是一个将分散的、具有独立功能的计算机系统，通过<strong>通信设备与线路</strong>连接起来，由功能完善的<strong>软件</strong>实现资源共享和信息传递的系统，是互连的、自治的计算机集合</p><center><img src="/img/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E4%BA%8C/1.jpg" style="zoom:80%;" /></center><center><img src="/img/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E4%BA%8C/2.jpg" style="zoom:80%;" /></center><ul><li>功能</li></ul><p>&emsp;&emsp;同一个计算机网络上的其他计算机可使用某台计算机的计算机资源的行为，可共享硬件、软件、数据。功能包括了<strong>数据通信、资源共享</strong>、分布式处理(可靠性和负载均衡）等</p><ul><li>多层次ISP结构</li></ul><p>&emsp;&emsp;因特网服务提供者/因特网 服务提供商，是一个向广大用户 综合提供互联网接入业务、信息 业务、和增值业务的公司，如中国电信、中国联动、中国移动等。分为主干ISP、地区ISP和本地ISP。</p><center><img src="/img/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E4%BA%8C/3.jpg" style="zoom:80%;" /></center>&emsp;<h4 id="2计算机网络的组成"><a href="#2计算机网络的组成" class="headerlink" title="2计算机网络的组成"></a>2计算机网络的组成</h4><center><img src="/img/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E4%BA%8C/4.png" style="zoom:80%;" /></center><p>&emsp;&emsp;其中在七层结构中，资源网包含了应用层、表示层、会话层，而通信子网包含了网络层、数据链路层和物理层。</p><center><img src="/img/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E4%BA%8C/5.jpg" style="zoom:80%;" /></center><p>&emsp;</p><h4 id="3-计算机网络的分类"><a href="#3-计算机网络的分类" class="headerlink" title="3.计算机网络的分类"></a>3.计算机网络的分类</h4><ul><li>按分布范围</li></ul><p>&emsp;&emsp;广域网WAN（交换技术）、城域网MAN、局域网LAN（广播技术）、个人区域网PAN</p><ul><li>按使用者</li></ul><p>&emsp;&emsp;公用网、专用网</p><ul><li>按交换技术</li></ul><p>&emsp;&emsp;电路交换、报文交换、分组交换</p><ul><li>按拓扑结构</li></ul><center><img src="/img/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E4%BA%8C/6.png" style="zoom:60%;" /></center><ul><li>按传输技术</li></ul><p>&emsp;&emsp;广播式网络（共享公共通信信道）、点对点网络（使用分组存储转发和路由选择机制）</p><p>&emsp;</p><h4 id="5-标准化工作及相关知识（非重点）"><a href="#5-标准化工作及相关知识（非重点）" class="headerlink" title="5.标准化工作及相关知识（非重点）"></a>5.标准化工作及相关知识（非重点）</h4><p>&emsp;为了首先不同厂商的软件、硬件之间相互连通，所以建立了统一的标准</p><ul><li>法定标准</li></ul><p>&emsp;&emsp;由权威机构制定的正式的、合法的标准。例如：OSI</p><ul><li>事实标准</li></ul><p>&emsp;&emsp;某公司的产品在竞争中占据了主流，经过时间，这些产品中的协议和技术就成了标准。例如：TCP/IP</p><ul><li>RFC建立阶段</li></ul><center><img src="/img/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E4%BA%8C/7.jpg" style="zoom:60%;" /></center><p>&emsp;</p><h4 id="6-计算机网络性能指标（一）"><a href="#6-计算机网络性能指标（一）" class="headerlink" title="6.计算机网络性能指标（一）"></a>6.计算机网络性能指标（一）</h4><ul><li>速率</li></ul><p>&emsp;&emsp;速率即数据率或称数据传输率或比特率，是指连接在计算机网络上的主机在数字信道上传送数据位数的速率。单位：b/s  kb/s   Mb/s  Gb/s  Tb/s</p><center><img src="/img/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E4%BA%8C/7.png" style="zoom:60%;" /></center><ul><li>带宽</li></ul><p>&emsp;&emsp;带宽原本是指某个信号具有的频带宽度，即最高频率与最低频率之差，单位是赫兹（Hz），而在计算网络中，带宽是用来表示网络的通信线路传送数据的能力，通常是指单位时间内超平面网络中的某一点到另有点所能通过的“最高数据率”。单位是“比特每秒”。单位：b/s  kb/s   Mb/s  Gb/s  （发送的量，而不是传输的量）</p><center><img src="/img/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E4%BA%8C/8.jpg" style="zoom:60%;" /></center><ul><li>吞吐量</li></ul><p>&emsp;&emsp;吞吐量表示在单位时间内通过某个网络（或信道、接口）的数量。单位：b/s  kb/s   ；吞吐量受网络的带宽或网络的额定速率的限制</p><center><img src="/img/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E4%BA%8C/9.jpg" style="zoom:60%;" /></center><p>&emsp;&emsp;可以看见，带宽的理论的最大值，但是并不一定是实际的吞吐量，实际的吞吐量是所有的链路速率相加，在不超过最大的理想带宽的情况下。</p><p>&emsp;</p><h4 id="6-计算机网络性能指标（二）"><a href="#6-计算机网络性能指标（二）" class="headerlink" title="6.计算机网络性能指标（二）"></a>6.计算机网络性能指标（二）</h4><ul><li>时延</li></ul><p>&emsp;&emsp;时延是指数据（报文/分组/比特；流）从网络（或链路）的一端传送到另一端所需时间，也叫延迟或迟延。</p><center><img src="/img/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E4%BA%8C/10.jpg" style="zoom:60%;" /></center><ul><li>时延带宽积</li></ul><p>&emsp;&emsp;时延带宽积=传播时延×带宽，时延带宽积又称为以比特为单位的链路长度。 即“某段链路现在有多少比特”。</p><center><img src="/img/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E4%BA%8C/11.jpg" style="zoom:60%;" /></center><ul><li>往返时延（RTT）</li></ul><p>&emsp;&emsp;往返时延是指从发送方发送数据开始，到发送方收到接收方确认（接收方收到数据后立即发送确认），总共经历的时延，一般而言，末端处理事件会比较小或者题目会提示忽略不计</p><center><img src="/img/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E4%BA%8C/12.jpg" style="zoom:60%;" /></center><ul><li>利用率</li></ul><p>&emsp;&emsp;信道利用率为考察重点</p><center><img src="/img/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E4%BA%8C/13.jpg" style="zoom:60%;" /></center><p>&emsp;</p><h4 id="7-分层内容"><a href="#7-分层内容" class="headerlink" title="7.分层内容"></a>7.分层内容</h4><ul><li>如何分层</li></ul><center><img src="/img/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E4%BA%8C/14.jpg" style="zoom:80%;" /></center><ul><li>结构展示</li></ul><center><img src="/img/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E4%BA%8C/15.jpg" style="zoom:100%;" /></center><p>&emsp;</p><h4 id="8-分层结构"><a href="#8-分层结构" class="headerlink" title="8.分层结构"></a>8.分层结构</h4><p>&emsp;&emsp;计算机网络分层结构算法主要为两种：一种是法定标准为OSI参考模型，一种是事实标准为TCP/IP参考模型</p>]]></content>
     
     
     <categories>
