@@ -25,7 +25,7 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://one-null-pointer.github.io/img/net.jpg">
 <meta property="article:published_time" content="2022-09-17T13:41:01.000Z">
-<meta property="article:modified_time" content="2022-10-23T14:36:33.712Z">
+<meta property="article:modified_time" content="2022-10-24T07:42:27.802Z">
 <meta property="article:author" content="liaoyue">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://one-null-pointer.github.io/img/net.jpg">
@@ -208,7 +208,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.5k words
+          3k words
         
       </span>
     
@@ -219,7 +219,7 @@
         
         
         
-          13 mins
+          25 mins
         
       </span>
     
@@ -397,6 +397,107 @@
 
 <p>&emsp;</p>
 <h4 id="8-分层结构"><a href="#8-分层结构" class="headerlink" title="8.分层结构"></a>8.分层结构</h4><p>&emsp;&emsp;计算机网络分层结构算法主要为两种：一种是法定标准为OSI参考模型，一种是事实标准为TCP/IP参考模型</p>
+<ul>
+<li>OSI模型</li>
+</ul>
+<center><img src="/img/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E4%BA%8C/16.jpg" srcset="/img/loading.gif" lazyload style="zoom:100%;" />
+</center>
+
+<ul>
+<li>TCP/IP</li>
+</ul>
+<center><img src="/img/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E4%BA%8C/20.jpg" srcset="/img/loading.gif" lazyload style="zoom:100%;" />
+</center>
+
+<p>&emsp;</p>
+<h4 id="9-OSI模型"><a href="#9-OSI模型" class="headerlink" title="9.OSI模型"></a>9.OSI模型</h4><ul>
+<li>通信过程</li>
+</ul>
+ <center><img src="/img/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E4%BA%8C/17.jpg" srcset="/img/loading.gif" lazyload style="zoom:100%;" />
+</center>
+
+ <center><img src="/img/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E4%BA%8C/18.jpg" srcset="/img/loading.gif" lazyload style="zoom:100%;" />
+</center>
+
+<ul>
+<li><h6 id="应用层"><a href="#应用层" class="headerlink" title="应用层"></a>应用层</h6></li>
+</ul>
+<p>&emsp;&emsp;所有能和用户交互产生网络流量的程序</p>
+<ul>
+<li><h6 id="表示层"><a href="#表示层" class="headerlink" title="表示层"></a>表示层</h6></li>
+</ul>
+<p>&emsp;&emsp;用于处理再两个通信系统中交换信息的表示方式（语法和语义）；</p>
+<p>&emsp;&emsp;功能一：数据格式变换</p>
+<p>&emsp;&emsp;功能二：数据加密解密</p>
+<p>&emsp;&emsp;功能三：数据压缩和恢复</p>
+<ul>
+<li><h6 id="会话层"><a href="#会话层" class="headerlink" title="会话层"></a>会话层</h6></li>
+</ul>
+<p>&emsp;&emsp;向表示层实体/用户进程提供建立连接并在连接上有序地传输数据，这是会话，也是建立同步（SYN）；主要协议有ADSP、ASP</p>
+<p>&emsp;&emsp;功能一：建立、管理、终止会话</p>
+<p>&emsp;&emsp;功能二：使用校验点可使会话在通信失效时从校验点/同步点继续恢复通信，实现数据同步</p>
+<ul>
+<li><h6 id="传输层"><a href="#传输层" class="headerlink" title="传输层"></a>传输层</h6></li>
+</ul>
+<p>&emsp;&emsp;负责主机中两个进程的通信，即端到端的通信。传输单位是报文段或者用户数据报；主要协议有TCP、UDP</p>
+<p>&emsp;&emsp;功能一：可靠传输、不可靠传输</p>
+<p>&emsp;&emsp;功能二：差错控制</p>
+<p>&emsp;&emsp;功能三：流量控制</p>
+<p>&emsp;&emsp;功能四：复用分用  </p>
+<ul>
+<li><h6 id="网络层"><a href="#网络层" class="headerlink" title="网络层"></a>网络层</h6></li>
+</ul>
+<p>&emsp;&ensp;主要任务是吧分组从源端传到目的端，为分组交换网上的不同主机提供通信服务。网络层传输单位是数据报；主要协议有IP、IPX、ICMP、IGMP、ARP、RARP、OSPF</p>
+<p>&emsp;&emsp;功能一：路由选择</p>
+<p>&emsp;&emsp;功能二：流量控制</p>
+<p>&emsp;&emsp;功能三：差错控制</p>
+<p>&emsp;&emsp;功能四：拥塞控制</p>
+<ul>
+<li>数据链路层</li>
+</ul>
+<p>&emsp;&emsp;主要任务是把网路层传下来的数据报组装成帧，也就是其传输的传输单位；主要协议有SDLC、HDLC、PPP、STP</p>
+<p>&emsp;&emsp;功能一：成帧</p>
+<p>&emsp;&emsp;功能二：差错控制（检错+纠错）</p>
+<p>&emsp;&emsp;功能三：流量控制</p>
+<p>&emsp;&emsp;功能四：访问（接入）控制 </p>
+<ul>
+<li>物理层</li>
+</ul>
+<p>&emsp;&emsp;主要任务是在物理媒体上实现比特流的透明传输，透明传输是指不管所传数据是什么样的比特组合，第应当能够在链路上传送</p>
+<p>&emsp;&emsp;功能一：定义接口特性</p>
+<p>&emsp;&emsp;功能二：定义传输模式（单工、半双工、双工）</p>
+<p>&emsp;&emsp;功能三：定义传输速率</p>
+<p>&emsp;&emsp;功能四：比特同步</p>
+<p>&emsp;&emsp;功能五：比特编码</p>
+<p>&emsp;</p>
+<h4 id="10-TCP-IP模型"><a href="#10-TCP-IP模型" class="headerlink" title="10.TCP/IP模型"></a>10.TCP/IP模型</h4><p>&emsp;&emsp;该模型为四层模型，</p>
+<ul>
+<li>应用层</li>
+</ul>
+<p>&emsp;&emsp;TCP/IP的分层中，将OSI参考模型中的会话层、表示层和应用层的功能都集中到了应用程序中实现。TCP/IP应用的架构绝大多数属于客户端/服务器模型。）</p>
+<ul>
+<li>传输层</li>
+</ul>
+<p>&emsp;&emsp;与OSI模型类似</p>
+<ul>
+<li>网际层</li>
+</ul>
+<p>&emsp;&emsp;用来处理网络上流动的数据包（网络传输中最小的数据单元），规定了怎样的路径把数据包传输到目标计算机，并把数据包传送给对方。（与tcp/ip协议密切相关的有IP协议、ARP协议、RARP协议）。IP协议就在这里，它负责对数据加上IP地址和其他的数据（后面会讲到）以确定传输的目标。</p>
+<ul>
+<li>网络接口层</li>
+</ul>
+<p>&emsp;&emsp;TCP/IP软件的最底层，负责接收IP数据报并通过网络发送之，或者从网络上接收物理帧，抽出IP数据报，交给IP层。</p>
+<p>&emsp;</p>
+<h4 id="11-两种模型区别"><a href="#11-两种模型区别" class="headerlink" title="11.两种模型区别"></a>11.两种模型区别</h4> <center><img src="/img/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E4%BA%8C/21.jpg" srcset="/img/loading.gif" lazyload style="zoom:100%;" />
+</center>
+
+<p>&emsp;</p>
+<h4 id="12-更优解——5层参考模型"><a href="#12-更优解——5层参考模型" class="headerlink" title="12. 更优解——5层参考模型"></a>12. 更优解——5层参考模型</h4><p>&emsp;&emsp;5层参考模型综合了OSI和TCP/IP的优点，更好的应用到了实际当中</p>
+ <center><img src="/img/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E4%BA%8C/22.jpg" srcset="/img/loading.gif" lazyload style="zoom:100%;" />
+</center>
+
+ <center><img src="/img/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E4%BA%8C/23.jpg" srcset="/img/loading.gif" lazyload style="zoom:100%;" />
+</center>
 
                 
               </div>
