@@ -25,7 +25,7 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://one-null-pointer.github.io/img/datastructure.png">
 <meta property="article:published_time" content="2022-10-22T05:59:33.000Z">
-<meta property="article:modified_time" content="2022-11-04T08:05:08.550Z">
+<meta property="article:modified_time" content="2022-11-05T14:12:30.006Z">
 <meta property="article:author" content="liaoyue">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://one-null-pointer.github.io/img/datastructure.png">
@@ -208,7 +208,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          5.2k words
+          6.7k words
         
       </span>
     
@@ -219,7 +219,7 @@
         
         
         
-          44 mins
+          56 mins
         
       </span>
     
@@ -604,6 +604,105 @@
 <li><h6 id="中序遍历"><a href="#中序遍历" class="headerlink" title="中序遍历"></a>中序遍历</h6></li>
 </ul>
 <center><img src="/img/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%83/52.jpg" srcset="/img/loading.gif" lazyload style="zoom:80%;" /></center>
+
+<p>&emsp;</p>
+<h4 id="19-二叉排序树"><a href="#19-二叉排序树" class="headerlink" title="19.二叉排序树"></a>19.二叉排序树</h4><p>&emsp;&emsp;&emsp;二叉排序数，又称二叉查找树（BST），一棵二叉树或者空二叉树，或者是具有如下性质的二叉树；</p>
+<p>&emsp;&emsp;左子树上所有结点的关键字均小于根节点的关键字；</p>
+<p>&emsp;&emsp;右子树上所有结点的关键字均大于根节点的关键字。</p>
+<p>&emsp;&emsp;左子树和右子树由各是一棵二叉排序树。</p>
+<center><img src="/img/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%83/53.jpg" srcset="/img/loading.gif" lazyload style="zoom:80%;" /></center>
+
+<ul>
+<li><h6 id="二叉排序树的查找"><a href="#二叉排序树的查找" class="headerlink" title="二叉排序树的查找"></a>二叉排序树的查找</h6></li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-comment">//正常实现思路</span><br>BSTNode *<span class="hljs-title function_">BST_Search</span><span class="hljs-params">(BSTree T,<span class="hljs-type">int</span> key)</span><br>&#123;<br>    <span class="hljs-keyword">while</span>(T!=<span class="hljs-literal">NULL</span>&amp;&amp;key!=T-&gt;key)<br>    &#123;<br>        <span class="hljs-keyword">if</span>(key&lt;T-&gt;key)<br>            T=T-&gt;lchild;<br>        <span class="hljs-keyword">else</span><br>            T=T-&gt;rchild;<br>    &#125;<br>    <span class="hljs-keyword">return</span> T;<br>&#125;<br><br><span class="hljs-comment">//递归实现思路</span><br>BSTNode *<span class="hljs-title function_">BSTSearch</span><span class="hljs-params">(BSTree T,<span class="hljs-type">int</span> key)</span><br>&#123;<br>    <span class="hljs-keyword">if</span>(T==<span class="hljs-literal">NULL</span>)<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">NULL</span>;<br>    <span class="hljs-keyword">if</span>(key==T-&gt;key)<br>        <span class="hljs-keyword">return</span> T;<br>    <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(key &lt; T-&gt;key)<br>        <span class="hljs-keyword">return</span> BSTSearch(T-&gt;lchild,key);<br>    <span class="hljs-keyword">else</span><br>        <span class="hljs-keyword">return</span> BSTSearch(T-&gt;rchild,key);<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<ul>
+<li><h6 id="二叉排序树的插入"><a href="#二叉排序树的插入" class="headerlink" title="二叉排序树的插入"></a>二叉排序树的插入</h6></li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-comment">//递归实现思路</span><br>BSTNode *<span class="hljs-title function_">BST_Insert</span><span class="hljs-params">(BSTree &amp;T,<span class="hljs-type">int</span> key)</span><br>&#123;<br>    <span class="hljs-keyword">if</span>(T==<span class="hljs-literal">NULL</span>)<br>    &#123;<br>        T=(BSTree)<span class="hljs-built_in">malloc</span>(<span class="hljs-keyword">sizeof</span>(BSTNode));<br>        T-&gt;key=k;<br>        T-&gt;lchild=T-&gt;rchild=<span class="hljs-literal">NULL</span>;<br>        <span class="hljs-keyword">return</span> <span class="hljs-number">1</span>;<br>    &#125;<br>    <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(key==T-&gt;key)<br>        <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>    <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(key &lt; T-&gt;key)<br>        <span class="hljs-keyword">return</span> BST_Insert(T-&gt;lchild,key);<br>    <span class="hljs-keyword">else</span><br>        <span class="hljs-keyword">return</span> BST_Insert(T-&gt;rchild,key);<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<ul>
+<li><h6 id="二叉排序树的构造"><a href="#二叉排序树的构造" class="headerlink" title="二叉排序树的构造"></a>二叉排序树的构造</h6></li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-type">void</span> <span class="hljs-title function_">Creat_BST</span><span class="hljs-params">(BSTree &amp;T,<span class="hljs-type">int</span> str[],<span class="hljs-type">int</span> n)</span><br>&#123;<br>    T=<span class="hljs-literal">NULL</span>;<br>    <span class="hljs-type">int</span> i=<span class="hljs-number">0</span>;<br>    <span class="hljs-keyword">while</span>(i&lt;n)<br>    &#123;<br>        BST_Insert(T,str[i]);<br>        i++;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<center><img src="/img/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%83/54.jpg" srcset="/img/loading.gif" lazyload style="zoom:80%;" /></center>
+
+<ul>
+<li><h6 id="二叉排序树的删除"><a href="#二叉排序树的删除" class="headerlink" title="二叉排序树的删除"></a>二叉排序树的删除</h6></li>
+</ul>
+<center><img src="/img/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%83/55.jpg" srcset="/img/loading.gif" lazyload style="zoom:80%;" /></center>
+
+<ul>
+<li><h6 id="查找效率计算"><a href="#查找效率计算" class="headerlink" title="查找效率计算"></a>查找效率计算</h6></li>
+</ul>
+<center><img src="/img/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%83/56.jpg" srcset="/img/loading.gif" lazyload style="zoom:80%;" /></center>
+
+<center><img src="/img/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%83/57.jpg" srcset="/img/loading.gif" lazyload style="zoom:80%;" /></center>
+
+<p>&emsp;</p>
+<h4 id="20-平衡二叉树"><a href="#20-平衡二叉树" class="headerlink" title="20.平衡二叉树"></a>20.平衡二叉树</h4><ul>
+<li><h4 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h4></li>
+</ul>
+<p>&emsp;&emsp;平衡二叉树，简称平衡树（AVL树）——树上任一结点的左子树和右子树的高度之差不超过1</p>
+<p>&emsp;&emsp;结点的平衡因子=左子树高-右子树高</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-comment">//平衡二叉树结点</span><br><span class="hljs-keyword">typedef</span> <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">AVLNode</span></span><br><span class="hljs-class">&#123;</span><br>    <span class="hljs-type">int</span> key;<br>    <span class="hljs-type">int</span> balance;<br>    <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">AVLNode</span> *<span class="hljs-title">lchild</span>,*<span class="hljs-title">rchild</span>;</span><br>&#125;AVLNode,*AVLTree;<br></code></pre></td></tr></table></figure>
+
+<ul>
+<li><h6 id="平衡二叉树的插入"><a href="#平衡二叉树的插入" class="headerlink" title="平衡二叉树的插入"></a>平衡二叉树的插入</h6></li>
+</ul>
+<center><img src="/img/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%83/58.jpg" srcset="/img/loading.gif" lazyload style="zoom:80%;" /></center>
+
+<ul>
+<li><h6 id="调制不平衡树的四种情况"><a href="#调制不平衡树的四种情况" class="headerlink" title="调制不平衡树的四种情况"></a>调制不平衡树的四种情况</h6></li>
+</ul>
+<center><img src="/img/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%83/59.jpg" srcset="/img/loading.gif" lazyload style="zoom:80%;" /></center>
+
+<center><img src="/img/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%83/60.jpg" srcset="/img/loading.gif" lazyload style="zoom:80%;" /></center>
+
+<center><img src="/img/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%83/62.jpg" srcset="/img/loading.gif" lazyload style="zoom:80%;" /></center>
+
+<center><img src="/img/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%83/63.jpg" srcset="/img/loading.gif" lazyload style="zoom:80%;" /></center>
+
+<ul>
+<li><h6 id="查找效率分析"><a href="#查找效率分析" class="headerlink" title="查找效率分析"></a>查找效率分析</h6></li>
+</ul>
+<center><img src="/img/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%83/64.jpg" srcset="/img/loading.gif" lazyload style="zoom:80%;" /></center>
+
+<p>&emsp;</p>
+<h4 id="21-哈夫曼树"><a href="#21-哈夫曼树" class="headerlink" title="21.哈夫曼树"></a>21.哈夫曼树</h4><ul>
+<li><h6 id="带权路径长度"><a href="#带权路径长度" class="headerlink" title="带权路径长度"></a>带权路径长度</h6></li>
+</ul>
+<p>&emsp;&emsp;结点的权：有某种现实含义的数值</p>
+<p>&emsp;&emsp;接单的带权路径长度：从树的根到该结点的路径长度（经过的边数）与该接单上权值的乘积</p>
+<p>&emsp;&emsp;树的带权路径长度：树中所有叶接单的带权路径长度之和（WPL）</p>
+<center><img src="/img/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%83/65.jpg" srcset="/img/loading.gif" lazyload style="zoom:80%;" /></center>
+
+<ul>
+<li><h6 id="哈夫曼树的定义"><a href="#哈夫曼树的定义" class="headerlink" title="哈夫曼树的定义"></a>哈夫曼树的定义</h6></li>
+</ul>
+<center><img src="/img/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%83/66.jpg" srcset="/img/loading.gif" lazyload style="zoom:80%;" /></center>
+
+<p>&emsp;&emsp;在含有n个带权叶结点的二叉树中，其中带权路径长度（WPL）最小的二叉树称为哈夫曼树，也称为最优二叉树，是图中红色框出的部分</p>
+<ul>
+<li><h6 id="哈夫曼树的构造"><a href="#哈夫曼树的构造" class="headerlink" title="哈夫曼树的构造"></a>哈夫曼树的构造</h6></li>
+</ul>
+<center><img src="/img/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%83/67.jpg" srcset="/img/loading.gif" lazyload style="zoom:80%;" /></center>
+
+<ul>
+<li><h6 id="哈夫曼编码"><a href="#哈夫曼编码" class="headerlink" title="哈夫曼编码"></a>哈夫曼编码</h6></li>
+</ul>
+<center><img src="/img/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%83/68.jpg" srcset="/img/loading.gif" lazyload style="zoom:80%;" /></center>
+
+<center><img src="/img/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%83/69.jpg" srcset="/img/loading.gif" lazyload style="zoom:80%;" /></center>
+
+<ul>
+<li><h6 id="编码类型"><a href="#编码类型" class="headerlink" title="编码类型"></a>编码类型</h6></li>
+</ul>
+<center><img src="/img/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%83/70.jpg" srcset="/img/loading.gif" lazyload style="zoom:80%;" /></center>
+
+<center><img src="/img/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%83/71.jpg" srcset="/img/loading.gif" lazyload style="zoom:80%;" /></center>
 
                 
               </div>
