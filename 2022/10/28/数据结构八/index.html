@@ -1,0 +1,715 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="liaoyue">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="图1.图的定义&amp;emsp;&amp;emsp;图G由顶点集V和边集E组成，记为G&#x3D;（V,E），其中V（G）表示图G中顶点的有限非空集；E(G)表示图G中顶点之间的关系（边）集合。若V&#x3D;{V1,V2,V3,···,Vn}，则用|V|表示图G中顶点的个数，也称图G的阶，E&#x3D;{(u,v)|u∈V,v∈V}，则|E|表示图G中边的条数 &amp;emsp;&amp;emsp;注意：线性表可以是空表，数可以说空树，但是u不可以是空">
+<meta property="og:type" content="article">
+<meta property="og:title" content="图">
+<meta property="og:url" content="https://one-null-pointer.github.io/2022/10/28/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%85%AB/index.html">
+<meta property="og:site_name" content="one-null-poniter">
+<meta property="og:description" content="图1.图的定义&amp;emsp;&amp;emsp;图G由顶点集V和边集E组成，记为G&#x3D;（V,E），其中V（G）表示图G中顶点的有限非空集；E(G)表示图G中顶点之间的关系（边）集合。若V&#x3D;{V1,V2,V3,···,Vn}，则用|V|表示图G中顶点的个数，也称图G的阶，E&#x3D;{(u,v)|u∈V,v∈V}，则|E|表示图G中边的条数 &amp;emsp;&amp;emsp;注意：线性表可以是空表，数可以说空树，但是u不可以是空">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://one-null-pointer.github.io/img/datastructure.png">
+<meta property="article:published_time" content="2022-10-28T05:59:33.000Z">
+<meta property="article:modified_time" content="2022-11-07T13:39:14.327Z">
+<meta property="article:author" content="liaoyue">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://one-null-pointer.github.io/img/datastructure.png">
+  
+  
+  
+  <title>图 - one-null-poniter</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"one-null-pointer.github.io","root":"/","version":"1.9.2","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 5.4.2"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>one null pointer</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                吾
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                學
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                類
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="图"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2022-10-28 13:59" pubdate>
+          October 28, 2022 pm
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          1.3k words
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          12 mins
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">图</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="图"><a href="#图" class="headerlink" title="图"></a>图</h1><h4 id="1-图的定义"><a href="#1-图的定义" class="headerlink" title="1.图的定义"></a>1.图的定义</h4><p>&emsp;&emsp;图G由顶点集V和边集E组成，记为G=（V,E），其中V（G）表示图G中顶点的有限非空集；E(G)表示图G中顶点之间的关系（边）集合。若V={V1,V2,V3,···,Vn}，则用|V|表示图G中顶点的个数，也称图G的阶，E={(u,v)|u∈V,v∈V}，则|E|表示图G中边的条数</p>
+<p>&emsp;&emsp;注意：线性表可以是空表，数可以说空树，但是u不可以是空，也就是其中的V一定是非空集</p>
+<center><img src="/img/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%85%AB/1.jpg" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<ul>
+<li><h6 id="有向图"><a href="#有向图" class="headerlink" title="有向图"></a>有向图</h6></li>
+</ul>
+<center><img src="/img/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%85%AB/2.jpg" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<ul>
+<li><h6 id="无向图"><a href="#无向图" class="headerlink" title="无向图"></a>无向图</h6></li>
+</ul>
+<center><img src="/img/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%85%AB/3.jpg" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<ul>
+<li><h6 id="度"><a href="#度" class="headerlink" title="度"></a>度</h6></li>
+</ul>
+<center><img src="/img/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%85%AB/4.jpg" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<ul>
+<li><h6 id="路径"><a href="#路径" class="headerlink" title="路径"></a>路径</h6></li>
+</ul>
+<center><img src="/img/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%85%AB/5.jpg" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<ul>
+<li><h6 id="连通图"><a href="#连通图" class="headerlink" title="连通图"></a>连通图</h6></li>
+</ul>
+<center><img src="/img/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%85%AB/6.jpg" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<ul>
+<li><h6 id="子图"><a href="#子图" class="headerlink" title="子图"></a>子图</h6></li>
+</ul>
+<center><img src="/img/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%85%AB/7.jpg" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<ul>
+<li><h6 id="连通分量"><a href="#连通分量" class="headerlink" title="连通分量"></a>连通分量</h6></li>
+</ul>
+<center><img src="/img/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%85%AB/8.jpg" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<ul>
+<li>强连通分量</li>
+</ul>
+<center><img src="/img/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%85%AB/9.jpg" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<ul>
+<li><h6 id="特殊的图"><a href="#特殊的图" class="headerlink" title="特殊的图"></a>特殊的图</h6></li>
+</ul>
+<center><img src="/img/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%85%AB/10.jpg" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<center><img src="/img/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%85%AB/11.jpg" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<center><img src="/img/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%85%AB/12.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<p>&emsp;</p>
+<h4 id="2-图的存储——邻接矩阵法"><a href="#2-图的存储——邻接矩阵法" class="headerlink" title="2.图的存储——邻接矩阵法"></a>2.图的存储——邻接矩阵法</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-meta">#<span class="hljs-keyword">define</span> MaxVertexum 100</span><br><span class="hljs-keyword">typedef</span> <span class="hljs-class"><span class="hljs-keyword">struct</span></span><br><span class="hljs-class">&#123;</span><br>    <span class="hljs-type">char</span> Vex[MaxVertexNum];     <span class="hljs-comment">//顶点表</span><br>    <span class="hljs-type">int</span> Edge[MaxVertexNum][MaxVertexNum];  <span class="hljs-comment">//邻接矩阵边表</span><br>    <span class="hljs-type">int</span> vexnum,arcnum;              <span class="hljs-comment">//图当前顶点数和边数</span><br>&#125;MGraph;<br></code></pre></td></tr></table></figure>
+
+<center><img src="/img/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%85%AB/13.jpg" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<ul>
+<li><h6 id="邻接矩阵法存储带权图"><a href="#邻接矩阵法存储带权图" class="headerlink" title="邻接矩阵法存储带权图"></a>邻接矩阵法存储带权图</h6></li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-meta">#<span class="hljs-keyword">define</span> MaxVertexum 100</span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> INFINITY 最大的int值  <span class="hljs-comment">//可用int的上限值表示“无穷”</span></span><br><span class="hljs-keyword">typedef</span> <span class="hljs-type">char</span> VertexType;<br><span class="hljs-keyword">typedef</span> <span class="hljs-type">int</span> EdgeType;<br><span class="hljs-keyword">typedef</span> <span class="hljs-class"><span class="hljs-keyword">struct</span></span><br><span class="hljs-class">&#123;</span><br>    VertexType Vex[MaxVertexNum];     <span class="hljs-comment">//顶点表</span><br>    EdgeType Edge[MaxVertexNum][MaxVertexNum];  <span class="hljs-comment">//邻接矩阵边表</span><br>    <span class="hljs-type">int</span> vexnum,arcnum;              <span class="hljs-comment">//图当前顶点数和边数</span><br>&#125;MGraph;<br></code></pre></td></tr></table></figure>
+
+<center><img src="/img/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%85%AB/14.jpg" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<ul>
+<li><h6 id="性能分析"><a href="#性能分析" class="headerlink" title="性能分析"></a>性能分析</h6></li>
+</ul>
+<p>&emsp;&emsp;空间复杂度为：O(|V|²)  ——只和顶点数相关，和实际的边数无关</p>
+<p>&emsp;&emsp;可以看见在矩阵图存储中，会存在没有边的情况，如果一个图的边过少，则会浪费大量的存储空间，所以这种存储方式适用于存储稠密图，注：无向图的邻接矩阵是对称矩阵，可以压缩存储（只存储上三角区/下三角区）</p>
+<ul>
+<li><h6 id="性质分析"><a href="#性质分析" class="headerlink" title="性质分析"></a>性质分析</h6></li>
+</ul>
+<center><img src="/img/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%85%AB/15.jpg" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<center><img src="/img/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%85%AB/16.jpg" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<p>&emsp;</p>
+<h4 id="3-邻接表法（顺序-链式）"><a href="#3-邻接表法（顺序-链式）" class="headerlink" title="3.邻接表法（顺序+链式）"></a>3.邻接表法（顺序+链式）</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-comment">//用邻接表存储的图</span><br><span class="hljs-keyword">typedef</span> <span class="hljs-class"><span class="hljs-keyword">struct</span></span><br><span class="hljs-class">&#123;</span><br>    AdjList vertices;<br>    <span class="hljs-type">int</span> vexnum,arcnum;<br>&#125;ALGraph;<br><br><span class="hljs-comment">//边</span><br><span class="hljs-keyword">typedef</span> <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">ArcNode</span></span><br><span class="hljs-class">&#123;</span><br>    <span class="hljs-type">int</span> adjvex;       <span class="hljs-comment">//边指向哪个结点</span><br>    <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">ArcNode</span> *<span class="hljs-title">next</span>;</span> <span class="hljs-comment">//指向下一条边的指针</span><br>&#125;ArcNode；<br>    <br><span class="hljs-comment">//顶点</span><br><span class="hljs-keyword">typedef</span> <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">VNode</span></span><br><span class="hljs-class">&#123;</span><br>    VertexType data;    <span class="hljs-comment">//顶点信息</span><br>    ArcNode *first;    <span class="hljs-comment">//第一条边</span><br>&#125;VNode,AdjList[MaxVertexNum];<br></code></pre></td></tr></table></figure>
+
+<center><img src="/img/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%85%AB/17.jpg" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<ul>
+<li><h6 id="与邻接矩阵的对比"><a href="#与邻接矩阵的对比" class="headerlink" title="与邻接矩阵的对比"></a>与邻接矩阵的对比</h6></li>
+</ul>
+<center><img src="/img/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%85%AB/18.jpg" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<p>&emsp;</p>
+<h4 id="4-十字链表法"><a href="#4-十字链表法" class="headerlink" title="4.十字链表法"></a>4.十字链表法</h4><p>&emsp;&emsp;十字链表法只能用于解决存储有向图</p>
+<center><img src="/img/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%85%AB/19.jpg" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<p>&emsp;&emsp;空间复杂度：O(|V|+|E|)</p>
+<p>&emsp;</p>
+<h4 id="5-邻接多重表"><a href="#5-邻接多重表" class="headerlink" title="5.邻接多重表"></a>5.邻接多重表</h4><p>&emsp;&emsp;邻接多重表只适 用于存储无向图</p>
+<center><img src="/img/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%85%AB/20.jpg" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<p>&emsp;&emsp;空间复杂度：O(|V|+|E|)</p>
+<p>&emsp;</p>
+<h4 id="6-四种方法比较"><a href="#6-四种方法比较" class="headerlink" title="6.四种方法比较"></a>6.四种方法比较</h4><center><img src="/img/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%85%AB/21.jpg" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" class="category-chain-item">数据结构学习笔记</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>图</div>
+      <div>https://one-null-pointer.github.io/2022/10/28/数据结构八/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>Author</div>
+          <div>liaoyue</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>Posted on</div>
+          <div>October 28, 2022</div>
+        </div>
+      
+      
+      <div class="license-meta-item">
+        <div>传送口</div>
+        <div>
+          
+            
+            
+              <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+              <span class="hint--top hint--rounded" aria-label="点击进行传送">
+                <i class="iconfont icon-by"></i>
+              </span>
+              </a>
+            
+          
+        </div>
+      </div>
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2022/10/28/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%9B%9B/" title="数据链路层">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">数据链路层</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2022/10/22/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E4%B8%89/" title="物理层">
+                        <span class="hidden-mobile">物理层</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;Table of Contents</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">Keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://github.com/" target="_blank" rel="nofollow noopener"><span>pointer</span></a> <i class="iconfont icon-love"></i> <a href="https://mp.weixin.qq.com/s/6ncLUtaiJ9j_sMjZT5z-2w" target="_blank" rel="nofollow noopener"><span>一个爱学习的空指针</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      headingSelector : CONFIG.toc.headingSelector || 'h1,h2,h3,h4,h5,h6',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      collapseDepth   : CONFIG.toc.collapseDepth || 0,
+      scrollSmooth    : true,
+      headingsOffset  : -boardTop
+    });
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.10/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">Blog works best with JavaScript enabled</div>
+  </noscript>
+</body>
+</html>
