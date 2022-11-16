@@ -25,7 +25,7 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://one-null-pointer.github.io/img/datastructure.png">
 <meta property="article:published_time" content="2022-10-28T05:59:33.000Z">
-<meta property="article:modified_time" content="2022-11-07T13:39:14.327Z">
+<meta property="article:modified_time" content="2022-11-16T11:42:56.824Z">
 <meta property="article:author" content="liaoyue">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://one-null-pointer.github.io/img/datastructure.png">
@@ -208,7 +208,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.3k words
+          4.7k words
         
       </span>
     
@@ -219,7 +219,7 @@
         
         
         
-          12 mins
+          40 mins
         
       </span>
     
@@ -382,6 +382,185 @@
 <p>&emsp;</p>
 <h4 id="6-四种方法比较"><a href="#6-四种方法比较" class="headerlink" title="6.四种方法比较"></a>6.四种方法比较</h4><center><img src="/img/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%85%AB/21.jpg" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
 </center>
+
+<p>&emsp;</p>
+<h4 id="7-图的基本操作"><a href="#7-图的基本操作" class="headerlink" title="7.图的基本操作"></a>7.图的基本操作</h4><p>&emsp;&emsp;Adjacent(G,x,y)：判断图G是否存在边或(x, y)。 </p>
+<p>&emsp;&emsp;Neighbors(G,x)：列出图G中与结点x邻接的边。 </p>
+<p>&emsp;&emsp;InsertVertex(G,x)：在图G中插入顶点x。 </p>
+<p>&emsp;&emsp;DeleteVertex(G,x)：从图G中删除顶点x。 </p>
+<p>&emsp;&emsp;AddEdge(G,x,y)：若无向边(x, y)或有向边不存在，则向图G中添加该边。 </p>
+<p>&emsp;&emsp;RemoveEdge(G,x,y)：若无向边(x, y)或有向边存在，则从图G中删除该边。 </p>
+<p>&emsp;&emsp;FirstNeighbor(G,x)：求图G中顶点x的第一个邻接点，若有则返回顶点号。若x没有邻接点 或图中不存在x，则返回-1。 </p>
+<p>&emsp;&emsp;NextNeighbor(G,x,y)：假设图G中顶点y是顶点x的一个邻接点，返回除y之外顶点x的下一 个邻接点的顶点号，若y是x的最后一个邻接点，则返回-1。 </p>
+<p>&emsp;&emsp;Get_edge_value(G,x,y)：获取图G中边(x, y)或对应的权值。 </p>
+<p>&emsp;&emsp;Set_edge_value(G,x,y,v)：设置图G中边(x, y)或对应的权值为v。</p>
+<h4 id="8-图的广度优先遍历算法"><a href="#8-图的广度优先遍历算法" class="headerlink" title="8.图的广度优先遍历算法"></a>8.图的广度优先遍历算法</h4><ul>
+<li><h6 id="起初版"><a href="#起初版" class="headerlink" title="起初版"></a>起初版</h6></li>
+</ul>
+<center><img src="/img/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%85%AB/22.jpg" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-type">bool</span> visited[MAX_VERTEX_NUM];<br><br><span class="hljs-comment">//广度优先遍历</span><br><span class="hljs-type">void</span> <span class="hljs-title function_">BFS</span><span class="hljs-params">(Graph G,<span class="hljs-type">int</span> v)</span>          <span class="hljs-comment">//从顶点v出发，广度优先遍历图G</span><br>&#123;<br>    visit(v);                   <span class="hljs-comment">//访问初始结点v</span><br>    visited[v]=TRUE;            <span class="hljs-comment">//对v做已访问标记</span><br>    Enqueue(Q,v);               <span class="hljs-comment">//顶点v入队伍Q</span><br>    <span class="hljs-keyword">while</span>(!isEmpty(Q))          <br>    &#123;<br>        DeQueue(Q,v);        <span class="hljs-comment">//顶点v 出队列</span><br>        <span class="hljs-keyword">for</span>(w=FirstNeighbor(G,v);w&gt;=<span class="hljs-number">0</span>;w=NextNeighbor(G,v,w))<br>            <span class="hljs-comment">//检测v所有的邻接点</span><br>            <span class="hljs-keyword">if</span>(!visted[w])<br>            &#123;<br>                visit(w);            <span class="hljs-comment">//访问顶点w</span><br>                visit[w]=TRUE;       <span class="hljs-comment">//对w做已访问标记</span><br>                EnQueue(Q,w);       <span class="hljs-comment">//顶点w入队伍</span><br>            &#125;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<center><img src="/img/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%85%AB/23.jpg" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<center><img src="/img/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%85%AB/24.jpg" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<ul>
+<li><h6 id="Final版"><a href="#Final版" class="headerlink" title="Final版"></a>Final版</h6></li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-type">bool</span> visited[MAX_VERTEX_NUM];  <span class="hljs-comment">//访问标记数组</span><br><span class="hljs-type">void</span> <span class="hljs-title function_">BFSTraverse</span><span class="hljs-params">(Graph,G)</span>   <span class="hljs-comment">//对图G进行广度优先遍历</span><br>&#123;	<br>    <span class="hljs-keyword">for</span>(i=<span class="hljs-number">0</span>;i&lt;G.vexnum;++i)<br>        visited[i]=FALSE;    <span class="hljs-comment">//访问标记数组初始化</span><br>    InitQueue(Q);            <span class="hljs-comment">//初始化辅助队列</span><br>    <span class="hljs-keyword">for</span>(i=<span class="hljs-number">0</span>;i&lt;G.vexnum;++i)  <span class="hljs-comment">//从0号顶点开始遍历</span><br>        <span class="hljs-keyword">if</span>(!visited[i])     <span class="hljs-comment">//对每一个连通分量调用一次BFS</span><br>            BFS(G,i);      <span class="hljs-comment">//vi未访问过，从vi开始BFS</span><br>&#125;<br><br><span class="hljs-comment">//广度优先遍历</span><br><span class="hljs-type">void</span> <span class="hljs-title function_">BFS</span><span class="hljs-params">(Graph G,<span class="hljs-type">int</span> v)</span>          <span class="hljs-comment">//从顶点v出发，广度优先遍历图G</span><br>&#123;<br>    visit(v);                   <span class="hljs-comment">//访问初始结点v</span><br>    visited[v]=TRUE;            <span class="hljs-comment">//对v做已访问标记</span><br>    Enqueue(Q,v);               <span class="hljs-comment">//顶点v入队伍Q</span><br>    <span class="hljs-keyword">while</span>(!isEmpty(Q))          <br>    &#123;<br>        DeQueue(Q,v);        <span class="hljs-comment">//顶点v 出队列</span><br>        <span class="hljs-keyword">for</span>(w=FirstNeighbor(G,v);w&gt;=<span class="hljs-number">0</span>;w=NextNeighbor(G,v,w))<br>            <span class="hljs-comment">//检测v所有的邻接点</span><br>            <span class="hljs-keyword">if</span>(!visted[w])<br>            &#123;<br>                visit(w);            <span class="hljs-comment">//访问顶点w</span><br>                visit[w]=TRUE;       <span class="hljs-comment">//对w做已访问标记</span><br>                EnQueue(Q,w);       <span class="hljs-comment">//顶点w入队伍</span><br>            &#125;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<center><img src="/img/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%85%AB/25.jpg" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<ul>
+<li><h6 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h6></li>
+</ul>
+<center><img src="/img/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%85%AB/26.jpg" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<ul>
+<li><h6 id="广度优先生成树"><a href="#广度优先生成树" class="headerlink" title="广度优先生成树"></a>广度优先生成树</h6></li>
+</ul>
+<center><img src="/img/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%85%AB/27.jpg" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<ul>
+<li><h6 id="注：有向图的BFS过程"><a href="#注：有向图的BFS过程" class="headerlink" title="注：有向图的BFS过程"></a>注：有向图的BFS过程</h6></li>
+</ul>
+<center><img src="/img/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%85%AB/28.jpg" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+&emsp;
+
+<h4 id="9-图的深度优先遍历"><a href="#9-图的深度优先遍历" class="headerlink" title="9.图的深度优先遍历"></a>9.图的深度优先遍历</h4><ul>
+<li><h6 id="起初版-1"><a href="#起初版-1" class="headerlink" title="起初版"></a>起初版</h6></li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-type">bool</span> visited[MAX_VERTEX_NUM];<br><br><span class="hljs-type">void</span> <span class="hljs-title function_">DFS</span><span class="hljs-params">(Grah G,<span class="hljs-type">int</span> v)</span><br>&#123;<br>    visir(v);     <span class="hljs-comment">//从顶点v出发，深度优先遍历图G</span><br>    visited[v]=TURE;   <span class="hljs-comment">//访问顶点v</span><br>    <span class="hljs-keyword">for</span>(W=FirstNeighbor(G,v);w&gt;=<span class="hljs-number">0</span>;w=NextNeighor(G,v,w))<br>        <span class="hljs-keyword">if</span>(!visit[w])         <span class="hljs-comment">//w为u的尚未访问的邻接顶点</span><br>        &#123;<br>            DFS(G,w);<br>        &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<center><img src="/img/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%85%AB/29.jpg" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<ul>
+<li><h6 id="Final版-1"><a href="#Final版-1" class="headerlink" title="Final版"></a>Final版</h6></li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-type">bool</span> visited[MAX_VERTEX_NUM];<br><br><span class="hljs-type">void</span> <span class="hljs-title function_">DFSTraverse</span><span class="hljs-params">(Graph,G)</span>   <span class="hljs-comment">//对图G进行深度优先遍历</span><br>&#123;	<br>    <span class="hljs-keyword">for</span>(v=<span class="hljs-number">0</span>;v&lt;G.vexnum;++v)<br>        visited[v]=FALSE;    <span class="hljs-comment">//访问标记数组初始化</span><br>    <span class="hljs-keyword">for</span>(v=<span class="hljs-number">0</span>;v&lt;G.vexnum;++v)  <span class="hljs-comment">//从0号顶点开始遍历</span><br>        <span class="hljs-keyword">if</span>(!visited[v])     <span class="hljs-comment">//对每一个连通分量调用一次BFS</span><br>            DFS(G,v);      <span class="hljs-comment">//vi未访问过，从vi开始BFS</span><br>&#125;<br><br><span class="hljs-type">void</span> <span class="hljs-title function_">DFS</span><span class="hljs-params">(Grah G,<span class="hljs-type">int</span> v)</span><br>&#123;<br>    visir(v);     <span class="hljs-comment">//从顶点v出发，深度优先遍历图G</span><br>    visited[v]=TURE;   <span class="hljs-comment">//访问顶点v</span><br>    <span class="hljs-keyword">for</span>(W=FirstNeighbor(G,v);w&gt;=<span class="hljs-number">0</span>;w=NextNeighor(G,v,w))<br>        <span class="hljs-keyword">if</span>(!visit[w])         <span class="hljs-comment">//w为u的尚未访问的邻接顶点</span><br>        &#123;<br>            DFS(G,w);<br>        &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>&emsp;&emsp;解决了非连通图无法遍历完所有结点的问题</p>
+<ul>
+<li><h6 id="复杂度分析-1"><a href="#复杂度分析-1" class="headerlink" title="复杂度分析"></a>复杂度分析</h6></li>
+</ul>
+<center><img src="/img/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%85%AB/30.jpg" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<center><img src="/img/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%85%AB/31.jpg" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<ul>
+<li><h6 id="深度优先生成树"><a href="#深度优先生成树" class="headerlink" title="深度优先生成树"></a>深度优先生成树</h6></li>
+</ul>
+<center><img src="/img/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%85%AB/32.jpg" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<p>&emsp;</p>
+<h6 id="10-最小生成树"><a href="#10-最小生成树" class="headerlink" title="10.最小生成树"></a>10.最小生成树</h6><ul>
+<li><h6 id="生成树的定义"><a href="#生成树的定义" class="headerlink" title="生成树的定义"></a>生成树的定义</h6></li>
+</ul>
+<p>&emsp;&emsp;连通图的生成树是包括图中全部顶点的一个极小连通子图，若图中的顶点数维n，则它的生成树含有n-1条边，对生成树而言，若砍去它的一条边，则会变成非连通图，若加上一条边则会形成一个回路</p>
+<center><img src="/img/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%85%AB/33.jpg" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+
+
+<ul>
+<li><h6 id="最小生成树的定义"><a href="#最小生成树的定义" class="headerlink" title="最小生成树的定义"></a>最小生成树的定义</h6></li>
+</ul>
+<p>&emsp;&emsp;对于一个带权连通无向图G(V,E)，生成树不同，每棵树的权（即树中所有边上的权值之和）也可能不同。设R为G的所有生成树的集合，若T为R中边的权值之和最小的生成树，则T称为G的最小生成树</p>
+<center><img src="/img/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%85%AB/34.jpg" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<p>&emsp;</p>
+<ul>
+<li><h6 id="Prim算法（普利姆）"><a href="#Prim算法（普利姆）" class="headerlink" title="Prim算法（普利姆）"></a>Prim算法（普利姆）</h6></li>
+</ul>
+<p>&emsp;&emsp;从某一个顶点开始构建生成树；每次将代价最小的新顶点纳入生成树，直到所有的顶点都纳入为止</p>
+<center><img src="/img/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%85%AB/35.jpg" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<center><img src="/img/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%85%AB/38.jpg" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<center><img src="/img/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%85%AB/39.jpg" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<ul>
+<li>Kruskal算法（克鲁斯卡尔）</li>
+</ul>
+<p>&emsp;&emsp;每次选择一条权值最小的边，使这条边的两头连通（原本已经连通的不选），直到所有的结点都连通</p>
+<center><img src="/img/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%85%AB/36.jpg" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<center><img src="/img/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%85%AB/40.jpg" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<center><img src="/img/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%85%AB/41.jpg" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<center><img src="/img/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%85%AB/42.jpg" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<center><img src="/img/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%85%AB/43.jpg" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<center><img src="/img/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%85%AB/44.jpg" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<ul>
+<li><h6 id="算法对比"><a href="#算法对比" class="headerlink" title="算法对比"></a>算法对比</h6></li>
+</ul>
+<center><img src="/img/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%85%AB/37.jpg" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<p>&emsp;</p>
+<h4 id="11-最短路径"><a href="#11-最短路径" class="headerlink" title="11.最短路径"></a>11.最短路径</h4><center><img src="/img/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%85%AB/52.jpg" srcset="/img/loading.gif" lazyload style="zoom:120%;" />
+</center>
+
+<ul>
+<li><h6 id="BFS算法——单源最短路径问题"><a href="#BFS算法——单源最短路径问题" class="headerlink" title="BFS算法——单源最短路径问题"></a>BFS算法——单源最短路径问题</h6></li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-comment">//求顶点u到其他顶点的最短路径</span><br><span class="hljs-type">void</span> <span class="hljs-title function_">BFS_MIN_Distance</span><span class="hljs-params">(Graph G,<span class="hljs-type">int</span> u)</span><br>&#123;<br>    <span class="hljs-comment">//d[i]表示从u到i结点的最短路径</span><br>    <span class="hljs-keyword">for</span>(i=<span class="hljs-number">0</span>;i&lt;G.vexnum;++i)<br>    &#123;<br>        d[i]=∞;    <span class="hljs-comment">//初始化路径长度</span><br>        path[i]=<span class="hljs-number">-1</span>;   <span class="hljs-comment">//最短路径从哪个顶点过来</span><br>    &#125;<br>    d[u]=<span class="hljs-number">0</span>;    <span class="hljs-comment">//自己到自己的距离为0</span><br>    visited[u]=TRUE;<br>    EnQueue(Q,u);<br>    <span class="hljs-keyword">while</span>(!isEmpty(Q))     <span class="hljs-comment">//BFS算法主过程         </span><br>    &#123;<br>        DeQueue(Q,u);        <span class="hljs-comment">//队头元素u出队列</span><br>        <span class="hljs-keyword">for</span>(w=FirstNeighbor(G,u);w&gt;=<span class="hljs-number">0</span>;w=NextNeighbor(G,u,w))<br>            <span class="hljs-keyword">if</span>(!visted[w])        <span class="hljs-comment">//w为u的尚未访问的邻接顶点</span><br>            &#123;<br>                d[w]=d[u]+<span class="hljs-number">1</span>;         <span class="hljs-comment">//路径长度加1</span><br>                path[w]=u            <span class="hljs-comment">//最短路径应从u到w</span><br>                visit[w]=TRUE;       <span class="hljs-comment">//设置已访问标记</span><br>                EnQueue(Q,w);       <span class="hljs-comment">//顶点w入队伍</span><br>            &#125;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<center><img src="/img/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%85%AB/45.jpg" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<p>&emsp;&emsp;BFS算法求单源最短路径只适⽤于⽆ 权图，或所有边的权值都相同的图</p>
+<ul>
+<li><h6 id="Dijkstra算法"><a href="#Dijkstra算法" class="headerlink" title="Dijkstra算法"></a>Dijkstra算法</h6></li>
+</ul>
+<center><img src="/img/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%85%AB/46.jpg" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<center><img src="/img/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%85%AB/47.jpg" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<center><img src="/img/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%85%AB/48.jpg" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<center><img src="/img/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%85%AB/49.jpg" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<center><img src="/img/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%85%AB/50.jpg" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<center><img src="/img/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%85%AB/51.jpg" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<p>&emsp;&emsp;注：Dijkstra算法不适合用于有负权值的带权图</p>
+<ul>
+<li><h6 id="Floyd算法"><a href="#Floyd算法" class="headerlink" title="Floyd算法"></a>Floyd算法</h6></li>
+</ul>
 
                 
               </div>
