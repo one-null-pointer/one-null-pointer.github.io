@@ -25,7 +25,7 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://one-null-pointer.github.io/img/datastructure.png">
 <meta property="article:published_time" content="2022-10-28T05:59:33.000Z">
-<meta property="article:modified_time" content="2022-11-16T11:42:56.824Z">
+<meta property="article:modified_time" content="2022-11-17T11:19:59.446Z">
 <meta property="article:author" content="liaoyue">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://one-null-pointer.github.io/img/datastructure.png">
@@ -208,7 +208,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          4.7k words
+          6.3k words
         
       </span>
     
@@ -219,7 +219,7 @@
         
         
         
-          40 mins
+          53 mins
         
       </span>
     
@@ -561,6 +561,134 @@
 <ul>
 <li><h6 id="Floyd算法"><a href="#Floyd算法" class="headerlink" title="Floyd算法"></a>Floyd算法</h6></li>
 </ul>
+<p>&emsp;&emsp;使用了动态规划思想，将问题的求解分为了多个阶段</p>
+<center><img src="/img/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%85%AB/53.jpg" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<center><img src="/img/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%85%AB/54.jpg" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<center><img src="/img/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%85%AB/55.jpg" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<center><img src="/img/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%85%AB/56.jpg" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<center><img src="/img/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%85%AB/57.jpg" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-comment">//准备工作，根据图的信息初始化矩阵A和path</span><br><br><span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> k=<span class="hljs-number">0</span>;k&lt;n;k++)     <span class="hljs-comment">//考虑以VK作为中转点</span><br>&#123;<br>    <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i=<span class="hljs-number">0</span>;i&lt;n;i++)   <span class="hljs-comment">//遍历整个矩阵，i为行号，j为列号</span><br>    &#123;<br>        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> j=<span class="hljs-number">0</span>;j&lt;n;j++)<br>        &#123;<br>            <span class="hljs-keyword">if</span>(A[i][j]&gt;A[i][k]+A[k][j])<br>            &#123;<br>                A[i][j]=A[i][k]+A[k][j];  <span class="hljs-comment">//更新最短路径长度</span><br>                path[i][j]=k;           <span class="hljs-comment">//中转点</span><br>            &#125;<br>        &#125;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>&emsp;&emsp;这种算法的时间复杂度是|V|³，空间复杂度是|V|²</p>
+<ul>
+<li><h6 id="三种算法对比"><a href="#三种算法对比" class="headerlink" title="三种算法对比"></a>三种算法对比</h6></li>
+</ul>
+<center><img src="/img/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%85%AB/58.jpg" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<p>&emsp;</p>
+<h4 id="12-有向无环图（DAG）"><a href="#12-有向无环图（DAG）" class="headerlink" title="12.有向无环图（DAG）"></a>12.有向无环图（DAG）</h4><p>&emsp;&emsp;有向⽆环图：若⼀个有向图中不存在环，则称为有向⽆环图，简称DAG图</p>
+<center><img src="/img/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%85%AB/59.jpg" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<center><img src="/img/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%85%AB/60.jpg" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<p>&emsp;</p>
+<h4 id="13-拓扑排序"><a href="#13-拓扑排序" class="headerlink" title="13.拓扑排序"></a>13.拓扑排序</h4><ul>
+<li><h6 id="AOV网的定义"><a href="#AOV网的定义" class="headerlink" title="AOV网的定义"></a>AOV网的定义</h6></li>
+</ul>
+<p>&emsp;&emsp;⽤顶点表示活动的⽹，⽤DAG图（有向⽆环图）表示⼀个⼯程。顶点表示活动，有向边表示活动&lt;Vi,Vj&gt;，必须先于活动Vj进⾏</p>
+<center><img src="/img/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%85%AB/61.jpg" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<ul>
+<li><h6 id="拓扑排序的定义"><a href="#拓扑排序的定义" class="headerlink" title="拓扑排序的定义"></a>拓扑排序的定义</h6></li>
+</ul>
+<p>&emsp;&emsp;在图论中，由⼀个有向⽆环图 的顶点组成的序列，当且仅当满⾜下列条 件时，称为该图的⼀个拓扑排序：</p>
+<p>&emsp;&emsp; ① 每个顶点出现且只出现⼀次。 </p>
+<p>&emsp;&emsp;② 若顶点A在序列中排在顶点B的前⾯，则 在图中不存在从顶点B到顶点A的路径。</p>
+<center><img src="/img/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%85%AB/62.jpg" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<ul>
+<li><h6 id="拓扑排序实现代码"><a href="#拓扑排序实现代码" class="headerlink" title="拓扑排序实现代码"></a>拓扑排序实现代码</h6></li>
+</ul>
+<center><img src="/img/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%85%AB/63.jpg" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<p>&emsp;</p>
+<h6 id="14-逆拓扑排序"><a href="#14-逆拓扑排序" class="headerlink" title="14.逆拓扑排序"></a>14.逆拓扑排序</h6><ul>
+<li><h6 id="逆拓扑排序定义"><a href="#逆拓扑排序定义" class="headerlink" title="逆拓扑排序定义"></a>逆拓扑排序定义</h6></li>
+</ul>
+<p>&emsp;&emsp;对⼀个AOV⽹，如果采⽤下列步骤进⾏排序，则称之为逆拓扑排序：</p>
+<p>&emsp;&emsp; ① 从AOV⽹中选择⼀个没有后继（出度为0）的顶点并输出。</p>
+<p>&emsp;&emsp; ② 从⽹中删除该顶点和所有以它为终点的有向边。 </p>
+<p>&emsp;&emsp; ③ 重复①和②直到当前的AOV⽹为空。</p>
+<center><img src="/img/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%85%AB/64.jpg" srcset="/img/loading.gif" lazyload style="zoom:100%;" />
+</center>
+
+<ul>
+<li><h6 id="逆拓扑排序实现代码"><a href="#逆拓扑排序实现代码" class="headerlink" title="逆拓扑排序实现代码"></a>逆拓扑排序实现代码</h6></li>
+</ul>
+<p>&emsp;&emsp;第一种方法是参考拓扑排序将入度的比较改变为出度的比较即可，第二种是利用DFS算法实现</p>
+<center><img src="/img/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%85%AB/65.jpg" srcset="/img/loading.gif" lazyload style="zoom:100%;" />
+</center>
+
+<p>&emsp;</p>
+<h4 id="15-关键路径"><a href="#15-关键路径" class="headerlink" title="15.关键路径"></a>15.关键路径</h4><ul>
+<li><h6 id="AOE网的定义"><a href="#AOE网的定义" class="headerlink" title="AOE网的定义"></a>AOE网的定义</h6></li>
+</ul>
+<p>&emsp;&emsp;在带权有向图中，以顶点表示事件，以有向边表示活动，以边上的权值表示完成该活动的开销（如 完成活动所需的时间），称之为⽤边表示活动的⽹络，简称AOE⽹</p>
+<center><img src="/img/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%85%AB/66.jpg" srcset="/img/loading.gif" lazyload style="zoom:100%;" />
+</center>
+
+<p>&emsp;&emsp;在AOE网中仅有一个入度为0的顶点，称为开始顶点（源点），它代表整个工程的开始；也仅有一个出度为0的顶点，称为结束顶点（汇点），它代表整个工程的结束</p>
+<p>&emsp;&emsp;从源点到汇点的有向路径可能有多条，所有路径中，具有最⼤路径⻓度的路径称为 关键路径，⽽把关键路径上的活动称为关键活动</p>
+<ul>
+<li><h6 id="事件vk的最早发⽣时间ve-k"><a href="#事件vk的最早发⽣时间ve-k" class="headerlink" title="事件vk的最早发⽣时间ve(k)"></a>事件vk的最早发⽣时间ve(k)</h6></li>
+</ul>
+<p>&emsp;&emsp;决定了所有从vk开始的活动能够开⼯的最早时间</p>
+<center><img src="/img/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%85%AB/67.jpg" srcset="/img/loading.gif" lazyload style="zoom:100%;" />
+</center>
+
+<ul>
+<li><h6 id="事件vk的最迟发⽣时间vl-k"><a href="#事件vk的最迟发⽣时间vl-k" class="headerlink" title="事件vk的最迟发⽣时间vl(k)"></a>事件vk的最迟发⽣时间vl(k)</h6></li>
+</ul>
+<p>&emsp;&emsp;它是指在不推迟整个⼯程完成的前提下，该事件最迟必须发⽣的时间</p>
+<center><img src="/img/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%85%AB/68.jpg" srcset="/img/loading.gif" lazyload style="zoom:100%;" />
+</center>
+
+<ul>
+<li><h6 id="活动ai的最早开始时间e-i"><a href="#活动ai的最早开始时间e-i" class="headerlink" title="活动ai的最早开始时间e(i)"></a>活动ai的最早开始时间e(i)</h6></li>
+</ul>
+<p>&emsp;&emsp;指该活动弧的起点所表⽰的事件的最早发⽣时间</p>
+<center><img src="/img/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%85%AB/69.jpg" srcset="/img/loading.gif" lazyload style="zoom:100%;" />
+</center>
+
+<ul>
+<li><h6 id="活动ai的最迟开始时间l-i"><a href="#活动ai的最迟开始时间l-i" class="headerlink" title="活动ai的最迟开始时间l(i)"></a>活动ai的最迟开始时间l(i)</h6></li>
+</ul>
+<p>&emsp;&emsp;它是指该活动弧的终点所表示事件的最迟发⽣时间与该活动所需时间之差</p>
+<center><img src="/img/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%85%AB/70.jpg" srcset="/img/loading.gif" lazyload style="zoom:100%;" />
+</center>
+
+<ul>
+<li><h6 id="活动ai的时间余量d-i"><a href="#活动ai的时间余量d-i" class="headerlink" title="活动ai的时间余量d(i)"></a>活动ai的时间余量d(i)</h6></li>
+</ul>
+<p>&emsp;&emsp;d(i)=l(i)-e(i)，表⽰在不增加完成整个⼯程所需总时间的情况下，活动ai可以拖延的时间 若⼀个活动的时间余量为零，则说明该活动必须要如期完成，d(i)=0即l(i) = e(i)的活动ai是关键活动 由关键活动组成的路径就是关键路径</p>
+<center><img src="/img/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%85%AB/71.jpg" srcset="/img/loading.gif" lazyload style="zoom:100%;" />
+</center>
+
+<ul>
+<li><h6 id="关键活动、关键路径"><a href="#关键活动、关键路径" class="headerlink" title="关键活动、关键路径"></a>关键活动、关键路径</h6></li>
+</ul>
+<center><img src="/img/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%85%AB/72.jpg" srcset="/img/loading.gif" lazyload style="zoom:100%;" />
+</center>
+
+<p>&emsp;&emsp;若关键活动耗时增加，则整个⼯程的⼯期将增⻓</p>
+<p>&emsp;&emsp;缩短关键活动的时间，可以缩短整个⼯程的⼯期</p>
+<p>&emsp;&emsp;当缩短到⼀定程度时，关键活动可能会变成⾮关键活动</p>
 
                 
               </div>
