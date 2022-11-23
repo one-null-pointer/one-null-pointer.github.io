@@ -16,16 +16,16 @@
   <meta name="author" content="liaoyue">
   <meta name="keywords" content="">
   
-    <meta name="description" content="数据链路层">
+    <meta name="description" content="数据链路层1.链路层导图    &amp;emsp;&amp;emsp;数据链路层负责通过一条链路从一个结点向另一个物理链路直接相连的相邻结点传送数据报 2.数据链路层概述 基本术语  &amp;emsp;&amp;emsp;结点：主机、路由器 &amp;emsp;&amp;emsp;链路：网络汇总两个结点之间的物理通道，链路的传输介质主要有双绞线、光纤和微波。分为有有线链路、无线链路 &amp;emsp;&amp;emsp;数据链路：网络中两个结点之间的逻辑">
 <meta property="og:type" content="article">
 <meta property="og:title" content="数据链路层">
 <meta property="og:url" content="https://one-null-pointer.github.io/2022/10/28/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%9B%9B/index.html">
 <meta property="og:site_name" content="one-null-poniter">
-<meta property="og:description" content="数据链路层">
+<meta property="og:description" content="数据链路层1.链路层导图    &amp;emsp;&amp;emsp;数据链路层负责通过一条链路从一个结点向另一个物理链路直接相连的相邻结点传送数据报 2.数据链路层概述 基本术语  &amp;emsp;&amp;emsp;结点：主机、路由器 &amp;emsp;&amp;emsp;链路：网络汇总两个结点之间的物理通道，链路的传输介质主要有双绞线、光纤和微波。分为有有线链路、无线链路 &amp;emsp;&amp;emsp;数据链路：网络中两个结点之间的逻辑">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://one-null-pointer.github.io/img/net.jpg">
 <meta property="article:published_time" content="2022-10-28T13:41:01.000Z">
-<meta property="article:modified_time" content="2022-11-07T04:19:36.659Z">
+<meta property="article:modified_time" content="2022-11-23T11:22:28.800Z">
 <meta property="article:author" content="liaoyue">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://one-null-pointer.github.io/img/net.jpg">
@@ -208,7 +208,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          5 words
+          960 words
         
       </span>
     
@@ -219,7 +219,7 @@
         
         
         
-          1 mins
+          9 mins
         
       </span>
     
@@ -262,7 +262,65 @@
             
               <div class="markdown-body">
                 
-                <h1 id="数据链路层"><a href="#数据链路层" class="headerlink" title="数据链路层"></a>数据链路层</h1>
+                <h1 id="数据链路层"><a href="#数据链路层" class="headerlink" title="数据链路层"></a>数据链路层</h1><h4 id="1-链路层导图"><a href="#1-链路层导图" class="headerlink" title="1.链路层导图"></a>1.链路层导图</h4><center><img src="/img/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%9B%9B/1.png" srcset="/img/loading.gif" lazyload style="zoom:100%;" />
+</center>
+
+<p> &emsp;&emsp;数据链路层负责通过一条链路从一个结点向另一个物理链路直接相连的相邻结点传送数据报</p>
+<h4 id="2-数据链路层概述"><a href="#2-数据链路层概述" class="headerlink" title="2.数据链路层概述"></a>2.数据链路层概述</h4><ul>
+<li><h5 id="基本术语"><a href="#基本术语" class="headerlink" title="基本术语"></a>基本术语</h5></li>
+</ul>
+<p>&emsp;&emsp;结点：主机、路由器</p>
+<p>&emsp;&emsp;链路：网络汇总两个结点之间的物理通道，链路的传输介质主要有双绞线、光纤和微波。分为有有线链路、无线链路</p>
+<p>&emsp;&emsp;数据链路：网络中两个结点之间的逻辑通道，吧实现控制数据传输协议的硬件和软件加到链路上就构成数据链路</p>
+<p>&emsp;&emsp;帧：链路层的协议数据单元，封装网络层数据报</p>
+<ul>
+<li><h6 id="功能概述"><a href="#功能概述" class="headerlink" title="功能概述"></a>功能概述</h6></li>
+</ul>
+<p>&emsp;&emsp;数据链路层在物理层提供服务的基础上，下个网络层提供服务，其最基本的服务是将源自网络层来的数据可靠地传输到相邻结点的目标机网络层。其主要作用是加强物理层传输原始比特流的功能，将物理层提供的可能出错的物理连接改造成为逻辑上无差错的数据链路，使之对网络层表现为一条无差错的链路。</p>
+<p>&emsp;&emsp;功能一：为网络层提供服务，无确认无连接服务，有确认无连接服务，有确认面向连接服务。（有连接就一定有确认！）</p>
+<p>&emsp;&emsp;功能二：链路管理，即连接的建立、维持、释放（用于面向连接的服务）</p>
+<p>&emsp;&emsp;功能三：组帧</p>
+<p>&emsp;&emsp;功能四：流量控制，限制发送方</p>
+<p>&emsp;&emsp;功能五：差错控制（帧错/位错）</p>
+<p>&emsp;</p>
+<h4 id="3-帧的相关概念"><a href="#3-帧的相关概念" class="headerlink" title="3.帧的相关概念"></a>3.帧的相关概念</h4><ul>
+<li><h6 id="封装成帧"><a href="#封装成帧" class="headerlink" title="封装成帧"></a>封装成帧</h6></li>
+</ul>
+<p>是在一段数据的前后部分添加首部和尾部，这样就构成了一个帧，接收端在收到物理层上交的比特流后，就能根据首部和尾部的标记，从收到的比特流中识别帧的开始和结束。其中，首部和尾部包含了许多的控制信息，他们有一个重要的作用：帧定界（确定帧的界限）</p>
+<ul>
+<li><h6 id="帧同步"><a href="#帧同步" class="headerlink" title="帧同步"></a>帧同步</h6></li>
+</ul>
+<p>&emsp;&emsp;接收方应当从接收的二进制比特流中区分出帧的起始和终止</p>
+<center><img src="/img/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%9B%9B/2.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<ul>
+<li><h6 id="透明传输"><a href="#透明传输" class="headerlink" title="透明传输"></a>透明传输</h6></li>
+</ul>
+<p>&emsp;&emsp;透明传输：是指不管所传输数据是什么样的比特组合，都应当能够在链路上传送，因此，链路层就“看不见”有什么妨碍数据传输的东西，而当所传数据中的比特组合恰巧与某一控制信息完全一样时，就必须采取适当的措施，使收方不会将这样的数据误认为是某种控制信息，这样子才能保证数据链路层的传输是透明的</p>
+<ul>
+<li><h6 id="组帧的四种方法："><a href="#组帧的四种方法：" class="headerlink" title="组帧的四种方法："></a>组帧的四种方法：</h6></li>
+</ul>
+<p>1.字符计数法  </p>
+<center><img src="/img/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%9B%9B/3.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<p>2.字符（节）填充法  </p>
+<center><img src="/img/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%9B%9B/4.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<center><img src="/img/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%9B%9B/5.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<p>3.零比特填充法  </p>
+<center><img src="/img/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%9B%9B/6.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<p>4.违规编码法</p>
+<center><img src="/img/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%9B%9B/7.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+
                 
               </div>
             

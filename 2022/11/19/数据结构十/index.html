@@ -25,7 +25,7 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://one-null-pointer.github.io/img/datastructure.png">
 <meta property="article:published_time" content="2022-11-19T11:07:05.000Z">
-<meta property="article:modified_time" content="2022-11-21T11:29:13.427Z">
+<meta property="article:modified_time" content="2022-11-22T10:26:45.563Z">
 <meta property="article:author" content="liaoyue">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://one-null-pointer.github.io/img/datastructure.png">
@@ -331,7 +331,7 @@
 
 
 <p>&emsp;</p>
-<h6 id="4-冒泡排序"><a href="#4-冒泡排序" class="headerlink" title="4.冒泡排序"></a>4.冒泡排序</h6><ul>
+<h4 id="4-冒泡排序"><a href="#4-冒泡排序" class="headerlink" title="4.冒泡排序"></a>4.冒泡排序</h4><ul>
 <li><h6 id="算法思想-2"><a href="#算法思想-2" class="headerlink" title="算法思想"></a>算法思想</h6></li>
 </ul>
 <p>&emsp;&emsp;基于“交换”的排序：根据序列中两个元素关键字的⽐较结果来对换这两个记录在序列中的位置</p>
@@ -353,7 +353,7 @@
 
 <p>&emsp;</p>
 <h4 id="5-快速排序（重点）"><a href="#5-快速排序（重点）" class="headerlink" title="5.快速排序（重点）"></a>5.快速排序（重点）</h4><ul>
-<li><h4 id="算法思想-3"><a href="#算法思想-3" class="headerlink" title="算法思想"></a>算法思想</h4></li>
+<li><h6 id="算法思想-3"><a href="#算法思想-3" class="headerlink" title="算法思想"></a>算法思想</h6></li>
 </ul>
 <p>&emsp;&emsp;在待排序表L[1…n]中任取⼀个元素pivot作为枢轴（或基准，通常取⾸元素），通过⼀趟排序将待排序表划 分为独⽴的两部分L[1…k-1]和L[k+1…n]，使得L[1…k-1]中的所有元素⼩于pivot，L[k+1…n]中的所有元素⼤于等于 pivot，则pivot放在了其最终位置L(k)上，这个过程称为⼀次“划分”。然后分别递归地对两个⼦表重复上述过程，直⾄ 每部分内只有⼀个元素或空为⽌，即所有元素放在了其最终位置上。</p>
 <center><img src="/img/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%8D%81/11.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
@@ -405,7 +405,7 @@
 </center>
 
 <ul>
-<li><h4 id="建立大根堆实现代码"><a href="#建立大根堆实现代码" class="headerlink" title="建立大根堆实现代码"></a>建立大根堆实现代码</h4></li>
+<li><h6 id="建立大根堆实现代码"><a href="#建立大根堆实现代码" class="headerlink" title="建立大根堆实现代码"></a>建立大根堆实现代码</h6></li>
 </ul>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-comment">//建立大根堆</span><br><span class="hljs-type">void</span> <span class="hljs-title function_">BuildMaxHeap</span><span class="hljs-params">(<span class="hljs-type">int</span> A[],<span class="hljs-type">int</span> len)</span><br>&#123;<br>    <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i=len/<span class="hljs-number">2</span>;i&gt;<span class="hljs-number">0</span>;i--)    <span class="hljs-comment">//从后往前调整所有非终端结点</span><br>        HeadAdjust(A,i,len);<br>&#125;<br><br><span class="hljs-comment">//将 以k为根的子树调整为大根堆</span><br><span class="hljs-type">void</span> <span class="hljs-title function_">HeadAdjust</span><span class="hljs-params">(<span class="hljs-type">int</span> A[],<span class="hljs-type">int</span> k,<span class="hljs-type">int</span> len)</span><br>&#123;<br>    A[<span class="hljs-number">0</span>]=A[k];      <span class="hljs-comment">//A[0]暂存子树的根节点</span><br>    <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i=<span class="hljs-number">2</span>*k;i&lt;=len;i*=<span class="hljs-number">2</span>)   <span class="hljs-comment">//沿key较大的子结点向下筛选</span><br>    &#123;<br>        <span class="hljs-keyword">if</span>(i&lt;len&amp;&amp;A[i]&lt;A[i+<span class="hljs-number">1</span>])<br>            i++;             <span class="hljs-comment">//取key更大的子结点下标</span><br>        <span class="hljs-keyword">if</span>(A[<span class="hljs-number">0</span>]&gt;=A[i])      <span class="hljs-comment">//筛选结束</span><br>            <span class="hljs-keyword">break</span>;<br>        <span class="hljs-keyword">else</span><br>        &#123;<br>            A[k]=A[i];     <span class="hljs-comment">//将A[i]调整到双亲结点上</span><br>            k=i;         <span class="hljs-comment">//修改k值，以便继续向下筛选</span><br>        &#125;<br>    &#125;<br>    A[k]=A[<span class="hljs-number">0</span>];           <span class="hljs-comment">//被筛选结点的值放入最终位置</span><br>&#125;<br></code></pre></td></tr></table></figure>
 
@@ -548,13 +548,13 @@
 </center>
 
 <ul>
-<li><h4 id="多路平衡归并"><a href="#多路平衡归并" class="headerlink" title="多路平衡归并"></a>多路平衡归并</h4></li>
+<li><h6 id="多路平衡归并"><a href="#多路平衡归并" class="headerlink" title="多路平衡归并"></a>多路平衡归并</h6></li>
 </ul>
 <center><img src="/img/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%8D%81/45.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
 </center>
 
 <p>&emsp;</p>
-<h4 id="11-败者数"><a href="#11-败者数" class="headerlink" title="11.败者数"></a>11.败者数</h4><ul>
+<h4 id="11-败者树"><a href="#11-败者树" class="headerlink" title="11.败者树"></a>11.败者树</h4><ul>
 <li><h6 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h6></li>
 </ul>
 <p>&emsp;&emsp;败者树是指可以视为一棵完全二叉树（多了一个头头）。k个叶节点分别是当前参加比较的元素，非叶子结点用来记忆左右子树的”失败者”，而让胜者往上继续进行比较，一直到根节点（考的频率不高，基本是手算的程度）</p>
@@ -592,7 +592,6 @@
 
 <center><img src="/img/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%8D%81/55.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
 </center>
-
 
                 
               </div>
