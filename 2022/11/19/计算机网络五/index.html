@@ -16,23 +16,23 @@
   <meta name="author" content="liaoyue">
   <meta name="keywords" content="">
   
-    <meta name="description" content="数据链路层（下）1.数据传输使用的两种链路 点对点链路  &amp;emsp;&amp;emsp;两个相邻结点通过一个链路相连，没有第三者。应用：PPP协议，常用于广域网  广播式链路  &amp;emsp;&amp;emsp;所有主机共享通信介质。应用：早期的总线以太网、无线局域网，常用于局域网。典型拓扑结构：总线型、星型（逻辑总线型） 2.介质访问控制  &amp;emsp;&amp;emsp;介质访问控制的内容就是，采取一定的措施，使得两">
+    <meta name="description" content="数据链路层（中）1.数据传输使用的两种链路 点对点链路  &amp;emsp;&amp;emsp;两个相邻结点通过一个链路相连，没有第三者。应用：PPP协议，常用于广域网  广播式链路  &amp;emsp;&amp;emsp;所有主机共享通信介质。应用：早期的总线以太网、无线局域网，常用于局域网。典型拓扑结构：总线型、星型（逻辑总线型） 2.介质访问控制  &amp;emsp;&amp;emsp;介质访问控制的内容就是，采取一定的措施，使得两">
 <meta property="og:type" content="article">
-<meta property="og:title" content="数据链路层（下）">
+<meta property="og:title" content="数据链路层（中）">
 <meta property="og:url" content="https://one-null-pointer.github.io/2022/11/19/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E4%BA%94/index.html">
 <meta property="og:site_name" content="one-null-poniter">
-<meta property="og:description" content="数据链路层（下）1.数据传输使用的两种链路 点对点链路  &amp;emsp;&amp;emsp;两个相邻结点通过一个链路相连，没有第三者。应用：PPP协议，常用于广域网  广播式链路  &amp;emsp;&amp;emsp;所有主机共享通信介质。应用：早期的总线以太网、无线局域网，常用于局域网。典型拓扑结构：总线型、星型（逻辑总线型） 2.介质访问控制  &amp;emsp;&amp;emsp;介质访问控制的内容就是，采取一定的措施，使得两">
+<meta property="og:description" content="数据链路层（中）1.数据传输使用的两种链路 点对点链路  &amp;emsp;&amp;emsp;两个相邻结点通过一个链路相连，没有第三者。应用：PPP协议，常用于广域网  广播式链路  &amp;emsp;&amp;emsp;所有主机共享通信介质。应用：早期的总线以太网、无线局域网，常用于局域网。典型拓扑结构：总线型、星型（逻辑总线型） 2.介质访问控制  &amp;emsp;&amp;emsp;介质访问控制的内容就是，采取一定的措施，使得两">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://one-null-pointer.github.io/img/net.jpg">
 <meta property="article:published_time" content="2022-11-19T11:06:37.000Z">
-<meta property="article:modified_time" content="2022-11-27T10:27:42.647Z">
+<meta property="article:modified_time" content="2022-11-28T10:42:07.054Z">
 <meta property="article:author" content="liaoyue">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://one-null-pointer.github.io/img/net.jpg">
   
   
   
-  <title>数据链路层（下） - one-null-poniter</title>
+  <title>数据链路层（中） - one-null-poniter</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -185,7 +185,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="数据链路层（下）"></span>
+            <span id="subtitle" data-typed-text="数据链路层（中）"></span>
           
         </div>
 
@@ -208,7 +208,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          2.2k words
+          3.9k words
         
       </span>
     
@@ -219,7 +219,7 @@
         
         
         
-          18 mins
+          33 mins
         
       </span>
     
@@ -257,12 +257,12 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">数据链路层（下）</h1>
+            <h1 style="display: none">数据链路层（中）</h1>
             
             
               <div class="markdown-body">
                 
-                <h1 id="数据链路层（下）"><a href="#数据链路层（下）" class="headerlink" title="数据链路层（下）"></a>数据链路层（下）</h1><h4 id="1-数据传输使用的两种链路"><a href="#1-数据传输使用的两种链路" class="headerlink" title="1.数据传输使用的两种链路"></a>1.数据传输使用的两种链路</h4><ul>
+                <h1 id="数据链路层（中）"><a href="#数据链路层（中）" class="headerlink" title="数据链路层（中）"></a>数据链路层（中）</h1><h4 id="1-数据传输使用的两种链路"><a href="#1-数据传输使用的两种链路" class="headerlink" title="1.数据传输使用的两种链路"></a>1.数据传输使用的两种链路</h4><ul>
 <li><h6 id="点对点链路"><a href="#点对点链路" class="headerlink" title="点对点链路"></a>点对点链路</h6></li>
 </ul>
 <p>&emsp;&emsp;两个相邻结点通过一个链路相连，没有第三者。应用：PPP协议，常用于广域网</p>
@@ -378,6 +378,87 @@
 <center><img src="/img/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E4%BA%94/12.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
 </center>
 
+<p>&emsp;</p>
+<h4 id="6-CSMA-CD协议"><a href="#6-CSMA-CD协议" class="headerlink" title="6.CSMA/CD协议"></a>6.CSMA/CD协议</h4><p>&emsp;&emsp;CS：载波侦听/监听，每一个站在发送数据之前以及发送数据时都要检测一下总线上是否有其他计算机在发送数据</p>
+<p>&emsp;&emsp;MA：多点接入，表示许多计算机以多点接入的方式连接在一根总线上。总线型网络</p>
+<p>&emsp;&emsp;CD：碰撞检测（冲突检测），“边发送边监听”，适配器边发送数据边检测信道上信号电压的变化情况，以便判 断自己在发送数据时其他站是否也在发送数据 。半双工网络</p>
+<ul>
+<li><h6 id="传播时延对载波监听的影响"><a href="#传播时延对载波监听的影响" class="headerlink" title="传播时延对载波监听的影响"></a>传播时延对载波监听的影响</h6></li>
+</ul>
+<center><img src="/img/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E4%BA%94/13.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<ul>
+<li><h6 id="碰撞后的重传算法"><a href="#碰撞后的重传算法" class="headerlink" title="碰撞后的重传算法"></a>碰撞后的重传算法</h6></li>
+</ul>
+<p>&emsp;&emsp;在这种协议中，当确定碰撞后的重传时间采用的是截断二进制指数规避算法：</p>
+<p>&emsp;&emsp;1、确定基本退避（推迟）时间为争用期 2τ。</p>
+<p>&emsp;&emsp;2、定义参数k，它等于重传次数，但k不超过10，即k=min[重传次数，10]。当重传次数不超过10时，k等于 重传次数；当重传次数大于10时，k就不再增大而一直等于10。</p>
+<p>&emsp;&emsp; 3、从离散的整数集合[0, 1, , 2^k -1]中随机取出一个数r，重传所需要退避的时间就是r倍的基本退避时间，即 2rτ 。</p>
+<p>&emsp;&emsp;4、当重传达16次仍不能成功时，说明网络太拥挤，认为此帧永远无法正确发出，抛弃此帧并向高层报告出错。 </p>
+<center><img src="/img/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E4%BA%94/14.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<ul>
+<li><h6 id="最小帧长问题"><a href="#最小帧长问题" class="headerlink" title="最小帧长问题"></a>最小帧长问题</h6></li>
+</ul>
+<center><img src="/img/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E4%BA%94/15.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<p>&emsp;</p>
+<h4 id="7-CSMA-CA协议"><a href="#7-CSMA-CA协议" class="headerlink" title="7.CSMA/CA协议"></a>7.CSMA/CA协议</h4><p>&emsp;&emsp;CSMA/CA协议的产生是因为CSMA/CD只能用于总线式以太网（有线介质），为了解决无线局域网的问题，CSMA/CD无法做到360°全满检测，也无法应对隐蔽站（当A和C都检测不到信号，认为信道空闲时，同时向终端B发送数 据帧，就会导致冲突）的问题</p>
+<ul>
+<li><h6 id="CSMA-CA协议工作原理"><a href="#CSMA-CA协议工作原理" class="headerlink" title="CSMA/CA协议工作原理"></a>CSMA/CA协议工作原理</h6></li>
+</ul>
+<p>&emsp;&emsp;1、在发送数据前，先检测信道是否空闲。</p>
+<p>&emsp;&emsp;2、空闲则发出RTS（request to send），RTS包括发射端的地址、接收端的地址、下一份数据将持续发送的时间 等信息；信道忙则等待</p>
+<p>&emsp;&emsp;3、接收端收到RTS后，将响应CTS（clear to send）</p>
+<p>&emsp;&emsp;4、发送端收到CTS后，开始发送数据帧（同时预约信道：发送方告知其他站点自己要传多久数据）</p>
+<p>&emsp;&emsp;5、接收端收到数据帧后，将用CRC来检验数据是否正确，正确则响应ACK帧。</p>
+<p>&emsp;&emsp;6、发送方收到ACK就可以进行下一个数据帧的发送，若没有则一直重传至规定重发次数为止（采用二进制指数 退避算法来确定随机的推迟时间）</p>
+<h4 id="8-CSMA-CA与CSMA-CD的比较"><a href="#8-CSMA-CA与CSMA-CD的比较" class="headerlink" title="8.CSMA/CA与CSMA/CD的比较"></a>8.CSMA/CA与CSMA/CD的比较</h4><ul>
+<li><h6 id="相同点"><a href="#相同点" class="headerlink" title="相同点"></a>相同点</h6></li>
+</ul>
+<p>&emsp;&emsp;CSMA/CD与CSMA/CA机制都从属于CSMA的思路，其核心是先听再说。换言之，两个在接入信道之前都须要 进行监听。当发现信道空闲后，才能进行接入。</p>
+<ul>
+<li><h6 id="不同点"><a href="#不同点" class="headerlink" title="不同点"></a>不同点</h6></li>
+</ul>
+<p>&emsp;&emsp;1、传输介质不同：CSMA/CD 用于总线式以太网【有线】，而CSMA/CA用于无线局域网【无线】</p>
+<p>&emsp;&emsp;2、.载波检测方式不同：因传输介质不同，CSMA/CD与CSMA/CA的检测方式也不同。CSMA/CD通过电缆中电压 的变化来检测，当数据发生碰撞时，电缆中的电压就会随着发生变化；而CSMA/CA采用能量检测（ED）、 载波检测（CS）和能量载波混合检测三种检测信道空闲的方式</p>
+<p>&emsp;&emsp;3、CSMA/CD检测冲突，CSMA/CA避免冲突，二者出现冲突后都会进行有上限的重传</p>
+<p>&emsp;</p>
+<h4 id="9-轮询访问介质访问控制"><a href="#9-轮询访问介质访问控制" class="headerlink" title="9.轮询访问介质访问控制"></a>9.轮询访问介质访问控制</h4><ul>
+<li><h6 id="轮询协议"><a href="#轮询协议" class="headerlink" title="轮询协议"></a>轮询协议</h6></li>
+</ul>
+<center><img src="/img/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E4%BA%94/16.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<ul>
+<li><h6 id="令牌传递协议"><a href="#令牌传递协议" class="headerlink" title="令牌传递协议"></a>令牌传递协议</h6></li>
+</ul>
+<center><img src="/img/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E4%BA%94/17.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<p>&emsp;</p>
+<h4 id="10-介质访问控制总结"><a href="#10-介质访问控制总结" class="headerlink" title="10.介质访问控制总结"></a>10.介质访问控制总结</h4><ul>
+<li><h6 id="信道划分介质访问控制MAC协议"><a href="#信道划分介质访问控制MAC协议" class="headerlink" title="信道划分介质访问控制MAC协议"></a>信道划分介质访问控制MAC协议</h6></li>
+</ul>
+<p>&emsp;&emsp;基于多路复用技术划分资源</p>
+<p>&emsp;&emsp;网络负载重时：共享信道效率高，且公平</p>
+<p>&emsp;&emsp;网络负载轻时：共享信道效率低</p>
+<ul>
+<li><h6 id="随机访问MAC协议"><a href="#随机访问MAC协议" class="headerlink" title="随机访问MAC协议"></a>随机访问MAC协议</h6></li>
+</ul>
+<p>&emsp;&emsp;用户根据意愿随机发送信息，发送信息时可独占信道带宽</p>
+<p>&emsp;&emsp;网络负载重时：产生冲突开销</p>
+<p>&emsp;&emsp;网络负载轻时：共享信道效率高，单个结点可利用信道全部带宽</p>
+<ul>
+<li><h6 id="轮询访问MAC协议-轮流协议-轮转访问MAC协议："><a href="#轮询访问MAC协议-轮流协议-轮转访问MAC协议：" class="headerlink" title="轮询访问MAC协议/轮流协议/轮转访问MAC协议："></a>轮询访问MAC协议/轮流协议/轮转访问MAC协议：</h6></li>
+</ul>
+<p>&emsp;&emsp;既要不产生冲突，又要发送时占全部带宽。</p>
+<center><img src="/img/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E4%BA%94/18.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
                 
               </div>
             
@@ -415,7 +496,7 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>数据链路层（下）</div>
+      <div>数据链路层（中）</div>
       <div>https://one-null-pointer.github.io/2022/11/19/计算机网络五/</div>
     </div>
     <div class="license-meta">
