@@ -16,14 +16,16 @@
   <meta name="author" content="liaoyue">
   <meta name="keywords" content="">
   
-    <meta property="og:type" content="article">
+    <meta name="description" content="文件上传——白名单验证绕过案例1.Pass-12（get 00截断）   &amp;emsp;&amp;emsp;原因是move_uploaded_file（底层为C），遇到0x00会截断（16进制），%00（URL编码）    &amp;emsp;&amp;emsp;可以看出是get类型的传送，尝试使用%00来截断       &amp;emsp;&amp;emsp;在文件路径后加上shell.php%00进行截断处理       &amp;emsp">
+<meta property="og:type" content="article">
 <meta property="og:title" content="文件上传——白名单验证绕过案例">
 <meta property="og:url" content="https://one-null-pointer.github.io/2022/09/09/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E2%80%94%E2%80%94%E7%99%BD%E5%90%8D%E5%8D%95%E9%AA%8C%E8%AF%81%E7%BB%95%E8%BF%87%E6%A1%88%E4%BE%8B/index.html">
 <meta property="og:site_name" content="one-null-poniter">
+<meta property="og:description" content="文件上传——白名单验证绕过案例1.Pass-12（get 00截断）   &amp;emsp;&amp;emsp;原因是move_uploaded_file（底层为C），遇到0x00会截断（16进制），%00（URL编码）    &amp;emsp;&amp;emsp;可以看出是get类型的传送，尝试使用%00来截断       &amp;emsp;&amp;emsp;在文件路径后加上shell.php%00进行截断处理       &amp;emsp">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://one-null-pointer.github.io/img/web1.png">
 <meta property="article:published_time" content="2022-09-09T08:05:08.000Z">
-<meta property="article:modified_time" content="2022-09-11T08:05:40.332Z">
+<meta property="article:modified_time" content="2023-02-22T09:01:48.729Z">
 <meta property="article:author" content="liaoyue">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://one-null-pointer.github.io/img/web1.png">
@@ -206,7 +208,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          0 words
+          1.1k words
         
       </span>
     
@@ -217,7 +219,7 @@
         
         
         
-          1 mins
+          9 mins
         
       </span>
     
@@ -260,7 +262,80 @@
             
               <div class="markdown-body">
                 
-                
+                <h1 id="文件上传——白名单验证绕过案例"><a href="#文件上传——白名单验证绕过案例" class="headerlink" title="文件上传——白名单验证绕过案例"></a>文件上传——白名单验证绕过案例</h1><h4 id="1-Pass-12（get-00截断）"><a href="#1-Pass-12（get-00截断）" class="headerlink" title="1.Pass-12（get 00截断）"></a>1.Pass-12（get 00截断）</h4><center><img src="/img/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E2%80%94%E2%80%94%E7%99%BD%E5%90%8D%E5%8D%95%E9%AA%8C%E8%AF%81%E7%BB%95%E8%BF%87%E6%A1%88%E4%BE%8B/1.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<p>&emsp;&emsp;原因是move_uploaded_file（底层为C），遇到0x00会截断（16进制），%00（URL编码）</p>
+<center><img src="/img/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E2%80%94%E2%80%94%E7%99%BD%E5%90%8D%E5%8D%95%E9%AA%8C%E8%AF%81%E7%BB%95%E8%BF%87%E6%A1%88%E4%BE%8B/2.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<p>&emsp;&emsp;可以看出是get类型的传送，尝试使用%00来截断</p>
+<center><img src="/img/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E2%80%94%E2%80%94%E7%99%BD%E5%90%8D%E5%8D%95%E9%AA%8C%E8%AF%81%E7%BB%95%E8%BF%87%E6%A1%88%E4%BE%8B/3.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<center><img src="/img/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E2%80%94%E2%80%94%E7%99%BD%E5%90%8D%E5%8D%95%E9%AA%8C%E8%AF%81%E7%BB%95%E8%BF%87%E6%A1%88%E4%BE%8B/4.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<p>&emsp;&emsp;在文件路径后加上shell.php%00进行截断处理</p>
+<center><img src="/img/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E2%80%94%E2%80%94%E7%99%BD%E5%90%8D%E5%8D%95%E9%AA%8C%E8%AF%81%E7%BB%95%E8%BF%87%E6%A1%88%E4%BE%8B/5.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<center><img src="/img/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E2%80%94%E2%80%94%E7%99%BD%E5%90%8D%E5%8D%95%E9%AA%8C%E8%AF%81%E7%BB%95%E8%BF%87%E6%A1%88%E4%BE%8B/6.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<p>&emsp;&emsp;将filename传入的文件名改为白名单内容</p>
+<center><img src="/img/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E2%80%94%E2%80%94%E7%99%BD%E5%90%8D%E5%8D%95%E9%AA%8C%E8%AF%81%E7%BB%95%E8%BF%87%E6%A1%88%E4%BE%8B/7.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<p>&emsp;&emsp;最后上传php文件成功，值得一提的是，改漏洞的前提条件是php版本需要小于5.3.4，并且其中的magic_quotes_gpc为off状态即可。</p>
+<p>&emsp;&emsp;</p>
+<h4 id="2-Pass-13（post-00截断）"><a href="#2-Pass-13（post-00截断）" class="headerlink" title="2.Pass-13（post 00截断）"></a>2.Pass-13（post 00截断）</h4><p>&emsp;&emsp;与Pass—12基本原理相同，只是这次是post的的截断</p>
+<center><img src="/img/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E2%80%94%E2%80%94%E7%99%BD%E5%90%8D%E5%8D%95%E9%AA%8C%E8%AF%81%E7%BB%95%E8%BF%87%E6%A1%88%E4%BE%8B/8.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<center><img src="/img/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E2%80%94%E2%80%94%E7%99%BD%E5%90%8D%E5%8D%95%E9%AA%8C%E8%AF%81%E7%BB%95%E8%BF%87%E6%A1%88%E4%BE%8B/9.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<p>&emsp;&emsp;将相关内容进行修改，并且在hex的板块中将+符号的编码改为00</p>
+<center><img src="/img/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E2%80%94%E2%80%94%E7%99%BD%E5%90%8D%E5%8D%95%E9%AA%8C%E8%AF%81%E7%BB%95%E8%BF%87%E6%A1%88%E4%BE%8B/10.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<center><img src="/img/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E2%80%94%E2%80%94%E7%99%BD%E5%90%8D%E5%8D%95%E9%AA%8C%E8%AF%81%E7%BB%95%E8%BF%87%E6%A1%88%E4%BE%8B/11.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<p>&emsp;&emsp;尤其注意magic_quotes_gpc为off状态，本人是试了好几次才成功，过程中也是遇到各种情况，在小迪安全中，则不是使用+而是用%00然后点击url编码显示位一个口字，但是对于使用的burp版本有要求，具体原因并没有给出，而且最终上传并没有成功。</p>
+<center><img src="/img/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E2%80%94%E2%80%94%E7%99%BD%E5%90%8D%E5%8D%95%E9%AA%8C%E8%AF%81%E7%BB%95%E8%BF%87%E6%A1%88%E4%BE%8B/12.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<center><img src="/img/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E2%80%94%E2%80%94%E7%99%BD%E5%90%8D%E5%8D%95%E9%AA%8C%E8%AF%81%E7%BB%95%E8%BF%87%E6%A1%88%E4%BE%8B/13.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<p>&emsp;&emsp;</p>
+<h4 id="3-Pass—14（图片码，判断文件类型）"><a href="#3-Pass—14（图片码，判断文件类型）" class="headerlink" title="3.Pass—14（图片码，判断文件类型）"></a>3.Pass—14（图片码，判断文件类型）</h4><p>&emsp;&emsp;有些上传网站是通过判断文件的前两个字节从而判断文件类型：</p>
+<ul>
+<li>Png：89 50 4E 47 0D 0A 1A 0A</li>
+<li>Jpg：FF D8</li>
+<li>Gif：47 49 46 38 39|37 61 </li>
+<li>Bmp：42 4D</li>
+</ul>
+<center><img src="/img/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E2%80%94%E2%80%94%E7%99%BD%E5%90%8D%E5%8D%95%E9%AA%8C%E8%AF%81%E7%BB%95%E8%BF%87%E6%A1%88%E4%BE%8B/14.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<p>&emsp;&emsp;一般操作是使用HEX的软件，我比较习惯用ida在合适的位置写入相关的代码，之后再cmd命令中，将图片和php文件进行拼接</p>
+<p>&emsp;&emsp;</p>
+<h4 id="4-Pass—15（图片码，函数检测文件类型）"><a href="#4-Pass—15（图片码，函数检测文件类型）" class="headerlink" title="4.Pass—15（图片码，函数检测文件类型）"></a>4.Pass—15（图片码，函数检测文件类型）</h4><p>&emsp;&emsp;有的通过getimagesize()函数检查是否为图片文件</p>
+<center><img src="/img/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E2%80%94%E2%80%94%E7%99%BD%E5%90%8D%E5%8D%95%E9%AA%8C%E8%AF%81%E7%BB%95%E8%BF%87%E6%A1%88%E4%BE%8B/15.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<p>&emsp;&emsp;破解原理同pass-14，只是一个是代码解析一个是函数解析，只要了解函数的本质即可攻破</p>
+<p>&emsp;&emsp;</p>
+<h4 id="5-Pass—16（图片码，同时检查字节和后缀）"><a href="#5-Pass—16（图片码，同时检查字节和后缀）" class="headerlink" title="5.Pass—16（图片码，同时检查字节和后缀）"></a>5.Pass—16（图片码，同时检查字节和后缀）</h4><p>&emsp;&emsp;采用后缀和字节的方式同时检查是前面的几种结合情况，一般是通过通过exif_imagetype()函数，读取图像的第一个字节，并检查其后缀名。而返回值与getimage()函数返回的索引2相同</p>
+<center><img src="/img/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E2%80%94%E2%80%94%E7%99%BD%E5%90%8D%E5%8D%95%E9%AA%8C%E8%AF%81%E7%BB%95%E8%BF%87%E6%A1%88%E4%BE%8B/16.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<p>&emsp;&emsp;</p>
+<p>小知识：get会自动解码为url编码，而post则不会自动解码</p>
+
                 
               </div>
             
