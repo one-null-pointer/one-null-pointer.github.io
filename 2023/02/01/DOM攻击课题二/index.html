@@ -16,23 +16,23 @@
   <meta name="author" content="liaoyue">
   <meta name="keywords" content="">
   
-    <meta name="description" content="DOM简介1.什么是DOM？&amp;emsp;&amp;emsp;DOM（文档对象模型）是web浏览器对页面上元素的层次表示。网站可以使用JavaScript来操纵DOM的节点和对象及其属性。是中立于平台和语言的接口，它允许程序和脚本动态地访问和更新文档的内容、结构和样式 &amp;emsp;&amp;emsp;用比较通俗的解释，DOM是一个接口，是HTML和XML的编程接口，他将一个文档表示为了一棵树，再加上js脚本语言形成">
+    <meta name="description" content="前期准备——HTML温习1.什么是HTML？&amp;emsp;&amp;emsp;HTML是用来描述网页的一种语言，也就是超文本标记语言。这种语言不是一种编程语言，而是标记语言，其实用标记标签来描述网页。HTML文档也叫做web页面    &amp;emsp;&amp;emsp;在浏览器的页面上使用键盘上的 F12 按键开启调试模式，就可以看到组成标签   元素是 HTML 页面的根元素   元素包含了文档的元（meta）数据">
 <meta property="og:type" content="article">
-<meta property="og:title" content="DOM">
-<meta property="og:url" content="https://one-null-pointer.github.io/2023/02/01/DOM%E6%94%BB%E5%87%BB%E8%AF%BE%E9%A2%98%E4%B8%80/index.html">
+<meta property="og:title" content="前期准备——HTML温习">
+<meta property="og:url" content="https://one-null-pointer.github.io/2023/02/01/DOM%E6%94%BB%E5%87%BB%E8%AF%BE%E9%A2%98%E4%BA%8C/index.html">
 <meta property="og:site_name" content="one-null-poniter">
-<meta property="og:description" content="DOM简介1.什么是DOM？&amp;emsp;&amp;emsp;DOM（文档对象模型）是web浏览器对页面上元素的层次表示。网站可以使用JavaScript来操纵DOM的节点和对象及其属性。是中立于平台和语言的接口，它允许程序和脚本动态地访问和更新文档的内容、结构和样式 &amp;emsp;&amp;emsp;用比较通俗的解释，DOM是一个接口，是HTML和XML的编程接口，他将一个文档表示为了一棵树，再加上js脚本语言形成">
+<meta property="og:description" content="前期准备——HTML温习1.什么是HTML？&amp;emsp;&amp;emsp;HTML是用来描述网页的一种语言，也就是超文本标记语言。这种语言不是一种编程语言，而是标记语言，其实用标记标签来描述网页。HTML文档也叫做web页面    &amp;emsp;&amp;emsp;在浏览器的页面上使用键盘上的 F12 按键开启调试模式，就可以看到组成标签   元素是 HTML 页面的根元素   元素包含了文档的元（meta）数据">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://one-null-pointer.github.io/img/DOM.png">
-<meta property="article:published_time" content="2023-02-01T07:08:06.000Z">
-<meta property="article:modified_time" content="2023-02-16T03:25:43.461Z">
+<meta property="article:published_time" content="2023-02-01T09:21:36.000Z">
+<meta property="article:modified_time" content="2023-02-23T07:42:48.274Z">
 <meta property="article:author" content="liaoyue">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://one-null-pointer.github.io/img/DOM.png">
   
   
   
-  <title>DOM - one-null-poniter</title>
+  <title>前期准备——HTML温习 - one-null-poniter</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -185,7 +185,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="DOM"></span>
+            <span id="subtitle" data-typed-text="前期准备——HTML温习"></span>
           
         </div>
 
@@ -196,7 +196,7 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-02-01 15:08" pubdate>
+        <time datetime="2023-02-01 17:21" pubdate>
           February 1, 2023 pm
         </time>
       </span>
@@ -208,7 +208,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          2k words
+          1.9k words
         
       </span>
     
@@ -219,7 +219,7 @@
         
         
         
-          17 mins
+          16 mins
         
       </span>
     
@@ -257,69 +257,58 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">DOM</h1>
+            <h1 style="display: none">前期准备——HTML温习</h1>
             
             
               <div class="markdown-body">
                 
-                <h1 id="DOM简介"><a href="#DOM简介" class="headerlink" title="DOM简介"></a>DOM简介</h1><h4 id="1-什么是DOM？"><a href="#1-什么是DOM？" class="headerlink" title="1.什么是DOM？"></a>1.什么是DOM？</h4><p>&emsp;&emsp;DOM（文档对象模型）是web浏览器对页面上元素的层次表示。网站可以使用JavaScript来操纵DOM的节点和对象及其属性。是中立于平台和语言的接口，它允许程序和脚本动态地访问和更新文档的内容、结构和样式</p>
-<p>&emsp;&emsp;用比较通俗的解释，DOM是一个接口，是HTML和XML的编程接口，他将一个文档表示为了一棵树，再加上js脚本语言形成web中的对应网页界面</p>
-<p>&emsp;</p>
-<h4 id="2-HTML和XML的区别"><a href="#2-HTML和XML的区别" class="headerlink" title="2.HTML和XML的区别"></a>2.HTML和XML的区别</h4><p>&emsp;&emsp;HTML又称超文本标记语言，是通往web世界的钥匙。它使用了表姐标签的办法来对网页进行描述，它的文档中包含了HTML规定合法的标签以及相关的文本内容，所以一般打开HTML文档就是web页面</p>
-<p>&emsp;&emsp;XML又称可扩展标记语言，用于创建网页和web应用程序。它是动态的，用于传输数据而不是用于显示数据 </p>
-<p>&emsp;&emsp;总的来说，HTML 被设计用来显示数据，其焦点是数据的外观；而XML 被设计用来传输和存储数据，其焦点是数据的内容。</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs html"><span class="hljs-meta">&lt;!DOCTYPE <span class="hljs-keyword">html</span>&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">html</span>&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">head</span>&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">charset</span>=<span class="hljs-string">&quot;utf-8&quot;</span>&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">title</span>&gt;</span>菜鸟教程(runoob.com)<span class="hljs-tag">&lt;/<span class="hljs-name">title</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">head</span>&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">body</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">h1</span>&gt;</span>我的第一个标题<span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>我的第一个段落。<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">body</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">html</span>&gt;</span><br></code></pre></td></tr></table></figure>
-
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-comment">&lt;!--  Edited by XMLSpy®  --&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">note</span>&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">to</span>&gt;</span>Tove<span class="hljs-tag">&lt;/<span class="hljs-name">to</span>&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">from</span>&gt;</span>Jani<span class="hljs-tag">&lt;/<span class="hljs-name">from</span>&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">heading</span>&gt;</span>Reminder<span class="hljs-tag">&lt;/<span class="hljs-name">heading</span>&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">body</span>&gt;</span>Don&#x27;t forget me this weekend!<span class="hljs-tag">&lt;/<span class="hljs-name">body</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">note</span>&gt;</span><br></code></pre></td></tr></table></figure>
-
-<p>&emsp;&emsp;当然我主要研究的是HTML中的DOM结构作为例子</p>
-<p>&emsp;</p>
-<h4 id="3-DOM树形结构"><a href="#3-DOM树形结构" class="headerlink" title="3.DOM树形结构"></a>3.DOM树形结构</h4><CENTER><img src="/img/DOM%E6%94%BB%E5%87%BB%E8%AF%BE%E9%A2%98%E4%B8%80/1.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+                <h1 id="前期准备——HTML温习"><a href="#前期准备——HTML温习" class="headerlink" title="前期准备——HTML温习"></a>前期准备——HTML温习</h1><h4 id="1-什么是HTML？"><a href="#1-什么是HTML？" class="headerlink" title="1.什么是HTML？"></a>1.什么是HTML？</h4><p>&emsp;&emsp;HTML是用来描述网页的一种语言，也就是超文本标记语言。这种语言不是一种编程语言，而是标记语言，其实用标记标签来描述网页。HTML文档也叫做web页面</p>
+<center><img src="/img/DOM%E6%94%BB%E5%87%BB%E8%AF%BE%E9%A2%98%E4%BA%8C/1.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
 </center>
-&emsp;
 
-<h4 id="4-DOM方法和属性"><a href="#4-DOM方法和属性" class="headerlink" title="4.DOM方法和属性"></a>4.DOM方法和属性</h4><p>&emsp;&emsp;我们可以通过 JavaScript （以及其他编程语言）对 HTML DOM 进行访问，所有 HTML 元素被定义为对象，而编程接口则是对象方法和对象属性。在DOM中方法是指我们可以在结点（HTML元素）上执行的动作，二属性则是指我们可以在结点（HTML元素）设置和修改的值</p>
+<p>&emsp;&emsp;在浏览器的页面上使用键盘上的 F12 按键开启调试模式，就可以看到组成标签</p>
 <ul>
-<li><h5 id="方法"><a href="#方法" class="headerlink" title="方法"></a><strong>方法</strong></h5></li>
+<li><p><strong><html></strong> 元素是 HTML 页面的根元素</p>
+</li>
+<li><p><strong><head></strong> 元素包含了文档的元（meta）数据，如 <strong><meta charset="utf-8"></strong> 定义网页编码格式为 <strong>utf-8</strong>。</p>
+</li>
+<li><p><strong><title></strong> 元素描述了文档的标题</p>
+</li>
+<li><p><strong><body></strong> 元素包含了可见的页面内容</p>
+</li>
+<li><p><strong><h1></strong> 元素定义一个大标题</p>
+</li>
+<li><p><strong><p></strong> 元素定义一个段落</p>
+</li>
 </ul>
-<p>&emsp;&emsp;以getElementById()为例，他是作为方法返回带有指定ID的元素</p>
-<CENTER><img src="/img/DOM%E6%94%BB%E5%87%BB%E8%AF%BE%E9%A2%98%E4%B8%80/2.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
-</center>
+<p>&emsp;&emsp;</p>
+<h4 id="2-HTML元素"><a href="#2-HTML元素" class="headerlink" title="2.HTML元素"></a>2.HTML元素</h4><p>&emsp;&emsp;在HTML中，从开始标签起始，到结束标签终止，两者之间的内容为元素。大多数的HTML元素是可以嵌套的（HTML元素可以包含其他HTML元素），HTML文档就是有互相嵌套的HTML元素构成</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">html</span>&gt;</span><br>   <span class="hljs-tag">&lt;<span class="hljs-name">body</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>撩月<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span><br>   <span class="hljs-tag">&lt;/<span class="hljs-name">body</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">html</span>&gt;</span><br></code></pre></td></tr></table></figure>
 
-<p>&emsp;&emsp;一些常用的 HTML DOM 方法：</p>
-<CENTER><img src="/img/DOM%E6%94%BB%E5%87%BB%E8%AF%BE%E9%A2%98%E4%B8%80/3.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
-</center>
-
-<ul>
-<li><h5 id="属性"><a href="#属性" class="headerlink" title="属性"></a>属性</h5></li>
-</ul>
-<p>&emsp;&emsp;以innerHTML为例子，他是结点元素的文本值，其中 innerHTML 属性可用于获取或改变任意 HTML 元素，包括<hrml> 和 <body>。</p>
-<CENTER><img src="/img/DOM%E6%94%BB%E5%87%BB%E8%AF%BE%E9%A2%98%E4%B8%80/4.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
-</center>
-
-<p>&emsp;&emsp;一些常用的 HTML DOM 属性：</p>
-<p>&emsp;&emsp;&emsp;&emsp;innerHTML - 节点（元素）的文本值</p>
-<p>&emsp;&emsp;&emsp;&emsp;parentNode - 节点（元素）的父节点</p>
-<p>&emsp;&emsp;&emsp;&emsp;childNodes - 节点（元素）的子节点</p>
-<p>&emsp;&emsp;&emsp;&emsp;attributes - 节点（元素）的属性节点</p>
+<p>&emsp;&emsp;没有内容的HTML元素被称为空元素，空元素是在开始标签中关闭。譬如：<strong>《br》</strong>（打&lt;&gt;会换行，这里用书名号代替）就是没有关闭标签的空元素，定义换行。</p>
+<p>&emsp;&emsp;值得注意的是，HTML 标签对大小写不敏感：<P> 等同于 <p>。许多网站都使用大写的 HTML 标签。但是万维网联盟（W3C）在 <strong>HTML 4 中推荐</strong>使用小写，所以在未来 (X)HTML 版本中可能强制使用小写</p>
 <p>&emsp;</p>
-<h4 id="5-DOM修改"><a href="#5-DOM修改" class="headerlink" title="5.DOM修改"></a>5.DOM修改</h4><p>&emsp;&emsp;对于HTML DOM的的修改可以意味着许多的不同的方面，比如HTML内容、CSS样式、HTML属性、创建或删除HTML元素、改变事件顺序（处理程序顺序）。</p>
-<p>&emsp;&emsp;以修改文本样式为例子:</p>
-<CENTER><img src="/img/DOM%E6%94%BB%E5%87%BB%E8%AF%BE%E9%A2%98%E4%B8%80/5.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
-</center>
+<h4 id="3-HTML属性"><a href="#3-HTML属性" class="headerlink" title="3.HTML属性"></a>3.HTML属性</h4><p>&emsp;&emsp;首先明确属性是在HTML元素中添加附加信息，一般描述于开始标签并总是以名称/值对的形式出现。比如：<strong>name=”liaoyue”</strong></p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs html"><span class="hljs-comment">&lt;!--HTML 链接由 &lt;a&gt; 标签定义。链接的地址在 href 属性中指定：--&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">href</span>=<span class="hljs-string">&quot;http://www.runoob.com&quot;</span>&gt;</span>这是一个链接<span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span> <br><br><br><span class="hljs-comment">&lt;!--属性值应该始终被包括在引号内,双引号是最常用的，不过使用单引号也没有问题;在某些个别的情况下，比如属性值本身就含有双引号，那么您必须使用单引号，例如：--&gt;</span><br>name=&#x27;John &quot;ShotGun&quot; Nelson&#x27; <br></code></pre></td></tr></table></figure>
 
 <p>&emsp;</p>
-<h4 id="6-DOM事件"><a href="#6-DOM事件" class="headerlink" title="6.DOM事件"></a>6.DOM事件</h4><p>&emsp;&emsp;HTML DOM 允许 JavaScript 对 HTML 事件作出反应。当事件发生时，可以执行 JavaScript，比如当用户点击一个 HTML 元素时。如需在用户点击某个元素时执行代码，请把 JavaScript 代码添加到 HTML 事件属性中：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs javascript">onclick=<span class="hljs-title class_">JavaScript</span><br></code></pre></td></tr></table></figure>
+<h4 id="4-HTML的ID属性"><a href="#4-HTML的ID属性" class="headerlink" title="4.HTML的ID属性"></a>4.HTML的ID属性</h4><p>&emsp;&emsp;HTML的ID属性是为了HTML元素拥有指定唯一的ID，一个HTML文档中不能存在多个相同id元素。ID属性用于指向样式表中的特定样式声明，JavaScript也可以使用它来访问和操作拥有特定ID元素。</p>
+<p>&emsp;&emsp;id的语法是写一个井号（#）后跟一个id名称，然后花括号{}中定义相关的css属性</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><code class="hljs html"><span class="hljs-meta">&lt;!DOCTYPE <span class="hljs-keyword">html</span>&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">html</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">head</span>&gt;</span><br>     <span class="hljs-tag">&lt;<span class="hljs-name">style</span>&gt;</span><span class="language-css"></span><br><span class="language-css"><span class="hljs-selector-id">#liaoyue</span> &#123;</span><br><span class="language-css">  <span class="hljs-attribute">background-color</span>: lightblue;</span><br><span class="language-css">  <span class="hljs-attribute">color</span>: black;</span><br><span class="language-css">  <span class="hljs-attribute">padding</span>: <span class="hljs-number">40px</span>;</span><br><span class="language-css">  <span class="hljs-attribute">text-align</span>: center;</span><br><span class="language-css">&#125;</span><br><span class="language-css">     </span><span class="hljs-tag">&lt;/<span class="hljs-name">style</span>&gt;</span><br>  <span class="hljs-tag">&lt;/<span class="hljs-name">head</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">body</span>&gt;</span><br><br>     <span class="hljs-tag">&lt;<span class="hljs-name">h1</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;liaoyue&quot;</span>&gt;</span>My Header<span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span><br><br>  <span class="hljs-tag">&lt;/<span class="hljs-name">body</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">html</span>&gt;</span><br><br><br><span class="hljs-comment">&lt;!--通过 ID 和链接实现 HTML 书签--&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">href</span>=<span class="hljs-string">&quot;#C4&quot;</span>&gt;</span>跳转到第四章<span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">h2</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;C4&quot;</span>&gt;</span>第四章<span class="hljs-tag">&lt;/<span class="hljs-name">h2</span>&gt;</span><br></code></pre></td></tr></table></figure>
 
-<p>&emsp;&emsp;当用户点击鼠标时、当网页已加载时、当图片已加载时、当鼠标移动到元素上时、当输入字段被改变时、当 HTML 表单被提交时、当用户触发按键时;</p>
-<CENTER><img src="/img/DOM%E6%94%BB%E5%87%BB%E8%AF%BE%E9%A2%98%E4%B8%80/6.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+<p>&emsp;&emsp;在JavaScript也可以使用id属性为特定元素执行某些任务，比如使用<code>getElementById()</code> 方法访问拥有特定 id 的元素：</p>
+<center><img src="/img/DOM%E6%94%BB%E5%87%BB%E8%AF%BE%E9%A2%98%E4%BA%8C/2.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
 </center>
 
-<CENTER><img src="/img/DOM%E6%94%BB%E5%87%BB%E8%AF%BE%E9%A2%98%E4%B8%80/7.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+<p>&emsp;&emsp;</p>
+<h4 id="5-HTML的script标签"><a href="#5-HTML的script标签" class="headerlink" title="5.HTML的script标签"></a>5.HTML的script标签</h4><p>&emsp;&emsp;HTML**<script><strong>标签用于定义客户端脚本（JavaScript），</strong><script>**元素元素即可包含脚本语句，也可通过src属性指向外部脚本文件。一般来说，JavaScript的常见用途是图像处理、表单验证和内容的动态更改。</p>
+<center><img src="/img/DOM%E6%94%BB%E5%87%BB%E8%AF%BE%E9%A2%98%E4%BA%8C/3.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
 </center>
 
-<p>&emsp;&emsp;总的来说，就是当触发了某些操作条件后，会对页面内容进行修改，达到交互的结果。比如当用户进入或离开页面时，会触发 onload 和 onunload 事件。onload 事件可用于检查访客的浏览器类型和版本，以便基于这些信息来加载不同版本的网页。onload 和 onunload 事件可用于处理 cookies。</p>
+<p>&emsp;&emsp;需选取 HTML 元素，JavaScript 最常用 <code>document.getElementById()</code> 方法。</p>
+<p>&emsp;</p>
+<h4 id="6-HTML全局属性"><a href="#6-HTML全局属性" class="headerlink" title="6.HTML全局属性"></a>6.HTML全局属性</h4><center><img src="/img/DOM%E6%94%BB%E5%87%BB%E8%AF%BE%E9%A2%98%E4%BA%8C/4.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
 
                 
               </div>
@@ -358,8 +347,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>DOM</div>
-      <div>https://one-null-pointer.github.io/2023/02/01/DOM攻击课题一/</div>
+      <div>前期准备——HTML温习</div>
+      <div>https://one-null-pointer.github.io/2023/02/01/DOM攻击课题二/</div>
     </div>
     <div class="license-meta">
       
@@ -400,6 +389,12 @@
                 <div class="post-prevnext my-3">
                   <article class="post-prev col-6">
                     
+                    
+                      <a href="/2023/02/03/DOM%E6%94%BB%E5%87%BB%E8%AF%BE%E9%A2%98%E4%B8%80/" title="前期准备——DOM了解">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">前期准备——DOM了解</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
                     
                   </article>
                   <article class="post-next col-6">
