@@ -16,23 +16,23 @@
   <meta name="author" content="liaoyue">
   <meta name="keywords" content="">
   
-    <meta name="description" content="文件上传——CVE等漏洞&amp;emsp;&amp;emsp;就生活而言文件上传的漏洞不仅仅是代码层面上的漏洞，有些时候也存在着搭建上传环境的服务漏洞，譬如CVE-2015-5254、CVE-2017-12615、CVE-2019-2618等等多种漏洞">
+    <meta name="description" content="文件上传——CVE、中间件解析相关漏洞0.前言&amp;emsp;&amp;emsp;就生活而言文件上传的漏洞不仅仅是代码层面上的漏洞，有些时候也存在着搭建上传环境的服务漏洞或者是中间件中的解析漏洞，譬如CVE-2015-5254、CVE-2017-12615、CVE-2019-2618等等多种漏洞（可以在vulhub网站中搭建相关平台），有或者是Apache、Nginx等中间件平台的上传解析。我们一般用nmap">
 <meta property="og:type" content="article">
-<meta property="og:title" content="文件上传——CVE等漏洞">
+<meta property="og:title" content="文件上传——CVE、中间件解析相关漏洞">
 <meta property="og:url" content="https://one-null-pointer.github.io/2022/09/13/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E2%80%94%E2%80%94CVE%E7%AD%89%E6%BC%8F%E6%B4%9E/index.html">
 <meta property="og:site_name" content="one-null-poniter">
-<meta property="og:description" content="文件上传——CVE等漏洞&amp;emsp;&amp;emsp;就生活而言文件上传的漏洞不仅仅是代码层面上的漏洞，有些时候也存在着搭建上传环境的服务漏洞，譬如CVE-2015-5254、CVE-2017-12615、CVE-2019-2618等等多种漏洞">
+<meta property="og:description" content="文件上传——CVE、中间件解析相关漏洞0.前言&amp;emsp;&amp;emsp;就生活而言文件上传的漏洞不仅仅是代码层面上的漏洞，有些时候也存在着搭建上传环境的服务漏洞或者是中间件中的解析漏洞，譬如CVE-2015-5254、CVE-2017-12615、CVE-2019-2618等等多种漏洞（可以在vulhub网站中搭建相关平台），有或者是Apache、Nginx等中间件平台的上传解析。我们一般用nmap">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://one-null-pointer.github.io/img/web1.png">
 <meta property="article:published_time" content="2022-09-13T12:23:45.000Z">
-<meta property="article:modified_time" content="2023-02-23T12:27:07.898Z">
+<meta property="article:modified_time" content="2023-02-24T07:42:16.345Z">
 <meta property="article:author" content="liaoyue">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://one-null-pointer.github.io/img/web1.png">
   
   
   
-  <title>文件上传——CVE等漏洞 - one-null-poniter</title>
+  <title>文件上传——CVE、中间件解析相关漏洞 - one-null-poniter</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -185,7 +185,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="文件上传——CVE等漏洞"></span>
+            <span id="subtitle" data-typed-text="文件上传——CVE、中间件解析相关漏洞"></span>
           
         </div>
 
@@ -208,7 +208,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          119 words
+          876 words
         
       </span>
     
@@ -219,7 +219,7 @@
         
         
         
-          1 mins
+          8 mins
         
       </span>
     
@@ -257,12 +257,47 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">文件上传——CVE等漏洞</h1>
+            <h1 style="display: none">文件上传——CVE、中间件解析相关漏洞</h1>
             
             
               <div class="markdown-body">
                 
-                <h1 id="文件上传——CVE等漏洞"><a href="#文件上传——CVE等漏洞" class="headerlink" title="文件上传——CVE等漏洞"></a>文件上传——CVE等漏洞</h1><p>&emsp;&emsp;就生活而言文件上传的漏洞不仅仅是代码层面上的漏洞，有些时候也存在着搭建上传环境的服务漏洞，譬如CVE-2015-5254、CVE-2017-12615、CVE-2019-2618等等多种漏洞</p>
+                <h1 id="文件上传——CVE、中间件解析相关漏洞"><a href="#文件上传——CVE、中间件解析相关漏洞" class="headerlink" title="文件上传——CVE、中间件解析相关漏洞"></a>文件上传——CVE、中间件解析相关漏洞</h1><h4 id="0-前言"><a href="#0-前言" class="headerlink" title="0.前言"></a>0.前言</h4><p>&emsp;&emsp;就生活而言文件上传的漏洞不仅仅是代码层面上的漏洞，有些时候也存在着搭建上传环境的服务漏洞或者是中间件中的解析漏洞，譬如CVE-2015-5254、CVE-2017-12615、CVE-2019-2618等等多种漏洞（可以在vulhub网站中搭建相关平台），有或者是Apache、Nginx等中间件平台的上传解析。我们一般用nmap进行端口扫描，查看对应版本查找相关漏洞</p>
+<p>&emsp;</p>
+<h4 id="1-CVE漏洞举例：CVE-2017-12615"><a href="#1-CVE漏洞举例：CVE-2017-12615" class="headerlink" title="1.CVE漏洞举例：CVE-2017-12615"></a>1.CVE漏洞举例：CVE-2017-12615</h4><p>&emsp;&emsp;2017年9月19日，Apache Tomcat官方确认的高位漏洞，漏洞CVE编号CVE-2017-12615。当在windows主机上运行Tomcat并启用HTTP PUT请求方式时，攻击者就可能通过精心构造的攻击请求向服务器上传包含任意代码的JSP文件并使其被执行。影响版本为Apache Tomcat 7.0.0 - 7.0.81</p>
+<center><img src="/img/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E2%80%94%E2%80%94CVE%E7%AD%89%E6%BC%8F%E6%B4%9E/1.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<center><img src="/img/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E2%80%94%E2%80%94CVE%E7%AD%89%E6%BC%8F%E6%B4%9E/2.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<center><img src="/img/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E2%80%94%E2%80%94CVE%E7%AD%89%E6%BC%8F%E6%B4%9E/3.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<p>&emsp;</p>
+<h4 id="2-IIS版本（解析漏洞-上传漏洞）"><a href="#2-IIS版本（解析漏洞-上传漏洞）" class="headerlink" title="2.IIS版本（解析漏洞+上传漏洞）"></a>2.IIS版本（解析漏洞+上传漏洞）</h4><p>&emsp;&emsp;在IIS6.0中，对文件夹而言，正常路径是image/qq.jpg，而如果是iamge.asp/qq.jpg，则qq.jpg就会被当做asp解析。对于文件而言，正常文件命名是image.jpg，而改为image.asp;.jpg或者是xxx.asp;xxx.jpg，则该文件就会被当做asp执行。在这当中asp可以换成php，如果换成php则就当php文件执行。</p>
+<center><img src="/img/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E2%80%94%E2%80%94CVE%E7%AD%89%E6%BC%8F%E6%B4%9E/4.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<center><img src="/img/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E2%80%94%E2%80%94CVE%E7%AD%89%E6%BC%8F%E6%B4%9E/5.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<p>&emsp;</p>
+<h4 id="3-Nginx版本（解析漏洞-上传漏洞）"><a href="#3-Nginx版本（解析漏洞-上传漏洞）" class="headerlink" title="3.Nginx版本（解析漏洞+上传漏洞）"></a>3.Nginx版本（解析漏洞+上传漏洞）</h4><p>&emsp;&emsp;存在低版本的Nginx，在文件后面加入/xxx.php，那么这个文件就会被当做php文件执行，只要我们上传一个图片后缀的文件，使用此方法，就能插入恶意代码执行php代码内容</p>
+<center><img src="/img/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E2%80%94%E2%80%94CVE%E7%AD%89%E6%BC%8F%E6%B4%9E/6.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<center><img src="/img/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E2%80%94%E2%80%94CVE%E7%AD%89%E6%BC%8F%E6%B4%9E/7.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<center><img src="/img/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E2%80%94%E2%80%94CVE%E7%AD%89%E6%BC%8F%E6%B4%9E/8.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<center><img src="/img/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E2%80%94%E2%80%94CVE%E7%AD%89%E6%BC%8F%E6%B4%9E/9.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<p>&emsp;</p>
+<h4 id="4-总结思路"><a href="#4-总结思路" class="headerlink" title="4.总结思路"></a>4.总结思路</h4><p>&emsp;&emsp;当给一个文件上传漏洞判断时，首先查看是否有二次渲染，然后当是没有代码的黑盒测试时，就需要盲猜是什么代码构造，最后就是看中间件一些服务平台的版本是否存在相关的上传缺陷或者解析漏洞</p>
 
                 
               </div>
@@ -301,7 +336,7 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>文件上传——CVE等漏洞</div>
+      <div>文件上传——CVE、中间件解析相关漏洞</div>
       <div>https://one-null-pointer.github.io/2022/09/13/文件上传——CVE等漏洞/</div>
     </div>
     <div class="license-meta">
