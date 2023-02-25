@@ -1,0 +1,674 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="liaoyue">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="密码学复习内容（一）0.前言&amp;emsp;&amp;emsp;复习内容来源于三个部分，一个是老师给的试卷例题（由于是考完试再放的，所以忘记例题文件在哪了），一个是网上的大佬解析，最最重要的是来源于上一届学霸师姐的密码学笔记（绝对是救命大佬，看字体就知道哪个是学姐写的了，字有漂亮的那个就是） 1.完善保密两种定义等价性的证明&amp;emsp;&amp;emsp;1）什么是完善保密理论    &amp;emsp;&amp;emsp;本质：当">
+<meta property="og:type" content="article">
+<meta property="og:title" content="密码学复习内容（一）">
+<meta property="og:url" content="https://one-null-pointer.github.io/2021/12/15/%E5%AF%86%E7%A0%81%E5%AD%A6%E5%A4%8D%E4%B9%A0%E5%86%85%E5%AE%B9%EF%BC%88%E4%B8%80%EF%BC%89/index.html">
+<meta property="og:site_name" content="one-null-poniter">
+<meta property="og:description" content="密码学复习内容（一）0.前言&amp;emsp;&amp;emsp;复习内容来源于三个部分，一个是老师给的试卷例题（由于是考完试再放的，所以忘记例题文件在哪了），一个是网上的大佬解析，最最重要的是来源于上一届学霸师姐的密码学笔记（绝对是救命大佬，看字体就知道哪个是学姐写的了，字有漂亮的那个就是） 1.完善保密两种定义等价性的证明&amp;emsp;&amp;emsp;1）什么是完善保密理论    &amp;emsp;&amp;emsp;本质：当">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://one-null-pointer.github.io/img/cryptography.png">
+<meta property="article:published_time" content="2021-12-15T09:41:47.000Z">
+<meta property="article:modified_time" content="2023-02-25T10:17:34.566Z">
+<meta property="article:author" content="liaoyue">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://one-null-pointer.github.io/img/cryptography.png">
+  
+  
+  
+  <title>密码学复习内容（一） - one-null-poniter</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"one-null-pointer.github.io","root":"/","version":"1.9.2","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 5.4.2"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>one null pointer</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                吾
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                學
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                類
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="密码学复习内容（一）"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2021-12-15 17:41" pubdate>
+          December 15, 2021 pm
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          1.2k words
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          10 mins
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">密码学复习内容（一）</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="密码学复习内容（一）"><a href="#密码学复习内容（一）" class="headerlink" title="密码学复习内容（一）"></a>密码学复习内容（一）</h1><h4 id="0-前言"><a href="#0-前言" class="headerlink" title="0.前言"></a>0.前言</h4><p>&emsp;&emsp;复习内容来源于三个部分，一个是老师给的试卷例题（由于是考完试再放的，所以忘记例题文件在哪了），一个是网上的大佬解析，最最重要的是来源于上一届学霸师姐的密码学笔记（绝对是救命大佬，看字体就知道哪个是学姐写的了，字有漂亮的那个就是）</p>
+<h4 id="1-完善保密两种定义等价性的证明"><a href="#1-完善保密两种定义等价性的证明" class="headerlink" title="1.完善保密两种定义等价性的证明"></a>1.完善保密两种定义等价性的证明</h4><p>&emsp;&emsp;1）什么是完善保密理论</p>
+<center><img src="/img/%E5%AF%86%E7%A0%81%E5%AD%A6%E5%A4%8D%E4%B9%A0%E5%86%85%E5%AE%B9%EF%BC%88%E4%B8%80%EF%BC%89/1.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<p>&emsp;&emsp;本质：当攻击者得到一个密文后，是无法判断密文是来自于明文中的哪一个，因为这个密文来自于每一个明文的概率是一样的。这样子的对称加密方案是完善保密的。</p>
+<p>&emsp;&emsp;前提条件： 攻击者只能窃听到密文且拥有无限的计算资源。</p>
+<p>&emsp;&emsp;2）概率论基础</p>
+<center><img src="/img/%E5%AF%86%E7%A0%81%E5%AD%A6%E5%A4%8D%E4%B9%A0%E5%86%85%E5%AE%B9%EF%BC%88%E4%B8%80%EF%BC%89/2.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<p>&emsp;&emsp;3）两种定义等价证明</p>
+<center><img src="/img/%E5%AF%86%E7%A0%81%E5%AD%A6%E5%A4%8D%E4%B9%A0%E5%86%85%E5%AE%B9%EF%BC%88%E4%B8%80%EF%BC%89/3.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<center><img src="/img/%E5%AF%86%E7%A0%81%E5%AD%A6%E5%A4%8D%E4%B9%A0%E5%86%85%E5%AE%B9%EF%BC%88%E4%B8%80%EF%BC%89/4.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<center><img src="/img/%E5%AF%86%E7%A0%81%E5%AD%A6%E5%A4%8D%E4%B9%A0%E5%86%85%E5%AE%B9%EF%BC%88%E4%B8%80%EF%BC%89/5.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<center><img src="/img/%E5%AF%86%E7%A0%81%E5%AD%A6%E5%A4%8D%E4%B9%A0%E5%86%85%E5%AE%B9%EF%BC%88%E4%B8%80%EF%BC%89/6.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<p>&emsp;</p>
+<h4 id="2-PRG-PRF定义的伪随机性"><a href="#2-PRG-PRF定义的伪随机性" class="headerlink" title="2.PRG/PRF定义的伪随机性"></a>2.PRG/PRF定义的伪随机性</h4><p>&emsp;1）PRG定义的伪随机性</p>
+<p>&emsp;2）PRF定义的伪随机性</p>
+<p>&emsp;</p>
+<h4 id="3-PRG-PRF的例题：怎么证明某函数不是PRG-PRF"><a href="#3-PRG-PRF的例题：怎么证明某函数不是PRG-PRF" class="headerlink" title="3.PRG/PRF的例题：怎么证明某函数不是PRG/PRF"></a>3.PRG/PRF的例题：怎么证明某函数不是PRG/PRF</h4><p>&emsp;1）证明题一：if G is PRG,then Π is eav—secure</p>
+<center><img src="/img/%E5%AF%86%E7%A0%81%E5%AD%A6%E5%A4%8D%E4%B9%A0%E5%86%85%E5%AE%B9%EF%BC%88%E4%B8%80%EF%BC%89/7.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<p>&emsp;2）证明题二：if F is PRF,then Π is cpa-secure</p>
+<center><img src="/img/%E5%AF%86%E7%A0%81%E5%AD%A6%E5%A4%8D%E4%B9%A0%E5%86%85%E5%AE%B9%EF%BC%88%E4%B8%80%EF%BC%89/8.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<p>&emsp;</p>
+<h4 id="4-PRG构造EAV-secure加密方案"><a href="#4-PRG构造EAV-secure加密方案" class="headerlink" title="4.PRG构造EAV-secure加密方案"></a>4.PRG构造EAV-secure加密方案</h4><center><img src="/img/%E5%AF%86%E7%A0%81%E5%AD%A6%E5%A4%8D%E4%B9%A0%E5%86%85%E5%AE%B9%EF%BC%88%E4%B8%80%EF%BC%89/9.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<center><img src="/img/%E5%AF%86%E7%A0%81%E5%AD%A6%E5%A4%8D%E4%B9%A0%E5%86%85%E5%AE%B9%EF%BC%88%E4%B8%80%EF%BC%89/10.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<p>&emsp;&emsp;Privk（交互机模型）</p>
+<p>&emsp;&emsp;EAV的单消息安全并不代表多消息安全</p>
+<p>&emsp;</p>
+<h4 id="5-PRF构造CPA-secure加密方案（需要看例题）"><a href="#5-PRF构造CPA-secure加密方案（需要看例题）" class="headerlink" title="5.PRF构造CPA-secure加密方案（需要看例题）"></a>5.PRF构造CPA-secure加密方案（需要看例题）</h4><p>&emsp;&emsp;由于语义安全模型的局限性：只考虑了攻击者询问一次挑战者的情况，而没有考虑多次询问的情况。为此，提出了新的安全模型CPA模型，以讨论多次询问挑战者时的安全性问题。</p>
+<p>&emsp;&emsp;在CPA安全中，攻击者可以发动选择明文攻击，攻击的目的是区分挑战者返回的密文包含的到底是那个明文。CPA安全性的定义与语义安全性定义类似，只不过，CPA安全模型中允许攻击者多次询问挑战者。</p>
+<center><img src="/img/%E5%AF%86%E7%A0%81%E5%AD%A6%E5%A4%8D%E4%B9%A0%E5%86%85%E5%AE%B9%EF%BC%88%E4%B8%80%EF%BC%89/11.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<p>&emsp;</p>
+<h4 id="6-CCA安全性的基本理解-需要看例题"><a href="#6-CCA安全性的基本理解-需要看例题" class="headerlink" title="6.CCA安全性的基本理解(需要看例题)"></a>6.CCA安全性的基本理解(需要看例题)</h4><p>&emsp;&emsp;在上面我们介绍了CPA安全，CPA安全作为选择明文攻击，考虑到了多次询问明文给予密文的情况，但是依旧存在一种攻击，它能够在多次询问明文给予密文的情况下，同时多次询问密文基于明文，这就就是所谓的CCA攻击，也就是选择密文攻击。</p>
+<p>&emsp;&emsp;在CCA安全中，攻击者可以发动选择密文攻击，攻击的目的是区分挑战者返回的密文包含的到底是那个明文。</p>
+<center><img src="/img/%E5%AF%86%E7%A0%81%E5%AD%A6%E5%A4%8D%E4%B9%A0%E5%86%85%E5%AE%B9%EF%BC%88%E4%B8%80%EF%BC%89/12.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<p>&emsp;&emsp;问题：为什么满足cpa却不满足cca？</p>
+<p>&emsp;</p>
+<h4 id="7-MAC的安全性（消息认证码）"><a href="#7-MAC的安全性（消息认证码）" class="headerlink" title="7.MAC的安全性（消息认证码）"></a>7.MAC的安全性（消息认证码）</h4><p>&emsp;&emsp;1）随机化IV  </p>
+<center><img src="/img/%E5%AF%86%E7%A0%81%E5%AD%A6%E5%A4%8D%E4%B9%A0%E5%86%85%E5%AE%B9%EF%BC%88%E4%B8%80%EF%BC%89/13.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<p>&emsp;&emsp;2）输出中间值</p>
+<center><img src="/img/%E5%AF%86%E7%A0%81%E5%AD%A6%E5%A4%8D%E4%B9%A0%E5%86%85%E5%AE%B9%EF%BC%88%E4%B8%80%EF%BC%89/14.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<p>&emsp;&emsp;3）把消息放在末尾</p>
+<center><img src="/img/%E5%AF%86%E7%A0%81%E5%AD%A6%E5%A4%8D%E4%B9%A0%E5%86%85%E5%AE%B9%EF%BC%88%E4%B8%80%EF%BC%89/15.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<p>&emsp;</p>
+<h4 id="8-哈希函数的三个安全性质及关系"><a href="#8-哈希函数的三个安全性质及关系" class="headerlink" title="8.哈希函数的三个安全性质及关系"></a>8.哈希函数的三个安全性质及关系</h4><center><img src="/img/%E5%AF%86%E7%A0%81%E5%AD%A6%E5%A4%8D%E4%B9%A0%E5%86%85%E5%AE%B9%EF%BC%88%E4%B8%80%EF%BC%89/16.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<center><img src="/img/%E5%AF%86%E7%A0%81%E5%AD%A6%E5%A4%8D%E4%B9%A0%E5%86%85%E5%AE%B9%EF%BC%88%E4%B8%80%EF%BC%89/17.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<p>&emsp;</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E5%AF%86%E7%A0%81%E5%AD%A6%E7%AC%94%E8%AE%B0/" class="category-chain-item">密码学笔记</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>密码学复习内容（一）</div>
+      <div>https://one-null-pointer.github.io/2021/12/15/密码学复习内容（一）/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>Author</div>
+          <div>liaoyue</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>Posted on</div>
+          <div>December 15, 2021</div>
+        </div>
+      
+      
+      <div class="license-meta-item">
+        <div>传送口</div>
+        <div>
+          
+            
+            
+              <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+              <span class="hint--top hint--rounded" aria-label="点击进行传送">
+                <i class="iconfont icon-by"></i>
+              </span>
+              </a>
+            
+          
+        </div>
+      </div>
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2021/12/18/%E5%AF%86%E7%A0%81%E5%AD%A6%E5%A4%8D%E4%B9%A0%E5%86%85%E5%AE%B9%EF%BC%88%E4%BA%8C%EF%BC%89/" title="密码学复习内容（二）">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">密码学复习内容（二）</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/12/05/%E5%AF%86%E7%A0%81%E5%AD%A6%E7%9F%A5%E8%AF%86%EF%BC%88%E4%B8%89%EF%BC%89/" title="密码学知识（三）">
+                        <span class="hidden-mobile">密码学知识（三）</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;Table of Contents</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">Keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://github.com/" target="_blank" rel="nofollow noopener"><span>pointer</span></a> <i class="iconfont icon-love"></i> <a href="https://mp.weixin.qq.com/s/6ncLUtaiJ9j_sMjZT5z-2w" target="_blank" rel="nofollow noopener"><span>一个爱学习的空指针</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      headingSelector : CONFIG.toc.headingSelector || 'h1,h2,h3,h4,h5,h6',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      collapseDepth   : CONFIG.toc.collapseDepth || 0,
+      scrollSmooth    : true,
+      headingsOffset  : -boardTop
+    });
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.10/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">Blog works best with JavaScript enabled</div>
+  </noscript>
+</body>
+</html>
