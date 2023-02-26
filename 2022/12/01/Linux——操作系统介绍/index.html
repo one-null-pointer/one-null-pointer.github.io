@@ -1,0 +1,722 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="liaoyue">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="Linux——操作系统介绍0.前言&amp;emsp;&amp;emsp;其实我用Linux使用的比较少，可以说除了老师作业基本不怎么玩Linux系统，但是在面试某个的面试官问我Linux系统的东西时间，我懵逼了，所以我觉得有必要学习Linux的相关知识和体系 &amp;emsp; 1.操作系统简史&amp;emsp;&amp;emsp;1946年2月，美国宾夕法尼亚大学诞生了第一台电子计算机，这款计算机由大量的电子管构成，体型十分的庞">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linux——操作系统介绍">
+<meta property="og:url" content="https://one-null-pointer.github.io/2022/12/01/Linux%E2%80%94%E2%80%94%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E4%BB%8B%E7%BB%8D/index.html">
+<meta property="og:site_name" content="one-null-poniter">
+<meta property="og:description" content="Linux——操作系统介绍0.前言&amp;emsp;&amp;emsp;其实我用Linux使用的比较少，可以说除了老师作业基本不怎么玩Linux系统，但是在面试某个的面试官问我Linux系统的东西时间，我懵逼了，所以我觉得有必要学习Linux的相关知识和体系 &amp;emsp; 1.操作系统简史&amp;emsp;&amp;emsp;1946年2月，美国宾夕法尼亚大学诞生了第一台电子计算机，这款计算机由大量的电子管构成，体型十分的庞">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://one-null-pointer.github.io/img/Linux.png">
+<meta property="article:published_time" content="2022-12-01T04:19:57.000Z">
+<meta property="article:modified_time" content="2023-02-26T08:28:55.896Z">
+<meta property="article:author" content="liaoyue">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://one-null-pointer.github.io/img/Linux.png">
+  
+  
+  
+  <title>Linux——操作系统介绍 - one-null-poniter</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"one-null-pointer.github.io","root":"/","version":"1.9.2","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 5.4.2"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>one null pointer</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                吾
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                學
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                類
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="Linux——操作系统介绍"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2022-12-01 12:19" pubdate>
+          December 1, 2022 pm
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          3.3k words
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          28 mins
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Linux——操作系统介绍</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="Linux——操作系统介绍"><a href="#Linux——操作系统介绍" class="headerlink" title="Linux——操作系统介绍"></a>Linux——操作系统介绍</h1><h4 id="0-前言"><a href="#0-前言" class="headerlink" title="0.前言"></a>0.前言</h4><p>&emsp;&emsp;其实我用Linux使用的比较少，可以说除了老师作业基本不怎么玩Linux系统，但是在面试某个的面试官问我Linux系统的东西时间，我懵逼了，所以我觉得有必要学习Linux的相关知识和体系</p>
+<p>&emsp;</p>
+<h4 id="1-操作系统简史"><a href="#1-操作系统简史" class="headerlink" title="1.操作系统简史"></a>1.操作系统简史</h4><p>&emsp;&emsp;1946年2月，美国宾夕法尼亚大学诞生了第一台电子计算机，这款计算机由大量的电子管构成，体型十分的庞大。在最开始的计算机最后并没有操作系统的概念，计算机采用手工操作，程序员将对应程序和数据的打孔纸带装入输入机器当中，然后启动输入机器将程序和数据输入计算机内存最后控制运行计算结果，完成后要取下纸带才能让下一个用户使用。</p>
+<p>&emsp;&emsp;这种方式的缺点很明显，用户独占全机，系统资源的利用效率十分低下，计算机只能单用户单任务的执行操作，中途也无法暂停。为了解决这种问题，操作系统的概念由此出现，从批处理系统、多道程序系统、分时系统到最后的实时系统不断根据时代的需求向前发展</p>
+<center><img src="/img/Linux%E2%80%94%E2%80%94%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E4%BB%8B%E7%BB%8D/1.png" srcset="/img/loading.gif" lazyload style="zoom:60%;" />
+</center>
+
+<p>&emsp;</p>
+<h4 id="2-Linux的诞生与分支"><a href="#2-Linux的诞生与分支" class="headerlink" title="2.Linux的诞生与分支"></a>2.Linux的诞生与分支</h4><p>&emsp;&emsp;在计算机的硬件发展中，随着使用的人数增加带来了巨大的利益，发明UNIX的AT&amp;T收回了相应的版权，大家无法免费使用Unix，大学也不能将Unix源码作为教材教导学生，新的开源免费操作系统迫在眉睫。</p>
+<p>&emsp;&emsp;首先是Andrew S. Tanenbaum在Unix源码不开源的条件下，写出了另一个的操作系统Minix（mini—Unix），最后由Linus Torvalds研究Minix并在此基础上开发，最终写出了玩具版的操作系统Linux，自此以后，世界上第一款Linux操作系统诞生了。由于其开源和免费的理念，吸引了许多的电脑高手投入到了开发、改善、发展的Linux历史之中，最终演变成如今强大的Linux系统。</p>
+<center><img src="/img/Linux%E2%80%94%E2%80%94%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E4%BB%8B%E7%BB%8D/2.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<p>&emsp;&emsp;Linux系统发行版流派众多。目前有Red Hat、Debian、Suse、Ubuntu等发行版本，它们都使用Linux内核，都是Linux系统，却有各自的特点。总体来说，Linux的发行版本大体分可为两类，一类是商业公司维护的发行版本，一类是社区组织维护的发行版本。前者以Redhat（RHEL）为代表，后者以Debian为代表。</p>
+<p>&emsp;</p>
+<h4 id="3-Linux内核和发行版"><a href="#3-Linux内核和发行版" class="headerlink" title="3.Linux内核和发行版"></a>3.Linux内核和发行版</h4><p>&emsp;&emsp;Linux的内核和发行版并不是一个概念：</p>
+<ul>
+<li>Linux内核：Linux内核是Linus领导的开发小组负责维护，版本唯一，提供硬件抽象层、硬盘、文件系统控制以及多任务功能的系统核心程序。作为系统的心脏，运行程序和管理像磁盘和打印机等硬件设备的核心程序</li>
+<li>Linux发行版：Linux发行版就是由Linux内核与工作常用软件的集合产品。不同标准将Linux发行版进行了不同性质的分类，比如根据社区维护还是商业公司维护，Linux发行版本分为了三个分支===》Redhat家族、Debian家族以及ShackWare家族</li>
+</ul>
+<p>&emsp;&emsp;总的来说，Linux核心只有内核部分，安装好内核后，是没有所谓的用户界面和软件的，内核可以作为是Linux最基层的代码，而Linux发行版，是在内核的基础上，加入用户界面，软件支持，以内核为基础，开发不同应用的程序，组成完整的操作系统。</p>
+<p>&emsp;</p>
+<h4 id="4-Linux系统结构"><a href="#4-Linux系统结构" class="headerlink" title="4.Linux系统结构"></a>4.Linux系统结构</h4><p>&emsp;&emsp;Linux系统的内部结构一般而言主要分为四个部分：内核、shell、文件系统和应用程序。前三者构成了基本的操作系统结构，使得用户能够运行程序、管理文件和使用系统。</p>
+<ul>
+<li><p>内核：</p>
+<p>操作系统核心，负责管理系统的进程、内存、设备驱动程序等等，决定着系统的性能和稳定性</p>
+</li>
+<li><p>shell：</p>
+<p>shell是系统的用户界面，提供了用户与内核进行交互的一种接口，它接收用户输入端命令并把它送入内核去执行，是一种命令解释器。由于shell编程语言具有普通编程语言的很多特点，用这种编程语言编写的shell程序与其他应用程序具有相同的效果</p>
+</li>
+<li><p>文件系统：</p>
+<p>文件系统就是文件存放在磁盘等存储设备上的组织方法</p>
+</li>
+<li><p>应用程序</p>
+<p>标准的Linux系统一般都有一套称为应用程序的程序集合，包括了文本编辑器、编程语言、X Window、办公套件、数据库等</p>
+</li>
+</ul>
+<p>&emsp;</p>
+<h4 id="5-Linux帮助命令"><a href="#5-Linux帮助命令" class="headerlink" title="5.Linux帮助命令"></a>5.Linux帮助命令</h4><p>&emsp;&emsp;Linux下常用的帮助命令有man和help，当需要查询一些命令或函数的具体使用方法时，就可以使用man，主要输入命令man后输入想要获取的命令别称，man就会列出一份完整的锁门，其中内容包括命令语法、各选项的意义以及相关命令等等</p>
+<ul>
+<li>man命令选项说明表</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th align="center">选项</th>
+<th align="center">说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">-f</td>
+<td align="center">只显示出命令的功能而不显示其中详细的说明文件</td>
+</tr>
+<tr>
+<td align="center">-w</td>
+<td align="center">不显示手册页，只显示将被格式化和显示的文件所在位置</td>
+</tr>
+<tr>
+<td align="center">-a</td>
+<td align="center">显示所有的手册页，而不是只显示第一个</td>
+</tr>
+<tr>
+<td align="center">-E</td>
+<td align="center">在每行的末尾显示$符号</td>
+</tr>
+</tbody></table>
+<p>&emsp;&emsp;help命令用于查看所有shell命令，用户可以通过该命令寻求shell命令的用法，只需在所查找的命令后输入help命令，就能查命令的内容了</p>
+<center><img src="/img/Linux%E2%80%94%E2%80%94%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E4%BB%8B%E7%BB%8D/3.png" srcset="/img/loading.gif" lazyload style="zoom:60%;" />
+</center>
+
+<p>&emsp;</p>
+<h4 id="6-Linux常用快捷键和脚本命令"><a href="#6-Linux常用快捷键和脚本命令" class="headerlink" title="6.Linux常用快捷键和脚本命令"></a>6.Linux常用快捷键和脚本命令</h4><center><img src="/img/Linux%E2%80%94%E2%80%94%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E4%BB%8B%E7%BB%8D/4.png" srcset="/img/loading.gif" lazyload style="zoom:100%;" />
+</center>
+
+<p>&emsp;&emsp;（图片来源：<a target="_blank" rel="noopener" href="https://www.cnblogs.com/youngchaolin/p/10962049.html%EF%BC%89">https://www.cnblogs.com/youngchaolin/p/10962049.html）</a></p>
+<p>&emsp;</p>
+<h4 id="7-Linux别名配置"><a href="#7-Linux别名配置" class="headerlink" title="7.Linux别名配置"></a>7.Linux别名配置</h4><p>&emsp;&emsp;在Linux系统中有一个叫作alias的命令，它可以给一些命令设置别名。</p>
+<figure class="highlight delphi"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs delphi"><span class="hljs-keyword">alias</span>[<span class="hljs-keyword">name</span>[=value]]<br></code></pre></td></tr></table></figure>
+
+<p>&emsp;&emsp;这里需要注意的是等号前后不能有空格，并且如果vakue中有空格或者tab，则value需要使用引号括起来</p>
+<figure class="highlight elixir"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs elixir">[roc<span class="hljs-variable">@roclinux</span> ~]<span class="hljs-variable">$ </span><span class="hljs-keyword">alias</span> vi=<span class="hljs-string">&#x27;vim&#x27;</span><br><br>//查看别名<br>[roc<span class="hljs-variable">@roclinux</span> ~]<span class="hljs-variable">$ </span><span class="hljs-keyword">alias</span><br></code></pre></td></tr></table></figure>
+
+<center><img src="/img/Linux%E2%80%94%E2%80%94%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E4%BB%8B%E7%BB%8D/5.png" srcset="/img/loading.gif" lazyload style="zoom:100%;" />
+</center>
+
+<p>&emsp;&emsp;（<a target="_blank" rel="noopener" href="http://c.biancheng.net/linux/alias.html%EF%BC%89">http://c.biancheng.net/linux/alias.html）</a></p>
+<p>&emsp;</p>
+<h4 id="8-Linux通配符"><a href="#8-Linux通配符" class="headerlink" title="8.Linux通配符"></a>8.Linux通配符</h4><p>&emsp;&emsp;Linux通配符是由shell解析，一般用于匹配问津名，实际上是shell解释器去解析的特殊符号，Linux系统通常的通配符主要有：</p>
+<ul>
+<li>*：匹配任意多个字符</li>
+<li>?：匹配任意一个字符</li>
+<li>[…]：匹配中括号内出现的任意一个字符</li>
+<li>[!…]：不匹配中括号内出现的任意一个字符</li>
+</ul>
+<p>&emsp;</p>
+<h4 id="9-Linux环境变量"><a href="#9-Linux环境变量" class="headerlink" title="9.Linux环境变量"></a>9.Linux环境变量</h4><p>&emsp;&emsp;在Linux系统中，环境变量是用来定义系统运行环境的一些参数，比如每个月用户不同的家的目录、邮件存放地址等。Linux的环境变量一般都是大写，算是约定俗成的规范。我们可以使用env来查看Linux系统中的所有环境变量：</p>
+<center><img src="/img/Linux%E2%80%94%E2%80%94%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E4%BB%8B%E7%BB%8D/6.png" srcset="/img/loading.gif" lazyload style="zoom:100%;" />
+</center>
+
+<p>&emsp;&emsp;Linux需要数百个环境变量来协同工作提供服务，又因为给每个用户提供独立的工作运行环境，一个相同的环境变量会因为用户身份的不同而具有不同的值。具体操作百度即可，我是觉得除特殊情况外，没必要记得清清楚楚。</p>
+<p>&emsp;</p>
+<h4 id="10-Linux文件描述符和重定向"><a href="#10-Linux文件描述符和重定向" class="headerlink" title="10.Linux文件描述符和重定向"></a>10.Linux文件描述符和重定向</h4><p>&emsp;&emsp;所谓的文件描述符设置与文件输入、输出相关的证书，在编写脚本时会经常使用标准的文件描述符来讲内容重定向输出，其中0、1、2是文件描述符（分别对应stdin、stdout、stderr），&lt; 、&gt;, &gt;&gt;叫做操作符：</p>
+<ul>
+<li><p>stdin(0):</p>
+<p>标准输入，这个概念有点不太容易理解比如：1.使用&lt;从文件中读取内容，2.当前命令将内容通过管道传输给下一个命令而下一个命令，而实际内容是传输给了stdin所以下一个命令也是从stdin中读取内容</p>
+</li>
+<li><p>stdout(1)：</p>
+<p>标准输出，这是默认选项。使用方法:1&gt;等价于&gt;  <strong>或者</strong> 1&gt;&gt;等价于&gt;&gt;，;如果想使用其它文件描述符，必须将文件描述符放在操作符之前</p>
+</li>
+<li><p>stderr(2):</p>
+<p>标准错误，使用方法2&gt;或者2&gt;&gt;，标准错误可以将错误信息插入到文件而不在终端显示  。</p>
+</li>
+<li><p>&lt;:</p>
+<p>从文件中读取内容</p>
+</li>
+<li><p>&gt;:</p>
+<p>将内容插入到文件,每次插入前都会清空文件内容</p>
+</li>
+<li><p>&gt;&gt;:</p>
+<p>将内容插入到文件, 将内容追加到现有文件的末尾</p>
+</li>
+</ul>
+<center><img src="/img/Linux%E2%80%94%E2%80%94%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E4%BB%8B%E7%BB%8D/7.png" srcset="/img/loading.gif" lazyload style="zoom:100%;" />
+</center>
+
+
+
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Linux/" class="category-chain-item">Linux</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>Linux——操作系统介绍</div>
+      <div>https://one-null-pointer.github.io/2022/12/01/Linux——操作系统介绍/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>Author</div>
+          <div>liaoyue</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>Posted on</div>
+          <div>December 1, 2022</div>
+        </div>
+      
+      
+      <div class="license-meta-item">
+        <div>传送口</div>
+        <div>
+          
+            
+            
+              <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+              <span class="hint--top hint--rounded" aria-label="点击进行传送">
+                <i class="iconfont icon-by"></i>
+              </span>
+              </a>
+            
+          
+        </div>
+      </div>
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2022/12/01/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E4%B8%83/" title="网络层（上）">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">网络层（上）</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2022/11/28/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%85%AD/" title="数据链路层（下）">
+                        <span class="hidden-mobile">数据链路层（下）</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;Table of Contents</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">Keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://github.com/" target="_blank" rel="nofollow noopener"><span>pointer</span></a> <i class="iconfont icon-love"></i> <a href="https://mp.weixin.qq.com/s/6ncLUtaiJ9j_sMjZT5z-2w" target="_blank" rel="nofollow noopener"><span>一个爱学习的空指针</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      headingSelector : CONFIG.toc.headingSelector || 'h1,h2,h3,h4,h5,h6',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      collapseDepth   : CONFIG.toc.collapseDepth || 0,
+      scrollSmooth    : true,
+      headingsOffset  : -boardTop
+    });
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.10/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">Blog works best with JavaScript enabled</div>
+  </noscript>
+</body>
+</html>
