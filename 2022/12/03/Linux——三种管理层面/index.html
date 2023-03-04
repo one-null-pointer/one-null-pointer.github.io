@@ -16,16 +16,16 @@
   <meta name="author" content="liaoyue">
   <meta name="keywords" content="">
   
-    <meta name="description" content="Linux——三种管理层面">
+    <meta name="description" content="Linux——三种管理层面1.用户管理 用户组&#x2F;用户&amp;emsp;&amp;emsp;Linux 是一个多用户、多任务操作系统，支持许多用户在同一时间登录，并共享计算机的资源。为了管理这些用户，Linux 使用了用户和用户组的概念。 &amp;emsp;&amp;emsp;用户（user）是系统中拥有登录权限的个人账户，每个用户都有一个唯一的用户名（username）和一个唯一的用户 ID（uid）。用户可以拥有自己的文件">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Linux——三种管理层面">
 <meta property="og:url" content="https://one-null-pointer.github.io/2022/12/03/Linux%E2%80%94%E2%80%94%E4%B8%89%E7%A7%8D%E7%AE%A1%E7%90%86%E5%B1%82%E9%9D%A2/index.html">
 <meta property="og:site_name" content="one-null-poniter">
-<meta property="og:description" content="Linux——三种管理层面">
+<meta property="og:description" content="Linux——三种管理层面1.用户管理 用户组&#x2F;用户&amp;emsp;&amp;emsp;Linux 是一个多用户、多任务操作系统，支持许多用户在同一时间登录，并共享计算机的资源。为了管理这些用户，Linux 使用了用户和用户组的概念。 &amp;emsp;&amp;emsp;用户（user）是系统中拥有登录权限的个人账户，每个用户都有一个唯一的用户名（username）和一个唯一的用户 ID（uid）。用户可以拥有自己的文件">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://one-null-pointer.github.io/img/Linux.png">
 <meta property="article:published_time" content="2022-12-03T04:19:57.000Z">
-<meta property="article:modified_time" content="2023-02-26T08:34:19.588Z">
+<meta property="article:modified_time" content="2023-03-04T09:01:25.692Z">
 <meta property="article:author" content="liaoyue">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://one-null-pointer.github.io/img/Linux.png">
@@ -208,7 +208,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          13 words
+          3.2k words
         
       </span>
     
@@ -219,7 +219,7 @@
         
         
         
-          1 mins
+          28 mins
         
       </span>
     
@@ -262,7 +262,124 @@
             
               <div class="markdown-body">
                 
-                <h1 id="Linux——三种管理层面"><a href="#Linux——三种管理层面" class="headerlink" title="Linux——三种管理层面"></a>Linux——三种管理层面</h1>
+                <h1 id="Linux——三种管理层面"><a href="#Linux——三种管理层面" class="headerlink" title="Linux——三种管理层面"></a>Linux——三种管理层面</h1><h4 id="1-用户管理"><a href="#1-用户管理" class="headerlink" title="1.用户管理"></a>1.用户管理</h4><ul>
+<li><h5 id="用户组-用户"><a href="#用户组-用户" class="headerlink" title="用户组/用户"></a>用户组/用户</h5><p>&emsp;&emsp;Linux 是一个多用户、多任务操作系统，支持许多用户在同一时间登录，并共享计算机的资源。为了管理这些用户，Linux 使用了用户和用户组的概念。</p>
+<p>&emsp;&emsp;用户（user）是系统中拥有登录权限的个人账户，每个用户都有一个唯一的用户名（username）和一个唯一的用户 ID（uid）。用户可以拥有自己的文件和目录，并且可以访问系统的共享资源。</p>
+<p>&emsp;&emsp;用户组（group）是一组用户的集合，每个用户可以属于一个或多个用户组。用户组有一个唯一的名称（groupname）和一个唯一的用户组 ID（gid）。用户组可以用于控制文件和目录的权限，使一组用户可以共享文件和目录的访问权限</p>
+</li>
+<li><h5 id="用户管理相关文件"><a href="#用户管理相关文件" class="headerlink" title="用户管理相关文件"></a>用户管理相关文件</h5><p>&emsp;&emsp;在 Linux 中，每个用户都有自己的 HOME 目录，用于存储用户的个人文件和配置信息。用户可以在自己的 HOME 目录下创建文件和目录，并根据需要设置文件和目录的权限，以控制其他用户对它们的访问权限。</p>
+<p>&emsp;&emsp;Linux 中的文件权限包括读（read）、写（write）和执行（execute）权限，这些权限可以分别赋予文件的所有者、所属用户组和其他用户。以下是 Linux 中用于管理文件和目录权限的命令：</p>
+<ol>
+<li>chmod：用于修改文件和目录的权限，可以使用数字或符号表示权限；</li>
+<li>chown：用于修改文件或目录的所有者；</li>
+<li>chgrp：用于修改文件或目录的所属用户组。</li>
+</ol>
+</li>
+<li><h5 id="用户管理基本命令"><a href="#用户管理基本命令" class="headerlink" title="用户管理基本命令"></a>用户管理基本命令</h5><ol>
+<li><p>useradd：添加用户账户</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs css">useradd <span class="hljs-selector-attr">[options]</span> username<br></code></pre></td></tr></table></figure></li>
+<li><p>passwd：设置用户密码</p>
+<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ebnf"><span class="hljs-attribute">passwd username</span><br></code></pre></td></tr></table></figure></li>
+<li><p>userdel：删除用户账户</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs css">userdel <span class="hljs-selector-attr">[options]</span> username<br></code></pre></td></tr></table></figure></li>
+<li><p>usermod：修改用户账户</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs css">usermod <span class="hljs-selector-attr">[options]</span> username<br></code></pre></td></tr></table></figure></li>
+<li><p>groupadd：添加用户组</p>
+<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ebnf"><span class="hljs-attribute">groupadd groupname</span><br></code></pre></td></tr></table></figure></li>
+<li><p>groupdel：删除用户组</p>
+<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ebnf"><span class="hljs-attribute">groupdel groupname</span><br></code></pre></td></tr></table></figure></li>
+<li><p>id：查看用户账户信息</p>
+<figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs applescript"><span class="hljs-built_in">id</span> username<br></code></pre></td></tr></table></figure></li>
+</ol>
+</li>
+<li><h5 id="文件和目录归属"><a href="#文件和目录归属" class="headerlink" title="文件和目录归属"></a>文件和目录归属</h5><p>&emsp;&emsp;在 Linux 中，每个文件和目录都有一个所属用户和所属用户组。这些信息决定了谁有权访问文件和目录，并且可以用来限制其他用户的访问权限</p>
+<p>&emsp;&emsp;每个用户都有一个唯一的用户标识符（UID）和一个所属用户组标识符（GID）。当创建一个新文件或目录时，它的所有者默认为创建它的用户，所属用户组默认为该用户的默认用户组。可以使用以下命令查看当前用户的 UID 和 GID</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs awk">ls -l filename<br><span class="hljs-regexp">//</span>可以使用还命令查看文件的或目录的归属<br></code></pre></td></tr></table></figure></li>
+<li><h5 id="文件和目录权限"><a href="#文件和目录权限" class="headerlink" title="文件和目录权限"></a>文件和目录权限</h5><p>&emsp;&emsp;在 Linux 中，文件和目录的访问权限是通过一组三位数字来表示的，分别代表所有者、所属用户组和其他用户的权限。每个数字表示三个二进制位，分别代表读（r）、写（w）和执行（x）权限，没有权限用 0 表示，有权限用 1 表示。</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs awk">ls -l filename<br><span class="hljs-regexp">//</span>可以使用该命令查看文件或目录的权限<br></code></pre></td></tr></table></figure></li>
+</ul>
+<p>&emsp;</p>
+<h4 id="2-网络管理"><a href="#2-网络管理" class="headerlink" title="2.网络管理"></a>2.网络管理</h4><ul>
+<li><h5 id="网络配置文件"><a href="#网络配置文件" class="headerlink" title="网络配置文件"></a>网络配置文件</h5><p>&emsp;&emsp;在 Linux 中，网络配置文件通常位于 /etc 目录下，主要包括以下文件:</p>
+<ol>
+<li>/etc/hosts：该文件用于将 IP 地址映射到主机名，可以手动添加条目以自定义主机名和 IP 地址的映射。</li>
+<li>/etc/hostname：该文件包含主机名，可以使用编辑器修改主机名。</li>
+<li>/etc/network/interfaces：该文件包含了所有网络接口的配置信息，包括 IP 地址、子网掩码、网关等。</li>
+<li>/etc/resolv.conf：该文件包含了 DNS 服务器的配置信息，可以手动添加 DNS 服务器的 IP 地址。</li>
+<li>/etc/nsswitch.conf：该文件指定系统如何查找各种网络服务的信息，例如主机名、用户信息等。</li>
+<li>/etc/sysconfig/network-scripts/ifcfg-<interface>：该文件包含指定接口的配置信息，如 IP 地址、子网掩码、网关、DNS 等。在不同的 Linux 发行版中，此文件可能位于不同的目录中</li>
+</ol>
+</li>
+<li><h5 id="查看及配置网络"><a href="#查看及配置网络" class="headerlink" title="查看及配置网络"></a>查看及配置网络</h5><ol>
+<li><p>ifconfig</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs awk">ifconfig eth0<br><span class="hljs-regexp">//</span>用于显示和配置网络接口的信息，例如 IP 地址、子网掩码、MAC 地址等<br></code></pre></td></tr></table></figure></li>
+<li><p>ip</p>
+<figure class="highlight x86asm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs x86asm"><span class="hljs-built_in">ip</span> addr <span class="hljs-keyword">add</span> <span class="hljs-number">127.0</span><span class="hljs-number">.0</span><span class="hljs-number">.1</span>/<span class="hljs-number">24</span> dev eth0<br>//是 ifconfig 的替代工具，提供更多的网络配置选项。例如，使用 <span class="hljs-built_in">ip</span> 命令设置 eth0 网络接口的 <span class="hljs-built_in">IP</span> 地址为 <span class="hljs-number">127.0</span><span class="hljs-number">.0</span><span class="hljs-number">.1</span><br></code></pre></td></tr></table></figure></li>
+<li><p>ping</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs awk">ping <span class="hljs-number">127.0</span>.<span class="hljs-number">0.1</span><br><span class="hljs-regexp">//</span>用于测试主机之间的网络连通性，可以通过向目标主机发送 ICMP 数据包来检测网络是否正常<br></code></pre></td></tr></table></figure></li>
+<li><p>route</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs csharp">route <span class="hljs-keyword">add</span> <span class="hljs-literal">default</span> gw <span class="hljs-number">127.0</span><span class="hljs-number">.0</span><span class="hljs-number">.1</span><br><span class="hljs-comment">//用于显示和配置网络路由表，可以添加、删除和修改路由规则</span><br></code></pre></td></tr></table></figure></li>
+<li><p>nmcli</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs awk">nmcli connection show<br><span class="hljs-regexp">//</span>是 Network Manager 的命令行界面工具，可以用于配置网络连接、查看网络状态等<br></code></pre></td></tr></table></figure></li>
+<li><p>nmtui</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs awk">nmtui<br><span class="hljs-regexp">//</span>是 Network Manager 的文本界面工具，可以通过交互式菜单来配置网络连接<br></code></pre></td></tr></table></figure></li>
+</ol>
+</li>
+<li><h5 id="域名相关"><a href="#域名相关" class="headerlink" title="域名相关"></a>域名相关</h5><p>&emsp;&emsp;在 Linux 中，可以使用一些命令来进行域名解析和管理</p>
+<ol>
+<li><p>dig</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs awk">dig example.com<br><span class="hljs-regexp">//</span>用于查询 DNS 服务器的信息，例如域名解析结果、DNS 记录等<br></code></pre></td></tr></table></figure></li>
+<li><p>nslookup</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs awk">nslookup example.com<br><span class="hljs-regexp">//</span>也是用于查询 DNS 服务器的信息，可以查询域名解析结果、DNS 记录等<br></code></pre></td></tr></table></figure></li>
+<li><p>hostname</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs awk">hostname<br><span class="hljs-regexp">//</span>用于显示或设置主机名。例如，使用 hostname 命令显示当前主机名<br></code></pre></td></tr></table></figure></li>
+<li><p>hostnamectl</p>
+<figure class="highlight dsconfig"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs dsconfig"><span class="hljs-string">hostnamectl</span> <span class="hljs-built_in">set-hostname</span> <span class="hljs-string">myhostname</span><br>//用于管理主机名，可以设置静态主机名、临时主机名等<br></code></pre></td></tr></table></figure></li>
+</ol>
+</li>
+<li><h5 id="下载传输"><a href="#下载传输" class="headerlink" title="下载传输"></a>下载传输</h5><p>&emsp;&emsp;在 Linux 中，有多种下载和传输文件的方式，以下是其中几种常用的方式</p>
+<ol>
+<li><p>wget</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs awk">wget http:<span class="hljs-regexp">//</span>example.com/file.zip<br><span class="hljs-regexp">//g</span>et 是一个基于命令行的下载工具，可以下载 HTTP、HTTPS、FTP 等协议的文件<br></code></pre></td></tr></table></figure></li>
+<li><p>curl</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs awk">curl -O http:<span class="hljs-regexp">//</span>example.com/file.zip<br><span class="hljs-regexp">//</span>curl 也是一个基于命令行的下载工具，支持多种协议和数据传输方式<br></code></pre></td></tr></table></figure></li>
+<li><p>scp</p>
+<figure class="highlight elixir"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs elixir">scp file.txt user<span class="hljs-variable">@remotehost</span><span class="hljs-symbol">:/path/to/destination</span><br>//scp 是一个基于 <span class="hljs-title class_">SSH</span> 协议的文件传输工具，可以在 <span class="hljs-title class_">Linux</span> 主机之间传输文件<br></code></pre></td></tr></table></figure></li>
+<li><p>rsync</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs awk">rsync -avz --progress <span class="hljs-regexp">/path/</span>to<span class="hljs-regexp">/local/</span>dir user@remotehost:<span class="hljs-regexp">/path/</span>to<span class="hljs-regexp">/remote/</span>dir<br><span class="hljs-regexp">//</span>rsync 也是一个基于 SSH 协议的文件传输工具，支持增量同步和快速复制文件<br></code></pre></td></tr></table></figure></li>
+<li><p>ftp</p>
+<figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs livecodeserver"><span class="hljs-keyword">ftp</span> <span class="hljs-keyword">ftp</span>.example.com<br><span class="hljs-built_in">get</span> <span class="hljs-built_in">file</span>.txt<span class="hljs-comment"></span><br><span class="hljs-comment">//ftp 是一种基于文件传输协议的文件传输工具，可以在 Linux 主机之间传输文件</span><br></code></pre></td></tr></table></figure></li>
+</ol>
+</li>
+</ul>
+<p>&emsp;</p>
+<h4 id="3-系统状态管理"><a href="#3-系统状态管理" class="headerlink" title="3.系统状态管理"></a>3.系统状态管理</h4><ul>
+<li><h5 id="查看系统信息"><a href="#查看系统信息" class="headerlink" title="查看系统信息"></a>查看系统信息</h5><ol>
+<li><p>uname</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs awk">uname -r<br><span class="hljs-regexp">//</span>该命令可以查看系统内核的版本、系统架构等信息。例如，使用 uname 命令查看系统内核版本<br></code></pre></td></tr></table></figure></li>
+<li><p>sb_release</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs awk">lsb_release -a<br><span class="hljs-regexp">//</span>该命令可以查看 Linux 发行版的信息。例如，使用 lsb_release 命令查看 Linux 发行版的版本....<br></code></pre></td></tr></table></figure></li>
+</ol>
+</li>
+<li><h5 id="进程管理"><a href="#进程管理" class="headerlink" title="进程管理"></a>进程管理</h5><ol>
+<li><p>top </p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs awk">top<br><span class="hljs-regexp">//</span>该命令可以查看系统的进程和资源占用情况。例如，使用 top 命令查看系统的进程和资源占用情况<br></code></pre></td></tr></table></figure></li>
+</ol>
+</li>
+<li><h5 id="内存使用情况"><a href="#内存使用情况" class="headerlink" title="内存使用情况"></a>内存使用情况</h5><ol>
+<li><p>free</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs awk">free -h<br><span class="hljs-regexp">//</span>该命令可以查看系统的内存使用情况。例如，使用 free 命令查看系统的内存使用情况<br></code></pre></td></tr></table></figure></li>
+</ol>
+</li>
+<li><h5 id="磁盘使用情况"><a href="#磁盘使用情况" class="headerlink" title="磁盘使用情况"></a>磁盘使用情况</h5><ol>
+<li><p>df</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs awk">df -h<br><span class="hljs-regexp">//</span>该命令可以查看文件系统的磁盘使用情况。例如，使用 df 命令查看磁盘使用情况<br></code></pre></td></tr></table></figure></li>
+<li><p>du</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs awk">du -h<br><span class="hljs-regexp">//</span>该命令可以查看指定目录或文件的磁盘使用情况。例如，使用 du 命令查看当前目录的磁盘使用情况<br></code></pre></td></tr></table></figure></li>
+</ol>
+</li>
+</ul>
+<h5 id="emsp"><a href="#emsp" class="headerlink" title="&emsp;"></a>&emsp;</h5>
                 
               </div>
             

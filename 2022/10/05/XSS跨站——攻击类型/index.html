@@ -16,23 +16,23 @@
   <meta name="author" content="liaoyue">
   <meta name="keywords" content="">
   
-    <meta name="description" content="XSS跨站——攻击类型（一）1.反射型XSS（get）&amp;emsp;&amp;emsp;首先在界面中是能够有输入框的，所以尝试使用测试代码： 12345&#x2F;&#x2F;onclick是一个鼠标触发事件，也就是鼠标触发之后就会发出警报#&amp;#x27; onclick&#x3D;&quot;alert(2)&quot;&gt;  &#x2F;&#x2F;直接用script显示警告也可行&lt;script&gt;alert(1)&lt;&#x2F;script&amp;g">
+    <meta name="description" content="XSS跨站——攻击类型1.反射型XSS（get）&amp;emsp;&amp;emsp;首先在界面中是能够有输入框的，所以尝试使用测试代码： 12345&#x2F;&#x2F;onclick是一个鼠标触发事件，也就是鼠标触发之后就会发出警报#&amp;#x27; onclick&#x3D;&quot;alert(2)&quot;&gt;  &#x2F;&#x2F;直接用script显示警告也可行&lt;script&gt;alert(1)&lt;&#x2F;script&gt;">
 <meta property="og:type" content="article">
-<meta property="og:title" content="XSS跨站——攻击类型（一）">
-<meta property="og:url" content="https://one-null-pointer.github.io/2022/10/05/XSS%E8%B7%A8%E7%AB%99%E2%80%94%E2%80%94%E6%94%BB%E5%87%BB%E7%B1%BB%E5%9E%8B%EF%BC%88%E4%B8%80%EF%BC%89/index.html">
+<meta property="og:title" content="XSS跨站——攻击类型">
+<meta property="og:url" content="https://one-null-pointer.github.io/2022/10/05/XSS%E8%B7%A8%E7%AB%99%E2%80%94%E2%80%94%E6%94%BB%E5%87%BB%E7%B1%BB%E5%9E%8B/index.html">
 <meta property="og:site_name" content="one-null-poniter">
-<meta property="og:description" content="XSS跨站——攻击类型（一）1.反射型XSS（get）&amp;emsp;&amp;emsp;首先在界面中是能够有输入框的，所以尝试使用测试代码： 12345&#x2F;&#x2F;onclick是一个鼠标触发事件，也就是鼠标触发之后就会发出警报#&amp;#x27; onclick&#x3D;&quot;alert(2)&quot;&gt;  &#x2F;&#x2F;直接用script显示警告也可行&lt;script&gt;alert(1)&lt;&#x2F;script&amp;g">
+<meta property="og:description" content="XSS跨站——攻击类型1.反射型XSS（get）&amp;emsp;&amp;emsp;首先在界面中是能够有输入框的，所以尝试使用测试代码： 12345&#x2F;&#x2F;onclick是一个鼠标触发事件，也就是鼠标触发之后就会发出警报#&amp;#x27; onclick&#x3D;&quot;alert(2)&quot;&gt;  &#x2F;&#x2F;直接用script显示警告也可行&lt;script&gt;alert(1)&lt;&#x2F;script&gt;">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://one-null-pointer.github.io/img/web1.png">
 <meta property="article:published_time" content="2022-10-05T03:55:52.000Z">
-<meta property="article:modified_time" content="2023-03-01T06:51:42.800Z">
+<meta property="article:modified_time" content="2023-03-04T09:38:29.873Z">
 <meta property="article:author" content="liaoyue">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://one-null-pointer.github.io/img/web1.png">
   
   
   
-  <title>XSS跨站——攻击类型（一） - one-null-poniter</title>
+  <title>XSS跨站——攻击类型 - one-null-poniter</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -185,7 +185,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="XSS跨站——攻击类型（一）"></span>
+            <span id="subtitle" data-typed-text="XSS跨站——攻击类型"></span>
           
         </div>
 
@@ -208,7 +208,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.6k words
+          1.7k words
         
       </span>
     
@@ -219,7 +219,7 @@
         
         
         
-          14 mins
+          15 mins
         
       </span>
     
@@ -257,13 +257,13 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">XSS跨站——攻击类型（一）</h1>
+            <h1 style="display: none">XSS跨站——攻击类型</h1>
             
             
               <div class="markdown-body">
                 
-                <h1 id="XSS跨站——攻击类型（一）"><a href="#XSS跨站——攻击类型（一）" class="headerlink" title="XSS跨站——攻击类型（一）"></a>XSS跨站——攻击类型（一）</h1><h4 id="1-反射型XSS（get）"><a href="#1-反射型XSS（get）" class="headerlink" title="1.反射型XSS（get）"></a>1.反射型XSS（get）</h4><p>&emsp;&emsp;首先在界面中是能够有输入框的，所以尝试使用测试代码：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-comment">//onclick是一个鼠标触发事件，也就是鼠标触发之后就会发出警报</span><br>#<span class="hljs-string">&#x27; onclick=&quot;alert(2)&quot;&gt;  </span><br><span class="hljs-string"></span><br><span class="hljs-string">//直接用script显示警告也可行</span><br><span class="hljs-string">&lt;script&gt;alert(1)&lt;/script&gt;</span><br></code></pre></td></tr></table></figure>
+                <h1 id="XSS跨站——攻击类型"><a href="#XSS跨站——攻击类型" class="headerlink" title="XSS跨站——攻击类型"></a>XSS跨站——攻击类型</h1><h4 id="1-反射型XSS（get）"><a href="#1-反射型XSS（get）" class="headerlink" title="1.反射型XSS（get）"></a>1.反射型XSS（get）</h4><p>&emsp;&emsp;首先在界面中是能够有输入框的，所以尝试使用测试代码：</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs awk"><span class="hljs-regexp">//</span>onclick是一个鼠标触发事件，也就是鼠标触发之后就会发出警报<br><span class="hljs-comment">#&#x27; onclick=&quot;alert(2)&quot;&gt;  </span><br><br><span class="hljs-regexp">//</span>直接用script显示警告也可行<br>&lt;script&gt;alert(<span class="hljs-number">1</span>)&lt;/script&gt;<br></code></pre></td></tr></table></figure>
 
 <center><img src="/img/XSS%E8%B7%A8%E7%AB%99%E2%80%94%E2%80%94%E6%94%BB%E5%87%BB%E7%B1%BB%E5%9E%8B%EF%BC%88%E4%B8%80%EF%BC%89/1.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
 </center>
@@ -340,7 +340,7 @@
 </center>
 
 <p>&emsp;&emsp;JavaScript的代码在执行后会将a标签和输入的字符串连接，就如同一开始是空白的页面，在输入后输出了what do you see的回显，通过这个JavaScript函数，利用了DOM将字符串进行了拼接并把值给了a标签的href，然后输出，开始构造执行代码</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs javascript">#<span class="hljs-string">&#x27; onclick=&quot;alert(&#x27;</span>xss<span class="hljs-string">&#x27;)&quot;&gt;</span><br></code></pre></td></tr></table></figure>
+<figure class="highlight clean"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs clean">#<span class="hljs-string">&#x27; onclick=&quot;alert(&#x27;</span>xss<span class="hljs-string">&#x27;)&quot;&gt;</span><br></code></pre></td></tr></table></figure>
 
 <center><img src="/img/XSS%E8%B7%A8%E7%AB%99%E2%80%94%E2%80%94%E6%94%BB%E5%87%BB%E7%B1%BB%E5%9E%8B%EF%BC%88%E4%B8%80%EF%BC%89/18.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
 </center>
@@ -354,12 +354,14 @@
 <center><img src="/img/XSS%E8%B7%A8%E7%AB%99%E2%80%94%E2%80%94%E6%94%BB%E5%87%BB%E7%B1%BB%E5%9E%8B%EF%BC%88%E4%B8%80%EF%BC%89/20.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
 </center>
 
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs url">text=%23%27+onclick%3D&quot;alert%28%27xss%27%29&quot;&gt;#<br></code></pre></td></tr></table></figure>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs perl">text=%23%27+onclick%3D<span class="hljs-string">&quot;alert%28%27xss%27%29&quot;</span>&gt;<span class="hljs-comment">#</span><br></code></pre></td></tr></table></figure>
 
 <center><img src="/img/XSS%E8%B7%A8%E7%AB%99%E2%80%94%E2%80%94%E6%94%BB%E5%87%BB%E7%B1%BB%E5%9E%8B%EF%BC%88%E4%B8%80%EF%BC%89/21.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
 </center>
 
 <p>&emsp;&emsp;DOM-X型具有更大的危害，它能够通过URL输入一些内容，而普通型的DOM攻击仅仅是针对前端，但是URL作为参数前后端传递。</p>
+<p>&emsp;</p>
+<h4 id="6-注意事项"><a href="#6-注意事项" class="headerlink" title="6.注意事项"></a>6.注意事项</h4><p>&emsp;&emsp;在进行脚本写入的测试中，如果使用了alert等语句，数字可以不用处理直接写在括号内，但是输入字母和汉字就需要单引号或者双引号，这是语法规则，当然，使用/   /进行闭合也是可以的，但是在输出的内容上也会带有//。</p>
 
                 
               </div>
@@ -398,8 +400,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>XSS跨站——攻击类型（一）</div>
-      <div>https://one-null-pointer.github.io/2022/10/05/XSS跨站——攻击类型（一）/</div>
+      <div>XSS跨站——攻击类型</div>
+      <div>https://one-null-pointer.github.io/2022/10/05/XSS跨站——攻击类型/</div>
     </div>
     <div class="license-meta">
       
