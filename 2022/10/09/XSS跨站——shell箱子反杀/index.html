@@ -16,23 +16,23 @@
   <meta name="author" content="liaoyue">
   <meta name="keywords" content="">
   
-    <meta name="description" content="XSS跨站——shell箱子反杀0.前言&amp;emsp;&amp;emsp;首先了解一下什么是Webshell ，Webshell 是一种利用 web 应用程序漏洞或弱点来上传并执行恶意脚本的黑客工具。它可以让攻击者在受攻击的 web 服务器上执行任意代码，控制服务器并窃取敏感数据。Webshell 可以通过各种方式上传到 web 服务器上，包括利用漏洞、社会工程学攻击和弱口令等。攻击者可以使用 webshe">
+    <meta name="description" content="XSS跨站——Webshell箱子反杀0.前言&amp;emsp;&amp;emsp;首先了解一下什么是Webshell ，Webshell 是一种利用 web 应用程序漏洞或弱点来上传并执行恶意脚本的黑客工具。它可以让攻击者在受攻击的 web 服务器上执行任意代码，控制服务器并窃取敏感数据。Webshell 可以通过各种方式上传到 web 服务器上，包括利用漏洞、社会工程学攻击和弱口令等。攻击者可以使用 web">
 <meta property="og:type" content="article">
-<meta property="og:title" content="XSS跨站——shell箱子反杀">
-<meta property="og:url" content="https://one-null-pointer.github.io/2023/10/09/XSS%E8%B7%A8%E7%AB%99%E2%80%94%E2%80%94shell%E7%AE%B1%E5%AD%90%E5%8F%8D%E6%9D%80/index.html">
+<meta property="og:title" content="XSS跨站——Webshell箱子反杀">
+<meta property="og:url" content="https://one-null-pointer.github.io/2022/10/09/XSS%E8%B7%A8%E7%AB%99%E2%80%94%E2%80%94shell%E7%AE%B1%E5%AD%90%E5%8F%8D%E6%9D%80/index.html">
 <meta property="og:site_name" content="one-null-poniter">
-<meta property="og:description" content="XSS跨站——shell箱子反杀0.前言&amp;emsp;&amp;emsp;首先了解一下什么是Webshell ，Webshell 是一种利用 web 应用程序漏洞或弱点来上传并执行恶意脚本的黑客工具。它可以让攻击者在受攻击的 web 服务器上执行任意代码，控制服务器并窃取敏感数据。Webshell 可以通过各种方式上传到 web 服务器上，包括利用漏洞、社会工程学攻击和弱口令等。攻击者可以使用 webshe">
+<meta property="og:description" content="XSS跨站——Webshell箱子反杀0.前言&amp;emsp;&amp;emsp;首先了解一下什么是Webshell ，Webshell 是一种利用 web 应用程序漏洞或弱点来上传并执行恶意脚本的黑客工具。它可以让攻击者在受攻击的 web 服务器上执行任意代码，控制服务器并窃取敏感数据。Webshell 可以通过各种方式上传到 web 服务器上，包括利用漏洞、社会工程学攻击和弱口令等。攻击者可以使用 web">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://one-null-pointer.github.io/img/web1.png">
-<meta property="article:published_time" content="2023-10-09T07:09:29.000Z">
-<meta property="article:modified_time" content="2023-03-06T11:49:40.887Z">
+<meta property="article:published_time" content="2022-10-09T07:09:29.000Z">
+<meta property="article:modified_time" content="2023-03-08T11:14:31.228Z">
 <meta property="article:author" content="liaoyue">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://one-null-pointer.github.io/img/web1.png">
   
   
   
-  <title>XSS跨站——shell箱子反杀 - one-null-poniter</title>
+  <title>XSS跨站——Webshell箱子反杀 - one-null-poniter</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -185,7 +185,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="XSS跨站——shell箱子反杀"></span>
+            <span id="subtitle" data-typed-text="XSS跨站——Webshell箱子反杀"></span>
           
         </div>
 
@@ -196,8 +196,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-10-09 15:09" pubdate>
-          October 9, 2023 pm
+        <time datetime="2022-10-09 15:09" pubdate>
+          October 9, 2022 pm
         </time>
       </span>
     
@@ -208,7 +208,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          292 words
+          1.6k words
         
       </span>
     
@@ -219,7 +219,7 @@
         
         
         
-          3 mins
+          14 mins
         
       </span>
     
@@ -257,18 +257,111 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">XSS跨站——shell箱子反杀</h1>
+            <h1 style="display: none">XSS跨站——Webshell箱子反杀</h1>
             
             
               <div class="markdown-body">
                 
-                <h1 id="XSS跨站——shell箱子反杀"><a href="#XSS跨站——shell箱子反杀" class="headerlink" title="XSS跨站——shell箱子反杀"></a>XSS跨站——shell箱子反杀</h1><h4 id="0-前言"><a href="#0-前言" class="headerlink" title="0.前言"></a>0.前言</h4><p>&emsp;&emsp;首先了解一下什么是Webshell ，Webshell 是一种利用 web 应用程序漏洞或弱点来上传并执行恶意脚本的黑客工具。它可以让攻击者在受攻击的 web 服务器上执行任意代码，控制服务器并窃取敏感数据。Webshell 可以通过各种方式上传到 web 服务器上，包括利用漏洞、社会工程学攻击和弱口令等。攻击者可以使用 webshell 进行多种活动，例如查找和下载文件、修改文件、执行系统命令和建立反向 shell 连接</p>
-<p>&emsp;&emsp;相关环境配置：</p>
+                <h1 id="XSS跨站——Webshell箱子反杀"><a href="#XSS跨站——Webshell箱子反杀" class="headerlink" title="XSS跨站——Webshell箱子反杀"></a>XSS跨站——Webshell箱子反杀</h1><h4 id="0-前言"><a href="#0-前言" class="headerlink" title="0.前言"></a>0.前言</h4><p>&emsp;&emsp;首先了解一下什么是Webshell ，Webshell 是一种利用 web 应用程序漏洞或弱点来上传并执行恶意脚本的黑客工具。它可以让攻击者在受攻击的 web 服务器上执行任意代码，控制服务器并窃取敏感数据。Webshell 可以通过各种方式上传到 web 服务器上，包括利用漏洞、社会工程学攻击和弱口令等。攻击者可以使用 webshell 进行多种活动，例如查找和下载文件、修改文件、执行系统命令和建立反向 shell 连接</p>
+<p>&emsp;</p>
+<h4 id="1-Webshell箱子"><a href="#1-Webshell箱子" class="headerlink" title="1.Webshell箱子"></a>1.Webshell箱子</h4><p>&emsp;&emsp;Webshell箱子是指一个包含多个Webshell的集合或者存储库，当我们入侵也网站之后，当我们使用后门进行控制时，网站的信息、后门地址和后门密码统统会发送带一个地方，这个地方就称之为箱子</p>
+<center><img src="/img/XSS%E8%B7%A8%E7%AB%99%E2%80%94%E2%80%94shell%E7%AE%B1%E5%AD%90%E5%8F%8D%E6%9D%80/1.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<p>&emsp;&emsp;可以在相关环境配置中设置，搞一个后门作为联系，通过后门去控制网站</p>
 <ul>
 <li><a target="_blank" rel="noopener" href="https://github.com/tennc/webshell">https://github.com/tennc/webshell</a></li>
 </ul>
+<center><img src="/img/XSS%E8%B7%A8%E7%AB%99%E2%80%94%E2%80%94shell%E7%AE%B1%E5%AD%90%E5%8F%8D%E6%9D%80/2.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
 <p>&emsp;</p>
-<p>1.</p>
+<h4 id="2-模拟后门场景"><a href="#2-模拟后门场景" class="headerlink" title="2.模拟后门场景"></a>2.模拟后门场景</h4><p>&emsp;&emsp;通过模拟后门传送信息到Webshell箱子中，首先在后门管理中写入一些后门代码，然后也可以进行加密处理防止被轻易的发现后门脚本</p>
+<center><img src="/img/XSS%E8%B7%A8%E7%AB%99%E2%80%94%E2%80%94shell%E7%AE%B1%E5%AD%90%E5%8F%8D%E6%9D%80/3.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<center><img src="/img/XSS%E8%B7%A8%E7%AB%99%E2%80%94%E2%80%94shell%E7%AE%B1%E5%AD%90%E5%8F%8D%E6%9D%80/4.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<center><img src="/img/XSS%E8%B7%A8%E7%AB%99%E2%80%94%E2%80%94shell%E7%AE%B1%E5%AD%90%E5%8F%8D%E6%9D%80/5.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<p>&emsp;&emsp;访问webshell查看反馈，</p>
+<center><img src="/img/XSS%E8%B7%A8%E7%AB%99%E2%80%94%E2%80%94shell%E7%AE%B1%E5%AD%90%E5%8F%8D%E6%9D%80/6.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<center><img src="/img/XSS%E8%B7%A8%E7%AB%99%E2%80%94%E2%80%94shell%E7%AE%B1%E5%AD%90%E5%8F%8D%E6%9D%80/7.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<p>&emsp;&emsp;如果我们将后门发到社区，别人使用后门入侵别的网站时，我们就收到入侵的网站信息。所以当我们一般在网上查到的免费提供新的工具，可能是带后门的，也就是我们操作的时候其实也是有可能传给了提供者</p>
+<p>&emsp;</p>
+<h4 id="3-判定后门"><a href="#3-判定后门" class="headerlink" title="3.判定后门"></a>3.判定后门</h4><ul>
+<li><h5 id="脚本"><a href="#脚本" class="headerlink" title="脚本"></a>脚本</h5></li>
+</ul>
+<p>&emsp;&emsp;如何判断一个脚本有没有后门呢，搭建访问脚本查看数据包的情况就好，查看是否有给莫名其妙的地址发送后门信息；如果是程序的话，就直接使用抓包软件对程序进行抓包，或者抓当前网络接口数据包。</p>
+<p>&emsp;&emsp;以网上下载的一个php脚本为例子</p>
+<center><img src="/img/XSS%E8%B7%A8%E7%AB%99%E2%80%94%E2%80%94shell%E7%AE%B1%E5%AD%90%E5%8F%8D%E6%9D%80/8.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<center><img src="/img/XSS%E8%B7%A8%E7%AB%99%E2%80%94%E2%80%94shell%E7%AE%B1%E5%AD%90%E5%8F%8D%E6%9D%80/9.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<center><img src="/img/XSS%E8%B7%A8%E7%AB%99%E2%80%94%E2%80%94shell%E7%AE%B1%E5%AD%90%E5%8F%8D%E6%9D%80/10.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<p>&emsp;&emsp;可以看到脚本执行的数据包是比较干净的，没有看到有向外发送数据，所以这个脚本应该是没有后门的，但是完全确定，因为也有可能通过其他协议进行传输，所以一般来说抓数据网络接口会比较准确</p>
+<p>&emsp;&emsp;有后门的数据包情况，以前流行的ASP-木马是存在后门的，接下来进行演示：</p>
+<center><img src="/img/XSS%E8%B7%A8%E7%AB%99%E2%80%94%E2%80%94shell%E7%AE%B1%E5%AD%90%E5%8F%8D%E6%9D%80/12.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<center><img src="/img/XSS%E8%B7%A8%E7%AB%99%E2%80%94%E2%80%94shell%E7%AE%B1%E5%AD%90%E5%8F%8D%E6%9D%80/13.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<p>&emsp;&emsp;可以看见有后门的传输信息，这个圈出来的地址是收信的服务端，其实菜刀也是有后门的传输</p>
+<p>&emsp;</p>
+<h4 id="4-BeEF工具"><a href="#4-BeEF工具" class="headerlink" title="4.BeEF工具"></a>4.BeEF工具</h4><p>&emsp;&emsp;这里使用kali虚拟机，首先打开虚拟，切换到root模式，使用ficonfig语句进行ip地址，然后输入beef-xss</p>
+<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs ebnf"><span class="hljs-attribute">su root</span><br><span class="hljs-attribute">ifconfig</span><br><span class="hljs-attribute">beef-xss</span><br></code></pre></td></tr></table></figure>
+
+<center><img src="/img/XSS%E8%B7%A8%E7%AB%99%E2%80%94%E2%80%94shell%E7%AE%B1%E5%AD%90%E5%8F%8D%E6%9D%80/14.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<center><img src="/img/XSS%E8%B7%A8%E7%AB%99%E2%80%94%E2%80%94shell%E7%AE%B1%E5%AD%90%E5%8F%8D%E6%9D%80/15.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<p>&emsp;&emsp;登录的账号密码就是beef，然后接下来使用beef进行xss攻击，首先复制选中的代码，框中的内容中127.0.0.1是内网ip地址，需要改成控制端的ip地址（ifconfig查的那个）</p>
+<center><img src="/img/XSS%E8%B7%A8%E7%AB%99%E2%80%94%E2%80%94shell%E7%AE%B1%E5%AD%90%E5%8F%8D%E6%9D%80/16.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<p>&emsp;&emsp;首先写入后门脚本，发送到网页当中，然后查看beef更新情况</p>
+<center><img src="/img/XSS%E8%B7%A8%E7%AB%99%E2%80%94%E2%80%94shell%E7%AE%B1%E5%AD%90%E5%8F%8D%E6%9D%80/17.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<center><img src="/img/XSS%E8%B7%A8%E7%AB%99%E2%80%94%E2%80%94shell%E7%AE%B1%E5%AD%90%E5%8F%8D%E6%9D%80/18.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<p>&emsp;&emsp;online代表现在还在控制状态的，offline表示失去控制的，然后触发后门代码</p>
+<center><img src="/img/XSS%E8%B7%A8%E7%AB%99%E2%80%94%E2%80%94shell%E7%AE%B1%E5%AD%90%E5%8F%8D%E6%9D%80/19.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<center><img src="/img/XSS%E8%B7%A8%E7%AB%99%E2%80%94%E2%80%94shell%E7%AE%B1%E5%AD%90%E5%8F%8D%E6%9D%80/20.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<center><img src="/img/XSS%E8%B7%A8%E7%AB%99%E2%80%94%E2%80%94shell%E7%AE%B1%E5%AD%90%E5%8F%8D%E6%9D%80/21.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<p>&emsp;&emsp;可以看到我们获取了相关的控制权限，我们就能够改动相关的内容，比如flash的更新</p>
+<center><img src="/img/XSS%E8%B7%A8%E7%AB%99%E2%80%94%E2%80%94shell%E7%AE%B1%E5%AD%90%E5%8F%8D%E6%9D%80/22.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<center><img src="/img/XSS%E8%B7%A8%E7%AB%99%E2%80%94%E2%80%94shell%E7%AE%B1%E5%AD%90%E5%8F%8D%E6%9D%80/23.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>&emsp;&emsp;
+
+<p>&emsp;&emsp;我们可以伪造成更新，然后对方会以为是更新结果点入了我们设置的后门地址，下载我们相关的木马，木马可以是电脑端木马，直接控制到电脑的权限，另外可以进行内网和ip地址的扫描，结合其他的漏洞</p>
+<center><img src="/img/XSS%E8%B7%A8%E7%AB%99%E2%80%94%E2%80%94shell%E7%AE%B1%E5%AD%90%E5%8F%8D%E6%9D%80/24.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>&emsp;&emsp;
+
+<p>&emsp;</p>
+<h4 id="5-总结"><a href="#5-总结" class="headerlink" title="5.总结"></a>5.总结</h4><p>&emsp;&emsp;XSS跨站漏洞种类很多，归根结底是主动和自动的问题，是自己自动触发还是等管理员触发， 后者其实是比较不可取的，因为是存在了赌的成分。所以漏洞主要还是主要是在留言板、评论区、订单系统以及反馈条件等等</p>
 
                 
               </div>
@@ -307,8 +400,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>XSS跨站——shell箱子反杀</div>
-      <div>https://one-null-pointer.github.io/2023/10/09/XSS跨站——shell箱子反杀/</div>
+      <div>XSS跨站——Webshell箱子反杀</div>
+      <div>https://one-null-pointer.github.io/2022/10/09/XSS跨站——shell箱子反杀/</div>
     </div>
     <div class="license-meta">
       
@@ -320,7 +413,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>Posted on</div>
-          <div>October 9, 2023</div>
+          <div>October 9, 2022</div>
         </div>
       
       
@@ -350,12 +443,18 @@
                   <article class="post-prev col-6">
                     
                     
+                      <a href="/2022/10/14/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%89/" title="栈">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">栈</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2023/02/05/DOM%E6%94%BB%E5%87%BB%E8%AF%BE%E9%A2%98%E5%9B%9B/" title="环境准备——DOM分析器">
-                        <span class="hidden-mobile">环境准备——DOM分析器</span>
+                      <a href="/2022/10/07/XSS%E8%B7%A8%E7%AB%99%E2%80%94%E2%80%94%E6%94%BB%E5%87%BB%E7%B1%BB%E5%9E%8B%EF%BC%88%E4%BA%8C%EF%BC%89/" title="XSS跨站——攻击常见环境模拟">
+                        <span class="hidden-mobile">XSS跨站——攻击常见环境模拟</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
