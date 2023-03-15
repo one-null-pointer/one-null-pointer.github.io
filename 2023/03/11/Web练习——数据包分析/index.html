@@ -1,0 +1,668 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="liaoyue">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="Web练习——数据包分析0.前言&amp;emsp;&amp;emsp;主要做一下抓包工具分析Web应用传输的数据的复现（之前大三web课程的作业整理了一下） &amp;emsp; 1.配置抓包工具Burpsuite&#x2F;Wireshark   &amp;emsp;&amp;emsp;Burp Suite 是一款集成化的渗透测试工具，包含了很多功能，可以帮助我们高效地 完成对 Web 应用程序的渗透测试和攻击。 &amp;emsp;&amp;emsp; B">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Web练习——数据包分析">
+<meta property="og:url" content="https://one-null-pointer.github.io/2023/03/11/Web%E7%BB%83%E4%B9%A0%E2%80%94%E2%80%94%E6%95%B0%E6%8D%AE%E5%8C%85%E5%88%86%E6%9E%90/index.html">
+<meta property="og:site_name" content="one-null-poniter">
+<meta property="og:description" content="Web练习——数据包分析0.前言&amp;emsp;&amp;emsp;主要做一下抓包工具分析Web应用传输的数据的复现（之前大三web课程的作业整理了一下） &amp;emsp; 1.配置抓包工具Burpsuite&#x2F;Wireshark   &amp;emsp;&amp;emsp;Burp Suite 是一款集成化的渗透测试工具，包含了很多功能，可以帮助我们高效地 完成对 Web 应用程序的渗透测试和攻击。 &amp;emsp;&amp;emsp; B">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://one-null-pointer.github.io/img/weblianxi.jpg">
+<meta property="article:published_time" content="2023-03-11T09:48:13.000Z">
+<meta property="article:modified_time" content="2023-03-15T10:36:05.881Z">
+<meta property="article:author" content="liaoyue">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://one-null-pointer.github.io/img/weblianxi.jpg">
+  
+  
+  
+  <title>Web练习——数据包分析 - one-null-poniter</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"one-null-pointer.github.io","root":"/","version":"1.9.2","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 5.4.2"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>one null pointer</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                吾
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                學
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                類
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="Web练习——数据包分析"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2023-03-11 17:48" pubdate>
+          March 11, 2023 pm
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          3.6k words
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          30 mins
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Web练习——数据包分析</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="Web练习——数据包分析"><a href="#Web练习——数据包分析" class="headerlink" title="Web练习——数据包分析"></a>Web练习——数据包分析</h1><h4 id="0-前言"><a href="#0-前言" class="headerlink" title="0.前言"></a>0.前言</h4><p>&emsp;&emsp;主要做一下抓包工具分析Web应用传输的数据的复现（之前大三web课程的作业整理了一下）</p>
+<p>&emsp;</p>
+<h4 id="1-配置抓包工具Burpsuite-Wireshark"><a href="#1-配置抓包工具Burpsuite-Wireshark" class="headerlink" title="1.配置抓包工具Burpsuite/Wireshark"></a>1.配置抓包工具Burpsuite/Wireshark</h4><center><img src="/img/Web%E7%BB%83%E4%B9%A0%E2%80%94%E2%80%94%E6%95%B0%E6%8D%AE%E5%8C%85%E5%88%86%E6%9E%90/1.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<p>&emsp;&emsp;Burp Suite 是一款集成化的渗透测试工具，包含了很多功能，可以帮助我们高效地 完成对 Web 应用程序的渗透测试和攻击。</p>
+<p>&emsp;&emsp; Burp Proxy 的拦截功能主要由 intercept（intercept 拦截/截夺）选项卡中的 Forward、Drop、Interception is on/off 和 Action 构成，他们的功能如下所示。 </p>
+<p>&emsp;Forward（放包）：表示将拦截的数据表或修改后的数据包发送至服务器端。</p>
+<p>&emsp;&emsp; Drop（废包）：表示丢弃当前拦截的数据包 </p>
+<p>&emsp;&emsp;Interception is on（拦截请求）：表示开启拦截功能，单击后变为 interception is off（拦截禁用），表示关闭拦截功能</p>
+<p>&emsp;&emsp;单击 Action（行动）按钮：可以将数据包进一步发送到 Spider、scanner、Repeater、 Intruder 等功能组件做进一步测试，同时也包含改变数据包请求方式及其 body 的编码 功能。（发送到其他功能组件）</p>
+<p>&emsp;</p>
+<h4 id="2-访问过程"><a href="#2-访问过程" class="headerlink" title="2.访问过程"></a>2.访问过程</h4><p>&emsp;&emsp;访问某些国内大学的主页，选择使用 http 访问的邮件服务器，以德州学院的邮箱服务为例</p>
+<center><img src="/img/Web%E7%BB%83%E4%B9%A0%E2%80%94%E2%80%94%E6%95%B0%E6%8D%AE%E5%8C%85%E5%88%86%E6%9E%90/2.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<p>&emsp;&emsp;HOST：主机或域名地址。 </p>
+<p>&emsp;&emsp;Accept：指浏览器或其他客户可以接受的 MIME 格式。Servlet 可以根据它判断并返 回适当的文件格式。 </p>
+<p>&emsp;&emsp;User-Agent：是客户端浏览器名称。 </p>
+<p>&emsp;&emsp;Host：对应网址 URL 中的 Web 名称和端口号。</p>
+<p>&emsp;&emsp;Accept-Langeuage：指出浏览器可以接受的语言种类。</p>
+<p>&emsp;&emsp;connection：用来告诉服务器是否可以维持固定的 HTTP 连接。http 是无连接的， HTTP/1.1 使用 Keep-Alive 为默认值。 </p>
+<p>&emsp;&emsp;Cookie：浏览器用这个属性向服务器发送 Cookie。Cookie 是在浏览器中寄存的小型 数据体，它可以记载和服务器相关的用户信息，也可以用来实现会话功能。 </p>
+<p>&emsp;&emsp;Referer：表示产生的网页 URL。如此从网页/icconcept/index.jsp 中点击一个链接 到网页/icwork/search，在服务器发送的 GET/icwoek/search 中的请求中，Referer 是 <a target="_blank" rel="noopener" href="http://hostname:8080/icconcept/index.jsp%E3%80%82%E8%BF%99%E4%B8%AA%E5%B1%9E%E6%80%A7%E5%8F%AF%E4%BB%A5%E7%94%A8%E6%9D%A5%E8%BF%BD%E8%B8%AA">http://hostname:8080/icconcept/index.jsp。这个属性可以用来追踪</a> web 请求是从什 么网站来的。</p>
+<p>&emsp;</p>
+<h4 id="3-尝试输入虚构的帐号口令字进行登录"><a href="#3-尝试输入虚构的帐号口令字进行登录" class="headerlink" title="3.尝试输入虚构的帐号口令字进行登录"></a>3.尝试输入虚构的帐号口令字进行登录</h4><p>&emsp;&emsp;在上面抓取到的数据包中可以看见，访问的协议是 HTTP/1.1 版本，使用 GET 进行传输等 信息，通过数据包的内容，我们可以查询到相关版本从而进行对应的漏洞查找</p>
+<center><img src="/img/Web%E7%BB%83%E4%B9%A0%E2%80%94%E2%80%94%E6%95%B0%E6%8D%AE%E5%8C%85%E5%88%86%E6%9E%90/3.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<p>&emsp;&emsp;如图所示，我们选择使用账号与密码同为 123456 作为输入内容进行数据包的抓取</p>
+<center><img src="/img/Web%E7%BB%83%E4%B9%A0%E2%80%94%E2%80%94%E6%95%B0%E6%8D%AE%E5%8C%85%E5%88%86%E6%9E%90/4.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<p>&emsp;&emsp;在所显示的的数据包中我们可以看到，所谓的用户名与密码在 http 的传输中是明文 加密的，可以轻易的就抓到传输的数据，显然是十分不安全的，随后我们捕获网络踪迹并保存</p>
+<p>&emsp;</p>
+<h4 id="4-访问广大-广工或者其他使用腾讯邮件服务的邮件服务器"><a href="#4-访问广大-广工或者其他使用腾讯邮件服务的邮件服务器" class="headerlink" title="4.访问广大/广工或者其他使用腾讯邮件服务的邮件服务器"></a>4.访问广大/广工或者其他使用腾讯邮件服务的邮件服务器</h4><p>&emsp;&emsp;尝试帐号登录</p>
+<center><img src="/img/Web%E7%BB%83%E4%B9%A0%E2%80%94%E2%80%94%E6%95%B0%E6%8D%AE%E5%8C%85%E5%88%86%E6%9E%90/5.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<p>&emsp;&emsp;如图所示，我们依旧选择使用账号与密码同为 123456 作为输入内容进行数据包的抓取</p>
+<center><img src="/img/Web%E7%BB%83%E4%B9%A0%E2%80%94%E2%80%94%E6%95%B0%E6%8D%AE%E5%8C%85%E5%88%86%E6%9E%90/7.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<p>&emsp;&emsp;在所显示的的数据包中我们可以看到，用户名在传输的过程中使用的是明文传输， 但是对于密码的传输是采用了密文加密的效果，通过网站的源码也能看出是 RSA 的加密方式</p>
+<p>&emsp;</p>
+<h4 id="5-实验分析"><a href="#5-实验分析" class="headerlink" title="5.实验分析"></a>5.实验分析</h4><p>&emsp;&emsp;对实验过程截屏，通过适当踪迹数据和 HTML 文本，</p>
+<ul>
+<li><p>问题1 ：在 HTTP 访问教育网中的邮件服务器的踪迹中是否发现帐号口令字？为什么？ </p>
+<p>&emsp;&emsp;首先是在 HTTP 访问邮件服务器的踪迹中确实能够发现账号口令字，这是因为 HTTP 作为超文本传输协议，与 HTTPS 最大的区别就在于 HTT 采取不加密的传输，所以在传输 的过程中是以明文的方式进行交互，这也就导致了我们在抓包的过程中，能够准确的查 看到相关重要信息</p>
+<center><img src="/img/Web%E7%BB%83%E4%B9%A0%E2%80%94%E2%80%94%E6%95%B0%E6%8D%AE%E5%8C%85%E5%88%86%E6%9E%90/8.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<p>&emsp;&emsp;在德州学院学生邮箱的网址界面源码中，对于密码的传输基本那只涉及到一些是否 为空的基本条件判断，对于传输的过程并没有进一步的加密措施</p>
+</li>
+<li><p>问题2：能否从登录使用腾讯邮件服务的邮箱踪迹中发现帐号口令字等相关信息？为什 么</p>
+<p>&emsp;&emsp;在步骤三实验的数据包中，我们依旧可以查找到账号以及口令的相关内容和信息， 但是不同的是，腾讯邮件服务在对数据进行传输中，进行了选择性的加密方法。账号是 以明文的形式呈现在数据包中，而口令是明显进行处理并加密的</p>
+</li>
+<li><p>问题3：依据所保存的 HTML 文档，解释使用腾讯邮件服务的邮箱帐号登录是如何保护你 的输入凭证的？有什么样的攻击方法可以攻击这样的登录过程？</p>
+<center><img src="/img/Web%E7%BB%83%E4%B9%A0%E2%80%94%E2%80%94%E6%95%B0%E6%8D%AE%E5%8C%85%E5%88%86%E6%9E%90/9.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<p>通过查看 HTML 文本，我们可以发现，在对口令的处理方式是进行 RSA 加密，所以在 抓取数据包的界面中，所看见的口令是密文效果。 RSA 算法的安全性依赖于大整数分解的困难性。 最直接的攻击方法是分解 n 得到 p,q，进而基于 e 计算 d，随着计算机运算能力的不断提高，通过二次筛法已能分解 180 多位的十进制素数，增加 p,q 的长度已成为许多安全应用系统的加密要求。 另一方面， 利用系统设计和实现的缺陷， 人们也提出了一些基于非因子分解方式破解 RSA 算法的 方案。 目前，对 RSA 算法的攻击主要有以下几种： </p>
+<p>&emsp;&emsp;1）模数 n 的因子分解 分解模数 n 是最直接的攻击方法，也是最困难的方法。 攻击者可以获得公钥 e 和 模数 n；如果 n=p*q 被成功分解，则攻击者可以计算出φ(n)=(p-1)(q-1)，进而从 ed ≡1 mod φ(n)解得私钥 d </p>
+<p>&emsp;&emsp;2）公共模数攻击 若一个多用户系统中只采用一个模数 n，不同的用户拥有不同的 e 和 d，系统将是 危险的。 在此系统中，若有同一消息用不同的公钥加密，这些公钥共模且互质，那该信 息无需私钥就可解密。 举例来说，设 P 为信息明文，两个加密公钥为 e1 和 e2，公共 模数是 n，有：C1=Pe1 mod n 和 C2=Pe2 mod n。如果攻击者获得 n、e1、e2、C1 和 C2， 就能得到 P。 </p>
+<p>&emsp;&emsp;3）小指数攻击 如果 RSA 系统的公钥 e 选取较小的值， 可以使加密和验证签名的速度有所提高。 但如果 e 取得太小，就容易受到小指数攻击。 例如，有同一系统的三个用户，分别使 用不同的模数 n1，n2，n3，但都选取 e=3；另有一用户欲将同一明文消息 P 发送给以 上三人，使用各人的公钥加密得：C1=P3 (mod n1)，C2=P3 (mod n2)和 C3=P3 (mod n3) 一般地，n1，n2，n3 互素（否则，会比较容易求出公因子，降低安全性），根据中国剩 余定理，可由 C1，C2，C3 计算：C=P3 (mod n1<em>n2</em>n3) </p>
+<p>&emsp;&emsp;4）选择密文攻击 选择密文攻击指的是攻击者能选择不同的密文，并拥有对应的明文，由此推出想要 的信息。一般攻击者会伪装若干信息，让拥有私钥的用户签名，由此获得有用的明文密文对，然后推算想要的信息。</p>
+<p>&emsp;&emsp; 该方法最为复杂，从算法上无法解决这一问题，主要对应策略有两条：1）私钥持有 者不对不信任的信息签名；2）签名信息时，先使用 Hash 函数生成的摘要，再对摘要签 名，避免直接对信息的签名。</p>
+</li>
+</ul>
+<p>&emsp;</p>
+<h4 id="6-实验总结"><a href="#6-实验总结" class="headerlink" title="6.实验总结"></a>6.实验总结</h4><p>&emsp;&emsp;本次实验利用抓包工具分析 Web 应用传输的数据，通过该实验很好的了解了 http 和 https 的数据情况，首先是对数据包的结构进行了回顾，其次是是熟练了 burpsuit 的抓包使用。 </p>
+<p>&emsp;&emsp;在 http 和 https 的数据包中，明显的差异便是前者没有重要信息加密，后者是进行 了主要信息加密的，值得一提的是，部分大学邮箱的网址访问是 http 协议，但是在抓取包的时候发现口令是进行了加密的，譬如一开始尝试登录的是深圳技术大学的学生邮箱， 他们使用的就是 http 协议结构，但无法直接获取到相关的口令传输。</p>
+<p>&emsp;&emsp; 通过查找资料，明白了有些学校采用的是前端加密的 http 协议结构方法，这样子也 在一定程度上保护了信息的安全性和保密性，但是前端加密和 https 的区别还未掌握， 他们的体系的不同也就导致了漏洞重点的不同，这一点还有待我去挖掘。</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/web%E7%BB%83%E4%B9%A0/" class="category-chain-item">web练习</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>Web练习——数据包分析</div>
+      <div>https://one-null-pointer.github.io/2023/03/11/Web练习——数据包分析/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>Author</div>
+          <div>liaoyue</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>Posted on</div>
+          <div>March 11, 2023</div>
+        </div>
+      
+      
+      <div class="license-meta-item">
+        <div>传送口</div>
+        <div>
+          
+            
+            
+              <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+              <span class="hint--top hint--rounded" aria-label="点击进行传送">
+                <i class="iconfont icon-by"></i>
+              </span>
+              </a>
+            
+          
+        </div>
+      </div>
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2023/03/15/Web%E7%BB%83%E4%B9%A0%E2%80%94%E2%80%94Web%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E6%94%BB%E5%87%BB/" title="Web练习——Web应用程序攻击">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Web练习——Web应用程序攻击</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2023/03/10/%E5%85%B3%E4%BA%8E%E6%89%80%E8%B0%93%E7%9A%84%E5%96%9C%E6%AC%A2/" title="日记——关于所谓的喜欢">
+                        <span class="hidden-mobile">日记——关于所谓的喜欢</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;Table of Contents</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">Keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://github.com/" target="_blank" rel="nofollow noopener"><span>pointer</span></a> <i class="iconfont icon-love"></i> <a href="https://mp.weixin.qq.com/s/6ncLUtaiJ9j_sMjZT5z-2w" target="_blank" rel="nofollow noopener"><span>一个爱学习的空指针</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      headingSelector : CONFIG.toc.headingSelector || 'h1,h2,h3,h4,h5,h6',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      collapseDepth   : CONFIG.toc.collapseDepth || 0,
+      scrollSmooth    : true,
+      headingsOffset  : -boardTop
+    });
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.10/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">Blog works best with JavaScript enabled</div>
+  </noscript>
+</body>
+</html>
