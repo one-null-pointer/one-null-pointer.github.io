@@ -16,23 +16,23 @@
   <meta name="author" content="liaoyue">
   <meta name="keywords" content="">
   
-    <meta name="description" content="Web练习——数据包分析0.前言&amp;emsp;&amp;emsp;主要做一下抓包工具分析Web应用传输的数据的复现（之前大三web课程的作业整理了一下） &amp;emsp; 1.配置抓包工具Burpsuite&#x2F;Wireshark   &amp;emsp;&amp;emsp;Burp Suite 是一款集成化的渗透测试工具，包含了很多功能，可以帮助我们高效地 完成对 Web 应用程序的渗透测试和攻击。 &amp;emsp;&amp;emsp; B">
+    <meta name="description" content="Web练习——网络协议攻防实验（Netwox-Netwag）0.前言&amp;emsp;&amp;emsp;理解基于网络协议的攻击原理， 掌握一些基于网络协议攻击的方法，掌握 netwox&#x2F;netwag 的使用方法 &amp;emsp; 1.工具配置&amp;emsp;&amp;emsp;安装 netwox&#x2F;netwag 工具要先安装 ActiveTcl，再解压安装,安装配置 Telnet 服务器，Telnet 客户端。打开 Telne">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Web练习——数据包分析">
-<meta property="og:url" content="https://one-null-pointer.github.io/2023/03/11/Web%E7%BB%83%E4%B9%A0%E2%80%94%E2%80%94%E6%95%B0%E6%8D%AE%E5%8C%85%E5%88%86%E6%9E%90/index.html">
+<meta property="og:title" content="Web练习——网络协议攻防实验（Netwox-Netwag）">
+<meta property="og:url" content="https://one-null-pointer.github.io/2023/03/17/Web%E7%BB%83%E4%B9%A0%E2%80%94%E2%80%94%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE%E6%94%BB%E9%98%B2%E5%AE%9E%E9%AA%8C%EF%BC%88Netwox-Netwag%EF%BC%89/index.html">
 <meta property="og:site_name" content="one-null-poniter">
-<meta property="og:description" content="Web练习——数据包分析0.前言&amp;emsp;&amp;emsp;主要做一下抓包工具分析Web应用传输的数据的复现（之前大三web课程的作业整理了一下） &amp;emsp; 1.配置抓包工具Burpsuite&#x2F;Wireshark   &amp;emsp;&amp;emsp;Burp Suite 是一款集成化的渗透测试工具，包含了很多功能，可以帮助我们高效地 完成对 Web 应用程序的渗透测试和攻击。 &amp;emsp;&amp;emsp; B">
+<meta property="og:description" content="Web练习——网络协议攻防实验（Netwox-Netwag）0.前言&amp;emsp;&amp;emsp;理解基于网络协议的攻击原理， 掌握一些基于网络协议攻击的方法，掌握 netwox&#x2F;netwag 的使用方法 &amp;emsp; 1.工具配置&amp;emsp;&amp;emsp;安装 netwox&#x2F;netwag 工具要先安装 ActiveTcl，再解压安装,安装配置 Telnet 服务器，Telnet 客户端。打开 Telne">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://one-null-pointer.github.io/img/weblianxi.jpg">
-<meta property="article:published_time" content="2023-03-11T09:48:13.000Z">
-<meta property="article:modified_time" content="2023-03-15T10:36:05.881Z">
+<meta property="article:published_time" content="2023-03-17T09:26:41.000Z">
+<meta property="article:modified_time" content="2023-03-22T10:03:10.783Z">
 <meta property="article:author" content="liaoyue">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://one-null-pointer.github.io/img/weblianxi.jpg">
   
   
   
-  <title>Web练习——数据包分析 - one-null-poniter</title>
+  <title>Web练习——网络协议攻防实验（Netwox-Netwag） - one-null-poniter</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -185,7 +185,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="Web练习——数据包分析"></span>
+            <span id="subtitle" data-typed-text="Web练习——网络协议攻防实验（Netwox-Netwag）"></span>
           
         </div>
 
@@ -196,8 +196,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-03-11 17:48" pubdate>
-          March 11, 2023 pm
+        <time datetime="2023-03-17 17:26" pubdate>
+          March 17, 2023 pm
         </time>
       </span>
     
@@ -208,7 +208,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          3.6k words
+          2.5k words
         
       </span>
     
@@ -219,7 +219,7 @@
         
         
         
-          30 mins
+          21 mins
         
       </span>
     
@@ -257,84 +257,118 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">Web练习——数据包分析</h1>
+            <h1 style="display: none">Web练习——网络协议攻防实验（Netwox-Netwag）</h1>
             
             
               <div class="markdown-body">
                 
-                <h1 id="Web练习——数据包分析"><a href="#Web练习——数据包分析" class="headerlink" title="Web练习——数据包分析"></a>Web练习——数据包分析</h1><h4 id="0-前言"><a href="#0-前言" class="headerlink" title="0.前言"></a>0.前言</h4><p>&emsp;&emsp;主要做一下抓包工具分析Web应用传输的数据的复现（之前大三web课程的作业整理了一下）</p>
+                <h1 id="Web练习——网络协议攻防实验（Netwox-Netwag）"><a href="#Web练习——网络协议攻防实验（Netwox-Netwag）" class="headerlink" title="Web练习——网络协议攻防实验（Netwox-Netwag）"></a>Web练习——网络协议攻防实验（Netwox-Netwag）</h1><h4 id="0-前言"><a href="#0-前言" class="headerlink" title="0.前言"></a>0.前言</h4><p>&emsp;&emsp;理解基于网络协议的攻击原理， 掌握一些基于网络协议攻击的方法，掌握 netwox/netwag 的使用方法</p>
 <p>&emsp;</p>
-<h4 id="1-配置抓包工具Burpsuite-Wireshark"><a href="#1-配置抓包工具Burpsuite-Wireshark" class="headerlink" title="1.配置抓包工具Burpsuite/Wireshark"></a>1.配置抓包工具Burpsuite/Wireshark</h4><center><img src="/img/Web%E7%BB%83%E4%B9%A0%E2%80%94%E2%80%94%E6%95%B0%E6%8D%AE%E5%8C%85%E5%88%86%E6%9E%90/1.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
-</center>
+<h4 id="1-工具配置"><a href="#1-工具配置" class="headerlink" title="1.工具配置"></a>1.工具配置</h4><p>&emsp;&emsp;安装 netwox/netwag 工具要先安装 ActiveTcl，再解压安装,安装配置 Telnet 服务器，Telnet 客户端。打开 Telnet 功能：控制面板-程序-程序和功能-打开或关闭 Windows 功能，勾选 Telnet 服务器，Telnet 客户端</p>
+<center><img src="/img/Web练习——网络协议攻防实验（Netwox-Netwag）/1.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" /></center>
+&emsp;&emsp;启动本地 Telnet 服务器：搜索-服务，点击服务，选择 Telnet，更改启动类型为手动
 
-<p>&emsp;&emsp;Burp Suite 是一款集成化的渗透测试工具，包含了很多功能，可以帮助我们高效地 完成对 Web 应用程序的渗透测试和攻击。</p>
-<p>&emsp;&emsp; Burp Proxy 的拦截功能主要由 intercept（intercept 拦截/截夺）选项卡中的 Forward、Drop、Interception is on/off 和 Action 构成，他们的功能如下所示。 </p>
-<p>&emsp;Forward（放包）：表示将拦截的数据表或修改后的数据包发送至服务器端。</p>
-<p>&emsp;&emsp; Drop（废包）：表示丢弃当前拦截的数据包 </p>
-<p>&emsp;&emsp;Interception is on（拦截请求）：表示开启拦截功能，单击后变为 interception is off（拦截禁用），表示关闭拦截功能</p>
-<p>&emsp;&emsp;单击 Action（行动）按钮：可以将数据包进一步发送到 Spider、scanner、Repeater、 Intruder 等功能组件做进一步测试，同时也包含改变数据包请求方式及其 body 的编码 功能。（发送到其他功能组件）</p>
+<center><img src="/img/Web练习——网络协议攻防实验（Netwox-Netwag）/2.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" /></center>
+
+<p>&emsp;&emsp;增加 Win7 用：控制面板-用户帐户和家庭安全-用户帐-管理帐户，之后按提示创建用户并设置</p>
+<center><img src="/img/Web练习——网络协议攻防实验（Netwox-Netwag）/3.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" /></center>
+
+<p>&emsp;&emsp;将用户加入 Telnet 群组假定创建用户为 infosec12，搜索 - lusrmgr.msc</p>
+<center><img src="/img/Web练习——网络协议攻防实验（Netwox-Netwag）/4.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" /></center>
+
+<p>&emsp;&emsp;本地用户和组–组-TelnetClients-添加-infosec1</p>
 <p>&emsp;</p>
-<h4 id="2-访问过程"><a href="#2-访问过程" class="headerlink" title="2.访问过程"></a>2.访问过程</h4><p>&emsp;&emsp;访问某些国内大学的主页，选择使用 http 访问的邮件服务器，以德州学院的邮箱服务为例</p>
-<center><img src="/img/Web%E7%BB%83%E4%B9%A0%E2%80%94%E2%80%94%E6%95%B0%E6%8D%AE%E5%8C%85%E5%88%86%E6%9E%90/2.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
-</center>
+<h4 id="2-启动-Telnet-服务器"><a href="#2-启动-Telnet-服务器" class="headerlink" title="2.启动 Telnet 服务器"></a>2.启动 Telnet 服务器</h4><center><img src="/img/Web练习——网络协议攻防实验（Netwox-Netwag）/5.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" /></center>
 
-<p>&emsp;&emsp;HOST：主机或域名地址。 </p>
-<p>&emsp;&emsp;Accept：指浏览器或其他客户可以接受的 MIME 格式。Servlet 可以根据它判断并返 回适当的文件格式。 </p>
-<p>&emsp;&emsp;User-Agent：是客户端浏览器名称。 </p>
-<p>&emsp;&emsp;Host：对应网址 URL 中的 Web 名称和端口号。</p>
-<p>&emsp;&emsp;Accept-Langeuage：指出浏览器可以接受的语言种类。</p>
-<p>&emsp;&emsp;connection：用来告诉服务器是否可以维持固定的 HTTP 连接。http 是无连接的， HTTP/1.1 使用 Keep-Alive 为默认值。 </p>
-<p>&emsp;&emsp;Cookie：浏览器用这个属性向服务器发送 Cookie。Cookie 是在浏览器中寄存的小型 数据体，它可以记载和服务器相关的用户信息，也可以用来实现会话功能。 </p>
-<p>&emsp;&emsp;Referer：表示产生的网页 URL。如此从网页/icconcept/index.jsp 中点击一个链接 到网页/icwork/search，在服务器发送的 GET/icwoek/search 中的请求中，Referer 是 <a target="_blank" rel="noopener" href="http://hostname:8080/icconcept/index.jsp%E3%80%82%E8%BF%99%E4%B8%AA%E5%B1%9E%E6%80%A7%E5%8F%AF%E4%BB%A5%E7%94%A8%E6%9D%A5%E8%BF%BD%E8%B8%AA">http://hostname:8080/icconcept/index.jsp。这个属性可以用来追踪</a> web 请求是从什 么网站来的。</p>
 <p>&emsp;</p>
-<h4 id="3-尝试输入虚构的帐号口令字进行登录"><a href="#3-尝试输入虚构的帐号口令字进行登录" class="headerlink" title="3.尝试输入虚构的帐号口令字进行登录"></a>3.尝试输入虚构的帐号口令字进行登录</h4><p>&emsp;&emsp;在上面抓取到的数据包中可以看见，访问的协议是 HTTP/1.1 版本，使用 GET 进行传输等 信息，通过数据包的内容，我们可以查询到相关版本从而进行对应的漏洞查找</p>
-<center><img src="/img/Web%E7%BB%83%E4%B9%A0%E2%80%94%E2%80%94%E6%95%B0%E6%8D%AE%E5%8C%85%E5%88%86%E6%9E%90/3.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
-</center>
+<h4 id="3-客户端登录-Telnet-服务器"><a href="#3-客户端登录-Telnet-服务器" class="headerlink" title="3.客户端登录 Telnet 服务器"></a>3.客户端登录 Telnet 服务器</h4><p>&emsp;&emsp;从客户端命令行上输入 telnet IP 地址，之后输入帐号/口令字，登入 Telnet服务器。下图的踪迹表明客户端登录 Telnet 服务器的踪迹。Wireshark 可运行在客户端或服务器上</p>
+<center><img src="/img/Web练习——网络协议攻防实验（Netwox-Netwag）/6.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" /></center>
 
-<p>&emsp;&emsp;如图所示，我们选择使用账号与密码同为 123456 作为输入内容进行数据包的抓取</p>
-<center><img src="/img/Web%E7%BB%83%E4%B9%A0%E2%80%94%E2%80%94%E6%95%B0%E6%8D%AE%E5%8C%85%E5%88%86%E6%9E%90/4.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
-</center>
+<center><img src="/img/Web练习——网络协议攻防实验（Netwox-Netwag）/7.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" /></center>
 
-<p>&emsp;&emsp;在所显示的的数据包中我们可以看到，所谓的用户名与密码在 http 的传输中是明文 加密的，可以轻易的就抓到传输的数据，显然是十分不安全的，随后我们捕获网络踪迹并保存</p>
 <p>&emsp;</p>
-<h4 id="4-访问广大-广工或者其他使用腾讯邮件服务的邮件服务器"><a href="#4-访问广大-广工或者其他使用腾讯邮件服务的邮件服务器" class="headerlink" title="4.访问广大/广工或者其他使用腾讯邮件服务的邮件服务器"></a>4.访问广大/广工或者其他使用腾讯邮件服务的邮件服务器</h4><p>&emsp;&emsp;尝试帐号登录</p>
-<center><img src="/img/Web%E7%BB%83%E4%B9%A0%E2%80%94%E2%80%94%E6%95%B0%E6%8D%AE%E5%8C%85%E5%88%86%E6%9E%90/5.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
-</center>
+<h4 id="4-使用-netwox-netwag-工具"><a href="#4-使用-netwox-netwag-工具" class="headerlink" title="4.使用 netwox/netwag 工具"></a>4.使用 netwox/netwag 工具</h4><p>&emsp;&emsp;使用 netwox/netwag 工具伪造 TCP 包并进行抓包分析可以采用方法 38</p>
+<center><img src="/img/Web练习——网络协议攻防实验（Netwox-Netwag）/8.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" /></center>
 
-<p>&emsp;&emsp;如图所示，我们依旧选择使用账号与密码同为 123456 作为输入内容进行数据包的抓取</p>
-<center><img src="/img/Web%E7%BB%83%E4%B9%A0%E2%80%94%E2%80%94%E6%95%B0%E6%8D%AE%E5%8C%85%E5%88%86%E6%9E%90/7.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
-</center>
+<p>&emsp;&emsp;捕获的踪迹如下</p>
+<center><img src="/img/Web练习——网络协议攻防实验（Netwox-Netwag）/9.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" /></center>
 
-<p>&emsp;&emsp;在所显示的的数据包中我们可以看到，用户名在传输的过程中使用的是明文传输， 但是对于密码的传输是采用了密文加密的效果，通过网站的源码也能看出是 RSA 的加密方式</p>
 <p>&emsp;</p>
-<h4 id="5-实验分析"><a href="#5-实验分析" class="headerlink" title="5.实验分析"></a>5.实验分析</h4><p>&emsp;&emsp;对实验过程截屏，通过适当踪迹数据和 HTML 文本，</p>
-<ul>
-<li><p>问题1 ：在 HTTP 访问教育网中的邮件服务器的踪迹中是否发现帐号口令字？为什么？ </p>
-<p>&emsp;&emsp;首先是在 HTTP 访问邮件服务器的踪迹中确实能够发现账号口令字，这是因为 HTTP 作为超文本传输协议，与 HTTPS 最大的区别就在于 HTT 采取不加密的传输，所以在传输 的过程中是以明文的方式进行交互，这也就导致了我们在抓包的过程中，能够准确的查 看到相关重要信息</p>
-<center><img src="/img/Web%E7%BB%83%E4%B9%A0%E2%80%94%E2%80%94%E6%95%B0%E6%8D%AE%E5%8C%85%E5%88%86%E6%9E%90/8.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
-</center>
+<h4 id="5-进行-SYN-flood-攻击"><a href="#5-进行-SYN-flood-攻击" class="headerlink" title="5.进行 SYN flood 攻击"></a>5.进行 SYN flood 攻击</h4><p>&emsp;&emsp;使用 netwox/netwag 工具对 Telnet 服务器进行 SYN flood 攻击，并进行抓包分析</p>
+<p>&emsp;&emsp;(1)在本地机器上配置激活 Telnet 服务器与 Telnet 客户端，以自己的学号创建新的用户</p>
+<center><img src="/img/Web练习——网络协议攻防实验（Netwox-Netwag）/10.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" /></center>
 
-<p>&emsp;&emsp;在德州学院学生邮箱的网址界面源码中，对于密码的传输基本那只涉及到一些是否 为空的基本条件判断，对于传输的过程并没有进一步的加密措施</p>
-</li>
-<li><p>问题2：能否从登录使用腾讯邮件服务的邮箱踪迹中发现帐号口令字等相关信息？为什 么</p>
-<p>&emsp;&emsp;在步骤三实验的数据包中，我们依旧可以查找到账号以及口令的相关内容和信息， 但是不同的是，腾讯邮件服务在对数据进行传输中，进行了选择性的加密方法。账号是 以明文的形式呈现在数据包中，而口令是明显进行处理并加密的</p>
-</li>
-<li><p>问题3：依据所保存的 HTML 文档，解释使用腾讯邮件服务的邮箱帐号登录是如何保护你 的输入凭证的？有什么样的攻击方法可以攻击这样的登录过程？</p>
-<center><img src="/img/Web%E7%BB%83%E4%B9%A0%E2%80%94%E2%80%94%E6%95%B0%E6%8D%AE%E5%8C%85%E5%88%86%E6%9E%90/9.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
-</center>
+<p>&emsp;&emsp;(2)启动本地 Wireshark；</p>
+<p>&emsp;&emsp;(3)在另外的 IP 上登录有自己学号帐户的 Telnet 服务器，截屏及捕获登录踪迹；</p>
+<center><img src="/img/Web练习——网络协议攻防实验（Netwox-Netwag）/11.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" /></center>
 
-<p>通过查看 HTML 文本，我们可以发现，在对口令的处理方式是进行 RSA 加密，所以在 抓取数据包的界面中，所看见的口令是密文效果。 RSA 算法的安全性依赖于大整数分解的困难性。 最直接的攻击方法是分解 n 得到 p,q，进而基于 e 计算 d，随着计算机运算能力的不断提高，通过二次筛法已能分解 180 多位的十进制素数，增加 p,q 的长度已成为许多安全应用系统的加密要求。 另一方面， 利用系统设计和实现的缺陷， 人们也提出了一些基于非因子分解方式破解 RSA 算法的 方案。 目前，对 RSA 算法的攻击主要有以下几种： </p>
-<p>&emsp;&emsp;1）模数 n 的因子分解 分解模数 n 是最直接的攻击方法，也是最困难的方法。 攻击者可以获得公钥 e 和 模数 n；如果 n=p*q 被成功分解，则攻击者可以计算出φ(n)=(p-1)(q-1)，进而从 ed ≡1 mod φ(n)解得私钥 d </p>
-<p>&emsp;&emsp;2）公共模数攻击 若一个多用户系统中只采用一个模数 n，不同的用户拥有不同的 e 和 d，系统将是 危险的。 在此系统中，若有同一消息用不同的公钥加密，这些公钥共模且互质，那该信 息无需私钥就可解密。 举例来说，设 P 为信息明文，两个加密公钥为 e1 和 e2，公共 模数是 n，有：C1=Pe1 mod n 和 C2=Pe2 mod n。如果攻击者获得 n、e1、e2、C1 和 C2， 就能得到 P。 </p>
-<p>&emsp;&emsp;3）小指数攻击 如果 RSA 系统的公钥 e 选取较小的值， 可以使加密和验证签名的速度有所提高。 但如果 e 取得太小，就容易受到小指数攻击。 例如，有同一系统的三个用户，分别使 用不同的模数 n1，n2，n3，但都选取 e=3；另有一用户欲将同一明文消息 P 发送给以 上三人，使用各人的公钥加密得：C1=P3 (mod n1)，C2=P3 (mod n2)和 C3=P3 (mod n3) 一般地，n1，n2，n3 互素（否则，会比较容易求出公因子，降低安全性），根据中国剩 余定理，可由 C1，C2，C3 计算：C=P3 (mod n1<em>n2</em>n3) </p>
-<p>&emsp;&emsp;4）选择密文攻击 选择密文攻击指的是攻击者能选择不同的密文，并拥有对应的明文，由此推出想要 的信息。一般攻击者会伪装若干信息，让拥有私钥的用户签名，由此获得有用的明文密文对，然后推算想要的信息。</p>
-<p>&emsp;&emsp; 该方法最为复杂，从算法上无法解决这一问题，主要对应策略有两条：1）私钥持有 者不对不信任的信息签名；2）签名信息时，先使用 Hash 函数生成的摘要，再对摘要签 名，避免直接对信息的签名。</p>
-</li>
-</ul>
+<p>&emsp;&emsp;(4)退出登录，从第三台机器上利用 netwox/netwag 工具对进行 SYN flood 攻击。捕获 DDOS 攻击踪迹。尝试再次登录 Telnet 服务器，解释现象</p>
+<center><img src="/img/Web练习——网络协议攻防实验（Netwox-Netwag）/12.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" /></center>
+
+<center><img src="/img/Web练习——网络协议攻防实验（Netwox-Netwag）/13.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" /></center>
+
+<p>&emsp;&emsp;通过上图，我们可以看见，大量不同源地址的SYN包对服务器的80端口发送SYN包，从而进行SYN flood攻击。</p>
+<p>&emsp;&emsp;客户端再次尝试连接，结果为</p>
+<center><img src="/img/Web练习——网络协议攻防实验（Netwox-Netwag）/14.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" /></center>
+
+<p>&emsp;&emsp;可以看见，在重新运行连接时，客户端的连接一直处于等待连接状态，明显是由于SYN-flood的攻击起了作用，导致客户端无法连接</p>
 <p>&emsp;</p>
-<h4 id="6-实验总结"><a href="#6-实验总结" class="headerlink" title="6.实验总结"></a>6.实验总结</h4><p>&emsp;&emsp;本次实验利用抓包工具分析 Web 应用传输的数据，通过该实验很好的了解了 http 和 https 的数据情况，首先是对数据包的结构进行了回顾，其次是是熟练了 burpsuit 的抓包使用。 </p>
-<p>&emsp;&emsp;在 http 和 https 的数据包中，明显的差异便是前者没有重要信息加密，后者是进行 了主要信息加密的，值得一提的是，部分大学邮箱的网址访问是 http 协议，但是在抓取包的时候发现口令是进行了加密的，譬如一开始尝试登录的是深圳技术大学的学生邮箱， 他们使用的就是 http 协议结构，但无法直接获取到相关的口令传输。</p>
-<p>&emsp;&emsp; 通过查找资料，明白了有些学校采用的是前端加密的 http 协议结构方法，这样子也 在一定程度上保护了信息的安全性和保密性，但是前端加密和 https 的区别还未掌握， 他们的体系的不同也就导致了漏洞重点的不同，这一点还有待我去挖掘。</p>
+<h4 id="6-进行-TCP-RST-攻击"><a href="#6-进行-TCP-RST-攻击" class="headerlink" title="6.进行 TCP RST 攻击"></a>6.进行 TCP RST 攻击</h4><p>&emsp;&emsp;使用 netwox/netwag 工具对 Telnet 服务器进行 TCP RST 攻击，并进行抓包析</p>
+<p>&emsp;&emsp;(1) 创建一个 Telnet 账户，以这个账户为基础进行后继的实验。</p>
+<p>&emsp;&emsp;(2) 验证 TCP RESET 理论上的可行性</p>
+<p>&emsp;&emsp;A） 先在二主机之间建立一个 TCP 连接，通过抓包程序获得当前二主机的 ip地址，端口号，序列号</p>
+<center><img src="/img/Web练习——网络协议攻防实验（Netwox-Netwag）/15.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" /></center>
+
+<center><img src="/img/Web练习——网络协议攻防实验（Netwox-Netwag）/16.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" /></center>
+
+<p>&emsp;&emsp;从捕获的包中可以看见两台连接主机的 主要信息：</p>
+<p>&emsp;&emsp;源ip：192.168.172.131  源端口：49160</p>
+<p>&emsp;&emsp;目标ip：192.168.172.133  目标端口：23</p>
+<p>&emsp;&emsp;Seq：715  Ack：1418   Win：64256</p>
+<p>&emsp;&emsp;十六进制为： Seq：000c29  Ack：9053ce58  Win：00fb</p>
+<center><img src="/img/Web练习——网络协议攻防实验（Netwox-Netwag）/17.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" /></center>
+
+<p>&emsp;&emsp;B 通过获得的信息伪造 TCP RESET 报文并发送。</p>
+<center><img src="/img/Web练习——网络协议攻防实验（Netwox-Netwag）/18.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" /></center>
+
+<center><img src="/img/Web练习——网络协议攻防实验（Netwox-Netwag）/19.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" /></center>
+
+<p>&emsp;&emsp;通过输入对应的Ack（raw）值作为Seq输入，伪TCP RESET 报文</p>
+<center><img src="/img/Web练习——网络协议攻防实验（Netwox-Netwag）/20.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" /></center>
+
+<p>&emsp;&emsp;C） 观察原有 TCP 连接是否断开</p>
+<center><img src="/img/Web练习——网络协议攻防实验（Netwox-Netwag）/21.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" /></center>
+
+<p>&emsp;&emsp;可以观察到主机已经失去连接</p>
+<p>&emsp;</p>
+<h4 id="7-窗口对-TCP-RESET-攻击"><a href="#7-窗口对-TCP-RESET-攻击" class="headerlink" title="7.窗口对 TCP RESET 攻击"></a>7.窗口对 TCP RESET 攻击</h4><p>&emsp;&emsp;A） 先在二主机之间建立一个 TCP 连接，通过抓包程序获得当前二主机的 ip地址，端口号，序列号，另外就是记录下窗口的大小</p>
+<center><img src="/img/Web练习——网络协议攻防实验（Netwox-Netwag）/22.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" /></center>
+
+<p>&emsp;&emsp;B） 通过获得的信息伪造 TCP RESET，填写伪造的序列号时，使伪造序号大于准确的序列号但是与准确序列号的差小于窗口大小，发送 TCP RESET 报文。</p>
+<p>&emsp;&emsp;我们这里win的大小为63212，令伪造序的序列号与准确序列号的差为237</p>
+<center><img src="/img/Web练习——网络协议攻防实验（Netwox-Netwag）/23.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" /></center>
+
+<center><img src="/img/Web练习——网络协议攻防实验（Netwox-Netwag）/24.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" /></center>
+
+<center><img src="/img/Web练习——网络协议攻防实验（Netwox-Netwag）/25.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" /></center>
+
+<p>&emsp;&emsp;C ）观察原有 TCP 连接是否断开。改动伪造的序列号，使其刚与准确的序列号之差刚好为窗口大小，重复以上实验。</p>
+<p>&emsp;&emsp;可以看见原有 TCP 连接并没有断开，2995052430+63212=2995115642</p>
+<center><img src="/img/Web练习——网络协议攻防实验（Netwox-Netwag）/26.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" /></center>
+
+<center><img src="/img/Web练习——网络协议攻防实验（Netwox-Netwag）/27.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" /></center>
+
+<center><img src="/img/Web练习——网络协议攻防实验（Netwox-Netwag）/28.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" /></center>
+
+<p>&emsp;&emsp;D） 改动伪造的序列号，使其刚与准确的序列号之差大于窗口大小，重复以上实验。</p>
+<p>&emsp;&emsp;可以看见原有 TCP 连接依旧没有断开，这次我们取大于窗口大小的伪造的序列号</p>
+<center><img src="/img/Web练习——网络协议攻防实验（Netwox-Netwag）/29.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" /></center>
+
+<p>&emsp;&emsp;最后显示断开连接</p>
+<p>&emsp;</p>
+<h4 id="8-总结"><a href="#8-总结" class="headerlink" title="8.总结"></a>8.总结</h4><p>&emsp;&emsp;对于工具netwag的使用，浅显的学会了其中的几个功能实现和数据包伪装。对于数据包所包含的Seq、Ack和Win等值的参数都有了更进一步的了解</p>
+<p>&emsp;&emsp;其次是对于泛洪攻击的实现与掌握，通过攻击服务端的相应端口，扔出大量无用的数据包，导致客户端的机器无法连接，防范这种攻击的想法是过滤，通过过滤出无用的SYN包，达到减少大量数据包占用资源的效果，如何有效的过滤也是一个问题。</p>
+<p>&emsp;&emsp;最后是RST攻击，RST数据包是为了通讯双方在连接时出现问题时采取的中断措施，在实验中伪造RST，可以实现第三方中断客户端与服务端的最终效果</p>
 
                 
               </div>
@@ -373,8 +407,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>Web练习——数据包分析</div>
-      <div>https://one-null-pointer.github.io/2023/03/11/Web练习——数据包分析/</div>
+      <div>Web练习——网络协议攻防实验（Netwox-Netwag）</div>
+      <div>https://one-null-pointer.github.io/2023/03/17/Web练习——网络协议攻防实验（Netwox-Netwag）/</div>
     </div>
     <div class="license-meta">
       
@@ -386,7 +420,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>Posted on</div>
-          <div>March 11, 2023</div>
+          <div>March 17, 2023</div>
         </div>
       
       
@@ -416,9 +450,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2023/03/15/Web%E7%BB%83%E4%B9%A0%E2%80%94%E2%80%94Web%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E6%94%BB%E5%87%BB/" title="Web练习——Web应用程序攻击">
+                      <a href="/2023/03/18/CSRF%E4%B8%8ESSRF%E4%BA%86%E8%A7%A3/" title="CSRF与SSRF——了解与漏洞案例">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Web练习——Web应用程序攻击</span>
+                        <span class="hidden-mobile">CSRF与SSRF——了解与漏洞案例</span>
                         <span class="visible-mobile">Previous</span>
                       </a>
                     
@@ -426,8 +460,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2023/03/10/%E5%85%B3%E4%BA%8E%E6%89%80%E8%B0%93%E7%9A%84%E5%96%9C%E6%AC%A2/" title="日记——关于所谓的喜欢">
-                        <span class="hidden-mobile">日记——关于所谓的喜欢</span>
+                      <a href="/2023/03/17/Web%E7%BB%83%E4%B9%A0%E2%80%94%E2%80%94%E9%98%B2%E7%81%AB%E5%A2%99%E6%BC%8F%E6%B4%9E%E6%89%AB%E6%8F%8FNessus/" title="Web练习——防火墙漏洞扫描（Nessus）">
+                        <span class="hidden-mobile">Web练习——防火墙漏洞扫描（Nessus）</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
