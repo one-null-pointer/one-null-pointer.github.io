@@ -4,6 +4,25 @@
   
   
   <entry>
+    <title>SSRF——漏洞案例与了解</title>
+    <link href="/2023/03/27/SSRF%E2%80%94%E2%80%94%E6%BC%8F%E6%B4%9E%E6%A1%88%E4%BE%8B%E4%B8%8E%E4%BA%86%E8%A7%A3/"/>
+    <url>/2023/03/27/SSRF%E2%80%94%E2%80%94%E6%BC%8F%E6%B4%9E%E6%A1%88%E4%BE%8B%E4%B8%8E%E4%BA%86%E8%A7%A3/</url>
+    
+    <content type="html"><![CDATA[<h1 id="SSRF——漏洞案例与了解"><a href="#SSRF——漏洞案例与了解" class="headerlink" title="SSRF——漏洞案例与了解"></a>SSRF——漏洞案例与了解</h1><h4 id="1-SSRF"><a href="#1-SSRF" class="headerlink" title="1.SSRF"></a>1.SSRF</h4><ul><li><h5 id="漏洞解释"><a href="#漏洞解释" class="headerlink" title="漏洞解释"></a>漏洞解释</h5><p>&emsp;&emsp;SSRF（Server-Side Request Forgery，服务器端请求伪造）是一种网络攻击技术，攻击者可以利用它来发送伪造的请求，使服务器误认为这些请求来自于合法的用户或者本地网络中的其他服务，从而获取敏感信息或者执行未授权的操作</p></li><li><h5 id="漏洞过程"><a href="#漏洞过程" class="headerlink" title="漏洞过程"></a>漏洞过程</h5></li></ul><center><img src="/img/SSRF——漏洞案例与了解/1.png" style="zoom:80%;" /></center><ul><li><h5 id="漏洞原理"><a href="#漏洞原理" class="headerlink" title="漏洞原理"></a>漏洞原理</h5><p>&emsp;&emsp;具体来说，攻击者可以构造一个包含恶意代码的请求，将该请求发送给服务器，并控制该请求中的某些参数。服务器在处理该请求时，会将该参数中指定的 URL 当作内部请求发送出去，而攻击者通过构造的 URL 可以控制这个内部请求的目标和内容。这样一来，攻击者就可以在不经过任何身份验证的情况下，访问服务器内部的敏感信息，甚至执行任意的系统命令</p><p>&emsp;&emsp;SSRF 攻击通常针对那些将用户提供的 URL 直接传递给服务器端，用于进行内部请求的应用程序，如图片加载、文件下载、API 调用等。攻击者可以在 URL 中注入恶意代码，将内部请求发送到指定的目标服务器，并获取敏感信息或者执行未授权的操作</p></li></ul><p>&emsp;</p><h4 id="2-SSRF的作用"><a href="#2-SSRF的作用" class="headerlink" title="2.SSRF的作用"></a>2.SSRF的作用</h4><ul><li><h5 id="协议调用探针"><a href="#协议调用探针" class="headerlink" title="协议调用探针"></a>协议调用探针</h5><p>http、file、dict、ftp、gopher等</p></li><li><h5 id="漏洞攻击"><a href="#漏洞攻击" class="headerlink" title="漏洞攻击"></a>漏洞攻击</h5><p>端口扫描、指纹识别、漏洞利用、内网探针等</p></li><li><h5 id="协议举例"><a href="#协议举例" class="headerlink" title="协议举例"></a>协议举例</h5><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs awk">http:<span class="hljs-regexp">//</span><span class="hljs-number">192.168</span>.<span class="hljs-number">64.144</span><span class="hljs-regexp">/phpmyadmin/</span><br>file:<span class="hljs-regexp">//</span><span class="hljs-regexp">/D:/</span>www.txt<br>dict:<span class="hljs-regexp">//</span><span class="hljs-number">192.168</span>.<span class="hljs-number">64.144</span>:<span class="hljs-number">3306</span>/info<br>ftp:<span class="hljs-regexp">//</span><span class="hljs-number">192.168</span>.<span class="hljs-number">64.144</span>:<span class="hljs-number">21</span><br></code></pre></td></tr></table></figure></li></ul><p>&emsp;</p><h4 id="3-SSRF举例——获取mysql版本信息"><a href="#3-SSRF举例——获取mysql版本信息" class="headerlink" title="3.SSRF举例——获取mysql版本信息"></a>3.SSRF举例——获取mysql版本信息</h4><p>&emsp;&emsp;首先创建一个可以访问并且有上传图片网址的服务器</p><center><img src="/img/SSRF——漏洞案例与了解/4.png" style="zoom:80%;" /></center><p>&emsp;&emsp;可以看到这里上传了png文件，并反馈了png代码的乱码情况，接下来通过访问地址端口达到信息收集的目的</p><center><img src="/img/SSRF——漏洞案例与了解/2.png" style="zoom:80%;" /></center><center><img src="/img/SSRF——漏洞案例与了解/3.png" style="zoom:80%;" /></center><p>&emsp;&emsp;可以看见，在对端口进行输入访问时，会反馈的内容信息是服务器的相关软件版本，这里是扫描了本地的ip地址，当然这是不局限于本地ip地址的。所以我们可以通过这种方式去获取到服务器的相关内容信息</p><p>&emsp;</p><h4 id="4-SSRF实例演示"><a href="#4-SSRF实例演示" class="headerlink" title="4.SSRF实例演示"></a>4.SSRF实例演示</h4><p>&emsp;win7扮演服务器，使用HFS作为网络文件服务器工具</p><center><img src="/img/SSRF——漏洞案例与了解/5.png" style="zoom:80%;" /></center><p>&emsp;&emsp;进行访问尝试</p><center><img src="/img/SSRF——漏洞案例与了解/6.png" style="zoom:80%;" /></center><center><img src="/img/SSRF——漏洞案例与了解/7.png" style="zoom:80%;" /></center><p>&emsp;&emsp;有反馈说明地址是存活的，所以我们要探测有哪些端口，比如8080端口</p><center><img src="/img/SSRF——漏洞案例与了解/8.png" style="zoom:80%;" /></center><center><img src="/img/SSRF——漏洞案例与了解/9.png" style="zoom:80%;" /></center><p>&emsp;&emsp;发现有HFS服务，然后我们查询该版本工具是否存在相关漏洞</p><center><img src="/img/SSRF——漏洞案例与了解/10.png" style="zoom:80%;" /></center><p>&emsp;&emsp;发现存在相关的漏洞，我们可以尝试利用远程命令执行进行攻击</p><center><img src="/img/SSRF——漏洞案例与了解/11.png" style="zoom:80%;" /></center><p>&emsp;&emsp;最后在服务器中会发现远程添加了一个管理员用户</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>web</category>
+      
+    </categories>
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>Liunx——缓冲区溢出实验</title>
     <link href="/2023/03/26/Liunx%E2%80%94%E2%80%94%E7%BC%93%E5%86%B2%E5%8C%BA%E6%BA%A2%E5%87%BA%E5%AE%9E%E9%AA%8C/"/>
     <url>/2023/03/26/Liunx%E2%80%94%E2%80%94%E7%BC%93%E5%86%B2%E5%8C%BA%E6%BA%A2%E5%87%BA%E5%AE%9E%E9%AA%8C/</url>
