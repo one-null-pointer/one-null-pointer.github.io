@@ -1,0 +1,651 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="liaoyue">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="蓝队——相关了解1.学习蓝队知识的原因&amp;emsp;&amp;emsp;这几周面试了一些公司吧，主要面试的方向是安全服务工程师，渗透测试以及信息安全工程师。其实大抵的方向就分为两种，一种是作为乙方公司的小喽啰给甲方提供测试盒安全服务，这是攻击层面的，也是自己之前学的比较多的，另一种是为自己公司提供服务的团队，这种团队比较少，但是是偏向与蓝方的体系思路，所以打算学习，当然，之前的web攻防也不会落下。 &amp;em">
+<meta property="og:type" content="article">
+<meta property="og:title" content="蓝队——相关了解">
+<meta property="og:url" content="https://one-null-pointer.github.io/2023/05/01/%E8%93%9D%E9%98%9F%E2%80%94%E2%80%94%E7%9B%B8%E5%85%B3%E4%BA%86%E8%A7%A3/index.html">
+<meta property="og:site_name" content="one-null-poniter">
+<meta property="og:description" content="蓝队——相关了解1.学习蓝队知识的原因&amp;emsp;&amp;emsp;这几周面试了一些公司吧，主要面试的方向是安全服务工程师，渗透测试以及信息安全工程师。其实大抵的方向就分为两种，一种是作为乙方公司的小喽啰给甲方提供测试盒安全服务，这是攻击层面的，也是自己之前学的比较多的，另一种是为自己公司提供服务的团队，这种团队比较少，但是是偏向与蓝方的体系思路，所以打算学习，当然，之前的web攻防也不会落下。 &amp;em">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://one-null-pointer.github.io/img/lanteam.png">
+<meta property="article:published_time" content="2023-05-01T08:01:24.000Z">
+<meta property="article:modified_time" content="2023-05-08T09:24:56.764Z">
+<meta property="article:author" content="liaoyue">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://one-null-pointer.github.io/img/lanteam.png">
+  
+  
+  
+  <title>蓝队——相关了解 - one-null-poniter</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"one-null-pointer.github.io","root":"/","version":"1.9.2","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 5.4.2"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>one null pointer</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                吾
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                學
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                類
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="蓝队——相关了解"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2023-05-01 16:01" pubdate>
+          May 1, 2023 pm
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          1.7k words
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          15 mins
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">蓝队——相关了解</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="蓝队——相关了解"><a href="#蓝队——相关了解" class="headerlink" title="蓝队——相关了解"></a>蓝队——相关了解</h1><h4 id="1-学习蓝队知识的原因"><a href="#1-学习蓝队知识的原因" class="headerlink" title="1.学习蓝队知识的原因"></a>1.学习蓝队知识的原因</h4><p>&emsp;&emsp;这几周面试了一些公司吧，主要面试的方向是安全服务工程师，渗透测试以及信息安全工程师。其实大抵的方向就分为两种，一种是作为乙方公司的小喽啰给甲方提供测试盒安全服务，这是攻击层面的，也是自己之前学的比较多的，另一种是为自己公司提供服务的团队，这种团队比较少，但是是偏向与蓝方的体系思路，所以打算学习，当然，之前的web攻防也不会落下。</p>
+<p>&emsp;</p>
+<h4 id="2-蓝队简介"><a href="#2-蓝队简介" class="headerlink" title="2.蓝队简介"></a>2.蓝队简介</h4><p>&emsp;&emsp;蓝队是指网络安全领域中负责保护和维护组织网络安全的团队或个人。蓝队的职责是预防、检测和应对网络威胁，确保组织的信息系统和数据得到充分的保护。</p>
+<p>蓝队的主要任务包括但不限于以下几个方面：</p>
+<ul>
+<li><p>安全策略和规划：</p>
+<p>&emsp;&emsp;制定和实施组织的网络安全策略、政策和流程。确保安全措施与业务需求相匹配，并与相关部门进行协调。</p>
+</li>
+<li><p>安全防御和保护：</p>
+<p>&emsp;&emsp;部署和管理安全设备和解决方案，例如防火墙、入侵检测系统（IDS）、入侵防御系统（IPS）、反病毒软件、蜜罐等，以及网络访问控制和身份验证机制。确保网络和系统受到适当的保护，防止未经授权的访问和恶意活动。</p>
+</li>
+<li><p>安全监测和事件响应：</p>
+<p>&emsp;&emsp;监控组织的网络和系统，及时检测和识别安全事件和威胁。建立安全事件响应流程，能够迅速响应和应对安全事件，包括恶意软件感染、数据泄露、入侵行为等。</p>
+</li>
+<li><p>安全漏洞管理：</p>
+<p>&emsp;&emsp;进行漏洞评估和漏洞扫描，及时发现和修复系统中的安全漏洞。确保组织的应用程序和系统保持最新的补丁和安全更新。</p>
+</li>
+<li><p>安全培训和意识：</p>
+<p>&emsp;&emsp;提供网络安全培训和意识活动，教育员工关于网络安全的基本知识、最佳实践和安全行为。</p>
+</li>
+<li><p>安全审计和合规：</p>
+<p>&emsp;&emsp;进行安全审计和合规性评估，确保组织的安全实践符合相关法规和行业标准。</p>
+</li>
+</ul>
+<p>&emsp;&emsp;蓝队与红队（攻击方）形成对立，红队负责模拟攻击，寻找系统和网络的弱点，而蓝队则负责发现并修复这些弱点，提供安全保护。两者之间的协作和竞争有助于提高组织的网络安全能力。</p>
+<p>&emsp;</p>
+<h4 id="3-学习内容"><a href="#3-学习内容" class="headerlink" title="3.学习内容"></a>3.学习内容</h4><ul>
+<li><p>网络基础知识：</p>
+<p>&emsp;&emsp;了解计算机网络的基本原理、网络协议、TCP/IP协议栈、子网划分、路由和交换等基础知识。这将帮助你理解网络通信和安全的基本概念。</p>
+</li>
+<li><p>安全基础知识：</p>
+<p>&emsp;&emsp;学习计算机安全的基本概念、安全威胁、攻击类型和常见的防御措施。了解密码学、认证、授权、防火墙、入侵检测系统等安全技术。</p>
+</li>
+<li><p>操作系统安全：</p>
+<p>&emsp;&emsp;深入学习主流操作系统（如Windows和Linux）的安全机制和配置。了解权限管理、安全策略、安全补丁、日志监控等与操作系统相关的安全实践。</p>
+</li>
+<li><p>网络安全工具：</p>
+<p>&emsp;&emsp;学习使用常见的网络安全工具，例如防火墙、入侵检测系统（IDS/IPS）、日志分析工具、漏洞扫描工具、蜜罐等。掌握这些工具的使用方法和原理，以便进行网络监控、事件响应和漏洞管理等任务。</p>
+</li>
+<li><p>安全事件响应：</p>
+<p>&emsp;&emsp;了解安全事件的生命周期、事件响应流程和常见的安全事件类型。学习如何建立安全事件响应团队、制定应急响应计划，并掌握调查取证、恶意代码分析、网络日志分析等技术。</p>
+</li>
+<li><p>安全监测和日志分析：</p>
+<p>&emsp;&emsp;学习安全监测的基本原理和方法，了解网络流量分析、入侵检测、威胁情报等技术。熟悉日志分析工具和技术，能够从系统日志、网络日志等数据中发现异常和威胁。</p>
+</li>
+<li><p>安全漏洞管理：</p>
+<p>&emsp;&emsp;学习安全漏洞管理的流程和方法，包括漏洞扫描、漏洞评估、漏洞修复和漏洞管理平台的使用。了解常见的漏洞类型和攻击技术，能够评估系统和应用的安全性。</p>
+</li>
+<li><p>法规和合规要求：</p>
+<p>&emsp;&emsp;了解适用于你所在地区和行业的隐私法规、数据保护法规和安全合规要求。学习如何确保组织的安全实践符合法规要求，并能够执行风险评估和合规审计。</p>
+</li>
+<li><p>持续学习和实践：</p>
+<p>&emsp;&emsp;网络安全领域不断发展和变化</p>
+</li>
+</ul>
+<p>&emsp;&emsp;这其中有一些学习过的知识就不加以过多的阐述，就开始愉快的学习吧</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E8%93%9D%E9%98%9F%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/" class="category-chain-item">蓝队相关知识</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>蓝队——相关了解</div>
+      <div>https://one-null-pointer.github.io/2023/05/01/蓝队——相关了解/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>Author</div>
+          <div>liaoyue</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>Posted on</div>
+          <div>May 1, 2023</div>
+        </div>
+      
+      
+      <div class="license-meta-item">
+        <div>传送口</div>
+        <div>
+          
+            
+            
+              <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+              <span class="hint--top hint--rounded" aria-label="点击进行传送">
+                <i class="iconfont icon-by"></i>
+              </span>
+              </a>
+            
+          
+        </div>
+      </div>
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2023/05/06/%E8%93%9D%E9%98%9F%E2%80%94%E2%80%94%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94/" title="蓝队之应急响应">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">蓝队之应急响应</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2023/03/27/SSRF%E2%80%94%E2%80%94%E6%BC%8F%E6%B4%9E%E6%A1%88%E4%BE%8B%E4%B8%8E%E4%BA%86%E8%A7%A3/" title="SSRF——漏洞案例与了解">
+                        <span class="hidden-mobile">SSRF——漏洞案例与了解</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;Table of Contents</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">Keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://github.com/" target="_blank" rel="nofollow noopener"><span>pointer</span></a> <i class="iconfont icon-love"></i> <a href="https://mp.weixin.qq.com/s/6ncLUtaiJ9j_sMjZT5z-2w" target="_blank" rel="nofollow noopener"><span>一个爱学习的空指针</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      headingSelector : CONFIG.toc.headingSelector || 'h1,h2,h3,h4,h5,h6',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      collapseDepth   : CONFIG.toc.collapseDepth || 0,
+      scrollSmooth    : true,
+      headingsOffset  : -boardTop
+    });
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.10/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">Blog works best with JavaScript enabled</div>
+  </noscript>
+</body>
+</html>
