@@ -25,7 +25,7 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://one-null-pointer.github.io/img/Linux.png">
 <meta property="article:published_time" content="2023-06-01T03:29:07.000Z">
-<meta property="article:modified_time" content="2023-07-16T15:05:16.886Z">
+<meta property="article:modified_time" content="2023-07-18T15:03:57.440Z">
 <meta property="article:author" content="liaoyue">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://one-null-pointer.github.io/img/Linux.png">
@@ -208,7 +208,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          5.1k words
+          10k words
         
       </span>
     
@@ -219,7 +219,7 @@
         
         
         
-          43 mins
+          85 mins
         
       </span>
     
@@ -415,7 +415,7 @@
 </center>
 
 <p>&emsp;</p>
-<h4 id="2-Nginx提供静态内容"><a href="#2-Nginx提供静态内容" class="headerlink" title="2.Nginx提供静态内容"></a>2.Nginx提供静态内容</h4><p>&emsp;&emsp;前面已经使用server模块进行了文本内容的响应和内容展示，接下来就是静态内容的使用和配置，为了提供静态内容，就必须把这些文件放置在服务器的某个位置，以nginx 的默认而言，其所提供的初始网页文件在其html文件夹中：</p>
+<h4 id="2-静态内容"><a href="#2-静态内容" class="headerlink" title="2.静态内容"></a>2.静态内容</h4><p>&emsp;&emsp;前面已经使用server模块进行了文本内容的响应和内容展示，接下来就是静态内容的使用和配置，为了提供静态内容，就必须把这些文件放置在服务器的某个位置，以nginx 的默认而言，其所提供的初始网页文件在其html文件夹中：</p>
 <center><img src="/img/Linux运维——Nginx（2）/7.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
 </center>
 
@@ -467,6 +467,179 @@
 </center>
 
 <p>&emsp;&emsp;该文件包含一长串文件类型及其扩展名，可以进行查看和使用。</p>
+<h4 id="3-匹配方式"><a href="#3-匹配方式" class="headerlink" title="3.匹配方式"></a>3.匹配方式</h4><p>&emsp;&emsp;前文提到了在上一节中编写配置是一个基础的静态内容服务器配置，它究竟是匹配来自于于客户端发文档URL相对应的站点目录的文件并进行相应，所以当我们请求对应根目录，例如 index.html、about.html 或 mini.min.css，NGINX 将返回该文件。但是，如果访问诸如 <a target="_blank" rel="noopener" href="http://nginx-handbook.test/nothing">http://nginx-handbook.test/nothing</a> 之类的路由，它将以默认的 404 页面响应：</p>
+<center><img src="/img/Linux运维——Nginx（2）/15.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<p>&emsp;&emsp;在Nginx配置文件中，location指令用于定义一个特定的URI（Uniform Resource Identifier）或URI模式，并为其指定相应的处理规则。当客户端发起请求时，Nginx会根据请求的URI与配置文件中的location指令进行匹配，然后按照匹配到的location块中的规则来处理请求。location指令可以包含多种匹配模式，例如精确匹配、前缀匹配、正则表达式匹配等。这使得你可以针对不同的URI或URI模式设置不同的处理规则，例如代理转发、静态文件服务、访问控制等。那么接下来就是了解location的三种匹配了。</p>
+<ul>
+<li><h5 id="前缀匹配"><a href="#前缀匹配" class="headerlink" title="前缀匹配"></a>前缀匹配</h5></li>
+</ul>
+<p>&emsp;&emsp;作为位置匹配模块，我们将在本节中讨论的第一个内容是location上下文，首先设置如下内容进行前缀匹配的设置：</p>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs nginx"><span class="hljs-section">server</span> &#123;<br>       <span class="hljs-attribute">listen</span> <span class="hljs-number">80</span>;<br>       <span class="hljs-attribute">server_name</span> nginx-handbook.test;<br>       <span class="hljs-section">location</span> /lhy &#123;<br>           <span class="hljs-attribute">return</span> <span class="hljs-number">200</span> <span class="hljs-string">&quot;good good study day day up&quot;</span>;<br>       &#125;<br>   &#125;<br></code></pre></td></tr></table></figure>
+
+<center><img src="/img/Linux运维——Nginx（2）/16.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<p>&emsp;&emsp;我们已经用新的 location 上下文替换了 root 指令。这个上下文通常嵌套在 server 块中。server 上下文中可以有多个 location 上下文。如果向 <a target="_blank" rel="noopener" href="http://nginx-handbook.test/lhy%E5%8F%91%E9%80%81%E8%AF%B7%E6%B1%82%EF%BC%8C%E5%B0%86%E8%8E%B7%E5%BE%97">http://nginx-handbook.test/lhy发送请求，将获得</a> 200 响应代码和建的good good study day day up 创字符列表。</p>
+<center><img src="/img/Linux运维——Nginx（2）/17.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<p>&emsp;&emsp;这里需要注意的是，如果向 <a target="_blank" rel="noopener" href="http://nginx-handbook.test/lhy-shuai">http://nginx-handbook.test/lhy-shuai</a> 发送请求，将得到相同的响应，这是由于通过编写 location /lhy，告诉 NGINX 匹配任何以“lhy”开头的 URI。这种匹配就是上述的前缀匹配</p>
+<ul>
+<li><h5 id="完全匹配"><a href="#完全匹配" class="headerlink" title="完全匹配"></a>完全匹配</h5></li>
+</ul>
+<p>&emsp;&emsp;当然，我们也能够使用生成执行完全匹配的效果。在位置 URI 之前添加一个 = 符号将指示 NGINX 只有在 URL 完全匹配时才响应。现在，如果向除 /agatha 之外的任何内容发送请求，都将收到 404 响应。</p>
+<figure class="highlight abnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs abnf">server &#123;<br>        listen <span class="hljs-number">80</span><span class="hljs-comment">;</span><br>        server_name nginx-handbook.test<span class="hljs-comment">;</span><br>        location <span class="hljs-operator">=/</span>lhy &#123;<br>            return <span class="hljs-number">200</span> <span class="hljs-string">&quot;good good study day day up&quot;</span><span class="hljs-comment">;</span><br>        &#125;<br>    &#125;<br></code></pre></td></tr></table></figure>
+
+<center><img src="/img/Linux运维——Nginx（2）/18.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<ul>
+<li><h5 id="regex匹配"><a href="#regex匹配" class="headerlink" title="regex匹配"></a>regex匹配</h5></li>
+</ul>
+<p>&emsp;&emsp;使用此匹配，可以根据复杂的正则表达式检查 URL location，通过将之前使用的 = 符号替换为 ~ 符号，来告诉 NGINX 执行正则表达式匹配。将 location 设置为 ~ /lhy[0-9] 意味着 NIGINX 只有在单词“lhy”后面有数字时才会响应</p>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs nginx"><span class="hljs-section">server</span> &#123;<br>        <span class="hljs-attribute">listen</span> <span class="hljs-number">80</span>;<br>        <span class="hljs-attribute">server_name</span> nginx-handbook.test;<br>        <span class="hljs-section">location</span> <span class="hljs-regexp">~ /lhy[0-9]\</span><br><span class="hljs-regexp"></span> &#123;<br>            <span class="hljs-attribute">return</span> <span class="hljs-number">200</span> <span class="hljs-string">&quot;good good study day day up&quot;</span>;<br>        &#125;<br>    &#125;<br></code></pre></td></tr></table></figure>
+
+<center><img src="/img/Linux运维——Nginx（2）/19.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<p>默认情况下，正则表达式匹配区分大小写，这意味着如果将任何字母大写，则该 location 将不起作用，要将其转换为不区分大小写，必须在 ~ 符号后添加一个 *。</p>
+<ul>
+<li><h5 id="匹配优先级"><a href="#匹配优先级" class="headerlink" title="匹配优先级"></a>匹配优先级</h5></li>
+</ul>
+<p>&emsp;&emsp;在nginx中，location指令用于定义处理特定URI请求的规则。当有多个location块匹配同一个请求时，nginx会根据一定的优先级选择一个来处理该请求。通常来说location匹配的优先级顺序为：</p>
+<table>
+<thead>
+<tr>
+<th align="center">优先级从上到下</th>
+<th>语法</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">完全匹配</td>
+<td>= /</td>
+</tr>
+<tr>
+<td align="center">前缀匹配</td>
+<td>^~ /</td>
+</tr>
+<tr>
+<td align="center">正则匹配</td>
+<td><del>或</del>* /</td>
+</tr>
+<tr>
+<td align="center">通用前缀匹配</td>
+<td>/</td>
+</tr>
+</tbody></table>
+<figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs crmsh">server &#123;<br>        listen <span class="hljs-number">80</span>;<br>        server_name nginx-handbook.test;<br>        <span class="hljs-keyword">location</span> <span class="hljs-title">=/lhy8</span> &#123;<br>            return <span class="hljs-number">200</span> <span class="hljs-string">&quot;这是完全匹配结果&quot;</span>;<br>        &#125;<br>        <span class="hljs-keyword">location</span> <span class="hljs-title">/lhy</span> &#123;<br>            return <span class="hljs-number">200</span> <span class="hljs-string">&quot;这是前缀匹配结果&quot;</span>;<br>        &#125;<br>         <span class="hljs-keyword">location</span> <span class="hljs-title">~ /lhy</span>[<span class="hljs-number">0</span>-<span class="hljs-number">9</span>] &#123;<br>            return <span class="hljs-number">200</span> <span class="hljs-string">&quot;这是正则匹配结果&quot;</span>;<br>        &#125;<br>    &#125;<br></code></pre></td></tr></table></figure>
+
+<center><img src="/img/Linux运维——Nginx（2）/20.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<p>&emsp;&emsp;从输出结果可以看到，当我们输入lhy8时，对应的是完全匹配表达式的结果，输入lhy9时则是正则表达式的结果。这与我们所讲的理论一致，那么匹配的介绍与学习就到此为止了。</p>
+<h4 id="4-日志内容"><a href="#4-日志内容" class="headerlink" title="4.日志内容"></a>4.日志内容</h4><p>&emsp;&emsp;默认情况下，Nginx的日志文件是位于/var/log/nginx中，本人在安装的时候就通过配置–error-log-path=/opt/project/nginx-1.14/logs/error.log 设置错误，警告，和诊断文件的位置和名称，通过罗列可以看到：</p>
+<figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs gradle">ls -lh <span class="hljs-regexp">/opt/</span><span class="hljs-keyword">project</span><span class="hljs-regexp">/nginx-1.24/</span>logs/<br></code></pre></td></tr></table></figure>
+
+<center><img src="/img/Linux运维——Nginx（2）/21.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<p>&emsp;&emsp;在nginx中，日志文件主要分为两类：访问日志（access log）和错误日志（error log）：</p>
+<ul>
+<li><h5 id="访问日志"><a href="#访问日志" class="headerlink" title="访问日志"></a>访问日志</h5></li>
+</ul>
+<p>&emsp;&emsp;访问日志（access log）：记录了所有客户端发起的请求。默认情况下，访问日志存储在/var/log/nginx/access.log文件中。你可以通过access_log指令自定义日志文件的位置和格式，</p>
+<center><img src="/img/Linux运维——Nginx（2）/22.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<p>&emsp;&emsp;如图片所示，access.log文件在默认情况下，对服务器的任何请求都会记录到该文件当中，我们可以通过acccess——log指令来改变这种情况</p>
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs pgsql"><span class="hljs-keyword">server</span> &#123;        <br><span class="hljs-keyword">listen</span> <span class="hljs-number">80</span>;        <br>server_name nginx-handbook.test;                <br><span class="hljs-keyword">location</span> / &#123;            <br><span class="hljs-keyword">return</span> <span class="hljs-number">200</span> &quot;this will be logged to the default file.\n&quot;;        <br>&#125;                <br><span class="hljs-keyword">location</span> = /<span class="hljs-keyword">access</span> &#123;            <br>access_log /opt/project/nginx<span class="hljs-number">-1.24</span>/logs/<span class="hljs-keyword">admin</span>.<span class="hljs-keyword">log</span>;                        <br><span class="hljs-keyword">return</span> <span class="hljs-number">200</span> &quot;this will be logged in a separate file.\n&quot;;        <br>&#125;                <br><span class="hljs-keyword">location</span> = /no_logging &#123;            <br>access_log <span class="hljs-keyword">off</span>;                        <br><span class="hljs-keyword">return</span> <span class="hljs-number">200</span> &quot;this will not be logged.\n&quot;;        <br>&#125;   <br>&#125;<br></code></pre></td></tr></table></figure>
+
+<center><img src="/img/Linux运维——Nginx（2）/23.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<center><img src="/img/Linux运维——Nginx（2）/24.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<p>&emsp;&emsp;可以看到，当我们访问两个域名下的文件都成功时，仅有accesss是记录在了日志当中，而no_logging则并没有相关的访问记录、</p>
+<ul>
+<li><h5 id="错误日志"><a href="#错误日志" class="headerlink" title="错误日志"></a>错误日志</h5></li>
+</ul>
+<p>&emsp;&emsp;错误日志（error log）：记录了nginx服务器遇到的错误和警告信息。默认情况下，错误日志存储在/var/log/nginx/error.log文件中。可以通过error_log指令自定义日志文件的位置和日志级别</p>
+<center><img src="/img/Linux运维——Nginx（2）/25.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<p>&emsp;&emsp;现在假设我们认为创建一个错误的文件保存失败日志消息，比如：</p>
+<figure class="highlight abnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs abnf">server&#123;<br>listen <span class="hljs-number">8080</span><span class="hljs-comment">;</span><br>server_name librarian.test<span class="hljs-comment">;       </span><br>return <span class="hljs-number">200</span> <span class="hljs-string">&quot;...&quot;</span> <span class="hljs-string">&quot;...&quot;</span><span class="hljs-comment">;    </span><br>&#125;<br></code></pre></td></tr></table></figure>
+
+<center><img src="/img/Linux运维——Nginx（2）/26.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<center><img src="/img/Linux运维——Nginx（2）/27.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<p>&emsp;&emsp;如图所示，return规定只接受两个参数，当我们给出三个参数时，系统就会进行报错并提示错误位置，最后将错误位置记录在error的日志消息中。正如图片所显示的那样，在error的报错中，错误消息存在级别划分，目前共有八个级别的错误消息类型</p>
+<table>
+<thead>
+<tr>
+<th align="center">错误类型</th>
+<th align="center">对应级别</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">debug</td>
+<td align="center">有助于确定问题所在的有用调试信息</td>
+</tr>
+<tr>
+<td align="center">info</td>
+<td align="center">不需要阅读但可能很好了解的信息性消息</td>
+</tr>
+<tr>
+<td align="center">notice</td>
+<td align="center">发生了一些值得注意的正常现象</td>
+</tr>
+<tr>
+<td align="center">warn</td>
+<td align="center">发生意外，但不必担心</td>
+</tr>
+<tr>
+<td align="center">error</td>
+<td align="center">某些事情不成功</td>
+</tr>
+<tr>
+<td align="center">crit</td>
+<td align="center">存在急需解决的问题</td>
+</tr>
+<tr>
+<td align="center">alert</td>
+<td align="center">需要迅速采取行动</td>
+</tr>
+<tr>
+<td align="center">emerg</td>
+<td align="center">系统处于无法使用的状态，需要立即关注</td>
+</tr>
+</tbody></table>
+<p>&emsp;&emsp;默认情况下，Nginx记录所有级别的消息，可以使用error_log指令覆盖该行为，如果要将消息的最低级别设置为warn，参考下列指令即可</p>
+<figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs gradle">error_log <span class="hljs-regexp">/opt/</span><span class="hljs-keyword">project</span><span class="hljs-regexp">/nginx-1.24/</span>logs/error.log warn;<br></code></pre></td></tr></table></figure>
+
+<ul>
+<li><h5 id="日志分割设置"><a href="#日志分割设置" class="headerlink" title="日志分割设置"></a>日志分割设置</h5></li>
+</ul>
+<p>&emsp;&emsp;首先在nginx的sbin文件夹下创建相关脚本，取名为cut_log,sh，输入如下内容：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-meta">#!/bin/bash</span><br><br><span class="hljs-comment">#定义一个变量logs_path，存储Nginx日志文件的路径。</span><br>log_path=”/opt/project/nginx-1.24/logs/”  <br><br><span class="hljs-comment">#使用mkdir命令创建一个目录，该目录的路径由logs_path、昨天的年份和月份组成。-p选项确保在需要时创建父目录。</span><br><span class="hljs-built_in">mkdir</span> –p <span class="hljs-variable">$&#123;logs_path&#125;</span>$(<span class="hljs-built_in">date</span> -d <span class="hljs-string">&quot;yesterday&quot;</span> +<span class="hljs-string">&quot;%Y&quot;</span>)/$(<span class="hljs-built_in">date</span> -d <span class="hljs-string">&quot;yesterday&quot;</span> +<span class="hljs-string">&quot;%m&quot;</span>)/ <br><br><span class="hljs-comment">#使用mv命令将当前的访问日志文件移动到新创建的目录，并重命名为包含昨天日期的文件名</span><br><span class="hljs-built_in">mv</span> <span class="hljs-variable">$&#123;logs_path&#125;</span>access.log <span class="hljs-variable">$&#123;logs_path&#125;</span>$(<span class="hljs-built_in">date</span> -d <span class="hljs-string">&quot;yesterday&quot;</span> +<span class="hljs-string">&quot;%Y&quot;</span>)/$(<span class="hljs-built_in">date</span> -d <span class="hljs-string">&quot;yesterday&quot;</span> +<span class="hljs-string">&quot;%m&quot;</span>)/access_$(<span class="hljs-built_in">date</span> -d <span class="hljs-string">&quot;yesterday&quot;</span> +<span class="hljs-string">&quot;%Y%m%d&quot;</span>).<span class="hljs-built_in">log</span> <br><br><span class="hljs-comment">#发送USR1信号给Nginx进程，通知它重新打开日志文件。通过读取nginx.pid`文件获取Nginx进程的ID</span><br><span class="hljs-built_in">kill</span> -USR1 ‘<span class="hljs-built_in">cat</span> /opt/project/nginx-1.24/logs/nginx.pid’<br></code></pre></td></tr></table></figure>
+
+<p>&emsp;&emsp;接下来设置crontab，进行定时任务的编写</p>
+<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ebnf"><span class="hljs-attribute">crontab -e</span><br></code></pre></td></tr></table></figure>
+
+<p>&emsp;&emsp;crontab -e是一个命令，用于编辑当前用户的Cron表。Cron是Linux系统中的定时任务调度程序，允许在特定时间执行脚本或命令。当输入crontab -e并按回车后，系统会打开一个文本编辑器（如nano、vim等），让我们编辑当前用户的Cron表。在这个文件中，我们可以添加、修改或删除定时任务，接下来就是设置定时任务</p>
+<figure class="highlight basic"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs basic"><span class="hljs-symbol">00 </span><span class="hljs-number">00</span> * * * /bin/bash /opt/project/nginx-<span class="hljs-number">1.24</span>/sbin/cut_nginx_log.sh<br></code></pre></td></tr></table></figure>
+
+<p>&emsp;&emsp;这是一个Cron表达式，用于定时执行任务。这个具体的表达式表示每天凌晨00:00（午夜）执行/opt/project/nginx-1.24/sbin/cut_nginx_log.sh脚本。</p>
+<center><img src="/img/Linux运维——Nginx（2）/28.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<p>&emsp;&emsp;no crontab for root - using an empty one crontab: installing new crontab这些消息表明我以root用户身份编辑了Cron表，但在此之前，root用户没有任何已配置的Cron任务。因此，系统为root用户创建了一个空的Cron表，当看到”crontab: installing new crontab”这个提示时，表示已经成功地保存并安装了新的Cron表。现在，Cron将按照我们在Cron表中指定的时间和频率执行任务。</p>
 
                 
               </div>
