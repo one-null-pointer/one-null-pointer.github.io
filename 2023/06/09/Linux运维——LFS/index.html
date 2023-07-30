@@ -16,23 +16,23 @@
   <meta name="author" content="liaoyue">
   <meta name="keywords" content="">
   
-    <meta name="description" content="Linux运维——LFS（一）0.前言&amp;emsp;&amp;emsp;这里的搭建是参考了网上一位博主的教程进行学习的，附上参考连接： 1https:&#x2F;&#x2F;blog.csdn.net&#x2F;u012333520&#x2F;article&#x2F;details&#x2F;50533002  &amp;emsp; 1.概念&amp;emsp;&amp;emsp;lfs其实本质上就是一个项目，用于引导我们如何构造出属于自己要求或者喜好的Linux系统，这种定制的Liun">
+    <meta name="description" content="LFS（一）0.前言&amp;emsp;&amp;emsp;这里的搭建是参考了网上一位博主的教程进行学习的，附上参考连接： 1https:&#x2F;&#x2F;blog.csdn.net&#x2F;u012333520&#x2F;article&#x2F;details&#x2F;50533002  &amp;emsp; 1.概念&amp;emsp;&amp;emsp;lfs其实本质上就是一个项目，用于引导我们如何构造出属于自己要求或者喜好的Linux系统，这种定制的Liunx系统不仅能满足用">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Linux运维——LFS（一）">
+<meta property="og:title" content="LFS（一）">
 <meta property="og:url" content="https://one-null-pointer.github.io/2023/06/09/Linux%E8%BF%90%E7%BB%B4%E2%80%94%E2%80%94LFS/index.html">
 <meta property="og:site_name" content="one-null-poniter">
-<meta property="og:description" content="Linux运维——LFS（一）0.前言&amp;emsp;&amp;emsp;这里的搭建是参考了网上一位博主的教程进行学习的，附上参考连接： 1https:&#x2F;&#x2F;blog.csdn.net&#x2F;u012333520&#x2F;article&#x2F;details&#x2F;50533002  &amp;emsp; 1.概念&amp;emsp;&amp;emsp;lfs其实本质上就是一个项目，用于引导我们如何构造出属于自己要求或者喜好的Linux系统，这种定制的Liun">
+<meta property="og:description" content="LFS（一）0.前言&amp;emsp;&amp;emsp;这里的搭建是参考了网上一位博主的教程进行学习的，附上参考连接： 1https:&#x2F;&#x2F;blog.csdn.net&#x2F;u012333520&#x2F;article&#x2F;details&#x2F;50533002  &amp;emsp; 1.概念&amp;emsp;&amp;emsp;lfs其实本质上就是一个项目，用于引导我们如何构造出属于自己要求或者喜好的Linux系统，这种定制的Liunx系统不仅能满足用">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://one-null-pointer.github.io/img/Linux.png">
 <meta property="article:published_time" content="2023-06-09T03:29:07.000Z">
-<meta property="article:modified_time" content="2023-07-30T13:10:46.122Z">
+<meta property="article:modified_time" content="2023-07-30T14:52:34.066Z">
 <meta property="article:author" content="liaoyue">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://one-null-pointer.github.io/img/Linux.png">
   
   
   
-  <title>Linux运维——LFS（一） - one-null-poniter</title>
+  <title>LFS（一） - one-null-poniter</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -185,7 +185,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="Linux运维——LFS（一）"></span>
+            <span id="subtitle" data-typed-text="LFS（一）"></span>
           
         </div>
 
@@ -208,7 +208,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          9.1k words
+          9k words
         
       </span>
     
@@ -257,12 +257,12 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">Linux运维——LFS（一）</h1>
+            <h1 style="display: none">LFS（一）</h1>
             
             
               <div class="markdown-body">
                 
-                <h1 id="Linux运维——LFS（一）"><a href="#Linux运维——LFS（一）" class="headerlink" title="Linux运维——LFS（一）"></a>Linux运维——LFS（一）</h1><h4 id="0-前言"><a href="#0-前言" class="headerlink" title="0.前言"></a>0.前言</h4><p>&emsp;&emsp;这里的搭建是参考了网上一位博主的教程进行学习的，附上参考连接：</p>
+                <h1 id="LFS（一）"><a href="#LFS（一）" class="headerlink" title="LFS（一）"></a>LFS（一）</h1><h4 id="0-前言"><a href="#0-前言" class="headerlink" title="0.前言"></a>0.前言</h4><p>&emsp;&emsp;这里的搭建是参考了网上一位博主的教程进行学习的，附上参考连接：</p>
 <figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">https:<span class="hljs-regexp">//</span>blog.csdn.net<span class="hljs-regexp">/u012333520/</span>article<span class="hljs-regexp">/details/</span><span class="hljs-number">50533002</span><br></code></pre></td></tr></table></figure>
 
 <p>&emsp;</p>
@@ -523,7 +523,6 @@
 
 
 
-
                 
               </div>
             
@@ -561,7 +560,7 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>Linux运维——LFS（一）</div>
+      <div>LFS（一）</div>
       <div>https://one-null-pointer.github.io/2023/06/09/Linux运维——LFS/</div>
     </div>
     <div class="license-meta">
@@ -604,12 +603,18 @@
                   <article class="post-prev col-6">
                     
                     
+                      <a href="/2023/06/23/Linux%E8%BF%90%E7%BB%B4%E2%80%94%E2%80%94linux%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0%E8%B7%AF%E7%94%B1%E8%BD%AC%E5%8F%91%E5%8A%9F%E8%83%BD/" title="系统实现路由转发功能">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">系统实现路由转发功能</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2023/06/07/Linux%E8%BF%90%E7%BB%B4%E2%80%94%E2%80%94Zabbix%EF%BC%88%E4%BA%8C%EF%BC%89/" title="Linux运维——Zabbix（二）">
-                        <span class="hidden-mobile">Linux运维——Zabbix（二）</span>
+                      <a href="/2023/06/07/Linux%E8%BF%90%E7%BB%B4%E2%80%94%E2%80%94Zabbix%EF%BC%88%E4%BA%8C%EF%BC%89/" title="Zabbix（二）">
+                        <span class="hidden-mobile">Zabbix（二）</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
