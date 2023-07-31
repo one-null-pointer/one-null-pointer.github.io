@@ -1,0 +1,868 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="liaoyue">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="WEBtools——Nmap1.Nmap简介&amp;emsp;&amp;emsp;Nmap是一款强大而广泛使用的开源网络扫描工具。它旨在帮助安全专业人员评估和审核网络上的主机和服务，发现潜在的漏洞和安全问题。Nmap提供了灵活且可定制的扫描技术，可以用于网络发现、端口扫描、服务和操作系统识别等任务   &amp;emsp;&amp;emsp;这个工具包括了端口扫描、操作系统和服务识别、脚本扫描、网络发现等功能，可以说是安全专业">
+<meta property="og:type" content="article">
+<meta property="og:title" content="WEBtools——Nmap">
+<meta property="og:url" content="https://one-null-pointer.github.io/2023/07/21/WEBtools%E2%80%94%E2%80%94Nmap/index.html">
+<meta property="og:site_name" content="one-null-poniter">
+<meta property="og:description" content="WEBtools——Nmap1.Nmap简介&amp;emsp;&amp;emsp;Nmap是一款强大而广泛使用的开源网络扫描工具。它旨在帮助安全专业人员评估和审核网络上的主机和服务，发现潜在的漏洞和安全问题。Nmap提供了灵活且可定制的扫描技术，可以用于网络发现、端口扫描、服务和操作系统识别等任务   &amp;emsp;&amp;emsp;这个工具包括了端口扫描、操作系统和服务识别、脚本扫描、网络发现等功能，可以说是安全专业">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://one-null-pointer.github.io/img/tools.png">
+<meta property="article:published_time" content="2023-07-21T08:26:44.000Z">
+<meta property="article:modified_time" content="2023-07-31T15:38:30.925Z">
+<meta property="article:author" content="liaoyue">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://one-null-pointer.github.io/img/tools.png">
+  
+  
+  
+  <title>WEBtools——Nmap - one-null-poniter</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"one-null-pointer.github.io","root":"/","version":"1.9.2","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 5.4.2"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>one null pointer</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                吾
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                學
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                類
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="WEBtools——Nmap"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2023-07-21 16:26" pubdate>
+          July 21, 2023 pm
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          6.9k words
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          58 mins
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">WEBtools——Nmap</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="WEBtools——Nmap"><a href="#WEBtools——Nmap" class="headerlink" title="WEBtools——Nmap"></a>WEBtools——Nmap</h1><h4 id="1-Nmap简介"><a href="#1-Nmap简介" class="headerlink" title="1.Nmap简介"></a>1.Nmap简介</h4><p>&emsp;&emsp;Nmap是一款强大而广泛使用的开源网络扫描工具。它旨在帮助安全专业人员评估和审核网络上的主机和服务，发现潜在的漏洞和安全问题。Nmap提供了灵活且可定制的扫描技术，可以用于网络发现、端口扫描、服务和操作系统识别等任务</p>
+<center><img src="/img/WEBtools——Nmap/1.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+&emsp;&emsp;这个工具包括了端口扫描、操作系统和服务识别、脚本扫描、网络发现等功能，可以说是安全专业必须要掌握的工具之一，网络上也有很多的nmap使用教程，在我看来是有些混乱和繁琐的，想要完全进行学习和掌握是需要花费比较大的时间的，所以这里仅展示出基础的用法和功能。（具体的学习可以参考nmap的官方文档）
+
+<figure class="highlight avrasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs avrasm"><span class="hljs-symbol">https:</span>//nmap<span class="hljs-meta">.org</span>/<br></code></pre></td></tr></table></figure>
+
+<p>&emsp;</p>
+<h4 id="2-主机发现"><a href="#2-主机发现" class="headerlink" title="2.主机发现"></a>2.主机发现</h4><p>&emsp;&emsp;在我们渗透网络探测的任务中，最起初的步骤便是主机发现，在主机发现中，我们可以选择不同的扫描技术和选项来满足我的要求，例如</p>
+<p>&emsp;&emsp;-sn：使用Ping扫描模式，只进行主机发现而不进行端口扫描。</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">nmap</span> -sn <span class="hljs-number">192.168.0.0</span>/<span class="hljs-number">24</span><br></code></pre></td></tr></table></figure>
+
+<p>&emsp;&emsp;-Pn：禁用主机发现，直接对指定的IP地址进行端口扫描。</p>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs nginx"><span class="hljs-attribute">nmap</span> -Pn <span class="hljs-number">192.168.0.1</span><br></code></pre></td></tr></table></figure>
+
+<p>&emsp;&emsp;-PR：使用ARP请求来发现局域网内的主机。</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">nmap</span> -PR <span class="hljs-number">192.168.0.0</span>/<span class="hljs-number">24</span><br></code></pre></td></tr></table></figure>
+
+<p>&emsp;&emsp;-PS、-PA、-PU：分别使用TCP SYN、TCP ACK和UDP扫描来发现主机</p>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs nginx"><span class="hljs-attribute">nmap</span> -PS <span class="hljs-number">192.168.0.1</span><br></code></pre></td></tr></table></figure>
+
+<center><img src="/img/WEBtools——Nmap/2.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<center><img src="/img/WEBtools——Nmap/3.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<p>&emsp;&emsp;除了上述选项，Nmap还支持其他高级的主机发现技术。例如，使用IDLE/IPID扫描可以通过观察目标主机的TCP/IP栈行为来发现主机。FTP bounce扫描则利用FTP服务器的反弹功能来发现隐藏在防火墙后面的主机。SCTP INIT扫描则用于发现使用SCTP协议的主机</p>
+<p>&emsp;</p>
+<h4 id="3-端口扫描基础"><a href="#3-端口扫描基础" class="headerlink" title="3.端口扫描基础"></a>3.端口扫描基础</h4><p>&emsp;&emsp;首先我们明确nmap工具的作用，其作为一款以高效的端口扫描作为核心功能的工具，nmap简单的命令能扫描主机1660个tcp端口，对于传统的一些端口扫描器仅仅展示是否开放和关闭，nmap所提供的内容会更加的细节，器分为了6中端口状态：</p>
+<ul>
+<li><h5 id="Open状态"><a href="#Open状态" class="headerlink" title="Open状态"></a>Open状态</h5></li>
+</ul>
+<p>&emsp;&emsp;Open状态：（开放），当Nmap发送探测数据包到目标端口时，如果收到了预期的响应（例如，TCP SYN扫描中的SYN+ACK数据包），则表明该端口正在监听并接受传入的连接。这意味着有一个服务或应用程序正在使用此端口，并准备处理传入的请求</p>
+<ul>
+<li><h5 id="Closed状态"><a href="#Closed状态" class="headerlink" title="Closed状态"></a>Closed状态</h5></li>
+</ul>
+<p>&emsp;&emsp;Closed状态：（关闭），当Nmap发送探测数据包到目标端口时，如果收到了RST（重置）数据包，表示该端口没有任何服务或应用程序在监听。尽管关闭的端口不提供任何服务，但它们仍然对安全评估很重要，因为它们表明目标主机存在且响应数据包</p>
+<ul>
+<li><h5 id="Unfiltered状态"><a href="#Unfiltered状态" class="headerlink" title="Unfiltered状态"></a>Unfiltered状态</h5></li>
+</ul>
+<p>&emsp;&emsp;Unfiltered状态：（未过滤），当Nmap发送探测数据包到目标端口时，如果没有收到任何响应或收到了ICMP错误消息（例如“目的地不可达”），则可能是因为防火墙、路由器或其他网络设备阻止了探测数据包的传输。在这种情况下，Nmap无法判断端口是开放还是关闭</p>
+<ul>
+<li><h5 id="Filtered状态"><a href="#Filtered状态" class="headerlink" title="Filtered状态"></a>Filtered状态</h5></li>
+</ul>
+<p>&emsp;&emsp;Filtered状态：（过滤），当Nmap发送探测数据包到目标端口时，如果没有收到任何响应或收到了ICMP错误消息（例如“目的地不可达”），则可能是因为防火墙、路由器或其他网络设备阻止了探测数据包的传输。在这种情况下，Nmap无法判断端口是开放还是关闭</p>
+<ul>
+<li><h5 id="Open-Filtered状态"><a href="#Open-Filtered状态" class="headerlink" title="Open|Filtered状态"></a>Open|Filtered状态</h5></li>
+</ul>
+<p>&emsp;&emsp;Open|Filtered状态：（开放或过滤），当使用某些扫描技术（如UDP扫描、IP协议扫描等）时，如果没有收到足够的信息来判断端口是开放还是被过滤，Nmap会将其标记为开放或过滤。这种状态表明Nmap无法确定端口是开放还是被过滤</p>
+<ul>
+<li><h5 id="Closed-Filtered状态"><a href="#Closed-Filtered状态" class="headerlink" title="Closed|Filtered状态"></a>Closed|Filtered状态</h5></li>
+</ul>
+<p>&emsp;&emsp;Closed|Filtered状态：（关闭或过滤），这是一种非常罕见的状态，表示Nmap无法确定端口是关闭还是被过滤。这种状态可能出现在使用某些特殊扫描技术时，由于收到的信息不足以判断端口状态</p>
+<p>&emsp;</p>
+<h4 id="4-端口扫描指令"><a href="#4-端口扫描指令" class="headerlink" title="4.端口扫描指令"></a>4.端口扫描指令</h4><p>&emsp;&emsp;对于端口扫描的6种状态反馈，在前文也进行了相应的讲解和描述，对于端口如何进行扫描，如何用正确的命令进行扫描成为了一个问题（总不能一直用默认的SYN扫描解决所有问题吧），这里依旧需要注意，尽管Nmap会对扫描的位置进行结果产出，但是所有的结果都是基于目标机器返回的报文，有些主机并不值得信任，它会产生迷惑或误导类型的报文，更普遍的是非RFC兼容的主机以不正确的方式响应Nmap探测。FIN，Null和Xmas扫描 特别容易遇到这个问题。这些是特定扫描类型的问题。接下来进行扫描指令种类描述</p>
+<center><img src="/img/WEBtools——Nmap/4.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<ul>
+<li><h5 id="p（指定扫描模式）"><a href="#p（指定扫描模式）" class="headerlink" title="-p（指定扫描模式）"></a>-p（指定扫描模式）</h5></li>
+</ul>
+<p>&emsp;&emsp;指定要扫描的端口范围</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">nmap</span> -p <span class="hljs-number">1</span>-<span class="hljs-number">100</span> <span class="hljs-number">4399</span>.com<br></code></pre></td></tr></table></figure>
+
+<p>&emsp;&emsp;这个命令将对IP地址为4399.com的主机进行1到100端口范围内的扫描</p>
+<center><img src="/img/WEBtools——Nmap/5.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<ul>
+<li><h5 id="F（快速扫描模式）"><a href="#F（快速扫描模式）" class="headerlink" title="-F（快速扫描模式）"></a>-F（快速扫描模式）</h5></li>
+</ul>
+<p>&emsp;&emsp;快速扫描模式，只扫描最常见的端口</p>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs vim"><span class="hljs-keyword">nmap</span> –F <span class="hljs-number">4399</span>.<span class="hljs-keyword">com</span><br></code></pre></td></tr></table></figure>
+
+<p>&emsp;&emsp;这个命令将对IP地址为4399.com的主机进行快速扫描，只扫描最常见的端口</p>
+<center><img src="/img/WEBtools——Nmap/6.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<ul>
+<li><h5 id="sS（半开放扫描模式）"><a href="#sS（半开放扫描模式）" class="headerlink" title="-sS（半开放扫描模式）"></a>-sS（半开放扫描模式）</h5></li>
+</ul>
+<p>&emsp;&emsp;TCP SYN扫描是Nmap默认的扫描方式。它通过发送TCP SYN数据包到目标端口来探测端口状态 </p>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs vim"><span class="hljs-keyword">nmap</span> –sS <span class="hljs-number">4399</span>.<span class="hljs-keyword">com</span><br></code></pre></td></tr></table></figure>
+
+<p>&emsp;&emsp;其产出的结果是根据收到的响应（SYN+ACK表示开放，RST表示关闭，无响应或ICMP错误表示过滤），判断端口状态</p>
+<center><img src="/img/WEBtools——Nmap/7.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<p>&emsp;&emsp;其原理利用TCP三次握手过程中的前两个步骤，发送SYN数据包并分析返回的数据包。这种扫描类型适用于大多数情况，尤其是对隐蔽性要求较高的场景，因为不会完成TCP连接。</p>
+<ul>
+<li><h5 id="sT（TCP-Connect扫描）"><a href="#sT（TCP-Connect扫描）" class="headerlink" title="-sT（TCP Connect扫描）"></a>-sT（TCP Connect扫描）</h5></li>
+</ul>
+<p>&emsp;&emsp;TCP Connect扫描通过尝试建立完整的TCP连接来探测端口状态。</p>
+<figure class="highlight avrasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs avrasm">nmap –<span class="hljs-keyword">sT</span> <span class="hljs-number">4399.</span><span class="hljs-keyword">com</span><br></code></pre></td></tr></table></figure>
+
+<p>&emsp;&emsp;根据是否成功建立连接（成功表示开放，失败表示关闭或过滤），判断端口状态</p>
+<center><img src="/img/WEBtools——Nmap/8.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<p>&emsp;&emsp;其原理是执行完整的TCP三次握手过程，直接与目标端口建立连接。该扫描类型适用于无法执行TCP SYN扫描的情况，例如在Windows非管理员权限下运行Nmap</p>
+<ul>
+<li><h5 id="sU（UDP扫描）"><a href="#sU（UDP扫描）" class="headerlink" title="-sU（UDP扫描）"></a>-sU（UDP扫描）</h5></li>
+</ul>
+<p>&emsp;&emsp;UDP扫描通过发送空的UDP数据包到目标端口来探测端口状态</p>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs vim"><span class="hljs-keyword">nmap</span> –sU <span class="hljs-number">4399</span>.<span class="hljs-keyword">com</span><br></code></pre></td></tr></table></figure>
+
+<p>&emsp;&emsp;根据收到的响应（ICMP端口不可达表示关闭，无响应或其他ICMP错误表示开放或过滤），判断端口状态</p>
+<center><img src="/img/WEBtools——Nmap/9.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<p>&emsp;&emsp;其原理是发送空的UDP数据包，分析返回的ICMP错误消息。这种类型适用于检测UDP服务，如DNS、SNMP等</p>
+<ul>
+<li><h5 id="sA（ACK扫描）"><a href="#sA（ACK扫描）" class="headerlink" title="-sA（ACK扫描）"></a>-sA（ACK扫描）</h5></li>
+</ul>
+<p>&emsp;&emsp;ACK扫描通过发送TCP ACK数据包到目标端口来探测端口是否被防火墙过滤</p>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs vim"><span class="hljs-keyword">nmap</span> –sA <span class="hljs-number">4399</span>.<span class="hljs-keyword">com</span><br></code></pre></td></tr></table></figure>
+
+<p>&emsp;&emsp;根据收到的响应（RST表示未过滤，无响应或ICMP错误表示过滤），判断端口是否被过滤</p>
+<center><img src="/img/WEBtools——Nmap/10.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<p>&emsp;&emsp;其原理是发送特定的TCP数据包（如设置FIN、URG和PUSH标志的Xmas数据包），分析返回的RST数据包。这种类型适用于绕过某些防火墙和IDS检测，但可能在某些操作系统上不准确</p>
+<ul>
+<li><h5 id="sY（SCTP-INIT扫描"><a href="#sY（SCTP-INIT扫描" class="headerlink" title="-sY（SCTP INIT扫描)"></a>-sY（SCTP INIT扫描)</h5></li>
+</ul>
+<p>&emsp;&emsp;SCTP INIT扫描通过发送SCTP INIT数据包到目标端口来探测端口状态</p>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs vim"><span class="hljs-keyword">nmap</span> –sY <span class="hljs-number">4399</span>.<span class="hljs-keyword">com</span><br></code></pre></td></tr></table></figure>
+
+<p>&emsp;&emsp;根据收到的响应（INIT ACK表示开放，ABORT表示关闭，无响应表示过滤），判断端口状态</p>
+<center><img src="/img/WEBtools——Nmap/11.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<p>&emsp;&emsp;其原理是利用SCTP协议的四次握手过程中的前两个步骤，发送INIT数据包并分析返回的数据包。这种类型适用于检测使用SCTP协议的服务，如SIGTRAN、Diameter等</p>
+<ul>
+<li><h5 id="sO（IP协议扫描）"><a href="#sO（IP协议扫描）" class="headerlink" title="-sO（IP协议扫描）"></a>-sO（IP协议扫描）</h5></li>
+</ul>
+<p>&emsp;&emsp;IP协议扫描通过发送IP数据包到目标主机来探测支持的协议类型（如TCP、UDP、ICMP等）</p>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs vim"><span class="hljs-keyword">nmap</span> –sO <span class="hljs-number">4399</span>.<span class="hljs-keyword">com</span><br></code></pre></td></tr></table></figure>
+
+<p>&emsp;&emsp;根据收到的响应（ICMP协议可达表示支持，ICMP协议不可达表示不支持），判断协议类型</p>
+<center><img src="/img/WEBtools——Nmap/12.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<p>&emsp;&emsp;其原理是发送空的IP数据包，分析返回的ICMP错误消息。这种类型适用于评估目标主机支持的协议类型，以便选择合适的扫描策略</p>
+<ul>
+<li><h5 id="sW（window扫描）"><a href="#sW（window扫描）" class="headerlink" title="-sW（window扫描）"></a>-sW（window扫描）</h5></li>
+</ul>
+<p>&emsp;&emsp;Window扫描通过发送TCP ACK数据包到目标端口并检查返回的RST数据包中的窗口大小字段来探测端口状态</p>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs vim"><span class="hljs-keyword">nmap</span> –sW <span class="hljs-number">4399</span>.<span class="hljs-keyword">com</span><br></code></pre></td></tr></table></figure>
+
+<p>&emsp;&emsp;根据返回的RST数据包中的窗口大小字段（非零表示开放，零表示关闭），判断端口状态</p>
+<center><img src="/img/WEBtools——Nmap/13.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<p>&emsp;&emsp;其原理是发送TCP ACK数据包，分析返回的RST数据包中的窗口大小字段。这种类型适用于某些特殊情况，例如当其他扫描方法受限时。但在许多现代操作系统上可能不准确</p>
+<ul>
+<li><h5 id="sM（Maimon扫描）"><a href="#sM（Maimon扫描）" class="headerlink" title="-sM（Maimon扫描）"></a>-sM（Maimon扫描）</h5></li>
+</ul>
+<p>&emsp;&emsp;Maimon扫描通过发送TCP FIN/ACK数据包到目标端口来探测端口状态</p>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs vim"><span class="hljs-keyword">nmap</span> –sM <span class="hljs-number">4399</span>.<span class="hljs-keyword">com</span><br></code></pre></td></tr></table></figure>
+
+<p>&emsp;&emsp;根据收到的响应（无响应表示开放或过滤，RST表示关闭），判断端口状态</p>
+<center><img src="/img/WEBtools——Nmap/14.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<p>&emsp;&emsp;其原理是发送TCP FIN/ACK数据包，分析返回的RST数据包。这个模式适用于绕过某些防火墙和IDS检测，但可能在某些操作系统上不准确</p>
+<ul>
+<li><h5 id="sI-（Idle扫描）"><a href="#sI-（Idle扫描）" class="headerlink" title="-sI （Idle扫描）"></a>-sI （Idle扫描）</h5></li>
+</ul>
+<p>&emsp;&emsp;Idle扫描是一种隐蔽的扫描方法，通过利用一个“僵尸”主机（即空闲主机）来探测目标端口状态，从而隐藏真实的扫描来源</p>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs vim"><span class="hljs-keyword">nmap</span> –sI &lt;僵尸主机ip&gt; <span class="hljs-number">4399</span>.<span class="hljs-keyword">com</span><br><br><span class="hljs-keyword">nmap</span> -Pn -sI &lt;僵尸主机IP&gt; <span class="hljs-number">4399</span>.<span class="hljs-keyword">com</span><br></code></pre></td></tr></table></figure>
+
+<p>&emsp;&emsp;根据“僵尸”主机收到的响应（IPID增加表示开放，未变化表示关闭），判断端口状态</p>
+<center><img src="/img/WEBtools——Nmap/15.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<p>&emsp;&emsp;当使用Idle扫描时，很多人会选择使用-Pn选项来禁用主机发现（即不对目标发送ping探测），以防止真实IP地址被泄露。这样做可以提高扫描的隐蔽性，但可能会影响扫描速度和可靠性</p>
+<p>&emsp;&emsp;其原理是发送特制的数据包到“僵尸”主机和目标端口，观察“僵尸”主机的IPID变化。这个模式适用于高度隐蔽性要求的场景，但需要找到合适的“僵尸”主机，并且可能较慢</p>
+<ul>
+<li><h5 id="b（FTP-bounce扫描）"><a href="#b（FTP-bounce扫描）" class="headerlink" title="-b（FTP bounce扫描）"></a>-b（FTP bounce扫描）</h5></li>
+</ul>
+<p>&emsp;&emsp;FTP bounce扫描利用漏洞存在的FTP服务器来代理扫描目标端口</p>
+<figure class="highlight bnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bnf">nmap -b <span class="hljs-attribute">&lt;FTP服务器IP&gt;</span>:<span class="hljs-attribute">&lt;FTP端口&gt;</span> -Pn <span class="hljs-attribute">&lt;目标主机&gt;</span><br></code></pre></td></tr></table></figure>
+
+<p>&emsp;&emsp;根据FTP服务器返回的响应（成功表示开放，失败表示关闭或过滤），判断端口状态。其原理是通过FTP服务器的PORT命令将数据连接重定向到目标端口，观察FTP服务器的响应。该模式适用于利用存在漏洞的FTP服务器进行隐蔽扫描的场景。但由于现代FTP服务器通常修复了此类漏洞，实际应用较少</p>
+<p>&emsp;</p>
+<h4 id="5-服务和版本探测"><a href="#5-服务和版本探测" class="headerlink" title="5.服务和版本探测"></a>5.服务和版本探测</h4><p>&emsp;&emsp;对于渗透网站进行相关的服务和版本扫描是十分必要的，通过对不同扫描的结果进行</p>
+<ul>
+<li><h5 id="sV-（版本探测）"><a href="#sV-（版本探测）" class="headerlink" title="-sV （版本探测）"></a>-sV （版本探测）</h5></li>
+</ul>
+<p>&emsp;&emsp;服务探测扫描通过发送特定的数据包到目标端口来识别运行在这些端口上的服务及其版本</p>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs vim"><span class="hljs-keyword">nmap</span> –sV <span class="hljs-number">4399</span>.<span class="hljs-keyword">com</span><br></code></pre></td></tr></table></figure>
+
+<p>&emsp;&emsp;根据收到的响应，Nmap会报告每个端口上运行的服务名称、版本以及其他相关信息</p>
+<center><img src="/img/WEBtools——Nmap/16.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<p>&emsp;&emsp;其利用Nmap的服务指纹数据库，发送针对特定服务的探测数据包并分析返回的响应。用于了解目标系统上运行的服务及其版本，以便评估潜在的安全风险和选择合适的攻击策略</p>
+<ul>
+<li><h5 id="sC（脚本探测）"><a href="#sC（脚本探测）" class="headerlink" title="-sC（脚本探测）"></a>-sC（脚本探测）</h5></li>
+</ul>
+<p>&emsp;&emsp;脚本扫描使用Nmap脚本引擎（NSE）执行预定义或自定义的Lua脚本，以获取更多关于目标主机和服务的信息</p>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs vim"><span class="hljs-keyword">nmap</span> –sC <span class="hljs-number">4399</span>.<span class="hljs-keyword">com</span><br></code></pre></td></tr></table></figure>
+
+<p>&emsp;&emsp;根据执行的脚本类型，Nmap会报告各种有关目标主机和服务的详细信息，如漏洞、配置错误等</p>
+<center><img src="/img/WEBtools——Nmap/17.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<p>&emsp;&emsp;其原理是运行Lua脚本，与目标主机和服务进行交互并收集信息。适用于深入分析目标主机和服务的安全状况，发现潜在的漏洞和配置问题</p>
+<ul>
+<li><h5 id="–version-intensity（版本强度扫描）"><a href="#–version-intensity（版本强度扫描）" class="headerlink" title="–version-intensity（版本强度扫描）"></a>–version-intensity（版本强度扫描）</h5></li>
+</ul>
+<p>&emsp;&emsp;版本强度扫描允许调整服务版本探测的强度，从而影响扫描速度和准确性。取值范围为0（最低强度）至9（最高强度），默认值为7。</p>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs vim"><span class="hljs-keyword">nmap</span> -sV --<span class="hljs-keyword">version</span>-intensity <span class="hljs-number">5</span> <span class="hljs-number">4399</span>.<span class="hljs-keyword">com</span><br></code></pre></td></tr></table></figure>
+
+<p>&emsp;&emsp;根据设置的版本强度，Nmap会报告不同程度的详细服务版本信息</p>
+<center><img src="/img/WEBtools——Nmap/18.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<p>&emsp;&emsp;原理是根据设置的强度值，发送更多或更少的服务探测数据包并分析返回的响应。适用于在扫描速度和准确性之间进行权衡，根据实际需求调整服务版本探测的强度</p>
+<ul>
+<li><h5 id="–version-light（版本轻量级扫描）"><a href="#–version-light（版本轻量级扫描）" class="headerlink" title="–version-light（版本轻量级扫描）"></a>–version-light（版本轻量级扫描）</h5></li>
+</ul>
+<p>&emsp;&emsp;版本轻量级扫描是一种快速的服务版本探测方法，只发送少量的探测数据包以加快扫描速度</p>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs vim"><span class="hljs-keyword">nmap</span> -sV --<span class="hljs-keyword">version</span>-light <span class="hljs-number">4399</span>.<span class="hljs-keyword">com</span><br></code></pre></td></tr></table></figure>
+
+<p>&emsp;&emsp;由于发送的探测数据包较少，Nmap可能报告较少的服务版本信息，本质上是–version-intensity 2</p>
+<center><img src="/img/WEBtools——Nmap/19.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<p>&emsp;&emsp;仅发送少量的服务探测数据包并分析返回的响应。适用于需要快速获取服务版本信息的场景，但可能牺牲一定的准确性</p>
+<ul>
+<li><h5 id="version-all-（版本全面扫描）"><a href="#version-all-（版本全面扫描）" class="headerlink" title="-version-all （版本全面扫描）"></a>-version-all （版本全面扫描）</h5></li>
+</ul>
+<p>&emsp;&emsp;版本全面扫描会尝试所有可用的服务探测，以获得最准确的服务版本信息</p>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs vim"><span class="hljs-keyword">nmap</span> -sV --<span class="hljs-keyword">version</span>-<span class="hljs-keyword">all</span> <span class="hljs-number">4399</span>.<span class="hljs-keyword">com</span><br></code></pre></td></tr></table></figure>
+
+<p>&emsp;&emsp;由于发送的探测数据包较多，Nmap会报告更详细的服务版本信息，其实本质上就是–version-intensity 9，直接上强度</p>
+<center><img src="/img/WEBtools——Nmap/20.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<p>&emsp;&emsp;发送所有可用的服务探测数据包并分析返回的响应。适用于需要最准确的服务版本信息的场景，但可能导致扫描速度较慢</p>
+<p>&emsp;</p>
+<h4 id="6-操作系统探测"><a href="#6-操作系统探测" class="headerlink" title="6.操作系统探测"></a>6.操作系统探测</h4><p>&emsp;&emsp;Nmap的TCP/IP协议栈fingerprinting是一种远程操作系统探测技术，通过分析目标主机对特定数据包的响应来推断其操作系统类型和版本。这项功能使得Nmap能够在不直接访问目标系统的情况下获取有关其操作系统的信息</p>
+<p>&emsp;&emsp;原理是Nmap发送一系列特制的数据包到目标主机，并观察其响应。这些数据包可能包括不同的TCP标志、IP选项、ICMP请求等。由于不同操作系统的TCP/IP实现存在差异，它们对这些数据包的响应也会有所不同。Nmap通过比较收到的响应与预先定义的操作系统指纹数据库，来确定目标主机最可能运行的操作系统及其版本</p>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs vim"><span class="hljs-keyword">nmap</span> -O <span class="hljs-number">4399</span>.<span class="hljs-keyword">com</span><br></code></pre></td></tr></table></figure>
+
+<center><img src="/img/WEBtools——Nmap/21.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<p>&emsp;&emsp;由于操作系统探测可能受到防火墙、IDS/IPS等安全设备的影响，从而导致结果不准确。为了提高准确性，建议将操作系统探测与其他扫描选项（如服务探测）结合使用</p>
+<p>&emsp;</p>
+<h4 id="7-防火墙-IDS躲避和哄骗"><a href="#7-防火墙-IDS躲避和哄骗" class="headerlink" title="7.防火墙/IDS躲避和哄骗"></a>7.防火墙/IDS躲避和哄骗</h4><ul>
+<li><h5 id="防火墙-IDS躲避"><a href="#防火墙-IDS躲避" class="headerlink" title="防火墙/IDS躲避"></a>防火墙/IDS躲避</h5></li>
+</ul>
+<p>&emsp;&emsp;该指令使用了分段IP数据包的技术，将扫描流量分割成更小的片段，以绕过防火墙和IDS的检测。</p>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs vim"><span class="hljs-keyword">nmap</span> -<span class="hljs-keyword">f</span> <span class="hljs-number">4399</span>.<span class="hljs-keyword">com</span><br></code></pre></td></tr></table></figure>
+
+<p>&emsp;&emsp;显示目标主机上开放的端口和服务</p>
+<center><img src="/img/WEBtools——Nmap/22.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<p>&emsp;&emsp;这是通过发送分段的IP数据包，使得防火墙和IDS无法完整地重组和检测扫描流量。当目标主机上的防火墙或IDS对完整的扫描流量进行检测时，可以使用此功能来尝试规避检测</p>
+<ul>
+<li><h5 id="哄骗操作"><a href="#哄骗操作" class="headerlink" title="哄骗操作"></a>哄骗操作</h5></li>
+</ul>
+<p>&emsp;&emsp;该指令使用了IP地址欺骗技术，生成虚假的源IP地址，以混淆目标主机和网络设备的追踪</p>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs vim"><span class="hljs-keyword">nmap</span> -D RND:<span class="hljs-number">10</span> <span class="hljs-symbol">&lt;target&gt;</span><br></code></pre></td></tr></table></figure>
+
+<p>&emsp;&emsp;显示目标主机上开放的端口和服务</p>
+<center><img src="/img/WEBtools——Nmap/23.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<p>&emsp;&emsp;通过使用虚假的源IP地址，可以使得目标主机和网络设备无法准确追踪扫描请求的来源。当用户希望隐藏自己的真实IP地址并混淆扫描来源时，可以使用此功能</p>
+<p>&emsp;</p>
+<h4 id="注：参考链接"><a href="#注：参考链接" class="headerlink" title="注：参考链接"></a>注：参考链接</h4><p>&emsp;&emsp;剩余的内容就不给予讲述了，对于时间、性能、输出以及运行交互上的相关内容可以参考该片文章：（写得很详细，就是内容太多，显得很杂的感觉）</p>
+<figure class="highlight llvm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs llvm"><span class="hljs-symbol">https:</span>//www.cnblogs.com/toki-plus/p/<span class="hljs-number">16286632</span>.html#<span class="hljs-variable">%E5</span><span class="hljs-variable">%AE</span><span class="hljs-variable">%9</span>E<span class="hljs-variable">%E4</span><span class="hljs-variable">%BE</span><span class="hljs-variable">%8</span>B<br></code></pre></td></tr></table></figure>
+
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/WEB-tools/" class="category-chain-item">WEB tools</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>WEBtools——Nmap</div>
+      <div>https://one-null-pointer.github.io/2023/07/21/WEBtools——Nmap/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>Author</div>
+          <div>liaoyue</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>Posted on</div>
+          <div>July 21, 2023</div>
+        </div>
+      
+      
+      <div class="license-meta-item">
+        <div>传送口</div>
+        <div>
+          
+            
+            
+              <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+              <span class="hint--top hint--rounded" aria-label="点击进行传送">
+                <i class="iconfont icon-by"></i>
+              </span>
+              </a>
+            
+          
+        </div>
+      </div>
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2023/06/23/Linux%E8%BF%90%E7%BB%B4%E2%80%94%E2%80%94linux%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0%E8%B7%AF%E7%94%B1%E8%BD%AC%E5%8F%91%E5%8A%9F%E8%83%BD/" title="系统实现路由转发功能">
+                        <span class="hidden-mobile">系统实现路由转发功能</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;Table of Contents</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">Keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://github.com/" target="_blank" rel="nofollow noopener"><span>pointer</span></a> <i class="iconfont icon-love"></i> <a href="https://mp.weixin.qq.com/s/6ncLUtaiJ9j_sMjZT5z-2w" target="_blank" rel="nofollow noopener"><span>一个爱学习的空指针</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      headingSelector : CONFIG.toc.headingSelector || 'h1,h2,h3,h4,h5,h6',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      collapseDepth   : CONFIG.toc.collapseDepth || 0,
+      scrollSmooth    : true,
+      headingsOffset  : -boardTop
+    });
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.10/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">Blog works best with JavaScript enabled</div>
+  </noscript>
+</body>
+</html>
