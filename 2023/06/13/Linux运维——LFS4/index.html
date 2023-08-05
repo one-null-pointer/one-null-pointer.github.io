@@ -1,0 +1,788 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="liaoyue">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="LFS（四）0.前言&amp;emsp;&amp;emsp;通过第二小节，我们终于完成了lfs系统root用户的相关软件包的编译安装，接下来就是涉及到lfs系统的相关配置内容，比如Bootscripts、时间设置等内容 &amp;emsp;&amp;emsp;首先退出logout 1logout  &amp;emsp;&amp;emsp;完成最后的设置，重新进入chroot环境 123456chroot &quot;$LFS&quot; &#x2F;us">
+<meta property="og:type" content="article">
+<meta property="og:title" content="LFS（四）">
+<meta property="og:url" content="https://one-null-pointer.github.io/2023/06/13/Linux%E8%BF%90%E7%BB%B4%E2%80%94%E2%80%94LFS4/index.html">
+<meta property="og:site_name" content="one-null-poniter">
+<meta property="og:description" content="LFS（四）0.前言&amp;emsp;&amp;emsp;通过第二小节，我们终于完成了lfs系统root用户的相关软件包的编译安装，接下来就是涉及到lfs系统的相关配置内容，比如Bootscripts、时间设置等内容 &amp;emsp;&amp;emsp;首先退出logout 1logout  &amp;emsp;&amp;emsp;完成最后的设置，重新进入chroot环境 123456chroot &quot;$LFS&quot; &#x2F;us">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://one-null-pointer.github.io/img/Linux.png">
+<meta property="article:published_time" content="2023-06-13T03:29:07.000Z">
+<meta property="article:modified_time" content="2023-08-05T14:35:57.857Z">
+<meta property="article:author" content="liaoyue">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://one-null-pointer.github.io/img/Linux.png">
+  
+  
+  
+  <title>LFS（四） - one-null-poniter</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"one-null-pointer.github.io","root":"/","version":"1.9.2","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 5.4.2"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>one null pointer</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                吾
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                學
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                類
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="LFS（四）"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2023-06-13 11:29" pubdate>
+          June 13, 2023 am
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          4.2k words
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          36 mins
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">LFS（四）</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="LFS（四）"><a href="#LFS（四）" class="headerlink" title="LFS（四）"></a>LFS（四）</h1><h4 id="0-前言"><a href="#0-前言" class="headerlink" title="0.前言"></a>0.前言</h4><p>&emsp;&emsp;通过第二小节，我们终于完成了lfs系统root用户的相关软件包的编译安装，接下来就是涉及到lfs系统的相关配置内容，比如Bootscripts、时间设置等内容</p>
+<p>&emsp;&emsp;首先退出logout</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">logout</span><br></code></pre></td></tr></table></figure>
+
+<p>&emsp;&emsp;完成最后的设置，重新进入chroot环境</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">chroot</span> <span class="hljs-string">&quot;<span class="hljs-variable">$LFS</span>&quot;</span> /usr/bin/env -i \<br>HOME=/root TERM=<span class="hljs-string">&quot;<span class="hljs-variable">$TERM</span>&quot;</span> PS1=<span class="hljs-string">&#x27;\u:\w\$ &#x27;</span> \<br>PATH=/bin:/usr/bin:/sbin:/usr/sbin \<br>/bin/bash --login<br><span class="hljs-built_in">cd</span> /sources<br><span class="hljs-built_in">export</span> LFS=/sources<br></code></pre></td></tr></table></figure>
+
+<center><img src="/img/Linux运维——LFS（四）/1.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+
+<p>&emsp;&emsp;这里的作用只是和之前的作用进行一个分界，其实本质上没有意义（毕竟退出又重来了）</p>
+<p>&emsp;</p>
+<h4 id="1-开机脚本设置"><a href="#1-开机脚本设置" class="headerlink" title="1.开机脚本设置"></a>1.开机脚本设置</h4><p>&emsp;&emsp;LFS-Bootscripts-6.3是一组用于Linux系统启动时自动运行的脚本。这些脚本负责初始化系统和启动各种服务，例如启动网络、挂载文件系统、启动系统日志等任务。LFS-Bootscripts-6.3是针对LFS系统定制的，可以确保系统能够正确地启动并提供所需的服务</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">tar</span> xvf $LFS/lfs-bootscripts-<span class="hljs-number">6</span>.<span class="hljs-number">3</span>.tar.bz2<br><span class="hljs-attribute">cd</span> lfs-bootscripts-<span class="hljs-number">6</span>.<span class="hljs-number">3</span><br><span class="hljs-attribute">make</span> install<br><span class="hljs-attribute">cd</span> ..<br><span class="hljs-attribute">rm</span> -rf lfs-bootscripts-<span class="hljs-number">6</span>.<span class="hljs-number">3</span><br></code></pre></td></tr></table></figure>
+
+<center><img src="/img/Linux运维——LFS（四）/2.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+
+<p>&emsp;</p>
+<h4 id="2-系统时间设置"><a href="#2-系统时间设置" class="headerlink" title="2.系统时间设置"></a>2.系统时间设置</h4><figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs gradle">cat &gt; <span class="hljs-regexp">/etc/</span>sysconfig/clock &lt;&lt; <span class="hljs-string">&quot;EOF&quot;</span><br># Begin <span class="hljs-regexp">/etc/</span>sysconfig/clock<br>UTC=<span class="hljs-number">1</span><br># End <span class="hljs-regexp">/etc/</span>sysconfig/clock<br>EOF<br></code></pre></td></tr></table></figure>
+
+<center><img src="/img/Linux运维——LFS（四）/3.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+
+<p>&emsp;</p>
+<h4 id="3-bash下的键盘功能键设置"><a href="#3-bash下的键盘功能键设置" class="headerlink" title="3.bash下的键盘功能键设置"></a>3.bash下的键盘功能键设置</h4><figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs pgsql">cat &gt; /etc/inputrc &lt;&lt; &quot;EOF&quot;<br><span class="hljs-keyword">set</span> horizontal-scroll-mode <span class="hljs-keyword">Off</span><br><span class="hljs-keyword">set</span> meta-flag <span class="hljs-keyword">On</span><br><span class="hljs-keyword">set</span> <span class="hljs-keyword">input</span>-meta <span class="hljs-keyword">On</span><br><span class="hljs-keyword">set</span> convert-meta <span class="hljs-keyword">Off</span><br><span class="hljs-keyword">set</span> output-meta <span class="hljs-keyword">On</span><br><span class="hljs-keyword">set</span> bell-style <span class="hljs-keyword">none</span><br>&quot;\eOd&quot;: backward-word<br>&quot;\eOc&quot;: forward-word<br>&quot;\e[1~&quot;: beginning-<span class="hljs-keyword">of</span>-<span class="hljs-type">line</span><br>&quot;\e[4~&quot;: <span class="hljs-keyword">end</span>-<span class="hljs-keyword">of</span>-<span class="hljs-type">line</span><br>&quot;\e[5~&quot;: beginning-<span class="hljs-keyword">of</span>-history<br>&quot;\e[6~&quot;: <span class="hljs-keyword">end</span>-<span class="hljs-keyword">of</span>-history<br>&quot;\e[3~&quot;: <span class="hljs-keyword">delete</span>-<span class="hljs-type">char</span><br>&quot;\e[2~&quot;: quoted-<span class="hljs-keyword">insert</span><br>&quot;\eOH&quot;: beginning-<span class="hljs-keyword">of</span>-<span class="hljs-type">line</span><br>&quot;\eOF&quot;: <span class="hljs-keyword">end</span>-<span class="hljs-keyword">of</span>-<span class="hljs-type">line</span><br>&quot;\e[H&quot;: beginning-<span class="hljs-keyword">of</span>-<span class="hljs-type">line</span><br>&quot;\e[F&quot;: <span class="hljs-keyword">end</span>-<span class="hljs-keyword">of</span>-<span class="hljs-type">line</span><br>EOF<br></code></pre></td></tr></table></figure>
+
+<center><img src="/img/Linux运维——LFS（四）/4.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+
+<p>&emsp;</p>
+<h4 id="4-Bash-Shell启动文件设置"><a href="#4-Bash-Shell启动文件设置" class="headerlink" title="4.Bash Shell启动文件设置"></a>4.Bash Shell启动文件设置</h4><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs routeros">cat &gt; /etc<span class="hljs-built_in">/profile </span>&lt;&lt; <span class="hljs-string">&quot;EOF&quot;</span><br><span class="hljs-comment"># Begin /etc/profile</span><br><span class="hljs-built_in">export</span> <span class="hljs-attribute">LANG</span>=en_US.UTF-8<br><span class="hljs-built_in">export</span> <span class="hljs-attribute">INPUTRC</span>=/etc/inputrc<br>alias <span class="hljs-attribute">ls</span>=<span class="hljs-string">&quot;ls --color&quot;</span><br><span class="hljs-built_in">export</span> <span class="hljs-attribute">PS1</span>=<span class="hljs-string">&#x27;\u:\w\$ &#x27;</span><br><span class="hljs-comment"># End /etc/profile</span><br>EOF<br></code></pre></td></tr></table></figure>
+
+<center><img src="/img/Linux运维——LFS（四）/5.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+
+<p>&emsp;</p>
+<h4 id="5-本地网络名设置"><a href="#5-本地网络名设置" class="headerlink" title="5.本地网络名设置"></a>5.本地网络名设置</h4><figure class="highlight arcade"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs arcade">echo <span class="hljs-string">&quot;HOSTNAME=mylinux&quot;</span> &gt; <span class="hljs-regexp">/etc/</span>sysconfig/network<br></code></pre></td></tr></table></figure>
+
+<center><img src="/img/Linux运维——LFS（四）/6.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+
+<p>&emsp;</p>
+<h4 id="6-hosts文件设置"><a href="#6-hosts文件设置" class="headerlink" title="6.hosts文件设置"></a>6.hosts文件设置</h4><figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs gradle">cat &gt; <span class="hljs-regexp">/etc/</span>hosts &lt;&lt; <span class="hljs-string">&quot;EOF&quot;</span><br># Begin <span class="hljs-regexp">/etc/</span>hosts (no network card version)<br><span class="hljs-number">127.0</span>.<span class="hljs-number">0.1</span> mylinux localhost<br># End <span class="hljs-regexp">/etc/</span>hosts (no network card version)<br>EOF<br></code></pre></td></tr></table></figure>
+
+<center><img src="/img/Linux运维——LFS（四）/7.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+
+<p>&emsp;</p>
+<h4 id="7-网络静态地址设置"><a href="#7-网络静态地址设置" class="headerlink" title="7.网络静态地址设置"></a>7.网络静态地址设置</h4><p>&emsp;&emsp;实现打开编辑，点击网络编辑器，选中NAT模式</p>
+<center><img src="/img/Linux运维——LFS（四）/8.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+
+<p>&emsp;</p>
+<center><img src="/img/Linux运维——LFS（四）/9.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+
+<p>&emsp;&emsp;通过查看可以看到我们的网关ip为192.168.70.2，之后回到网络编辑器界面，点击DHCP设置</p>
+<center><img src="/img/Linux运维——LFS（四）/10.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+
+<p>&emsp;&emsp;可以看到开始IP地址和结束IP地址，前三位是一样的，最后一位是128和254，证明我可以选择的IP地址是XX.XX.XX.128——XX.XX.XX.254，中间任意选一个都可以，比如选择XX.XX.XX.230，接下来就进行相关的代码示范</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs routeros">cd /etc/sysconfig/network-devices<br>mkdir -v ifconfig.eth0<br>cat &gt; ifconfig.eth0/ipv4 &lt;&lt; <span class="hljs-string">&quot;EOF&quot;</span><br><span class="hljs-attribute">ONBOOT</span>=<span class="hljs-literal">yes</span><br><span class="hljs-attribute">SERVICE</span>=ipv4-static<br><span class="hljs-attribute">IP</span>=192.168.70.230<br><span class="hljs-attribute">GATEWAY</span>=192.168.70.2<br><span class="hljs-attribute">PREFIX</span>=24<br><span class="hljs-attribute">BROADCAST</span>=192.168.70.255<br>EOF<br>cat &gt; /etc/resolv.conf &lt;&lt; <span class="hljs-string">&quot;EOF&quot;</span><br><span class="hljs-comment"># Begin /etc/resolv.conf</span><br>nameserver 114.114.114.114<br>nameserver 114.114.114.114<br><span class="hljs-comment"># End /etc/resolv.conf</span><br>EOF<br></code></pre></td></tr></table></figure>
+
+<center><img src="/img/Linux运维——LFS（四）/11.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+
+<p>&emsp;&emsp;（这里dns的编写运行忘记截图了，但是问题不大）</p>
+<p>&emsp;</p>
+<h4 id="8-fstab的建立"><a href="#8-fstab的建立" class="headerlink" title="8. fstab的建立"></a>8. fstab的建立</h4><p>&emsp;&emsp;这里的磁盘名以及文件系统名需要根据实际情况修改，不过照着教程做的话不用做出修改</p>
+<figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs gradle">cat &gt; <span class="hljs-regexp">/etc/</span>fstab &lt;&lt; <span class="hljs-string">&quot;EOF&quot;</span><br># Begin <span class="hljs-regexp">/etc/</span>fstab<br># <span class="hljs-keyword">file</span> system  mount-point  type   <span class="hljs-keyword">options</span>         <span class="hljs-keyword">dump</span>  fsck<br>#                                                        order<br><span class="hljs-regexp">/dev/</span>hdd2       /            xfs  defaults        <span class="hljs-number">1</span>     <span class="hljs-number">1</span><br><span class="hljs-regexp">/dev/</span>hdd1       swap         swap   pri=<span class="hljs-number">1</span>           <span class="hljs-number">0</span>     <span class="hljs-number">0</span><br>proc              /proc        proc   defaults        <span class="hljs-number">0</span>     <span class="hljs-number">0</span><br>sysfs             /sys         sysfs  defaults        <span class="hljs-number">0</span>     <span class="hljs-number">0</span><br>devpts          <span class="hljs-regexp">/dev/</span>pts     devpts gid=<span class="hljs-number">4</span>,mode=<span class="hljs-number">620</span>  <span class="hljs-number">0</span>     <span class="hljs-number">0</span><br>shm              <span class="hljs-regexp">/dev/</span>shm     tmpfs  defaults        <span class="hljs-number">0</span>     <span class="hljs-number">0</span><br># End <span class="hljs-regexp">/etc/</span>fstab<br>EOF<br><br></code></pre></td></tr></table></figure>
+
+<center><img src="/img/Linux运维——LFS（四）/12.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+
+<p>&emsp;</p>
+<h4 id="9-安装内核"><a href="#9-安装内核" class="headerlink" title="9.安装内核"></a>9.安装内核</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">cd</span> /sources<br>tar xvf <span class="hljs-variable">$LFS</span>/linux-2.6.22.5.tar.bz2<br><span class="hljs-built_in">cd</span> linux-2.6.22.5<br>make mrproper<br>make menuconfig<br></code></pre></td></tr></table></figure>
+
+<center><img src="/img/Linux运维——LFS（四）/13.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+
+<p>&emsp;&emsp;上下键移动选中Device Drivers-&gt;Networking device support-&gt;Ethernet (10 or 100Mbit)后下上选中AMD PCnet32 PCI support，这里移动要对应位置敲击键盘的“m”键即可</p>
+<center><img src="/img/Linux运维——LFS（四）/14.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+
+<p>&emsp;</p>
+<center><img src="/img/Linux运维——LFS（四）/15.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+
+<p>&emsp;</p>
+<center><img src="/img/Linux运维——LFS（四）/16.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+
+<p>&emsp;&emsp;接下来退回（选择exit）选中Device Drivers-&gt;Sound-&gt;Advanced Linux Sound Architecture</p>
+<center><img src="/img/Linux运维——LFS（四）/17.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+
+<p>&emsp;&emsp;敲击键盘“m”键，即可出现子选项，然后选中PCI devices加入(Creative) Ensoniq AudioPCI 1371/1373的支持，编译成模块即可（下上选中(Creative) Ensoniq AudioPCI 1371/1373，然后敲击键盘的“m”键即可</p>
+<center><img src="/img/Linux运维——LFS（四）/18.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+
+<p>&emsp;</p>
+<center><img src="/img/Linux运维——LFS（四）/19.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+
+<p>&emsp;</p>
+<center><img src="/img/Linux运维——LFS（四）/20.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+
+<p>&emsp;</p>
+<center><img src="/img/Linux运维——LFS（四）/21.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+
+<p>&emsp;&emsp;然后回去选中File Systems-&gt;XFS filesystem support加入XFS的支持，可以采用编译到内核来避免未用initrd脚本来加载模块而导致启动失败（下上选中XFS filesystem support，然后敲击键盘的“y”键即可</p>
+<center><img src="/img/Linux运维——LFS（四）/22.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+
+<p>&emsp;</p>
+<center><img src="/img/Linux运维——LFS（四）/23.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+
+<p>&emsp;</p>
+<center><img src="/img/Linux运维——LFS（四）/24.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs awk">make<br>make modules_install<br>cp -v arch<span class="hljs-regexp">/i386/</span>boot<span class="hljs-regexp">/bzImage /</span>boot/lfskernel-<span class="hljs-number">2.6</span>.<span class="hljs-number">22.5</span><br>cp -v System.map <span class="hljs-regexp">/boot/</span>System.map-<span class="hljs-number">2.6</span>.<span class="hljs-number">22.5</span><br>cp -v .config <span class="hljs-regexp">/boot/</span>config-<span class="hljs-number">2.6</span>.<span class="hljs-number">22.5</span><br>install -d <span class="hljs-regexp">/usr/</span>share<span class="hljs-regexp">/doc/</span>linux-<span class="hljs-number">2.6</span>.<span class="hljs-number">22.5</span><br>cp -r Documentation<span class="hljs-regexp">/* /u</span>sr<span class="hljs-regexp">/share/</span>doc/linux-<span class="hljs-number">2.6</span>.<span class="hljs-number">22.5</span><br></code></pre></td></tr></table></figure>
+
+<center><img src="/img/Linux运维——LFS（四）/25.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+
+<p>&emsp;</p>
+<h4 id="10-安装Grub"><a href="#10-安装Grub" class="headerlink" title="10.安装Grub"></a>10.安装Grub</h4><figure class="highlight erlang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs erlang"><span class="hljs-function"><span class="hljs-title">root</span> <span class="hljs-params">(hd0,<span class="hljs-number">1</span>)</span></span><br><span class="hljs-function"><span class="hljs-title">setup</span> <span class="hljs-params">(hd0)</span></span><br><span class="hljs-function"><span class="hljs-title">quit</span></span><br></code></pre></td></tr></table></figure>
+
+<center><img src="/img/Linux运维——LFS（四）/26.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs awk">cat &gt; <span class="hljs-regexp">/boot/g</span>rub/menu.lst &lt;&lt; <span class="hljs-string">&quot;EOF&quot;</span><br><span class="hljs-comment"># Begin /boot/grub/menu.lst</span><br><span class="hljs-comment"># By default boot the first menu entry.</span><br>default <span class="hljs-number">0</span><br><span class="hljs-comment"># Allow 30 seconds before booting the default.</span><br>timeout <span class="hljs-number">30</span><br><span class="hljs-comment"># Use prettier colors.</span><br>color green<span class="hljs-regexp">/black light-green/</span>black<br><span class="hljs-comment"># The first entry is for LFS.</span><br>title LFS <span class="hljs-number">6.3</span><br>root (hd0,<span class="hljs-number">1</span>)<br>kernel <span class="hljs-regexp">/boot/</span>lfskernel-<span class="hljs-number">2.6</span>.<span class="hljs-number">22.5</span> root=<span class="hljs-regexp">/dev/</span>hda2<br>EOF<br></code></pre></td></tr></table></figure>
+
+<center><img src="/img/Linux运维——LFS（四）/27.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs awk">mkdir -v <span class="hljs-regexp">/etc/g</span>rub<br>ln -sv <span class="hljs-regexp">/boot/g</span>rub<span class="hljs-regexp">/menu.lst /</span>etc/grub<br>logout<br></code></pre></td></tr></table></figure>
+
+<center><img src="/img/Linux运维——LFS（四）/28.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+
+<p>&emsp;</p>
+<h4 id="11-进入LFS系统"><a href="#11-进入LFS系统" class="headerlink" title="11.进入LFS系统"></a>11.进入LFS系统</h4><figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ebnf"><span class="hljs-attribute">reboot</span><br></code></pre></td></tr></table></figure>
+
+<center><img src="/img/Linux运维——LFS（四）/29.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+
+<p>&emsp;&emsp;用户名是root，密码是之前定义的</p>
+<center><img src="/img/Linux运维——LFS（四）/30.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+
+<p>&emsp;</p>
+<center><img src="/img/Linux运维——LFS（四）/31.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+
+<p>&emsp;&emsp;至此，一个初级的LFS就已经完成</p>
+<p>&emsp;</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Linux%E8%BF%90%E7%BB%B4/" class="category-chain-item">Linux运维</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>LFS（四）</div>
+      <div>https://one-null-pointer.github.io/2023/06/13/Linux运维——LFS4/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>Author</div>
+          <div>liaoyue</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>Posted on</div>
+          <div>June 13, 2023</div>
+        </div>
+      
+      
+      <div class="license-meta-item">
+        <div>传送口</div>
+        <div>
+          
+            
+            
+              <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+              <span class="hint--top hint--rounded" aria-label="点击进行传送">
+                <i class="iconfont icon-by"></i>
+              </span>
+              </a>
+            
+          
+        </div>
+      </div>
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2023/06/23/Linux%E8%BF%90%E7%BB%B4%E2%80%94%E2%80%94linux%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0%E8%B7%AF%E7%94%B1%E8%BD%AC%E5%8F%91%E5%8A%9F%E8%83%BD/" title="系统实现路由转发功能">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">系统实现路由转发功能</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2023/06/11/Linux%E8%BF%90%E7%BB%B4%E2%80%94%E2%80%94LFS3/" title="LFS（三）">
+                        <span class="hidden-mobile">LFS（三）</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;Table of Contents</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">Keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://github.com/" target="_blank" rel="nofollow noopener"><span>pointer</span></a> <i class="iconfont icon-love"></i> <a href="https://mp.weixin.qq.com/s/6ncLUtaiJ9j_sMjZT5z-2w" target="_blank" rel="nofollow noopener"><span>一个爱学习的空指针</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      headingSelector : CONFIG.toc.headingSelector || 'h1,h2,h3,h4,h5,h6',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      collapseDepth   : CONFIG.toc.collapseDepth || 0,
+      scrollSmooth    : true,
+      headingsOffset  : -boardTop
+    });
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.10/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">Blog works best with JavaScript enabled</div>
+  </noscript>
+</body>
+</html>
