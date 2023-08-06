@@ -16,23 +16,23 @@
   <meta name="author" content="liaoyue">
   <meta name="keywords" content="">
   
-    <meta name="description" content="系统实现路由转发功能0.前言&amp;emsp;&amp;emsp;这里主要尝试实现在两个虚拟机系统中，一台虚拟机通过另外一台虚拟机当作网关来上网的功能（网关虚拟机下面简称为R，客户端虚拟机下面简称C） &amp;emsp; 1.编辑网卡&amp;emsp;&amp;emsp;首先需要设置一个自定义的内网网卡模式，让虚拟机C只有内网的连接，进入VM界面，点击编辑进入虚拟网络编辑界面    &amp;emsp;&amp;emsp;点击添加网络，添加出VM">
+    <meta name="description" content="iptables0.前言&amp;emsp;&amp;emsp;首先在学习iptables之前，需要区分一些概念，从逻辑出发，现有的防火墙大致上可以分为主机防火墙和网络防火墙，前者针对于单个主机进行防护，后者则往往放置在网络的入口或边缘处，针对网络入口进行防护，服务于防火墙背后的本地局域网，可以理解为主机防火墙主内保护个人，网络防火墙主外保护集体 &amp;emsp;&amp;emsp;从物理出发，防火墙有分为硬件防火墙和软件防">
 <meta property="og:type" content="article">
-<meta property="og:title" content="系统实现路由转发功能">
-<meta property="og:url" content="https://one-null-pointer.github.io/2023/06/23/Linux%E8%BF%90%E7%BB%B4%E2%80%94%E2%80%94linux%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0%E8%B7%AF%E7%94%B1%E8%BD%AC%E5%8F%91%E5%8A%9F%E8%83%BD/index.html">
+<meta property="og:title" content="iptables">
+<meta property="og:url" content="https://one-null-pointer.github.io/2023/06/17/Linux%E8%BF%90%E7%BB%B4%E2%80%94%E2%80%94iptable/index.html">
 <meta property="og:site_name" content="one-null-poniter">
-<meta property="og:description" content="系统实现路由转发功能0.前言&amp;emsp;&amp;emsp;这里主要尝试实现在两个虚拟机系统中，一台虚拟机通过另外一台虚拟机当作网关来上网的功能（网关虚拟机下面简称为R，客户端虚拟机下面简称C） &amp;emsp; 1.编辑网卡&amp;emsp;&amp;emsp;首先需要设置一个自定义的内网网卡模式，让虚拟机C只有内网的连接，进入VM界面，点击编辑进入虚拟网络编辑界面    &amp;emsp;&amp;emsp;点击添加网络，添加出VM">
+<meta property="og:description" content="iptables0.前言&amp;emsp;&amp;emsp;首先在学习iptables之前，需要区分一些概念，从逻辑出发，现有的防火墙大致上可以分为主机防火墙和网络防火墙，前者针对于单个主机进行防护，后者则往往放置在网络的入口或边缘处，针对网络入口进行防护，服务于防火墙背后的本地局域网，可以理解为主机防火墙主内保护个人，网络防火墙主外保护集体 &amp;emsp;&amp;emsp;从物理出发，防火墙有分为硬件防火墙和软件防">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://one-null-pointer.github.io/img/Linux.png">
-<meta property="article:published_time" content="2023-06-23T03:29:07.000Z">
-<meta property="article:modified_time" content="2023-07-30T15:27:00.808Z">
+<meta property="article:published_time" content="2023-06-17T03:29:07.000Z">
+<meta property="article:modified_time" content="2023-08-06T06:42:57.972Z">
 <meta property="article:author" content="liaoyue">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://one-null-pointer.github.io/img/Linux.png">
   
   
   
-  <title>系统实现路由转发功能 - one-null-poniter</title>
+  <title>iptables - one-null-poniter</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -185,7 +185,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="系统实现路由转发功能"></span>
+            <span id="subtitle" data-typed-text="iptables"></span>
           
         </div>
 
@@ -196,8 +196,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-06-23 11:29" pubdate>
-          June 23, 2023 am
+        <time datetime="2023-06-17 11:29" pubdate>
+          June 17, 2023 am
         </time>
       </span>
     
@@ -257,102 +257,67 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">系统实现路由转发功能</h1>
+            <h1 style="display: none">iptables</h1>
             
             
               <div class="markdown-body">
                 
-                <h1 id="系统实现路由转发功能"><a href="#系统实现路由转发功能" class="headerlink" title="系统实现路由转发功能"></a>系统实现路由转发功能</h1><h4 id="0-前言"><a href="#0-前言" class="headerlink" title="0.前言"></a>0.前言</h4><p>&emsp;&emsp;这里主要尝试实现在两个虚拟机系统中，一台虚拟机通过另外一台虚拟机当作网关来上网的功能（网关虚拟机下面简称为R，客户端虚拟机下面简称C）</p>
+                <h1 id="iptables"><a href="#iptables" class="headerlink" title="iptables"></a>iptables</h1><h4 id="0-前言"><a href="#0-前言" class="headerlink" title="0.前言"></a>0.前言</h4><p>&emsp;&emsp;首先在学习iptables之前，需要区分一些概念，从逻辑出发，现有的防火墙大致上可以分为主机防火墙和网络防火墙，前者针对于单个主机进行防护，后者则往往放置在网络的入口或边缘处，针对网络入口进行防护，服务于防火墙背后的本地局域网，可以理解为主机防火墙主内保护个人，网络防火墙主外保护集体</p>
+<p>&emsp;&emsp;从物理出发，防火墙有分为硬件防火墙和软件防火墙，硬件防火墙顾名思义是在硬件级别实现部分防火墙功能，而软件防火墙则是用软件处理逻辑运行于通用硬件平台上的防火墙</p>
+<center><img src="/img/Linux运维——iptable/1.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
 <p>&emsp;</p>
-<h4 id="1-编辑网卡"><a href="#1-编辑网卡" class="headerlink" title="1.编辑网卡"></a>1.编辑网卡</h4><p>&emsp;&emsp;首先需要设置一个自定义的内网网卡模式，让虚拟机C只有内网的连接，进入VM界面，点击编辑进入虚拟网络编辑界面</p>
-<center><img src="/img/Linux运维——系统实现路由转发功能/1.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+<h4 id="1-基础了解"><a href="#1-基础了解" class="headerlink" title="1.基础了解"></a>1.基础了解</h4><p>&emsp;&emsp;实现一般而言，Linux的防火墙体系主要工作在网络层，针对TCP/IP数据包实施过滤盒限制，属于典型的包过滤防火墙。而iptables本质上并不是一个真正的防火墙，可以连接为一个客户端代理，我们通过iptables代理，将用户的安全设定执行到对应的安全框架中，而这里涉及到的安全框架才是真正的防火墙，也就是netfilter。</p>
+<p>&emsp;&emsp;netfilter作为防火墙真正的安全框架，位于内核空间中，iptables其实是一个命令行工具，位于用户空间，我们用这个工具操作真正的框架。netfilter/iptables组成的就是前文所提到的Linux平台下的包过滤防火墙</p>
+<center><img src="/img/Linux运维——iptable/2.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
 </center>
 
-<p>&emsp;&emsp;点击添加网络，添加出VMnet2，设置为仅主机模式，子网ip这里设置为192.168.32.0,子网掩码是255.255.255.0</p>
+<p>&emsp;&emsp;提到防火墙就必然需要知道防火墙的运行是按照规则进行运行的，规则是我们网络管理员预定义的条件，对于数据包符合不同的条件就按照不同的处理办法，规则的存储位置是在内核空间的信息包过滤表中，这些规则分别指定了源地址、目的地址、传输协议以及服务类型等内容，当数据包与规则匹配时，iptables就会工具规则所定义的方法来处理这些数据包，处理行为包括放行、拒绝和丢弃等操作。</p>
+<center><img src="/img/Linux运维——iptable/3.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
 <p>&emsp;</p>
-<h4 id="2-设置网卡"><a href="#2-设置网卡" class="headerlink" title="2.设置网卡"></a>2.设置网卡</h4><p>&emsp;&emsp;首先建立两个虚拟机</p>
-<center><img src="/img/Linux运维——系统实现路由转发功能/2.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+<h4 id="2-链的概念"><a href="#2-链的概念" class="headerlink" title="2.链的概念"></a>2.链的概念</h4><p>&emsp;&emsp;在防火墙中，我们会提及到发送的概念，不同转发场景所需要进入的关卡路径也不同，而这些关卡就是我们所称呼的“链”，为什么称呼为链呢，这是以为在防火墙的使用中，其对结果的报文进行规则匹配，然后执行对应的动作，当报文经过这些关卡的时候，则必须匹配这个关卡上的规则，但是，这个关卡上可能不止有一条规则，而是有很多条规则，当我们把这些规则串到一个链条上的时候，就形成了”链”</p>
+<center><img src="/img/Linux运维——iptable/4.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
 </center>
 
-<p>&emsp;&emsp;虚拟机R为网卡代理虚拟机，虚拟机C为客户端，点击虚拟机R进行虚拟机设置</p>
-<center><img src="/img/Linux运维——系统实现路由转发功能/3.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
-</center>
-
-<p>&emsp;&emsp;点击网络适配器，连接外网，设置为桥接模式或者是nat模式，这里都无所谓，能上网即可，网卡2连接为内网，设置为自定义，选择3.1所编辑好的VMnet2</p>
-<center><img src="/img/Linux运维——系统实现路由转发功能/4.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
-</center>
-
-<p>&emsp;&emsp;上面已经设置好虚拟机R的相关网卡设置，接下来就是客户主机的网卡连接内网，同样的选择对应的虚拟机C，点击编辑虚拟机设置，将网络适配器改为配好的内网VMnet2</p>
 <p>&emsp;</p>
-<h4 id="3-ip配置"><a href="#3-ip配置" class="headerlink" title="3. ip配置"></a>3. ip配置</h4><p>&emsp;&emsp;通过3.2的步骤，我们已经成功实现了对于两台虚拟机的网卡部署和相关配制，接下里就是检验网卡的配置ip情况</p>
-<p>&emsp;&emsp;首先在虚拟机R中执行ifconfig命令</p>
-<center><img src="/img/Linux运维——系统实现路由转发功能/5.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
-</center>
+<h4 id="3-表的概念"><a href="#3-表的概念" class="headerlink" title="3.表的概念"></a>3.表的概念</h4><p>&emsp;&emsp;有了链的概念，接下来就是表的概念了，我们对每个链上都会放置相应的一串规则，而有些规则是有部分相似的，所以我们是不是也能够实现见关晓彤的规则放在一起呢，答案是肯定的，我们把具有相同功能的规则的集合叫做”表”，所以说，不同功能的规则，我们可以放置在不同的表中进行管理，而iptables已经为我们定义了4种表，每种表对应了不同的功能，而我们定义的规则也都逃脱不了这4种功能的范围</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs css"><span class="hljs-attribute">filter</span>表：<br>负责过滤功能，防火墙；内核模块：iptables_filter<br><br>nat表：<br>network <span class="hljs-selector-tag">address</span> translation，网络地址转换功能；内核模块：iptable_nat<br><br>mangle表：<br>拆解报文，做出修改，并重新封装 的功能；iptable_mangle<br><br>raw表：<br>关闭nat表上启用的连接追踪机制；iptable_raw<br></code></pre></td></tr></table></figure>
 
-<p>&emsp;&emsp;可以看到在虚拟机R的ip网卡中，ens33网卡的ip地址为192.168.70.173（这里需要提及一下，由于不习惯使用桥接模式，最终还是改为了nat模式进行连接），ens37网卡的ip地址未192.168.32.131，这说明我们虚拟机R的设置成功了</p>
-<p>&emsp;&emsp;接下来使用ping指令检查能否上网：</p>
-<center><img src="/img/Linux运维——系统实现路由转发功能/6.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
-</center>
-
-<p>&emsp;&emsp;发送数据包成功，显然能够上网，接下来查看虚拟机C的配置情况</p>
-<center><img src="/img/Linux运维——系统实现路由转发功能/7.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
-</center>
-
-<p>&emsp;&emsp;可以看到在虚拟机C的ip网卡中，ens33网卡的ip地址为192.168.32.128，这说明我们虚拟机C的设置成功了</p>
-<p>&emsp;&emsp;接下来依旧是使用ping指令检查能否上网：</p>
-<center><img src="/img/Linux运维——系统实现路由转发功能/8.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
-</center>
-
-<p>&emsp;&emsp;显然是无连接的，这前期的ip搭建基本完毕了</p>
 <p>&emsp;</p>
-<h4 id="4-配置客户端网关和DNS"><a href="#4-配置客户端网关和DNS" class="headerlink" title="4.配置客户端网关和DNS"></a>4.配置客户端网关和DNS</h4><p>&emsp;&emsp;由于我们需要从客户端传过网关ip进行上网操作，所以这里客户端需要将网关配置为虚拟机R知道内网网卡ip地址，dns配置为114.114.114.114，首先是配置DNS</p>
-<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs awk">vim   <span class="hljs-regexp">/etc/</span>resolv.conf<br>nameserver <span class="hljs-number">114.114</span>.<span class="hljs-number">114.114</span><br></code></pre></td></tr></table></figure>
-
-<center><img src="/img/Linux运维——系统实现路由转发功能/9.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+<h4 id="4-链表关系"><a href="#4-链表关系" class="headerlink" title="4.链表关系"></a>4.链表关系</h4><p>&emsp;&emsp;如前文所说的，链与表的概念都基本了解了，那接下来就是链表的结合</p>
+<center><img src="/img/Linux运维——iptable/5.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
 </center>
 
-<p>&emsp;&emsp;接下来配置网关，配置的忘光有两种做法，一种是临时的做法，使用route命令：</p>
-<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs routeros">route <span class="hljs-built_in">add</span><span class="hljs-built_in"> default </span>gw 192.168.32.131 dev ens33<br></code></pre></td></tr></table></figure>
+<p>&emsp;&emsp;以上图为例，这表示着prerouting”链”只拥有nat表、raw表和mangle表所对应的功能，所以，prerouting中的规则只能存放于nat表、raw表和mangle表中，在上述的思路中，每一个关卡所对应的功能都各不相同，规则可存在的表也各有差异：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs css">PREROUTING的规则可以存在于：raw表，mangle表，nat表。<br><br><span class="hljs-selector-tag">INPUT</span>的规则可以存在于：mangle表，<span class="hljs-attribute">filter</span>表，（centos7中还有nat表，centos6中没有）。<br><br>FORWARD的规则可以存在于：mangle表，<span class="hljs-attribute">filter</span>表。<br><br>OUTPUT的规则可以存在于：raw表mangle表，nat表，<span class="hljs-attribute">filter</span>表。<br><br>POSTROUTING的规则可以存在于：mangle表，nat表。<br></code></pre></td></tr></table></figure>
 
-<p>&emsp;&emsp;该指令就是将网关修改为192.168.32.131，但是这种修改是具有临时性的，当虚拟机重新启动或者网卡重新启动时，网关依旧会变更为原来的默认网关，还有一种做法就是永久性修改，修改/etc/sysconfig/ network-scripts/ifcfg-ens33文件（就是你对应的网卡文件，我这里是ens33）</p>
-<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs awk">vim  <span class="hljs-regexp">/etc/</span>sysconfig<span class="hljs-regexp">/network-scripts/i</span>fcfg-ens33<br>GATEWAY=<span class="hljs-number">192.168</span>.<span class="hljs-number">32.131</span> <span class="hljs-comment">#设置本机连接的网关的IP地址</span><br></code></pre></td></tr></table></figure>
+<p>&emsp;&emsp;当然，我们在实际的使用过程中，往往是通过”表”作为操作入口，对规则进行定义的，所以上面所表达的也仅仅是为更好的理解，在实际的设置和使用中还是安装表对应链的关系进行罗列</p>
+<figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs arduino">raw表中的规则可以被哪些链使用：PREROUTING，<span class="hljs-literal">OUTPUT</span><br><br>mangle表中的规则可以被哪些链使用：PREROUTING，<span class="hljs-literal">INPUT</span>，FORWARD，<span class="hljs-literal">OUTPUT</span>，POSTROUTING<br><br>nat表中的规则可以被哪些链使用：PREROUTING，<span class="hljs-literal">OUTPUT</span>，POSTROUTING（centos7中还有<span class="hljs-literal">INPUT</span>，centos6中没有）<br><br>filter表中的规则可以被哪些链使用：<span class="hljs-literal">INPUT</span>，FORWARD，OUTPU<br></code></pre></td></tr></table></figure>
 
-<center><img src="/img/Linux运维——系统实现路由转发功能/10.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
-</center>
-
-<p>&emsp;&emsp;按照实际情况加入网关主机的内网网卡ip地址即可</p>
 <p>&emsp;</p>
-<h4 id="5-设置路由转发"><a href="#5-设置路由转发" class="headerlink" title="5.设置路由转发"></a>5.设置路由转发</h4><p>&emsp;&emsp;这里的设置比较简单，就是打开相关的sysctl.conf文件，加入一行代码并执行即可：</p>
-<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs stylus">vim /etc/sysctl<span class="hljs-selector-class">.conf</span><br>net<span class="hljs-selector-class">.ipv4</span><span class="hljs-selector-class">.ip_forward</span> = <span class="hljs-number">1</span><br>sysctl -p<br></code></pre></td></tr></table></figure>
-
-<center><img src="/img/Linux运维——系统实现路由转发功能/11.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+<h4 id="5-数据经过防火墙的流程"><a href="#5-数据经过防火墙的流程" class="headerlink" title="5.数据经过防火墙的流程"></a>5.数据经过防火墙的流程</h4><p>&emsp;&emsp;根据前面的相关介绍和理解，我们已经能够初步的建立出iptables的初步流程，而数据经过防火墙的大体流程如下</p>
+<center><img src="/img/Linux运维——iptable/6.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
 </center>
 
-<p>&emsp;&emsp;首先对于sysctl.conf，该文件包含了Linux系统的内核参数配置，net.ipv4.ip_forward = 1表示启用IPv4的IP转发功能，最后使用sysctl –p进行重新加载sysctl.conf文件中的配置，以使更改生效。执行该命令后，系统会自动应用新的内核参数配置，包括启用IP转发功能。启用IP转发功能后，Linux系统可以将收到的数据包转发到其他网络中。这也就是我们设置成网关主机中重要的一步</p>
+<p>&emsp;&emsp;通过图表进行了解，对于我们编写iptables的规则会有很大的帮助，链的规则存放与哪个表中也是一目了然</p>
 <p>&emsp;</p>
-<h4 id="6-使用iptable设置转发"><a href="#6-使用iptable设置转发" class="headerlink" title="6.使用iptable设置转发"></a>6.使用iptable设置转发</h4><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs css">iptables -t nat -<span class="hljs-selector-tag">A</span> POSTROUTING -o ens33 -j  MASQUERADE <br>iptables -<span class="hljs-selector-tag">A</span> FORWARD -<span class="hljs-selector-tag">i</span> ens37 -j ACCEPT<br></code></pre></td></tr></table></figure>
+<h4 id="6-规则的概念"><a href="#6-规则的概念" class="headerlink" title="6.规则的概念"></a>6.规则的概念</h4><p>&emsp;&emsp;前文多次提到了规则的概念，那具体的规则在iptables中是体现在哪呢，其实规则的概念与其他相关的程序大抵相同，无非是进行了一些条件的限定，并对进入的数据进行条件判断和对应的处理方式。总而言之，过载就是有匹配条件和处理动作组成。</p>
+<p>&emsp;&emsp;在iptables 的匹配条件中，有区分为基本匹配条件与扩展匹配条件，基本匹配条件就是源地址Source IP，目标地址 Destination IP，而扩展匹配条件则是除了上述的条件可以用于匹配，还有很多其他的条件可以用于匹配，这种条件则称为扩展匹配条件，这里就不就行过多的阐述，后面会有相关的实例理解可能更好一些。</p>
+<ul>
+<li><h5 id="处理动作"><a href="#处理动作" class="headerlink" title="处理动作"></a>处理动作</h5></li>
+</ul>
+<p>&emsp;&emsp;处理动作而言，在iptables中被称为target，如同匹配条件一般，动作也分为了基本动作和扩展动作，首先是简单动作：</p>
+<figure class="highlight ada"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs ada"><span class="hljs-keyword">ACCEPT</span>：允许数据包通过。<br><br>DROP：直接丢弃数据包，不给任何回应信息，这时候客户端会感觉自己的请求泥牛入海了，过了超时时间才会有反应。<br><br>REJECT：拒绝数据包通过，必要时会给数据发送端一个响应的信息，客户端刚请求就会收到拒绝的信息。<br></code></pre></td></tr></table></figure>
 
-<p>&emsp;&emsp;前一个命令会在iptables的nat表中添加一条POSTROUTING规则，用于对从ens33网卡出去的数据包进行NAT转换。具体来说，-o ens33表示匹配输出接口为ens33的数据包，-j MASQUERADE表示将源IP地址替换为本机的IP地址，并且动态分配端口号。这样可以实现网关的功能，后一个命令会在iptables的filter表中添加一条FORWARD规则，用于允许从ens37网卡进入的数据包通过Linux系统进行转发。具体来说，-i ens37表示匹配输入接口为ens37的数据包，-j ACCEPT表示允许这些数据包通过。</p>
-<p>&emsp;&emsp;设置完毕后，客户端的虚拟机C就可以上网了</p>
-<center><img src="/img/Linux运维——系统实现路由转发功能/12.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
-</center>
+<ul>
+<li><h5 id="扩展动作"><a href="#扩展动作" class="headerlink" title="扩展动作"></a>扩展动作</h5></li>
+</ul>
+<p>&emsp;&emsp;接下来是扩展动作：</p>
+<figure class="highlight armasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs armasm"><span class="hljs-symbol">LOG</span>：记录数据包的信息到系统日志中，以便后续分析和调试。<br><br><span class="hljs-symbol">SNAT</span>：源地址转换，将数据包的源<span class="hljs-built_in">IP</span>地址替换为指定的<span class="hljs-built_in">IP</span>地址。<br><br><span class="hljs-symbol">DNAT</span>：目标地址转换，将数据包的目标<span class="hljs-built_in">IP</span>地址替换为指定的<span class="hljs-built_in">IP</span>地址。<br><br><span class="hljs-symbol">MASQUERADE</span>：动态NAT，将内部网络的私有<span class="hljs-built_in">IP</span>地址映射为公共<span class="hljs-built_in">IP</span>地址。<br><br><span class="hljs-symbol">REDIRECT</span>：重定向数据包到指定的端口或<span class="hljs-built_in">IP</span>地址。<br></code></pre></td></tr></table></figure>
 
-<p>&emsp;&emsp;使用ping的功能ping下百度，可恶，还是失败了，通过思考，大抵每一步都没有出错，除了对于网关的配置，网上的永久配置教学不一，有的是修改network文件，有的要求是修改对应网卡的配置文件，都有道理，我选择后者失败了，首先进行排错，这里采用暂时性的网关配置，也就是前面提到的：</p>
-<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs routeros">route <span class="hljs-built_in">add</span><span class="hljs-built_in"> default </span>gw 192.168.32.131 dev ens33<br></code></pre></td></tr></table></figure>
-
-<center><img src="/img/Linux运维——系统实现路由转发功能/13.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
-</center>
-
-<p>&emsp;&emsp;果然是网关的问题，使用暂时性的网关修改就已经能实现一台虚拟机通过另外一台虚拟机当作网关来上网的功能，但是对于永久网关的修改之前都是通过可视化界面进行依旧修改的，用过几次命令行的修改，但我的印象里应该是可以直接通过vim /etc/sysconfig/network-scripts/ifcfg-ens33修改网关的，首先重启客户端，取消掉网关的临时修改，重新配置</p>
-<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs awk">vim  <span class="hljs-regexp">/etc/</span>sysconfig<span class="hljs-regexp">/network-scripts/i</span>fcfg-ens33<br>GATEWAY=<span class="hljs-number">192.168</span>.<span class="hljs-number">32.131</span> <span class="hljs-comment">#设置本机连接的网关的IP地址</span><br></code></pre></td></tr></table></figure>
-
-<p>&emsp;&emsp;在这个过程中发现在reconf中输入DNS后重启还是会被消掉DNS的配置，所以这里直接写入ifcig文件中会方便很多，可以用这几个命令进行检查</p>
-<figure class="highlight q"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs q">ip route <span class="hljs-built_in">show</span> <span class="hljs-built_in">dev</span> ens33<br>nmcli <span class="hljs-built_in">dev</span> <span class="hljs-built_in">show</span> ens33 | grep DNS<br></code></pre></td></tr></table></figure>
-
-<center><img src="/img/Linux运维——系统实现路由转发功能/14.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
-</center>
-
-<p>&emsp;&emsp;可以发现我们的dns是配置成功了，但是网关还是配置失败了</p>
 
                 
               </div>
@@ -391,8 +356,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>系统实现路由转发功能</div>
-      <div>https://one-null-pointer.github.io/2023/06/23/Linux运维——linux系统实现路由转发功能/</div>
+      <div>iptables</div>
+      <div>https://one-null-pointer.github.io/2023/06/17/Linux运维——iptable/</div>
     </div>
     <div class="license-meta">
       
@@ -404,7 +369,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>Posted on</div>
-          <div>June 23, 2023</div>
+          <div>June 17, 2023</div>
         </div>
       
       
@@ -434,9 +399,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2023/07/21/WEBtools%E2%80%94%E2%80%94Nmap/" title="WEBtools——Nmap">
+                      <a href="/2023/06/20/Linux%E8%BF%90%E7%BB%B4%E2%80%94%E2%80%94linux%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0%E8%B7%AF%E7%94%B1%E8%BD%AC%E5%8F%91%E5%8A%9F%E8%83%BD/" title="系统实现路由转发功能">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">WEBtools——Nmap</span>
+                        <span class="hidden-mobile">系统实现路由转发功能</span>
                         <span class="visible-mobile">Previous</span>
                       </a>
                     
@@ -444,7 +409,7 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2023/06/13/Linux%E8%BF%90%E7%BB%B4%E2%80%94%E2%80%94LFS4/" title="LFS（四）">
+                      <a href="/2023/06/15/Linux%E8%BF%90%E7%BB%B4%E2%80%94%E2%80%94LFS4/" title="LFS（四）">
                         <span class="hidden-mobile">LFS（四）</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>

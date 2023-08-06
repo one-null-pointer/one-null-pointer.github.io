@@ -1,0 +1,958 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="liaoyue">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="系统安全与优化0.前言&amp;emsp;&amp;emsp;在运维过程中，Linux系统的安全与优化就变得尤为重要，这里主要从本机配置、ssh安全、mysql安全配置、shell安全、防火墙和Linux系统资源调配等方面进行讲述 &amp;emsp; 1.本机系统的配置 删除多余账号  &amp;emsp;&amp;emsp;首先是删除系统特殊的用户账号和组账号，在centos系统中，我们可以使用命令查看用户账号和组账号的相关信息 1">
+<meta property="og:type" content="article">
+<meta property="og:title" content="系统安全与优化">
+<meta property="og:url" content="https://one-null-pointer.github.io/2023/07/05/Linux%E8%BF%90%E7%BB%B4%E2%80%94%E2%80%94%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8%E4%B8%8E%E4%BC%98%E5%8C%96/index.html">
+<meta property="og:site_name" content="one-null-poniter">
+<meta property="og:description" content="系统安全与优化0.前言&amp;emsp;&amp;emsp;在运维过程中，Linux系统的安全与优化就变得尤为重要，这里主要从本机配置、ssh安全、mysql安全配置、shell安全、防火墙和Linux系统资源调配等方面进行讲述 &amp;emsp; 1.本机系统的配置 删除多余账号  &amp;emsp;&amp;emsp;首先是删除系统特殊的用户账号和组账号，在centos系统中，我们可以使用命令查看用户账号和组账号的相关信息 1">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://one-null-pointer.github.io/img/Linux.png">
+<meta property="article:published_time" content="2023-07-05T06:59:41.000Z">
+<meta property="article:modified_time" content="2023-08-06T14:45:13.509Z">
+<meta property="article:author" content="liaoyue">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://one-null-pointer.github.io/img/Linux.png">
+  
+  
+  
+  <title>系统安全与优化 - one-null-poniter</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"one-null-pointer.github.io","root":"/","version":"1.9.2","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 5.4.2"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>one null pointer</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                吾
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                學
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                類
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="系统安全与优化"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2023-07-05 14:59" pubdate>
+          July 5, 2023 pm
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          9.5k words
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          80 mins
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">系统安全与优化</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="系统安全与优化"><a href="#系统安全与优化" class="headerlink" title="系统安全与优化"></a>系统安全与优化</h1><h4 id="0-前言"><a href="#0-前言" class="headerlink" title="0.前言"></a>0.前言</h4><p>&emsp;&emsp;在运维过程中，Linux系统的安全与优化就变得尤为重要，这里主要从本机配置、ssh安全、mysql安全配置、shell安全、防火墙和Linux系统资源调配等方面进行讲述</p>
+<p>&emsp;</p>
+<h4 id="1-本机系统的配置"><a href="#1-本机系统的配置" class="headerlink" title="1.本机系统的配置"></a>1.本机系统的配置</h4><ul>
+<li><h5 id="删除多余账号"><a href="#删除多余账号" class="headerlink" title="删除多余账号"></a>删除多余账号</h5></li>
+</ul>
+<p>&emsp;&emsp;首先是删除系统特殊的用户账号和组账号，在centos系统中，我们可以使用命令查看用户账号和组账号的相关信息</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">cat <span class="hljs-regexp">/etc/</span>passwd   <span class="hljs-comment">#查看用户账号信息</span><br></code></pre></td></tr></table></figure>
+
+<center><img src="/img/Linux运维——系统安全与优化/1.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">cat <span class="hljs-regexp">/etc/g</span>roup      <span class="hljs-comment">#查看组账号信息</span><br></code></pre></td></tr></table></figure>
+
+<center><img src="/img/Linux运维——系统安全与优化/2.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<p>&emsp;&emsp;除此以外，我们也可以使用getent命令进行用户账号和组账号的查看</p>
+<figure class="highlight axapta"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs axapta">getent passwd<br>getent <span class="hljs-keyword">group</span><br></code></pre></td></tr></table></figure>
+
+<p>&emsp;&emsp;效果与前两命令一致</p>
+<ul>
+<li><h5 id="服务运行定期检查"><a href="#服务运行定期检查" class="headerlink" title="服务运行定期检查"></a>服务运行定期检查</h5></li>
+</ul>
+<p>&emsp;&emsp;除此之外，我们还需要定期查看服务运行情况，执行最小化安装的原则，定期给本机系统打补丁，我们可以执行</p>
+<figure class="highlight dsconfig"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs dsconfig"><span class="hljs-string">systemctl</span> <span class="hljs-built_in">list-units</span> <span class="hljs-built_in">--type=service</span><br></code></pre></td></tr></table></figure>
+
+<p>&emsp;&emsp;这个命令将列出所有正在运行的服务及其状态。每个服务都有一个单位，它可以是一个服务文件或者一个系统初始脚本。</p>
+<center><img src="/img/Linux运维——系统安全与优化/3.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<ul>
+<li><h5 id="防止单用户破解"><a href="#防止单用户破解" class="headerlink" title="防止单用户破解"></a>防止单用户破解</h5></li>
+</ul>
+<p>&emsp;&emsp;对于防止单用户模式下的破解，我们可以通过配置GRUB口令实现，其实现的主要步骤如下：</p>
+<p>&emsp;&emsp;首先打开终端，使用root权限登录系统</p>
+<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ebnf"><span class="hljs-attribute">su root</span><br></code></pre></td></tr></table></figure>
+
+<p>&emsp;&emsp;接下来编辑GRUB配置文件，大多数的centos系统中，GRUB的配置文件路径都为 /etc/default/grub</p>
+<figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs gradle">vi <span class="hljs-regexp">/etc/</span><span class="hljs-keyword">default</span>/grub<br></code></pre></td></tr></table></figure>
+
+<center><img src="/img/Linux运维——系统安全与优化/4.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<p>&emsp;&emsp;在打开的文件中找到GRUB_CMDLINE_LINUX行，并在引号内添加single参数。这将禁用单用户模式，比如修改前：</p>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ini"><span class="hljs-attr">GRUB_CMDLINE_LINUX</span>=<span class="hljs-string">&quot;rhgb quiet&quot;</span><br></code></pre></td></tr></table></figure>
+
+<p>&emsp;&emsp;修改后</p>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ini"><span class="hljs-attr">GRUB_CMDLINE_LINUX</span>=<span class="hljs-string">&quot;rhgb quiet single&quot;</span><br></code></pre></td></tr></table></figure>
+
+<ul>
+<li><h5 id="iptable加固"><a href="#iptable加固" class="headerlink" title="iptable加固"></a>iptable加固</h5></li>
+</ul>
+<p>&emsp;&emsp;我们可以通过iptable加固系统安全比如：执行最严苛开放策略，我们可以通过添加规则的方式进行，比如允许所有传入的HTTP流量（TCP端口80），可以使用以下命令</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs css">iptables -<span class="hljs-selector-tag">A</span> <span class="hljs-selector-tag">INPUT</span> -<span class="hljs-selector-tag">p</span> tcp <span class="hljs-attr">--dport</span> <span class="hljs-number">80</span> -j ACCEPT<br></code></pre></td></tr></table></figure>
+
+<p>&emsp;&emsp;也能够设置重要敏感端口不开放，比如要拒绝所有传入的SSH流量（TCP端口22）</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs css">iptables -<span class="hljs-selector-tag">A</span> <span class="hljs-selector-tag">INPUT</span> -<span class="hljs-selector-tag">p</span> tcp <span class="hljs-attr">--dport</span> <span class="hljs-number">22</span> -j DROP<br></code></pre></td></tr></table></figure>
+
+<p>&emsp;&emsp;我们还能够IP白名单限制方式访问，比如允许来自IP地址为192.168.0.100的主机访问SSH（TCP端口22）</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs css">iptables -<span class="hljs-selector-tag">A</span> <span class="hljs-selector-tag">INPUT</span> -<span class="hljs-selector-tag">p</span> tcp <span class="hljs-attr">--dport</span> <span class="hljs-number">22</span> -s <span class="hljs-number">192.168</span>.<span class="hljs-number">0.100</span> -j ACCEPT<br></code></pre></td></tr></table></figure>
+
+<p>&emsp;&emsp;确保规则已正确添加并生效。您可以使用iptables命令查看当前的规则列表，以确认是否存在针对白名单IP地址的允许规则和默认的拒绝规则</p>
+<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ebnf"><span class="hljs-attribute">iptables -L</span><br></code></pre></td></tr></table></figure>
+
+<center><img src="/img/Linux运维——系统安全与优化/5.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+
+
+<ul>
+<li><h5 id="Rootkit-Hunter扫描器"><a href="#Rootkit-Hunter扫描器" class="headerlink" title="Rootkit Hunter扫描器"></a>Rootkit Hunter扫描器</h5></li>
+</ul>
+<p>&emsp;&emsp;Rootkit Hunter是一种用于检测和识别系统中的rootkit、后门和潜在恶意软件的工具。它可以扫描系统文件、进程和隐藏的文件，以查找可能存在的安全问题，首先是安装</p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs cmake">yum <span class="hljs-keyword">install</span> rkhunter<br></code></pre></td></tr></table></figure>
+
+<center><img src="/img/Linux运维——系统安全与优化/6.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<p>&emsp;&emsp;更新Rootkit Hunter数据库：在运行扫描之前，您应该更新Rootkit Hunter的数据库，以确保它包含最新的检测规则。您可以使用以下命令更新数据库</p>
+<figure class="highlight n1ql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs n1ql">sudo rkhunter –<span class="hljs-keyword">update</span><br></code></pre></td></tr></table></figure>
+
+<center><img src="/img/Linux运维——系统安全与优化/7.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<p>&emsp;&emsp;运行Rootkit Hunter进行系统扫描：</p>
+<figure class="highlight ada"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ada">sudo rkhunter <span class="hljs-comment">--check</span><br></code></pre></td></tr></table></figure>
+
+<center><img src="/img/Linux运维——系统安全与优化/8.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<p>&emsp;&emsp;这里需要注意的是Rootkit Hunter作为一种安全工具，不能保证100%的安全性。它可以帮助您发现一些常见的安全问题，但并不是绝对可靠的。建议将Rootkit Hunter与其他安全工具和最佳实践结合使用，以确保系统的安全性</p>
+<ul>
+<li><h5 id="警惕rm命令"><a href="#警惕rm命令" class="headerlink" title="警惕rm命令"></a>警惕rm命令</h5></li>
+</ul>
+<p>&emsp;&emsp;使用rm命令删除文件时，确实需要谨慎操作。rm命令是用于删除文件和目录的强大工具，但它没有回收站或垃圾箱的概念，因此删除的文件将无法恢复，我们可以在仔细检查要删除的文件：在运行rm命令之前，确保要删除的是正确的文件或目录，这里可以使用ls命令预览要删除的内容。</p>
+<p>&emsp;&emsp;其次是使用-i选项：在运行rm命令时，可以添加-i选项，以便在删除每个文件之前进行确认提示。这样可以避免误删文件。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">rm</span> -i filename<br></code></pre></td></tr></table></figure>
+
+<center><img src="/img/Linux运维——系统安全与优化/9.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<p>&emsp;&emsp;这里也提醒了我们，要养成将重要数据进行备份的习惯，这样子即使发生意外，也可以从备份中恢复文件</p>
+<p>&emsp;</p>
+<h4 id="2-Openssh安全配置"><a href="#2-Openssh安全配置" class="headerlink" title="2.Openssh安全配置"></a>2.Openssh安全配置</h4><ul>
+<li><h5 id="禁止root用户登录"><a href="#禁止root用户登录" class="headerlink" title="禁止root用户登录"></a>禁止root用户登录</h5></li>
+</ul>
+<p>&emsp;&emsp;可以通过在ssh配置文件中设置只允许普通用户登录，开发人员费必要不的使用root登录即可</p>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs nginx"><span class="hljs-attribute">PermitRootLogin</span> <span class="hljs-literal">no</span>  <br></code></pre></td></tr></table></figure>
+
+<center><img src="/img/Linux运维——系统安全与优化/10.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<ul>
+<li><h5 id="限制SSH验证重试次数"><a href="#限制SSH验证重试次数" class="headerlink" title="限制SSH验证重试次数"></a>限制SSH验证重试次数</h5></li>
+</ul>
+<p>&emsp;&emsp;通过限制验证次数，能够在一定程度上防止爆破问题的产生，比如设置超过3次socket连接会断开</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">MaxAuthTries</span> <span class="hljs-number">3</span><br></code></pre></td></tr></table></figure>
+
+<center><img src="/img/Linux运维——系统安全与优化/11.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<ul>
+<li><h5 id="禁用相关的登录方式"><a href="#禁用相关的登录方式" class="headerlink" title="禁用相关的登录方式"></a>禁用相关的登录方式</h5></li>
+</ul>
+<p>&emsp;&emsp;有些ssh登录验证并不完全安全，也会有一定的风险，比如账号密码登录能够被破解，所以我们可以有选择性的去设置我们自己符合场景的验证方式</p>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs nginx"><span class="hljs-attribute">PasswordAuthentication</span> <span class="hljs-literal">no</span><br>PubkeyAuthentication <span class="hljs-literal">yes</span><br></code></pre></td></tr></table></figure>
+
+<center><img src="/img/Linux运维——系统安全与优化/12.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<ul>
+<li>自定义默认ssh端口</li>
+</ul>
+<p>&emsp;&emsp;恶意用户通常会使用自动化工具扫描常见的默认SSH端口（如22），以寻找易受攻击的系统。通过将SSH端口更改为非默认端口，可以减少这些扫描攻击的数量，因为攻击者无法轻易确定我们的实际SSH端口</p>
+<p>&emsp;&emsp;在配置文件中查找名为”Port”的行，默认情况下，该行通常被注释掉（以”#”开头）。取消注释并将端口号更改为想要使用的自定义端口号即可。这里要确保选择一个未被其他服务使用的端口号。</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">Port</span> <span class="hljs-number">2222</span><br></code></pre></td></tr></table></figure>
+
+<p>&emsp;&emsp;当然，除此之外我们还需要配置防火墙允许指定自定义端口号进行连接</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs css">#添加新的SSH端口到防火墙规则<br>iptables -<span class="hljs-selector-tag">A</span> <span class="hljs-selector-tag">INPUT</span> -<span class="hljs-selector-tag">p</span> tcp <span class="hljs-attr">--dport</span> <span class="hljs-number">2222</span> -j ACCEPT<br><br>#确认新的SSH端口是否已添加到防火墙规则<br>iptables -L -n<br></code></pre></td></tr></table></figure>
+
+<center><img src="/img/Linux运维——系统安全与优化/13.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<p>&emsp;&emsp;此外可以安装一个DenyHosts，这是一个用于防止SSH暴力破解攻击的工具。它可以监视系统上的SSH登录尝试，并根据配置的规则来自动阻止恶意IP地址。与此工具类似的还有sshguard和fail2ban等工具，DenyHosts是一个python编写的脚本</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs awk">wget https:<span class="hljs-regexp">//gi</span>thub.com<span class="hljs-regexp">/denyhosts/</span>denyhosts<span class="hljs-regexp">/archive/</span>v2.<span class="hljs-number">10</span>.tar.gz<br>tar xf v2.<span class="hljs-number">10</span>.tar.gz<br>cd denyhosts-<span class="hljs-number">2.10</span><br>python setup.py install<br></code></pre></td></tr></table></figure>
+
+<center><img src="/img/Linux运维——系统安全与优化/14.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<p>&emsp;&emsp;其相关配置主要是在denyhosts.conf</p>
+<center><img src="/img/Linux运维——系统安全与优化/15.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<ul>
+<li><h5 id="禁止ssh端口映射"><a href="#禁止ssh端口映射" class="headerlink" title="禁止ssh端口映射"></a>禁止ssh端口映射</h5></li>
+</ul>
+<p>&emsp;&emsp;禁止使用SSH映射Socks5访问外国网站等等</p>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs nginx"><span class="hljs-attribute">AllowTcpForwarding</span> <span class="hljs-literal">no</span><br></code></pre></td></tr></table></figure>
+
+<p>&emsp;&emsp;在某些情况下，我们可能希望禁止TCP转发以增强安全性。例如，担心用户滥用TCP转发功能，或者希望限制用户对特定网络资源的访问，禁用TCP转发可能是一个好的选择。</p>
+<ul>
+<li><h5 id="ip地址限制"><a href="#ip地址限制" class="headerlink" title="ip地址限制"></a>ip地址限制</h5></li>
+</ul>
+<p>&emsp;&emsp;在ssh远程连接时，我们可以通过黑白名单的办法修改hosts.allow和hosts.deny的相关操作</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-comment">#白名单文件</span><br><span class="hljs-attribute">vim</span> /etc/hosts.<span class="hljs-literal">allow</span><br><span class="hljs-comment">#只允许通过两个ip主机的ssh访问</span><br><span class="hljs-attribute">sshd</span>:<span class="hljs-number">192.168.2.1</span>,<span class="hljs-number">192.168.2.2</span><br><span class="hljs-comment"># 黑名单文件</span><br><span class="hljs-attribute">vim</span> /etc/hosts.<span class="hljs-literal">deny</span><br><span class="hljs-comment">#禁止所有人访问本机</span><br><span class="hljs-attribute">sshd</span>:<span class="hljs-literal">ALL</span><br></code></pre></td></tr></table></figure>
+
+<center><img src="/img/Linux运维——系统安全与优化/16.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<ul>
+<li><h5 id="Bash审计"><a href="#Bash审计" class="headerlink" title="Bash审计"></a>Bash审计</h5></li>
+</ul>
+<p>&emsp;&emsp;要记录SSH终端中的Bash操作，可以使用Bash会话审计功能。这将允许我们记录用户在SSH终端中执行的命令和操作，我们可以编辑/etc/bash.bashrc或者是/etc/bashrc文件，并添加相应的配置</p>
+<figure class="highlight julia"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs julia"><span class="hljs-comment"># 设置审计日志文件路径</span><br><span class="hljs-keyword">export</span> PROMPT_COMMAND=&#x27;RETRN_VAL=$?;logger -p local6.debug <span class="hljs-string">&quot;<span class="hljs-subst">$(whoami)</span> [$$]: <span class="hljs-subst">$(history <span class="hljs-number">1</span> | sed <span class="hljs-string">&quot;s/^[ ]*[0-9]\+[ ]*//&quot;</span>)</span> [<span class="hljs-variable">$RETRN_VAL</span>]&quot;</span>&#x27;<br></code></pre></td></tr></table></figure>
+
+<p>&emsp;&emsp;接下来，可以使用grep命令结合关键字来搜索审计日志文件，例如/var/log/secure或/var/log/auth.log，具体取决于我们的系统</p>
+<figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs gradle"><span class="hljs-keyword">grep</span> <span class="hljs-string">&quot;KEY&quot;</span> <span class="hljs-regexp">/var/</span>log/secure<br></code></pre></td></tr></table></figure>
+
+<p>&emsp;&emsp;或者查询用户名作为过滤条件</p>
+<figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs gradle"><span class="hljs-keyword">grep</span> <span class="hljs-string">&quot;USERNAME&quot;</span> <span class="hljs-regexp">/var/</span>log/secure<br></code></pre></td></tr></table></figure>
+
+<p>&emsp;&emsp;通过这些操作，我们能够在Bash会话审计日志中定位到key或者是某个用户的操作</p>
+<p>&emsp;</p>
+<h4 id="3-MYSQL安全配置"><a href="#3-MYSQL安全配置" class="headerlink" title="3. MYSQL安全配置"></a>3. MYSQL安全配置</h4><ul>
+<li><h5 id="设置相关权限和属主"><a href="#设置相关权限和属主" class="headerlink" title="设置相关权限和属主"></a>设置相关权限和属主</h5></li>
+</ul>
+<p>&emsp;&emsp;对于mysql安装目录，确保权限和属主设置正确非常重要。这可以提高系统的安全性和稳定性，通常情况下，mysql的安装目录位于/var/lib/mysql或/usr/local/mysql，当然使用编译安装我们可以指定一个安装目录位置，接下来我们操作指令查看相关信息</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs awk"><span class="hljs-comment">#检查当前MySQL安装目录的权限和属主</span><br>ls -ld <span class="hljs-regexp">/var/</span>lib/mysql<br><span class="hljs-comment">#属主不正确，可以使用chown命令更改属主</span><br>chown -R mysql:mysql <span class="hljs-regexp">/var/</span>lib/mysql<br><span class="hljs-comment">#设置正确的权限，推荐的权限设置是700</span><br>chmod <span class="hljs-number">700</span> <span class="hljs-regexp">/var/</span>lib/mysql<br></code></pre></td></tr></table></figure>
+
+<p>&emsp;&emsp;这将确保只有MySQL用户（属主）可以访问该目录，能够有效的提高系统的安全性</p>
+<center><img src="/img/Linux运维——系统安全与优化/17.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<ul>
+<li><h5 id="限制远程访问MYSQL"><a href="#限制远程访问MYSQL" class="headerlink" title="限制远程访问MYSQL"></a>限制远程访问MYSQL</h5></li>
+</ul>
+<p>&emsp;&emsp;一般不允许用户远程直接访问数据库，如果有访问需要，建议使用navicat通过SSH隧道访问，或者按规范配置phpmyadmin</p>
+<p>&emsp;&emsp;这里的限制ip地址访问可以仿照ssh的相关配置，也是在hosts.allow中去添加：</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">mysqld</span>： <span class="hljs-number">127.0.0.1</span><br></code></pre></td></tr></table></figure>
+
+<center><img src="/img/Linux运维——系统安全与优化/18.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<p>&emsp;&emsp;这将限制只有本地IP地址可以访问MySQL，也可以通过SSH隧道连接到MySQL数据库。在Navicat中，创建一个新的数据库连接，并使用本地端口作为主机地址。</p>
+<ul>
+<li><h5 id="设置加密通道"><a href="#设置加密通道" class="headerlink" title="设置加密通道"></a>设置加密通道</h5></li>
+</ul>
+<p>&emsp;&emsp;对于MySQL的异地备份和异地从库连接，设置加密通道是一个很好的安全实践。通过使用加密通道，可以确保数据在传输过程中得到保护，防止被未经授权的人员截获或篡改，一般有以下这几种设置加密通道的方法：</p>
+<p>&emsp;&emsp;使用SSL/TLS：MySQL支持使用SSL/TLS来加密客户端与服务器之间的通信。生成自签名证书或购买可信任的证书，并将其配置到MySQL服务器和客户端上。这样可以确保数据在传输过程中得到加密保护。</p>
+<p>&emsp;&emsp;配置SSH隧道：使用SSH隧道来加密MySQL的连接。通过在本地机器和远程机器之间建立SSH连接，并将MySQL的连接通过该SSH连接进行转发，可以实现加密通信。</p>
+<p>&emsp;&emsp;使用VPN：如果您有一个虚拟私有网络（VPN），可以通过在VPN上建立连接来加密MySQL的通信。这样可以确保数据在通过公共网络传输时得到保护。</p>
+<p>&emsp;&emsp;这里以ssh隧道作为举例，使用SSH隧道来加密MySQL连接是一种常见的方法，首先我们在本地机器上打开终端或命令提示符，并使用以下命令建立SSH连接</p>
+<figure class="highlight bnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bnf">ssh -L <span class="hljs-attribute">&lt;本地端口&gt;</span>:<span class="hljs-attribute">&lt;MySQL服务器IP&gt;</span>:<span class="hljs-attribute">&lt;MySQL端口&gt;</span> <span class="hljs-attribute">&lt;SSH用户名&gt;</span>@<span class="hljs-attribute">&lt;SSH服务器IP&gt;</span><br></code></pre></td></tr></table></figure>
+
+<p>&emsp;&emsp;输入SSH服务器的密码并登录，ssh连接成功后，我们就可以通过本地机器上的相应端口访问mysql服务器了，例如五年本地端口设定为了3307，则可以使用命令连接mysql服务器：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs css">mysql -h localhost -<span class="hljs-selector-tag">P</span> <span class="hljs-number">3307</span> -u &lt;MySQL用户名&gt; -<span class="hljs-selector-tag">p</span><br></code></pre></td></tr></table></figure>
+
+<center><img src="/img/Linux运维——系统安全与优化/19.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<ul>
+<li><h5 id="设置连接上限"><a href="#设置连接上限" class="headerlink" title="设置连接上限"></a>设置连接上限</h5></li>
+</ul>
+<p>&emsp;&emsp;设置MySQL合理的连接上限能够保证数据库的稳定性，这是通过修改MySQL服务器的配置文件来实现</p>
+<p>&emsp;&emsp;在配置文件中找到名为[mysqld]的部分，添加相关命令</p>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ini"><span class="hljs-attr">max_connections</span>=&lt;连接上限&gt;<br></code></pre></td></tr></table></figure>
+
+<center><img src="/img/Linux运维——系统安全与优化/20.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<p>&emsp;&emsp;这样子我们mysql的连接上线就是10了（a是打多了的），需要注意增加连接上限可能会对服务器的性能产生影响。确保评估了服务器的硬件资源和负载情况，并根据需要进行适当的调整，设置合理的连接上限</p>
+<ul>
+<li><h5 id="开启mysql-binlog"><a href="#开启mysql-binlog" class="headerlink" title="开启mysql binlog"></a>开启mysql binlog</h5></li>
+</ul>
+<p>&emsp;&emsp;二进制日志（binlog）在MySQL中起着重要的作用。它是一种记录数据库中所有数据更改操作的日志文件。其开启也是在配置文件中设置相关指令：</p>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ini"><span class="hljs-attr">log_bin</span>=&lt;日志文件名&gt;<br></code></pre></td></tr></table></figure>
+
+<p>&emsp;&emsp;如果我们需要设置二进制日志的位置，就可以输入;</p>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ini"><span class="hljs-attr">log_bin_index</span>=&lt;索引文件名&gt;<br></code></pre></td></tr></table></figure>
+
+<center><img src="/img/Linux运维——系统安全与优化/21.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<ul>
+<li><h5 id="LINUX-IO调度"><a href="#LINUX-IO调度" class="headerlink" title="LINUX IO调度"></a>LINUX IO调度</h5></li>
+</ul>
+<p>&emsp;&emsp;在Linux中，IO调度器是负责管理磁盘IO请求的组件之一。Deadline IO调度器是其中一种常见的调度算法。它的目标是通过优化IO请求的排序和处理方式来提高系统的性能和响应能力。</p>
+<p>&emsp;&emsp;对于文件系统的选择，XFS和ext4都是常见的Linux文件系统。它们各自有不同的特点和适用场景。而关闭atime是一种优化技术，它可以减少文件系统的IO操作。atime记录了文件的最后访问时间，但这个信息并不总是必要的。关闭atime可以减少对文件系统的写入操作，从而提高性能。我们可以通过指令确认系统是否已经安装了deadline IO调度器</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs awk">lsblk<br>cat <span class="hljs-regexp">/sys/</span>block<span class="hljs-regexp">/&lt;device&gt;/</span>queue/scheduler<br></code></pre></td></tr></table></figure>
+
+<center><img src="/img/Linux运维——系统安全与优化/22.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<p>&emsp;&emsp;如果输出中包含”deadline”字样，则表示系统已经使用了deadline IO调度器，我们这里明显输出认证了我们使用了这种调度器，如果没有使用的话，则可以执行以下命令进行切换：</p>
+<figure class="highlight arcade"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs arcade">echo deadline &gt; <span class="hljs-regexp">/sys/</span>block/&lt;device&gt;<span class="hljs-regexp">/queue/</span>scheduler<br></code></pre></td></tr></table></figure>
+
+<p>&emsp;&emsp;另外，要关闭atime的话，我们需要再挂载的文件系统下使用相应的选项，对于ext4文件系统，可以在/etc/fstab文件中找到相应的挂载选项，并将noatime添加到选项列表中。对于XFS文件系统，则可以使用-o noatime选项来挂载</p>
+<ul>
+<li><h5 id="第三方库的定期审查"><a href="#第三方库的定期审查" class="headerlink" title="第三方库的定期审查"></a>第三方库的定期审查</h5></li>
+</ul>
+<p>&emsp;&emsp;在我们使用mysql的过程中，我们往往会利用到第三方库的相关扩展和利用，因此我们需要时时关注链接第三方库是否存在漏洞</p>
+<figure class="highlight gauss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs gauss"><span class="hljs-meta">#显示MySQL服务器上已加载的所有插件和扩展</span><br><span class="hljs-keyword">SHOW</span> PLUGINS;<br><span class="hljs-meta">#查看特定插件的详细信息</span><br><span class="hljs-keyword">SHOW</span> PLUGIN &lt;plugin_name&gt;;<br></code></pre></td></tr></table></figure>
+
+<center><img src="/img/Linux运维——系统安全与优化/23.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<p>&emsp;&emsp;因此为了确保应用程序的安全性，建议定期检查并更新所有使用的第三方库，并遵循最佳实践来保护应用程序免受已知的安全威胁</p>
+<ul>
+<li><h5 id="数据库对应用户"><a href="#数据库对应用户" class="headerlink" title="数据库对应用户"></a>数据库对应用户</h5></li>
+</ul>
+<p>&emsp;&emsp;对不同应用的数据库设置不同的用户使用，保证正确、合理的授权</p>
+<center><img src="/img/Linux运维——系统安全与优化/24.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<ul>
+<li><h5 id="配置备份策略"><a href="#配置备份策略" class="headerlink" title="配置备份策略"></a>配置备份策略</h5></li>
+</ul>
+<p>&emsp;&emsp;备份数据的最终目的是为了在出现一些意外情况的时，能够通过备份将数据还原，所以在备份数据库时，除了备份数据本身以外，也要注意到备份相关的数据库性感环境，如配置文件，定时任务，sudo权限等相关信息</p>
+<p>&emsp;&emsp;前面有讲述mysql备份的相关文章，这里就不进行更多的阐述了，需要知道的是一般的备份策略为：主从备份+定时备份+异地备份</p>
+<center><img src="/img/Linux运维——系统安全与优化/25.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<p>&emsp;</p>
+<h4 id="4-Shell安全配置"><a href="#4-Shell安全配置" class="headerlink" title="4.Shell安全配置"></a>4.Shell安全配置</h4><p>&emsp;&emsp;Shell的安全配置是指对操作系统中的shell进行设置和调整，以提高系统的安全性。Shell是用户与操作系统之间进行交互的界面，因此其安全配置非常重要</p>
+<ul>
+<li><h5 id="history文件"><a href="#history文件" class="headerlink" title=".history文件"></a>.history文件</h5></li>
+</ul>
+<p>&emsp;&emsp;通过~/.bash_history文件记录系统管理员的操作记录，定制.bash_history格式</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">vim ~/.bash_history<br></code></pre></td></tr></table></figure>
+
+<center><img src="/img/Linux运维——系统安全与优化/26.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">history</span> | <span class="hljs-built_in">head</span><br></code></pre></td></tr></table></figure>
+
+<center><img src="/img/Linux运维——系统安全与优化/27.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<ul>
+<li><h5 id="日志记录功能"><a href="#日志记录功能" class="headerlink" title="日志记录功能"></a>日志记录功能</h5></li>
+</ul>
+<p>&emsp;&emsp;CentOS通常使用rsyslog作为默认的日志记录服务。您可以查看/etc/rsyslog.conf文件以了解当前的配置</p>
+<p>&emsp;&emsp;在rsyslog.conf文件中，找到与shell活动和登录尝试相关的规则，并确保它们被正确配置。这些规则通常涉及auth、authpriv或security等设施。我们可以指定将这些日志记录到特定的文件中，如/var/log/secure，然后重新启动rsyslog服务以使更改生效</p>
+<figure class="highlight maxima"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs maxima">systemctl <span class="hljs-built_in">restart</span> rsyslog<br>systemctl <span class="hljs-built_in">status</span> rsyslog<br></code></pre></td></tr></table></figure>
+
+<p>&emsp;&emsp;一旦日志记录功能启用，就可以定期审查和监控生成的日志文件/var/log/secure</p>
+<center><img src="/img/Linux运维——系统安全与优化/28.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<p>&emsp;</p>
+<h4 id="5-防火墙安全配置"><a href="#5-防火墙安全配置" class="headerlink" title="5.防火墙安全配置"></a>5.防火墙安全配置</h4><ul>
+<li><h5 id="禁止跳板机"><a href="#禁止跳板机" class="headerlink" title="禁止跳板机"></a>禁止跳板机</h5></li>
+</ul>
+<p>&emsp;&emsp;所谓跳板机就是用户首先登录任意一台服务器后，由该服务器再登录另外一台服务器，我们可以通过封锁22等端口，避免相互跳转</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs css">iptables -<span class="hljs-selector-tag">A</span> OUTPUT -<span class="hljs-selector-tag">p</span> tcp -m multiport <span class="hljs-attr">--dports</span> <span class="hljs-number">22</span>,<span class="hljs-number">21</span>,<span class="hljs-number">873</span> -j REJECT<br>/etc/init<span class="hljs-selector-class">.d</span>/iptables save<br>iptables -L -n<br></code></pre></td></tr></table></figure>
+
+<p>&emsp;&emsp;web 服务器禁止使用ssh，作为跳板机，而用户也将不能使用ssh命令登陆到其他电脑，这里需要注意的是在某些系统中，/etc/init.d/iptables文件可能不存在。如果您想保存iptables规则，请尝试使用以下命令：</p>
+<figure class="highlight arcade"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs arcade">iptables-save &gt; <span class="hljs-regexp">/etc/i</span>ptables/rules.v4<br></code></pre></td></tr></table></figure>
+
+<center><img src="/img/Linux运维——系统安全与优化/29.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<ul>
+<li><h5 id="封锁特定字符串"><a href="#封锁特定字符串" class="headerlink" title="封锁特定字符串"></a>封锁特定字符串</h5></li>
+</ul>
+<p>&emsp;&emsp;防火墙封锁特定字符串的目的是为了增强网络安全和保护系统免受潜在的威胁。通过检测和阻止包含特定字符串的请求或数据包，防火墙可以帮助防止恶意行为、攻击和滥用。封锁特定字符串的常见应用场景之一是防止爬虫或机器人对网站进行未经授权的访问</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs css">iptables -<span class="hljs-selector-tag">A</span> <span class="hljs-selector-tag">INPUT</span> -<span class="hljs-selector-tag">p</span> tcp <span class="hljs-attr">--dport</span> <span class="hljs-number">80</span> -m string <span class="hljs-attr">--algo</span> bm <span class="hljs-attr">--string</span> &quot;Spider&quot; -j DROP<br>iptables -<span class="hljs-selector-tag">A</span> <span class="hljs-selector-tag">INPUT</span> -<span class="hljs-selector-tag">p</span> tcp <span class="hljs-attr">--dport</span> <span class="hljs-number">80</span> -m string <span class="hljs-attr">--algo</span> bm <span class="hljs-attr">--string</span> &quot;Baidu&quot; -j DROP<br>iptables -<span class="hljs-selector-tag">A</span> <span class="hljs-selector-tag">INPUT</span> -<span class="hljs-selector-tag">p</span> tcp <span class="hljs-attr">--dport</span> <span class="hljs-number">80</span> -m string <span class="hljs-attr">--algo</span> bm <span class="hljs-attr">--string</span> &quot;Robat&quot; -j DROP<br>iptables -L -n<br></code></pre></td></tr></table></figure>
+
+<center><img src="/img/Linux运维——系统安全与优化/30.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<p>&emsp;&emsp;这些iptables规则用于在端口80上阻止包含特定字符串的HTTP请求。具体来说，它们使用-m string模块和Boyer-Moore算法来匹配字符串，并使用-j DROP将匹配的请求丢弃。第一条规则将包含”Spider”字符串的HTTP请求丢弃。第二条规则将包含”Baidu”字符串的HTTP请求丢弃。第三条规则将包含”Robat”字符串的HTTP请求丢弃</p>
+<p>&emsp;</p>
+<h4 id="6-浅谈DDoS攻击"><a href="#6-浅谈DDoS攻击" class="headerlink" title="6.浅谈DDoS攻击"></a>6.浅谈DDoS攻击</h4><p>&emsp;&emsp;DDoS 即是分布式拒绝服务攻击这种网络攻击形式尝试用恶意流量淹没网站或网络资源，从而导致网站或网络资源无法正常运行，攻击者利用大量遭遇入侵的机器和接入互联网的设备向目标发送大量流量。这些设备有物联网 (IoT) 设备、智能手机、个人电脑和网络服务器等等</p>
+<ul>
+<li><h5 id="DDoS的攻击方式"><a href="#DDoS的攻击方式" class="headerlink" title="DDoS的攻击方式"></a>DDoS的攻击方式</h5></li>
+</ul>
+<p>&emsp;&emsp;一般而言，DDoS攻击针对的是网络中的TCP/IP基础设施，分为了许多不同的类型，，攻击者经常混合使用多种攻击来给目标造成严重破坏。三种关键类型是容积攻击、协议攻击和应用层攻击。所有攻击的目的都是为了严重拖慢合法流量的速度，或者阻止合法流量到达其预定目的地。</p>
+<center><img src="/img/Linux运维——系统安全与优化/31.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<ul>
+<li><h5 id="DDoS的攻击类型"><a href="#DDoS的攻击类型" class="headerlink" title="DDoS的攻击类型"></a>DDoS的攻击类型</h5></li>
+</ul>
+<p>&emsp;&emsp;可以根据攻击的方式和目标进行更详细的了解</p>
+<p>&emsp;&emsp;带宽消耗型攻击：</p>
+<figure class="highlight dos"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs dos">UDP Flood：攻击者发送大量的UDP数据包到目标服务器，占用其带宽资源。<br><br>ICMP Flood：攻击者发送大量的ICMP <span class="hljs-built_in">Echo</span>请求（<span class="hljs-built_in">ping</span>）到目标服务器，使其无法正常响应合法请求。<br><br>HTTP Flood：攻击者发送大量的HTTP请求到目标服务器，耗尽其带宽和处理能力。<br></code></pre></td></tr></table></figure>
+
+<p>&emsp;&emsp;资源消耗型攻击：</p>
+<figure class="highlight dos"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs dos">SYN/ACK Flood：攻击者伪造大量的源IP地址，向目标服务器发送大量的SYN请求，但不发送ACK确认，导致服务器资源耗尽。<br><br><span class="hljs-built_in">Ping</span> of Death：攻击者发送异常大的ICMP <span class="hljs-built_in">Echo</span>请求（<span class="hljs-built_in">ping</span>），超过目标系统的处理能力，导致系统崩溃或变得不可用。<br><br>Slowloris：攻击者利用HTTP协议的特性，通过发送大量的部分请求并保持连接打开，耗尽目标服务器的资源。<br><br></code></pre></td></tr></table></figure>
+
+<p>&emsp;&emsp;应用层攻击：</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs routeros">HTTP POST请求攻击：攻击者发送大量的POST请求到目标服务器上的特定URL，使其无法处理其他合法请求。<br><span class="hljs-built_in"></span><br><span class="hljs-built_in">DNS </span>Amplification：攻击者利用DNS服务器的放大效应，向目标发送小型DNS查询请求，但响应会被放大成更大的数据包，占用目标带宽。<br><br>SSL/TLS握手攻击：攻击者发起大量的SSL/TLS握手请求，消耗目标服务器的计算资源。<br>分布式反射放大攻击：<br><span class="hljs-built_in"></span><br><span class="hljs-built_in">DNS </span>Amplification：攻击者伪造源IP地址，向开放的DNS服务器发送小型DNS查询请求，但响应会被放大成更大的数据包，占用目标带宽。<br><span class="hljs-built_in"></span><br><span class="hljs-built_in">NTP </span>Amplification：攻击者伪造源IP地址，向开放的NTP服务器发送小型NTP查询请求，但响应会被放大成更大的数据包，占用目标带宽。<br></code></pre></td></tr></table></figure>
+
+<ul>
+<li><h5 id="如何应对DDoS攻击"><a href="#如何应对DDoS攻击" class="headerlink" title="如何应对DDoS攻击"></a>如何应对DDoS攻击</h5></li>
+</ul>
+<p>&emsp;&emsp;高防服务器：</p>
+<p>&emsp;&emsp;高防服务器一般主要是指能够独立防御50Gbps以上的强大服务器，能够帮助网站进行抵抗拒绝服务攻击，并能够定期扫描网络主节点，要收费</p>
+<p>&emsp;&emsp;DDoS清洗：</p>
+<p>&emsp;&emsp;也就是对用户请求数据进行实时监控，及时发现DOS攻击等异常流量，在不影响正常业务开展的情况下清洗掉这些异常流量</p>
+<p>&emsp;&emsp;CDN 加速：</p>
+<p>&emsp;&emsp;利用CDN 服务将网站访问流量分配到了各个节点中，即能隐藏网站的真实 IP，也能在遭遇 DDoS 攻击时，将流量分散到各个节点中，防止源站崩溃</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Linux%E8%BF%90%E7%BB%B4/" class="category-chain-item">Linux运维</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>系统安全与优化</div>
+      <div>https://one-null-pointer.github.io/2023/07/05/Linux运维——系统安全与优化/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>Author</div>
+          <div>liaoyue</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>Posted on</div>
+          <div>July 5, 2023</div>
+        </div>
+      
+      
+      <div class="license-meta-item">
+        <div>传送口</div>
+        <div>
+          
+            
+            
+              <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+              <span class="hint--top hint--rounded" aria-label="点击进行传送">
+                <i class="iconfont icon-by"></i>
+              </span>
+              </a>
+            
+          
+        </div>
+      </div>
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2023/07/21/WEBtools%E2%80%94%E2%80%94Nmap/" title="WEBtools——Nmap">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">WEBtools——Nmap</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2023/06/20/Linux%E8%BF%90%E7%BB%B4%E2%80%94%E2%80%94linux%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0%E8%B7%AF%E7%94%B1%E8%BD%AC%E5%8F%91%E5%8A%9F%E8%83%BD/" title="系统实现路由转发功能">
+                        <span class="hidden-mobile">系统实现路由转发功能</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;Table of Contents</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">Keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://github.com/" target="_blank" rel="nofollow noopener"><span>pointer</span></a> <i class="iconfont icon-love"></i> <a href="https://mp.weixin.qq.com/s/6ncLUtaiJ9j_sMjZT5z-2w" target="_blank" rel="nofollow noopener"><span>一个爱学习的空指针</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      headingSelector : CONFIG.toc.headingSelector || 'h1,h2,h3,h4,h5,h6',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      collapseDepth   : CONFIG.toc.collapseDepth || 0,
+      scrollSmooth    : true,
+      headingsOffset  : -boardTop
+    });
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.10/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">Blog works best with JavaScript enabled</div>
+  </noscript>
+</body>
+</html>

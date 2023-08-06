@@ -1,0 +1,686 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="liaoyue">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="系统实现路由转发功能0.前言&amp;emsp;&amp;emsp;这里主要尝试实现在两个虚拟机系统中，一台虚拟机通过另外一台虚拟机当作网关来上网的功能（网关虚拟机下面简称为R，客户端虚拟机下面简称C） &amp;emsp; 1.编辑网卡&amp;emsp;&amp;emsp;首先需要设置一个自定义的内网网卡模式，让虚拟机C只有内网的连接，进入VM界面，点击编辑进入虚拟网络编辑界面    &amp;emsp;&amp;emsp;点击添加网络，添加出VM">
+<meta property="og:type" content="article">
+<meta property="og:title" content="系统实现路由转发功能">
+<meta property="og:url" content="https://one-null-pointer.github.io/2023/06/20/Linux%E8%BF%90%E7%BB%B4%E2%80%94%E2%80%94linux%E7%B3%BB%E7%BB%9F%E5%AE%9E%E7%8E%B0%E8%B7%AF%E7%94%B1%E8%BD%AC%E5%8F%91%E5%8A%9F%E8%83%BD/index.html">
+<meta property="og:site_name" content="one-null-poniter">
+<meta property="og:description" content="系统实现路由转发功能0.前言&amp;emsp;&amp;emsp;这里主要尝试实现在两个虚拟机系统中，一台虚拟机通过另外一台虚拟机当作网关来上网的功能（网关虚拟机下面简称为R，客户端虚拟机下面简称C） &amp;emsp; 1.编辑网卡&amp;emsp;&amp;emsp;首先需要设置一个自定义的内网网卡模式，让虚拟机C只有内网的连接，进入VM界面，点击编辑进入虚拟网络编辑界面    &amp;emsp;&amp;emsp;点击添加网络，添加出VM">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://one-null-pointer.github.io/img/Linux.png">
+<meta property="article:published_time" content="2023-06-20T03:29:07.000Z">
+<meta property="article:modified_time" content="2023-08-06T06:43:09.661Z">
+<meta property="article:author" content="liaoyue">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://one-null-pointer.github.io/img/Linux.png">
+  
+  
+  
+  <title>系统实现路由转发功能 - one-null-poniter</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"one-null-pointer.github.io","root":"/","version":"1.9.2","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 5.4.2"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>one null pointer</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                吾
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                學
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                類
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="系统实现路由转发功能"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2023-06-20 11:29" pubdate>
+          June 20, 2023 am
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          2.9k words
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          25 mins
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">系统实现路由转发功能</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="系统实现路由转发功能"><a href="#系统实现路由转发功能" class="headerlink" title="系统实现路由转发功能"></a>系统实现路由转发功能</h1><h4 id="0-前言"><a href="#0-前言" class="headerlink" title="0.前言"></a>0.前言</h4><p>&emsp;&emsp;这里主要尝试实现在两个虚拟机系统中，一台虚拟机通过另外一台虚拟机当作网关来上网的功能（网关虚拟机下面简称为R，客户端虚拟机下面简称C）</p>
+<p>&emsp;</p>
+<h4 id="1-编辑网卡"><a href="#1-编辑网卡" class="headerlink" title="1.编辑网卡"></a>1.编辑网卡</h4><p>&emsp;&emsp;首先需要设置一个自定义的内网网卡模式，让虚拟机C只有内网的连接，进入VM界面，点击编辑进入虚拟网络编辑界面</p>
+<center><img src="/img/Linux运维——系统实现路由转发功能/1.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<p>&emsp;&emsp;点击添加网络，添加出VMnet2，设置为仅主机模式，子网ip这里设置为192.168.32.0,子网掩码是255.255.255.0</p>
+<p>&emsp;</p>
+<h4 id="2-设置网卡"><a href="#2-设置网卡" class="headerlink" title="2.设置网卡"></a>2.设置网卡</h4><p>&emsp;&emsp;首先建立两个虚拟机</p>
+<center><img src="/img/Linux运维——系统实现路由转发功能/2.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<p>&emsp;&emsp;虚拟机R为网卡代理虚拟机，虚拟机C为客户端，点击虚拟机R进行虚拟机设置</p>
+<center><img src="/img/Linux运维——系统实现路由转发功能/3.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<p>&emsp;&emsp;点击网络适配器，连接外网，设置为桥接模式或者是nat模式，这里都无所谓，能上网即可，网卡2连接为内网，设置为自定义，选择3.1所编辑好的VMnet2</p>
+<center><img src="/img/Linux运维——系统实现路由转发功能/4.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<p>&emsp;&emsp;上面已经设置好虚拟机R的相关网卡设置，接下来就是客户主机的网卡连接内网，同样的选择对应的虚拟机C，点击编辑虚拟机设置，将网络适配器改为配好的内网VMnet2</p>
+<p>&emsp;</p>
+<h4 id="3-ip配置"><a href="#3-ip配置" class="headerlink" title="3. ip配置"></a>3. ip配置</h4><p>&emsp;&emsp;通过3.2的步骤，我们已经成功实现了对于两台虚拟机的网卡部署和相关配制，接下里就是检验网卡的配置ip情况</p>
+<p>&emsp;&emsp;首先在虚拟机R中执行ifconfig命令</p>
+<center><img src="/img/Linux运维——系统实现路由转发功能/5.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<p>&emsp;&emsp;可以看到在虚拟机R的ip网卡中，ens33网卡的ip地址为192.168.70.173（这里需要提及一下，由于不习惯使用桥接模式，最终还是改为了nat模式进行连接），ens37网卡的ip地址未192.168.32.131，这说明我们虚拟机R的设置成功了</p>
+<p>&emsp;&emsp;接下来使用ping指令检查能否上网：</p>
+<center><img src="/img/Linux运维——系统实现路由转发功能/6.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<p>&emsp;&emsp;发送数据包成功，显然能够上网，接下来查看虚拟机C的配置情况</p>
+<center><img src="/img/Linux运维——系统实现路由转发功能/7.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<p>&emsp;&emsp;可以看到在虚拟机C的ip网卡中，ens33网卡的ip地址为192.168.32.128，这说明我们虚拟机C的设置成功了</p>
+<p>&emsp;&emsp;接下来依旧是使用ping指令检查能否上网：</p>
+<center><img src="/img/Linux运维——系统实现路由转发功能/8.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<p>&emsp;&emsp;显然是无连接的，这前期的ip搭建基本完毕了</p>
+<p>&emsp;</p>
+<h4 id="4-配置客户端网关和DNS"><a href="#4-配置客户端网关和DNS" class="headerlink" title="4.配置客户端网关和DNS"></a>4.配置客户端网关和DNS</h4><p>&emsp;&emsp;由于我们需要从客户端传过网关ip进行上网操作，所以这里客户端需要将网关配置为虚拟机R知道内网网卡ip地址，dns配置为114.114.114.114，首先是配置DNS</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs awk">vim   <span class="hljs-regexp">/etc/</span>resolv.conf<br>nameserver <span class="hljs-number">114.114</span>.<span class="hljs-number">114.114</span><br></code></pre></td></tr></table></figure>
+
+<center><img src="/img/Linux运维——系统实现路由转发功能/9.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<p>&emsp;&emsp;接下来配置网关，配置的忘光有两种做法，一种是临时的做法，使用route命令：</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs routeros">route <span class="hljs-built_in">add</span><span class="hljs-built_in"> default </span>gw 192.168.32.131 dev ens33<br></code></pre></td></tr></table></figure>
+
+<p>&emsp;&emsp;该指令就是将网关修改为192.168.32.131，但是这种修改是具有临时性的，当虚拟机重新启动或者网卡重新启动时，网关依旧会变更为原来的默认网关，还有一种做法就是永久性修改，修改/etc/sysconfig/ network-scripts/ifcfg-ens33文件（就是你对应的网卡文件，我这里是ens33）</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs awk">vim  <span class="hljs-regexp">/etc/</span>sysconfig<span class="hljs-regexp">/network-scripts/i</span>fcfg-ens33<br>GATEWAY=<span class="hljs-number">192.168</span>.<span class="hljs-number">32.131</span> <span class="hljs-comment">#设置本机连接的网关的IP地址</span><br></code></pre></td></tr></table></figure>
+
+<center><img src="/img/Linux运维——系统实现路由转发功能/10.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<p>&emsp;&emsp;按照实际情况加入网关主机的内网网卡ip地址即可</p>
+<p>&emsp;</p>
+<h4 id="5-设置路由转发"><a href="#5-设置路由转发" class="headerlink" title="5.设置路由转发"></a>5.设置路由转发</h4><p>&emsp;&emsp;这里的设置比较简单，就是打开相关的sysctl.conf文件，加入一行代码并执行即可：</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs stylus">vim /etc/sysctl<span class="hljs-selector-class">.conf</span><br>net<span class="hljs-selector-class">.ipv4</span><span class="hljs-selector-class">.ip_forward</span> = <span class="hljs-number">1</span><br>sysctl -p<br></code></pre></td></tr></table></figure>
+
+<center><img src="/img/Linux运维——系统实现路由转发功能/11.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<p>&emsp;&emsp;首先对于sysctl.conf，该文件包含了Linux系统的内核参数配置，net.ipv4.ip_forward = 1表示启用IPv4的IP转发功能，最后使用sysctl –p进行重新加载sysctl.conf文件中的配置，以使更改生效。执行该命令后，系统会自动应用新的内核参数配置，包括启用IP转发功能。启用IP转发功能后，Linux系统可以将收到的数据包转发到其他网络中。这也就是我们设置成网关主机中重要的一步</p>
+<p>&emsp;</p>
+<h4 id="6-使用iptable设置转发"><a href="#6-使用iptable设置转发" class="headerlink" title="6.使用iptable设置转发"></a>6.使用iptable设置转发</h4><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs css">iptables -t nat -<span class="hljs-selector-tag">A</span> POSTROUTING -o ens33 -j  MASQUERADE <br>iptables -<span class="hljs-selector-tag">A</span> FORWARD -<span class="hljs-selector-tag">i</span> ens37 -j ACCEPT<br></code></pre></td></tr></table></figure>
+
+<p>&emsp;&emsp;前一个命令会在iptables的nat表中添加一条POSTROUTING规则，用于对从ens33网卡出去的数据包进行NAT转换。具体来说，-o ens33表示匹配输出接口为ens33的数据包，-j MASQUERADE表示将源IP地址替换为本机的IP地址，并且动态分配端口号。这样可以实现网关的功能，后一个命令会在iptables的filter表中添加一条FORWARD规则，用于允许从ens37网卡进入的数据包通过Linux系统进行转发。具体来说，-i ens37表示匹配输入接口为ens37的数据包，-j ACCEPT表示允许这些数据包通过。</p>
+<p>&emsp;&emsp;设置完毕后，客户端的虚拟机C就可以上网了</p>
+<center><img src="/img/Linux运维——系统实现路由转发功能/12.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<p>&emsp;&emsp;使用ping的功能ping下百度，可恶，还是失败了，通过思考，大抵每一步都没有出错，除了对于网关的配置，网上的永久配置教学不一，有的是修改network文件，有的要求是修改对应网卡的配置文件，都有道理，我选择后者失败了，首先进行排错，这里采用暂时性的网关配置，也就是前面提到的：</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs routeros">route <span class="hljs-built_in">add</span><span class="hljs-built_in"> default </span>gw 192.168.32.131 dev ens33<br></code></pre></td></tr></table></figure>
+
+<center><img src="/img/Linux运维——系统实现路由转发功能/13.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<p>&emsp;&emsp;果然是网关的问题，使用暂时性的网关修改就已经能实现一台虚拟机通过另外一台虚拟机当作网关来上网的功能，但是对于永久网关的修改之前都是通过可视化界面进行依旧修改的，用过几次命令行的修改，但我的印象里应该是可以直接通过vim /etc/sysconfig/network-scripts/ifcfg-ens33修改网关的，首先重启客户端，取消掉网关的临时修改，重新配置</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs awk">vim  <span class="hljs-regexp">/etc/</span>sysconfig<span class="hljs-regexp">/network-scripts/i</span>fcfg-ens33<br>GATEWAY=<span class="hljs-number">192.168</span>.<span class="hljs-number">32.131</span> <span class="hljs-comment">#设置本机连接的网关的IP地址</span><br></code></pre></td></tr></table></figure>
+
+<p>&emsp;&emsp;在这个过程中发现在reconf中输入DNS后重启还是会被消掉DNS的配置，所以这里直接写入ifcig文件中会方便很多，可以用这几个命令进行检查</p>
+<figure class="highlight q"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs q">ip route <span class="hljs-built_in">show</span> <span class="hljs-built_in">dev</span> ens33<br>nmcli <span class="hljs-built_in">dev</span> <span class="hljs-built_in">show</span> ens33 | grep DNS<br></code></pre></td></tr></table></figure>
+
+<center><img src="/img/Linux运维——系统实现路由转发功能/14.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<p>&emsp;&emsp;可以发现我们的dns是配置成功了，但是网关还是配置失败了</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Linux%E8%BF%90%E7%BB%B4/" class="category-chain-item">Linux运维</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>系统实现路由转发功能</div>
+      <div>https://one-null-pointer.github.io/2023/06/20/Linux运维——linux系统实现路由转发功能/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>Author</div>
+          <div>liaoyue</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>Posted on</div>
+          <div>June 20, 2023</div>
+        </div>
+      
+      
+      <div class="license-meta-item">
+        <div>传送口</div>
+        <div>
+          
+            
+            
+              <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+              <span class="hint--top hint--rounded" aria-label="点击进行传送">
+                <i class="iconfont icon-by"></i>
+              </span>
+              </a>
+            
+          
+        </div>
+      </div>
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2023/07/05/Linux%E8%BF%90%E7%BB%B4%E2%80%94%E2%80%94%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8%E4%B8%8E%E4%BC%98%E5%8C%96/" title="系统安全与优化">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">系统安全与优化</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2023/06/17/Linux%E8%BF%90%E7%BB%B4%E2%80%94%E2%80%94iptable/" title="iptables">
+                        <span class="hidden-mobile">iptables</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;Table of Contents</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">Keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://github.com/" target="_blank" rel="nofollow noopener"><span>pointer</span></a> <i class="iconfont icon-love"></i> <a href="https://mp.weixin.qq.com/s/6ncLUtaiJ9j_sMjZT5z-2w" target="_blank" rel="nofollow noopener"><span>一个爱学习的空指针</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      headingSelector : CONFIG.toc.headingSelector || 'h1,h2,h3,h4,h5,h6',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      collapseDepth   : CONFIG.toc.collapseDepth || 0,
+      scrollSmooth    : true,
+      headingsOffset  : -boardTop
+    });
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.10/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">Blog works best with JavaScript enabled</div>
+  </noscript>
+</body>
+</html>
