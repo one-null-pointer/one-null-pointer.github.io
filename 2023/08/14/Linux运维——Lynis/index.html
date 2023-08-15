@@ -1,0 +1,768 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="liaoyue">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="Lynis1.工具简介&amp;emsp;&amp;emsp;Lynis是一款开源的安全性扫描工具，用于评估和提高Linux和Unix系统的安全性。它可以检查系统配置、软件包管理、用户权限、文件完整性等方面的安全问题，并提供建议和解决方案来加强系统的安全性。Lynis还可以扫描网络服务和应用程序，以发现潜在的漏洞和安全风险。 &amp;emsp;&amp;emsp;其主要提供功能如：法规遵从测试、自动审计、漏洞检测、渗透测试以及">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Lynis">
+<meta property="og:url" content="https://one-null-pointer.github.io/2023/08/14/Linux%E8%BF%90%E7%BB%B4%E2%80%94%E2%80%94Lynis/index.html">
+<meta property="og:site_name" content="one-null-poniter">
+<meta property="og:description" content="Lynis1.工具简介&amp;emsp;&amp;emsp;Lynis是一款开源的安全性扫描工具，用于评估和提高Linux和Unix系统的安全性。它可以检查系统配置、软件包管理、用户权限、文件完整性等方面的安全问题，并提供建议和解决方案来加强系统的安全性。Lynis还可以扫描网络服务和应用程序，以发现潜在的漏洞和安全风险。 &amp;emsp;&amp;emsp;其主要提供功能如：法规遵从测试、自动审计、漏洞检测、渗透测试以及">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://one-null-pointer.github.io/img/Linux.png">
+<meta property="article:published_time" content="2023-08-14T14:11:12.000Z">
+<meta property="article:modified_time" content="2023-08-14T14:12:03.076Z">
+<meta property="article:author" content="liaoyue">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://one-null-pointer.github.io/img/Linux.png">
+  
+  
+  
+  <title>Lynis - one-null-poniter</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"one-null-pointer.github.io","root":"/","version":"1.9.2","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 5.4.2"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>one null pointer</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                吾
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                學
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                類
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="Lynis"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2023-08-14 22:11" pubdate>
+          August 14, 2023 pm
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          5.1k words
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          43 mins
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Lynis</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="Lynis"><a href="#Lynis" class="headerlink" title="Lynis"></a>Lynis</h1><h4 id="1-工具简介"><a href="#1-工具简介" class="headerlink" title="1.工具简介"></a>1.工具简介</h4><p>&emsp;&emsp;Lynis是一款开源的安全性扫描工具，用于评估和提高Linux和Unix系统的安全性。它可以检查系统配置、软件包管理、用户权限、文件完整性等方面的安全问题，并提供建议和解决方案来加强系统的安全性。Lynis还可以扫描网络服务和应用程序，以发现潜在的漏洞和安全风险。</p>
+<p>&emsp;&emsp;其主要提供功能如：法规遵从测试、自动审计、漏洞检测、渗透测试以及提供改善建议等，通过Lynis的功能，可以进行许多法规遵循的自动化测试。官网上提到了可以用于PCI-DSS、HIPPA、ISO27001等。相比人工逐个进行检测，使用Lynis可以节省相当可观的时间</p>
+<p>&emsp;&emsp;参考链接：</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs awk">https:<span class="hljs-regexp">//</span>blog.csdn.net<span class="hljs-regexp">/stone_fall/</span>article<span class="hljs-regexp">/details/</span><span class="hljs-number">105932665</span><br>https:<span class="hljs-regexp">//i</span>thelp.ithome.com.tw<span class="hljs-regexp">/articles/</span><span class="hljs-number">10217009</span><br>https:<span class="hljs-regexp">//</span>www.lxlinux.net/<span class="hljs-number">4492</span>.html<br></code></pre></td></tr></table></figure>
+
+<p>&emsp;</p>
+<h4 id="2-工具安装"><a href="#2-工具安装" class="headerlink" title="2.工具安装"></a>2.工具安装</h4><p>&emsp;&emsp;首先查找压缩包并进行相关的解压:</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">wget</span> https://downloads.cisofy.com/lynis/lynis-<span class="hljs-number">3</span>.<span class="hljs-number">0</span>.<span class="hljs-number">0</span>.tar.gz<br><span class="hljs-attribute">tar</span> xvf l ynis-<span class="hljs-number">3</span>.<span class="hljs-number">0</span>.<span class="hljs-number">0</span>.tar.gz<br><span class="hljs-attribute">cd</span> lynis<br></code></pre></td></tr></table></figure>
+
+<center><img src="/img/Linux运维——lynis/1.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+
+
+
+<p>&emsp;</p>
+<h4 id="3-安全扫描"><a href="#3-安全扫描" class="headerlink" title="3.安全扫描"></a>3.安全扫描</h4><p>&emsp;&emsp;运行lynis显示帮助信息。具有管理员权限的用户可以运行该脚本，所有日志和输出将保存在/var/log/lynis.log文件中</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">./lynis<br></code></pre></td></tr></table></figure>
+
+<center><img src="/img/Linux运维——lynis/2.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+
+<p>&emsp;&emsp;与大多数linux的系统命令类似，lynis也提供了man手册进行查询和了解</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">./lynis –man<br></code></pre></td></tr></table></figure>
+
+<center><img src="/img/Linux运维——lynis/3.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+
+<p>&emsp;&emsp;</p>
+<center><img src="/img/Linux运维——lynis/4.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+
+<p>&emsp;&emsp;通过man我们可以了解到，lynis提供了本地安全扫描，直接使用audit system参数进行扫描系统即可：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash">./lynis audit system<br><span class="hljs-comment"># 或者是</span><br>./lynis audit system --<span class="hljs-built_in">wait</span><br></code></pre></td></tr></table></figure>
+
+<center><img src="/img/Linux运维——lynis/5.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+
+<p>&emsp;&emsp;两条执行命令的区别在于—wait，使用该命令后，想要用户自行启动回车键进行一节一节的播放</p>
+<center><img src="/img/Linux运维——lynis/6.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+
+<p>&emsp;&emsp;根据提示，通过按下enter键进行继续操作，或使用ctrl+c进行停止操作，除了对于系统的全面检测以外，也提供了针对于单个或指定多个的内容进行探测和安全扫描：</p>
+<figure class="highlight axapta"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs axapta">./lynis --tests-<span class="hljs-keyword">from</span>-<span class="hljs-keyword">group</span> <span class="hljs-string">&quot;firewalls&quot;</span><br></code></pre></td></tr></table></figure>
+
+<center><img src="/img/Linux运维——lynis/7.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+
+<figure class="highlight axapta"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs axapta">./lynis --tests-<span class="hljs-keyword">from</span>-<span class="hljs-keyword">group</span> <span class="hljs-string">&quot;kernel firewalls&quot;</span><br></code></pre></td></tr></table></figure>
+
+<center><img src="/img/Linux运维——lynis/8.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+
+<p>&emsp;</p>
+<h4 id="4-安全日志"><a href="#4-安全日志" class="headerlink" title="4.安全日志"></a>4.安全日志</h4><p>&emsp;&emsp;使用lynis扫描过后，所有的扫描结果都将存放在/var/log/lynis.log之中</p>
+<figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs stata"><span class="hljs-keyword">cat</span> /<span class="hljs-keyword">var</span>/<span class="hljs-keyword">log</span>/lynis.<span class="hljs-keyword">log</span><br></code></pre></td></tr></table></figure>
+
+<center><img src="/img/Linux运维——lynis/9.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+
+<p>&emsp;&emsp;如图所示日志内容解读：给出Lynis版本为3.0.0，构建日期为2020年06月18日。的信息；之后检查了文件夹/home/lfs/lynis/include/profiles的权限，表明权限正常。然后读取了配置文件/home/lfs/lynis/default.prf并创建了临时文件/tmp/lynis.uLkMCw6rEc。最后根据配置文件，启用了以下插件：’authentication’、’compliance’、’configuration’、’control-panels’、’crypto’、’dns’和’docker’等内容</p>
+<p>&emsp;&emsp;通过grep的配合我们也能够通过日志查找出我们想要的日志内容比如</p>
+<figure class="highlight arcade"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs arcade">grep Warning /<span class="hljs-keyword">var</span>/<span class="hljs-built_in">log</span>/lynis.<span class="hljs-built_in">log</span><br>grep Suggestion /<span class="hljs-keyword">var</span>/<span class="hljs-built_in">log</span>/lynis.<span class="hljs-built_in">log</span><br></code></pre></td></tr></table></figure>
+
+<center><img src="/img/Linux运维——lynis/10.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+
+<p>&emsp;&emsp;利用grep指令，筛选出warning与suggestion的相关结果，前者指的是被lynis认为警告的项目，后者则提供建议，可以作为如何修正问题的参考。而除了对于筛选关键词外，我们也可以指定项目编号进行查看，首先查看有什么项目编号：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">./lynis show tests<br></code></pre></td></tr></table></figure>
+
+<center><img src="/img/Linux运维——lynis/11.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">./lynis show details PHP-2376<br></code></pre></td></tr></table></figure>
+
+<center><img src="/img/Linux运维——lynis/12.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+
+<p>&emsp;</p>
+<h4 id="5-插件扩展"><a href="#5-插件扩展" class="headerlink" title="5.插件扩展"></a>5.插件扩展</h4><p>&emsp;&emsp;对于lynis而言，作为一款使用Shell脚本进行编写的安全工具，运行与Linux与基于UNIX的系统之中，因此除了使用lynis默认的规则进行Linux加固外，其也提供了提高适用性的插件功能。</p>
+<p>&emsp;&emsp;lynis的插件主要是具有收集数据的功能，基于这种功能，展开任何预定义或者测试都能够进行很好的兼容和实现，另外就是将数据仅存储在报告文件中，由第三方工具进行相关的分析，比如将lynis改装成linux提权信息的收集器又或者是恶意程序的检测工具内容。</p>
+<ul>
+<li><h6 id="插件执行位置"><a href="#插件执行位置" class="headerlink" title="插件执行位置"></a>插件执行位置</h6></li>
+</ul>
+<p>&emsp;&emsp;lynis 的每次执行都是一个完善的步骤周期</p>
+<center><img src="/img/Linux运维——lynis/13.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+
+<p>&emsp;&emsp;首先介绍下lynis 的周期流程：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><code class="hljs">1）初始化阶段，<br>lynis加载必要的配置文件与资源并准备进行后续的操作<br><br>2）操作系统检测<br>检验当前系统的系统类型与版本信息，以便于后续不同的操作系统执行相应的测试与分析<br><br>3）二进制文件检测<br>扫描系统中的二进制文件，从而定位哪些文件可能存在安全风险与配置问题<br><br>4）插件阶段1<br>在此阶段，lynis会加载并执行第一批插件，这些插件可以对系统进行更深入的分析和测试，以发现潜在的安全漏洞，完成插件一后<br><br>5）内置测试<br>lynis会执行一系列的包括文件权限、用户账户设置、网络配置等方面的内置内容测试，以确保系统的安全性<br><br>6）自定义测试<br>在这个阶段使用者能够根据现实的情况对出内置测试以外的内容进行自定义内容测试<br><br>7）插件阶段2<br>在此阶段，lynis会加载并执行第二批插件，这些插件通常与特定的应用程序或服务相关，以进一步评估系统的安全性<br><br>8）生成报告<br>经过前面的全部阶段，lynis会生成一个详细的报告，其中包含系统中发现的问题、建议的修复措施和改进建议。<br></code></pre></td></tr></table></figure>
+
+<p>&emsp;&emsp;这就是lynis 的一般运行周期流程可以看到对于插件的执行位置而言，只有两个时刻是能够进行运行的，分别是Plugins phase 1与Plugins phase 2，以下分别称呼为阶段1与阶段2</p>
+<ul>
+<li><h6 id="SDK开发套件"><a href="#SDK开发套件" class="headerlink" title="SDK开发套件"></a>SDK开发套件</h6></li>
+</ul>
+<p>&emsp;&emsp;lynis软件的sdk开发套件是为了能够测试软件质量以及让使用者能够使用开始自定义测试和插件而开发其安装教程也比较简单</p>
+<p>&emsp;&emsp;首先克隆sdk项目：</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">git clone https:<span class="hljs-regexp">//gi</span>thub.com<span class="hljs-regexp">/CISOfy/</span>lynis-sdk<br></code></pre></td></tr></table></figure>
+
+<center><img src="/img/Linux运维——lynis/14.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+
+<p>&emsp;&emsp;在sdk中的文件内容并不多，lynis-devkit 用于对 Lynis 源执行各种测试的工具，Documentation/ 该目录将存放最重要的开发文档。include/ 和 unit-tests/ 与 lynis-devkit 是相关的组件</p>
+<center><img src="/img/Linux运维——lynis/15.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+
+<p>&emsp;&emsp;进入SDK目录运行开发包内容：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">cd</span> lynis-sdk<br>./lynis-devkit<br></code></pre></td></tr></table></figure>
+
+<center><img src="/img/Linux运维——lynis/16.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+
+<p>&emsp;&emsp;这将检查Lynis 树是否存在并显示基本详细信息和帮助。使用此套件，我们可以执行质量检查，并测试一切是否按预期工作。官方也鼓励所有开发人员和贡献者使用此工具包，特别是在创建拉取请求之前。</p>
+<ul>
+<li><h6 id="开发流程"><a href="#开发流程" class="headerlink" title="开发流程"></a>开发流程</h6></li>
+</ul>
+<p>&emsp;&emsp;首先第一步寻找到lynis的安装位置，尤其是需要定位到插件的内容存储在哪个目录之中，当我们运行ynis时，插件目录会显示在终端界面汇总，同时会存储到日志文件里面：</p>
+<figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs stata">grep -i <span class="hljs-keyword">plugin</span> /<span class="hljs-keyword">var</span>/<span class="hljs-keyword">log</span>/lynis.<span class="hljs-keyword">log</span><br></code></pre></td></tr></table></figure>
+
+<center><img src="/img/Linux运维——lynis/17.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+
+<p>&emsp;&emsp;日志的内容在前文就有讲解，这里不作过多的阐述，接下来我们需要决定加载插件的阶段，前文的lynis运行流程中提到了插件有两个阶段，阶段1以及阶段2，不同阶段所对应的作用和效果大有不同。</p>
+<p>&emsp;&emsp;在阶段1中，运行的插件将在内置测试之前执行，这个阶段非常适合仅收集数据的测试。这有可能是获取已安装的软件包列表或系统上运行的程序；在阶段2中，运行的插件将在正常测试之后执行，这是使用者希望分析闲钱发现的信息，并处理和选择性的在终端界面中进行展示。有了两者区别的掌握，接下里我们需要创建插件文件，这里以plugins目录中自带的customplugin.template作为示范</p>
+<center><img src="/img/Linux运维——lynis/18.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+
+<p>&emsp;&emsp;在plugins目录，将customplugin.template文件复制到plugin [name] _phase [number]文件中，[name]的值应替换为插件的唯一名称。仅使用小写字符，数字和（可选）短划线（ - ）来链接两个单词。 [number]用以定义插件阶段，即1或2，例如：</p>
+<figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs arduino">cp custom_plugin.<span class="hljs-keyword">template</span> plugin_custom-tests_phase2<br></code></pre></td></tr></table></figure>
+
+<center><img src="/img/Linux运维——lynis/19.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+
+<p>&emsp;&emsp;对于文件的第一个调整就是修改标题内容，该部分用于插件的说明，能够用与验证插件的正确格式</p>
+<center><img src="/img/Linux运维——lynis/20.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+
+<figure class="highlight vbnet"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs vbnet"><span class="hljs-symbol">PLUGIN_AUTHOR:</span> <br>作者字段定义谁负责创建和更新此文件。<br><br><span class="hljs-symbol">PLUGIN_CATEGORY:</span> <br>这个字段描述了此插件所属的测试类型（例如，network）。可以使用“<span class="hljs-keyword">custom</span>”。<br><br><span class="hljs-symbol">PLUGIN_DESC:</span> <br>描述字段，带有可选的解释，说明为什么创建此插件及其目标。<br><br><span class="hljs-symbol">PLUGIN_NAME:</span> <br>应该和你用作文件名的名称相同。<br><br><span class="hljs-symbol">PLUGIN_REQUIRED_TESTS:</span> <br>描述在执行该插件之前应该已经执行的依赖检测。通常可以跳过。<br></code></pre></td></tr></table></figure>
+
+<p>&emsp;&emsp;这里需要注意检查是否正确的定义了LUGIN_NAME字段。这里我们添加后，我们需要创建插件，每一个插件都包含一个或多个单独的检测单元。它们标有唯一的ID，以便正确的记录和存储测试结果。出于同样的原因，您创建的所有测试都应以“CUST-”开头，然后是四个数字（例如CUST-0010），最后运行lynis后没插件就会载入了。（这一部分的最后载入部分并没有很清楚的弄懂，后续会进行补充，可参考的资料很少）</p>
+<p>&emsp;&emsp;在运行lynis后，插件会被载入，但是这样的话会在运行我们的插件的同时运行lynis自带的插件和很多其他的信息收集脚本，所以lynis提供了一种单独运行插件的选项—tests</p>
+<figure class="highlight jboss-cli"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs jboss-cli"><span class="hljs-string">./lynis</span> audit system <span class="hljs-params">--tests</span> CUST-id1,CUST-id2<br></code></pre></td></tr></table></figure>
+
+<p>&emsp;&emsp;具体参考官网链接：</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">https:<span class="hljs-regexp">//</span>cisofy.com<span class="hljs-regexp">/documentation/</span>lynis<span class="hljs-regexp">/plugins/</span>development/<span class="hljs-comment">#create-plugin-file</span><br></code></pre></td></tr></table></figure>
+
+
+
+<h4 id="6-编写shell脚本"><a href="#6-编写shell脚本" class="headerlink" title="6.编写shell脚本"></a>6.编写shell脚本</h4><p>&emsp;&emsp;为了较好的安全性质，能够定期的运行lynis，这里尝试编写了一个简单的sh脚本，使用–cronjob 选项运行，lynis 以自动、非交互式扫描模式进行启动</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs bash">vim /etc/cron.daily/lynis-1.sh<br><br><span class="hljs-comment">#! /bin/sh</span><br>AUDITOR=<span class="hljs-string">&quot;root&quot;</span><br>DATE=$(<span class="hljs-built_in">date</span> +%Y%m%d)<br>HOST=$(hostname)<br>LOG_DIR=<span class="hljs-string">&quot;/var/log/lynis&quot;</span><br>REPORT=<span class="hljs-string">&quot;<span class="hljs-variable">$LOG_DIR</span>/report-<span class="hljs-variable">$&#123;HOST&#125;</span>.<span class="hljs-variable">$&#123;DATE&#125;</span>&quot;</span><br>DATA=<span class="hljs-string">&quot;<span class="hljs-variable">$LOG_DIR</span>/report-data-<span class="hljs-variable">$&#123;HOST&#125;</span>.<span class="hljs-variable">$&#123;DATE&#125;</span>.txt&quot;</span><br><br><span class="hljs-built_in">cd</span> /home/lfs/lynis<br>./lynis audit system --auditor <span class="hljs-string">&quot;<span class="hljs-variable">$&#123;AUDITOR&#125;</span>&quot;</span> --cronjob &gt; <span class="hljs-variable">$&#123;REPORT&#125;</span><br><br><span class="hljs-built_in">cat</span> /etc/cron.daily/lynis-1.sh<br>sudo <span class="hljs-built_in">chmod</span> 755 /etc/cron.daily/lynis-1.sh<br></code></pre></td></tr></table></figure>
+
+<center><img src="/img/Linux运维——lynis/21.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+
+<p>&emsp;&emsp;接下来尝试运行并检验</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs awk">./lynis-<span class="hljs-number">1</span>.sh<br>ll <span class="hljs-regexp">/var/</span>log<span class="hljs-regexp">/lynis/</span><br>cat <span class="hljs-regexp">/var/</span>log<span class="hljs-regexp">/lynis/</span>report-localhost.localdomain.<span class="hljs-number">20230814</span><br></code></pre></td></tr></table></figure>
+
+<center><img src="/img/Linux运维——lynis/22.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Linux%E8%BF%90%E7%BB%B4/" class="category-chain-item">Linux运维</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>Lynis</div>
+      <div>https://one-null-pointer.github.io/2023/08/14/Linux运维——Lynis/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>Author</div>
+          <div>liaoyue</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>Posted on</div>
+          <div>August 14, 2023</div>
+        </div>
+      
+      
+      <div class="license-meta-item">
+        <div>传送口</div>
+        <div>
+          
+            
+            
+              <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+              <span class="hint--top hint--rounded" aria-label="点击进行传送">
+                <i class="iconfont icon-by"></i>
+              </span>
+              </a>
+            
+          
+        </div>
+      </div>
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2023/08/11/Linux%E8%BF%90%E7%BB%B4%E2%80%94%E2%80%94Ossec%E5%AE%89%E8%A3%85%EF%BC%882%EF%BC%89/" title="OSSEC（二）">
+                        <span class="hidden-mobile">OSSEC（二）</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;Table of Contents</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">Keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://github.com/" target="_blank" rel="nofollow noopener"><span>pointer</span></a> <i class="iconfont icon-love"></i> <a href="https://mp.weixin.qq.com/s/6ncLUtaiJ9j_sMjZT5z-2w" target="_blank" rel="nofollow noopener"><span>一个爱学习的空指针</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      headingSelector : CONFIG.toc.headingSelector || 'h1,h2,h3,h4,h5,h6',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      collapseDepth   : CONFIG.toc.collapseDepth || 0,
+      scrollSmooth    : true,
+      headingsOffset  : -boardTop
+    });
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.10/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">Blog works best with JavaScript enabled</div>
+  </noscript>
+</body>
+</html>

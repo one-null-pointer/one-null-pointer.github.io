@@ -1,0 +1,858 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="liaoyue">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="Burp Suite0.前言&amp;emsp;&amp;emsp;Burp Suite的功能是十分强大的web应用程序渗透测试软件工具，其提供了多个模块和功能，一般常用到的就是抓包，与发送包的功能模块，这里使用了Burp2.0.11工具安装包（包含中文补丁） 1https:&#x2F;&#x2F;portswigger.net&#x2F;burp  &amp;emsp; 1.语言环境及脚本安装   &amp;emsp;&amp;emsp;由于burp是基于java">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Burpsuite">
+<meta property="og:url" content="https://one-null-pointer.github.io/2023/07/23/Burpsuite/index.html">
+<meta property="og:site_name" content="one-null-poniter">
+<meta property="og:description" content="Burp Suite0.前言&amp;emsp;&amp;emsp;Burp Suite的功能是十分强大的web应用程序渗透测试软件工具，其提供了多个模块和功能，一般常用到的就是抓包，与发送包的功能模块，这里使用了Burp2.0.11工具安装包（包含中文补丁） 1https:&#x2F;&#x2F;portswigger.net&#x2F;burp  &amp;emsp; 1.语言环境及脚本安装   &amp;emsp;&amp;emsp;由于burp是基于java">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://one-null-pointer.github.io/img/tools.png">
+<meta property="article:published_time" content="2023-07-23T08:26:44.000Z">
+<meta property="article:modified_time" content="2023-08-15T14:06:18.450Z">
+<meta property="article:author" content="liaoyue">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://one-null-pointer.github.io/img/tools.png">
+  
+  
+  
+  <title>Burpsuite - one-null-poniter</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"one-null-pointer.github.io","root":"/","version":"1.9.2","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 5.4.2"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>one null pointer</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                吾
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                學
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                類
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="Burpsuite"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2023-07-23 16:26" pubdate>
+          July 23, 2023 pm
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          5.8k words
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          49 mins
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Burpsuite</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="Burp-Suite"><a href="#Burp-Suite" class="headerlink" title="Burp Suite"></a>Burp Suite</h1><h4 id="0-前言"><a href="#0-前言" class="headerlink" title="0.前言"></a>0.前言</h4><p>&emsp;&emsp;Burp Suite的功能是十分强大的web应用程序渗透测试软件工具，其提供了多个模块和功能，一般常用到的就是抓包，与发送包的功能模块，这里使用了Burp2.0.11工具安装包（包含中文补丁）</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">https:<span class="hljs-regexp">//</span>portswigger.net/burp<br></code></pre></td></tr></table></figure>
+
+<p>&emsp;</p>
+<h4 id="1-语言环境及脚本安装"><a href="#1-语言环境及脚本安装" class="headerlink" title="1.语言环境及脚本安装"></a>1.语言环境及脚本安装</h4><center><img src="/img/WEBtools——BURP/1.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<p>&emsp;&emsp;由于burp是基于java语言进行开发，所以首先点击jdk进行java 8的语言环境安装，参考教程：</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">https:<span class="hljs-regexp">//</span>juejin.cn<span class="hljs-regexp">/post/</span><span class="hljs-number">7197990402720432184</span><br></code></pre></td></tr></table></figure>
+
+<center><img src="/img/WEBtools——BURP/2.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<p>&emsp;&emsp;然后点击run.bat就能够运行了，当然在运行前，必须在run文件内容中加入自己运行的文件夹路径</p>
+<center><img src="/img/WEBtools——BURP/3.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<p>&emsp;&emsp;这是为了引导加入指定目录，如果将burp文件放在Users\Administrator下不写入cd指令也是可以的，如果路径不对，run.bat文件就打不开，这里就不具体展开了</p>
+<center><img src="/img/WEBtools——BURP/4.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<p>&emsp;</p>
+<h4 id="2-代理和浏览器设置"><a href="#2-代理和浏览器设置" class="headerlink" title="2.代理和浏览器设置"></a>2.代理和浏览器设置</h4><p>&emsp;&emsp;前面提到我们最常用的就是抓包代理，所以这里进行浏览器的相关设置，首先为了方便代理的转换，这里谷歌浏览器推荐使用扩展工具SwitchyOmega</p>
+<center><img src="/img/WEBtools——BURP/5.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<p>&emsp;&emsp;设置SwitchyOmega代理</p>
+<center><img src="/img/WEBtools——BURP/6.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<p>&emsp;&emsp;接下来进行证书的导入：</p>
+<center><img src="/img/WEBtools——BURP/7.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<p>&emsp;</p>
+<center><img src="/img/WEBtools——BURP/8.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<p>&emsp;</p>
+<center><img src="/img/WEBtools——BURP/9.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<p>&emsp;&emsp;当然，在给出的文件包中已经是含有证书了，可以选择直接使用给的证书，也可以自己重新导出一份证书出来，接下来就是导入证书到浏览器中，在浏览器中输入：</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">chrome:<span class="hljs-regexp">//</span>settings/security<br></code></pre></td></tr></table></figure>
+
+<center><img src="/img/WEBtools——BURP/10.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<p>&emsp;&emsp;（你要通过点击设置进入也行）</p>
+<center><img src="/img/WEBtools——BURP/11.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<p>&emsp;</p>
+<center><img src="/img/WEBtools——BURP/12.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<p>&emsp;&emsp;接下里就是进行抓包尝试：</p>
+<center><img src="/img/WEBtools——BURP/13.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<p>&emsp;&emsp;很好，抓包成功，接下来就是对burp的各个模块进行详细的教学和讲解</p>
+<p>&emsp;</p>
+<h4 id="3-Proxy模块"><a href="#3-Proxy模块" class="headerlink" title="3. Proxy模块"></a>3. Proxy模块</h4><p>&emsp;&emsp;Proxy的使用是一个摸索熟悉的过程，我们这里仅仅是介绍一些基础的使用效果 </p>
+<ul>
+<li><h5 id="截断界面"><a href="#截断界面" class="headerlink" title="截断界面"></a>截断界面</h5></li>
+</ul>
+<p>&emsp;&emsp;截断界面中，Intercept选项就是控制是否打开拦截功能的，on是打开off是关闭，这里就不啰嗦了</p>
+<center><img src="/img/WEBtools——BURP/14.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<p>&emsp;&emsp;forward和drop则是提供了对包处理的选择，forward是放包通过，让服务器进行响应，drop是将数据包进行丢弃，后续不进行相关的处理。当我们点击forward后，就能够看到这次请求返回的相关数据，http报文内容就不必过多解释</p>
+<center><img src="/img/WEBtools——BURP/15.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<p>&emsp;&emsp;最后一行是包含多个Cookie的字符串。每个Cookie都是一个键值对，用分号分隔开，些键值对记录了与用户相关的信息，例如用户标识、网站记录ID、会话ID等。每个网站可能使用不同的Cookie来跟踪和存储用户信息</p>
+<p>&emsp;&emsp;在抓包成功后主要就是四个选项Raw、Params、Headers、Hex：</p>
+<h6 id="emsp-emsp-1）Raw"><a href="#emsp-emsp-1）Raw" class="headerlink" title="&emsp;&emsp;1）Raw"></a>&emsp;&emsp;1）Raw</h6><p>&emsp;&emsp;显示的是HTTP请求或者响应的原神数据，以纯文本的形式呈现，包括请求行、头部信息和正文内容等（图片看上图即可）</p>
+<h6 id="emsp-emsp-2）Params"><a href="#emsp-emsp-2）Params" class="headerlink" title="&emsp;&emsp;2）Params"></a>&emsp;&emsp;2）Params</h6><p>&emsp;&emsp;显示了HTTP请求中的参数。这些参数通常以键值对的形式出现在URL查询字符串或请求体中。Params选项使我们能够查看和编辑这些参数，以便测试应用程序的安全性</p>
+<center><img src="/img/WEBtools——BURP/16.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<h6 id="emsp-emsp-3）Headers"><a href="#emsp-emsp-3）Headers" class="headerlink" title="&emsp;&emsp;3）Headers"></a>&emsp;&emsp;3）Headers</h6><p>&emsp;&emsp;显示了HTTP请求或响应的头部信息。头部包含了关于请求或响应的元数据，如User-Agent、Cookie、Content-Type等。Headers选项允许我们查看和编辑这些头部信息，以便模拟不同的请求环境或测试特定的漏洞</p>
+<center><img src="/img/WEBtools——BURP/17.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<h6 id="emsp-emsp-4）Hex"><a href="#emsp-emsp-4）Hex" class="headerlink" title="&emsp;&emsp;4）Hex"></a>&emsp;&emsp;4）Hex</h6><p>&emsp;&emsp;以十六进制形式显示HTTP请求或响应的内容。这对于分析二进制数据或检测隐藏字符或编码非常有用</p>
+<center><img src="/img/WEBtools——BURP/18.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<p>&emsp;&emsp;在一般的默认情况下，Rroxy模块指会拦截请求的信息，普通文件如css、js、图片等相关内容的请求并不会被拦截，当然，burp也允许使用者通过修改默认的拦截选项来拦截这一部分的静态文件</p>
+<ul>
+<li><h5 id="HTTP历史界面"><a href="#HTTP历史界面" class="headerlink" title="HTTP历史界面"></a>HTTP历史界面</h5></li>
+</ul>
+<p>&emsp;&emsp;在历史选项界面中，我们可以看到我们所拦截的数据包内容，其所具有的属性与拦截界面是基本一致的，但更主要的是在该历史选项界面中，我们能够查看到响应包的相关内容，以及能用render查看响应后的界面效果：</p>
+<center><img src="/img/WEBtools——BURP/19.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<p>&emsp;</p>
+<center><img src="/img/WEBtools——BURP/20.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<p>&emsp;&emsp;对于拦截到的消息和历史消息，都可以通过右击弹出菜单，发送到Burp的其他组件，如Spider、Scanner、Repeater、Intruder、Sequencer、Decoder、Comparer、Extender，进行进一步的测试</p>
+<center><img src="/img/WEBtools——BURP/21.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<ul>
+<li><h5 id="WebSocket历史界面"><a href="#WebSocket历史界面" class="headerlink" title="WebSocket历史界面"></a>WebSocket历史界面</h5></li>
+</ul>
+<p>&emsp;&emsp;WebSocket历史记录的作用是记录和显示与WebSocket通信相关的请求和响应。WebSocket是一种在Web应用程序中实现双向通信的协议，它允许服务器主动向客户端推送数据。通过WebSocket历史记录，可以查看和分析与WebSocket连接相关的请求和响应</p>
+<center><img src="/img/WEBtools——BURP/22.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<ul>
+<li><h5 id="选项界面"><a href="#选项界面" class="headerlink" title="选项界面"></a>选项界面</h5></li>
+</ul>
+<p>&emsp;&emsp;在Burp Suite中，Options（选项）是一个功能强大的工具，用于配置和自定义Burp Suite的各种设置。通过Options，可以根据需要调整Burp Suite的行为和功能，其包括了对代理监听器的修改、拦截客户端请求设置，服务器响应拦截，websocket消息、响应操作、搜索和替换、SSL passthrough以及最后的详细控制操作修改（其他）</p>
+<center><img src="/img/WEBtools——BURP/23.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<p>&emsp;&emsp;比如对于客户端的请求消息拦截，这是指拦截客户端发送到服务器端数据的相关配置选项，主要是有着拦截规则配置、错误消息主动恢复、主动更新Content-Length消息头三个部分，服务器端的返回拦截本质上也与该模块类似</p>
+<center><img src="/img/WEBtools——BURP/24.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<p>&emsp;&emsp;其本质是正则表达式配置，其主要作用就是是主动偷换请求消息和服务端返回消息的某些值与文本内容，其与前面几项不同之处在于支持正则表达式的语言；选项界面的其余模块就不过多介绍了，在使用的时候也能慢慢熟悉和理解其作用。</p>
+<p>&emsp;</p>
+<h4 id="4-Target模块"><a href="#4-Target模块" class="headerlink" title="4.Target模块"></a>4.Target模块</h4><p>&emsp;&emsp;在Burp Suite中，Target模块用于配置目标应用程序的相关设置。它是Burp Suite的一个核心模块，提供了多个子模块，用于执行各种与目标应用程序相关的任务</p>
+<ul>
+<li><h5 id="站点地图模块"><a href="#站点地图模块" class="headerlink" title="站点地图模块"></a>站点地图模块</h5></li>
+</ul>
+<p>&emsp;&emsp;Site map子模块显示了目标应用程序的网站结构和页面层次结构。它会自动收集和显示通过Burp Suite代理的所有请求和响应，并将它们组织成树状结构。您可以使用Site map来导航和分析目标应用程序的不同页面，并对其进行进一步的测试和评估</p>
+<center><img src="/img/WEBtools——BURP/25.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<p>&emsp;&emsp;从图的结构而言，站点地图左边的为访问的URL相关内容，安装网站的层级，以树形结构的形式展示了整个网站系统的结构，右面四大模块则是详细的列表、访问的url、请求和应答的内容，基于树形结构，我们既可以抓取想要的某个分支，对指定的分支进行扫描和分析</p>
+<ul>
+<li><h5 id="范围模块"><a href="#范围模块" class="headerlink" title="范围模块"></a>范围模块</h5></li>
+</ul>
+<p>&emsp;&emsp;Scope子模块用于定义目标应用程序的测试范围。您可以指定要包含或排除的URL、域名、文件扩展名等。通过配置Scope，这样子可以确保Burp Suite只针对特定的目标进行测试，以提高效率并减少误报</p>
+<center><img src="/img/WEBtools——BURP/26.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<p>&emsp;&emsp;这里我们也能够勾选高级选项，进行更加细节的操作和消息过滤</p>
+<center><img src="/img/WEBtools——BURP/27.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<p>&emsp;&emsp;规则主要由协议、域名或IP地址、端口、文件名4个部分组成，这就意味着我们可以从协议、域名或IP地址、端口、文件名4个维度去控制哪些消息出现在允许或去除在规则列表中</p>
+<ul>
+<li><h5 id="问题定义模块"><a href="#问题定义模块" class="headerlink" title="问题定义模块"></a>问题定义模块</h5></li>
+</ul>
+<p>&emsp;&emsp;Issues定义子模块用于显示Burp Suite扫描器检测到的漏洞和问题。它会列出各种安全问题，如SQL注入、跨站脚本（XSS）、敏感信息泄露等。您可以查看每个问题的详细信息，并导出报告以供进一步分析和修复</p>
+<center><img src="/img/WEBtools——BURP/28.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<p>&emsp;&emsp;这里就不过多的进行阐述，后续信息内容可以查看官方的文档介绍</p>
+<p>&emsp;</p>
+<h4 id="5-intruder模块"><a href="#5-intruder模块" class="headerlink" title="5.intruder模块"></a>5.intruder模块</h4><p>&emsp;&emsp;该模块是需要着重学习的模块，Intruder作为Burp Suite中一款功能极其强大的自动化测试工具，通常被系统安全渗透测试人员被使用在各种任务测试的场景中，其作用可以说是十分的显著。这里进行相关的介绍</p>
+<ul>
+<li><h5 id="目标界面"><a href="#目标界面" class="headerlink" title="目标界面"></a>目标界面</h5></li>
+</ul>
+<center><img src="/img/WEBtools——BURP/29.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<p>&emsp;&emsp;目标界面较为简单，主要就是三个方面，主机地址，端口号以及是否选用HTTPS的选择，一般当我们在代理模块将数据包发送到instruder模块时，这里就是已经默认填上了对应的内容了</p>
+<ul>
+<li><h5 id="位置界面"><a href="#位置界面" class="headerlink" title="位置界面"></a>位置界面</h5></li>
+</ul>
+<p>&emsp;&emsp;位置界面的定位就比较好理解，在这个界面一般我们就干两件事情，第一件是寻找我们需要改变的变量，对其进行相应的赋值行为，第二个就是选择我们所需要进行攻击的类型，不同攻击类型对应着不同的测试场景，先提供的暂时是4个</p>
+<center><img src="/img/WEBtools——BURP/30.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<p>&emsp;&emsp;具体的简单利用可以参考，对于四种攻击方式的利用，我认为还是应用例子会比较容易理解，后续会加入一些演示的例子作为参考：</p>
+<ul>
+<li><h5 id="有效载荷界面"><a href="#有效载荷界面" class="headerlink" title="有效载荷界面"></a>有效载荷界面</h5></li>
+</ul>
+<p>&emsp;&emsp;在该界面中，有payload集合的设置选项，包含了经常使用的18种payload类型，从简单清单、运行时文件、自定义迭代器等多种功能，每一个功能对应的相关可设置内容也各不相同，这里的使用和学习也能参考：</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">https:<span class="hljs-regexp">//</span>t0data.gitbooks.io<span class="hljs-regexp">/burpsuite/</span>content/chapter8.html<br></code></pre></td></tr></table></figure>
+
+<center><img src="/img/WEBtools——BURP/31.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<ul>
+<li><h5 id="选项设置界面"><a href="#选项设置界面" class="headerlink" title="选项设置界面"></a>选项设置界面</h5></li>
+</ul>
+<p>&emsp;&emsp;在选项设置界面中主要是包含了请求消息头、请求引擎、攻击结果、grep match, grep extract, grep payloads,以及重定向设的相关7中设置，我们可以在攻击前进行设置，也可以在攻击过程中进行选项设置</p>
+<center><img src="/img/WEBtools——BURP/32.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<ul>
+<li><h5 id="模块使用演示"><a href="#模块使用演示" class="headerlink" title="模块使用演示"></a>模块使用演示</h5></li>
+</ul>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">https:<span class="hljs-regexp">//</span>one-null-pointer.github.io<span class="hljs-regexp">/2022/</span><span class="hljs-number">07</span><span class="hljs-regexp">/02/</span>抓包攻击演示/<br></code></pre></td></tr></table></figure>
+
+<p>&emsp;</p>
+<h4 id="6-Repeater模块"><a href="#6-Repeater模块" class="headerlink" title="6. Repeater模块"></a>6. Repeater模块</h4><p>&emsp;&emsp;c重放功能是作为buro中的一项手工验证HTTP消息的测试工具，通常是用于多次请求响应和手工修改请求信息的修改后对服务器响应的信息分析，其整个界面区分为了请求包和响应：</p>
+<center><img src="/img/WEBtools——BURP/33.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<p>&emsp;&emsp;点击go按钮，burp就会将请求包发送，并且接受对应的响应包内容， 通过修改请求数据包的参数内容来比对分析每次应答消息之间的差异，能更好的帮助我们查找到对应的漏洞点</p>
+<p>&emsp;</p>
+<h4 id="7-Sequencer模块"><a href="#7-Sequencer模块" class="headerlink" title="7.Sequencer模块"></a>7.Sequencer模块</h4><p>&emsp;&emsp;用于破解密码、识别可预测的随机数生成器以及评估会话令牌和其他安全令牌的强度。使用这个模块时，可以捕获应用程序发送的请求，并将其作为输入传递给Sequencer。然后，Sequencer会分析请求中的随机性，并生成统计数据和报告，以帮助评估随机性的质量和预测性</p>
+<p>&emsp;&emsp;其提供了多种统计方法，包括频率分析、最长公共子序列（LCS）和熵分析等。这些方法可以帮助确定随机性的质量，并检测是否存在可预测的模式或趋势</p>
+<center><img src="/img/WEBtools——BURP/34.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<ul>
+<li><h6 id="实时捕捉界面"><a href="#实时捕捉界面" class="headerlink" title="实时捕捉界面"></a>实时捕捉界面</h6></li>
+</ul>
+<p>&emsp;&emsp;在这个界面中，主要是在代理的数据包中传送过来的内容，点击设定按钮对需要分析的token以及参数进行相关的配置和使用</p>
+<center><img src="/img/WEBtools——BURP/35.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<p>&emsp;&emsp;选定一个参数的值，这里选择ETag的内容：</p>
+<center><img src="/img/WEBtools——BURP/36.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<p>&emsp;&emsp;点击开始捕捉按钮，点击分析执行（可以停止进行分析，也可以不停止进行分析）</p>
+<center><img src="/img/WEBtools——BURP/37.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<p>&emsp;&emsp;等分析结束，则可以看到分析结果的各种图表</p>
+<ul>
+<li><h5 id="手动加载界面"><a href="#手动加载界面" class="headerlink" title="手动加载界面"></a>手动加载界面</h5></li>
+</ul>
+<p>&emsp;&emsp;这一块其实就是在实时捕捉阶段进行将获取数据保存起来，下一次使用的时候，只需要直接加载数据进行分析即可：</p>
+<center><img src="/img/WEBtools——BURP/38.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<ul>
+<li><h5 id="选项界面-1"><a href="#选项界面-1" class="headerlink" title="选项界面"></a>选项界面</h5></li>
+</ul>
+<p>&emsp;&emsp;该模块的选项界面追要是为了控制token以参数，在进行数据分析时，做如何处理，做什么类型的随机性分析</p>
+<center><img src="/img/WEBtools——BURP/39.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<p>&emsp;</p>
+<h4 id="8-Decoder模块"><a href="#8-Decoder模块" class="headerlink" title="8.Decoder模块"></a>8.Decoder模块</h4><p>&emsp;&emsp;对于burp的编码模块理解就比较简单了，这就是一个burp自带的编码解码工具，它能对原始数据进行各种编码格式和散列的转换</p>
+<center><img src="/img/WEBtools——BURP/40.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<p>&emsp;&emsp;输入域即输入需要解码的原始数据，此处可以直接填写或粘贴，上面是输入区域，下面的是输出区域，无论是输入域还是输出域都支持文本与Hex两种格式，其中编码解码选项中，由解码选项、编码选项、散列三个构成 ，目前支持八种形式的格式转换（URL、HTML、Base64、ASCII、16进制、8进制、2进制、GZIP），需要注意的是，在这个模块中可以进行多次界面和编码的转换</p>
+<center><img src="/img/WEBtools——BURP/41.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<p>&emsp;</p>
+<h4 id="9-扩展模块"><a href="#9-扩展模块" class="headerlink" title="9.扩展模块"></a>9.扩展模块</h4><p>&emsp;&emsp;burp在软件中是支持第三方扩展插件功能的，这是为了方便有更多的功能的加入，也鼓励使用者们进行开发，所以Burp扩展程序可以以多种方式支持自定义Burp的行为，这里主要介绍几个burp的相关信息，首先是burp的插件官方网站：</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">https:<span class="hljs-regexp">//</span>portswigger.net/bappstore<br></code></pre></td></tr></table></figure>
+
+<center><img src="/img/WEBtools——BURP/42.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<p>&emsp;&emsp;burp软件内也是由直接提供扩展内容的，与官网内容基本一致</p>
+<center><img src="/img/WEBtools——BURP/43.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<p>&emsp;&emsp;当然，除了官方版本，github也存在着许许多多的burp扩展项目提供开源使用，比如漏洞检测创建扩展、自己网站安全检测的安全脚本等等买这些都是开源提供的，能够很好的提高我们的工作效率，上面所讲述的软件内扩展提供有一部分也是根据github提供的内容进行转载：</p>
+<center><img src="/img/WEBtools——BURP/44.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<p>&emsp;&emsp;对于github的扩展内容，我们可以通过选项界面进行相关的导入</p>
+<center><img src="/img/WEBtools——BURP/45.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<p>&emsp;&emsp;举起导入过程，基本都有相关教程，这里就不别浪费时间进行阐述，我们对于burp的相关了解就至此结束，对于为涉及到的仪表盘、项目选择、用户选择以及对比器并没介绍，这是因为在我们的渗透过程中，这几个部分目前的使用概率比较小，所以不会进行描述，后续如果有涉及到也会进行相关的跟进和学习</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/WEB-tools/" class="category-chain-item">WEB tools</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>Burpsuite</div>
+      <div>https://one-null-pointer.github.io/2023/07/23/Burpsuite/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>Author</div>
+          <div>liaoyue</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>Posted on</div>
+          <div>July 23, 2023</div>
+        </div>
+      
+      
+      <div class="license-meta-item">
+        <div>传送口</div>
+        <div>
+          
+            
+            
+              <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+              <span class="hint--top hint--rounded" aria-label="点击进行传送">
+                <i class="iconfont icon-by"></i>
+              </span>
+              </a>
+            
+          
+        </div>
+      </div>
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2023/08/09/Linux%E8%BF%90%E7%BB%B4%E2%80%94%E2%80%94Ossec%E5%AE%89%E8%A3%85/" title="OSSEC（一）">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">OSSEC（一）</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2023/07/22/WEBtools%E2%80%94%E2%80%94AWVS/" title="AWVS">
+                        <span class="hidden-mobile">AWVS</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;Table of Contents</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">Keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://github.com/" target="_blank" rel="nofollow noopener"><span>pointer</span></a> <i class="iconfont icon-love"></i> <a href="https://mp.weixin.qq.com/s/6ncLUtaiJ9j_sMjZT5z-2w" target="_blank" rel="nofollow noopener"><span>一个爱学习的空指针</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      headingSelector : CONFIG.toc.headingSelector || 'h1,h2,h3,h4,h5,h6',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      collapseDepth   : CONFIG.toc.collapseDepth || 0,
+      scrollSmooth    : true,
+      headingsOffset  : -boardTop
+    });
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.10/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">Blog works best with JavaScript enabled</div>
+  </noscript>
+</body>
+</html>
