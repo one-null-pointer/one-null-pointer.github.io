@@ -1,0 +1,730 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="liaoyue">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="灯塔0.前言&amp;emsp;&amp;emsp;对于渗透和挖掘漏洞，前期就是需要做好相关的信息收集和域名，这里使用灯塔进行资产收集，一方面是由于其不容易导致服务器挂，又有比较好的收集效果 &amp;emsp; 1.灯塔安装 方法一：git clone  &amp;emsp;&amp;emsp;这里采用docker灯塔进行资产扫描，既可以在centos也可以在ubuntu中进行安装，这里选择了kali2023的系统配置环境，首先拉取镜">
+<meta property="og:type" content="article">
+<meta property="og:title" content="资产扫描——灯塔">
+<meta property="og:url" content="https://one-null-pointer.github.io/2023/08/18/%E8%B5%84%E4%BA%A7%E6%89%AB%E6%8F%8F%E2%80%94%E2%80%94%E7%81%AF%E5%A1%94/index.html">
+<meta property="og:site_name" content="one-null-poniter">
+<meta property="og:description" content="灯塔0.前言&amp;emsp;&amp;emsp;对于渗透和挖掘漏洞，前期就是需要做好相关的信息收集和域名，这里使用灯塔进行资产收集，一方面是由于其不容易导致服务器挂，又有比较好的收集效果 &amp;emsp; 1.灯塔安装 方法一：git clone  &amp;emsp;&amp;emsp;这里采用docker灯塔进行资产扫描，既可以在centos也可以在ubuntu中进行安装，这里选择了kali2023的系统配置环境，首先拉取镜">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://one-null-pointer.github.io/img/tools.png">
+<meta property="article:published_time" content="2023-08-18T13:49:41.000Z">
+<meta property="article:modified_time" content="2023-08-20T14:48:07.100Z">
+<meta property="article:author" content="liaoyue">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://one-null-pointer.github.io/img/tools.png">
+  
+  
+  
+  <title>资产扫描——灯塔 - one-null-poniter</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"one-null-pointer.github.io","root":"/","version":"1.9.2","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 5.4.2"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>one null pointer</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                吾
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                學
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                類
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="资产扫描——灯塔"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2023-08-18 21:49" pubdate>
+          August 18, 2023 pm
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          2.8k words
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          23 mins
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">资产扫描——灯塔</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="灯塔"><a href="#灯塔" class="headerlink" title="灯塔"></a>灯塔</h1><h4 id="0-前言"><a href="#0-前言" class="headerlink" title="0.前言"></a>0.前言</h4><p>&emsp;&emsp;对于渗透和挖掘漏洞，前期就是需要做好相关的信息收集和域名，这里使用灯塔进行资产收集，一方面是由于其不容易导致服务器挂，又有比较好的收集效果</p>
+<p>&emsp;</p>
+<h4 id="1-灯塔安装"><a href="#1-灯塔安装" class="headerlink" title="1.灯塔安装"></a>1.灯塔安装</h4><ul>
+<li><h5 id="方法一：git-clone"><a href="#方法一：git-clone" class="headerlink" title="方法一：git clone"></a>方法一：git clone</h5></li>
+</ul>
+<p>&emsp;&emsp;这里采用docker灯塔进行资产扫描，既可以在centos也可以在ubuntu中进行安装，这里选择了kali2023的系统配置环境，首先拉取镜像docker安装arl</p>
+<figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs arduino">clear<br>docker pull tophant/arl<br></code></pre></td></tr></table></figure>
+
+<center><img src="/img/WEBtools——deng/1.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<p>&emsp;&emsp;拉取镜像过后，下载arl</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">git clone https:<span class="hljs-regexp">//gi</span>thub.com<span class="hljs-regexp">/TophantTechnology/</span>ARL<br></code></pre></td></tr></table></figure>
+
+<center><img src="/img/WEBtools——deng/2.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<p>&emsp;&emsp;拉取后进入文件直接开启并下载</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs awk">cd ARL<span class="hljs-regexp">/docker/</span><br>docker-compose up –d<br></code></pre></td></tr></table></figure>
+
+<center><img src="/img/WEBtools——deng/3.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<p>&emsp;&emsp;这个错误提示表明在创建Docker网络时遇到了问题，并指出了名为”arl_db”的卷被声明为外部卷，但是找不到该卷直接执行命令docker volume create –name=arl_db手动创建名为”arl_db”的卷。然后再次尝试创建Docker网络</p>
+<figure class="highlight gauss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs gauss">docker <span class="hljs-built_in">volume</span> <span class="hljs-keyword">create</span> --name=arl_db<br>docker-compose up –d<br></code></pre></td></tr></table></figure>
+
+<center><img src="/img/WEBtools——deng/4.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<p>&emsp;&emsp;默认端口5003, 默认用户名密码admin/arlpass，端口访问ip:5003</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">http:<span class="hljs-regexp">//</span><span class="hljs-number">192.168</span>.<span class="hljs-number">70.172</span>:<span class="hljs-number">5003</span>/<br></code></pre></td></tr></table></figure>
+
+<center><img src="/img/WEBtools——deng/5.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<p>&emsp;&emsp;这个错误提示表明我们尝试将一个普通的HTTP请求发送到了HTTPS端口，所以不能只输入ip+端口，需要按照规定使用https协议</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">https:<span class="hljs-regexp">//</span><span class="hljs-number">192.168</span>.<span class="hljs-number">70.172</span>:<span class="hljs-number">5003</span>/<br></code></pre></td></tr></table></figure>
+
+<center><img src="/img/WEBtools——deng/6.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<p>&emsp;&emsp;这里没有登录就直接进入显然是不正常的，果然在进行操作的时候总是会报timeout of 12000ms exceeded的错误，这是新版的灯塔存在bug，在config.py里对”RISKIQ“的引用了</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs stylus">Config<span class="hljs-selector-class">.RISKIQ_EMAIL</span> = y<span class="hljs-selector-attr">[<span class="hljs-string">&quot;RISKIQ&quot;</span>]</span><span class="hljs-selector-attr">[<span class="hljs-string">&quot;EMAIL&quot;</span>]</span><br>Config<span class="hljs-selector-class">.RISKIO</span> KEY = y<span class="hljs-selector-attr">[<span class="hljs-string">&quot;RISKIQ&quot;</span>]</span><span class="hljs-selector-attr">[<span class="hljs-string">&quot;KEY&quot;</span>]</span><br></code></pre></td></tr></table></figure>
+
+<p>&emsp;&emsp;但是对于config.yaml的文件中并未声明，因此我们需要添加相关内容：</p>
+<figure class="highlight dts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs dts"><span class="hljs-symbol">RISKIQ:</span><br><span class="hljs-symbol">   EMAIL:</span> <span class="hljs-string">&quot;&quot;</span><br><span class="hljs-symbol">   KEY:</span> <span class="hljs-string">&quot;&quot;</span><br></code></pre></td></tr></table></figure>
+
+<p>&emsp;&emsp;添加的位置我们可以放在FOFA API 配置项下，模仿其格式即可（注意：这里的空格要求对齐）</p>
+<center><img src="/img/WEBtools——deng/7.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ebnf"><span class="hljs-attribute">docker-compose restart</span><br></code></pre></td></tr></table></figure>
+
+<center><img src="/img/WEBtools——deng/8.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<p>&emsp;&emsp;再次重新访问：</p>
+<center><img src="/img/WEBtools——deng/9.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<p>&emsp;</p>
+<center><img src="/img/WEBtools——deng/10.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<p>&emsp;&emsp;这就是正确反馈，注：为了安全起见，一定要记得修改默认密码，特别是在服务器的时候</p>
+<ul>
+<li><h5 id="方法二：wget"><a href="#方法二：wget" class="headerlink" title="方法二：wget"></a>方法二：wget</h5></li>
+</ul>
+<p>&emsp;&emsp;这种方法的好处就是直接拉取下我们指定版本的灯塔</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs awk">mkdir docker_arl<br>wget -O docker_arl<span class="hljs-regexp">/docker.zip https:/</span><span class="hljs-regexp">/github.com/</span>TophantTechnology<span class="hljs-regexp">/ARL/</span>releases<span class="hljs-regexp">/download/</span>v2.<span class="hljs-number">5.5</span>/docker.zip<br></code></pre></td></tr></table></figure>
+
+<center><img src="/img/WEBtools——deng/11.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<figure class="highlight gauss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs gauss">cd docker_arl<br>unzip -o docker.zip<br>docker-compose pull<br>docker <span class="hljs-built_in">volume</span> <span class="hljs-keyword">create</span> arl_db<br></code></pre></td></tr></table></figure>
+
+<center><img src="/img/WEBtools——deng/12.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ebnf"><span class="hljs-attribute">docker-compose up -d</span><br></code></pre></td></tr></table></figure>
+
+<center><img src="/img/WEBtools——deng/13.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<p>&emsp;&emsp;这个错误提示说明在创建容器时发生了冲突，因为容器名称已经被其他容器使用了，前面的忘记删除了，首先查看下所有容器的列表，包括正在运行和已停止的容器</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs css">docker ps -<span class="hljs-selector-tag">a</span><br></code></pre></td></tr></table></figure>
+
+<center><img src="/img/WEBtools——deng/14.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<p>&emsp;&emsp;明显有c0cf05020388以及23e54209db2e是冲突的，我们需要先stop后直接rm掉即可</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">docker</span> stop c0cf05020388<br><span class="hljs-attribute">docker</span> rm c0cf05020388<br><span class="hljs-attribute">docker</span> stop <span class="hljs-number">23</span>e54209db2e<br><span class="hljs-attribute">docker</span> rm <span class="hljs-number">23</span>e54209db2e<br></code></pre></td></tr></table></figure>
+
+<center><img src="/img/WEBtools——deng/15.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<p>&emsp;&emsp;再次重新启动（如果还是不行，可能是因为之前的git clone没删干净，重新搞个新环境就不会报错了）</p>
+<center><img src="/img/WEBtools——deng/16.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<p>&emsp;&emsp;接下来查看网址：</p>
+<center><img src="/img/WEBtools——deng/17.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<p>&emsp;&emsp;依旧是这个破问题，为什么博主不改呢，不知道，直接继续按照方法一讲到的解决操作再进行一遍即可</p>
+<center><img src="/img/WEBtools——deng/18.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<p>&emsp;</p>
+<h4 id="2-域名扫描"><a href="#2-域名扫描" class="headerlink" title="2.域名扫描"></a>2.域名扫描</h4><p>&emsp;&emsp;这里进行任务管理的添加，针对于单个或多个域名进行扫描，在提交任务添加表单时，有五个模块进行填充，任务名称随意填写进行标记即可，目标填写域名或者ip设置指定ip段，不过为了细致的资产挖掘，一般是一点点的挖掘。域名爆破类型分为大字典以及测试，其中大字典常用2万字典大小。测试则是少数几个字典，常用于测试功能是否正常。对于扫描端口，提供三种模式，分别是ALL：全部端口，TOP1000：常用top 1000端口，TOP100：常用top 100端口，测试：少数几个端口</p>
+<p>&emsp;&emsp;最重要的就是扫描的功能需求，一般在扫描中，根据站点的需求进行相应的选择，这里需要注意选择，有部分内容是扫描力度过大的，需要酌情考虑，比如文件泄露等内容</p>
+<center><img src="/img/WEBtools——deng/19.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<p>&emsp;&emsp;接下来选择完毕后就可开启进行扫描了：</p>
+<center><img src="/img/WEBtools——deng/20.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<p>&emsp;&emsp;就会显示相关的资产，这里就不进行详细阐述看，每个模块也不会陌生</p>
+<p>&emsp;</p>
+<h4 id="3-读取信息"><a href="#3-读取信息" class="headerlink" title="3.读取信息"></a>3.读取信息</h4><center><img src="/img/WEBtools——deng/21.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<p>&emsp;&emsp;可以查看到我们获取的资产信息，尝试抓取出有用的东西，首先是查看组件</p>
+<center><img src="/img/WEBtools——deng/22.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<p>&emsp;&emsp;清一色的nginx代理……，这里可以接入cms的扫描模块，查看是否有类似的nday漏洞，如果没有则尝试进行awvs进行扫描：</p>
+<center><img src="/img/WEBtools——deng/23.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<p>&emsp;&emsp;存在一个高危漏洞提示，这里点进去查看：</p>
+<center><img src="/img/WEBtools——deng/24.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<p>&emsp;&emsp;其对应的一种就是BEAST攻击，其针对SSL/TLS的浏览器漏洞利用，通过利用此漏洞影响SSL3.0和TLS1.0（CVE-2011-3389）。利用TLS1.0中CBC（密码块链）实现中的漏洞。这使攻击者能够通过使用MITM技术将构建的数据包注入TLS流来解密两个用户/系统之间的加密数据</p>
+<p>&emsp;&emsp;后续需要研究对该漏洞进行利用和尝试，查看是否成功，尽管评估是高，但是对于业务性质以及现有情况而言，危险系数不至于到高的程度。可能是使用了具有已知漏洞的组件就判断为高了，其次正如前面支持扫描可以看到其质问对应的为cdn</p>
+<center><img src="/img/WEBtools——deng/25.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<p>&emsp;&emsp;初步的扫描过后，我们就可以开始展开对于业务层面的web漏洞攻击尝试</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/WEB-tools/" class="category-chain-item">WEB tools</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>资产扫描——灯塔</div>
+      <div>https://one-null-pointer.github.io/2023/08/18/资产扫描——灯塔/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>Author</div>
+          <div>liaoyue</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>Posted on</div>
+          <div>August 18, 2023</div>
+        </div>
+      
+      
+      <div class="license-meta-item">
+        <div>传送口</div>
+        <div>
+          
+            
+            
+              <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+              <span class="hint--top hint--rounded" aria-label="点击进行传送">
+                <i class="iconfont icon-by"></i>
+              </span>
+              </a>
+            
+          
+        </div>
+      </div>
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2023/08/17/%E5%9F%BA%E4%BA%8Eossec%E5%B7%A5%E5%85%B7%E8%B0%83%E7%94%A8lynis%E8%BF%9B%E8%A1%8C%E8%AF%81%E4%B9%A6%E7%9A%84%E6%89%AB%E6%8F%8F%E5%AE%9E%E7%8E%B0/" title="基于ossec工具调用lynis进行证书的扫描实现">
+                        <span class="hidden-mobile">基于ossec工具调用lynis进行证书的扫描实现</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;Table of Contents</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">Keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://github.com/" target="_blank" rel="nofollow noopener"><span>pointer</span></a> <i class="iconfont icon-love"></i> <a href="https://mp.weixin.qq.com/s/6ncLUtaiJ9j_sMjZT5z-2w" target="_blank" rel="nofollow noopener"><span>一个爱学习的空指针</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      headingSelector : CONFIG.toc.headingSelector || 'h1,h2,h3,h4,h5,h6',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      collapseDepth   : CONFIG.toc.collapseDepth || 0,
+      scrollSmooth    : true,
+      headingsOffset  : -boardTop
+    });
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.10/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">Blog works best with JavaScript enabled</div>
+  </noscript>
+</body>
+</html>

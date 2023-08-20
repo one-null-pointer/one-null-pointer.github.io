@@ -1,0 +1,812 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="liaoyue">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="OSSEC（三）0.前言&amp;emsp;&amp;emsp;前面完成了ossec的两种版本的安装对比，对于3和2都进行了一定的解析，同时基于2.8版本进行了wui和analogi的可视化界面搭建，在结束工具的基本安装和搭建后，接下来需要掌握的是对于ossec入职的规范以及告警规则的配置学习，这里分为几点，首先是OSSEC的配置、ossec.conf的文件写法使用等相关内容。参考链接： 123https:&#x2F;&#x2F;m">
+<meta property="og:type" content="article">
+<meta property="og:title" content="OSSEC（三）">
+<meta property="og:url" content="https://one-null-pointer.github.io/2023/08/12/Linux%E8%BF%90%E7%BB%B4%E2%80%94%E2%80%94OSSEC%EF%BC%88%E4%B8%89%EF%BC%89/index.html">
+<meta property="og:site_name" content="one-null-poniter">
+<meta property="og:description" content="OSSEC（三）0.前言&amp;emsp;&amp;emsp;前面完成了ossec的两种版本的安装对比，对于3和2都进行了一定的解析，同时基于2.8版本进行了wui和analogi的可视化界面搭建，在结束工具的基本安装和搭建后，接下来需要掌握的是对于ossec入职的规范以及告警规则的配置学习，这里分为几点，首先是OSSEC的配置、ossec.conf的文件写法使用等相关内容。参考链接： 123https:&#x2F;&#x2F;m">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://one-null-pointer.github.io/img/Linux.png">
+<meta property="article:published_time" content="2023-08-12T06:59:41.000Z">
+<meta property="article:modified_time" content="2023-08-20T13:45:07.048Z">
+<meta property="article:author" content="liaoyue">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://one-null-pointer.github.io/img/Linux.png">
+  
+  
+  
+  <title>OSSEC（三） - one-null-poniter</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"one-null-pointer.github.io","root":"/","version":"1.9.2","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 5.4.2"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>one null pointer</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                吾
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                學
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                類
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="OSSEC（三）"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2023-08-12 14:59" pubdate>
+          August 12, 2023 pm
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          9.4k words
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          79 mins
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">OSSEC（三）</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="OSSEC（三）"><a href="#OSSEC（三）" class="headerlink" title="OSSEC（三）"></a>OSSEC（三）</h1><h4 id="0-前言"><a href="#0-前言" class="headerlink" title="0.前言"></a>0.前言</h4><p>&emsp;&emsp;前面完成了ossec的两种版本的安装对比，对于3和2都进行了一定的解析，同时基于2.8版本进行了wui和analogi的可视化界面搭建，在结束工具的基本安装和搭建后，接下来需要掌握的是对于ossec入职的规范以及告警规则的配置学习，这里分为几点，首先是OSSEC的配置、ossec.conf的文件写法使用等相关内容。参考链接：</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs awk">https:<span class="hljs-regexp">//m</span>.starcto.com<span class="hljs-regexp">/safetool/</span><span class="hljs-number">235</span>.html<br>https:<span class="hljs-regexp">//gi</span>thub.com<span class="hljs-regexp">/xiyoulaoyuanjia/</span>sAoccec<span class="hljs-regexp">/blob/m</span>aster/ossec 基于主机的入侵检测指南 手册.md<br>https:<span class="hljs-regexp">//</span>www.<span class="hljs-number">51</span>cto.com<span class="hljs-regexp">/article/</span><span class="hljs-number">442697</span>.html<br></code></pre></td></tr></table></figure>
+
+<p>&emsp;</p>
+<h4 id="1-配置文件"><a href="#1-配置文件" class="headerlink" title="1.配置文件"></a>1.配置文件</h4><ul>
+<li><h5 id="核心配置文件"><a href="#核心配置文件" class="headerlink" title="核心配置文件"></a>核心配置文件</h5></li>
+</ul>
+<p>&emsp;&emsp;在unix、linux等系统上安装OSSEC，其默认路径一般是/var/ossec,在启动过程中，配置文件和规则都是从该目录路径进行读取，接下来介绍下ossec的相关核心配置文件及其作用</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs awk"><span class="hljs-comment">#目录包含所有ossec hids使用的配置文件</span><br><span class="hljs-regexp">/var/</span>ossec/etc <br><span class="hljs-comment">#ossec hids主要配置文件</span><br>ossec.conf <br><span class="hljs-comment">#额外配置选项文件</span><br>internal_options.conf<br><span class="hljs-comment">#文件解码器，各种规则都在这里写来调用</span><br>decoders.xml <br><span class="hljs-comment">#用于客户端与服务器认证通信</span><br>client.keys<br><span class="hljs-comment">#目录包含ossec hids使用的二进制文件</span><br><span class="hljs-regexp">/var/</span>ossec/bin <br></code></pre></td></tr></table></figure>
+
+<center><img src="/img/Linux运维——ossec（三）/1.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<ul>
+<li><h5 id="日志配置文件"><a href="#日志配置文件" class="headerlink" title="日志配置文件"></a>日志配置文件</h5></li>
+</ul>
+<p>&emsp;&emsp;在OSSEC中，日志文件起着记录和存储系统活动的作用</p>
+<figure class="highlight 1c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs 1c"><span class="hljs-meta"># 包含有关ossec所有的日志记录文件</span><br>/var/ossec/logs<br><span class="hljs-meta"># 包含osse 所有日志(error,warn,info和其他)</span><br>ossec.<span class="hljs-built_in">log</span><br><span class="hljs-meta">#ossec报警日志</span><br>alerts/alerts.<span class="hljs-built_in">log</span><br><span class="hljs-meta">#ossec响应日志</span><br>active-responses.<span class="hljs-built_in">log</span><br></code></pre></td></tr></table></figure>
+
+<center><img src="/img/Linux运维——ossec（三）/2.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<ul>
+<li><h5 id="队列文件"><a href="#队列文件" class="headerlink" title="队列文件"></a>队列文件</h5></li>
+</ul>
+<p>&emsp;&emsp;在OSSEC中，队列用于存储和管理来自代理的事件和日志数据。它是一个临时存储区域，用于处理和分析来自不同代理的数据。队列的作用是确保数据的有序处理和传输。当代理无法立即将数据发送到服务器时，数据会被放入队列中，以便稍后进行处理。这可以发生在网络连接不稳定、服务器负载过高或代理与服务器之间的通信中断等情况下。</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs routeros"><span class="hljs-comment">#目录包含ossec hids队列文件</span><br>/var/ossec<span class="hljs-built_in">/queue </span><br><span class="hljs-comment">#目录包含操作系统版本、ossec hids版本等信息</span><br>agent-<span class="hljs-built_in">info</span> <br><span class="hljs-comment">#目录包含每个agent的数据校验日志</span><br>syscheck <br><span class="hljs-comment">#目录包含每个agent，rootkit检查数据和监控规则</span><br>rootcheck <br><span class="hljs-comment">#目录包含agent ids信息</span><br>rids <br></code></pre></td></tr></table></figure>
+
+<center><img src="/img/Linux运维——ossec（三）/3.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<ul>
+<li><h5 id="规则文件"><a href="#规则文件" class="headerlink" title="规则文件"></a>规则文件</h5></li>
+</ul>
+<p>&emsp;&emsp;规则文件定义了OSSEC如何检测和响应不同类型的安全事件。它们包含了一系列规则，这些规则描述了需要监控的特定事件、日志或行为，并指定了当这些事件发生时应该采取的操作</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs awk"><span class="hljs-comment">#目录包含所有ossec规则</span><br><span class="hljs-regexp">/var/</span>log/rules <br><span class="hljs-comment">#目录包含每秒统计数据等文件</span><br><span class="hljs-regexp">/var/</span>log/stats <br></code></pre></td></tr></table></figure>
+
+<center><img src="/img/Linux运维——ossec（三）/4.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<p>&emsp;</p>
+<h4 id="2-ossec-conf文件"><a href="#2-ossec-conf文件" class="headerlink" title="2.ossec.conf文件"></a>2.ossec.conf文件</h4><p>&emsp;&emsp;前一小节介绍了ossec的相关配置文件，接下来就针对最核心的ossec.conf文件进行深入探究，ossec.conf文件位于OSSEC安装目录下的/etc目录中，是ossec最主要配置文件，其使用的是xml格式结构进行语言编写，该文件包含的段落标识主要为</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-comment">#全局配置配置</span><br><span class="hljs-section">&lt;global&gt;</span><br><span class="hljs-comment">#邮件和日志报警选项</span><br><span class="hljs-section">&lt;alerts&gt;</span><br><span class="hljs-comment">#细力度邮件配置文件</span><br><span class="hljs-section">&lt;email alerts&gt;</span><br><span class="hljs-comment">#该选项只允许在server端配置</span><br><span class="hljs-section">&lt;remote&gt;</span><br><span class="hljs-comment">#数据库输出选项</span><br><span class="hljs-section">&lt;database output&gt;</span><br><span class="hljs-comment">#包含规则列表</span><br><span class="hljs-section">&lt;rules&gt;</span><br><span class="hljs-comment">#agent有关配置文件选项</span><br><span class="hljs-section">&lt;client&gt;</span><br><span class="hljs-comment">#日志文件监控配置选项</span><br><span class="hljs-section">&lt;localfle&gt;</span><br><span class="hljs-comment">#系统检查配置文件选项</span><br><span class="hljs-section">&lt;syscheck&gt;</span><br><span class="hljs-comment">#rootki发现和规则监控选项</span><br><span class="hljs-section">&lt;rootcheck&gt;</span><br><span class="hljs-comment">#主机响应配置选项</span><br><span class="hljs-section">&lt;comnand&gt;</span><br><span class="hljs-comment">#恶意主机响应配置选项</span><br><span class="hljs-section">&lt;active-response&gt;</span><br></code></pre></td></tr></table></figure>
+
+<center><img src="/img/Linux运维——ossec（三）/5.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<ul>
+<li><h5 id="global模块"><a href="#global模块" class="headerlink" title="global模块"></a>global模块</h5></li>
+</ul>
+<p>&emsp;&emsp;这个模块包含全局设置，如日志文件路径、邮件设置等，前文图片所显示的内容中就包含了global模块内容，这里进行解析：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">global</span>&gt;</span><br>   <span class="hljs-tag">&lt;<span class="hljs-name">email_notification</span>&gt;</span>yes<span class="hljs-tag">&lt;/<span class="hljs-name">email_notification</span>&gt;</span><br>   <span class="hljs-tag">&lt;<span class="hljs-name">email_to</span>&gt;</span>xxx@qq.com<span class="hljs-tag">&lt;/<span class="hljs-name">email_to</span>&gt;</span><br>   <span class="hljs-tag">&lt;<span class="hljs-name">smtp_server</span>&gt;</span>mx3.qq.com.<span class="hljs-tag">&lt;/<span class="hljs-name">smtp_server</span>&gt;</span><br>   <span class="hljs-tag">&lt;<span class="hljs-name">email_from</span>&gt;</span>ossecm@localhost.localdomain<span class="hljs-tag">&lt;/<span class="hljs-name">email_from</span>&gt;</span><br> <span class="hljs-tag">&lt;/<span class="hljs-name">global</span>&gt;</span><br></code></pre></td></tr></table></figure>
+
+<p>&emsp;&emsp;首先是<email_notification>：该选项设置为yes表示启用电子邮件通知功能，其次在<email_to>：指定接收通知的电子邮件地址，而<smtp_server>：指定SMTP服务器的地址，最后就是<email_from>：指定发送通知的电子邮件地址。在这个示例中，通知将从<a href="mailto:&#x6f;&#115;&#115;&#x65;&#99;&#x6d;&#64;&#x6c;&#111;&#x63;&#x61;&#108;&#104;&#x6f;&#x73;&#x74;&#x2e;&#108;&#111;&#99;&#97;&#x6c;&#100;&#111;&#109;&#97;&#x69;&#110;">&#x6f;&#115;&#115;&#x65;&#99;&#x6d;&#64;&#x6c;&#111;&#x63;&#x61;&#108;&#104;&#x6f;&#x73;&#x74;&#x2e;&#108;&#111;&#99;&#97;&#x6c;&#100;&#111;&#109;&#97;&#x69;&#110;</a>发送</p>
+<center><img src="/img/Linux运维——ossec（三）/6.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<ul>
+<li><h5 id="alerts模块"><a href="#alerts模块" class="headerlink" title="alerts模块"></a>alerts模块</h5></li>
+</ul>
+<p>&emsp;&emsp;alerts模块是配置报警级别以及收集所有的日志，每个报警都有一个严重基本报警等级，ossec的分配等级是0-15，等级越高则代表报警更加严重，严重级别更高，例如：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">alerts</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">log_alert_level</span>&gt;</span>1<span class="hljs-tag">&lt;/<span class="hljs-name">log_alert_level</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">email_alert_level</span>&gt;</span>7<span class="hljs-tag">&lt;/<span class="hljs-name">email_alert_level</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">alerts</span>&gt;</span><br></code></pre></td></tr></table></figure>
+
+<p>&emsp;&emsp;这条规则是指只记录1以上的报警级别日志，并且报警级别高于7 以上的报警都会发送邮件</p>
+<ul>
+<li><h5 id="email-alerts模块"><a href="#email-alerts模块" class="headerlink" title="email_alerts模块"></a>email_alerts模块</h5></li>
+</ul>
+<p>&emsp;&emsp;这个模块能够实现为特定的事件组创建一个单独的电子邮件通知，当该组的事件触发时能够直接发送邮件，例如：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">email_alerts</span>&gt;</span><br> <span class="hljs-tag">&lt;<span class="hljs-name">group</span>&gt;</span>authentication_failures<span class="hljs-tag">&lt;/<span class="hljs-name">group</span>&gt;</span><br> <span class="hljs-tag">&lt;<span class="hljs-name">do_not_delay</span>/&gt;</span><br> <span class="hljs-tag">&lt;<span class="hljs-name">email_to</span>&gt;</span>security@example.com<span class="hljs-tag">&lt;/<span class="hljs-name">email_to</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">email_alerts</span>&gt;</span><br></code></pre></td></tr></table></figure>
+
+<p>&emsp;&emsp;在这个示例中，我们为特定事件组 “authentication_failures” 创建了一个单独的电子邮件通知。当该组的事件触发时，不会延迟发送邮件（do_not_delay），并将邮件发送到 <a href="mailto:&#115;&#101;&#x63;&#x75;&#x72;&#105;&#116;&#x79;&#x40;&#101;&#120;&#97;&#x6d;&#x70;&#108;&#x65;&#x2e;&#x63;&#111;&#x6d;">&#115;&#101;&#x63;&#x75;&#x72;&#105;&#116;&#x79;&#x40;&#101;&#120;&#97;&#x6d;&#x70;&#108;&#x65;&#x2e;&#x63;&#111;&#x6d;</a>中</p>
+<center><img src="/img/Linux运维——ossec（三）/7.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<ul>
+<li><h5 id="remote模块"><a href="#remote模块" class="headerlink" title="remote模块"></a>remote模块</h5></li>
+</ul>
+<p>&emsp;&emsp;这个模块是远程配置选项模块，仅在服务器端配置，负责接收来自代理的信息，如连接方式和端口等，例如：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">remote</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">connection</span>&gt;</span>secure<span class="hljs-tag">&lt;/<span class="hljs-name">connection</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">port</span>&gt;</span>1514<span class="hljs-tag">&lt;/<span class="hljs-name">port</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">remote</span>&gt;</span><br></code></pre></td></tr></table></figure>
+
+<p>&emsp;&emsp;此示例配置了服务器端的远程连接选项。使用安全连接（connection 设置为 “secure”）并监听端口1514（port 设置为 “1514”）以接收代理发送的信息</p>
+<center><img src="/img/Linux运维——ossec（三）/8.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<ul>
+<li><h5 id="database-output模块"><a href="#database-output模块" class="headerlink" title="database_output模块"></a>database_output模块</h5></li>
+</ul>
+<p>&emsp;&emsp;这是数据库输出选项模块，负责将OSSEC事件存储到外部数据库中，如MySQL或PostgreSQL等，例如：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">database_output</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">hostname</span>&gt;</span>localhost<span class="hljs-tag">&lt;/<span class="hljs-name">hostname</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">username</span>&gt;</span>ossec<span class="hljs-tag">&lt;/<span class="hljs-name">username</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">password</span>&gt;</span>ossec<span class="hljs-tag">&lt;/<span class="hljs-name">password</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">database</span>&gt;</span>ossec<span class="hljs-tag">&lt;/<span class="hljs-name">database</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">type</span>&gt;</span>mysql<span class="hljs-tag">&lt;/<span class="hljs-name">type</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">database_output</span>&gt;</span><br></code></pre></td></tr></table></figure>
+
+<p>&emsp;&emsp;此示例配置了将OSSEC事件存储到MySQL数据库的设置。指定了数据库主机名（hostname 设置为 “localhost”）、用户名（username 设置为 “ossec”）、密码（password 设置为 “ossec”）、数据库名称（database 设置为 “ossec”）和数据库类型（type 设置为 “mysql”）</p>
+<center><img src="/img/Linux运维——ossec（三）/9.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<ul>
+<li><h5 id="rules模块"><a href="#rules模块" class="headerlink" title="rules模块"></a>rules模块</h5></li>
+</ul>
+<p>&emsp;&emsp;规则列表模块，定义用于检测事件的规则，包括内置规则和自定义规则，例如：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">rules</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">include</span>&gt;</span>rules_config.xml<span class="hljs-tag">&lt;/<span class="hljs-name">include</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">rules</span>&gt;</span><br></code></pre></td></tr></table></figure>
+
+<p>&emsp;&emsp;在这个示例中，我们包含了一个名为 “rules_config.xml” 的外部规则文件，该文件包含了一组自定义规则，而rules的文件位置一般是在/var/ossec/rules/</p>
+<center><img src="/img/Linux运维——ossec（三）/10.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<ul>
+<li><h5 id="client模块"><a href="#client模块" class="headerlink" title="client模块"></a>client模块</h5></li>
+</ul>
+<p>&emsp;&emsp;顾名思义，只有agent机器上的配置文件进行设置，代理相关配置文件选项模块，负责指定服务器地址和端口，以便代理与服务器建立连接。例如</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-section">&lt;client&gt;</span><br>  <span class="hljs-section">&lt;server-ip&gt;</span><span class="hljs-attribute">192</span>.<span class="hljs-number">168</span>.<span class="hljs-number">1</span>.<span class="hljs-number">1</span>&lt;/server-ip&gt;<br>  <span class="hljs-section">&lt;server-hostname&gt;</span><span class="hljs-attribute">ossec</span>-server.example.com&lt;/server-hostname&gt;<br>  <span class="hljs-section">&lt;port&gt;</span><span class="hljs-attribute">1514</span>&lt;/port&gt;<br><span class="hljs-section">&lt;/client&gt;</span><br></code></pre></td></tr></table></figure>
+
+<p>&emsp;&emsp;此示例配置了代理端的连接设置。指定了服务器IP地址（server-ip 设置为 “192.168.1.1”）、服务器主机名（server-hostname 设置为 “ossec-server.example.com”）和端口号（port 设置为 “1514”）</p>
+<center><img src="/img/Linux运维——ossec（三）/11.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<ul>
+<li><h5 id="localfile模块"><a href="#localfile模块" class="headerlink" title="localfile模块"></a>localfile模块</h5></li>
+</ul>
+<p>&emsp;&emsp;该模块是日志文件监控配置选项模块，负责定义要监控的本地日志文件，以便实时分析和检测恶意活动，例如：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">localfile</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">log_format</span>&gt;</span>syslog<span class="hljs-tag">&lt;/<span class="hljs-name">log_format</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">location</span>&gt;</span>/var/log/auth.log<span class="hljs-tag">&lt;/<span class="hljs-name">location</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">localfile</span>&gt;</span><br></code></pre></td></tr></table></figure>
+
+<p>&emsp;&emsp;在这个示例中，我们定义了要监控的本地日志文件。设置日志格式为 “syslog”（log_format 设置为 “syslog”），并指定要监控的日志文件位置为 “/var/log/auth.log”（location 设置为 “/var/log/auth.log”）</p>
+<center><img src="/img/Linux运维——ossec（三）/12.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<ul>
+<li><h5 id="syscheck模块"><a href="#syscheck模块" class="headerlink" title="syscheck模块"></a>syscheck模块</h5></li>
+</ul>
+<p>&emsp;&emsp;这是系统检查配置文件选项模块，负责监控文件完整性和注册表更改，以便发现未经授权的修改，例如：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">syscheck</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">frequency</span>&gt;</span>3600<span class="hljs-tag">&lt;/<span class="hljs-name">frequency</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">directories</span> <span class="hljs-attr">check_all</span>=<span class="hljs-string">&quot;yes&quot;</span>&gt;</span>/etc,/usr/bin,/usr/sbin<span class="hljs-tag">&lt;/<span class="hljs-name">directories</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">syscheck</span>&gt;</span><br></code></pre></td></tr></table></figure>
+
+<p>&emsp;&emsp;此示例配置了系统检查设置。指定了检查频率为每3600秒（frequency 设置为 “3600”），并监控 “/etc”、”/usr/bin” 和 “/usr/sbin” 目录下的所有文件（directories 设置为 “/etc,/usr/bin,/usr/sbin”，check_all 设置为 “yes”）</p>
+<center><img src="/img/Linux运维——ossec（三）/13.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<ul>
+<li><h5 id="rootcheck模块"><a href="#rootcheck模块" class="headerlink" title="rootcheck模块"></a>rootcheck模块</h5></li>
+</ul>
+<p>&emsp;&emsp;发现和规则监控选项模块，负责检测潜在的rootkits和其他恶意软件，以保护系统安全，例如：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">rootcheck</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">enabled</span>&gt;</span>yes<span class="hljs-tag">&lt;/<span class="hljs-name">enabled</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">scanall</span>&gt;</span>yes<span class="hljs-tag">&lt;/<span class="hljs-name">scanall</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">rootcheck</span>&gt;</span><br></code></pre></td></tr></table></figure>
+
+<p>&emsp;&emsp;在这个示例中，我们启用了rootcheck功能（enabled 设置为 “yes”），并设置为扫描所有可能的rootkit（scanall 设置为 “yes”），当然也启用系统文件进行调用运行</p>
+<center><img src="/img/Linux运维——ossec（三）/14.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<ul>
+<li><h5 id="command模块"><a href="#command模块" class="headerlink" title="command模块"></a>command模块</h5></li>
+</ul>
+<p>&emsp;&emsp;主机响应配置选项模块，负责定义执行特定操作的命令，如禁用用户账户、阻止IP地址等，例如：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">command</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">name</span>&gt;</span>disable_account<span class="hljs-tag">&lt;/<span class="hljs-name">name</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">executable</span>&gt;</span>disable_account.sh<span class="hljs-tag">&lt;/<span class="hljs-name">executable</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">expect</span>&gt;</span>user<span class="hljs-tag">&lt;/<span class="hljs-name">expect</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">command</span>&gt;</span><br></code></pre></td></tr></table></figure>
+
+<p>&emsp;&emsp;此示例定义了一个名为 “disable_account” 的命令（name 设置为 “disable_account”），该命令将执行 “disable_account.sh” 脚本（executable 设置为 “disable_account.sh”），并期望接收一个 “user” 参数（expect 设置为 “user”）</p>
+<center><img src="/img/Linux运维——ossec（三）/15.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<ul>
+<li><h5 id="active-response模块"><a href="#active-response模块" class="headerlink" title="active-response模块"></a>active-response模块</h5></li>
+</ul>
+<p>&emsp;&emsp;恶意主机响应配置选项模块，根据触发的规则自动采取措施，如执行命令、发送通知等，例如：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">active-response</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">command</span>&gt;</span>disable_account<span class="hljs-tag">&lt;/<span class="hljs-name">command</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">location</span>&gt;</span>local<span class="hljs-tag">&lt;/<span class="hljs-name">location</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">rules_id</span>&gt;</span>1002<span class="hljs-tag">&lt;/<span class="hljs-name">rules_id</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">timeout</span>&gt;</span>600<span class="hljs-tag">&lt;/<span class="hljs-name">timeout</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">active-response</span>&gt;</span><br></code></pre></td></tr></table></figure>
+
+<p>&emsp;&emsp;此示例配置了一个主动响应规则。当规则ID为1002的事件触发时（rules_id 设置为 “1002”），将在本地执行名为 “disable_account” 的命令（command 设置为 “disable_account”，location 设置为 “local”）。此响应在600秒后超时（timeout 设置为 “600”），之后可以再次触发</p>
+<center><img src="/img/Linux运维——ossec（三）/16.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<p>&emsp;</p>
+<h4 id="3-日志泛化规则"><a href="#3-日志泛化规则" class="headerlink" title="3.日志泛化规则"></a>3.日志泛化规则</h4><p>&emsp;&emsp;在ossec中默认具有一个ossec-logtest工具用于测试ossec的泛化及警告规则规则，工具默认安装在/var/ossec/bin中</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk"><span class="hljs-regexp">/var/</span>ossec<span class="hljs-regexp">/bin/</span>ossec-logtest<br></code></pre></td></tr></table></figure>
+
+<center><img src="/img/Linux运维——ossec（三）/17.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<p>&emsp;&emsp;前两行表示作为一个信息级别的日志记录，正在读取本地解码器文件和表示ossec-testrule已启动，并显示其进程ID（pid）为66919，最后一行命令是提示命令，要求我们逐行输入日志内容进行检测</p>
+<p>&emsp;&emsp;这里构造一个日志内容</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">Jun</span> <span class="hljs-number">10</span> <span class="hljs-number">21</span>:<span class="hljs-number">29</span>:<span class="hljs-number">33</span> <span class="hljs-number">192.168.70.122</span>/<span class="hljs-number">192.168.70.32</span> sshd[<span class="hljs-number">24668</span>]: Accepted publickey for root from <span class="hljs-number">192.168.270.121</span> port <span class="hljs-number">38720</span> ssh2  <br></code></pre></td></tr></table></figure>
+
+<p>&emsp;&emsp;Jun 10 21:29:33表示事件发生的日期和时间，192.168.70.122/192.168.70.32：这是远程主机的IP地址，其中192.168.70.122是源IP地址，192.168.70.32是目标IP地址，sshd[24668]表示是处理此事件的SSH守护进程（sshd）的进程ID（PID），为24668。Accepted publickey for root：这表示使用公钥身份验证方式成功接受了root用户的登录请求。from 192.168.70.121 port 38720 ssh2：这是远程客户端的IP地址和端口号，其中192.168.70.121是客户端IP地址，38720是客户端使用的SSH连接的端口号</p>
+<p>&emsp;&emsp;该条日志经过三步处理，会生成了一条4级告警，规则ID为10100，内容为“First time user logged in.”，表示用户是首次登入，接下来我们输入我们假设的日志内容并回车进行检测：</p>
+<center><img src="/img/Linux运维——ossec（三）/18.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<p>&emsp;&emsp;前面讲述了，日志会经过三步处理，最后生成一个经过解码和过滤后生成警报的事件，这里我们可以使用-v的指令获取到更加详细的日志分析逻辑层次</p>
+<center><img src="/img/Linux运维——ossec（三）/19.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<p>&emsp;前文所示，对于ossec在分析入职中有一个解码和过滤的过程比较专业的描述是pre-decoding和 decoding，而对于pre-decoding，其过程是ossec内置的，只要是标准的syslog日志，都可以解析出如下4个基本信息</p>
+<center><img src="/img/Linux运维——ossec（三）/20.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<p>&emsp;&emsp;而对于decoding过程，用户则可以通过修改/var/ossec/etc/decoder.xml，实现自定义的泛化：比如添加</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">decoder</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;auditServerd&quot;</span>&gt;</span> <br>  <span class="hljs-tag">&lt;<span class="hljs-name">program_name</span>&gt;</span>/usr/bin/auditServerd<span class="hljs-tag">&lt;/<span class="hljs-name">program_name</span>&gt;</span> <br><span class="hljs-tag">&lt;/<span class="hljs-name">decoder</span>&gt;</span><br></code></pre></td></tr></table></figure>
+
+<center><img src="/img/Linux运维——ossec（三）/21.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<p>&emsp;&emsp;发现，该条日志成功命中了名为auditServerd的规则，该条规则可以准确的将日志定位为是程序auditServerd所发出的。除此之外，基于auditServerd这条规则，我们还可以添加更多的子规则，来识别出更多的信息。用户可以通过正则表达式获取特定的字段，用于关联分析，而ossec一共内置了14个用户可解析的字段：</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs markdown"><span class="hljs-bullet">-</span> location – where the log came from (only on FTS)<br><span class="hljs-bullet">   -</span> srcuser  - extracts the source username<br><span class="hljs-bullet">   -</span> dstuser  - extracts the destination (target) username<br><span class="hljs-bullet">   -</span> user     – an alias to dstuser (only one of the two can be used)<br><span class="hljs-bullet">   -</span> srcip    - source ip<br><span class="hljs-bullet">   -</span> dstip    - dst ip<br><span class="hljs-bullet">   -</span> srcport  - source port<br><span class="hljs-bullet">   -</span> dstport  - destination port<br><span class="hljs-bullet">   -</span> protocol – protocol<br><span class="hljs-bullet">   -</span> id       – event id <br><span class="hljs-bullet">   -</span> url      - url of the event<br><span class="hljs-bullet">   -</span> action   – event action (deny, drop, accept, etc)<br><span class="hljs-bullet">   -</span> status   – event status (success, failure, etc)<br><span class="hljs-bullet">   -</span> extra<span class="hljs-emphasis">_data     – Any extra data</span><br></code></pre></td></tr></table></figure>
+
+<p>&emsp;&emsp;在弄明白ossec对于日志分析的泛化过程后，接下来就是尝试添加日志源，添加是通过修改/var/ossec/etc/ossec.conf进行实现，这也就是前一小节进行ossec.conf进行介绍的原因，在进行配置日志源需要进行区分，我们是本地文件还是远程的syslog。</p>
+<p>&emsp;&emsp;本地文件：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">localfile</span>&gt;</span><br>   <span class="hljs-tag">&lt;<span class="hljs-name">log_format</span>&gt;</span>syslog<span class="hljs-tag">&lt;/<span class="hljs-name">log_format</span>&gt;</span><br>   <span class="hljs-tag">&lt;<span class="hljs-name">location</span>&gt;</span>/var/log/messages<span class="hljs-tag">&lt;/<span class="hljs-name">location</span>&gt;</span><br> <span class="hljs-tag">&lt;/<span class="hljs-name">localfile</span>&gt;</span><br></code></pre></td></tr></table></figure>
+
+<p>&emsp;&emsp;如果是远程的syslog我们则需要写入连接方式，连接端口以及连接ip：</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-section">&lt;remote&gt;</span> <br><span class="hljs-section">&lt;connection&gt;</span><span class="hljs-attribute">syslog</span>&lt;/connection&gt; <br><span class="hljs-section">&lt;protocol&gt;</span><span class="hljs-attribute">udp</span>&lt;/protocol&gt; <br><span class="hljs-section">&lt;port&gt;</span><span class="hljs-attribute">2514</span>&lt;/port&gt; <br><span class="hljs-section">&lt;allowed-ips&gt;</span><span class="hljs-attribute">192</span>.<span class="hljs-number">168</span>.<span class="hljs-number">70</span>.<span class="hljs-number">0</span>/<span class="hljs-number">24</span>&lt;/allowed-ips&gt; <br><span class="hljs-section">&lt;/remote&gt;</span><br></code></pre></td></tr></table></figure>
+
+<p>&emsp;</p>
+<h4 id="4-告警规则"><a href="#4-告警规则" class="headerlink" title="4.告警规则"></a>4.告警规则</h4><p>&emsp;&emsp;首先在ossec中，其提供了一部分默认的告警规则，如果我们需要修改的依旧是ossec.conf文件，前面也展示过了：</p>
+<center><img src="/img/Linux运维——ossec（三）/22.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<p>&emsp;&emsp;而我们也能够添加新的文件内容，直接进行一个整合，通过下列配置，实现加载/var/ossec/rules 下的所有规则文件：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">ossec_config</span>&gt;</span> <br>    <span class="hljs-tag">&lt;<span class="hljs-name">rules</span>&gt;</span> <br>        <span class="hljs-tag">&lt;<span class="hljs-name">rule_dir</span> <span class="hljs-attr">pattern</span>=<span class="hljs-string">&quot;.xml$&quot;</span>&gt;</span>rules<span class="hljs-tag">&lt;/<span class="hljs-name">rule_dir</span>&gt;</span> <br>    <span class="hljs-tag">&lt;/<span class="hljs-name">rules</span>&gt;</span> <br><span class="hljs-tag">&lt;/<span class="hljs-name">ossec_config</span>&gt;</span><br></code></pre></td></tr></table></figure>
+
+<p>&emsp;&emsp;在这个配置项中，pattern=”.xml$”表示只加载以.xml结尾的规则文件。对于泛化规则，也可能通过配置decoder_dir域来实现，如：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">ossec_config</span>&gt;</span> <br>    <span class="hljs-tag">&lt;<span class="hljs-name">rules</span>&gt;</span> <br>        <span class="hljs-tag">&lt;<span class="hljs-name">decoder_dir</span> <span class="hljs-attr">pattern</span>=<span class="hljs-string">&quot;.xml$&quot;</span>&gt;</span>rules/plugins/decoders<span class="hljs-tag">&lt;/<span class="hljs-name">decoder_dir</span>&gt;</span> <br>    <span class="hljs-tag">&lt;/<span class="hljs-name">rules</span>&gt;</span> <br><span class="hljs-tag">&lt;/<span class="hljs-name">ossec_config</span>&gt;</span><br></code></pre></td></tr></table></figure>
+
+<p>&emsp;&emsp;上述配置可将/var/ossec/rules/plugins/plugins/decoders目录下所有的xml文件都添加为OSSEC的日志泛化规则</p>
+<p>&emsp;</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Linux%E8%BF%90%E7%BB%B4/" class="category-chain-item">Linux运维</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>OSSEC（三）</div>
+      <div>https://one-null-pointer.github.io/2023/08/12/Linux运维——OSSEC（三）/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>Author</div>
+          <div>liaoyue</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>Posted on</div>
+          <div>August 12, 2023</div>
+        </div>
+      
+      
+      <div class="license-meta-item">
+        <div>传送口</div>
+        <div>
+          
+            
+            
+              <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+              <span class="hint--top hint--rounded" aria-label="点击进行传送">
+                <i class="iconfont icon-by"></i>
+              </span>
+              </a>
+            
+          
+        </div>
+      </div>
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2023/08/14/Linux%E8%BF%90%E7%BB%B4%E2%80%94%E2%80%94Lynis/" title="Lynis">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Lynis</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2023/08/11/Linux%E8%BF%90%E7%BB%B4%E2%80%94%E2%80%94Ossec%E5%AE%89%E8%A3%85%EF%BC%882%EF%BC%89/" title="OSSEC（二）">
+                        <span class="hidden-mobile">OSSEC（二）</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;Table of Contents</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">Keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://github.com/" target="_blank" rel="nofollow noopener"><span>pointer</span></a> <i class="iconfont icon-love"></i> <a href="https://mp.weixin.qq.com/s/6ncLUtaiJ9j_sMjZT5z-2w" target="_blank" rel="nofollow noopener"><span>一个爱学习的空指针</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      headingSelector : CONFIG.toc.headingSelector || 'h1,h2,h3,h4,h5,h6',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      collapseDepth   : CONFIG.toc.collapseDepth || 0,
+      scrollSmooth    : true,
+      headingsOffset  : -boardTop
+    });
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.10/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">Blog works best with JavaScript enabled</div>
+  </noscript>
+</body>
+</html>
