@@ -4,6 +4,63 @@
   
   
   <entry>
+    <title>AI --大模型调用</title>
+    <link href="/2026/01/04/AI%20--%E5%A4%A7%E6%A8%A1%E5%9E%8B%E8%B0%83%E7%94%A8/"/>
+    <url>/2026/01/04/AI%20--%E5%A4%A7%E6%A8%A1%E5%9E%8B%E8%B0%83%E7%94%A8/</url>
+    
+    <content type="html"><![CDATA[<h1 id="AI-–大模型调用"><a href="#AI-–大模型调用" class="headerlink" title="AI –大模型调用"></a>AI –大模型调用</h1><h4 id="1-HTTP格式"><a href="#1-HTTP格式" class="headerlink" title="1.HTTP格式"></a>1.HTTP格式</h4><p>&emsp;在学习AI大模型的调用前，我们首先需要了解下HTTP的相关请求和响应格式，方便后续咱们的请求</p><ul><li>请求数据格式</li></ul><center><img src="/img/AI/9.png" style="zoom:80%;" /></center><ul><li>响应数据格式</li></ul><center><img src="/img/AI/10.png" style="zoom:80%;" /></center><p>&emsp;</p><h4 id="2-APIFOX接口测试–Gemini接口调用"><a href="#2-APIFOX接口测试–Gemini接口调用" class="headerlink" title="2.APIFOX接口测试–Gemini接口调用"></a>2.APIFOX接口测试–Gemini接口调用</h4><p>&emsp;&emsp;<a href="https://apifox.com/">Apifox</a> 是一个集 API 文档、API 调试、<a href="https://www.google.com/search?q=API+Mock&ved=2ahUKEwiZ5u2yg6KTAxVlmlYBHUFTNrYQgK4QegQIARAD">API Mock</a>、API 自动化测试于一体的 API 研发管理平台，我们可以通过使用这个工具进行咱们的AI API接口调用测试，这里以Gemini接口调用作为例子</p><center><img src="/img/AI/11.png" style="zoom:80%;" /></center><p>&emsp;&emsp;各个AI官方提供的API都会附带有请求的格式要求，各个官方可能不太一样</p><center><img src="/img/AI/12.png" style="zoom:80%;" /></center><p>&emsp;</p><h4 id="3-APIFOX接口测试–本地Deepseek接口调用"><a href="#3-APIFOX接口测试–本地Deepseek接口调用" class="headerlink" title="3.APIFOX接口测试–本地Deepseek接口调用"></a>3.APIFOX接口测试–本地Deepseek接口调用</h4><p>&emsp;&emsp;首先查看ollama的调用文档：<br>&emsp;&emsp;&emsp; <a href="https://docs.ollama.com/api/generate">https://docs.ollama.com/api/generate</a></p><center><img src="/img/AI/13.png" style="zoom:80%;" /></center><p>&emsp;&emsp;这里我们根据官方给的格式进行请求即可</p><center><img src="/img/AI/14.png" style="zoom:80%;" /></center><p>&emsp;</p><h4 id="4-会话记忆方案"><a href="#4-会话记忆方案" class="headerlink" title="4.会话记忆方案"></a>4.会话记忆方案</h4><p>&emsp;&emsp;在与AI 大模型的交互本质是无状态的，每一次请求响应都是相互独立的，这是因为AI 大模型本身没有真正的会话记忆能力，所以在开放中需要我们自己进行会话记忆的处理，比如比较简单的滚雪球方式：</p><center><img src="/img/AI/15.png" style="zoom:80%;" /></center><p>&emsp;</p><h4 id="5-代码调用大模型"><a href="#5-代码调用大模型" class="headerlink" title="5.代码调用大模型"></a>5.代码调用大模型</h4><p>&emsp;&emsp;具体代码调用各个官方的文档也同样都会有相关的说明，这里还是以谷歌的Gemini为例子</p><center><img src="/img/AI/16.png" style="zoom:80%;" /></center><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> os<br><span class="hljs-keyword">from</span> google <span class="hljs-keyword">import</span> genai<br><br><span class="hljs-comment">#os.environ[&#x27;GOOGLE_API_KEY&#x27;] = &#x27;xxxxx&#x27;</span><br><span class="hljs-comment"># 从环境变量中获取API密钥</span><br>client = genai.Client()<br><br>response = client.models.generate_content(<br>    model=<span class="hljs-string">&quot;gemini-3-flash-preview&quot;</span>, contents=<span class="hljs-string">&quot;你好&quot;</span><br>)<br><span class="hljs-built_in">print</span>(response.text)<br></code></pre></td></tr></table></figure><p>&emsp;&emsp;在此基础上，就可以衍生出通过输入进行消息存储从而达到历史会话加入的功能</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> os<br><span class="hljs-keyword">from</span> google <span class="hljs-keyword">import</span> genai<br><br><span class="hljs-comment">#os.environ[&#x27;GOOGLE_API_KEY&#x27;] = &#x27;xxxxx&#x27;</span><br><span class="hljs-comment"># 从环境变量中获取API密钥</span><br>client = genai.Client()<br><br><span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;=== Gemini 聊天助手 ===&quot;</span>)<br><span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;输入 &#x27;exit&#x27; 退出聊天&quot;</span>)<br><span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;====================&quot;</span>)<br><br><span class="hljs-comment"># 初始化对话历史</span><br>conversation = <span class="hljs-string">&quot;&quot;</span><br><br><span class="hljs-keyword">while</span> <span class="hljs-literal">True</span>:<br>    <span class="hljs-comment"># 从终端获取用户输入</span><br>    user_input = <span class="hljs-built_in">input</span>(<span class="hljs-string">&quot;你: &quot;</span>)<br>    <br>    <span class="hljs-comment"># 检查是否退出</span><br>    <span class="hljs-keyword">if</span> user_input.lower() == <span class="hljs-string">&#x27;exit&#x27;</span>:<br>        <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;再见！&quot;</span>)<br>        <span class="hljs-keyword">break</span><br>    <br>    <span class="hljs-comment"># 构建完整的对话上下文</span><br>    prompt = <span class="hljs-string">f&quot;<span class="hljs-subst">&#123;conversation&#125;</span>\n用户: <span class="hljs-subst">&#123;user_input&#125;</span>\nAI:&quot;</span><br>    <br>    <span class="hljs-comment"># 调用Gemini API</span><br>    response = client.models.generate_content(<br>        model=<span class="hljs-string">&quot;gemini-3-flash-preview&quot;</span>, <br>        contents=prompt<br>    )<br>    <br>    <span class="hljs-comment"># 获取AI的响应</span><br>    ai_response = response.text<br>    <br>    <span class="hljs-comment"># 更新对话历史</span><br>    conversation = <span class="hljs-string">f&quot;<span class="hljs-subst">&#123;conversation&#125;</span>\n用户: <span class="hljs-subst">&#123;user_input&#125;</span>\nAI: <span class="hljs-subst">&#123;ai_response&#125;</span>&quot;</span><br>    <br>    <span class="hljs-comment"># 打印AI的响应</span><br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;AI: <span class="hljs-subst">&#123;ai_response&#125;</span>&quot;</span>)<br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;-&quot;</span>)<br></code></pre></td></tr></table></figure><p>&emsp;&emsp;这就是一个简单的大模型交流的脚本，通过我们自己的自定义输入，给出思考和输出</p><p>&emsp;</p><h4 id="6、提示词工程"><a href="#6、提示词工程" class="headerlink" title="6、提示词工程"></a>6、提示词工程</h4><p>&emsp;&emsp;提示词是引导大模型（LLM）进行内容生成的命令，目的是引导AI思考，约束其输出范围，并明确期望的结果，提示词工程则是指通过有技巧的编写提示词，使大模型生成出尽可能符合预期的内容，这一持续性的过程就称为提示词工程</p><center><img src="/img/AI/17.png" style="zoom:80%;" /></center>]]></content>
+    
+    
+    <categories>
+      
+      <category>AI</category>
+      
+    </categories>
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>AI--大模型本地部署（Ollama篇）</title>
+    <link href="/2026/01/02/AI%20--%E5%A4%A7%E6%A8%A1%E5%9E%8B%E6%9C%AC%E5%9C%B0%E9%83%A8%E7%BD%B2%EF%BC%88Ollama%E7%AF%87%EF%BC%89/"/>
+    <url>/2026/01/02/AI%20--%E5%A4%A7%E6%A8%A1%E5%9E%8B%E6%9C%AC%E5%9C%B0%E9%83%A8%E7%BD%B2%EF%BC%88Ollama%E7%AF%87%EF%BC%89/</url>
+    
+    <content type="html"><![CDATA[<h1 id="AI–大模型本地部署（Ollama篇）"><a href="#AI–大模型本地部署（Ollama篇）" class="headerlink" title="AI–大模型本地部署（Ollama篇）"></a>AI–大模型本地部署（Ollama篇）</h1><h4 id="1-部署方式"><a href="#1-部署方式" class="headerlink" title="1.部署方式"></a>1.部署方式</h4><p>&emsp;&emsp;总的来说，大模型的部署主要分为三种方式，各自有自己的优缺点，具体如下：</p><center><img src="/img/AI/2.png" style="zoom:80%;" /></center><p>&emsp;</p><h4 id="2-本地部署-Ollama本地部署"><a href="#2-本地部署-Ollama本地部署" class="headerlink" title="2.本地部署-Ollama本地部署"></a>2.本地部署-Ollama本地部署</h4><p>&emsp;&emsp;Ollama下载地址：</p><ul><li><a href="https://ollama.com/download">https://ollama.com/download</a></li></ul><center><img src="/img/AI/3.png" style="zoom:80%;" /></center><center><img src="/img/AI/4.png" style="zoom:80%;" /></center><center><img src="/img/AI/5.png" style="zoom:80%;" /></center><p>&emsp;&emsp;这里我们根据需求选择需要用的模型，点解复制终端质量，其中的b代表了参数量级，1.5b代表了包含15亿的参数内容</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">ollama run deepseek-r1<br></code></pre></td></tr></table></figure><center><img src="/img/AI/6.png" style="zoom:80%;" /></center><center><img src="/img/AI/7.png" style="zoom:80%;" /></center><p>&emsp;&emsp;这样子我们就部署好了，是不是很简单捏</p><p>&emsp;</p><h4 id="3-官方开放API记录"><a href="#3-官方开放API记录" class="headerlink" title="3.官方开放API记录"></a>3.官方开放API记录</h4><p>&emsp;&emsp;目前主流的大模型（如：DeepSeek、Kimi等）官方都提供了开放API，无需部署，就可以直接调用访问，这里提供几个可以申请api的模型，可以进行尝试</p><p>&emsp;&emsp;智谱：<a href="https://bigmodel.cn/usercenter/proj-mgmt/apikeys">https://bigmodel.cn/usercenter/proj-mgmt/apikeys</a></p><p>&emsp;&emsp;deepseek：<a href="https://platform.deepseek.com/api_keys">https://platform.deepseek.com/api_keys</a></p><p>&emsp;&emsp;Gemini：<a href="https://aistudio.google.com/api-keys">https://aistudio.google.com/api-keys</a></p><center><img src="/img/AI/8.png" style="zoom:80%;" /></center>]]></content>
+    
+    
+    <categories>
+      
+      <category>AI</category>
+      
+    </categories>
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>AI--前言</title>
+    <link href="/2026/01/01/AI%20--%E5%89%8D%E8%A8%80/"/>
+    <url>/2026/01/01/AI%20--%E5%89%8D%E8%A8%80/</url>
+    
+    <content type="html"><![CDATA[<h1 id="AI–前言"><a href="#AI–前言" class="headerlink" title="AI–前言"></a>AI–前言</h1><h4 id="0-前言"><a href="#0-前言" class="headerlink" title="0.前言"></a>0.前言</h4><p>&emsp;&emsp;AI好啊，AI 得学</p><h4 id="1-AI概念"><a href="#1-AI概念" class="headerlink" title="1.AI概念"></a>1.AI概念</h4><p>&emsp;AI 是一个学科领域的统称，目标就是使用机器能够像人类一样思考、学习、推理和解决问题</p><p>&emsp;</p><h4 id="2-AI大模型"><a href="#2-AI大模型" class="headerlink" title="2.AI大模型"></a>2.AI大模型</h4><p>&emsp;&emsp;AI大模型：也称为大语言模型（Large Language Models LLM），是AI技术的一个分支，其实就是一个用代码模拟人脑神经网络的程序，通过大量的数据训练后，使得其具备理解人类语言，思考，推理并输出人类语言的能力</p><center><img src="/img/AI/1.png" style="zoom:80%;" /></center><p>&emsp;</p><h4 id="3-AI应用"><a href="#3-AI应用" class="headerlink" title="3.AI应用"></a>3.AI应用</h4><p>&emsp;&emsp;AI应用：将AI大模型技术落地到具体的业务场景中，用来解决实际问题的产品或者服务</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>AI</category>
+      
+    </categories>
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>Python--面相对象基础</title>
     <link href="/2025/12/29/Python--%E9%9D%A2%E7%9B%B8%E5%AF%B9%E8%B1%A1%E5%9F%BA%E7%A1%80/"/>
     <url>/2025/12/29/Python--%E9%9D%A2%E7%9B%B8%E5%AF%B9%E8%B1%A1%E5%9F%BA%E7%A1%80/</url>
