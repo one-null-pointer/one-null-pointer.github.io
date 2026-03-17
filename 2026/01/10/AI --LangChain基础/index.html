@@ -1,0 +1,658 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="liaoyue">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="AI–LangChain基础1.LangChain介绍&amp;emsp;&amp;emsp;LangChain是于2022年10月创建，围绕LLM建立的一个框架，核心里面是为各种LLM实现通用的接口，把LLM相关的组件连接在一起，简化LLM的开发难度，方便开发者快速的开发复杂的LLM    &amp;emsp; 2.LangChain的部署&amp;emsp;&amp;emsp;LangChain在Python中已经封装成了一个库，我">
+<meta property="og:type" content="article">
+<meta property="og:title" content="AI--LangChain基础">
+<meta property="og:url" content="https://one-null-pointer.github.io/2026/01/10/AI%20--LangChain%E5%9F%BA%E7%A1%80/index.html">
+<meta property="og:site_name" content="one-null-poniter">
+<meta property="og:description" content="AI–LangChain基础1.LangChain介绍&amp;emsp;&amp;emsp;LangChain是于2022年10月创建，围绕LLM建立的一个框架，核心里面是为各种LLM实现通用的接口，把LLM相关的组件连接在一起，简化LLM的开发难度，方便开发者快速的开发复杂的LLM    &amp;emsp; 2.LangChain的部署&amp;emsp;&amp;emsp;LangChain在Python中已经封装成了一个库，我">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://one-null-pointer.github.io/img/AI.png">
+<meta property="article:published_time" content="2026-01-10T13:48:48.000Z">
+<meta property="article:modified_time" content="2026-03-17T02:56:38.945Z">
+<meta property="article:author" content="liaoyue">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://one-null-pointer.github.io/img/AI.png">
+  
+  
+  
+  <title>AI--LangChain基础 - one-null-poniter</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"one-null-pointer.github.io","root":"/","version":"1.9.2","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 5.4.2"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>one null pointer</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                吾
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                學
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                類
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="AI--LangChain基础"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2026-01-10 21:48" pubdate>
+          January 10, 2026 pm
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          3.8k words
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          32 mins
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">AI--LangChain基础</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="AI–LangChain基础"><a href="#AI–LangChain基础" class="headerlink" title="AI–LangChain基础"></a>AI–LangChain基础</h1><h4 id="1-LangChain介绍"><a href="#1-LangChain介绍" class="headerlink" title="1.LangChain介绍"></a>1.LangChain介绍</h4><p>&emsp;&emsp;LangChain是于2022年10月创建，围绕LLM建立的一个框架，核心里面是为各种LLM实现通用的接口，把LLM相关的组件连接在一起，简化LLM的开发难度，方便开发者快速的开发复杂的LLM</p>
+<center><img src="/img/AI/21.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<p>&emsp;</p>
+<h4 id="2-LangChain的部署"><a href="#2-LangChain的部署" class="headerlink" title="2.LangChain的部署"></a>2.LangChain的部署</h4><p>&emsp;&emsp;LangChain在Python中已经封装成了一个库，我们可以直接调用，安装如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">pip install langchain langchain-community langchain-ollama dashscope chromadb<br></code></pre></td></tr></table></figure>
+
+<ul>
+<li>langchain: 核心包</li>
+<li>langchain-community: 社区支持包，提供了更多的第三方模型调用（我们用的阿里云千问模型就需要这个包）</li>
+<li>langchain-ollama: Ollama支持包，支持调用Ollama托管部署的本地模型</li>
+<li>dashscope: 阿里云通义千问的Python SDK</li>
+<li>chromadb: 轻量向量数据库（后续使用）</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">from</span> langchain_openai <span class="hljs-keyword">import</span> ChatOpenAI<br><br><span class="hljs-comment"># 1. 初始化模型</span><br>llm = ChatOpenAI(<br>    model=<span class="hljs-string">&quot;qwen-turbo&quot;</span>,<br>    api_key=<span class="hljs-string">&quot;key&quot;</span>,<br>    base_url=<span class="hljs-string">&quot;https://dashscope.aliyuncs.com/compatible-mode/v1&quot;</span>,<br>    temperature=<span class="hljs-number">0</span><br>)<br><br><span class="hljs-comment"># 2. 调用模型</span><br>response = llm.invoke(<span class="hljs-string">&quot;你好，请用一句话介绍 LangChain&quot;</span>)<br><br><span class="hljs-built_in">print</span>(response.content)<br></code></pre></td></tr></table></figure>
+
+<p>&emsp;&emsp;</p>
+<h4 id="3-LangChain的流式输出"><a href="#3-LangChain的流式输出" class="headerlink" title="3.LangChain的流式输出"></a>3.LangChain的流式输出</h4><p>&emsp;&emsp;LangChain的输出主要通过invoke和stream进行控制</p>
+<ul>
+<li>Invoke：一次性返回完整的结果</li>
+<li>stream：逐段返回结果，流式输出</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> os<br><span class="hljs-keyword">from</span> langchain_community.llms.tongyi <span class="hljs-keyword">import</span> Tongyi<br><br>os.environ[<span class="hljs-string">&quot;DASHSCOPE_API_KEY&quot;</span>] = <span class="hljs-string">&quot;KEY&quot;</span><br><br><span class="hljs-comment">#实例化模型</span><br>llm = Tongyi(model= <span class="hljs-string">&quot;qwen-max&quot;</span>)<br><br><span class="hljs-comment">#invoke和stream</span><br>response = llm.invoke(<span class="hljs-string">&quot;讲个冷笑话&quot;</span>)<br><span class="hljs-built_in">print</span>(response)<br><br><span class="hljs-keyword">for</span> chunk <span class="hljs-keyword">in</span> llm.stream(<span class="hljs-string">&quot;讲个冷笑话&quot;</span>):<br>    <span class="hljs-built_in">print</span>(chunk, end=<span class="hljs-string">&quot;&quot;</span>, flush=<span class="hljs-literal">True</span>)<br></code></pre></td></tr></table></figure>
+
+<p>&emsp;&emsp;</p>
+<h4 id="4-LangChain的支持模型"><a href="#4-LangChain的支持模型" class="headerlink" title="4.LangChain的支持模型"></a>4.LangChain的支持模型</h4><p>&emsp;&emsp;&emsp;&emsp;LangChain目前支持三种类型的模型使用：</p>
+<ul>
+<li>LLMS（大语言模型）</li>
+</ul>
+<p>&emsp;&emsp;&emsp;&emsp;是技术范畴的统称，指基于大参数量、海量文本训练的 Transformer 架构模型，核心能力是理解和生成自然语言，主要服务于文本生成场景</p>
+<ul>
+<li>Chat Models（聊天模型）</li>
+</ul>
+<p>&emsp;&emsp;&emsp;&emsp;是应用范畴的细分，是专为对话场景优化的 LLMs，核心能力是模拟人类对话的轮次交互，主要服务于聊天场景</p>
+<ul>
+<li>Embeddings Models（嵌入模型）</li>
+</ul>
+<p>&emsp;&emsp;&emsp;&emsp;文本嵌入模型接收文本作为输入，得到文本的向量。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> os<br><span class="hljs-keyword">from</span> langchain_community.llms.tongyi <span class="hljs-keyword">import</span> Tongyi<br><br><br>os.environ[<span class="hljs-string">&quot;DASHSCOPE_API_KEY&quot;</span>] = <span class="hljs-string">&quot;KEY&quot;</span><br><br><span class="hljs-comment">#实例化模型</span><br>llm = Tongyi(model= <span class="hljs-string">&quot;qwen-max&quot;</span>)<br><br>response = llm.invoke(<span class="hljs-string">&quot;讲个冷笑话&quot;</span>)<br><span class="hljs-built_in">print</span>(response)<br></code></pre></td></tr></table></figure>
+
+<p>&emsp;&emsp;&emsp;</p>
+<h4 id="5-LangChain的聊天模型"><a href="#5-LangChain的聊天模型" class="headerlink" title="5.LangChain的聊天模型"></a>5.LangChain的聊天模型</h4><p>&emsp;&emsp;&emsp;所谓聊天模型，其本质其实也只是大语言模型的分支，不过我们赋予了指定模型具体所处的环境和背景，例如让他进行cosplay，也就是前面OpenAI所提到的system模块</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> os<br><span class="hljs-keyword">from</span> langchain_community.chat_models.tongyi <span class="hljs-keyword">import</span> ChatTongyi<br><span class="hljs-keyword">from</span> langchain_core.messages <span class="hljs-keyword">import</span> HumanMessage, AIMessage, SystemMessage<br><br>os.environ[<span class="hljs-string">&quot;DASHSCOPE_API_KEY&quot;</span>] = <span class="hljs-string">&quot;key&quot;</span><br><span class="hljs-comment"># 初始化模型</span><br>chat = ChatTongyi(model=<span class="hljs-string">&quot;qwen-max&quot;</span>)<br><br><span class="hljs-comment">#准备消息list</span><br>messages = [<br>    SystemMessage(content=<span class="hljs-string">&quot;你是一位边塞诗人&quot;</span>),<br>    HumanMessage(content=<span class="hljs-string">&quot;写一首唐诗&quot;</span>),<br>    AIMessage(content=<span class="hljs-string">&quot;锄禾日当午，汗滴禾下土。谁知盘中餐，粒粒皆辛苦。&quot;</span>),<br>    HumanMessage(content=<span class="hljs-string">&quot;按照你上一个回复的格式，再写一首唐诗&quot;</span>)<br>]<br><br><span class="hljs-comment"># 调用模型</span><br><span class="hljs-keyword">for</span> chunk <span class="hljs-keyword">in</span> chat.stream(messages): <br>    <span class="hljs-built_in">print</span>(chunk.content, end=<span class="hljs-string">&quot;&quot;</span>, flush=<span class="hljs-literal">True</span>)<br><span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;-----------------&quot;</span>)<br></code></pre></td></tr></table></figure>
+
+<center><img src="/img/AI/22.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<p>&emsp;&emsp;除此之外，LangChain也支持简写的形式</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> os<br><span class="hljs-keyword">from</span> langchain_community.chat_models.tongyi <span class="hljs-keyword">import</span> ChatTongyi<br><span class="hljs-comment">#from langchain_core.messages import HumanMessage, AIMessage, SystemMessage</span><br><br>os.environ[<span class="hljs-string">&quot;DASHSCOPE_API_KEY&quot;</span>] = <span class="hljs-string">&quot;key&quot;</span><br><span class="hljs-comment"># 初始化模型</span><br>chat = ChatTongyi(model=<span class="hljs-string">&quot;qwen-max&quot;</span>)<br><br><span class="hljs-comment">#准备消息list 简写的方式</span><br>messages = [<br>    (<span class="hljs-string">&quot;system&quot;</span>, <span class="hljs-string">&quot;你是一位边塞诗人&quot;</span>),<br>    (<span class="hljs-string">&quot;human&quot;</span>, <span class="hljs-string">&quot;写一首唐诗&quot;</span>),<br>    (<span class="hljs-string">&quot;ai&quot;</span>, <span class="hljs-string">&quot;锄禾日当午，汗滴禾下土。谁知盘中餐，粒粒皆辛苦。&quot;</span>),<br>    (<span class="hljs-string">&quot;human&quot;</span>, <span class="hljs-string">&quot;按照你上一个回复的格式，再写一首唐诗&quot;</span>)<br>]<br><br><span class="hljs-comment"># 调用模型</span><br><span class="hljs-keyword">for</span> chunk <span class="hljs-keyword">in</span> chat.stream(messages): <br>    <span class="hljs-built_in">print</span>(chunk.content, end=<span class="hljs-string">&quot;&quot;</span>, flush=<span class="hljs-literal">True</span>)<br><span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;-----------------&quot;</span>)<br></code></pre></td></tr></table></figure>
+
+<p>&emsp;&emsp;简写的好处在于可以避免导包，写起来也更加简单易懂，可以让我们在运行时填充具体的值，后续使用提示词模版时就可以用到这种方式</p>
+<p>&emsp;&emsp;</p>
+<h4 id="6-LangChain的嵌入模型"><a href="#6-LangChain的嵌入模型" class="headerlink" title="6.LangChain的嵌入模型"></a>6.LangChain的嵌入模型</h4><p>&emsp;&emsp;嵌入模型的特点就是将字符串作为输入，返回一个浮点数的列表（向量），在NLP中，Embedding的作用就是将数据进行文本向量化</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment">#文本嵌入模型</span><br><span class="hljs-keyword">import</span> os<br><span class="hljs-keyword">from</span> langchain_community.embeddings <span class="hljs-keyword">import</span> DashScopeEmbeddings<br><br>os.environ[<span class="hljs-string">&quot;DASHSCOPE_API_KEY&quot;</span>] = <span class="hljs-string">&quot;key&quot;</span><br><br><span class="hljs-comment"># 初始化模型 其默认使用模型是text-embedding-v1</span><br>embeddings = DashScopeEmbeddings(model=<span class="hljs-string">&quot;text-embedding-v3&quot;</span>)<br><br><span class="hljs-comment"># 单个转换</span><br>result1 = embeddings.embed_query(<span class="hljs-string">&quot;我喜欢你&quot;</span>)<br><span class="hljs-built_in">print</span>(result1)<br><br><span class="hljs-comment"># 批量转换</span><br>result2 = embeddings.embed_documents([<span class="hljs-string">&quot;我喜欢你&quot;</span>, <span class="hljs-string">&quot;我不喜欢你&quot;</span>, <span class="hljs-string">&quot;晚上吃啥&quot;</span>])<br><span class="hljs-built_in">print</span>(result2)<br></code></pre></td></tr></table></figure>
+
+<p>&emsp;&emsp;而在阿里云百炼平台中，所谓的向量模型也就是咱们的嵌入模型，提供了14种</p>
+<center><img src="/img/AI/23.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<p>&emsp;&emsp;</p>
+<h4 id="7-LangChain模型类型总结"><a href="#7-LangChain模型类型总结" class="headerlink" title="7.LangChain模型类型总结"></a>7.LangChain模型类型总结</h4><center><img src="/img/AI/24.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/AI/" class="category-chain-item">AI</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>AI--LangChain基础</div>
+      <div>https://one-null-pointer.github.io/2026/01/10/AI --LangChain基础/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>Author</div>
+          <div>liaoyue</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>Posted on</div>
+          <div>January 10, 2026</div>
+        </div>
+      
+      
+      <div class="license-meta-item">
+        <div>传送口</div>
+        <div>
+          
+            
+            
+              <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+              <span class="hint--top hint--rounded" aria-label="点击进行传送">
+                <i class="iconfont icon-by"></i>
+              </span>
+              </a>
+            
+          
+        </div>
+      </div>
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2026/01/11/AI%20--LangChain%E8%BF%9B%E9%98%B6%EF%BC%88%E4%B8%80%EF%BC%89/" title="AI--LangChain进阶（一）">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">AI--LangChain进阶（一）</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2026/01/09/AI%20--%E6%8F%90%E7%A4%BA%E8%AF%8D%E5%B7%A5%E7%A8%8B/" title="AI--提示词工程">
+                        <span class="hidden-mobile">AI--提示词工程</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;Table of Contents</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">Keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://github.com/" target="_blank" rel="nofollow noopener"><span>pointer</span></a> <i class="iconfont icon-love"></i> <a href="https://mp.weixin.qq.com/s/6ncLUtaiJ9j_sMjZT5z-2w" target="_blank" rel="nofollow noopener"><span>一个爱学习的空指针</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      headingSelector : CONFIG.toc.headingSelector || 'h1,h2,h3,h4,h5,h6',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      collapseDepth   : CONFIG.toc.collapseDepth || 0,
+      scrollSmooth    : true,
+      headingsOffset  : -boardTop
+    });
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.10/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">Blog works best with JavaScript enabled</div>
+  </noscript>
+</body>
+</html>

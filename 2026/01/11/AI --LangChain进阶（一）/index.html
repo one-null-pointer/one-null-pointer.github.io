@@ -1,0 +1,646 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="liaoyue">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="AI–LangChain进阶（一）1.PromptTemplate&amp;emsp;&amp;emsp;PromptTemplate：通用提示词模版，支持动态注入信息 &amp;emsp;&amp;emsp;提示词优化在模型应用中非常重要，LangChain提供了PromptTemplate类，用来协助优化提示词，PromptTemplate表示提示词模版，可以构建一个自定义的基础提示词模版，支持变量的注入，最终生成所需要的提">
+<meta property="og:type" content="article">
+<meta property="og:title" content="AI--LangChain进阶（一）">
+<meta property="og:url" content="https://one-null-pointer.github.io/2026/01/11/AI%20--LangChain%E8%BF%9B%E9%98%B6%EF%BC%88%E4%B8%80%EF%BC%89/index.html">
+<meta property="og:site_name" content="one-null-poniter">
+<meta property="og:description" content="AI–LangChain进阶（一）1.PromptTemplate&amp;emsp;&amp;emsp;PromptTemplate：通用提示词模版，支持动态注入信息 &amp;emsp;&amp;emsp;提示词优化在模型应用中非常重要，LangChain提供了PromptTemplate类，用来协助优化提示词，PromptTemplate表示提示词模版，可以构建一个自定义的基础提示词模版，支持变量的注入，最终生成所需要的提">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://one-null-pointer.github.io/img/AI.png">
+<meta property="article:published_time" content="2026-01-11T13:48:48.000Z">
+<meta property="article:modified_time" content="2026-03-17T02:56:20.278Z">
+<meta property="article:author" content="liaoyue">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://one-null-pointer.github.io/img/AI.png">
+  
+  
+  
+  <title>AI--LangChain进阶（一） - one-null-poniter</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"one-null-pointer.github.io","root":"/","version":"1.9.2","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 5.4.2"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>one null pointer</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                吾
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                學
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                類
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="AI--LangChain进阶（一）"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2026-01-11 21:48" pubdate>
+          January 11, 2026 pm
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          6.7k words
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          56 mins
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">AI--LangChain进阶（一）</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="AI–LangChain进阶（一）"><a href="#AI–LangChain进阶（一）" class="headerlink" title="AI–LangChain进阶（一）"></a>AI–LangChain进阶（一）</h1><h4 id="1-PromptTemplate"><a href="#1-PromptTemplate" class="headerlink" title="1.PromptTemplate"></a>1.PromptTemplate</h4><p>&emsp;&emsp;PromptTemplate：通用提示词模版，支持动态注入信息</p>
+<p>&emsp;&emsp;提示词优化在模型应用中非常重要，LangChain提供了PromptTemplate类，用来协助优化提示词，PromptTemplate表示提示词模版，可以构建一个自定义的基础提示词模版，支持变量的注入，最终生成所需要的提示词，这里有两种写法，一种是标准写法，一种是基于chain链的写法</p>
+<ul>
+<li>标准写法</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment">#标准的提示词模版</span><br><span class="hljs-keyword">import</span> os<br><span class="hljs-keyword">from</span> langchain_core.prompts <span class="hljs-keyword">import</span> PromptTemplate<br><span class="hljs-keyword">from</span> langchain_community.llms.tongyi <span class="hljs-keyword">import</span> Tongyi<br><br>os.environ[<span class="hljs-string">&quot;DASHSCOPE_API_KEY&quot;</span>] = <span class="hljs-string">&quot;key&quot;</span><br><br>prompt_template = PromptTemplate.from_template(<br>    <span class="hljs-string">&quot;我的邻居姓&#123;lastname&#125;, 刚生了&#123;gender&#125;, 帮忙起名字, 请简略回答。&quot;</span><br>)<br><br>prompt_text = prompt_template.<span class="hljs-built_in">format</span>(lastname=<span class="hljs-string">&quot;张&quot;</span>, gender=<span class="hljs-string">&quot;女儿&quot;</span>)<br>model = Tongyi(model=<span class="hljs-string">&quot;qwen-max&quot;</span>) <span class="hljs-comment"># 创建模型对象</span><br>res = model.invoke(<span class="hljs-built_in">input</span>=prompt_text) <span class="hljs-comment"># 调用模型获取结果</span><br><span class="hljs-built_in">print</span>(res)<br></code></pre></td></tr></table></figure>
+
+<ul>
+<li>基于chain链的写法</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment">#基于chain链的提示词模版</span><br><span class="hljs-keyword">import</span> os<br><span class="hljs-keyword">from</span> langchain_core.prompts <span class="hljs-keyword">import</span> PromptTemplate<br><span class="hljs-keyword">from</span> langchain_community.llms.tongyi <span class="hljs-keyword">import</span> Tongyi<br><br>os.environ[<span class="hljs-string">&quot;DASHSCOPE_API_KEY&quot;</span>] = <span class="hljs-string">&quot;key&quot;</span><br><br>prompt_template = PromptTemplate.from_template(<br>    <span class="hljs-string">&quot;我的邻居姓&#123;lastname&#125;, 刚生了&#123;gender&#125;, 帮忙起名字, 请简略回答。&quot;</span><br>)<br><br>model = Tongyi(model=<span class="hljs-string">&quot;qwen-max&quot;</span>) <span class="hljs-comment"># 创建模型对象</span><br><br>chain = prompt_template | model<br><br>res = chain.invoke(<span class="hljs-built_in">input</span>=&#123;<span class="hljs-string">&quot;lastname&quot;</span>: <span class="hljs-string">&quot;曹&quot;</span>, <span class="hljs-string">&quot;gender&quot;</span>: <span class="hljs-string">&quot;女儿&quot;</span>&#125;)<br><span class="hljs-built_in">print</span>(res)<br></code></pre></td></tr></table></figure>
+
+
+
+<h4 id="2-FewShotPromptTemplate"><a href="#2-FewShotPromptTemplate" class="headerlink" title="2.FewShotPromptTemplate"></a>2.FewShotPromptTemplate</h4><p>&emsp;&emsp;FewShotPromptTemplate：支持基于模版注入容易数量的示例信息</p>
+<p>&emsp;&emsp;在提示词工程中我们有提到两种思想的提示词，既然有Zero-Shot则必然有对应的Few-Shot，在LangChain中使用的对应模块则是FewShotPromptTemlate</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs python">FewShotPromptTemplate(<br>    examples=<span class="hljs-literal">None</span>, <span class="hljs-comment">#示例数据,list,内套字典</span><br>    example_prompt=<span class="hljs-literal">None</span>, <span class="hljs-comment">#示例提示词模版</span><br>    prefix=<span class="hljs-literal">None</span>, <span class="hljs-comment">#组装提示词，示例数据前的内容</span><br>    suffix=<span class="hljs-literal">None</span>, <span class="hljs-comment">#组装提示词，示例数据后的内容</span><br>    input_variables=<span class="hljs-literal">None</span>, <span class="hljs-comment">#输入变量，list, 与示例数据的key对应</span><br>)<br></code></pre></td></tr></table></figure>
+
+<p>&emsp;&emsp;这里举个例子：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> os<br><span class="hljs-keyword">from</span> langchain_community.chat_models.tongyi <span class="hljs-keyword">import</span> ChatTongyi<br><span class="hljs-keyword">from</span> langchain_core.prompts <span class="hljs-keyword">import</span> FewShotPromptTemplate, PromptTemplate<br><br>os.environ[<span class="hljs-string">&quot;DASHSCOPE_API_KEY&quot;</span>] = <span class="hljs-string">&quot;key&quot;</span><br><br><span class="hljs-comment"># 初始化模型</span><br>chat = ChatTongyi(model=<span class="hljs-string">&quot;qwen-max&quot;</span>)<br><br>example_template = PromptTemplate.from_template(<br>    <span class="hljs-string">&quot;单词：&#123;word&#125;\n反义词：&#123;antonym&#125;&quot;</span><br>)<br><br>example_data = [<br>    &#123;<span class="hljs-string">&quot;word&quot;</span>: <span class="hljs-string">&quot;热&quot;</span>, <span class="hljs-string">&quot;antonym&quot;</span>: <span class="hljs-string">&quot;冷&quot;</span>&#125;,<br>    &#123;<span class="hljs-string">&quot;word&quot;</span>: <span class="hljs-string">&quot;大&quot;</span>, <span class="hljs-string">&quot;antonym&quot;</span>: <span class="hljs-string">&quot;小&quot;</span>&#125;,<br>    &#123;<span class="hljs-string">&quot;word&quot;</span>: <span class="hljs-string">&quot;快&quot;</span>, <span class="hljs-string">&quot;antonym&quot;</span>: <span class="hljs-string">&quot;慢&quot;</span>&#125;,<br>]<br><br>few_shot_prompt = FewShotPromptTemplate(<br>    examples=example_data, <span class="hljs-comment">#示例数据,list,内套字典</span><br>    example_prompt=example_template, <span class="hljs-comment">#示例提示词模版</span><br>    prefix=<span class="hljs-string">&quot;请给出每个单词的反义词:，有如下示例:\n&quot;</span>, <span class="hljs-comment">#组装提示词，示例数据前的内容</span><br>    suffix=<span class="hljs-string">&quot;基于示例得知，&#123;input_word&#125;的反义词是：&quot;</span>, <span class="hljs-comment">#组装提示词，示例数据后的内容</span><br>    input_variables=[<span class="hljs-string">&quot;input_word&quot;</span>], <span class="hljs-comment">#输入变量，list, 与示例数据的key对应</span><br>)<br><br><span class="hljs-comment"># 调用模型</span><br>prompt_text = few_shot_prompt.<span class="hljs-built_in">format</span>(input_word=<span class="hljs-string">&quot;左&quot;</span>)<br><span class="hljs-keyword">for</span> chunk <span class="hljs-keyword">in</span> chat.stream(<span class="hljs-built_in">input</span>=prompt_text): <br>    <span class="hljs-built_in">print</span>(chunk.content, end=<span class="hljs-string">&quot;&quot;</span>, flush=<span class="hljs-literal">True</span>)<br><br><span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;\n-----------------&quot;</span>)<br></code></pre></td></tr></table></figure>
+
+<p>&emsp;&emsp;</p>
+<h4 id="3-format和invoke"><a href="#3-format和invoke" class="headerlink" title="3.format和invoke"></a>3.format和invoke</h4><p>&emsp;&emsp;这两个玩意其实是提示词内容的填充方式，在我们所提到的三种提示词方法中都支持这两种，因为历史原因，三种提示词方法都能兼容这两种填充方式</p>
+<center><img src="/img/AI/25.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<p>&emsp;&emsp;主要对比区别在于：</p>
+<center><img src="/img/AI/26.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<p>&emsp;&emsp;&emsp;&emsp;如果我们对返回值可以接受是字符串的话使用format就没有问题，但是当后续我们需要用到chain链的时候，就需要使用invoke进行操作了，所以在正式的 LangChain 开发中，推荐优先使用invoke，因为它是框架统一的标准接口，兼容性更好</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">from</span> langchain_core.prompts <span class="hljs-keyword">import</span> PromptTemplate<br><span class="hljs-keyword">from</span> langchain_core.prompts <span class="hljs-keyword">import</span> FewShotPromptTemplate<br><span class="hljs-keyword">from</span> langchain_core.prompts <span class="hljs-keyword">import</span> ChatPromptTemplate<br><br><span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-string">    PromptTemplate -&gt; StringPromptTemplate -&gt; BasePromptTemplate -&gt; RunnableSerializable -&gt; Runnable</span><br><span class="hljs-string">    FewShotPromptTemplate -&gt; StringPromptTemplate -&gt; BasePromptTemplate -&gt; RunnableSerializable -&gt; Runnable</span><br><span class="hljs-string">    ChatPromptTemplate -&gt; BaseChatPromptTemplate -&gt; BasePromptTemplate -&gt; RunnableSerializable -&gt; Runnable  </span><br><span class="hljs-string">&quot;&quot;&quot;</span><br><br>template = PromptTemplate.from_template(<span class="hljs-string">&quot;我的邻居是，&#123;neighbor&#125;，最喜欢，&#123;favorite&#125;&quot;</span>)<br><br>res1 = template.<span class="hljs-built_in">format</span>(neighbor=<span class="hljs-string">&quot;撩月&quot;</span>, favorite=<span class="hljs-string">&quot;摄影&quot;</span>)<br><span class="hljs-built_in">print</span>(res1, <span class="hljs-built_in">type</span>(res1))<br><br>res2 = template.invoke(<span class="hljs-built_in">input</span>=&#123;<span class="hljs-string">&quot;neighbor&quot;</span>: <span class="hljs-string">&quot;撩月&quot;</span>, <span class="hljs-string">&quot;favorite&quot;</span>: <span class="hljs-string">&quot;摄影&quot;</span>&#125;)<br><span class="hljs-built_in">print</span>(res2, <span class="hljs-built_in">type</span>(res2))<br></code></pre></td></tr></table></figure>
+
+<center><img src="/img/AI/27.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<p>&emsp;</p>
+<h4 id="4-ChatPromptTemplate"><a href="#4-ChatPromptTemplate" class="headerlink" title="4.ChatPromptTemplate"></a>4.ChatPromptTemplate</h4><p>&emsp;&emsp;ChatPromptTemplate：支持注入任意数量的历史会话信息</p>
+<p>&emsp;&emsp;在前面学到的两种提示词模版中，只能接入少量的信息，而 ChatPromptTemplate通过from_messages方法，从列表中获取多轮次会话作为聊天的基础模版</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">from</span> langchain_core.prompts <span class="hljs-keyword">import</span> ChatPromptTemplate<br><br>ChatPromptTemplate.from_messages([<br>    (<span class="hljs-string">&quot;system&quot;</span>, <span class="hljs-string">&quot;你是一个专业的翻译&quot;</span>),<br>    (<span class="hljs-string">&quot;human&quot;</span>, <span class="hljs-string">&quot;你好&quot;</span>),<br>    (<span class="hljs-string">&quot;ai&quot;</span>, <span class="hljs-string">&quot;Hello&quot;</span>),<br>    (<span class="hljs-string">&quot;human&quot;</span>, <span class="hljs-string">&quot;&#123;input&#125;&quot;</span>),<br>])<br></code></pre></td></tr></table></figure>
+
+<p>&emsp;&emsp;但是如果没有信息能够动态注入的话明显是不够的，所以这里引入MessagesPlaceholder，他作为占位符，提供history作为占位的key，最后基于invoke动态注入历史会话记录中，需要注意的是，这里必须是invoke，format是无法注入的</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">from</span> langchain_core.prompts <span class="hljs-keyword">import</span> ChatPromptTemplate<br><span class="hljs-keyword">from</span> langchain_core.prompts <span class="hljs-keyword">import</span> MessagesPlaceholder<br><span class="hljs-keyword">from</span> langchain_community.chat_models.tongyi <span class="hljs-keyword">import</span> ChatTongyi<br><span class="hljs-keyword">import</span> os<br><br>os.environ[<span class="hljs-string">&quot;DASHSCOPE_API_KEY&quot;</span>] = <span class="hljs-string">&quot;key&quot;</span><br><br>chat_template = ChatPromptTemplate.from_messages([<br>    (<span class="hljs-string">&quot;system&quot;</span>, <span class="hljs-string">&quot;你是一个边塞诗人，可以作诗&quot;</span>),<br>    MessagesPlaceholder(<span class="hljs-string">&quot;history&quot;</span>),<br>    (<span class="hljs-string">&quot;human&quot;</span>, <span class="hljs-string">&quot;请再来一首唐诗&quot;</span>),<br>])<br><br>history_data = [<br>    (<span class="hljs-string">&quot;human&quot;</span>, <span class="hljs-string">&quot;你来写一个唐诗&quot;</span>),<br>    (<span class="hljs-string">&quot;ai&quot;</span>, <span class="hljs-string">&quot;床前明月光，疑是地上霜，举头望明月，低头思故乡。&quot;</span>),<br>    (<span class="hljs-string">&quot;human&quot;</span>, <span class="hljs-string">&quot;好诗，再来一首&quot;</span>),<br>    (<span class="hljs-string">&quot;ai&quot;</span>, <span class="hljs-string">&quot;锄禾日当午，汗滴禾下土，谁知盘中餐，粒粒皆辛苦。&quot;</span>),<br>]<br><br><span class="hljs-comment"># 需要同时传入 history 和 input</span><br>prompt = chat_template.invoke(&#123;<span class="hljs-string">&quot;history&quot;</span>: history_data&#125;).to_string()<br><br><span class="hljs-comment"># 规范输出：只打印消息内容</span><br><span class="hljs-built_in">print</span>(prompt)<br><br>model = ChatTongyi(model=<span class="hljs-string">&quot;qwen-max&quot;</span>)<br><br>res = model.invoke(prompt)<br><span class="hljs-built_in">print</span>(res.content)<br></code></pre></td></tr></table></figure>
+
+<p>&emsp;</p>
+<h4 id="5-Chain的基础使用"><a href="#5-Chain的基础使用" class="headerlink" title="5.Chain的基础使用"></a>5.Chain的基础使用</h4><p>&emsp;&emsp;将组件串联，上一个组件的输出作为下一个组件的输入，是LangChain链的核心工作原理，这也是链式调用的核心价值，实现数据的自动化流转与组件的协同工作，例如：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs python">chain = promot_template | model<br></code></pre></td></tr></table></figure>
+
+<p>&emsp;&emsp;这里需要注意有一个核心前提，即需要是Runnable子类对象才能入链（Callable Mapping接口子类对象也可以接入，不过目前用的不多），前面所列举的组件均是Runnable接口的子类，如下类的继承关系：</p>
+<center><img src="/img/AI/28.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> os<br><span class="hljs-keyword">from</span> langchain_core.prompts <span class="hljs-keyword">import</span> ChatPromptTemplate<br><span class="hljs-keyword">from</span> langchain_core.prompts <span class="hljs-keyword">import</span> MessagesPlaceholder<br><span class="hljs-keyword">from</span> langchain_community.chat_models.tongyi <span class="hljs-keyword">import</span> ChatTongyi<br><span class="hljs-keyword">from</span> langchain_core.runnables.base <span class="hljs-keyword">import</span> RunnableSerializable<br><br>os.environ[<span class="hljs-string">&quot;DASHSCOPE_API_KEY&quot;</span>] = <span class="hljs-string">&quot;key&quot;</span><br><br>chat_template = ChatPromptTemplate.from_messages([<br>    (<span class="hljs-string">&quot;system&quot;</span>, <span class="hljs-string">&quot;你是一个边塞诗人，可以作诗&quot;</span>),<br>    MessagesPlaceholder(<span class="hljs-string">&quot;history&quot;</span>),<br>    (<span class="hljs-string">&quot;human&quot;</span>, <span class="hljs-string">&quot;请再来一首唐诗&quot;</span>),<br>])<br><br>history_data = [<br>    (<span class="hljs-string">&quot;human&quot;</span>, <span class="hljs-string">&quot;你来写一个唐诗&quot;</span>),<br>    (<span class="hljs-string">&quot;ai&quot;</span>, <span class="hljs-string">&quot;床前明月光，疑是地上霜，举头望明月，低头思故乡。&quot;</span>),<br>    (<span class="hljs-string">&quot;human&quot;</span>, <span class="hljs-string">&quot;好诗，再来一首&quot;</span>),<br>    (<span class="hljs-string">&quot;ai&quot;</span>, <span class="hljs-string">&quot;锄禾日当午，汗滴禾下土，谁知盘中餐，粒粒皆辛苦。&quot;</span>),<br>]<br><br>model = ChatTongyi(model=<span class="hljs-string">&quot;qwen-max&quot;</span>)<br><br><span class="hljs-comment">#chain : RunnableSerializable = chat_template | model</span><br>chain = chat_template | model<br><span class="hljs-built_in">print</span>(<span class="hljs-built_in">type</span>(chain))<br><br>res = chain.invoke(<span class="hljs-built_in">input</span>=&#123;<span class="hljs-string">&quot;history&quot;</span>: history_data&#125;)<br><span class="hljs-built_in">print</span>(res.content)<br><br><span class="hljs-keyword">for</span> chunk <span class="hljs-keyword">in</span> chain.stream(<span class="hljs-built_in">input</span>=&#123;<span class="hljs-string">&quot;history&quot;</span>: history_data&#125;):<br>    <span class="hljs-built_in">print</span>(chunk.content, end=<span class="hljs-string">&quot;&quot;</span>, flush=<span class="hljs-literal">True</span>)<br></code></pre></td></tr></table></figure>
+
+<p>&emsp;&emsp;在构造链后，我们就可以通过链调用invoke或者stream触发整个链条的执行，前面代码执行的流程如下：</p>
+<center><img src="/img/AI/29.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/AI/" class="category-chain-item">AI</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>AI--LangChain进阶（一）</div>
+      <div>https://one-null-pointer.github.io/2026/01/11/AI --LangChain进阶（一）/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>Author</div>
+          <div>liaoyue</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>Posted on</div>
+          <div>January 11, 2026</div>
+        </div>
+      
+      
+      <div class="license-meta-item">
+        <div>传送口</div>
+        <div>
+          
+            
+            
+              <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+              <span class="hint--top hint--rounded" aria-label="点击进行传送">
+                <i class="iconfont icon-by"></i>
+              </span>
+              </a>
+            
+          
+        </div>
+      </div>
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2026/01/10/AI%20--LangChain%E5%9F%BA%E7%A1%80/" title="AI--LangChain基础">
+                        <span class="hidden-mobile">AI--LangChain基础</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;Table of Contents</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">Keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://github.com/" target="_blank" rel="nofollow noopener"><span>pointer</span></a> <i class="iconfont icon-love"></i> <a href="https://mp.weixin.qq.com/s/6ncLUtaiJ9j_sMjZT5z-2w" target="_blank" rel="nofollow noopener"><span>一个爱学习的空指针</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      headingSelector : CONFIG.toc.headingSelector || 'h1,h2,h3,h4,h5,h6',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      collapseDepth   : CONFIG.toc.collapseDepth || 0,
+      scrollSmooth    : true,
+      headingsOffset  : -boardTop
+    });
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.10/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">Blog works best with JavaScript enabled</div>
+  </noscript>
+</body>
+</html>
