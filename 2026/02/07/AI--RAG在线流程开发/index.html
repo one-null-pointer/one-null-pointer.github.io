@@ -1,0 +1,642 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="liaoyue">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="AI–RAG在线流程开发0.在线服务流程流程图   &amp;emsp;&amp;emsp;在线流程的开发主要涉及四个脚本  向量检索功能 wector_stores.py rag服务核心功能 rag.py 历史会话记录功能 file_history_store.py l聊天UI界面 app_qa.py  &amp;emsp;&amp;emsp; 1.向量检索12345678910111213141516171819202122">
+<meta property="og:type" content="article">
+<meta property="og:title" content="AI--RAG在线流程开发">
+<meta property="og:url" content="https://one-null-pointer.github.io/2026/02/07/AI--RAG%E5%9C%A8%E7%BA%BF%E6%B5%81%E7%A8%8B%E5%BC%80%E5%8F%91/index.html">
+<meta property="og:site_name" content="one-null-poniter">
+<meta property="og:description" content="AI–RAG在线流程开发0.在线服务流程流程图   &amp;emsp;&amp;emsp;在线流程的开发主要涉及四个脚本  向量检索功能 wector_stores.py rag服务核心功能 rag.py 历史会话记录功能 file_history_store.py l聊天UI界面 app_qa.py  &amp;emsp;&amp;emsp; 1.向量检索12345678910111213141516171819202122">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://one-null-pointer.github.io/img/AI.png">
+<meta property="article:published_time" content="2026-02-07T13:48:48.000Z">
+<meta property="article:modified_time" content="2026-03-19T03:56:42.719Z">
+<meta property="article:author" content="liaoyue">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://one-null-pointer.github.io/img/AI.png">
+  
+  
+  
+  <title>AI--RAG在线流程开发 - one-null-poniter</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"one-null-pointer.github.io","root":"/","version":"1.9.2","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 5.4.2"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>one null pointer</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                吾
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                學
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                類
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="AI--RAG在线流程开发"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2026-02-07 21:48" pubdate>
+          February 7, 2026 pm
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          14k words
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          114 mins
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">AI--RAG在线流程开发</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="AI–RAG在线流程开发"><a href="#AI–RAG在线流程开发" class="headerlink" title="AI–RAG在线流程开发"></a>AI–RAG在线流程开发</h1><h4 id="0-在线服务流程流程图"><a href="#0-在线服务流程流程图" class="headerlink" title="0.在线服务流程流程图"></a>0.在线服务流程流程图</h4><center><img src="/img/AI/50.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<p>&emsp;&emsp;在线流程的开发主要涉及四个脚本</p>
+<ul>
+<li>向量检索功能 wector_stores.py</li>
+<li>rag服务核心功能 rag.py</li>
+<li>历史会话记录功能 file_history_store.py</li>
+<li>l聊天UI界面 app_qa.py</li>
+</ul>
+<p>&emsp;&emsp;</p>
+<h4 id="1-向量检索"><a href="#1-向量检索" class="headerlink" title="1.向量检索"></a>1.向量检索</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">from</span> langchain_chroma <span class="hljs-keyword">import</span> Chroma<br><span class="hljs-keyword">import</span> config_data <span class="hljs-keyword">as</span> config<br><br><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">VectorStoresService</span>(<span class="hljs-title class_ inherited__">object</span>):<br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__init__</span>(<span class="hljs-params">self, embedding</span>):<br>        <span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-string">           :param embedding: 嵌入函数</span><br><span class="hljs-string">        &quot;&quot;&quot;</span><br><br>        self.embedding = embedding<br><br>        self.vector_stores = Chroma(<br>            collection_name=config.chroma_collection_name,   <span class="hljs-comment"># 向量库的名称 表名</span><br>            embedding_function=self.embedding,  <span class="hljs-comment"># 嵌入函数</span><br>            persist_directory=config.chroma_persist_directory,  <span class="hljs-comment"># 向量库的持久化目录</span><br>        )<br>    <br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">get_retriever</span>(<span class="hljs-params">self</span>):<br>        <span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-string">            返回向量检索器，方便加入chain链</span><br><span class="hljs-string">        &quot;&quot;&quot;</span><br>        <span class="hljs-keyword">return</span> self.vector_stores.as_retriever(search_kwargs=&#123;<span class="hljs-string">&quot;k&quot;</span>: config.similarity_threshold&#125;)<br><br><br><br><span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&quot;__main__&quot;</span>:<br>    <span class="hljs-comment"># 测试代码</span><br>    <span class="hljs-keyword">from</span> langchain_community.embeddings <span class="hljs-keyword">import</span> DashScopeEmbeddings<br>    embedding = DashScopeEmbeddings(model=<span class="hljs-string">&quot;text-embedding-v4&quot;</span>)<br>    <br>    vector_stores_service = VectorStoresService(embedding)<br>    retriever = VectorStoresService(embedding).get_retriever()<br><br><br>    results = retriever.invoke(<span class="hljs-string">&quot;我体重160斤，推荐什么尺码&quot;</span>)<br>    <span class="hljs-built_in">print</span>(results)<br><br></code></pre></td></tr></table></figure>
+
+
+<p>&emsp;&emsp;</p>
+<h4 id="2-RAG服务"><a href="#2-RAG服务" class="headerlink" title="2.RAG服务"></a>2.RAG服务</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">from</span> langchain_core.documents <span class="hljs-keyword">import</span> Document<br><span class="hljs-keyword">from</span> vector_stores <span class="hljs-keyword">import</span> VectorStoresService<br><span class="hljs-keyword">from</span> langchain_community.embeddings <span class="hljs-keyword">import</span> DashScopeEmbeddings<br><span class="hljs-keyword">import</span> config_data <span class="hljs-keyword">as</span> config<br><span class="hljs-keyword">from</span> langchain_core.prompts <span class="hljs-keyword">import</span> ChatPromptTemplate<br><span class="hljs-keyword">from</span> langchain_core.output_parsers <span class="hljs-keyword">import</span> StrOutputParser<br><span class="hljs-keyword">from</span> langchain_community.chat_models <span class="hljs-keyword">import</span> ChatTongyi<br><span class="hljs-keyword">from</span> langchain_core.runnables <span class="hljs-keyword">import</span> RunnablePassthrough<br><br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">print_prompt</span>(<span class="hljs-params">full_prompt</span>):<br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;=&quot;</span>*<span class="hljs-number">20</span>)<br>    <span class="hljs-built_in">print</span>(full_prompt)<br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;=&quot;</span>*<span class="hljs-number">20</span>)<br>    <span class="hljs-keyword">return</span> full_prompt<br><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">RAGService</span>(<span class="hljs-title class_ inherited__">object</span>):<br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__init__</span>(<span class="hljs-params">self</span>):<br>        <br>        self.vector_service = VectorStoresService(<br>            embedding=DashScopeEmbeddings(model=config.embedding_model_name)<br>        )<br><br>        self.prompt_template = ChatPromptTemplate.from_messages([<br>            (<span class="hljs-string">&quot;system&quot;</span>, <span class="hljs-string">&quot;基于所提供的参考资料，回答用户问题。参考资料：&#123;context&#125;&quot;</span>),<br>            (<span class="hljs-string">&quot;human&quot;</span>, <span class="hljs-string">&quot;请回答问题:&#123;input&#125;&quot;</span>),<br>        ])<br><br>        self.chat_model = ChatTongyi(model=config.chat_model_name)<br><br>        self.chain = self._get_chain()<br><br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">_get_chain</span>(<span class="hljs-params">self</span>):<br>        <span class="hljs-string">&quot;&quot;&quot; 获取最终的执行链&quot;&quot;&quot;</span><br><br>        retriever = self.vector_service.get_retriever()<br><br>        <span class="hljs-keyword">def</span> <span class="hljs-title function_">format_documents</span>(<span class="hljs-params">docs: <span class="hljs-built_in">list</span>[Document]</span>):<br>            <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> docs:<br>                <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;没有相关参考资料。&quot;</span><br>            <br>            formatted_str = <span class="hljs-string">&quot;&quot;</span><br>            <span class="hljs-keyword">for</span> doc <span class="hljs-keyword">in</span> docs:<br>                formatted_str += <span class="hljs-string">f&quot;文档判断：<span class="hljs-subst">&#123;doc.page_content&#125;</span>\n文档元数据：<span class="hljs-subst">&#123;doc.metadata&#125;</span>\n\n&quot;</span><br>            <span class="hljs-keyword">return</span> formatted_str<br><br>        chain = (<br>            &#123;<br>                <span class="hljs-string">&quot;input&quot;</span>: RunnablePassthrough(),<br>                <span class="hljs-string">&quot;context&quot;</span>: retriever | format_documents<br>            &#125; | self.prompt_template | print_prompt | self.chat_model | StrOutputParser()<br><br>        )<br><br>        <span class="hljs-keyword">return</span> chain<br><br><span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&quot;__main__&quot;</span>:<br>    rag_service = RAGService()<br>    <span class="hljs-built_in">print</span>(rag_service.chain.invoke(<span class="hljs-string">&quot;我体重180斤，尺码推荐&quot;</span>))<br></code></pre></td></tr></table></figure>
+
+
+<p>&emsp;&emsp;</p>
+<h4 id="3-历史会话记录功能"><a href="#3-历史会话记录功能" class="headerlink" title="3.历史会话记录功能"></a>3.历史会话记录功能</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">from</span> langchain_core.chat_history <span class="hljs-keyword">import</span> BaseChatMessageHistory<br><span class="hljs-keyword">from</span> langchain_core.messages <span class="hljs-keyword">import</span> BaseMessage, message_to_dict, messages_from_dict<br><span class="hljs-keyword">import</span> json<br><span class="hljs-keyword">import</span> os<br><span class="hljs-keyword">from</span> typing <span class="hljs-keyword">import</span> <span class="hljs-type">Sequence</span><br><br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">get_history</span>(<span class="hljs-params">session_id</span>):<br>    <span class="hljs-keyword">return</span> FileChatMessageHistory(session_id, <span class="hljs-string">&quot;./Z_AI_RAG/chat_history&quot;</span>)<br><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">FileChatMessageHistory</span>(<span class="hljs-title class_ inherited__">BaseChatMessageHistory</span>):<br>    <span class="hljs-comment"># 初始化会话id和存储路径</span><br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__init__</span>(<span class="hljs-params">self, session_id, storage_path</span>):<br>        self.session_id = session_id<br>        self.storage_path = storage_path<br>        self.file_path = os.path.join(self.storage_path, <span class="hljs-string">f&quot;<span class="hljs-subst">&#123;self.session_id&#125;</span>.json&quot;</span>)<br><br>         <span class="hljs-comment">#确保存储路径存在</span><br>        os.makedirs(os.path.dirname(self.file_path), exist_ok=<span class="hljs-literal">True</span>)<br><br>    <span class="hljs-comment"># 添加消息到会话历史</span><br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">add_messages</span>(<span class="hljs-params">self, message: <span class="hljs-type">Sequence</span>[BaseMessage]</span>) -&gt; <span class="hljs-literal">None</span>: <br>        <span class="hljs-comment"># Sequence序列 类型list tuple</span><br>        all_messages = <span class="hljs-built_in">list</span>(self.messages) <span class="hljs-comment">#已有的消息列表</span><br>        all_messages.extend(message)                    <span class="hljs-comment"># 合并新消息</span><br><br>        <span class="hljs-comment"># 将数据同步写入到本地文件中</span><br>        <span class="hljs-comment"># 类对象写入文件 -&gt; 一堆二进制</span><br>        <span class="hljs-comment"># 为了方便，可以将BaseMessage消息转为字典（借助json模块以json字符串写入文件）</span><br>        <span class="hljs-comment"># 官方message_to_dict: 单个消息对象 (BaseMessage类实例) -&gt; 字典</span><br>        new_messages = [message_to_dict(message) <span class="hljs-keyword">for</span> message <span class="hljs-keyword">in</span> all_messages]<br>        <span class="hljs-comment">#new_messages = messages_to_dict(all_messages)</span><br><br>        <span class="hljs-comment">#将数据写入文件</span><br>        <span class="hljs-keyword">with</span> <span class="hljs-built_in">open</span>(self.file_path, <span class="hljs-string">&quot;w&quot;</span>, encoding=<span class="hljs-string">&quot;utf-8&quot;</span>) <span class="hljs-keyword">as</span> f:<br>            json.dump(new_messages, f)<br><br><br>    <span class="hljs-comment"># 获取会话历史消息</span><br><span class="hljs-meta">    @property </span><span class="hljs-comment"># @property装饰器将messages方法转换为成员属性</span><br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">messages</span>(<span class="hljs-params">self</span>) -&gt; <span class="hljs-built_in">list</span>[BaseMessage]:<br>        <span class="hljs-comment"># 当前文件内： list[字典]</span><br>        <span class="hljs-keyword">try</span>:<br>            <span class="hljs-keyword">with</span> <span class="hljs-built_in">open</span>(self.file_path, <span class="hljs-string">&quot;r&quot;</span>, encoding=<span class="hljs-string">&quot;utf-8&quot;</span>) <span class="hljs-keyword">as</span> f:<br>                message_data = json.load(f)<br>                <span class="hljs-keyword">return</span> messages_from_dict(message_data)<br>        <span class="hljs-keyword">except</span> FileNotFoundError:<br>            <span class="hljs-keyword">return</span> []<br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">clear</span>(<span class="hljs-params">self</span>) -&gt; <span class="hljs-literal">None</span>:<br>        <span class="hljs-comment"># 清空文件内容</span><br>        <span class="hljs-keyword">with</span> <span class="hljs-built_in">open</span>(self.file_path, <span class="hljs-string">&quot;w&quot;</span>, encoding=<span class="hljs-string">&quot;utf-8&quot;</span>) <span class="hljs-keyword">as</span> f:<br>            json.dump([], f)<br></code></pre></td></tr></table></figure>
+
+<p>&emsp;&emsp;</p>
+<h4 id="4-聊天UI界面"><a href="#4-聊天UI界面" class="headerlink" title="4.聊天UI界面"></a>4.聊天UI界面</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> time<br><br><span class="hljs-keyword">from</span> chromadb <span class="hljs-keyword">import</span> config<br><span class="hljs-keyword">from</span> rag <span class="hljs-keyword">import</span> RagService<br><span class="hljs-keyword">import</span> streamlit <span class="hljs-keyword">as</span> st<br><span class="hljs-keyword">from</span> config_data <span class="hljs-keyword">import</span> session_config<br><br><span class="hljs-comment">#标题</span><br>st.title(<span class="hljs-string">&quot;智能问答系统&quot;</span>)<br><span class="hljs-comment"># 分隔线</span><br>st.divider()<br><br><br><span class="hljs-keyword">if</span> <span class="hljs-string">&quot;messages&quot;</span> <span class="hljs-keyword">not</span> <span class="hljs-keyword">in</span> st.session_state:<br>    st.session_state[<span class="hljs-string">&quot;messages&quot;</span>] = [&#123;<span class="hljs-string">&quot;role&quot;</span>: <span class="hljs-string">&quot;assistant&quot;</span>, <span class="hljs-string">&quot;content&quot;</span>: <span class="hljs-string">&quot;你好，大葱蘸酱很高兴为您服务&quot;</span>&#125;]<br><br><span class="hljs-keyword">if</span> <span class="hljs-string">&quot;rag&quot;</span> <span class="hljs-keyword">not</span> <span class="hljs-keyword">in</span> st.session_state:<br>    st.session_state[<span class="hljs-string">&quot;rag&quot;</span>] = RagService()<br><br><br><span class="hljs-keyword">for</span> message <span class="hljs-keyword">in</span> st.session_state[<span class="hljs-string">&quot;messages&quot;</span>]:<br>    st.chat_message(message[<span class="hljs-string">&quot;role&quot;</span>]).write(message[<span class="hljs-string">&quot;content&quot;</span>])<br><br><span class="hljs-comment">#在页面最下方提供用户输入栏</span><br>prompt = st.chat_input()<br><br><span class="hljs-keyword">if</span> prompt:<br>    <br>    <span class="hljs-comment">#在页面输出用户的提问</span><br>    st.chat_message(<span class="hljs-string">&quot;user&quot;</span>).write(prompt)<br><br>    st.session_state[<span class="hljs-string">&quot;messages&quot;</span>].append(&#123;<span class="hljs-string">&quot;role&quot;</span>: <span class="hljs-string">&quot;user&quot;</span>, <span class="hljs-string">&quot;content&quot;</span>: prompt&#125;)<br><br>    <span class="hljs-comment">#直输出模型的回复</span><br>    <span class="hljs-comment"># with st.spinner(&quot;思考中，请稍后...&quot;):</span><br>    <span class="hljs-comment">#     response = st.session_state[&quot;rag&quot;].chain.invoke(&#123;&quot;input&quot;: prompt&#125;, session_config)</span><br>    <span class="hljs-comment">#     st.chat_message(&quot;assistant&quot;).write(response)</span><br>    <span class="hljs-comment">#     st.session_state[&quot;messages&quot;].append(&#123;&quot;role&quot;: &quot;assistant&quot;, &quot;content&quot;: response&#125;)</span><br><br>   <span class="hljs-comment">#流式输出模型的回复</span><br>    <span class="hljs-keyword">with</span> st.spinner(<span class="hljs-string">&quot;思考中，请稍后...&quot;</span>):<br>        response_stream = st.session_state[<span class="hljs-string">&quot;rag&quot;</span>].chain.stream(&#123;<span class="hljs-string">&quot;input&quot;</span>: prompt&#125;, session_config)<br>        res = st.chat_message(<span class="hljs-string">&quot;assistant&quot;</span>).write_stream(response_stream)<br>        st.session_state[<span class="hljs-string">&quot;messages&quot;</span>].append(&#123;<span class="hljs-string">&quot;role&quot;</span>: <span class="hljs-string">&quot;assistant&quot;</span>, <span class="hljs-string">&quot;content&quot;</span>: res&#125;)<br></code></pre></td></tr></table></figure>
+
+<p>&emsp;&emsp;</p>
+<h4 id="5-合并代码块"><a href="#5-合并代码块" class="headerlink" title="5.合并代码块"></a>5.合并代码块</h4><ul>
+<li>vector_stores.py</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">from</span> langchain_chroma <span class="hljs-keyword">import</span> Chroma<br><span class="hljs-keyword">import</span> config_data <span class="hljs-keyword">as</span> config<br><br><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">VectorStoresService</span>(<span class="hljs-title class_ inherited__">object</span>):<br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__init__</span>(<span class="hljs-params">self, embedding</span>):<br>        <span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-string">           :param embedding: 嵌入函数</span><br><span class="hljs-string">        &quot;&quot;&quot;</span><br><br>        self.embedding = embedding<br><br>        self.vector_stores = Chroma(<br>            collection_name=config.chroma_collection_name,   <span class="hljs-comment"># 向量库的名称 表名</span><br>            embedding_function=self.embedding,  <span class="hljs-comment"># 嵌入函数</span><br>            persist_directory=config.chroma_persist_directory,  <span class="hljs-comment"># 向量库的持久化目录</span><br>        )<br>    <br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">get_retriever</span>(<span class="hljs-params">self</span>):<br>        <span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-string">            返回向量检索器，方便加入chain链</span><br><span class="hljs-string">        &quot;&quot;&quot;</span><br>        <span class="hljs-keyword">return</span> self.vector_stores.as_retriever(search_kwargs=&#123;<span class="hljs-string">&quot;k&quot;</span>: config.similarity_threshold&#125;)<br><br><br><br><span class="hljs-comment"># if __name__ == &quot;__main__&quot;:</span><br><span class="hljs-comment">#     # 测试代码</span><br><span class="hljs-comment">#     from langchain_community.embeddings import DashScopeEmbeddings</span><br><span class="hljs-comment">#     embedding = DashScopeEmbeddings(model=&quot;text-embedding-v4&quot;)</span><br>    <br><span class="hljs-comment">#     vector_stores_service = VectorStoresService(embedding)</span><br><span class="hljs-comment">#     retriever = VectorStoresService(embedding).get_retriever()</span><br><br><br><span class="hljs-comment">#     results = retriever.invoke(&quot;那我身高170呢&quot;)</span><br><span class="hljs-comment">#     print(results)</span><br></code></pre></td></tr></table></figure>
+
+<ul>
+<li>rag.py</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">from</span> langchain_core.documents <span class="hljs-keyword">import</span> Document<br><span class="hljs-keyword">from</span> langchain_core.runnables.base <span class="hljs-keyword">import</span> RunnableLambda<br><span class="hljs-keyword">from</span> vector_stores <span class="hljs-keyword">import</span> VectorStoresService<br><span class="hljs-keyword">from</span> langchain_community.embeddings <span class="hljs-keyword">import</span> DashScopeEmbeddings<br><span class="hljs-keyword">import</span> config_data <span class="hljs-keyword">as</span> config<br><span class="hljs-keyword">from</span> langchain_core.prompts <span class="hljs-keyword">import</span> ChatPromptTemplate, MessagesPlaceholder<br><span class="hljs-keyword">from</span> langchain_core.output_parsers <span class="hljs-keyword">import</span> StrOutputParser<br><span class="hljs-keyword">from</span> langchain_community.chat_models <span class="hljs-keyword">import</span> ChatTongyi<br><span class="hljs-keyword">from</span> langchain_core.runnables <span class="hljs-keyword">import</span> RunnablePassthrough, RunnableWithMessageHistory<br><span class="hljs-keyword">from</span> langchain_core.chat_history <span class="hljs-keyword">import</span> BaseChatMessageHistory<br><span class="hljs-keyword">from</span> file_history_store <span class="hljs-keyword">import</span> get_history<br><br><br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">print_prompt</span>(<span class="hljs-params">full_prompt</span>):<br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;=&quot;</span>*<span class="hljs-number">20</span>)<br>    <span class="hljs-built_in">print</span>(full_prompt)<br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;=&quot;</span>*<span class="hljs-number">20</span>)<br>    <span class="hljs-keyword">return</span> full_prompt<br><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">RagService</span>(<span class="hljs-title class_ inherited__">object</span>):<br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__init__</span>(<span class="hljs-params">self</span>):<br>        <br>        self.vector_service = VectorStoresService(<br>            embedding=DashScopeEmbeddings(model=config.embedding_model_name)<br>        )<br><br>        self.prompt_template = ChatPromptTemplate.from_messages([<br>            (<span class="hljs-string">&quot;system&quot;</span>, <span class="hljs-string">&quot;基于所提供的参考资料，回答用户问题。参考资料：&#123;context&#125;&quot;</span>),<br>            MessagesPlaceholder(variable_name=<span class="hljs-string">&quot;chat_history&quot;</span>),<br>            (<span class="hljs-string">&quot;human&quot;</span>, <span class="hljs-string">&quot;请回答问题:&#123;input&#125;&quot;</span>),<br>        ])<br><br>        self.chat_model = ChatTongyi(model=config.chat_model_name)<br><br>        self.chain = self._get_chain()<br><br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">_get_chain</span>(<span class="hljs-params">self</span>):<br>        <span class="hljs-string">&quot;&quot;&quot; 获取最终的执行链&quot;&quot;&quot;</span><br><br>        retriever = self.vector_service.get_retriever()<br><br>        <span class="hljs-keyword">def</span> <span class="hljs-title function_">format_documents</span>(<span class="hljs-params">docs: <span class="hljs-built_in">list</span>[Document]</span>):<br>            <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> docs:<br>                <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;没有相关参考资料。&quot;</span><br>            <br>            formatted_str = <span class="hljs-string">&quot;&quot;</span><br>            <span class="hljs-keyword">for</span> doc <span class="hljs-keyword">in</span> docs:<br>                formatted_str += <span class="hljs-string">f&quot;文档判断：<span class="hljs-subst">&#123;doc.page_content&#125;</span>\n文档元数据：<span class="hljs-subst">&#123;doc.metadata&#125;</span>\n\n&quot;</span><br>            <span class="hljs-keyword">return</span> formatted_str<br>        <br>        <span class="hljs-keyword">def</span> <span class="hljs-title function_">format_for_retriever</span>(<span class="hljs-params">value: <span class="hljs-built_in">dict</span></span>) -&gt; <span class="hljs-built_in">str</span>:<br>            <span class="hljs-keyword">return</span> value[<span class="hljs-string">&quot;input&quot;</span>]<br><br>        <span class="hljs-keyword">def</span> <span class="hljs-title function_">format_for_prompt_template</span>(<span class="hljs-params">value: <span class="hljs-built_in">dict</span></span>) :<br>            new_value = &#123;&#125;<br>            new_value[<span class="hljs-string">&quot;input&quot;</span>] = value[<span class="hljs-string">&quot;input&quot;</span>][<span class="hljs-string">&quot;input&quot;</span>]<br>            new_value[<span class="hljs-string">&quot;context&quot;</span>] = value[<span class="hljs-string">&quot;context&quot;</span>]<br>            new_value[<span class="hljs-string">&quot;chat_history&quot;</span>] = value[<span class="hljs-string">&quot;input&quot;</span>][<span class="hljs-string">&quot;chat_history&quot;</span>]<br>            <span class="hljs-keyword">return</span> new_value<br><br><br>        chain = (<br>            &#123;<br>                <span class="hljs-string">&quot;input&quot;</span>: RunnablePassthrough(),<br>                <span class="hljs-string">&quot;context&quot;</span>: RunnableLambda(format_for_retriever) | retriever | format_documents<br>            &#125; | RunnableLambda(format_for_prompt_template) | self.prompt_template | print_prompt | self.chat_model | StrOutputParser()<br>        )<br><br>        conversation_chain = RunnableWithMessageHistory(<br>            chain,<br>            get_history,<br>            input_messages_key=<span class="hljs-string">&quot;input&quot;</span>,<br>            history_messages_key=<span class="hljs-string">&quot;chat_history&quot;</span>,<br>        )<br><br>        <span class="hljs-keyword">return</span> conversation_chain<br><br><span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&quot;__main__&quot;</span>:<br>    <span class="hljs-comment"># session id 配置</span><br>    session_config = &#123;<br>        <span class="hljs-string">&quot;configurable&quot;</span>: &#123;<br>            <span class="hljs-string">&quot;session_id&quot;</span>: <span class="hljs-string">&quot;user_001&quot;</span><br>        &#125;<br>    &#125;<br><br><br>    rag_service = RagService()<br>    <span class="hljs-built_in">print</span>(rag_service.chain.invoke(&#123;<span class="hljs-string">&quot;input&quot;</span>: <span class="hljs-string">&quot;那我身高170呢&quot;</span>&#125;, session_config))<br></code></pre></td></tr></table></figure>
+
+<ul>
+<li>file_history_store.py</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">from</span> langchain_core.chat_history <span class="hljs-keyword">import</span> BaseChatMessageHistory<br><span class="hljs-keyword">from</span> langchain_core.messages <span class="hljs-keyword">import</span> BaseMessage, message_to_dict, messages_from_dict<br><span class="hljs-keyword">import</span> json<br><span class="hljs-keyword">import</span> os<br><span class="hljs-keyword">from</span> typing <span class="hljs-keyword">import</span> <span class="hljs-type">Sequence</span><br><br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">get_history</span>(<span class="hljs-params">session_id</span>):<br>    <span class="hljs-keyword">return</span> FileChatMessageHistory(session_id, <span class="hljs-string">&quot;./Z_AI_RAG/chat_history&quot;</span>)<br><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">FileChatMessageHistory</span>(<span class="hljs-title class_ inherited__">BaseChatMessageHistory</span>):<br>    <span class="hljs-comment"># 初始化会话id和存储路径</span><br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__init__</span>(<span class="hljs-params">self, session_id, storage_path</span>):<br>        self.session_id = session_id<br>        self.storage_path = storage_path<br>        self.file_path = os.path.join(self.storage_path, <span class="hljs-string">f&quot;<span class="hljs-subst">&#123;self.session_id&#125;</span>.json&quot;</span>)<br><br>         <span class="hljs-comment">#确保存储路径存在</span><br>        os.makedirs(os.path.dirname(self.file_path), exist_ok=<span class="hljs-literal">True</span>)<br><br>    <span class="hljs-comment"># 添加消息到会话历史</span><br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">add_messages</span>(<span class="hljs-params">self, message: <span class="hljs-type">Sequence</span>[BaseMessage]</span>) -&gt; <span class="hljs-literal">None</span>: <br>        <span class="hljs-comment"># Sequence序列 类型list tuple</span><br>        all_messages = <span class="hljs-built_in">list</span>(self.messages) <span class="hljs-comment">#已有的消息列表</span><br>        all_messages.extend(message)                    <span class="hljs-comment"># 合并新消息</span><br><br>        <span class="hljs-comment"># 将数据同步写入到本地文件中</span><br>        <span class="hljs-comment"># 类对象写入文件 -&gt; 一堆二进制</span><br>        <span class="hljs-comment"># 为了方便，可以将BaseMessage消息转为字典（借助json模块以json字符串写入文件）</span><br>        <span class="hljs-comment"># 官方message_to_dict: 单个消息对象 (BaseMessage类实例) -&gt; 字典</span><br>        new_messages = [message_to_dict(message) <span class="hljs-keyword">for</span> message <span class="hljs-keyword">in</span> all_messages]<br>        <span class="hljs-comment">#new_messages = messages_to_dict(all_messages)</span><br><br>        <span class="hljs-comment">#将数据写入文件</span><br>        <span class="hljs-keyword">with</span> <span class="hljs-built_in">open</span>(self.file_path, <span class="hljs-string">&quot;w&quot;</span>, encoding=<span class="hljs-string">&quot;utf-8&quot;</span>) <span class="hljs-keyword">as</span> f:<br>            json.dump(new_messages, f)<br><br><br>    <span class="hljs-comment"># 获取会话历史消息</span><br><span class="hljs-meta">    @property </span><span class="hljs-comment"># @property装饰器将messages方法转换为成员属性</span><br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">messages</span>(<span class="hljs-params">self</span>) -&gt; <span class="hljs-built_in">list</span>[BaseMessage]:<br>        <span class="hljs-comment"># 当前文件内： list[字典]</span><br>        <span class="hljs-keyword">try</span>:<br>            <span class="hljs-keyword">with</span> <span class="hljs-built_in">open</span>(self.file_path, <span class="hljs-string">&quot;r&quot;</span>, encoding=<span class="hljs-string">&quot;utf-8&quot;</span>) <span class="hljs-keyword">as</span> f:<br>                message_data = json.load(f)<br>                <span class="hljs-keyword">return</span> messages_from_dict(message_data)<br>        <span class="hljs-keyword">except</span> FileNotFoundError:<br>            <span class="hljs-keyword">return</span> []<br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">clear</span>(<span class="hljs-params">self</span>) -&gt; <span class="hljs-literal">None</span>:<br>        <span class="hljs-comment"># 清空文件内容</span><br>        <span class="hljs-keyword">with</span> <span class="hljs-built_in">open</span>(self.file_path, <span class="hljs-string">&quot;w&quot;</span>, encoding=<span class="hljs-string">&quot;utf-8&quot;</span>) <span class="hljs-keyword">as</span> f:<br>            json.dump([], f)<br></code></pre></td></tr></table></figure>
+
+<ul>
+<li>app_qa.py</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> time<br><br><span class="hljs-keyword">from</span> chromadb <span class="hljs-keyword">import</span> config<br><span class="hljs-keyword">from</span> rag <span class="hljs-keyword">import</span> RagService<br><span class="hljs-keyword">import</span> streamlit <span class="hljs-keyword">as</span> st<br><span class="hljs-keyword">from</span> config_data <span class="hljs-keyword">import</span> session_config<br><br><span class="hljs-comment">#标题</span><br>st.title(<span class="hljs-string">&quot;智能问答系统&quot;</span>)<br><span class="hljs-comment"># 分隔线</span><br>st.divider()<br><br><br><span class="hljs-keyword">if</span> <span class="hljs-string">&quot;messages&quot;</span> <span class="hljs-keyword">not</span> <span class="hljs-keyword">in</span> st.session_state:<br>    st.session_state[<span class="hljs-string">&quot;messages&quot;</span>] = [&#123;<span class="hljs-string">&quot;role&quot;</span>: <span class="hljs-string">&quot;assistant&quot;</span>, <span class="hljs-string">&quot;content&quot;</span>: <span class="hljs-string">&quot;你好，大葱蘸酱很高兴为您服务&quot;</span>&#125;]<br><br><span class="hljs-keyword">if</span> <span class="hljs-string">&quot;rag&quot;</span> <span class="hljs-keyword">not</span> <span class="hljs-keyword">in</span> st.session_state:<br>    st.session_state[<span class="hljs-string">&quot;rag&quot;</span>] = RagService()<br><br><br><span class="hljs-keyword">for</span> message <span class="hljs-keyword">in</span> st.session_state[<span class="hljs-string">&quot;messages&quot;</span>]:<br>    st.chat_message(message[<span class="hljs-string">&quot;role&quot;</span>]).write(message[<span class="hljs-string">&quot;content&quot;</span>])<br><br><span class="hljs-comment">#在页面最下方提供用户输入栏</span><br>prompt = st.chat_input()<br><br><span class="hljs-keyword">if</span> prompt:<br>    <br>    <span class="hljs-comment">#在页面输出用户的提问</span><br>    st.chat_message(<span class="hljs-string">&quot;user&quot;</span>).write(prompt)<br><br>    st.session_state[<span class="hljs-string">&quot;messages&quot;</span>].append(&#123;<span class="hljs-string">&quot;role&quot;</span>: <span class="hljs-string">&quot;user&quot;</span>, <span class="hljs-string">&quot;content&quot;</span>: prompt&#125;)<br><br>    <span class="hljs-comment">#直输出模型的回复</span><br>    <span class="hljs-comment"># with st.spinner(&quot;思考中，请稍后...&quot;):</span><br>    <span class="hljs-comment">#     response = st.session_state[&quot;rag&quot;].chain.invoke(&#123;&quot;input&quot;: prompt&#125;, session_config)</span><br>    <span class="hljs-comment">#     st.chat_message(&quot;assistant&quot;).write(response)</span><br>    <span class="hljs-comment">#     st.session_state[&quot;messages&quot;].append(&#123;&quot;role&quot;: &quot;assistant&quot;, &quot;content&quot;: response&#125;)</span><br><br>   <span class="hljs-comment">#流式输出模型的回复</span><br>    <span class="hljs-keyword">with</span> st.spinner(<span class="hljs-string">&quot;思考中，请稍后...&quot;</span>):<br>        response_stream = st.session_state[<span class="hljs-string">&quot;rag&quot;</span>].chain.stream(&#123;<span class="hljs-string">&quot;input&quot;</span>: prompt&#125;, session_config)<br>        res = st.chat_message(<span class="hljs-string">&quot;assistant&quot;</span>).write_stream(response_stream)<br>        st.session_state[<span class="hljs-string">&quot;messages&quot;</span>].append(&#123;<span class="hljs-string">&quot;role&quot;</span>: <span class="hljs-string">&quot;assistant&quot;</span>, <span class="hljs-string">&quot;content&quot;</span>: res&#125;)<br></code></pre></td></tr></table></figure>
+
+<ul>
+<li>config_data.py</li>
+</ul>
+<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><code class="hljs makefile">md5_file_path = <span class="hljs-string">&quot;./md5.txt&quot;</span><br><br><br><span class="hljs-comment">#Chroma向量库的配置</span><br>chroma_collection_name = <span class="hljs-string">&quot;RAG&quot;</span><br>chroma_persist_directory = <span class="hljs-string">&quot;./chroma_db&quot;</span><br><br><span class="hljs-comment">#spliter</span><br>chunk_size = 1000        <span class="hljs-comment"># 每个文本块的最大字符数</span><br>chunk_overlap = 100      <span class="hljs-comment"># 连续文本块之间的重叠字符数</span><br>separators = [<span class="hljs-string">&quot;\n\n&quot;</span>, <span class="hljs-string">&quot;\n&quot;</span>, <span class="hljs-string">&quot;。&quot;</span>, <span class="hljs-string">&quot;！&quot;</span>, <span class="hljs-string">&quot;？&quot;</span>, <span class="hljs-string">&quot;!&quot;</span>, <span class="hljs-string">&quot;?&quot;</span>, <span class="hljs-string">&quot; &quot;</span>]  <span class="hljs-comment"># 自然段落划分的符号</span><br>max_splist_chat_number = 1000  <span class="hljs-comment"># 文本分割的阈值，超过才进行分割</span><br><br><span class="hljs-comment"># 相似度检索阈值</span><br>similarity_threshold = 1 <span class="hljs-comment"># 检索返回匹配的文档数量</span><br><br><span class="hljs-comment">#mox 模型的配置</span><br>embedding_model_name = <span class="hljs-string">&quot;text-embedding-v4&quot;</span><br>chat_model_name = <span class="hljs-string">&quot;qwen3-max&quot;</span><br><br><span class="hljs-comment">#会话配置</span><br>session_config = &#123;<br>    <span class="hljs-string">&quot;configurable&quot;</span>: &#123;<br>        <span class="hljs-string">&quot;session_id&quot;</span>: <span class="hljs-string">&quot;user_001&quot;</span><br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>&emsp;&emsp;最终效果：</p>
+<center><img src="/img/AI/51.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/AI/" class="category-chain-item">AI</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>AI--RAG在线流程开发</div>
+      <div>https://one-null-pointer.github.io/2026/02/07/AI--RAG在线流程开发/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>Author</div>
+          <div>liaoyue</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>Posted on</div>
+          <div>February 7, 2026</div>
+        </div>
+      
+      
+      <div class="license-meta-item">
+        <div>传送口</div>
+        <div>
+          
+            
+            
+              <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+              <span class="hint--top hint--rounded" aria-label="点击进行传送">
+                <i class="iconfont icon-by"></i>
+              </span>
+              </a>
+            
+          
+        </div>
+      </div>
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2026/02/03/AI--RAG%E7%A6%BB%E7%BA%BF%E6%B5%81%E7%A8%8B%E5%BC%80%E5%8F%91/" title="AI--RAG离线流程开发">
+                        <span class="hidden-mobile">AI--RAG离线流程开发</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;Table of Contents</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">Keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://github.com/" target="_blank" rel="nofollow noopener"><span>pointer</span></a> <i class="iconfont icon-love"></i> <a href="https://mp.weixin.qq.com/s/6ncLUtaiJ9j_sMjZT5z-2w" target="_blank" rel="nofollow noopener"><span>一个爱学习的空指针</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      headingSelector : CONFIG.toc.headingSelector || 'h1,h2,h3,h4,h5,h6',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      collapseDepth   : CONFIG.toc.collapseDepth || 0,
+      scrollSmooth    : true,
+      headingsOffset  : -boardTop
+    });
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.10/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">Blog works best with JavaScript enabled</div>
+  </noscript>
+</body>
+</html>

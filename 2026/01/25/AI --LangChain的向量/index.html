@@ -1,0 +1,645 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="liaoyue">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="AI–LangChain的向量1.向量的概念&amp;emsp;&amp;emsp;从前面的流程图中，涉及到了向量的相关概念，向量库是RAG中的一个重要节点  离线流程：知识和信息 -&gt; 向量嵌入 (向量化) -&gt; 存入向量库 在线流程：用户的提问 -&gt; 向量嵌入 (向量化) -&gt; 在向量库中匹配  &amp;emsp;&amp;emsp;向量简单来说就是文本的数字身份证，它将一段文字的语义信息，转换成一">
+<meta property="og:type" content="article">
+<meta property="og:title" content="AI--LangChain的向量">
+<meta property="og:url" content="https://one-null-pointer.github.io/2026/01/25/AI%20--LangChain%E7%9A%84%E5%90%91%E9%87%8F/index.html">
+<meta property="og:site_name" content="one-null-poniter">
+<meta property="og:description" content="AI–LangChain的向量1.向量的概念&amp;emsp;&amp;emsp;从前面的流程图中，涉及到了向量的相关概念，向量库是RAG中的一个重要节点  离线流程：知识和信息 -&gt; 向量嵌入 (向量化) -&gt; 存入向量库 在线流程：用户的提问 -&gt; 向量嵌入 (向量化) -&gt; 在向量库中匹配  &amp;emsp;&amp;emsp;向量简单来说就是文本的数字身份证，它将一段文字的语义信息，转换成一">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://one-null-pointer.github.io/img/AI.png">
+<meta property="article:published_time" content="2026-01-25T13:48:48.000Z">
+<meta property="article:modified_time" content="2026-03-19T03:54:26.850Z">
+<meta property="article:author" content="liaoyue">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://one-null-pointer.github.io/img/AI.png">
+  
+  
+  
+  <title>AI--LangChain的向量 - one-null-poniter</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"one-null-pointer.github.io","root":"/","version":"1.9.2","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 5.4.2"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>one null pointer</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                吾
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                學
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                類
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="AI--LangChain的向量"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2026-01-25 21:48" pubdate>
+          January 25, 2026 pm
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          6.2k words
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          52 mins
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">AI--LangChain的向量</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="AI–LangChain的向量"><a href="#AI–LangChain的向量" class="headerlink" title="AI–LangChain的向量"></a>AI–LangChain的向量</h1><h4 id="1-向量的概念"><a href="#1-向量的概念" class="headerlink" title="1.向量的概念"></a>1.向量的概念</h4><p>&emsp;&emsp;从前面的流程图中，涉及到了向量的相关概念，向量库是RAG中的一个重要节点</p>
+<ul>
+<li>离线流程：知识和信息 -&gt; 向量嵌入 (向量化) -&gt; 存入向量库</li>
+<li>在线流程：用户的提问 -&gt; 向量嵌入 (向量化) -&gt; 在向量库中匹配</li>
+</ul>
+<p>&emsp;&emsp;向量简单来说就是文本的数字身份证，它将一段文字的语义信息，转换成一串固定长度的数字列表，让计算机能够看懂文字的含义并做相似度计算，也就是让计算机更方便的理解不同的文本内容，是否表达的是一个意思。</p>
+<center><img src="/img/AI/37.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<p>&emsp;&emsp;向量的计算，可以接祖文本嵌入模型实现，如text-embedding-v1，其匹配通过算法实现，如余弦相似度</p>
+<p>&emsp;&emsp;</p>
+<h4 id="2-余弦相似度"><a href="#2-余弦相似度" class="headerlink" title="2.余弦相似度"></a>2.余弦相似度</h4><p>&emsp;&emsp;在前面我们介绍了向量的概念，而在算法匹配中提到了余弦相似度，这里就简单的学习下。首先我们知道向量的数字序列，共同决定了向量在高维空间中的方向和成都，而余弦相似度主要就是在撇除长度的影响，得到方向的夹角，夹角越小则约相似，也就代表了两段文本语义更加相似。</p>
+<center><img src="/img/AI/38.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<p>&emsp;&emsp;这里只需要简单了解下即可，后续肯定是有python脚本帮助我们计算</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment">#计算余弦相似度</span><br><span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np<br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">cosine_similarity</span>(<span class="hljs-params">vec1, vec2</span>):<br>    dot_product = np.dot(vec1, vec2)<br>    norm_vec1 = np.linalg.norm(vec1)<br>    norm_vec2 = np.linalg.norm(vec2)<br>    <span class="hljs-keyword">return</span> dot_product / (norm_vec1 * norm_vec2)<br><br><span class="hljs-comment"># 示例用法</span><br>vec1 = np.array([<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>, <span class="hljs-number">5</span>])<br>vec2 = np.array([<span class="hljs-number">4</span>, <span class="hljs-number">5</span>, <span class="hljs-number">6</span>, <span class="hljs-number">7</span>, <span class="hljs-number">8</span>])<br>vec3 = np.array([<span class="hljs-number">1</span>, -<span class="hljs-number">2</span>, -<span class="hljs-number">3</span>, -<span class="hljs-number">4</span>, -<span class="hljs-number">5</span>])<br><br>similarity = cosine_similarity(vec1, vec2)<br><span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;余弦相似度: <span class="hljs-subst">&#123;similarity&#125;</span>&quot;</span>)<br>similarity = cosine_similarity(vec1, vec3)<br><span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;余弦相似度: <span class="hljs-subst">&#123;similarity&#125;</span>&quot;</span>)<br></code></pre></td></tr></table></figure>
+
+<p>&emsp;&emsp;</p>
+<h4 id="3-向量的相关操作"><a href="#3-向量的相关操作" class="headerlink" title="3.向量的相关操作"></a>3.向量的相关操作</h4><p>&emsp;&emsp;在前文中有提到过文本转向量的概念，而本章节则学习向量相关的内容，典型的向量存储应用如下：</p>
+<center><img src="/img/AI/39.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<p>&emsp;&emsp;对于向量的处理主要就是存储、删除以及检索，而在LangChain总也为向量存储提供了统一的接口</p>
+<ul>
+<li>存入向量：add_documents</li>
+<li>删除向量：delete</li>
+<li>向量检索：similarity_search</li>
+</ul>
+<p>&emsp;&emsp;</p>
+<h4 id="4-内部向量存储"><a href="#4-内部向量存储" class="headerlink" title="4.内部向量存储"></a>4.内部向量存储</h4><p>&emsp;&emsp;示例文本：</p>
+<center><img src="/img/AI/40.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<p>&emsp;&emsp;示例代码：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">from</span> langchain_core.vectorstores <span class="hljs-keyword">import</span> InMemoryVectorStore<br><span class="hljs-keyword">from</span> langchain_community.embeddings <span class="hljs-keyword">import</span> DashScopeEmbeddings<br><span class="hljs-keyword">from</span> langchain_community.document_loaders <span class="hljs-keyword">import</span> CSVLoader<br><br>vectorstore = InMemoryVectorStore(<br>    embedding=DashScopeEmbeddings()<br>)<br><br>loader = CSVLoader(<br>    file_path=<span class="hljs-string">&quot;./AI_Python/data/xl.csv&quot;</span>,<br>    encoding=<span class="hljs-string">&quot;utf-8&quot;</span>,<br>    source_column=<span class="hljs-string">&quot;source&quot;</span>, <span class="hljs-comment">#指定本条数据的来源字段</span><br>)   <br><br>documents = loader.load()<br><br><span class="hljs-comment">#向量存储的新增</span><br>vectorstore.add_documents(<br>    documents=documents, <span class="hljs-comment">#被添加的文档，类型：list[Document]</span><br>    ids = [<span class="hljs-string">&quot;id&quot;</span> + <span class="hljs-built_in">str</span>(i) <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">1</span>,<span class="hljs-built_in">len</span>(documents)+<span class="hljs-number">1</span>)]    <span class="hljs-comment"># 每个文档的id，必须唯一</span><br>)<br><br><span class="hljs-comment">#删除</span><br>vectorstore.delete(<br>    ids = [<span class="hljs-string">&quot;id1&quot;</span>, <span class="hljs-string">&quot;id2&quot;</span>]    <span class="hljs-comment"># 要删除的文档id列表</span><br>)<br><br><span class="hljs-comment">#检索 返回类型list[Document]</span><br>retriever = vectorstore.similarity_search(<br>    query=<span class="hljs-string">&quot;科学健身&quot;</span>, <span class="hljs-comment"># 要查询的文本</span><br>    k=<span class="hljs-number">2</span>    <span class="hljs-comment"># 要返回的文档数</span><br>)<br><span class="hljs-built_in">print</span>(retriever)<br></code></pre></td></tr></table></figure>
+
+<p>&emsp;&emsp;</p>
+<h4 id="5-外部向量存储"><a href="#5-外部向量存储" class="headerlink" title="5.外部向量存储"></a>5.外部向量存储</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">from</span> langchain_chroma <span class="hljs-keyword">import</span> Chroma<br><span class="hljs-keyword">from</span> langchain_core.vectorstores <span class="hljs-keyword">import</span> InMemoryVectorStore<br><span class="hljs-keyword">from</span> langchain_community.embeddings <span class="hljs-keyword">import</span> DashScopeEmbeddings<br><span class="hljs-keyword">from</span> langchain_community.document_loaders <span class="hljs-keyword">import</span> CSVLoader<br><br><span class="hljs-comment"># Chroma 向量数据库（轻量级）</span><br><span class="hljs-comment"># 确保安装了chromadb和langchain_chroma库：pip install chromadb langchain_chroma</span><br><br>vectorstore = Chroma(<br>    collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,  <span class="hljs-comment"># 集合名称,类似于数据库中的表名</span><br>    embedding_function=DashScopeEmbeddings(),  <span class="hljs-comment"># 嵌入模型</span><br>    persist_directory=<span class="hljs-string">&quot;./chroma_db&quot;</span>  <span class="hljs-comment"># 数据库文件存储路径</span><br>)<br><br>loader = CSVLoader(<br>    file_path=<span class="hljs-string">&quot;./AI_Python/data/xl.csv&quot;</span>,<br>    encoding=<span class="hljs-string">&quot;utf-8&quot;</span>,<br>    source_column=<span class="hljs-string">&quot;source&quot;</span>, <span class="hljs-comment">#指定本条数据的来源字段</span><br>)   <br><br>documents = loader.load()<br><br><span class="hljs-comment">#向量存储的新增</span><br>vectorstore.add_documents(<br>    documents=documents, <span class="hljs-comment">#被添加的文档，类型：list[Document]</span><br>    ids = [<span class="hljs-string">&quot;id&quot;</span> + <span class="hljs-built_in">str</span>(i) <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">1</span>,<span class="hljs-built_in">len</span>(documents)+<span class="hljs-number">1</span>)]    <span class="hljs-comment"># 每个文档的id，必须唯一</span><br>)<br><br><span class="hljs-comment">#删除</span><br>vectorstore.delete(<br>    ids = [<span class="hljs-string">&quot;id1&quot;</span>, <span class="hljs-string">&quot;id2&quot;</span>]    <span class="hljs-comment"># 要删除的文档id列表</span><br>)<br><br><span class="hljs-comment">#检索 返回类型list[Document]</span><br>retriever = vectorstore.similarity_search(<br>    query=<span class="hljs-string">&quot;科学健身&quot;</span>, <span class="hljs-comment"># 要查询的文本</span><br>    k=<span class="hljs-number">2</span>    <span class="hljs-comment"># 要返回的文档数</span><br>)<br><span class="hljs-built_in">print</span>(retriever)<br></code></pre></td></tr></table></figure>
+
+<center><img src="/img/AI/41.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<p>&emsp;&emsp;</p>
+<h4 id="6-基于向量检索构建提示词"><a href="#6-基于向量检索构建提示词" class="headerlink" title="6.基于向量检索构建提示词"></a>6.基于向量检索构建提示词</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">from</span> langchain_community.chat_models <span class="hljs-keyword">import</span> ChatTongyi<br><span class="hljs-keyword">from</span> langchain_core.vectorstores <span class="hljs-keyword">import</span> InMemoryVectorStore<br><span class="hljs-keyword">from</span> langchain_community.embeddings <span class="hljs-keyword">import</span> DashScopeEmbeddings<br><span class="hljs-keyword">from</span> langchain_core.prompts <span class="hljs-keyword">import</span> ChatPromptTemplate<br><span class="hljs-keyword">from</span> langchain_core.output_parsers <span class="hljs-keyword">import</span> StrOutputParser<br><br>model = ChatTongyi(model=<span class="hljs-string">&quot;qwen3-max&quot;</span>)<br>prompt = ChatPromptTemplate.from_messages(<br>    [<br>        (<span class="hljs-string">&quot;system&quot;</span>, <span class="hljs-string">&quot;以我提供的已知参考资料为主，简洁和专业的回答用户问题。参考资料:&#123;context&#125;。&quot;</span>),<br>        (<span class="hljs-string">&quot;user&quot;</span>, <span class="hljs-string">&quot;用户提问: &#123;input&#125;&quot;</span>)<br>    ]<br>)<br><br>vector_store = InMemoryVectorStore(embedding=DashScopeEmbeddings(model=<span class="hljs-string">&quot;text-embedding-v4&quot;</span>))<br><br><span class="hljs-comment"># 准备一下资料（向量库的数据）</span><br><span class="hljs-comment"># add_texts 传入一个 list[str]</span><br>vector_store.add_texts([<span class="hljs-string">&quot;减肥就是要少吃多练&quot;</span>, <span class="hljs-string">&quot;在减脂期间吃东西很重要,清淡少油控制卡路里摄入并运动起来&quot;</span>, <span class="hljs-string">&quot;跑步是很好的运动哦&quot;</span>])<br><br>input_text = <span class="hljs-string">&quot;怎么减肥？&quot;</span><br><br><span class="hljs-comment"># 检索向量库</span><br>result = vector_store.similarity_search(input_text, k=<span class="hljs-number">2</span>)<br>reference_text = <span class="hljs-string">&quot;[&quot;</span><br><span class="hljs-keyword">for</span> doc <span class="hljs-keyword">in</span> result:<br>    reference_text += doc.page_content<br>reference_text += <span class="hljs-string">&quot;]&quot;</span><br><br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">print_prompt</span>(<span class="hljs-params">prompt</span>):<br>    <span class="hljs-built_in">print</span>(prompt.to_string())<br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;=&quot;</span>*<span class="hljs-number">20</span>)<br>    <span class="hljs-keyword">return</span> prompt<br><br><span class="hljs-comment"># chain</span><br>chain = prompt | print_prompt | model | StrOutputParser()<br><br>res = chain.invoke(&#123;<span class="hljs-string">&quot;input&quot;</span>: input_text, <span class="hljs-string">&quot;context&quot;</span>: reference_text&#125;)<br><span class="hljs-built_in">print</span>(res)<br></code></pre></td></tr></table></figure>
+
+<p>&emsp;&emsp;</p>
+<h4 id="7-向量检索入链的优化"><a href="#7-向量检索入链的优化" class="headerlink" title="7.向量检索入链的优化"></a>7.向量检索入链的优化</h4><p>&emsp;&emsp;使用RunnablePassthrough</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">from</span> langchain_community.chat_models <span class="hljs-keyword">import</span> ChatTongyi<br><span class="hljs-keyword">from</span> langchain_core.vectorstores <span class="hljs-keyword">import</span> InMemoryVectorStore<br><span class="hljs-keyword">from</span> langchain_community.embeddings <span class="hljs-keyword">import</span> DashScopeEmbeddings<br><span class="hljs-keyword">from</span> langchain_core.prompts <span class="hljs-keyword">import</span> ChatPromptTemplate<br><span class="hljs-keyword">from</span> langchain_core.output_parsers <span class="hljs-keyword">import</span> StrOutputParser<br><span class="hljs-keyword">from</span> langchain_core.runnables <span class="hljs-keyword">import</span> RunnablePassthrough<br><span class="hljs-keyword">from</span> langchain_core.documents <span class="hljs-keyword">import</span> Document<br><br>model = ChatTongyi(model=<span class="hljs-string">&quot;qwen3-max&quot;</span>)<br>prompt = ChatPromptTemplate.from_messages(<br>    [<br>        (<span class="hljs-string">&quot;system&quot;</span>, <span class="hljs-string">&quot;以我提供的已知参考资料为主，简洁和专业的回答用户问题。参考资料:&#123;context&#125;。&quot;</span>),<br>        (<span class="hljs-string">&quot;user&quot;</span>, <span class="hljs-string">&quot;用户提问: &#123;input&#125;&quot;</span>)<br>    ]<br>)<br><br>vector_store = InMemoryVectorStore(embedding=DashScopeEmbeddings(model=<span class="hljs-string">&quot;text-embedding-v4&quot;</span>))<br><br><span class="hljs-comment"># 准备一下资料（向量库的数据）</span><br><span class="hljs-comment"># add_texts 传入一个 list[str]</span><br>vector_store.add_texts([<span class="hljs-string">&quot;减肥就是要少吃多练&quot;</span>, <span class="hljs-string">&quot;在减脂期间吃东西很重要,清淡少油控制卡路里摄入并运动起来&quot;</span>, <span class="hljs-string">&quot;跑步是很好的运动哦&quot;</span>])<br><br>input_text = <span class="hljs-string">&quot;怎么减肥？&quot;</span><br><br><span class="hljs-comment"># langchain中向量存储对象，有一个方法：as_retriever，可以返回一个Runnable接口的子类实例对象</span><br>retriever =  vector_store.as_retriever(search_kwargs=&#123;<span class="hljs-string">&quot;k&quot;</span>: <span class="hljs-number">2</span>&#125;)<br><br><span class="hljs-comment"># chain = retriever | prompt | model | StrOutputParser()  因为retriever的输出是list[Document]，而prompt的输入是dict，所以不能直接用chain.invoke()方法</span><br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">format_docs</span>(<span class="hljs-params">docs: <span class="hljs-built_in">list</span>[Document]</span>):<br>    <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> docs:<br>        <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;无相关参考资料&quot;</span><br><br>    formatted_str = <span class="hljs-string">&quot;[&quot;</span>   <br>    <span class="hljs-keyword">for</span> doc <span class="hljs-keyword">in</span> docs:<br>        formatted_str += doc.page_content<br>    formatted_str += <span class="hljs-string">&quot;]&quot;</span><br><br>    <span class="hljs-keyword">return</span> formatted_str<br><br><br>chain =(<br>    &#123;<span class="hljs-string">&quot;input&quot;</span>: RunnablePassthrough(), <span class="hljs-string">&quot;context&quot;</span>: retriever | format_docs&#125; | prompt | model | StrOutputParser()<br>)<br><br>res = chain.invoke(input_text)<br><span class="hljs-built_in">print</span>(res)<br><span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-string">reteriver:</span><br><span class="hljs-string">     - 输入：用户提问   str</span><br><span class="hljs-string">     - 输出：向量库的检索结果 list[Document]</span><br><span class="hljs-string">    </span><br><span class="hljs-string">prompt:</span><br><span class="hljs-string">     - 输入：用户提问 + 向量库的检索结果 dict</span><br><span class="hljs-string">     - 输出：完整的提示词   PromptValue</span><br><span class="hljs-string"></span><br><span class="hljs-string">model：</span><br><span class="hljs-string">     - 输入：完整的提示词 PromptValue</span><br><span class="hljs-string">     - 输出：模型的回复   str</span><br><span class="hljs-string">&quot;&quot;&quot;</span><br></code></pre></td></tr></table></figure>
+
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/AI/" class="category-chain-item">AI</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>AI--LangChain的向量</div>
+      <div>https://one-null-pointer.github.io/2026/01/25/AI --LangChain的向量/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>Author</div>
+          <div>liaoyue</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>Posted on</div>
+          <div>January 25, 2026</div>
+        </div>
+      
+      
+      <div class="license-meta-item">
+        <div>传送口</div>
+        <div>
+          
+            
+            
+              <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+              <span class="hint--top hint--rounded" aria-label="点击进行传送">
+                <i class="iconfont icon-by"></i>
+              </span>
+              </a>
+            
+          
+        </div>
+      </div>
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2026/02/01/AI--RAG%E4%BB%8B%E7%BB%8D/" title="AI--RAG介绍">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">AI--RAG介绍</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2026/01/22/AI%20--LangChain%E6%96%87%E6%A1%A3%E5%8A%A0%E8%BD%BD%E5%99%A8/" title="AI--LangChain文档加载器">
+                        <span class="hidden-mobile">AI--LangChain文档加载器</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;Table of Contents</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">Keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://github.com/" target="_blank" rel="nofollow noopener"><span>pointer</span></a> <i class="iconfont icon-love"></i> <a href="https://mp.weixin.qq.com/s/6ncLUtaiJ9j_sMjZT5z-2w" target="_blank" rel="nofollow noopener"><span>一个爱学习的空指针</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      headingSelector : CONFIG.toc.headingSelector || 'h1,h2,h3,h4,h5,h6',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      collapseDepth   : CONFIG.toc.collapseDepth || 0,
+      scrollSmooth    : true,
+      headingsOffset  : -boardTop
+    });
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.10/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">Blog works best with JavaScript enabled</div>
+  </noscript>
+</body>
+</html>

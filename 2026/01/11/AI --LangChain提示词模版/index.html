@@ -16,23 +16,23 @@
   <meta name="author" content="liaoyue">
   <meta name="keywords" content="">
   
-    <meta name="description" content="AI–LangChain进阶（一）1.PromptTemplate&amp;emsp;&amp;emsp;PromptTemplate：通用提示词模版，支持动态注入信息 &amp;emsp;&amp;emsp;提示词优化在模型应用中非常重要，LangChain提供了PromptTemplate类，用来协助优化提示词，PromptTemplate表示提示词模版，可以构建一个自定义的基础提示词模版，支持变量的注入，最终生成所需要的提">
+    <meta name="description" content="AI–LangChain提示词模版1.PromptTemplate&amp;emsp;&amp;emsp;PromptTemplate：通用提示词模版，支持动态注入信息 &amp;emsp;&amp;emsp;提示词优化在模型应用中非常重要，LangChain提供了PromptTemplate类，用来协助优化提示词，PromptTemplate表示提示词模版，可以构建一个自定义的基础提示词模版，支持变量的注入，最终生成所需要的提">
 <meta property="og:type" content="article">
-<meta property="og:title" content="AI--LangChain进阶（一）">
-<meta property="og:url" content="https://one-null-pointer.github.io/2026/01/11/AI%20--LangChain%E8%BF%9B%E9%98%B6%EF%BC%88%E4%B8%80%EF%BC%89/index.html">
+<meta property="og:title" content="AI--LangChain提示词模版">
+<meta property="og:url" content="https://one-null-pointer.github.io/2026/01/11/AI%20--LangChain%E6%8F%90%E7%A4%BA%E8%AF%8D%E6%A8%A1%E7%89%88/index.html">
 <meta property="og:site_name" content="one-null-poniter">
-<meta property="og:description" content="AI–LangChain进阶（一）1.PromptTemplate&amp;emsp;&amp;emsp;PromptTemplate：通用提示词模版，支持动态注入信息 &amp;emsp;&amp;emsp;提示词优化在模型应用中非常重要，LangChain提供了PromptTemplate类，用来协助优化提示词，PromptTemplate表示提示词模版，可以构建一个自定义的基础提示词模版，支持变量的注入，最终生成所需要的提">
+<meta property="og:description" content="AI–LangChain提示词模版1.PromptTemplate&amp;emsp;&amp;emsp;PromptTemplate：通用提示词模版，支持动态注入信息 &amp;emsp;&amp;emsp;提示词优化在模型应用中非常重要，LangChain提供了PromptTemplate类，用来协助优化提示词，PromptTemplate表示提示词模版，可以构建一个自定义的基础提示词模版，支持变量的注入，最终生成所需要的提">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://one-null-pointer.github.io/img/AI.png">
 <meta property="article:published_time" content="2026-01-11T13:48:48.000Z">
-<meta property="article:modified_time" content="2026-03-17T02:56:20.278Z">
+<meta property="article:modified_time" content="2026-03-19T03:01:52.371Z">
 <meta property="article:author" content="liaoyue">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://one-null-pointer.github.io/img/AI.png">
   
   
   
-  <title>AI--LangChain进阶（一） - one-null-poniter</title>
+  <title>AI--LangChain提示词模版 - one-null-poniter</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -185,7 +185,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="AI--LangChain进阶（一）"></span>
+            <span id="subtitle" data-typed-text="AI--LangChain提示词模版"></span>
           
         </div>
 
@@ -257,12 +257,12 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">AI--LangChain进阶（一）</h1>
+            <h1 style="display: none">AI--LangChain提示词模版</h1>
             
             
               <div class="markdown-body">
                 
-                <h1 id="AI–LangChain进阶（一）"><a href="#AI–LangChain进阶（一）" class="headerlink" title="AI–LangChain进阶（一）"></a>AI–LangChain进阶（一）</h1><h4 id="1-PromptTemplate"><a href="#1-PromptTemplate" class="headerlink" title="1.PromptTemplate"></a>1.PromptTemplate</h4><p>&emsp;&emsp;PromptTemplate：通用提示词模版，支持动态注入信息</p>
+                <h1 id="AI–LangChain提示词模版"><a href="#AI–LangChain提示词模版" class="headerlink" title="AI–LangChain提示词模版"></a>AI–<strong>LangChain提示词模版</strong></h1><h4 id="1-PromptTemplate"><a href="#1-PromptTemplate" class="headerlink" title="1.PromptTemplate"></a>1.PromptTemplate</h4><p>&emsp;&emsp;PromptTemplate：通用提示词模版，支持动态注入信息</p>
 <p>&emsp;&emsp;提示词优化在模型应用中非常重要，LangChain提供了PromptTemplate类，用来协助优化提示词，PromptTemplate表示提示词模版，可以构建一个自定义的基础提示词模版，支持变量的注入，最终生成所需要的提示词，这里有两种写法，一种是标准写法，一种是基于chain链的写法</p>
 <ul>
 <li>标准写法</li>
@@ -357,8 +357,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>AI--LangChain进阶（一）</div>
-      <div>https://one-null-pointer.github.io/2026/01/11/AI --LangChain进阶（一）/</div>
+      <div>AI--LangChain提示词模版</div>
+      <div>https://one-null-pointer.github.io/2026/01/11/AI --LangChain提示词模版/</div>
     </div>
     <div class="license-meta">
       
@@ -399,6 +399,12 @@
                 <div class="post-prevnext my-3">
                   <article class="post-prev col-6">
                     
+                    
+                      <a href="/2026/01/15/AI%20--LangChain%E7%9A%84%E9%93%BE/" title="AI--LangChain的链">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">AI--LangChain的链</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
                     
                   </article>
                   <article class="post-next col-6">
