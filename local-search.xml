@@ -4,6 +4,44 @@
   
   
   <entry>
+    <title>Openclaw--部署</title>
+    <link href="/2026/02/22/Openclaw--%E9%83%A8%E7%BD%B2/"/>
+    <url>/2026/02/22/Openclaw--%E9%83%A8%E7%BD%B2/</url>
+    
+    <content type="html"><![CDATA[<h1 id="Openclaw–部署"><a href="#Openclaw–部署" class="headerlink" title="Openclaw–部署"></a>Openclaw–部署</h1><h4 id="0-前言"><a href="#0-前言" class="headerlink" title="0.前言"></a>0.前言</h4><p>&emsp;&emsp;由于考虑安全性的问题，本人是在虚拟机中配置的了一个ubuntu 系统进行安装，尽管小龙虾在网络上吹的神乎其技，但是还是不建议直接安装在本地！！那接下来就安排安装</p><p>&emsp;</p><h4 id="1-升级node版本"><a href="#1-升级node版本" class="headerlink" title="1.升级node版本"></a>1.升级node版本</h4><ul><li>更新系统并安装必要工具</li></ul><figure class="highlight llvm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs llvm">sudo apt update<br>sudo apt install -y curl software-properties-<span class="hljs-keyword">common</span>下载Node.js <span class="hljs-number">22</span>.<span class="hljs-keyword">x</span>的版本<br></code></pre></td></tr></table></figure><ul><li>下载Node.js 22.x的版本</li></ul><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">curl -fsSL https:<span class="hljs-regexp">//</span>deb.nodesource.com/setup_22.x | sudo -E bash -<br></code></pre></td></tr></table></figure><ul><li>安装Node.js</li></ul><figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs cmake">sudo apt <span class="hljs-keyword">install</span> -y nodejs<br></code></pre></td></tr></table></figure><ul><li>检查安装版本</li></ul><figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs crmsh"><span class="hljs-keyword">node</span> <span class="hljs-title">-v</span><br>npm -v<br></code></pre></td></tr></table></figure><center><img src="/img/openclaw/4.png" style="zoom:80%;" /></center><p>&emsp;&emsp;如果没有安装到指定版本在后续安装中会有报错：</p><center><img src="/img/openclaw/5.png" style="zoom:80%;" /></center><p>&emsp;</p><h4 id="2-安装git工具"><a href="#2-安装git工具" class="headerlink" title="2.安装git工具"></a>2.安装git工具</h4><figure class="highlight ada"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ada">sudo apt install git-<span class="hljs-keyword">all</span><br></code></pre></td></tr></table></figure><center><img src="/img/openclaw/6.png" style="zoom:80%;" /></center><p>&emsp;</p><h4 id="3-安装小龙虾"><a href="#3-安装小龙虾" class="headerlink" title="3.安装小龙虾"></a>3.安装小龙虾</h4><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">curl -fsSL https:<span class="hljs-regexp">//</span>openclaw.ai/install.sh | bash<br></code></pre></td></tr></table></figure><p>&emsp;&emsp;具体操作可以参考阿里云文档，这里讲解的比较信息，按照步骤来即可，不过免费的百炼api不够用，这边是用的minimax的，这个也是openclaw开发者所推荐的模型</p><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">https:<span class="hljs-regexp">//</span>developer.aliyun.com<span class="hljs-regexp">/article/</span><span class="hljs-number">1713250</span><br></code></pre></td></tr></table></figure><p>&emsp;&emsp;最终启动</p><figure class="highlight perl"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs perl">openclaw dashboard --<span class="hljs-keyword">no</span>-<span class="hljs-keyword">open</span><br></code></pre></td></tr></table></figure><center><img src="/img/openclaw/7.png" style="zoom:80%;" /></center><p>（吐槽下，真的烧token啊TAT）</p><p>&emsp;</p><h4 id="4-设置任务"><a href="#4-设置任务" class="headerlink" title="4.设置任务"></a>4.设置任务</h4><p>&emsp;&emsp;我们可以简单在代理中构建AI agent</p><center><img src="/img/openclaw/9.png" style="zoom:80%;" /></center><p>&emsp;&emsp;最后设置定时任务去进行产出，比如这里写了一个定时写作的agent任务</p><center><img src="/img/openclaw/8.png" style="zoom:80%;" /></center>]]></content>
+    
+    
+    <categories>
+      
+      <category>OpenClaw</category>
+      
+    </categories>
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>Openclaw--产品分析</title>
+    <link href="/2026/02/20/Openclaw--%E4%BA%A7%E5%93%81%E5%88%86%E6%9E%90/"/>
+    <url>/2026/02/20/Openclaw--%E4%BA%A7%E5%93%81%E5%88%86%E6%9E%90/</url>
+    
+    <content type="html"><![CDATA[<h1 id="Openclaw–产品分析"><a href="#Openclaw–产品分析" class="headerlink" title="Openclaw–产品分析"></a>Openclaw–产品分析</h1><h4 id="0-前言"><a href="#0-前言" class="headerlink" title="0.前言"></a>0.前言</h4><p>&emsp;&emsp;最近Openclaw这个玩意比较火，本次就从产品方面去分析一下这个玩意吧（比较产品分析的思考也是在思考未来ai工具的方向标以及当下的ai需求）</p><p>&emsp;</p><h4 id="1-产品方面"><a href="#1-产品方面" class="headerlink" title="1.产品方面"></a>1.产品方面</h4><p>&emsp;&emsp;Openclaw的诞生，是一个转变，人们不再局限于只用ai作为一个思考工具，而是转向了将ai变成有自己思考和能干活的数字员工，能够自己操作电脑，不需要人的参与，其本质核心其实就是agent的低级，小白通过skill等技能也能很好的去搭建一个ai agnet。我觉得黄仁勋有一句话说的是蛮对的，他是一个ai的操作系统，而不再是简单定义的工具</p><p>&emsp;</p><h4 id="2-为什么爆火"><a href="#2-为什么爆火" class="headerlink" title="2.为什么爆火"></a>2.为什么爆火</h4><p>&emsp;其实在我看来，openclaw的爆火其实就三点：产品定位革命 × 开源生态飞轮 × 低门槛普惠</p><ul><li><p>产品定位革命</p><p>传统AI是”告诉你怎么做”，OpenClaw是”帮你直接做完”。用户只需一句自然语言指令，即可完成跨软件、跨平台的复杂任务流。就部署skill为例，以前是需要下载导入安装配置，而现在一句命令就可以直接操作，甚至会主动询问其他需求</p><center><img src="/img/openclaw/1.png" style="zoom:80%;" /></center></li><li><p>开源生态飞轮</p><p>开源的生态也带来了很大的影响，由于开源，公共的skill在不断增加，支持的模型也越来越多，覆盖的范围和场景也愈发广</p><center><img src="/img/openclaw/2.png" style="zoom:80%;" /></center></li><li><p>低门槛普惠</p><p>技术已不再是壁垒，传统CLI Agent需要命令行操作，劝退99%用户，而openclaw的部署并不算困难，一键安装与配置，任务的配置也不再需要代码操作，一句指令便可以让小龙虾干的明明白白的</p></li></ul><p>&emsp;</p><h4 id="3-问题"><a href="#3-问题" class="headerlink" title="3.问题"></a>3.问题</h4><p>&emsp;&emsp;凡事都是有双刃面的，openclaw在爆火中也存在的不少的问题</p><ul><li><p>烧钱</p><p>贵不是他的错，是俺的错，简单的问几个问题，我的qwen3-max直接就消耗了快100w的token，还好设置了超过就停止使用，不然不知道得给我带来多大的天价账单（还是用minimax好啊）</p><center><img src="/img/openclaw/3.png" style="zoom:80%;" /></center></li><li><p>安全性</p><p>这也是要提醒的，在不确定的情况下，一定不要将openclaw安装在本地！！！这玩意的权限很大，在生产环境下，一旦 AI幻觉导致误操作，比如删库或配置错误，损失可能是不可逆的。所以我认为必须建立沙箱隔离和高风险操作二次确认机制，不能让 AI 完裸奔。</p></li></ul><p>&emsp;</p><h4 id="4-未来趋势"><a href="#4-未来趋势" class="headerlink" title="4.未来趋势"></a>4.未来趋势</h4><p>&emsp;&emsp;首先第一个趋势肯定是用户期待的趋势，人们对ai的期待正在从「告诉我怎么做」转向「帮我直接做完」，因为一对话无法解决跨系统、多步骤的复杂工作流，这就需要AI具备任务拆解与自主调度能力，而哦们也更愿意为”解放双手”付费，而非”提升聊天体验”</p><p>&emsp;&emsp;开源的趋势，开源使得跟多的开发者一起维护生态，场景丰富则吸引更多的用户，再到反哺社区的创新，从而形成互相影响的飞升生态。</p><p>&emsp;&emsp;个人ai助手市场的打开，未来的ai一定是以员工的形式存在，这也是一人公司的由来，一个人+多个ai agent 组成一个强大的团队，基本的技术不会再成为壁垒，ai的使用才是护城河</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>OpenClaw</category>
+      
+    </categories>
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>AI--RAG在线流程开发</title>
     <link href="/2026/02/07/AI--RAG%E5%9C%A8%E7%BA%BF%E6%B5%81%E7%A8%8B%E5%BC%80%E5%8F%91/"/>
     <url>/2026/02/07/AI--RAG%E5%9C%A8%E7%BA%BF%E6%B5%81%E7%A8%8B%E5%BC%80%E5%8F%91/</url>
