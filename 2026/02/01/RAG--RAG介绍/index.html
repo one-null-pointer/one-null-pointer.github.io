@@ -16,23 +16,23 @@
   <meta name="author" content="liaoyue">
   <meta name="keywords" content="">
   
-    <meta name="description" content="AI–RAG介绍1.RAG介绍&amp;emsp;&amp;emsp;通用的基础大模型存在以下的一些问题：  LLM的知识不是实时的，模型训练好后不具备自动更新知识的能力，会导致部分信息滞后 LLM领域知识是缺乏的，大模型的知识来源于训练数据，这些数据主要来自公开的互联网和开源数据集，无法覆盖特定领域或高度专业化的内部知识 幻觉问题，LLM有时会在回答中生成看似合理但实际上是错误的信息 数据安全性     &amp;em">
+    <meta name="description" content="RAG–RAG介绍1.RAG的由来&amp;emsp;&amp;emsp;通用的基础大模型存在以下的一些问题：  实时性：LLM的知识不是实时的，模型训练好后不具备自动更新知识的能力，会导致部分信息滞后 知识覆盖度：LLM领域知识是缺乏的，大模型的知识来源于训练数据，这些数据主要来自公开的互联网和开源数据集，无法覆盖特定领域或高度专业化的内部知识 高幻觉：LLM有时会在回答中生成看似合理但实际上是错误的信息 数据">
 <meta property="og:type" content="article">
-<meta property="og:title" content="AI--RAG介绍">
-<meta property="og:url" content="https://one-null-pointer.github.io/2026/02/01/AI--RAG%E4%BB%8B%E7%BB%8D/index.html">
+<meta property="og:title" content="RAG--RAG介绍">
+<meta property="og:url" content="https://one-null-pointer.github.io/2026/02/01/RAG--RAG%E4%BB%8B%E7%BB%8D/index.html">
 <meta property="og:site_name" content="one-null-poniter">
-<meta property="og:description" content="AI–RAG介绍1.RAG介绍&amp;emsp;&amp;emsp;通用的基础大模型存在以下的一些问题：  LLM的知识不是实时的，模型训练好后不具备自动更新知识的能力，会导致部分信息滞后 LLM领域知识是缺乏的，大模型的知识来源于训练数据，这些数据主要来自公开的互联网和开源数据集，无法覆盖特定领域或高度专业化的内部知识 幻觉问题，LLM有时会在回答中生成看似合理但实际上是错误的信息 数据安全性     &amp;em">
+<meta property="og:description" content="RAG–RAG介绍1.RAG的由来&amp;emsp;&amp;emsp;通用的基础大模型存在以下的一些问题：  实时性：LLM的知识不是实时的，模型训练好后不具备自动更新知识的能力，会导致部分信息滞后 知识覆盖度：LLM领域知识是缺乏的，大模型的知识来源于训练数据，这些数据主要来自公开的互联网和开源数据集，无法覆盖特定领域或高度专业化的内部知识 高幻觉：LLM有时会在回答中生成看似合理但实际上是错误的信息 数据">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://one-null-pointer.github.io/img/AI.png">
+<meta property="og:image" content="https://one-null-pointer.github.io/img/RAG.png">
 <meta property="article:published_time" content="2026-02-01T13:48:48.000Z">
-<meta property="article:modified_time" content="2026-03-19T03:54:37.678Z">
+<meta property="article:modified_time" content="2026-06-02T04:13:20.996Z">
 <meta property="article:author" content="liaoyue">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://one-null-pointer.github.io/img/AI.png">
+<meta name="twitter:image" content="https://one-null-pointer.github.io/img/RAG.png">
   
   
   
-  <title>AI--RAG介绍 - one-null-poniter</title>
+  <title>RAG--RAG介绍 - one-null-poniter</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -185,7 +185,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="AI--RAG介绍"></span>
+            <span id="subtitle" data-typed-text="RAG--RAG介绍"></span>
           
         </div>
 
@@ -208,7 +208,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          449 words
+          1.2k words
         
       </span>
     
@@ -219,7 +219,7 @@
         
         
         
-          4 mins
+          10 mins
         
       </span>
     
@@ -257,44 +257,62 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">AI--RAG介绍</h1>
+            <h1 style="display: none">RAG--RAG介绍</h1>
             
             
               <div class="markdown-body">
                 
-                <h1 id="AI–RAG介绍"><a href="#AI–RAG介绍" class="headerlink" title="AI–RAG介绍"></a>AI–RAG介绍</h1><h4 id="1-RAG介绍"><a href="#1-RAG介绍" class="headerlink" title="1.RAG介绍"></a>1.RAG介绍</h4><p>&emsp;&emsp;通用的基础大模型存在以下的一些问题：</p>
+                <h1 id="RAG–RAG介绍"><a href="#RAG–RAG介绍" class="headerlink" title="RAG–RAG介绍"></a>RAG–RAG介绍</h1><h4 id="1-RAG的由来"><a href="#1-RAG的由来" class="headerlink" title="1.RAG的由来"></a>1.RAG的由来</h4><p>&emsp;&emsp;通用的基础大模型存在以下的一些问题：</p>
 <ul>
-<li>LLM的知识不是实时的，模型训练好后不具备自动更新知识的能力，会导致部分信息滞后</li>
-<li>LLM领域知识是缺乏的，大模型的知识来源于训练数据，这些数据主要来自公开的互联网和开源数据集，无法覆盖特定领域或高度专业化的内部知识</li>
-<li>幻觉问题，LLM有时会在回答中生成看似合理但实际上是错误的信息</li>
+<li>实时性：LLM的知识不是实时的，模型训练好后不具备自动更新知识的能力，会导致部分信息滞后</li>
+<li>知识覆盖度：LLM领域知识是缺乏的，大模型的知识来源于训练数据，这些数据主要来自公开的互联网和开源数据集，无法覆盖特定领域或高度专业化的内部知识</li>
+<li>高幻觉：LLM有时会在回答中生成看似合理但实际上是错误的信息</li>
 <li>数据安全性</li>
 </ul>
-<center><img src="/img/AI/42.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
-</center>
-
 <p>&emsp;&emsp;因此RAG应运而生，也就是检索增强生成，为大模型提供了从特定数据源检索到的信息，以此来修正和补充生成的答案，可以理解为 RAG = 检索技术 + LLM</p>
-<center><img src="/img/AI/43.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+<center><img src="/img/RAG/2.5.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
 </center>
 
 <p>&emsp;&emsp;</p>
-<h4 id="2-RAG的方向"><a href="#2-RAG的方向" class="headerlink" title="2.RAG的方向"></a>2.RAG的方向</h4><p>&emsp;&emsp;一般而言RAG主要分为两条线，离线处理和在线处理</p>
+<h4 id="2-RAG的双线架构"><a href="#2-RAG的双线架构" class="headerlink" title="2.RAG的双线架构"></a>2.RAG的双线架构</h4><p>&emsp;&emsp;RAG的全称为Retrieval Augmented Generation，即检索、增强、生成。一般而言我们可以将RAG系统拆解成两条线来看待，也就是双线架构</p>
 <ul>
-<li><p>离线处理：想私有数据库（向量存储）源源不断添加私有知识文档</p>
-</li>
-<li><ul>
-<li>想知识库添加来自未来的知识库文档</li>
-<li>想模型添加私有知识文档</li>
-<li>给出模型参考资料，规避模型幻觉</li>
+<li>数据装备阶段（业务线）</li>
 </ul>
-</li>
-<li><p>在线处理：用户提问会先基于私有知识库做检索，获取参考资料，同步组装新提示词询问大模型获取结果</p>
-</li>
-</ul>
-<center><img src="/img/AI/44.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+<center><img src="/img/RAG/1.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
 </center>
 
+<ul>
+<li>回答生成阶段（用户线）</li>
+</ul>
+<center><img src="/img/RAG/2.png" srcset="/img/loading.gif" lazyload style="zoom:70%;" />
+</center>
 
-<p>&emsp;</p>
+<p>&emsp;&emsp;</p>
+<h4 id="3-RAG商业落地的痛点"><a href="#3-RAG商业落地的痛点" class="headerlink" title="3.RAG商业落地的痛点"></a>3.RAG商业落地的痛点</h4><p>&emsp;&emsp;尽管从双线架构的层面理解，RAG系统是比较好实现的，但是如果要达到商业层面的交付还是需要注意很多痛点和问题的</p>
+<ul>
+<li>痛点一：文档解析</li>
+</ul>
+<p>&emsp;&emsp;在商业模式下，大部分的文件内容都是以PDF的形式存在，如果使用开源的PDF解析器进行拆解，可能会存在乱码和表格错位。针对问题的解决办法，我们需要使用专用版面分析模型 + OCR + 人工符合反馈（RLHF）的复合型方式进行文档解析，这是AI落地的第一道门槛</p>
+<ul>
+<li>痛点二：颗粒度</li>
+</ul>
+<p>&emsp;&emsp;当文档解析完毕后，对内容切片就成为了重要的问题，切片过大容易导致噪音多影响模型判断，切片过小又容易导致语义丢失，这里就需要根据业务场景大量测试分片的策略，一般在切片的同时会加入上下文重叠来使得损失最小化</p>
+<ul>
+<li>痛点三：检索的准确率</li>
+</ul>
+<p>&emsp;&emsp;检索的准确率不夸张的讲直接决定了RAG结果的生死，这里就涉及到混合检索（向量+关键词）和重排模型（Rerank）</p>
+<ul>
+<li>痛点四：用户提问的模糊性</li>
+</ul>
+<p>&emsp;&emsp;针对口语化、指代不明及语义模糊的提问，结合上下文进行信息不全与意图重构</p>
+<p>&emsp;&emsp;</p>
+<h4 id="4-RAG的大模型选项以及评估标准"><a href="#4-RAG的大模型选项以及评估标准" class="headerlink" title="4.RAG的大模型选项以及评估标准"></a>4.RAG的大模型选项以及评估标准</h4><p>&emsp;&emsp;目前市面上的大模型种类已经数不胜数，每隔个一段时间都会发布新的模型。但是并非所有的模型都能适合作为RAG系统的大模型基座。我们需要考虑的是模型的三个方面实力</p>
+<center><img src="/img/RAG/3.png" srcset="/img/loading.gif" lazyload style="zoom:70%;" />
+</center>
+
+<p>&emsp;&emsp;</p>
+<p>5.RAG的进阶</p>
+<p>&emsp;&emsp;除了常规的搭建，我们也会遇到很多不同的情况，例如实体关系错综复杂的需求，需要具备烧烤与拆解能力的智能体。GraphRAG（知识图谱）和Agentic RAG就此诞生，这只是两种比较典型的进阶版本，当基于后续的需求越来越复杂。更强大的构建方式也会随之产生</p>
 
                 
               </div>
@@ -313,7 +331,7 @@
     
       <span class="category-chain">
         
-  <a href="/categories/AI/" class="category-chain-item">AI</a>
+  <a href="/categories/RAG/" class="category-chain-item">RAG</a>
   
   
 
@@ -333,8 +351,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>AI--RAG介绍</div>
-      <div>https://one-null-pointer.github.io/2026/02/01/AI--RAG介绍/</div>
+      <div>RAG--RAG介绍</div>
+      <div>https://one-null-pointer.github.io/2026/02/01/RAG--RAG介绍/</div>
     </div>
     <div class="license-meta">
       
@@ -376,9 +394,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2026/02/03/AI--RAG%E7%A6%BB%E7%BA%BF%E6%B5%81%E7%A8%8B%E5%BC%80%E5%8F%91/" title="AI--RAG离线流程开发">
+                      <a href="/2026/02/01/RAG--%E6%B5%81%E7%A8%8B%E5%AD%A6%E4%B9%A0/" title="RAG--流程学习">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">AI--RAG离线流程开发</span>
+                        <span class="hidden-mobile">RAG--流程学习</span>
                         <span class="visible-mobile">Previous</span>
                       </a>
                     
