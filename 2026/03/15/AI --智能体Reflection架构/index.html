@@ -16,16 +16,16 @@
   <meta name="author" content="liaoyue">
   <meta name="keywords" content="">
   
-    <meta name="description" content="AI–智能体Reflection架构0.前言&amp;emsp;&amp;emsp;在前面实现的两种架构中，智能体一旦完成任务后，工作流程便会停止，由于函数的概率性，其所生成的结果并不百分百完全正确，依旧可能存在错误或者需要改进的地方，所以我们需要思考如何降低这种概率。 Reflection 机制本质是融入了我们反思的架构，我们希望智能体像我们人类一样，审视自己的工作，反思并进行迭代优化 &amp;emsp;&amp;emsp;">
+    <meta name="description" content="AI–智能体Reflection架构0.前言&amp;emsp;&amp;emsp;在前面实现的两种架构中，智能体一旦完成任务后，工作流程便会停止，由于函数的概率性，其所生成的结果并不百分百完全正确，依旧可能存在错误或者需要改进的地方，所以我们需要思考如何降低这种概率。 &amp;emsp;&amp;emsp;Reflection 机制本质是融入了我们反思的架构，我们希望智能体像我们人类一样，审视自己的工作，反思并进行迭代优化">
 <meta property="og:type" content="article">
 <meta property="og:title" content="AI--智能体Reflection架构">
 <meta property="og:url" content="https://one-null-pointer.github.io/2026/03/15/AI%20--%E6%99%BA%E8%83%BD%E4%BD%93Reflection%E6%9E%B6%E6%9E%84/index.html">
 <meta property="og:site_name" content="one-null-poniter">
-<meta property="og:description" content="AI–智能体Reflection架构0.前言&amp;emsp;&amp;emsp;在前面实现的两种架构中，智能体一旦完成任务后，工作流程便会停止，由于函数的概率性，其所生成的结果并不百分百完全正确，依旧可能存在错误或者需要改进的地方，所以我们需要思考如何降低这种概率。 Reflection 机制本质是融入了我们反思的架构，我们希望智能体像我们人类一样，审视自己的工作，反思并进行迭代优化 &amp;emsp;&amp;emsp;">
+<meta property="og:description" content="AI–智能体Reflection架构0.前言&amp;emsp;&amp;emsp;在前面实现的两种架构中，智能体一旦完成任务后，工作流程便会停止，由于函数的概率性，其所生成的结果并不百分百完全正确，依旧可能存在错误或者需要改进的地方，所以我们需要思考如何降低这种概率。 &amp;emsp;&amp;emsp;Reflection 机制本质是融入了我们反思的架构，我们希望智能体像我们人类一样，审视自己的工作，反思并进行迭代优化">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://one-null-pointer.github.io/img/AI.png">
 <meta property="article:published_time" content="2026-03-15T13:48:48.000Z">
-<meta property="article:modified_time" content="2026-07-01T06:42:02.641Z">
+<meta property="article:modified_time" content="2026-07-13T05:50:23.714Z">
 <meta property="article:author" content="liaoyue">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://one-null-pointer.github.io/img/AI.png">
@@ -208,7 +208,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          8.8k words
+          8.9k words
         
       </span>
     
@@ -219,7 +219,7 @@
         
         
         
-          74 mins
+          75 mins
         
       </span>
     
@@ -263,7 +263,8 @@
               <div class="markdown-body">
                 
                 <h1 id="AI–智能体Reflection架构"><a href="#AI–智能体Reflection架构" class="headerlink" title="AI–智能体Reflection架构"></a>AI–智能体Reflection架构</h1><h4 id="0-前言"><a href="#0-前言" class="headerlink" title="0.前言"></a>0.前言</h4><p>&emsp;&emsp;在前面实现的两种架构中，智能体一旦完成任务后，工作流程便会停止，由于函数的概率性，其所生成的结果并不百分百完全正确，依旧可能存在错误或者需要改进的地方，所以我们需要思考如何降低这种概率。</p>
-<p>Reflection 机制本质是融入了我们反思的架构，我们希望智能体像我们人类一样，审视自己的工作，反思并进行迭代优化</p>
+<p>&emsp;&emsp;Reflection 机制本质是融入了我们反思的架构，我们希望智能体像我们人类一样，审视自己的工作，反思并进行迭代优化</p>
+<p>（学习内容主要参考来源：<a target="_blank" rel="noopener" href="https://github.com/datawhalechina/hello-agents%EF%BC%89">https://github.com/datawhalechina/hello-agents）</a></p>
 <p>&emsp;&emsp;</p>
 <h4 id="1-Reflection架构的工作原理"><a href="#1-Reflection架构的工作原理" class="headerlink" title="1.Reflection架构的工作原理"></a>1.Reflection架构的工作原理</h4><p>&emsp;&emsp;Reflection架构的核心工作流程可以概括为简单的三步循环：<strong>执行 -&gt; 反思 -&gt; 优化</strong></p>
 <ul>
@@ -343,43 +344,27 @@
 <p>&emsp;&emsp;通过运行可以看到，智能体在接收到明确的反馈后，于优化阶段成功地实现了更高效的筛法，将算法复杂度降至 O(n log log n)，完成了第一次有意义的自我迭代。充分证明，一个设计良好的 Reflection 机制，其价值不仅在于修复错误，更在于驱动解决方案在质量和效率上实现阶梯式的提升，这使其成为构建复杂、高质量智能体的关键技术之一。</p>
 <p>&emsp;&emsp;</p>
 <h4 id="5-Reflection-架构的成本分析"><a href="#5-Reflection-架构的成本分析" class="headerlink" title="5.Reflection 架构的成本分析"></a>5.Reflection 架构的成本分析</h4><p>&emsp;&emsp;尽管Reflection 机制在提升任务解决质量上表现出色，但是在实际应用中，我们需要权衡其带来的收益与相应的成本。</p>
-<ul>
-<li><h5 id="主要成本"><a href="#主要成本" class="headerlink" title="主要成本"></a>主要成本</h5></li>
-<li><ul>
-<li><h6 id="模型调用开销增加："><a href="#模型调用开销增加：" class="headerlink" title="模型调用开销增加："></a><strong>模型调用开销增加</strong>：</h6></li>
-</ul>
-</li>
+<h5 id="5-1主要成本"><a href="#5-1主要成本" class="headerlink" title="5.1主要成本"></a>5.1主要成本</h5><ul>
+<li><h6 id="模型调用开销增加："><a href="#模型调用开销增加：" class="headerlink" title="模型调用开销增加："></a>模型调用开销增加：</h6></li>
 </ul>
 <p>&emsp;&emsp;这是最直接的成本。每进行一轮迭代，至少需要额外调用两次大语言模型（一次用于反思，一次用于优化）。如果迭代多轮，API 调用成本和计算资源消耗将成倍增加。</p>
 <ul>
-<li><ul>
-<li><h6 id="任务延迟显著提高："><a href="#任务延迟显著提高：" class="headerlink" title="任务延迟显著提高："></a><strong>任务延迟显著提高</strong>：</h6></li>
-</ul>
-</li>
+<li><h6 id="任务延迟显著提高："><a href="#任务延迟显著提高：" class="headerlink" title="任务延迟显著提高："></a>任务延迟显著提高：</h6></li>
 </ul>
 <p>&emsp;&emsp;Reflection 是一个串行过程，每一轮的优化都必须等待上一轮的反思完成。这使得任务的总耗时显著延长，不适合对实时性要求高的场景。</p>
 <ul>
-<li><ul>
-<li><h6 id="提示工程复杂度上升："><a href="#提示工程复杂度上升：" class="headerlink" title="提示工程复杂度上升："></a><strong>提示工程复杂度上升</strong>：</h6></li>
-</ul>
-</li>
+<li><h6 id="提示工程复杂度上升："><a href="#提示工程复杂度上升：" class="headerlink" title="提示工程复杂度上升："></a>提示工程复杂度上升：</h6></li>
 </ul>
 <p>&emsp;&emsp;如我们的案例所示，Reflection 的成功在很大程度上依赖于高质量、有针对性的提示词。为“执行”、“反思”、“优化”等不同阶段设计和调试有效的提示词，需要投入更多的开发精力。</p>
-<ul>
-<li><h5 id="核心收益"><a href="#核心收益" class="headerlink" title="核心收益"></a>核心收益</h5></li>
-<li><ul>
-<li><h6 id="解决方案质量的跃迁："><a href="#解决方案质量的跃迁：" class="headerlink" title="解决方案质量的跃迁："></a><strong>解决方案质量的跃迁</strong>：</h6></li>
-</ul>
-</li>
+<h5 id="5-2核心收益"><a href="#5-2核心收益" class="headerlink" title="5.2核心收益"></a>5.2核心收益</h5><ul>
+<li><h6 id="解决方案质量的跃迁："><a href="#解决方案质量的跃迁：" class="headerlink" title="解决方案质量的跃迁："></a>解决方案质量的跃迁：</h6></li>
 </ul>
 <p>&emsp;&emsp;最大的收益在于，它能将一个“合格”的初始方案，迭代优化成一个“优秀”的最终方案。这种从功能正确到性能高效、从逻辑粗糙到逻辑严谨的提升，在很多关键任务中是至关重要的。</p>
 <ul>
-<li><ul>
-<li><h6 id="鲁棒性与可靠性增强："><a href="#鲁棒性与可靠性增强：" class="headerlink" title="鲁棒性与可靠性增强："></a><strong>鲁棒性与可靠性增强</strong>：</h6></li>
-</ul>
-</li>
+<li><h6 id="鲁棒性与可靠性增强："><a href="#鲁棒性与可靠性增强：" class="headerlink" title="鲁棒性与可靠性增强："></a>鲁棒性与可靠性增强：</h6></li>
 </ul>
 <p>&emsp;&emsp;通过内部的自我纠错循环，智能体能够发现并修复初始方案中可能存在的逻辑漏洞、事实性错误或边界情况处理不当等问题，从而大大提高了最终结果的可靠性。</p>
+<p>&emsp;&emsp;</p>
 <h4 id="6-Reflection-架构的场景分析"><a href="#6-Reflection-架构的场景分析" class="headerlink" title="6.Reflection 架构的场景分析"></a>6.Reflection 架构的场景分析</h4><p>&emsp;&emsp;综上所述，Reflection 机制是一种典型的“以成本换质量”的策略。它非常适合那些对最终结果的质量、准确性和可靠性有极高要求，且对任务完成的实时性要求相对宽松的场景。例如:</p>
 <ul>
 <li>生成关键的业务代码或技术报告。</li>

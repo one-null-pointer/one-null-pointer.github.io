@@ -16,16 +16,16 @@
   <meta name="author" content="liaoyue">
   <meta name="keywords" content="">
   
-    <meta name="description" content="AI–智能体ReAct架构0.前言&amp;emsp;&amp;emsp;现在已经有了LLM客户端，接下来我们将构造第一个智能体范式ReAct。 &amp;emsp;&amp;emsp; 1.ReAct的工作流程&amp;emsp;&amp;emsp;ReAct的宗旨是认为思考与行动是相辅相成的，思考指导行动，而行动又会发过来修正思考，因此，该范式通过一种特殊的提示工程来引导模型，使得每一步的输出都遵循一个固定的轨迹：  Thought (思考">
+    <meta name="description" content="AI–智能体ReAct架构0.前言&amp;emsp;&amp;emsp;现在已经有了LLM客户端，接下来我们将构造第一个智能体范式ReAct。（学习内容主要参考来源：https:&#x2F;&#x2F;github.com&#x2F;datawhalechina&#x2F;hello-agents） &amp;emsp;&amp;emsp; 1.ReAct的工作流程&amp;emsp;&amp;emsp;ReAct的宗旨是认为思考与行动是相辅相成的，思考指导行动，而行动又会发过来修">
 <meta property="og:type" content="article">
 <meta property="og:title" content="AI--智能体ReAct架构">
 <meta property="og:url" content="https://one-null-pointer.github.io/2026/03/11/AI%20--%E6%99%BA%E8%83%BD%E4%BD%93ReAct%E6%9E%B6%E6%9E%84/index.html">
 <meta property="og:site_name" content="one-null-poniter">
-<meta property="og:description" content="AI–智能体ReAct架构0.前言&amp;emsp;&amp;emsp;现在已经有了LLM客户端，接下来我们将构造第一个智能体范式ReAct。 &amp;emsp;&amp;emsp; 1.ReAct的工作流程&amp;emsp;&amp;emsp;ReAct的宗旨是认为思考与行动是相辅相成的，思考指导行动，而行动又会发过来修正思考，因此，该范式通过一种特殊的提示工程来引导模型，使得每一步的输出都遵循一个固定的轨迹：  Thought (思考">
+<meta property="og:description" content="AI–智能体ReAct架构0.前言&amp;emsp;&amp;emsp;现在已经有了LLM客户端，接下来我们将构造第一个智能体范式ReAct。（学习内容主要参考来源：https:&#x2F;&#x2F;github.com&#x2F;datawhalechina&#x2F;hello-agents） &amp;emsp;&amp;emsp; 1.ReAct的工作流程&amp;emsp;&amp;emsp;ReAct的宗旨是认为思考与行动是相辅相成的，思考指导行动，而行动又会发过来修">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://one-null-pointer.github.io/img/AI.png">
 <meta property="article:published_time" content="2026-03-11T13:48:48.000Z">
-<meta property="article:modified_time" content="2026-06-29T07:50:31.027Z">
+<meta property="article:modified_time" content="2026-07-13T05:50:07.189Z">
 <meta property="article:author" content="liaoyue">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://one-null-pointer.github.io/img/AI.png">
@@ -219,7 +219,7 @@
         
         
         
-          126 mins
+          127 mins
         
       </span>
     
@@ -262,7 +262,7 @@
             
               <div class="markdown-body">
                 
-                <h1 id="AI–智能体ReAct架构"><a href="#AI–智能体ReAct架构" class="headerlink" title="AI–智能体ReAct架构"></a>AI–智能体ReAct架构</h1><h4 id="0-前言"><a href="#0-前言" class="headerlink" title="0.前言"></a>0.前言</h4><p>&emsp;&emsp;现在已经有了LLM客户端，接下来我们将构造第一个智能体范式ReAct。</p>
+                <h1 id="AI–智能体ReAct架构"><a href="#AI–智能体ReAct架构" class="headerlink" title="AI–智能体ReAct架构"></a>AI–智能体ReAct架构</h1><h4 id="0-前言"><a href="#0-前言" class="headerlink" title="0.前言"></a>0.前言</h4><p>&emsp;&emsp;现在已经有了LLM客户端，接下来我们将构造第一个智能体范式ReAct。（学习内容主要参考来源：<a target="_blank" rel="noopener" href="https://github.com/datawhalechina/hello-agents%EF%BC%89">https://github.com/datawhalechina/hello-agents）</a></p>
 <p>&emsp;&emsp;</p>
 <h4 id="1-ReAct的工作流程"><a href="#1-ReAct的工作流程" class="headerlink" title="1.ReAct的工作流程"></a>1.ReAct的工作流程</h4><p>&emsp;&emsp;ReAct的宗旨是认为思考与行动是相辅相成的，思考指导行动，而行动又会发过来修正思考，因此，该范式通过一种特殊的提示工程来引导模型，使得每一步的输出都遵循一个固定的轨迹：</p>
 <ul>
