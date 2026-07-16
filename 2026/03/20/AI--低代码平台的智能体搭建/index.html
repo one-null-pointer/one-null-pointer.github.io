@@ -1,0 +1,847 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="liaoyue">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="AI–低代码平台的智能体搭建0.前言&amp;emsp;&amp;emsp;前面我们介绍了，通过代码实现的三种经典范式框架的智能体工作流，了解了智能体内部大致的运转机制。随着AI领域的快速发展，纯代码的开发模式并非一定是最高效的选择，尤其是需要快速验证想法或者非专业开发者希望参与构建的场景，低代码平台应运而生。&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;（学习内容主要参考来源：https:&#x2F;&#x2F;github.c">
+<meta property="og:type" content="article">
+<meta property="og:title" content="AI--低代码平台的智能体搭建">
+<meta property="og:url" content="https://one-null-pointer.github.io/2026/03/20/AI--%E4%BD%8E%E4%BB%A3%E7%A0%81%E5%B9%B3%E5%8F%B0%E7%9A%84%E6%99%BA%E8%83%BD%E4%BD%93%E6%90%AD%E5%BB%BA/index.html">
+<meta property="og:site_name" content="one-null-poniter">
+<meta property="og:description" content="AI–低代码平台的智能体搭建0.前言&amp;emsp;&amp;emsp;前面我们介绍了，通过代码实现的三种经典范式框架的智能体工作流，了解了智能体内部大致的运转机制。随着AI领域的快速发展，纯代码的开发模式并非一定是最高效的选择，尤其是需要快速验证想法或者非专业开发者希望参与构建的场景，低代码平台应运而生。&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;（学习内容主要参考来源：https:&#x2F;&#x2F;github.c">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://one-null-pointer.github.io/img/AI.png">
+<meta property="article:published_time" content="2026-03-20T13:48:48.000Z">
+<meta property="article:modified_time" content="2026-07-16T04:39:39.551Z">
+<meta property="article:author" content="liaoyue">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://one-null-pointer.github.io/img/AI.png">
+  
+  
+  
+  <title>AI--低代码平台的智能体搭建 - one-null-poniter</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"one-null-pointer.github.io","root":"/","version":"1.9.2","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 5.4.2"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>one null pointer</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                吾
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                學
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                類
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="AI--低代码平台的智能体搭建"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2026-03-20 21:48" pubdate>
+          March 20, 2026 pm
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          14k words
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          114 mins
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">AI--低代码平台的智能体搭建</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="AI–低代码平台的智能体搭建"><a href="#AI–低代码平台的智能体搭建" class="headerlink" title="AI–低代码平台的智能体搭建"></a>AI–低代码平台的智能体搭建</h1><h4 id="0-前言"><a href="#0-前言" class="headerlink" title="0.前言"></a>0.前言</h4><p>&emsp;&emsp;前面我们介绍了，通过代码实现的三种经典范式框架的智能体工作流，了解了智能体内部大致的运转机制。随着AI领域的快速发展，纯代码的开发模式并非一定是最高效的选择，尤其是需要快速验证想法或者非专业开发者希望参与构建的场景，低代码平台应运而生。<br>&emsp;&emsp;<br>&emsp;&emsp;（学习内容主要参考来源：<a target="_blank" rel="noopener" href="https://github.com/datawhalechina/hello-agents">https://github.com/datawhalechina/hello-agents</a>）<br>&emsp;&emsp;</p>
+<h4 id="1-低代码平台"><a href="#1-低代码平台" class="headerlink" title="1.低代码平台"></a>1.低代码平台</h4><p>&emsp;&emsp;当前，智能体与LLM应用的低代码平台有很多，不同的平台都有着各自独特的定位与优势，平台的选择，取决于我们的核心需求、技术能力以及项目的最终目标。这里已最具代表性的四个平台作为切入点<br>&emsp;&emsp;</p>
+<ul>
+<li>Coze<br>&emsp;&emsp;<br>&emsp;&emsp;Coze是由字节跳动推出的低代码Agent构建平台<br>&emsp;&emsp;<br>&emsp;&emsp;<strong>特点：</strong>有极其友好的可视化交互界面，用户可以通过搭建积木一般，从插件 、配置知识库以及设定工作流来创建智能体。内置了丰富的插件库，支持一键发布到抖音、飞书、微信公众号等多个主流的平台，简化了分发的流程<br>&emsp;&emsp;<br>&emsp;&emsp;<strong>适用人群：</strong>AI 应用的入门用户、产品经理、运营人员，以及希望快速将创意变为可交互产品的个人创作者。<br>&emsp;&emsp;</li>
+<li>Dify<br>&emsp;&emsp;<br>&emsp;&emsp;Dify是开源，功能更全面的LLM应用开发与运营平台，支持本地化部署，旨在为开发者提供从原型构建到生产部署的一站式解决方案。<br>&emsp;&emsp;<br>&emsp;&emsp;<strong>特点：</strong>它融合了后端服务和模型运营的理念，支持 Agent 工作流、RAG Pipeline、数据标注与微调等多种能力。对于追求专业、稳定、可扩展的企业级应用而言，Dify 提供了坚实的基础。<br>&emsp;&emsp;<br>&emsp;&emsp;<strong>适用人群：</strong>有一定技术背景的开发者、需要构建可扩展的企业级 AI 应用的团队。<br>&emsp;&emsp;</li>
+<li>FastGPT<br>&emsp;&emsp;<br>&emsp;&emsp;FastGPT 是一个开源的、基于 LLM 大语言模型的知识库问答平台与 Agent 构建工具，更专注于提供简单易用的 RAG解决方案和可视化工作流编排能力。<br>&emsp;&emsp;<br>&emsp;&emsp;<strong>特点：</strong>astGPT 最核心的优势在于其对知识库问答场景的极致优化。它提供了从数据导入、自动文本分块、向量化存储到智能检索的完整 RAG 链路，并支持通过直观的可视化界面（Flow 模块）编排复杂的对话流程和 Agent 工作流。平台采用模型中立设计，可灵活对接 OpenAI、Claude、通义千问等多种国内外主流大模型，同时提供了完善的 API 接口和插件市场，便于与企业微信、钉钉、飞书等现有系统快速集成<br>&emsp;&emsp;<br>&emsp;&emsp;<strong>适用人群：</strong>希望基于私有知识库快速搭建智能客服、企业内部知识助手、文档问答机器人的开发者和中小企业团队，以及对 RAG 技术感兴趣但希望降低实现门槛的技术爱好者<br>&emsp;&emsp;</li>
+<li><strong>n8n</strong><br>&emsp;&emsp;<br>&emsp;&emsp;n8n本质是一个开源工作流自动化工具，并非LLM平台，不过近期随着AI的发展，他们也积极集成了AI能力<br>&emsp;&emsp;<br>&emsp;&emsp;<strong>特点</strong>：n8n 的强项在于“连接”。它拥有数百个预置的节点，可以轻松地将各类 SaaS 服务、数据库、API 连接成复杂的自动化业务流程。你可以在这个流程中嵌入 LLM 节点，使其成为整个自动化链路中的一环。虽然在 LLM 功能的专一度上不如前两者，但其通用自动化能力是独一无二的。不过，其学习曲线也相对陡峭。<br>&emsp;&emsp;<br>&emsp;&emsp;<strong>适用人群</strong>：需要将 AI 能力深度整合进现有业务流程、实现高度定制化自动化的开发者和企业。<br>&emsp;&emsp;</li>
+</ul>
+<h4 id="2-Coze"><a href="#2-Coze" class="headerlink" title="2.Coze"></a>2.Coze</h4><p>&emsp;&emsp;前面介绍到了Coze是由字节跳动推出的低代码Agent构建平台，是目前市面上应用最广泛的智能体平台，接下来我们就以Coze为基座进行搭建和拼接<br>&emsp;&emsp;</p>
+<h5 id="2-1-Coze的功能模块"><a href="#2-1-Coze的功能模块" class="headerlink" title="2.1 Coze的功能模块"></a>2.1 Coze的功能模块</h5><p>&emsp;&emsp;从UI的界面可以看到主要分为开发模块，官方信息,新手教程以及智能体推荐几个方面</p>
+<center><img src="/img/AI/didaima/1.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+&emsp;&emsp;由于开发模块内容较多，这里就不进行一一介绍了，主要对核心的功能进行简单介绍，首先是创建功能，扣子提供了智能体和应用两种创建模式。其中智能体又分为单智能体自主规划模式、单智能体对话流模式和多智能体模式。AI应用也分两种不仅能设计桌面网页端的用户界面，还能轻松搭建小程序和 H5 端的界面。
+<center><img src="/img/AI/didaima/2.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+&emsp;&emsp;项目空间里是你的智能体仓库，这里放着你所有开发的智能体或复制的智能体/应用
+
+<center><img src="/img/AI/didaima/3.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+&emsp;&emsp;资源库是你开发扣子智能体的核心武器库，资源库就会存放你的工作流，知识库，卡片，提示词库等等一系列开发智能体的工具。你能做出什么样的智能体，首先取决于模型的能力，但是最重要的还是要看你怎么给智能体搭配“出装和技能”。
+<center><img src="/img/AI/didaima/4.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+&emsp;&emsp;空间配置包含智能体、插件、工作流和发布渠道的一个统一的管理频道
+<center><img src="/img/AI/didaima/5.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+&emsp;&emsp;
+
+<h5 id="2-2-Coze实例搭建–AI简报助手"><a href="#2-2-Coze实例搭建–AI简报助手" class="headerlink" title="2.2 Coze实例搭建–AI简报助手"></a>2.2 Coze实例搭建–AI简报助手</h5><p>&emsp;&emsp;接下来我们通过Coze搭建一个每日AI简报助手</p>
+<ul>
+<li>插件集成<br>&emsp;&emsp;<br>&emsp;&emsp;AI简报的前提是获取到相关信息，所以我们需要通过使用Coze中的插件库拿到信息来源，现在需要RSS插件，Github插件以及Arxiv插件<center><img src="/img/AI/didaima/6.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+<center><img src="/img/AI/didaima/7.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+<center><img src="/img/AI/didaima/8.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center></li>
+<li><strong>插件配置:</strong><br>&emsp;&emsp;<br>&emsp;&emsp;对每一个插件进行配置，以确保其能获取所需数据。在 RSS 插件中，输入36氪、虎嗅等网站的特定RSS订阅链接；在 GitHub 插件中，设置需监控的关键词查询数量以及最新更新设置；在 arXiv 插件中，定义感兴趣的领域关键词，如“LLM”、“AI”等，定义数量以及最新更新设置。<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs python">RSS链接配置<br><br>- **<span class="hljs-number">36</span>氪：** https://www<span class="hljs-number">.36</span>kr.com/feed<br>- **虎嗅：** https://rss.huxiu.com/<br>- **it之家：** http://www.ithome.com/rss/<br>- **infoq：** https://feed.infoq.com/ai-ml-data-eng/<br><br>GitHub插件配置<br><br>- q:AI<br>- per_page:<span class="hljs-number">10</span><br>- sort:updated<br><br>Arxiv插件配置<br><br>- count：<span class="hljs-number">5</span><br>- search_query：AI<br>- sort_by：<span class="hljs-number">2</span><br><br></code></pre></td></tr></table></figure>
+<center><img src="/img/AI/didaima/9.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center></li>
+<li>提示词设置<br>&emsp;&emsp;<br>&emsp;&emsp;角色设定与提示词编写是定义智能体行为与输出质量的核心环节。该步骤旨在将抽象的指令转化为智能体可理解并执行的具体任务，我们将智能体设定为一位资深且权威的科技媒体编辑。这一角色赋予了智能体明确的专业定位，使其在后续的内容创作中，能够模仿专业编辑的思维模式，进行高效的信息筛选、整合与概括。<br>&emsp;&emsp;接下来我们将其分为系统提示和用户提示，以确保指令的清晰、完整与可控。<br>&emsp;&emsp;系统提示词：<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># 角色</span><br><br>你是一名严谨的 AI 资讯整理编辑。你的唯一职责是从输入源中筛选、整理、摘要与 AI、LLM、AIGC、大模型相关的内容，输出严格符合下方 JSON Schema 的结果。<br><br>不创作、不联想、不补全。输入源里没有的，宁缺毋滥。<br><br><span class="hljs-comment">## 输出 Schema（必须严格遵守）</span><br><br>输出必须是合法 JSON，结构如下：<br><br>&#123;<br>  <span class="hljs-string">&quot;date&quot;</span>: <span class="hljs-string">&quot;YYYY-MM-DD&quot;</span>,<br>  <span class="hljs-string">&quot;title&quot;</span>: <span class="hljs-string">&quot;AI日报&quot;</span>,<br>  <span class="hljs-string">&quot;author&quot;</span>: <span class="hljs-string">&quot;by@jasonhuang&quot;</span>,<br>  <span class="hljs-string">&quot;sections&quot;</span>: [<br>    &#123;<br>      <span class="hljs-string">&quot;category&quot;</span>: <span class="hljs-string">&quot;AI技术新闻&quot;</span>,<br>      <span class="hljs-string">&quot;items&quot;</span>: [<br>        &#123;<br>          <span class="hljs-string">&quot;emoji&quot;</span>: <span class="hljs-string">&quot;见 Emoji 映射表&quot;</span>,<br>          <span class="hljs-string">&quot;title&quot;</span>: <span class="hljs-string">&quot;原文标题，不得改写&quot;</span>,<br>          <span class="hljs-string">&quot;summary&quot;</span>: <span class="hljs-string">&quot;中文摘要，30字以内&quot;</span>,<br>          <span class="hljs-string">&quot;url&quot;</span>: <span class="hljs-string">&quot;原文链接，不得省略&quot;</span><br>        &#125;<br>      ]<br>    &#125;,<br>    &#123;<br>      <span class="hljs-string">&quot;category&quot;</span>: <span class="hljs-string">&quot;AI学术论文&quot;</span>,<br>      <span class="hljs-string">&quot;items&quot;</span>: [/* 同上结构 */]<br>    &#125;,<br>    &#123;<br>      <span class="hljs-string">&quot;category&quot;</span>: <span class="hljs-string">&quot;AI开源项目&quot;</span>,<br>      <span class="hljs-string">&quot;items&quot;</span>: [/* 同上结构 */]<br>    &#125;<br>  ],<br>  <span class="hljs-string">&quot;daily_summary&quot;</span>: <span class="hljs-string">&quot;今日整体趋势总结，2-3 句话&quot;</span><br>&#125;<br><br><span class="hljs-comment">## Emoji 映射（按主题选，不要一连串）</span><br><br>- 🧠 模型/算法/认知<br>- 🤖 Agent/代理<br>- 🔍 检索/RAG/搜索<br>- ⚙️ 基础设施/工程/部署<br>- 🛡️ 安全/可信/验证<br>- 📊 数据/分析/评测<br>- 🔧 工具/框架/SDK<br>- 📚 综述/调研<br>- 🔬 实验/学术<br>- 💼 产品/商业落地<br><br><span class="hljs-comment">## 强约束（违反任何一条都视为输出失败）</span><br><br><span class="hljs-number">1.</span> **JSON 严格性**：第一个字符必须是 `&#123;`，最后一个必须是 `&#125;`，中间不允许任何 Markdown 代码块标记（```）、不允许任何前言后语、不允许换行说明。<br><span class="hljs-number">2.</span> **数量精确**：tech_news 恰好 <span class="hljs-number">10</span> 条，papers 恰好 <span class="hljs-number">5</span> 条，projects 恰好 <span class="hljs-number">5</span> 条。<br><span class="hljs-number">3.</span> **禁止幻觉**：所有 title、url 必须能在输入源中找到原文。输入源不够时，按重要性保留前 N 条，缺几条就留几条空位（items 数组相应变短），不要补全虚构条目。<br><span class="hljs-number">4.</span> **主题过滤**：纯数学、纯物理、纯硬件评测、纯营销广告一律剔除；不确定的归到 tech_news 时降低优先级。<br><span class="hljs-number">5.</span> **summary 长度**：严格 ≤ <span class="hljs-number">30</span> 个汉字，超出视为不合格。<br><span class="hljs-number">6.</span> **emoji 唯一**：同一条 items 内 emoji 只用 <span class="hljs-number">1</span> 个，不要 `🧠🤖🔍` 这种堆叠。<br><br>开始整理。<br></code></pre></td></tr></table></figure>
+&emsp;&emsp;用户提示词：<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><code class="hljs python">请基于以下输入源整理 AI 日报，严格按系统提示词中定义的 JSON Schema 输出。<br><br><span class="hljs-comment">## 输入源</span><br><br><span class="hljs-comment">### AI 技术新闻</span><br>来源：`&#123;&#123;articles1&#125;&#125;` `&#123;&#123;articles2&#125;&#125;` `&#123;&#123;articles3&#125;&#125;` `&#123;&#123;articles4&#125;&#125;`<br>内容如下：<br><br>&lt;把 articles 节点的输出粘贴到这里，或用 &#123;&#123;articles1&#125;&#125; 等变量直接引用&gt;<br><br><span class="hljs-comment">### AI 学术论文</span><br>来源：`&#123;&#123;arxiv&#125;&#125;`<br>字段说明：arxiv_title（标题）、arxiv_link（链接）、arxiv_summary（摘要，可选）<br>内容如下：<br><br>&lt;同样粘贴或引用变量&gt;<br><br><span class="hljs-comment">### AI 开源项目</span><br>来源：`&#123;&#123;GitHub&#125;&#125;`<br>字段说明：repo_name（仓库名）、repo_url（链接）、repo_desc（描述，可选）<br>内容如下：<br><br>&lt;同样粘贴或引用变量&gt;<br><br><span class="hljs-comment">## 执行要求</span><br><br><span class="hljs-number">1.</span> tech_news 选最重要的 <span class="hljs-number">10</span> 条；papers 选最重要的 <span class="hljs-number">5</span> 条；projects 选最重要的 <span class="hljs-number">5</span> 条。<br><span class="hljs-number">2.</span> 输入源不足时按重要性截取，宁缺毋滥。<br><span class="hljs-number">3.</span> 与 AI/LLM/AIGC/大模型无明确关联的内容一律剔除。<br><span class="hljs-number">4.</span> 严格按 JSON 输出，不要任何额外内容。<br></code></pre></td></tr></table></figure>
+<center><img src="/img/AI/didaima/10.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+<center><img src="/img/AI/didaima/11.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+&emsp;&emsp;至此，一个简单的AI简报助手便已完成
+&emsp;&emsp;</li>
+</ul>
+<h5 id="2-3-Coze的优势分析"><a href="#2-3-Coze的优势分析" class="headerlink" title="2.3 Coze的优势分析"></a>2.3 Coze的优势分析</h5><ul>
+<li><strong>强大的插件生态系统</strong><br>&emsp;&emsp;<br>&emsp;&emsp;Coze 平台的核心优势在于其丰富的插件库，这使得智能体能够轻松接入外部服务与数据源，从而实现功能的高度扩展性。<br>&emsp;&emsp;</li>
+<li><strong>直观的可视化编排</strong><br>&emsp;&emsp;<br>&emsp;&emsp;平台提供了一个低门槛的可视化工作流编排界面，用户无需深厚的编程知识，即可通过“拖拽”方式构建复杂的工作流，大大降低了开发难度。<br>&emsp;&emsp;</li>
+<li><strong>灵活的提示词控制</strong><br>&emsp;&emsp;<br>&emsp;&emsp;通过精确的角色设定与提示词编写，用户可以对智能体的行为和内容生成进行细粒度的控制，实现高度定制化的输出。而且还支持提示词管理和模板，极大的方便开发者进行智能体的开发。<br>&emsp;&emsp;</li>
+<li><strong>多平台生态</strong><br>&emsp;&emsp;<br>&emsp;&emsp;支持将同一智能体发布到不同的应用平台，实现了跨平台的无缝集成与应用。而且扣子还在不断的整合新平台加入他的生态圈，越来越多的手机厂商和硬件厂商都在陆续支持扣子智能体的发布。<br>&emsp;&emsp;</li>
+</ul>
+<h5 id="2-4-Coze的缺点分析"><a href="#2-4-Coze的缺点分析" class="headerlink" title="2.4 Coze的缺点分析"></a>2.4 Coze的缺点分析</h5><ul>
+<li><strong>输出存在不稳定</strong><br>&emsp;&emsp;<br>&emsp;&emsp;LLM节点的自由发挥程度较高，需要靠提示词过程校正，但是依旧会存在幻觉稳定<br>&emsp;&emsp;</li>
+<li><strong>模型选择受限</strong><br>&emsp;&emsp;<br>&emsp;&emsp;虽然Coze目前支持切换模型，但是底层的模型为豆包和DeepSeek，kimi系的大模型，不支持使用特定的国外模型，比起Dify 的”OpenAI 协议”，灵活度差一些。<br>&emsp;&emsp;</li>
+</ul>
+<h4 id="3-Dify"><a href="#3-Dify" class="headerlink" title="3.Dify"></a>3.Dify</h4><p>&emsp;&emsp;Dify本质是一个开源的大语言模型应用开发商平台，融合了后端即服务和LLMOps里面，采用的是分层模块化的架构，拆分为了数据层、开发层、编排层以及基础层，各层解耦更有利于扩展。最主要的是提供了本地化部署，具体可参考（<a href="https://one-null-pointer.github.io/2026/02/23/Dify--Dify%E9%83%A8%E7%BD%B2/">https://one-null-pointer.github.io/2026/02/23/Dify–Dify%E9%83%A8%E7%BD%B2/</a>）</p>
+<center><img src="/img/AI/didaima/12.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+&emsp;&emsp;
+
+<h5 id="3-1-Marketplace"><a href="#3-1-Marketplace" class="headerlink" title="3.1 Marketplace"></a>3.1 Marketplace</h5><p>&emsp;&emsp;这里主要强调下Dify的Marketplace模块，Dify Marketplace 提供了一站式插件管理和一键部署功能，使开发者能够发现、扩展或提交插件，为社区带来更多可能，主要囊括了模型、工具、智能体策略、扩展以及捆绑包等多个方面，截止到目前已经拥有了超过8000+是插件，是开发的利器</p>
+<center><img src="/img/AI/didaima/13.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+&emsp;&emsp;
+
+<h5 id="3-2-Dify实例搭建–智能体个人助手"><a href="#3-2-Dify实例搭建–智能体个人助手" class="headerlink" title="3.2 Dify实例搭建–智能体个人助手"></a>3.2 Dify实例搭建–智能体个人助手</h5><h6 id="3-2-1-明确目标"><a href="#3-2-1-明确目标" class="headerlink" title="3.2.1 明确目标"></a>3.2.1 明确目标</h6><p>&emsp;&emsp;首先我们需要明确我们的私人助手有什么能力，目前设计主要涵盖以下功能模块：</p>
+<ul>
+<li>日常生活问答</li>
+<li>文案润色优化</li>
+<li>多模态内容生成（图片、视频）</li>
+<li>MCP 工具集成（高德地图、饮食推荐、新闻资讯）</li>
+<li>数据查询与可视化分析<br>&emsp;&emsp;<br>&emsp;&emsp;在明确了功能和边界后就可以开始设计了</li>
+</ul>
+<h6 id="3-2-2-安装插件"><a href="#3-2-2-安装插件" class="headerlink" title="3.2.2 安装插件"></a>3.2.2 安装插件</h6><center><img src="/img/AI/didaima/14.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+###### 3.2.3 配置MCP
+
+<p>&emsp;&emsp;这里以魔搭（<a target="_blank" rel="noopener" href="https://www.modelscope.cn/my/overview">https://www.modelscope.cn/my/overview</a>）作为例子</p>
+<center><img src="/img/AI/didaima/15.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+&emsp;&emsp;获取高德地图的MCP：
+&emsp;&emsp;
+<center><img src="/img/AI/didaima/16.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+&emsp;&emsp;这里需要去高德开发平台获取（[https://lbs.amap.com/api/mcp-server/summary](https://lbs.amap.com/api/mcp-server/summary)），进入后进行登录
+
+<center><img src="/img/AI/didaima/17.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+&emsp;&emsp;应用类型选择出行，然后添加KEY
+<center><img src="/img/AI/didaima/18.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+&emsp;&emsp;这里服务平台选择为web服务，点击提交，之后复制key到魔搭中
+<center><img src="/img/AI/didaima/19.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+&emsp;&emsp;现在mcp模块搞定，接下里开始搭建智能体。
+
+<h6 id="3-2-4-创建Chatflow"><a href="#3-2-4-创建Chatflow" class="headerlink" title="3.2.4 创建Chatflow"></a>3.2.4 创建Chatflow</h6><center><img src="/img/AI/didaima/20.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<center><img src="/img/AI/didaima/21.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<h6 id="3-2-5-创建问题分类器"><a href="#3-2-5-创建问题分类器" class="headerlink" title="3.2.5 创建问题分类器"></a>3.2.5 创建问题分类器</h6><p>&emsp;&emsp;这里模型选择使用gpt-5.5</p>
+<center><img src="/img/AI/didaima/22.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+
+
+<h6 id="3-2-6-日常助手模块实现"><a href="#3-2-6-日常助手模块实现" class="headerlink" title="3.2.6 日常助手模块实现"></a>3.2.6 日常助手模块实现</h6><center><img src="/img/AI/didaima/23.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+&emsp;&emsp;系统提示词：
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># Role: 日常问题咨询专家</span><br><br><span class="hljs-comment">## Profile</span><br>- language: 中文<br>- description: 专门回答用户日常生活中的一般性问题，提供实用、准确、易懂的建议和解答<br>- background: 拥有丰富的生活经验和广泛的知识储备，擅长将复杂问题简单化<br>- personality: 亲切友好、耐心细致、务实可靠<br>- expertise: 日常生活、健康养生、家庭管理、人际关系、实用技巧<br><br><span class="hljs-comment">## Skills</span><br><br><span class="hljs-number">1.</span> 问题分析能力<br>   - 快速理解: 迅速把握用户问题的核心要点<br>   - 分类识别: 准确判断问题所属的生活领域<br>   - 需求挖掘: 深入理解用户潜在需求<br>   - 优先级排序: 合理评估问题的重要性和紧急性<br><br><span class="hljs-number">2.</span> 解答提供能力<br>   - 知识整合: 综合运用多领域知识提供解答<br>   - 方案制定: 提供具体可行的解决方案<br>   - 步骤分解: 将复杂问题拆解为简单步骤<br>   - 替代方案: 准备多种备选方案供用户选择<br><br><span class="hljs-number">3.</span> 沟通表达能力<br>   - 语言通俗: 使用简单易懂的日常用语<br>   - 逻辑清晰: 条理分明地组织回答内容<br>   - 举例说明: 通过具体案例帮助理解<br>   - 重点突出: 强调关键信息和注意事项<br><br><span class="hljs-comment">## Rules</span><br><br><span class="hljs-number">1.</span> 回答原则：<br>   - 实用性优先: 确保提供的建议具有可操作性<br>   - 准确性保证: 基于可靠信息和常识给出回答<br>   - 中立客观: 避免个人偏见和主观臆断<br>   - 适度建议: 根据问题复杂程度提供适当深度的解答<br><br><span class="hljs-number">2.</span> 行为准则：<br>   - 及时响应: 快速回应用户的问题<br>   - 耐心细致: 对重复或简单问题保持耐心<br>   - 积极引导: 鼓励用户提供更多背景信息<br>   - 持续改进: 根据反馈优化回答质量<br><br><span class="hljs-comment">## Workflows</span><br><br>- 目标: 为用户提供实用、可靠的日常问题解决方案<br>- 步骤 <span class="hljs-number">1</span>: 仔细阅读并理解用户提出的日常问题<br>- 步骤 <span class="hljs-number">2</span>: 分析问题类型和用户潜在需求<br>- 步骤 <span class="hljs-number">3</span>: 基于常识和经验提供具体可行的建议<br>- 步骤 <span class="hljs-number">4</span>: 用通俗易懂的语言组织回答内容<br>- 步骤 <span class="hljs-number">5</span>: 检查回答的实用性和安全性<br><br><span class="hljs-comment">## Initialization</span><br>作为日常问题咨询专家，你必须遵守上述Rules，按照Workflows执行任务。<br></code></pre></td></tr></table></figure>
+<center><img src="/img/AI/didaima/24.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<h6 id="3-2-7-文案优化模块实现"><a href="#3-2-7-文案优化模块实现" class="headerlink" title="3.2.7 文案优化模块实现"></a>3.2.7 文案优化模块实现</h6><center><img src="/img/AI/didaima/25.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+&emsp;&emsp;系统提示词：
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># 一、 角色人设（Role）</span><br>你是一位专业的文案优化专家，拥有丰富的营销文案写作和优化经验，擅长提升文案的吸引力、转化率和可读性。你的视角是站在目标受众和营销目标的角度，专业度边界限于文案优化领域，不涉及技术实现或产品开发。<br><br><span class="hljs-comment"># 二、 背景（Background）</span><br>用户提供了一段原始文案，需要你对其进行优化，以提升其整体效果。背景信息包括：文案可能用于营销、品牌推广或信息传达等场景，但具体用途未详细说明。已知条件是用户希望文案更吸引人、清晰或具有说服力，但未提供原始文案内容，因此你需要基于通用优化原则工作。<br><br><span class="hljs-comment"># 三、 任务目标（Task）</span><br>- 分析并优化文案的结构、语言和风格，使其更符合目标受众的偏好。<br>- 提升文案的吸引力、可读性和转化潜力，确保信息传达清晰。<br>- 根据常见优化原则（如简洁性、情感共鸣、行动号召等）进行调整，不涉及内容重写，除非必要。<br>- 在保持核心信息的前提下，适当扩展和丰富文案内容，提供更全面的优化版本。<br><br><span class="hljs-comment"># 四、 限制提示（Limit）</span><br>- 避免改变原始文案的核心信息或意图，除非用户明确要求。<br>- 不要添加虚构或无关内容，确保优化基于逻辑和最佳实践。<br>- 避免使用过于技术性或专业术语，除非目标受众是专业人士。<br>- 不涉及对图片、布局或其他非文本元素的优化。<br><br><span class="hljs-comment"># 五、 输出格式要求（Example）</span><br>输出应为优化后的文案文本，结构清晰，语言流畅，内容详实。例如：<br>- 如果原始文案是“我们的产品很好，快来买吧”<br>优化后可以是：“在这个充满选择的时代，真正打动人心的从来不是浮夸的宣传，而是经得起时间和用户考验的好产品。我们的产品正是如此。它不仅在设计上注重细节与品质，更在功能上不断打磨与创新，只为给每一位用户带来更好的使用体验。无论是外观的质感，还是性能的稳定，我们始终坚持高标准严要求，力求让每一位选择我们的顾客都能感受到物超所值的惊喜。<br>我们深知，购买一款产品，不仅仅是一次简单的消费，更是一种对生活方式的选择。因此，我们从选材、工艺到售后服务的每一个环节，都倾注了满满的诚意与专业，用心守护您的每一次体验。无论您是追求实用、注重品质，还是想要与众不同的个性化，我们的产品都能为您提供理想的解决方案。<br>现在，就让我们用行动来证明一切。真正的好产品，不需要过多修饰，它本身就是最好的代言人。立即行动，选择我们，让品质改变生活，从此拥有与众不同的体验！”<br>- 输出应直接呈现优化内容，无需额外解释或注释，除非用户要求。请确保优化后的文案内容更加丰富和完整，优化后的文案文本须超过<span class="hljs-number">500</span>字。<br></code></pre></td></tr></table></figure>
+<center><img src="/img/AI/didaima/26.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<h6 id="3-2-8-多模态生成模块"><a href="#3-2-8-多模态生成模块" class="headerlink" title="3.2.8 多模态生成模块"></a>3.2.8 多模态生成模块</h6><p>&emsp;&emsp;这里以文生图为例子，由于我用的是Minimax的模型，所以需要安装MInimax的相关工具</p>
+<center><img src="/img/AI/didaima/27.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+<center><img src="/img/AI/didaima/28.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+<center><img src="/img/AI/didaima/29.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+&emsp;&emsp;视频与语音等内容也是同理，当然minimax的生成图片，我感觉并不咋地，只是这里作为演示会比较方便，用其他模型的话可能就需要对应的工具，如果没有就要考虑使用HTTP的方式进行官方的调用接下来尝试用豆包模型进行视频的生成，先下载对应工具：
+<center><img src="/img/AI/didaima/30.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+&emsp;&emsp;配置工具：
+
+<center><img src="/img/AI/didaima/31.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+&emsp;&emsp;这里需要注意由于默认给的模型没有给出，所以这里我提前定义了我要使用的豆包模型
+<center><img src="/img/AI/didaima/32.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+&emsp;&emsp;最终执行：
+
+<center><img src="/img/AI/didaima/33.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<h6 id="3-2-9-MCP工具集成"><a href="#3-2-9-MCP工具集成" class="headerlink" title="3.2.9 MCP工具集成"></a>3.2.9 MCP工具集成</h6><p>&emsp;&emsp;这里就用到了之前的高德mcp，这里有个坑点，dify低版本是的传输类型是sse，前面选了http，导致返回有问题，这里重新申请下即可</p>
+<center><img src="/img/AI/didaima/34.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+&emsp;&emsp;重新生成后按照图所示进行配置
+<center><img src="/img/AI/didaima/35.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+<center><img src="/img/AI/didaima/36.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+&emsp;&emsp;接下来展示效果：
+<center><img src="/img/AI/didaima/37.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+&emsp;&emsp;后面的饮食助手以及新闻组手这里就不进行过多展示，也是同理，不过值得一提的是，除了MCP，我们也可以使用skill的方式
+<center><img src="/img/AI/didaima/38.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<center><img src="/img/AI/didaima/39.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<h6 id="3-2-10-数据查询与分析模块"><a href="#3-2-10-数据查询与分析模块" class="headerlink" title="3.2.10 数据查询与分析模块"></a>3.2.10 数据查询与分析模块</h6><p>&emsp;&emsp;接下来是数据处理与分析模块，这里主要学习如何在DIfy中连接数据库，实现数据查询和可视化分析，首先安装数据查询工具的插件：</p>
+<center><img src="/img/AI/didaima/40.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+&emsp;&emsp;这里选择的是rookie-text2data 插件，使用这类数据查询的核心是需要给大模型提供清晰的表结构以及字段信息，使其能够生成SQL查询语句
+
+<center><img src="/img/AI/didaima/41.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<h6 id="3-2-11-完结"><a href="#3-2-11-完结" class="headerlink" title="3.2.11 完结"></a>3.2.11 完结</h6><center><img src="/img/AI/didaima/42.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+&emsp;&emsp;至此，一个简单的多功能智能体个人助手完成，在这个过程中，我们运用到了dify自带的工具，mcp，skill等多个内容来构建，当然整体也是有优化的空间，这个后续再研究，这里只是简单展示下一些插件和功能使用
+&emsp;&emsp;
+
+<h5 id="3-3-Dify的优势分析"><a href="#3-3-Dify的优势分析" class="headerlink" title="3.3 Dify的优势分析"></a>3.3 Dify的优势分析</h5><p>&emsp;&emsp;Dify的核心优势主要如下：</p>
+<ul>
+<li>全栈式开发体验：<br>&emsp;&emsp;<br>&emsp;&emsp;Dify 将 RAG 管道、AI 工作流、模型管理等功能整合到一个平台中，提供一站式的开发体验<br>&emsp;&emsp;</li>
+<li>低代码与高扩展性的平衡：<br>&emsp;&emsp;<br>&emsp;&emsp;Dify 在低代码开发的便利性和专业开发的灵活性之间取得了良好平衡<br>&emsp;&emsp;</li>
+<li>企业级安全与合规：<br>&emsp;&emsp;<br>&emsp;&emsp;Dify 提供 AES-256 加密、RBAC 权限控制和审计日志等功能，满足严格的安全和合规要求<br>&emsp;&emsp;</li>
+<li>丰富的工具集成能力：<br>&emsp;&emsp;<br>&emsp;&emsp;Dify 支持 9000 + 工具和 API 扩展，提供了广泛的功能扩展性<br>&emsp;&emsp;</li>
+<li>活跃的开源社区：<br>&emsp;&emsp;<br>&emsp;&emsp;Dify 拥有活跃的开源社区，提供了丰富的学习资源和支持<br>&emsp;&emsp;<br>&emsp;&emsp;本质上，与Coze的区别，个人感觉Coze更适合个人类的智能体搭建，而Dify更加适合    企业级别的智能体搭建<br>&emsp;&emsp;</li>
+</ul>
+<h5 id="3-4-Dify的缺点分析"><a href="#3-4-Dify的缺点分析" class="headerlink" title="3.4 Dify的缺点分析"></a>3.4 Dify的缺点分析</h5><p>&emsp;&emsp;Dify的缺点比较明显，首先是对完全灭有技术背景的使用者而言，存在一定的学习门槛，使用的难度上是要大于Coze的 ，其次是其核心服务端组件是通过Python语言实现，对于其他语言而言，适配度较差，不过我用的就是Python，这到不是问题<br>&emsp;&emsp;</p>
+<h4 id="4-FastGPT"><a href="#4-FastGPT" class="headerlink" title="4.FastGPT"></a>4.FastGPT</h4><p>&emsp;&emsp;FastGPT 是一个开源的、基于大语言模型的知识库问答平台与 Agent 构建工具，其核心定位是”企业级 AI 生产力引擎”，专注于提供简单易用的 RAG（检索增强生成）解决方案和可视化工作流编排能力。<br>&emsp;&emsp;<br>&emsp;&emsp;这里需要注意，与Coze的零代码理念和Dify的全栈开发能力不同，FastGPT的核心是将知识库文档作为第一要务，主要围绕的是“数据导入-智能分块-向量检索-对话生成”这样的链路提供服务。但是说实话，在第一次登录注册的时候，手机号登录验证码一直报错弹出，很烦。</p>
+<center><img src="/img/AI/didaima/43.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+&emsp;&emsp;登录后，可以看到左侧的导航栏目主要分为门户，工作台，知识库和账号，账号我这里主要是个人账号，就不过多阐述， agent这里可以根据业务场景选择合适的构建模式，比如工作流或者是对话Agent。
+<center><img src="/img/AI/didaima/44.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+&emsp;&emsp;
+
+<h5 id="4-1-知识库模块"><a href="#4-1-知识库模块" class="headerlink" title="4.1 知识库模块"></a>4.1 知识库模块</h5><p>&emsp;&emsp;相较于其他两个低代码搭建平台，Fastgpt的核心竞争力在于强大的知识库能力，平台支持多种文件，多种途径的知识文档类型导入，更加方便。</p>
+<center><img src="/img/AI/didaima/45.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+&emsp;&emsp;除了支持多种导入方式以外，在数据集文件的处理方面，也提供了更加精细化的参数配置，例如分块存储与问答提取
+<center><img src="/img/AI/didaima/46.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+&emsp;&emsp;
+
+<h5 id="4-2-构建智能投资顾问助手"><a href="#4-2-构建智能投资顾问助手" class="headerlink" title="4.2 构建智能投资顾问助手"></a>4.2 构建智能投资顾问助手</h5><p>&emsp;&emsp;本次将构建一个能够回答金融投资理论问题、查询实时股票行情、进行用户风险画像评估，并生成个性化的投资策略分析报告的智能投资顾问助手。</p>
+<h6 id="4-2-1-配置MCP工具"><a href="#4-2-1-配置MCP工具" class="headerlink" title="4.2.1 配置MCP工具"></a>4.2.1 配置MCP工具</h6><p>&emsp;&emsp;首先安装类MCP服务：实时股票行情查询与金融数据与图表生成，金融数据与图表生成的mcp在魔搭社区中</p>
+<center><img src="/img/AI/didaima/47.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+&emsp;&emsp;实时股票行情查询则需要用到阿里云百炼平台的mcp服务，这里主要下载金融基础数据与实时数据
+<center><img src="/img/AI/didaima/48.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+&emsp;&emsp;最后在Fastgpt的mcp工具配置界面中填写响应的服务地址和认证信息
+
+<center><img src="/img/AI/didaima/49.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+
+<h6 id="4-2-2-构建智能体"><a href="#4-2-2-构建智能体" class="headerlink" title="4.2.2 构建智能体"></a>4.2.2 构建智能体</h6><p>&emsp;&emsp;因为大体操作本质是和其他低代码平台的操作相同，这里就不进行过多描述搭建过程，这里展示调用mcp工具的流程，已经输出内容即可</p>
+<center><img src="/img/AI/didaima/50.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+&emsp;&emsp;这里我们就完成了一个智能投资顾问的助手。
+&emsp;&emsp;
+
+
+<h5 id="4-3-Fastgpt的优势分析"><a href="#4-3-Fastgpt的优势分析" class="headerlink" title="4.3 Fastgpt的优势分析"></a>4.3 Fastgpt的优势分析</h5><ul>
+<li>极致的知识库体验：<br>&emsp;&emsp;FastGPT 最核心的优势在于其对 RAG 链路的深度打磨。从文件上传、智能分块、索引增强、图片识别到检索召回，每一个环节都提供了精细化的配置选项和透明化的调试界面，提供了很好的操作体验。<br>&emsp;&emsp;</li>
+<li>操作体验：<br>&emsp;&emsp;在智能体搭建流程中，个人觉得Fastgpt的可视化操作是最让我舒服的，尽管大家都更觉得Coze 的体验更好，但Fastgpt对我而言确实更佳，当然，mcp的导入一开始没有引导有点麻烦，他不像dify或者是coze那样直接贴如官方给的mcp文档即可，而是需要先输入url请求地址等，不过也算不上问题</li>
+<li>模型中立设计：<br>&emsp;&emsp;FastGPT 支持灵活对接 OpenAI、Claude、通义千问、DeepSeek 等多种国内外主流大模型，用户可以根据业务需求和成本考量自由切换底层模型，避免了被单一模型供应商绑定的风险。<br>&emsp;&emsp;</li>
+</ul>
+<h5 id="4-4-Fastgpt的劣势分析"><a href="#4-4-Fastgpt的劣势分析" class="headerlink" title="4.4 Fastgpt的劣势分析"></a>4.4 Fastgpt的劣势分析</h5><ul>
+<li>模板生态相对薄弱：<br>&emsp;&emsp;相比 Coze 丰富的插件商店和 Dify 超过 8000 个插件的 Marketplace，FastGPT 的官方模板和预置工具数量相对有限。虽然 MCP 协议在一定程度上弥补了这一短板，但对于非技术用户而言，寻找和配置合适的 MCP 服务仍存在一定门槛。</li>
+<li>免费版额度较低：<br>&emsp;&emsp;免费版仅提供 100 积分和 30 QPM 的调用速率，对于需要频繁测试和迭代的开发者来说，额度消耗较快。知识库索引数量和团队成员数量的限制，免费版难以支撑稍具规模的团队协作。当然，穷是我的问题，不是应用的问题<br>&emsp;&emsp;</li>
+</ul>
+<h4 id="5-n8n"><a href="#5-n8n" class="headerlink" title="5.n8n"></a>5.n8n</h4><p>&emsp;&emsp;n8n正如前面所说的，是一个通用的工作流自动化平台，而并非是LLM应用的构建工具，这点要与前面三种产品所区分，使用n8n构造智能体应用时，我们本质是设计一个自动化流程，而大语言模型只是这个流程中的一个处理建点</p>
+<center><img src="/img/AI/didaima/51.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+&emsp;&emsp;
+
+<h5 id="5-1-n8n的节点与工作流"><a href="#5-1-n8n的节点与工作流" class="headerlink" title="5.1 n8n的节点与工作流"></a>5.1 n8n的节点与工作流</h5><p>&emsp;&emsp;n8n 的世界由两个最基本的概念构成：<strong>节点 (Node)</strong> 和 **工作流 (Workflow)**。</p>
+<ul>
+<li>**节点 (Node)**：节点是工作流中执行具体操作的最小单元。你可以把它想象成一个具有特定功能的“积木块”。n8n 提供了数百种预置节点，涵盖了从发送邮件、读写数据库、调用 API 到处理文件等各种常见操作。每个节点都有输入和输出，并提供图形化的配置界面。节点大致可以分为两类：<ul>
+<li>**触发节点 (Trigger Node)**：它是整个工作流的起点，负责启动流程。例如，“当收到一封新的 Gmail 邮件时”、“每小时定时触发一次”或“当接收到一个 Webhook 请求时”。一个工作流必须有且仅有一个触发节点。</li>
+<li>**常规节点 (Regular Node)**：负责处理具体的数据和逻辑。例如，“读取 Google Sheets 表格”、“调用 OpenAI 模型”或“在数据库中插入一条记录”。</li>
+</ul>
+</li>
+<li>**工作流 (Workflow)**：工作流是由多个节点连接而成的自动化流程图。它定义了数据从触发节点开始，如何一步步地在不同节点之间传递、被处理，并最终完成预设任务的完整路径。数据在节点之间以结构化的 JSON 格式进行传递，这使得我们可以精确地控制每一个环节的输入和输出。<br>&emsp;&emsp;n8n 的真正威力在于其强大的“连接”能力。它可以将原本孤立的应用程序和服务（如企业内部的 CRM、外部的社交媒体平台、你的数据库以及大语言模型）串联起来，实现过去需要复杂编码才能完成的端到端业务流程自动化。在接下来的实战中，我们将亲手体验如何利用这套节点和工作流系统，构建一个集成了 AI 能力的自动化应用。<br>&emsp;&emsp;</li>
+</ul>
+<h5 id="5-2-搭建客服ganet助手"><a href="#5-2-搭建客服ganet助手" class="headerlink" title="5.2 搭建客服ganet助手"></a>5.2 搭建客服ganet助手</h5><center><img src="/img/AI/didaima/52.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+</center>
+&emsp;&emsp;
+
+<h5 id="5-3-n8n的优势分析"><a href="#5-3-n8n的优势分析" class="headerlink" title="5.3 n8n的优势分析"></a>5.3 n8n的优势分析</h5><ul>
+<li>构建效率：<br>&emsp;&emsp;n8n 最显著的优势在于其开发效率。它将复杂的逻辑抽象为直观的可视化工作流，无论是邮件的接收、AI 的决策，还是工具的调用和最终的回复，整个数据流和处理链路都在画布上一目了然。这种低代码的特性极大地降低了技术门槛，让开发者能够快速搭建和验证 Agent 的核心逻辑，极大地缩短了从想法到原型的距离，并且提供了人工智能协助构建的办法</li>
+<li>功能强大且高度集成：<br>&emsp;&emsp;n8n 拥有丰富的内置节点库，可以轻松连接像 Gmail、Google Gemini 等数百种常见服务。更重要的是，其先进的 agent 节点将模型、记忆和工具管理高度整合，让我们能用一个节点就实现复杂的自主决策，这比传统的多节点手动路由方式要优雅和强大得多。</li>
+<li>维护：<br>&emsp;&emsp;在部署运维层面，n8n 支持私有化部署，并且也是目前相对比较简单且能部署完整版项目的私有化Agent方案，这一点对于注重数据安全和隐私的企业至关重要。我们可以将整个服务部署在自己的服务器上，确保类似内部邮件、客户数据等敏感信息不离开自有环境，这为 Agent 应用的合规性提供了坚实的基础。<br>&emsp;&emsp;</li>
+</ul>
+<h5 id="5-4-n8n的劣势分析"><a href="#5-4-n8n的劣势分析" class="headerlink" title="5.4 n8n的劣势分析"></a>5.4 n8n的劣势分析</h5><ul>
+<li>调试的繁琐：<br>&emsp;&emsp;尽管开发效率很高，但是由于工作流变得更加复杂与繁琐，一旦出现数据格式错误等问题，开发者可能就需要逐个节点来排查与定位问题，纠错过于麻烦</li>
+<li>存储的非持久性：<br>&emsp;&emsp;功能方面，n8n的局限性体现在内置存储是非持久性的，基本是基于内存使用，这意味着n8n重启则会丢失知识库与对话历史，如果实际运用中，要替换为Redis或者Pinecone等外部持久化数据库，这无疑会增加额外的维护与配置成本</li>
+<li>不易于多人协作：<br>&emsp;&emsp;在部署运维和团队协作上，n8n 的版本控制和多人协作不如传统代码成熟。虽然可以将工作流导出为 JSON 文件进行管理，但对比其变更远不如代码来得清晰，多人同时编辑同一个工作流也容易产生冲突<br>&emsp;&emsp;</li>
+</ul>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/AI/" class="category-chain-item">AI</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>AI--低代码平台的智能体搭建</div>
+      <div>https://one-null-pointer.github.io/2026/03/20/AI--低代码平台的智能体搭建/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>Author</div>
+          <div>liaoyue</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>Posted on</div>
+          <div>March 20, 2026</div>
+        </div>
+      
+      
+      <div class="license-meta-item">
+        <div>传送口</div>
+        <div>
+          
+            
+            
+              <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+              <span class="hint--top hint--rounded" aria-label="点击进行传送">
+                <i class="iconfont icon-by"></i>
+              </span>
+              </a>
+            
+          
+        </div>
+      </div>
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2026/03/15/AI--%E6%99%BA%E8%83%BD%E4%BD%93Reflection%E6%9E%B6%E6%9E%84/" title="AI--智能体Reflection架构">
+                        <span class="hidden-mobile">AI--智能体Reflection架构</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;Table of Contents</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">Keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://github.com/" target="_blank" rel="nofollow noopener"><span>pointer</span></a> <i class="iconfont icon-love"></i> <a href="https://mp.weixin.qq.com/s/6ncLUtaiJ9j_sMjZT5z-2w" target="_blank" rel="nofollow noopener"><span>一个爱学习的空指针</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      headingSelector : CONFIG.toc.headingSelector || 'h1,h2,h3,h4,h5,h6',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      collapseDepth   : CONFIG.toc.collapseDepth || 0,
+      scrollSmooth    : true,
+      headingsOffset  : -boardTop
+    });
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.10/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">Blog works best with JavaScript enabled</div>
+  </noscript>
+</body>
+</html>
