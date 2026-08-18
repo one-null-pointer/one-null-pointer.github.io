@@ -1,0 +1,720 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="liaoyue">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="智泊AI–提示词概念及优化0.前言&amp;emsp;&amp;emsp;这节课主要针对提示词工程以及相关优化。具体概念这里就不详细展开了，重点是看一些工程化和优化的技巧。 &amp;emsp; 1.什么是提示词&amp;emsp;&amp;emsp;简单来说，提示词是用户发送给大模型的文字，用于引导大模型生成特定的输出结果，可以包含指令、问题等各种内容，是用户与大模型沟通的途径。 &amp;emsp; 2.用户的概念区分&amp;emsp;&amp;emsp">
+<meta property="og:type" content="article">
+<meta property="og:title" content="智泊AI--提示词概念及优化">
+<meta property="og:url" content="https://one-null-pointer.github.io/2026/08/07/%E6%99%BA%E6%B3%8AAI--%E6%8F%90%E7%A4%BA%E8%AF%8D%E6%A6%82%E5%BF%B5%E5%8F%8A%E4%BC%98%E5%8C%96/index.html">
+<meta property="og:site_name" content="one-null-poniter">
+<meta property="og:description" content="智泊AI–提示词概念及优化0.前言&amp;emsp;&amp;emsp;这节课主要针对提示词工程以及相关优化。具体概念这里就不详细展开了，重点是看一些工程化和优化的技巧。 &amp;emsp; 1.什么是提示词&amp;emsp;&amp;emsp;简单来说，提示词是用户发送给大模型的文字，用于引导大模型生成特定的输出结果，可以包含指令、问题等各种内容，是用户与大模型沟通的途径。 &amp;emsp; 2.用户的概念区分&amp;emsp;&amp;emsp">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://one-null-pointer.github.io/img/zhiboai.png">
+<meta property="article:published_time" content="2026-08-06T16:00:00.000Z">
+<meta property="article:modified_time" content="2026-08-18T12:13:56.426Z">
+<meta property="article:author" content="liaoyue">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://one-null-pointer.github.io/img/zhiboai.png">
+  
+  
+  
+  <title>智泊AI--提示词概念及优化 - one-null-poniter</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"one-null-pointer.github.io","root":"/","version":"1.9.2","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 5.4.2"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>one null pointer</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                吾
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                學
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                類
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="智泊AI--提示词概念及优化"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2026-08-07 00:00" pubdate>
+          August 7, 2026 am
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          1.9k words
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          16 mins
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">智泊AI--提示词概念及优化</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="智泊AI–提示词概念及优化"><a href="#智泊AI–提示词概念及优化" class="headerlink" title="智泊AI–提示词概念及优化"></a>智泊AI–提示词概念及优化</h1><h4 id="0-前言"><a href="#0-前言" class="headerlink" title="0.前言"></a>0.前言</h4><p>&emsp;&emsp;这节课主要针对提示词工程以及相关优化。具体概念这里就不详细展开了，重点是看一些工程化和优化的技巧。</p>
+<p>&emsp;</p>
+<h4 id="1-什么是提示词"><a href="#1-什么是提示词" class="headerlink" title="1.什么是提示词"></a>1.什么是提示词</h4><p>&emsp;&emsp;简单来说，提示词是用户发送给大模型的文字，用于引导大模型生成特定的输出结果，可以包含指令、问题等各种内容，是用户与大模型沟通的途径。</p>
+<p>&emsp;</p>
+<h4 id="2-用户的概念区分"><a href="#2-用户的概念区分" class="headerlink" title="2.用户的概念区分"></a>2.用户的概念区分</h4><p>&emsp;&emsp;对于提示词而言，我们需要对使用用户进行区分——针对不同用户，所施展的策略也不太相同（后面会涉及），因此需要先明确自己的用户定位。目前可以区分为两种：</p>
+<table>
+<thead>
+<tr>
+<th>用户类型</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>普通用户</strong></td>
+<td>各种基于大模型智能体的终端用户。</td>
+</tr>
+<tr>
+<td><strong>开发者</strong></td>
+<td>面向大模型的 API，直接接触、访问大模型接口的人。</td>
+</tr>
+</tbody></table>
+<p>&emsp;</p>
+<h4 id="3-系统提示词-vs-用户提示词"><a href="#3-系统提示词-vs-用户提示词" class="headerlink" title="3.系统提示词 vs 用户提示词"></a>3.系统提示词 vs 用户提示词</h4><p>&emsp;&emsp;从作用域与稳定性来看，两者定位不同：</p>
+<table>
+<thead>
+<tr>
+<th>维度</th>
+<th>系统提示词（system）</th>
+<th>用户提示词（user）</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>内容性质</td>
+<td>变化较小，存放 Agent 层面的规则定义、流程等与产品相关的内容</td>
+<td>变化较大，通常和普通用户的输入有关</td>
+</tr>
+<tr>
+<td>优先级</td>
+<td>权重相对较高，与用户提示词冲突时以系统提示词为准</td>
+<td>权重相对较低</td>
+</tr>
+</tbody></table>
+<p>&emsp;&emsp;ps：正常而言，系统提示词的输入内容权重相对较高，当系统提示词与用户提示词存在冲突时，会以系统提示词为准。</p>
+<p>&emsp;</p>
+<h4 id="4-工程化"><a href="#4-工程化" class="headerlink" title="4.工程化"></a>4.工程化</h4><p>&emsp;&emsp;提示词工程化的目的，是研究如何设计和优化提示词，在稳定输出的前提下最大限度地发挥大模型的能力，采用工程化、标准化的思想构建提示词。通常分为三步：</p>
+<ol>
+<li><strong>分析需求、明确需求</strong></li>
+<li><strong>清晰规范编写提示词</strong><ul>
+<li>（1）<strong>结构化</strong>：采用 Markdown 文本格式进行提示词的编写。</li>
+<li>（2）<strong>解耦</strong>：高内聚、低耦合（目的是为了方便后续提示词的迭代）。</li>
+</ul>
+</li>
+<li><strong>验证提示词，反复迭代</strong></li>
+</ol>
+<blockquote>
+<p><strong>提示</strong>：结构与解耦只是手段，最终提示词的质量还是取决于我们对于业务、流程、需求的掌控。</p>
+</blockquote>
+<p>&emsp;</p>
+<h4 id="5-提示词基础总结"><a href="#5-提示词基础总结" class="headerlink" title="5.提示词基础总结"></a>5.提示词基础总结</h4><p>&emsp;&emsp;几条基础心法：</p>
+<ul>
+<li><strong>把 AI 当人看</strong>：不要神化，不要童化，要人化。</li>
+<li><strong>角色设定、任务明确</strong>：确定 AI 是什么角色，你要解决什么问题。</li>
+<li><strong>提问方式</strong>：<ul>
+<li>（1）明确需求。</li>
+<li>（2）信息丰富（背景信息、上下文信息），指令要清晰、具体（要求、任务、步骤）。</li>
+<li>（3）尝试提供示例、约束。</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p><strong>注意</strong>：尽管现在上下文号称达到百万，但正式有效的上限基本在 30w token 内，所以提示词 + 上下文尽量不要超过这个值，否则模型容易在理解过程中忽略内容；第二点是，由于当前大模型的机制，对前面和后面的内容理解较强、中间内容相对较弱，所以重要内容尽量放在前面或后面。</p>
+</blockquote>
+<ul>
+<li><strong>提示词工程</strong>：试试再试试，修改再试试！先加例子再试，再加思维链！如果都不行，就换模型再试。</li>
+</ul>
+<p>&emsp;</p>
+<h4 id="6-提示词调优技巧"><a href="#6-提示词调优技巧" class="headerlink" title="6.提示词调优技巧"></a>6.提示词调优技巧</h4><h5 id="6-1-零样本提示"><a href="#6-1-零样本提示" class="headerlink" title="6.1 零样本提示"></a>6.1 零样本提示</h5><p>&emsp;&emsp;不提供样本，适用于大模型直接回答的场景，例如翻译、简单运算等。</p>
+<h5 id="6-2-少样本提示"><a href="#6-2-少样本提示" class="headerlink" title="6.2 少样本提示"></a>6.2 少样本提示</h5><p>&emsp;&emsp;提供少量示例，引导模型理解任务内容，一般针对大模型的输出格式或内容进行引导。需要注意的是，由于提示的规范会限制大模型的创造力。</p>
+<h5 id="6-3-链式思考（COT）"><a href="#6-3-链式思考（COT）" class="headerlink" title="6.3 链式思考（COT）"></a>6.3 链式思考（COT）</h5><p>&emsp;&emsp;引导模型像人类一样逐步推理、分解问题，再得出结论，更适用于复杂的推理任务（主要对应业务问题的解决步骤标准化）。实际工作中，可以先基于思维链的思想去拆分任务得到原始提示词；在工程落地时，思维链绝对不是一次性调用，而是按步骤去调用大模型，后续步骤的运行还需要携带之前步骤的结果。</p>
+<p>&emsp;&emsp;”工作步骤”</p>
+<h5 id="6-4-自我一致性"><a href="#6-4-自我一致性" class="headerlink" title="6.4 自我一致性"></a>6.4 自我一致性</h5><p>&emsp;&emsp;自我一致性本质是基于思维链，利用大模型生成多条不同的推理路径（重复执行多次），用投票的方法选出出现次数最多的结果作为答案。</p>
+<p>&emsp;&emsp;”为了保证准确性，请使用’自我一致性’策略”</p>
+<h5 id="6-5-思维树（TOT）"><a href="#6-5-思维树（TOT）" class="headerlink" title="6.5 思维树（TOT）"></a>6.5 思维树（TOT）</h5><p>&emsp;&emsp;TOT 是扩展版本的 COT，主要解决复杂、多路径的决策问题。把问题思路设计为树结构，探索多种推理路径，最终综合选择最优解。但由于实现复杂、计算开销极大，因此对模型能力要求较高。</p>
+<h5 id="6-6-反思机制"><a href="#6-6-反思机制" class="headerlink" title="6.6 反思机制"></a>6.6 反思机制</h5><p>&emsp;&emsp;要求 AI 在给出最终答案之前，先对自己的思考过程、推理步骤或潜在假设进行审视和检查（主要适用于代码生成、写作润色等任务）。注意需要不带上下文，要进行交叉检查（不同模型）。</p>
+<p>&emsp;&emsp;六种技巧的适用场景对比：</p>
+<table>
+<thead>
+<tr>
+<th>技巧</th>
+<th>核心思想</th>
+<th>适用场景</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>零样本</td>
+<td>不提供示例直接回答</td>
+<td>翻译、简单运算</td>
+</tr>
+<tr>
+<td>少样本</td>
+<td>提供少量示例引导</td>
+<td>限定输出格式 / 内容</td>
+</tr>
+<tr>
+<td>COT</td>
+<td>分步推理</td>
+<td>复杂推理、业务步骤标准化</td>
+</tr>
+<tr>
+<td>自我一致性</td>
+<td>多路径投票</td>
+<td>提升答案准确度</td>
+</tr>
+<tr>
+<td>TOT</td>
+<td>树状多路径探索</td>
+<td>复杂多路径决策</td>
+</tr>
+<tr>
+<td>反思机制</td>
+<td>交叉审视自身</td>
+<td>代码生成、写作润色</td>
+</tr>
+</tbody></table>
+<center><img src="/img/zhibo/1.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" /></center>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E6%99%BA%E6%B3%8AAI%E8%AF%BE%E7%A8%8B/" class="category-chain-item">智泊AI课程</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>智泊AI--提示词概念及优化</div>
+      <div>https://one-null-pointer.github.io/2026/08/07/智泊AI--提示词概念及优化/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>Author</div>
+          <div>liaoyue</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>Posted on</div>
+          <div>August 7, 2026</div>
+        </div>
+      
+      
+      <div class="license-meta-item">
+        <div>传送口</div>
+        <div>
+          
+            
+            
+              <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+              <span class="hint--top hint--rounded" aria-label="点击进行传送">
+                <i class="iconfont icon-by"></i>
+              </span>
+              </a>
+            
+          
+        </div>
+      </div>
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2026/08/11/%E6%99%BA%E6%B3%8AAI--%E6%8F%90%E7%A4%BA%E8%AF%8D%E6%94%BB%E5%87%BB%E4%B8%8E%E9%98%B2%E8%8C%83/" title="智泊AI--提示词攻击与防范">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">智泊AI--提示词攻击与防范</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2026/08/04/%E6%99%BA%E6%B3%8AAI--%E5%A4%A7%E6%A8%A1%E5%9E%8B%E5%9F%BA%E7%A1%80/" title="智泊AI--大模型基础">
+                        <span class="hidden-mobile">智泊AI--大模型基础</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;Table of Contents</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">Keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://github.com/" target="_blank" rel="nofollow noopener"><span>pointer</span></a> <i class="iconfont icon-love"></i> <a href="https://mp.weixin.qq.com/s/6ncLUtaiJ9j_sMjZT5z-2w" target="_blank" rel="nofollow noopener"><span>一个爱学习的空指针</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      headingSelector : CONFIG.toc.headingSelector || 'h1,h2,h3,h4,h5,h6',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      collapseDepth   : CONFIG.toc.collapseDepth || 0,
+      scrollSmooth    : true,
+      headingsOffset  : -boardTop
+    });
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.10/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">Blog works best with JavaScript enabled</div>
+  </noscript>
+</body>
+</html>
