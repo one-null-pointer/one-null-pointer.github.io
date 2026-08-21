@@ -1,0 +1,714 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="liaoyue">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="智泊AI–大模型底层逻辑1.GPT的含义  &amp;emsp;&amp;emsp;深度学习：指基于深层神经网络模型的机器学习。 &amp;emsp;&amp;emsp;神经网络可视化：TensorFlow Playground &amp;emsp; 2.神经网络种类 卷积神经网络（CNN）：特别适合处理图像，广泛运用于计算机视觉领域。 循环神经网络（RNN）：用于处理序列数据，原理是引入了隐状态 h 来对序列数据提取特征，再接着转换为">
+<meta property="og:type" content="article">
+<meta property="og:title" content="智泊AI--大模型底层逻辑">
+<meta property="og:url" content="https://one-null-pointer.github.io/2026/08/13/%E6%99%BA%E6%B3%8AAI--%E5%A4%A7%E6%A8%A1%E5%9E%8B%E5%BA%95%E5%B1%82%E9%80%BB%E8%BE%91/index.html">
+<meta property="og:site_name" content="one-null-poniter">
+<meta property="og:description" content="智泊AI–大模型底层逻辑1.GPT的含义  &amp;emsp;&amp;emsp;深度学习：指基于深层神经网络模型的机器学习。 &amp;emsp;&amp;emsp;神经网络可视化：TensorFlow Playground &amp;emsp; 2.神经网络种类 卷积神经网络（CNN）：特别适合处理图像，广泛运用于计算机视觉领域。 循环神经网络（RNN）：用于处理序列数据，原理是引入了隐状态 h 来对序列数据提取特征，再接着转换为">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://one-null-pointer.github.io/img/zhiboai.png">
+<meta property="article:published_time" content="2026-08-12T16:00:00.000Z">
+<meta property="article:modified_time" content="2026-08-21T05:24:22.666Z">
+<meta property="article:author" content="liaoyue">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://one-null-pointer.github.io/img/zhiboai.png">
+  
+  
+  
+  <title>智泊AI--大模型底层逻辑 - one-null-poniter</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"one-null-pointer.github.io","root":"/","version":"1.9.2","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 5.4.2"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>one null pointer</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                吾
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                學
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                類
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="智泊AI--大模型底层逻辑"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2026-08-13 00:00" pubdate>
+          August 13, 2026 am
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          2.3k words
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          20 mins
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">智泊AI--大模型底层逻辑</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="智泊AI–大模型底层逻辑"><a href="#智泊AI–大模型底层逻辑" class="headerlink" title="智泊AI–大模型底层逻辑"></a>智泊AI–大模型底层逻辑</h1><h4 id="1-GPT的含义"><a href="#1-GPT的含义" class="headerlink" title="1.GPT的含义"></a>1.GPT的含义</h4><center><img src="/img/zhibo/14.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" /></center>
+
+<p>&emsp;&emsp;深度学习：指基于深层神经网络模型的机器学习。</p>
+<p>&emsp;&emsp;神经网络可视化：<a target="_blank" rel="noopener" href="https://playground.tensorflow.org/">TensorFlow Playground</a></p>
+<p>&emsp;</p>
+<h4 id="2-神经网络种类"><a href="#2-神经网络种类" class="headerlink" title="2.神经网络种类"></a>2.神经网络种类</h4><ul>
+<li><strong>卷积神经网络（CNN）</strong>：特别适合处理图像，广泛运用于计算机视觉领域。</li>
+<li><strong>循环神经网络（RNN）</strong>：用于处理序列数据，原理是引入了隐状态 h 来对序列数据提取特征，再接着转换为输出，能够记住过去的信息。但是处理的序列不能太长，否则会遗忘。</li>
+<li><strong>长短时记忆网络（LSTM）</strong>：是 RNN 的改进版本，能够更好的捕捉长距离依赖关系，比如语言、视频、股票等需要联系上下文的信息，但是计算效率低，并行计算能力不足，只能说长距离依赖的能力比 RNN 更优，但是依旧是有限的。</li>
+</ul>
+<p>&emsp;&emsp;基于上述的类别，Transformer 的出现就得以解决了上述的一系列问题，也是目前大模型的架构基本上都是基于 Transformer 架构。</p>
+<p>&emsp;</p>
+<h4 id="3-大模型的工作原理"><a href="#3-大模型的工作原理" class="headerlink" title="3.大模型的工作原理"></a>3.大模型的工作原理</h4><p>&emsp;&emsp;大模型的工作流程主要如下：</p>
+<p>&emsp;&emsp;分词 → 词嵌入 → Transformer 流程 → 最终内容生成</p>
+<center><img src="/img/zhibo/15.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" /></center>
+
+<ul>
+<li><strong>分词器</strong>：分词器是在模型训练之前就已经固定下来的。在模型训练之前，会抽取一些特定的样本，去进行分词和词频分析，最终去选定一些特定的字、词、符号去构成最原始的词表。</li>
+<li><strong>向量</strong>：有方向和大小的量，本质上就是数学中的矩阵——多维数组。向量的维度：一般来说，维度就是数组的长度，也就是向量坐标中指标值的数量。</li>
+</ul>
+<h5 id="第一步：分词，得到-token"><a href="#第一步：分词，得到-token" class="headerlink" title="第一步：分词，得到 token"></a>第一步：分词，得到 token</h5><center><img src="/img/zhibo/16.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" /></center>
+
+<blockquote>
+<p><strong>注意</strong>：虽然不同的大模型使用的分词算法是不一样的，但是解析提示词时都是与大模型训练时所采用的分词算法保持一致的。</p>
+</blockquote>
+<h5 id="第二步：词嵌入，将-Token-转化为词向量"><a href="#第二步：词嵌入，将-Token-转化为词向量" class="headerlink" title="第二步：词嵌入，将 Token 转化为词向量"></a>第二步：词嵌入，将 Token 转化为词向量</h5><center><img src="/img/zhibo/17.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" /></center>
+
+<center><img src="/img/zhibo/18.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" /></center>
+
+<center><img src="/img/zhibo/19.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" /></center>
+
+<blockquote>
+<p><strong>注意</strong>：向量的维度越大，在参数的数据类型不变的情况下，模型的大小、物理大小、占用的内存等都会变大。需要训练数据就越多，计算损耗的资源就越多，速度就越慢。向量的维度可以理解为对这个 token 的某个特征的计算结果，所以向量的维度越大，能够承载的参数就越多，模型对向量的理解就更充分。</p>
+</blockquote>
+<h5 id="第三步：自注意力机制（开会交流）"><a href="#第三步：自注意力机制（开会交流）" class="headerlink" title="第三步：自注意力机制（开会交流）"></a>第三步：自注意力机制（开会交流）</h5><p>&emsp;&emsp;每一个 token 都会根据邻居修改自己的标签，例如「女儿」的交流：</p>
+<ul>
+<li>「国王」是我的父亲</li>
+<li>「有」表示我被拥有，我不是主语是宾语</li>
+<li>「个」是量词，我是一个女儿</li>
+<li>「，」表示句子要延续，下文我要被描述</li>
+</ul>
+<p>&emsp;&emsp;于是调整向量权重：</p>
+<center><img src="/img/zhibo/20.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" /></center>
+
+<h5 id="第四步：前馈网络（闭门思考）"><a href="#第四步：前馈网络（闭门思考）" class="headerlink" title="第四步：前馈网络（闭门思考）"></a>第四步：前馈网络（闭门思考）</h5><p>&emsp;&emsp;每次开完会后，token 会各自去消化会议上学到的知识。「女儿」展开思考（512 → 2048 个想法，一般是四倍维度展开）：</p>
+<ul>
+<li>想法1：我是公主吗？(+0.6)</li>
+<li>想法2：皇室成员特权(+0.5)</li>
+<li>想法3：宫廷生活(+0.4)</li>
+<li>想法4：但「个」很普通(+0.1)</li>
+<li>想法5：可能不是公主，只是国王女儿(+0.3)</li>
+<li>……</li>
+</ul>
+<p>&emsp;&emsp;最终过滤（ReLU 保留正相关，也被称为激活函数）：</p>
+<ul>
+<li>保留：皇室关联(0.6)、特权(0.5)</li>
+<li>过滤：平民生活(-0.2)设为 0</li>
+</ul>
+<p>&emsp;&emsp;总结（2048 → 512 个新认知）：</p>
+<ul>
+<li>新维度10：女性+0.88(微减，因为作为公主可能用性别去定义会弱)</li>
+<li>新维度25：晚辈+0.82(微增，因为说了父亲属性，需要增加辈分考虑)</li>
+<li>新维度105：公主关联+0.551(明显增强)</li>
+<li>新维度150：被关注度+0.41(知道要被描述)</li>
+</ul>
+<h5 id="第五步：Transformer-层（多层交换）"><a href="#第五步：Transformer-层（多层交换）" class="headerlink" title="第五步：Transformer 层（多层交换）"></a>第五步：Transformer 层（多层交换）</h5><p>&emsp;&emsp;多次开会，每次关注不同的点，从认知基本身份 → 定位故事角色 → 准备具体描述 → 预测下文发展：</p>
+<ol>
+<li>第一次开会：讨论基本语法——「女儿」发现自己的名词，是「有」的宾语。</li>
+<li>第二次开会：讨论语义关系——「女儿」发现自己有个父亲是国王。</li>
+<li>第三次开会：讨论故事发展——「女儿」发现自己在逗号前面，后续续写需要先被作为主角。</li>
+<li>……</li>
+<li>第十二次开会：理解上下文。</li>
+</ol>
+<p>&emsp;&emsp;最终效果：</p>
+<center><img src="/img/zhibo/21.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" /></center>
+
+<h5 id="第六步：基于上下文，生成下一个预测"><a href="#第六步：基于上下文，生成下一个预测" class="headerlink" title="第六步：基于上下文，生成下一个预测"></a>第六步：基于上下文，生成下一个预测</h5><p>&emsp;&emsp;模型不是一次性写出整段话，而是一个 token 一个 token 的预测，不断的输出新词，从第三步开始到搭配第六步循环，最终给出内容。</p>
+<center><img src="/img/zhibo/22.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" /></center>
+
+<p>&emsp;</p>
+<h4 id="4-模型训练流程"><a href="#4-模型训练流程" class="headerlink" title="4.模型训练流程"></a>4.模型训练流程</h4><p>&emsp;&emsp;机器学习：</p>
+<ol>
+<li>提供数据</li>
+<li>创建模型，训练数据</li>
+<li>新数据输入模型，预测结果</li>
+</ol>
+<center><img src="/img/zhibo/23.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" /></center>
+
+<h5 id="机器学习分类"><a href="#机器学习分类" class="headerlink" title="机器学习分类"></a>机器学习分类</h5><table>
+<thead>
+<tr>
+<th>类型</th>
+<th>定义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>监督学习</td>
+<td>人们给机器一大堆标记好的数据</td>
+</tr>
+<tr>
+<td>无监督学习</td>
+<td>人们给机器一大堆没有分类标记的数据</td>
+</tr>
+<tr>
+<td>自监督学习</td>
+<td>一种无需人工标注数据的学习方法，通过利用数据本身的结构来生成「标签」，并利用这些生成的标签来训练模型；是一种特殊的无监督学习，介于监督学习和无监督学习之间，是训练大模型采用的一种学习方式</td>
+</tr>
+<tr>
+<td>强化学习</td>
+<td>一种让 AI 通过不断尝试和与环境互动来学习如何做出最优决策的方法，根据得到的反馈来调整自己的行为策略，逐渐学会哪些行动能带来更多奖励、哪些行动会带来负激励或者惩罚，从而找到最优的行动方式，如 AlphaGo</td>
+</tr>
+</tbody></table>
+<h5 id="模型训练三大阶段："><a href="#模型训练三大阶段：" class="headerlink" title="模型训练三大阶段："></a>模型训练三大阶段：</h5><ul>
+<li><strong>预训练</strong>：让模型学习通用知识，使用海量无标注文本（如书籍、网页、代码等），通过自监督学习训练模型。</li>
+<li><strong>监督微调（SFT）</strong>：对基座模型进行微调，让模型能够适用特定任务，最终得到一个有偏好的模型。</li>
+<li><strong>强化学习（RLHF）</strong>：通过引入人类反馈（或者基于人类反馈训练的奖励模型）进一步优化模型的生成质量，使其生成的回答更符合用户的期望和人类的价值观。</li>
+</ul>
+<p>&emsp;&emsp;<strong>蒸馏</strong>：让能力强的大参数模型生成监督的数据，蒸馏出来的模型针对特定的问题能够很好的解答，但是对于没有处理过的数据能力就会缺失。</p>
+<p>&emsp;&emsp;Transformer 架构下，影响模型能力最重要的因素就是训练的语料（维度）。</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E6%99%BA%E6%B3%8AAI%E8%AF%BE%E7%A8%8B/" class="category-chain-item">智泊AI课程</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>智泊AI--大模型底层逻辑</div>
+      <div>https://one-null-pointer.github.io/2026/08/13/智泊AI--大模型底层逻辑/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>Author</div>
+          <div>liaoyue</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>Posted on</div>
+          <div>August 13, 2026</div>
+        </div>
+      
+      
+      <div class="license-meta-item">
+        <div>传送口</div>
+        <div>
+          
+            
+            
+              <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+              <span class="hint--top hint--rounded" aria-label="点击进行传送">
+                <i class="iconfont icon-by"></i>
+              </span>
+              </a>
+            
+          
+        </div>
+      </div>
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2026/08/18/%E6%99%BA%E6%B3%8AAI--RAG%E6%9E%84%E5%BB%BA/" title="智泊AI--RAG构建">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">智泊AI--RAG构建</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2026/08/11/%E6%99%BA%E6%B3%8AAI--%E6%8F%90%E7%A4%BA%E8%AF%8D%E6%94%BB%E5%87%BB%E4%B8%8E%E9%98%B2%E8%8C%83/" title="智泊AI--提示词攻击与防范">
+                        <span class="hidden-mobile">智泊AI--提示词攻击与防范</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;Table of Contents</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">Keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://github.com/" target="_blank" rel="nofollow noopener"><span>pointer</span></a> <i class="iconfont icon-love"></i> <a href="https://mp.weixin.qq.com/s/6ncLUtaiJ9j_sMjZT5z-2w" target="_blank" rel="nofollow noopener"><span>一个爱学习的空指针</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      headingSelector : CONFIG.toc.headingSelector || 'h1,h2,h3,h4,h5,h6',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      collapseDepth   : CONFIG.toc.collapseDepth || 0,
+      scrollSmooth    : true,
+      headingsOffset  : -boardTop
+    });
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.10/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">Blog works best with JavaScript enabled</div>
+  </noscript>
+</body>
+</html>

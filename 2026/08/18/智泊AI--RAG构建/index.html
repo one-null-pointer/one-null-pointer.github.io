@@ -1,0 +1,740 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="liaoyue">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="智泊AI–RAG构建1.为什么需要RAG&amp;emsp;&amp;emsp;由于大模型的训练机制导致，大模型是静态的知识库，导致了如下缺点：  知识的缺失：一般发生在垂直领域，大模型获取不到垂直领域的一些私有数据。 时效性：大模型对数据的训练是非实时的，对于一些时效性的数据或者场景无法命中实时的数据。  &amp;emsp; 2.什么是RAG&amp;emsp;&amp;emsp;所谓的 RAG 就是三个单词的组合——检索、增强、生">
+<meta property="og:type" content="article">
+<meta property="og:title" content="智泊AI--RAG构建">
+<meta property="og:url" content="https://one-null-pointer.github.io/2026/08/18/%E6%99%BA%E6%B3%8AAI--RAG%E6%9E%84%E5%BB%BA/index.html">
+<meta property="og:site_name" content="one-null-poniter">
+<meta property="og:description" content="智泊AI–RAG构建1.为什么需要RAG&amp;emsp;&amp;emsp;由于大模型的训练机制导致，大模型是静态的知识库，导致了如下缺点：  知识的缺失：一般发生在垂直领域，大模型获取不到垂直领域的一些私有数据。 时效性：大模型对数据的训练是非实时的，对于一些时效性的数据或者场景无法命中实时的数据。  &amp;emsp; 2.什么是RAG&amp;emsp;&amp;emsp;所谓的 RAG 就是三个单词的组合——检索、增强、生">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://one-null-pointer.github.io/img/zhiboai.png">
+<meta property="article:published_time" content="2026-08-17T16:00:00.000Z">
+<meta property="article:modified_time" content="2026-08-21T05:24:13.364Z">
+<meta property="article:author" content="liaoyue">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://one-null-pointer.github.io/img/zhiboai.png">
+  
+  
+  
+  <title>智泊AI--RAG构建 - one-null-poniter</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"one-null-pointer.github.io","root":"/","version":"1.9.2","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 5.4.2"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>one null pointer</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                吾
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                學
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                類
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="智泊AI--RAG构建"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2026-08-18 00:00" pubdate>
+          August 18, 2026 am
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          2.2k words
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          19 mins
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">智泊AI--RAG构建</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="智泊AI–RAG构建"><a href="#智泊AI–RAG构建" class="headerlink" title="智泊AI–RAG构建"></a>智泊AI–RAG构建</h1><h4 id="1-为什么需要RAG"><a href="#1-为什么需要RAG" class="headerlink" title="1.为什么需要RAG"></a>1.为什么需要RAG</h4><p>&emsp;&emsp;由于大模型的训练机制导致，大模型是静态的知识库，导致了如下缺点：</p>
+<ul>
+<li><strong>知识的缺失</strong>：一般发生在垂直领域，大模型获取不到垂直领域的一些私有数据。</li>
+<li><strong>时效性</strong>：大模型对数据的训练是非实时的，对于一些时效性的数据或者场景无法命中实时的数据。</li>
+</ul>
+<p>&emsp;</p>
+<h4 id="2-什么是RAG"><a href="#2-什么是RAG" class="headerlink" title="2.什么是RAG"></a>2.什么是RAG</h4><p>&emsp;&emsp;所谓的 RAG 就是三个单词的组合——检索、增强、生成。</p>
+<ul>
+<li><strong>检索</strong>：在提问大模型之前，会先在模型之外检索并获取数据。检索的方式是多种多样的，因为检索方式的不同，RAG 可以分为不同的类型：<ul>
+<li>基于向量检索：Native RAG</li>
+<li>基于文本检索：wiki</li>
+<li>基于文档索引：PageIndex RAG</li>
+<li>基于实体：GraphRAG，基于三元组</li>
+</ul>
+</li>
+<li><strong>增强</strong>：基于用户问题去检索到知识后，将问题和知识一起构建为提示词。</li>
+<li><strong>生成</strong>：大模型最终结合问题和知识生成回答内容。</li>
+</ul>
+<p>&emsp;</p>
+<h4 id="3-RAG的构建"><a href="#3-RAG的构建" class="headerlink" title="3.RAG的构建"></a>3.RAG的构建</h4><p>&emsp;&emsp;正常来讲，RAG 系统的构建分为：离线构建、在线查询。</p>
+<p>&emsp;&emsp;离线和在线的区别：最早的来源于服务器的部署概念，offline（离线）和 online（在线）。</p>
+<ul>
+<li><strong>离线</strong>：指非本地用户无法访问、不受干扰的过程。</li>
+<li><strong>在线</strong>：服务已上线，非本地用户可以访问。</li>
+</ul>
+<p>&emsp;</p>
+<h4 id="4-离线构建"><a href="#4-离线构建" class="headerlink" title="4.离线构建"></a>4.离线构建</h4><p>&emsp;&emsp;离线构建：要提前将知识库搭建，一般步骤包括但不限于：清洗、分块、向量化、存储。</p>
+<blockquote>
+<p><strong>提示</strong>：在企业落地的过程中，90% 以上的工作量在清洗和分块之上，因为业务的复杂度不同。</p>
+</blockquote>
+<ul>
+<li><strong>清洗</strong>：数据清洗，一般包含文档加载、清洗、增强等操作。<ul>
+<li>文档加载：基于现有的文档加载器将不同类型的文档转为统一类型的数据（掌握常用的工具即可）。</li>
+<li>数据清洗：主要是基于通用规则的清洗（格式、脱敏、去重）、基于业务（版本、范围、名称语义的多样性统一、数据冲突）的清洗。</li>
+</ul>
+</li>
+</ul>
+<p>&emsp;&emsp;在企业中，RAG 的落地一般策略：主要针对企业文档很多、来源复杂，通常会抽取部分数据来实现快速流程验证，然后再普及推广。</p>
+<ul>
+<li><p><strong>文档分类</strong>：</p>
+<ul>
+<li>基于类型</li>
+<li>基于业务场景</li>
+<li>基于文档的内容，主要针对数据清洗部分（例如图片、表格）</li>
+</ul>
+</li>
+<li><p><strong>清洗流程和规则的建立</strong>：</p>
+<ul>
+<li>基于代码：对于抽取出来的业务清洗规则通过代码来实现，需要考虑是否具备可延展性。</li>
+<li>基于人工：一般来说，如果需要处理的数据规模较小、规则难以抽取，都会采用人工处理的方式。</li>
+</ul>
+</li>
+<li><p><strong>全局的方针</strong>：需要少量文本进行验证。</p>
+</li>
+<li><p><strong>分块</strong>：将一个大文档切分为多个小文档。</p>
+<ul>
+<li>分块原因：<ul>
+<li>技术层面：后续的向量化需要用到向量模型，向量模型的输入长度有限制，所以要保证进行向量化操作的文档块小于等于向量模型的输入限制。</li>
+<li>业务层面：用户的问题可能只和某个文档中的某一块信息有关，如果用整个文档去回答问题，会导致 token 损耗增加、处理速度变慢、引入的噪声过多等。</li>
+</ul>
+</li>
+<li>分块方法：<ul>
+<li>常见的：基于固定字符数、重叠窗口、基于句子、递归。</li>
+<li>进阶：外在基于业务场景去选择或自定义，常见的有：基于对话、父子结构、基于语义等。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><strong>向量化</strong>：基于向量模型，将分块之后的知识转化为对应的句向量（块向量），即一个知识块转化成一个向量（目前较好用的中文向量化模型：bge-m3）。向量模型与大模型一样，也是可以训练得到，不过向量模型训练成本较大。</p>
+<ul>
+<li>稀疏向量模型</li>
+<li>稠密向量模型</li>
+</ul>
+</li>
+<li><p><strong>存储</strong>：对于向量来说，需要用到向量数据库去进行存储。</p>
+</li>
+</ul>
+<blockquote>
+<p><strong>提示</strong>：对于向量数据库而言，存储知识只是开始，最终向量数据库的目的是为了实现快速的检索。</p>
+</blockquote>
+<p>&emsp;</p>
+<h4 id="5-在线查询"><a href="#5-在线查询" class="headerlink" title="5.在线查询"></a>5.在线查询</h4><p>&emsp;&emsp;当我们构建好知识数据库后，就可以基于知识库去实现在线查询。过程：查询 → 向量化 → 检索 → 增强 → 生成。</p>
+<ol>
+<li><strong>查询</strong>：用户提交问题。</li>
+<li><strong>向量化</strong>：用户查询的是字符串，知识是向量，需要将用户的查询也转化成相同标准的向量。</li>
+</ol>
+<blockquote>
+<p><strong>注意</strong>：用户的查询向量化和知识库的向量化必须使用相同的向量模型。</p>
+</blockquote>
+<ol start="3">
+<li><strong>检索</strong>：使用用户查询所转化得到的向量在向量数据库中进行检索。一般常用的三种：<ul>
+<li>余弦相似度：方向的一致性</li>
+<li>欧式距离：计算的是向量坐标的距离</li>
+<li>点积</li>
+</ul>
+</li>
+<li><strong>增强</strong>：基于向量检索拿到文本块后，将问题和对应的文本块一起构建提示词，从而达到增强提示词的效果。<ul>
+<li>原有的提示词：只有用户问题</li>
+<li>增强的提示词：用户问题 + 问题相关的知识</li>
+</ul>
+</li>
+<li><strong>生成</strong>：让大模型基于用户问题 + 问题相关的知识去回答用户问题。</li>
+</ol>
+<p>&emsp;</p>
+<h4 id="6-FastGPT搭建RAG"><a href="#6-FastGPT搭建RAG" class="headerlink" title="6.FastGPT搭建RAG"></a>6.FastGPT搭建RAG</h4><p>&emsp;&emsp;首先导入数据库。</p>
+<center><img src="/img/zhibo/11.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" /></center>
+
+<p>&emsp;&emsp;配置一个对话 agent 并导入知识库。</p>
+<center><img src="/img/zhibo/12.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" /></center>
+
+<blockquote>
+<p><strong>注意</strong>：由于内容较少，数据库中的结果重排需要关闭掉，可以查看执行流程：</p>
+</blockquote>
+<center><img src="/img/zhibo/13.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" /></center>
+
+<p>&emsp;</p>
+<h4 id="7-分块方法"><a href="#7-分块方法" class="headerlink" title="7.分块方法"></a>7.分块方法</h4><p>&emsp;&emsp;基础的分块方式主要有四种：</p>
+<table>
+<thead>
+<tr>
+<th>分块方式</th>
+<th>优点</th>
+<th>缺点</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>基于固定长度</td>
+<td>处理方便</td>
+<td>容易有语义割裂</td>
+</tr>
+<tr>
+<td>基于固定长度 + 重叠窗口</td>
+<td>一定程度上解决语义割裂问题</td>
+<td>增加资源消耗，引入更多噪音（一般是语句长度的 5%—20%）</td>
+</tr>
+<tr>
+<td>基于句子</td>
+<td>保证语义的完整性</td>
+<td>在实际中，业务更多的是段落</td>
+</tr>
+</tbody></table>
+<p>&emsp;&emsp;<strong>递归分块</strong>：是 LangChain 中封装的一个分块方法，是结合了以上三种优点的一种分块方法，一般作为企业落地的首选分块方法；一般来说，只有当递归分块不满足业务需要时，才会考虑其他方法。</p>
+<p>&emsp;&emsp;<strong>图片处理</strong>：</p>
+<ul>
+<li>图片单独分块：<ul>
+<li>图片转为 base64 编码直接存储。</li>
+<li>借助多模态模型去理解图片，生成图片的描述性文字作为分块（人工可以介入）。</li>
+<li>原本图片的位置使用描述性索引文字进行描述，指向真正的图片，借助多模态模型去理解图片（人工不介入）。</li>
+</ul>
+</li>
+</ul>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E6%99%BA%E6%B3%8AAI%E8%AF%BE%E7%A8%8B/" class="category-chain-item">智泊AI课程</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>智泊AI--RAG构建</div>
+      <div>https://one-null-pointer.github.io/2026/08/18/智泊AI--RAG构建/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>Author</div>
+          <div>liaoyue</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>Posted on</div>
+          <div>August 18, 2026</div>
+        </div>
+      
+      
+      <div class="license-meta-item">
+        <div>传送口</div>
+        <div>
+          
+            
+            
+              <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+              <span class="hint--top hint--rounded" aria-label="点击进行传送">
+                <i class="iconfont icon-by"></i>
+              </span>
+              </a>
+            
+          
+        </div>
+      </div>
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2026/08/13/%E6%99%BA%E6%B3%8AAI--%E5%A4%A7%E6%A8%A1%E5%9E%8B%E5%BA%95%E5%B1%82%E9%80%BB%E8%BE%91/" title="智泊AI--大模型底层逻辑">
+                        <span class="hidden-mobile">智泊AI--大模型底层逻辑</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;Table of Contents</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">Keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://github.com/" target="_blank" rel="nofollow noopener"><span>pointer</span></a> <i class="iconfont icon-love"></i> <a href="https://mp.weixin.qq.com/s/6ncLUtaiJ9j_sMjZT5z-2w" target="_blank" rel="nofollow noopener"><span>一个爱学习的空指针</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      headingSelector : CONFIG.toc.headingSelector || 'h1,h2,h3,h4,h5,h6',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      collapseDepth   : CONFIG.toc.collapseDepth || 0,
+      scrollSmooth    : true,
+      headingsOffset  : -boardTop
+    });
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.10/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">Blog works best with JavaScript enabled</div>
+  </noscript>
+</body>
+</html>
