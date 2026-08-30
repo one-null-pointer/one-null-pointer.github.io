@@ -25,7 +25,7 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://one-null-pointer.github.io/img/zhiboai.png">
 <meta property="article:published_time" content="2026-08-03T16:00:00.000Z">
-<meta property="article:modified_time" content="2026-08-20T08:18:36.614Z">
+<meta property="article:modified_time" content="2026-08-27T09:41:25.425Z">
 <meta property="article:author" content="liaoyue">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://one-null-pointer.github.io/img/zhiboai.png">
@@ -208,7 +208,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.6k words
+          1.5k words
         
       </span>
     
@@ -219,7 +219,7 @@
         
         
         
-          14 mins
+          13 mins
         
       </span>
     
@@ -271,20 +271,20 @@
 <li><strong>2022 年 · ChatGPT</strong>：1750 亿参数，使用 Transformer 架构，通过强化学习从人类反馈（RLHF）进行训练，能够理解上下文、生成连贯文本，实现回答问题和编写代码等任务。</li>
 <li><strong>2023 年 · DeepSeek</strong>：中国自主研发的大语言模型，支持中英文双语，在代码生成、数学推理、长文本处理等方面表现优异；开源模型降低了使用门槛。</li>
 </ul>
+<center><img src="/img/zhibo/10_1.png" srcset="/img/loading.gif" lazyload style="zoom:60%;" /></center>
+
 <p>&emsp;&emsp;目前主要是算力和硬件制约了大语言模型训练的参数规模。如果算力与硬件不断扩大，大模型会不会超越人类本身？这是有可能的事情——快进到 AI 给我当牛马……</p>
 <p>&emsp;</p>
 <h4 id="2-大模型的幻觉"><a href="#2-大模型的幻觉" class="headerlink" title="2.大模型的幻觉"></a>2.大模型的幻觉</h4><p>&emsp;&emsp;大模型的”编造”现象，也就是我们常说的<strong>幻觉问题</strong>，是指大模型生成看似合理但实际上完全错误、无中生有或与事实不符的现象。其产生原因主要如下：</p>
 <ul>
-<li><strong>概率预测机制</strong>：基于概率预测下一个词，而不是查询事实数据库，导致生成流畅但不准确的内容。</li>
-<li><strong>训练数据偏差</strong>：训练数据中的错误、偏见或过时的信息会被模型学习并复现。</li>
-<li><strong>缺乏事实核查</strong>：模型没有内置的事实核查机制，无法像人类一样验证信息的准确性。</li>
+<li><center><img src="/img/zhibo/10_2.png" srcset="/img/loading.gif" lazyload style="zoom:60%;" /></center></li>
 </ul>
 <p>&emsp;&emsp;应对办法：</p>
 <ul>
 <li><strong>交叉验证</strong>：对关键信息进行事实核查。</li>
-<li><strong>引用来源</strong>：要求模型提供信息来源。</li>
+<li><strong>引用来源</strong>：要求模型提供信息来源。（实际上，大模型引用的来源也可能造假，所以需要多重验证）</li>
 <li><strong>RAG 技术</strong>：结合外部知识库。</li>
-<li><strong>人工审核</strong>：重要决策需人工确认。</li>
+<li><strong>人工审核</strong>：重要决策仍然需人工确认。</li>
 </ul>
 <p>&emsp;</p>
 <h4 id="3-大模型上下文窗口"><a href="#3-大模型上下文窗口" class="headerlink" title="3.大模型上下文窗口"></a>3.大模型上下文窗口</h4><p>&emsp;&emsp;上下文窗口是指大模型一次能够处理的最大输入和输出文本长度（注意是输入 + 输出），通常以 token 为单位计量。可能导致的影响：</p>

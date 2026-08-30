@@ -16,16 +16,16 @@
   <meta name="author" content="liaoyue">
   <meta name="keywords" content="">
   
-    <meta name="description" content="智泊AI–大模型底层逻辑1.GPT的含义  &amp;emsp;&amp;emsp;深度学习：指基于深层神经网络模型的机器学习。 &amp;emsp;&amp;emsp;神经网络可视化：TensorFlow Playground &amp;emsp; 2.神经网络种类 卷积神经网络（CNN）：特别适合处理图像，广泛运用于计算机视觉领域。 循环神经网络（RNN）：用于处理序列数据，原理是引入了隐状态 h 来对序列数据提取特征，再接着转换为">
+    <meta name="description" content="智泊AI–大模型底层逻辑1.GPT的含义  &amp;emsp;&amp;emsp;深度学习：指基于深层神经网络模型的机器学习。 &amp;emsp;&amp;emsp;神经网络可视化：TensorFlow Playground &amp;emsp; 2.神经网络种类 卷积神经网络（CNN）：特别适合处理图像，广泛运用于计算机视觉领域。     &amp;emsp;&amp;emsp;这里以一张猫片为例： 123456789原图: 一整张猫的照片">
 <meta property="og:type" content="article">
 <meta property="og:title" content="智泊AI--大模型底层逻辑">
 <meta property="og:url" content="https://one-null-pointer.github.io/2026/08/13/%E6%99%BA%E6%B3%8AAI--%E5%A4%A7%E6%A8%A1%E5%9E%8B%E5%BA%95%E5%B1%82%E9%80%BB%E8%BE%91/index.html">
 <meta property="og:site_name" content="one-null-poniter">
-<meta property="og:description" content="智泊AI–大模型底层逻辑1.GPT的含义  &amp;emsp;&amp;emsp;深度学习：指基于深层神经网络模型的机器学习。 &amp;emsp;&amp;emsp;神经网络可视化：TensorFlow Playground &amp;emsp; 2.神经网络种类 卷积神经网络（CNN）：特别适合处理图像，广泛运用于计算机视觉领域。 循环神经网络（RNN）：用于处理序列数据，原理是引入了隐状态 h 来对序列数据提取特征，再接着转换为">
+<meta property="og:description" content="智泊AI–大模型底层逻辑1.GPT的含义  &amp;emsp;&amp;emsp;深度学习：指基于深层神经网络模型的机器学习。 &amp;emsp;&amp;emsp;神经网络可视化：TensorFlow Playground &amp;emsp; 2.神经网络种类 卷积神经网络（CNN）：特别适合处理图像，广泛运用于计算机视觉领域。     &amp;emsp;&amp;emsp;这里以一张猫片为例： 123456789原图: 一整张猫的照片">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://one-null-pointer.github.io/img/zhiboai.png">
 <meta property="article:published_time" content="2026-08-12T16:00:00.000Z">
-<meta property="article:modified_time" content="2026-08-21T05:24:22.666Z">
+<meta property="article:modified_time" content="2026-08-29T08:07:46.640Z">
 <meta property="article:author" content="liaoyue">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://one-null-pointer.github.io/img/zhiboai.png">
@@ -208,7 +208,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          2.3k words
+          3.1k words
         
       </span>
     
@@ -219,7 +219,7 @@
         
         
         
-          20 mins
+          27 mins
         
       </span>
     
@@ -268,10 +268,33 @@
 <p>&emsp;&emsp;神经网络可视化：<a target="_blank" rel="noopener" href="https://playground.tensorflow.org/">TensorFlow Playground</a></p>
 <p>&emsp;</p>
 <h4 id="2-神经网络种类"><a href="#2-神经网络种类" class="headerlink" title="2.神经网络种类"></a>2.神经网络种类</h4><ul>
-<li><strong>卷积神经网络（CNN）</strong>：特别适合处理图像，广泛运用于计算机视觉领域。</li>
-<li><strong>循环神经网络（RNN）</strong>：用于处理序列数据，原理是引入了隐状态 h 来对序列数据提取特征，再接着转换为输出，能够记住过去的信息。但是处理的序列不能太长，否则会遗忘。</li>
-<li><strong>长短时记忆网络（LSTM）</strong>：是 RNN 的改进版本，能够更好的捕捉长距离依赖关系，比如语言、视频、股票等需要联系上下文的信息，但是计算效率低，并行计算能力不足，只能说长距离依赖的能力比 RNN 更优，但是依旧是有限的。</li>
+<li><h5 id="卷积神经网络（CNN）："><a href="#卷积神经网络（CNN）：" class="headerlink" title="卷积神经网络（CNN）："></a><strong>卷积神经网络（CNN）</strong>：</h5><p>特别适合处理图像，广泛运用于计算机视觉领域。</p>
+</li>
 </ul>
+<center><img src="/img/zhibo/14_1.png" srcset="/img/loading.gif" lazyload style="zoom:60%;" /></center>
+
+<p>&emsp;&emsp;这里以一张猫片为例：</p>
+<figure class="highlight gcode"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs gcode">原图: 一整张猫的照片      <br>↓<br>【第<span class="hljs-number">1</span>次扫】 用 <span class="hljs-number">3</span>x<span class="hljs-number">3</span> 的小窗口扫,提取<span class="hljs-string">&quot;边缘&quot;</span> → 发现有尖尖的轮廓<span class="hljs-comment">(耳朵)</span>      <br>↓<br>【第<span class="hljs-number">2</span>次扫】 再用稍大的感受野,提取<span class="hljs-string">&quot;局部形状&quot;</span> → 发现圆圆的<span class="hljs-comment">(眼睛)</span>、细长的<span class="hljs-comment">(胡须)</span>      <br>↓<br>【第<span class="hljs-number">3</span>次扫】 提取<span class="hljs-string">&quot;整体部件&quot;</span> → 拼出<span class="hljs-string">&quot;猫头&quot;</span>      <br>↓<br>【最后】  全连接层做判断:这是猫!<br></code></pre></td></tr></table></figure>
+
+<ul>
+<li><h5 id="循环神经网络（RNN）："><a href="#循环神经网络（RNN）：" class="headerlink" title="循环神经网络（RNN）："></a><strong>循环神经网络（RNN）</strong>：</h5><p>&emsp;&emsp;用于处理序列数据，原理是引入了隐状态 h 来对序列数据提取特征，再接着转换为输出，能够记住过去的信息。但是处理的序列不能太长，否则会遗忘。</p>
+</li>
+</ul>
+<center><img src="/img/zhibo/14_2.png" srcset="/img/loading.gif" lazyload style="zoom:60%;" /></center>
+
+<p>&emsp;&emsp;RNNd的核心思路是每读一个词,就把”现在的理解”存到 <code>h</code> 里,传给下一步，例如预测”我今天心情很__” 后面是什么</p>
+<figure class="highlight gcode"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs gcode">步骤<span class="hljs-number">1</span>: 读 <span class="hljs-string">&quot;我&quot;</span>     <br>↓<br>h<span class="hljs-number">1</span><span class="hljs-comment">(主语)</span> → 输出: 嗯,一个人<br>↓<br>步骤<span class="hljs-number">2</span>: 读 <span class="hljs-string">&quot;今天&quot;</span>   <br>↓<br>h<span class="hljs-number">2</span><span class="hljs-comment">(带着h1)</span> → 输出: 主语+时间<br>↓<br>步骤<span class="hljs-number">3</span>: 读 <span class="hljs-string">&quot;心情&quot;</span>   <br>↓<br>h<span class="hljs-number">3</span><span class="hljs-comment">(带着h2)</span> → 输出: ...好像在描述心情<br>↓<br>步骤<span class="hljs-number">4</span>: 读 <span class="hljs-string">&quot;很&quot;</span>     <br>↓<br>h<span class="hljs-number">4</span><span class="hljs-comment">(带着h3,但h1的内容已经模糊了)</span> <br>↓<br>预测: 好<span class="hljs-comment">(概率最大)</span> / 差 / 复杂...<br>↓<br>步骤<span class="hljs-number">5</span>: 输出 <span class="hljs-string">&quot;好&quot;</span>   ✓<br></code></pre></td></tr></table></figure>
+
+<p>&emsp;&emsp;但是由于h的容量有限制，例如当句子变成”小明,那个来自北京、喜欢打篮球、昨天刚升职、养了只猫的男生,今天心情很__”，到第五步时，小明是谁，做了什么，前面的信息会被新信息”冲淡”。句子过长就记不住前面，并且只能一步步推导，并不能进行并行计算</p>
+<ul>
+<li><h5 id="长短时记忆网络（LSTM）："><a href="#长短时记忆网络（LSTM）：" class="headerlink" title="长短时记忆网络（LSTM）："></a><strong>长短时记忆网络（LSTM）</strong>：</h5><p>&emsp;&emsp;是 RNN 的改进版本，能够更好的捕捉长距离依赖关系，比如语言、视频、股票等需要联系上下文的信息，但是计算效率低，并行计算能力不足，只能说长距离依赖的能力比 RNN 更优，但是依旧是有限的。其核心思路就是在RNN的基础上加入了三个门：哪些信息要忘掉（遗忘门）、哪些要记下（输入门）、哪些要输出（输出门）</p>
+</li>
+</ul>
+<center><img src="/img/zhibo/14_3.png" srcset="/img/loading.gif" lazyload style="zoom:60%;" /></center>
+
+<p>&emsp;&emsp;例如观看一部两万字的小说</p>
+<figure class="highlight gcode"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs gcode">观看过程中:<br>  主角名字:很重要 <br>  ↓<br>  该信息长期记住 ✅<span class="hljs-comment">(记到笔记本)</span><br>  ↓<br>  路人甲说了啥:不重要 <br>  ↓<br>  该信息忘掉 ❌<br>  ↓<br>  主角刚升职:重要 <br>  ↓<br>  该信息记下 ✅<br>  ↓<br>  背景音乐:不太重要 <br>  ↓<br>  该信息弱化<br></code></pre></td></tr></table></figure>
+
 <p>&emsp;&emsp;基于上述的类别，Transformer 的出现就得以解决了上述的一系列问题，也是目前大模型的架构基本上都是基于 Transformer 架构。</p>
 <p>&emsp;</p>
 <h4 id="3-大模型的工作原理"><a href="#3-大模型的工作原理" class="headerlink" title="3.大模型的工作原理"></a>3.大模型的工作原理</h4><p>&emsp;&emsp;大模型的工作流程主要如下：</p>
