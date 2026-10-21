@@ -1,0 +1,719 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="liaoyue">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="智泊AI–Langchain（一）&amp;emsp; 0.安装环境变量&amp;emsp;&amp;emsp;这里使用的是 Langchain 1.0 版本，以下是涉及到的依赖版本，放到 requirements.txt 文件中，执行 pip install -r .\requirements.txt 即可安装。 12345678910111213141516171819202122232425262728293031">
+<meta property="og:type" content="article">
+<meta property="og:title" content="智泊AI--Langchain（一）">
+<meta property="og:url" content="https://one-null-pointer.github.io/2026/08/27/%E6%99%BA%E6%B3%8AAI--Langchain%EF%BC%88%E4%B8%80%EF%BC%89/index.html">
+<meta property="og:site_name" content="one-null-poniter">
+<meta property="og:description" content="智泊AI–Langchain（一）&amp;emsp; 0.安装环境变量&amp;emsp;&amp;emsp;这里使用的是 Langchain 1.0 版本，以下是涉及到的依赖版本，放到 requirements.txt 文件中，执行 pip install -r .\requirements.txt 即可安装。 12345678910111213141516171819202122232425262728293031">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://one-null-pointer.github.io/img/zhiboai.png">
+<meta property="article:published_time" content="2026-08-26T16:00:00.000Z">
+<meta property="article:modified_time" content="2026-10-21T09:53:07.335Z">
+<meta property="article:author" content="liaoyue">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://one-null-pointer.github.io/img/zhiboai.png">
+  
+  
+  
+  <title>智泊AI--Langchain（一） - one-null-poniter</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"one-null-pointer.github.io","root":"/","version":"1.9.2","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 5.4.2"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>one null pointer</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                吾
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                學
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                類
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="智泊AI--Langchain（一）"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2026-08-27 00:00" pubdate>
+          August 27, 2026 am
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          21k words
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          175 mins
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">智泊AI--Langchain（一）</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="智泊AI–Langchain（一）"><a href="#智泊AI–Langchain（一）" class="headerlink" title="智泊AI–Langchain（一）"></a>智泊AI–Langchain（一）</h1><p>&emsp;</p>
+<h4 id="0-安装环境变量"><a href="#0-安装环境变量" class="headerlink" title="0.安装环境变量"></a>0.安装环境变量</h4><p>&emsp;&emsp;这里使用的是 Langchain 1.0 版本，以下是涉及到的依赖版本，放到 <code>requirements.txt</code> 文件中，执行 <code>pip install -r .\requirements.txt</code> 即可安装。</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br></pre></td><td class="code"><pre><code class="hljs text">aiofiles==24.1.0<br>aiohappyeyeballs==2.6.1<br>aiohttp==3.13.2<br>aiosignal==1.4.0<br>altair==5.5.0<br>annotated-doc==0.0.3<br>annotated-types==0.7.0<br>anyio==4.11.0<br>arxiv==2.3.0<br>attrs==25.4.0<br>backoff==2.2.1<br>bcrypt==5.0.0<br>beautifulsoup4==4.14.2<br>blinker==1.9.0<br>brotli==1.2.0<br>build==1.3.0<br>cachetools==6.2.1<br>certifi==2025.10.5<br>cffi==2.0.0<br>charset-normalizer==3.4.4<br>chromadb==1.3.4<br>click==8.3.0<br>colorama==0.4.6<br>coloredlogs==15.0.1<br>cryptography==46.0.3<br>dashscope==1.25.0<br>dataclasses-json==0.6.7<br>defusedxml==0.7.1<br>distro==1.9.0<br>docx2txt==0.9<br>durationpy==0.10<br>fastapi==0.121.0<br>feedparser==6.0.12<br>ffmpy==0.6.4<br>filelock==3.20.0<br>flatbuffers==25.9.23<br>frozenlist==1.8.0<br>fsspec==2025.10.0<br>gitdb==4.0.12<br>GitPython==3.1.45<br>google-auth==2.43.0<br>googleapis-common-protos==1.72.0<br>gradio==5.49.1<br>gradio_client==1.13.3<br>grandalf==0.8<br>greenlet==3.2.4<br>groovy==0.1.2<br>grpcio==1.76.0<br>h11==0.16.0<br>hf-xet==1.2.0<br>httpcore==1.0.9<br>httptools==0.7.1<br>httpx==0.28.1<br>httpx-sse==0.4.3<br>huggingface_hub==1.1.2<br>humanfriendly==10.0<br>idna==3.11<br>importlib_metadata==8.7.0<br>importlib_resources==6.5.2<br>Jinja2==3.1.6<br>jiter==0.11.1<br>jsonpatch==1.33<br>jsonpointer==3.0.0<br>jsonschema==4.25.1<br>jsonschema-specifications==2025.9.1<br>kubernetes==34.1.0<br>langchain==1.0.4<br>langchain-classic==1.0.0<br>langchain-community==0.4.1<br>langchain-core==1.0.3<br>langchain-openai==1.0.2<br>langchain-text-splitters==1.0.0<br>langgraph==1.0.2<br>langgraph-checkpoint==3.0.1<br>langgraph-prebuilt==1.0.2<br>langgraph-sdk==0.2.9<br>langserve==0.3.3<br>langsmith==0.4.41<br>markdown-it-py==4.0.0<br>MarkupSafe==3.3.0<br>marshmallow==3.26.1<br>mdurl==0.1.2<br>mmh3==5.2.0<br>mpmath==1.3.0<br>multidict==6.7.0<br>mypy_extensions==1.1.1<br>mysqlclient==2.2.7<br>narwhals==2.11.0<br>numpy==2.3.4<br>oauthlib==3.3.1<br>onnxruntime==1.23.2<br>openai==2.7.1<br>opentelemetry-api==1.38.0<br>opentelemetry-exporter-otlp-proto-common==1.38.0<br>opentelemetry-exporter-otlp-proto-grpc==1.38.0<br>opentelemetry-proto==1.38.0<br>opentelemetry-sdk==1.38.0<br>opentelemetry-semantic-conventions==0.59b0<br>orjson==3.11.4<br>ormsgpack==1.12.0<br>overrides==7.7.0<br>packaging==25.0<br>pandas==2.3.3<br>pillow==11.3.0<br>posthog==5.4.0<br>propcache==0.4.1<br>protobuf==6.33.0<br>pyarrow==21.0.0<br>pyasn1==0.6.1<br>pyasn1_modules==0.4.2<br>pybase64==1.4.2<br>pycparser==2.23<br>pydantic==2.11.10<br>pydantic-settings==2.11.0<br>pydantic_core==2.33.2<br>pydeck==0.9.1<br>pydub==0.25.1<br>Pygments==2.19.2<br>pyparsing==3.2.5<br>PyPika==0.48.9<br>pyproject_hooks==1.2.0<br>pyreadline3==3.5.4<br>python-dateutil==2.9.0.post0<br>python-dotenv==1.2.1<br>python-multipart==0.0.20<br>pytz==2025.2<br>PyYAML==6.0.3<br>redis==7.0.1<br>referencing==0.37.0<br>regex==2025.11.3<br>requests==2.32.5<br>requests-oauthlib==2.0.0<br>requests-toolbelt==1.0.0<br>rich==14.2.0<br>rpds-py==0.28.0<br>rsa==9.1.1<br>ruff==0.14.4<br>safehttpx==0.1.7<br>semantic-version==2.10.0<br>sgmllib3k==1.0.0<br>shellingham==1.5.4<br>six==1.17.0<br>smmap==5.0.2<br>sniffio==1.3.1<br>soupsieve==2.8<br>SQLAlchemy==2.0.44<br>sse-starlette==3.0.3<br>starlette==0.49.3<br>streamlit==1.51.0<br>sympy==1.14.0<br>tenacity==9.1.2<br>tiktoken==0.12.0<br>tokenizers==0.22.1<br>toml==0.10.2<br>tomlkit==0.13.3<br>tornado==6.5.2<br>tqdm==4.67.1<br>typer==0.20.0<br>typer-slim==0.20.0<br>typing-inspect==0.9.0<br>typing-inspection==0.4.2<br>typing_extensions==4.15.0<br>tzdata==2025.2<br>urllib3==2.3.0<br>uvicorn==0.38.0<br>watchdog==6.0.0<br>watchfiles==1.1.1<br>websocket-client==1.9.0<br>websockets==15.0.1<br>xxhash==3.6.0<br>yarl==1.22.0<br>zipp==3.23.0<br>zstandard==0.25.0<br></code></pre></td></tr></table></figure>
+
+<center><img src="/img/langchain/01-env.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" /></center>
+
+<p>&emsp;</p>
+<h4 id="1-什么是Langchain"><a href="#1-什么是Langchain" class="headerlink" title="1.什么是Langchain"></a>1.什么是Langchain</h4><p>&emsp;&emsp;Langchain 是一个用于构建由 LLM 提供支持的代理和应用程序的框架。作用是简化 LLM 应用的开发难度，方便开发者快速地开发复杂的 LLM 应用。</p>
+<p>官网：<a target="_blank" rel="noopener" href="https://www.langchain.com/langchain">https://www.langchain.com/langchain</a></p>
+<p>&emsp;&emsp;从 Langchain 0.3 到 Langchain 1.0 的优化：</p>
+<ul>
+<li>统一 Agent 创建接口 —— create_agent()</li>
+<li>中间件系统（Middleware）—— 细粒度流程控制</li>
+<li>标准化输出（.content_blocks）—— 无论使用哪家模型，输出统一为结构化内容块</li>
+<li>结构化输出原生支持 —— 将结构化输出直接集成到主循环中</li>
+<li>基于 LangGraph 的底层架构 —— Agent 实际是 LangGraph 编排的状态图（StateGraph）</li>
+<li>包结构精简与迁移路径 —— 移除冗余模块，核心包更加轻量。旧版本功能（LLMChain，ConversationBufferMemory 等）迁移到了 langchain-classic</li>
+</ul>
+<p>&emsp;</p>
+<h4 id="2-LangChain的核心组件"><a href="#2-LangChain的核心组件" class="headerlink" title="2.LangChain的核心组件"></a>2.LangChain的核心组件</h4><p>&emsp;&emsp;LangChain 的组件较多，大致上可以分为六大分类：</p>
+<center><img src="/img/langchain/02-components.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" /></center>
+
+<ul>
+<li>模型包装器（Model）：与语言模型交互的接口，例如语言模型（Language Models）、提示词模版（Prompt Templates）、输出解析器（Output Parsers）等</li>
+<li>数据连接（Data connection）：与特定应用程序的数据进行交互的接口，例如文档加载器、文档切分、文本嵌入、矢量、检索器等</li>
+<li>链（Chains）：将组件组合实现端到端应用，链的存在允许我们将多个组件组合在一起，以创建一个单一的、连贯的应用程序</li>
+<li>记忆（Memory）：用于链的多次运行之间持久化应用程序状态</li>
+<li>代理与工具（Agents）：扩展模型的推理能力，用于复杂的应用的调用序列</li>
+<li>中间件（Middleware）：控制与自定义每个步骤的代理执行</li>
+</ul>
+<p>&emsp;</p>
+<h4 id="3-Langchain-的模型包装器"><a href="#3-Langchain-的模型包装器" class="headerlink" title="3.Langchain 的模型包装器"></a>3.Langchain 的模型包装器</h4><p>&emsp;&emsp;传统调用模型与 langchain 调用对比：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> os<br><span class="hljs-keyword">from</span> openai <span class="hljs-keyword">import</span> OpenAI<br><br><span class="hljs-comment"># 传统方式跟大模型交互</span><br><span class="hljs-comment"># 创建大模型连接</span><br><span class="hljs-comment"># client = OpenAI(</span><br><span class="hljs-comment">#     # 若没有配置环境变量，请用百炼API Key将下行替换为：api_key=&quot;sk-xxx&quot;,</span><br><span class="hljs-comment">#     api_key=os.getenv(&quot;DASHSCOPE_API_KEY&quot;),</span><br><span class="hljs-comment">#     base_url=&quot;https://dashscope.aliyuncs.com/compatible-mode/v1&quot;,</span><br><span class="hljs-comment"># )</span><br><span class="hljs-comment"># completion = client.chat.completions.create(</span><br><span class="hljs-comment">#     model=&quot;qwen-max&quot;,  # 此处以qwen-plus为例，可按需更换模型名称。模型列表：https://help.aliyun.com/zh/model-studio/getting-started/models</span><br><span class="hljs-comment">#     messages=[</span><br><span class="hljs-comment">#         &#123;&#x27;role&#x27;: &#x27;system&#x27;, &#x27;content&#x27;: &#x27;You are a helpful assistant.&#x27;&#125;,</span><br><span class="hljs-comment">#         &#123;&#x27;role&#x27;: &#x27;user&#x27;, &#x27;content&#x27;: &#x27;你是谁？&#x27;&#125;],</span><br><span class="hljs-comment"># )</span><br><span class="hljs-comment"># # print(completion.model_dump_json())</span><br><span class="hljs-comment"># print(completion.choices[0].message.content)</span><br><br><br><span class="hljs-comment"># 使用Langchain方式交互</span><br><span class="hljs-comment"># from langchain_community.chat_models.tongyi import ChatTongyi</span><br><span class="hljs-comment">#</span><br><span class="hljs-comment"># model = ChatTongyi()</span><br><span class="hljs-comment">#</span><br><span class="hljs-comment"># response = model.invoke(&quot;你是谁？&quot;)</span><br><span class="hljs-comment"># print(response.content)</span><br><br><span class="hljs-comment"># 使用Langchain方式与MiniMax模型交互（MiniMax提供OpenAI兼容接口，可用ChatOpenAI调用）</span><br><span class="hljs-keyword">from</span> langchain_openai <span class="hljs-keyword">import</span> ChatOpenAI<br><br>model = ChatOpenAI(<br>    api_key=os.getenv(<span class="hljs-string">&quot;MINIMAX_API_KEY&quot;</span>),<br>    base_url=<span class="hljs-string">&quot;https://api.minimaxi.com/v1&quot;</span>,<br>    model=<span class="hljs-string">&quot;MiniMax-M3&quot;</span>,<br>    temperature=<span class="hljs-number">0.7</span>,<br>    extra_body=&#123;<span class="hljs-string">&quot;enable_thinking&quot;</span>: <span class="hljs-literal">False</span>&#125;,<br>)<br><br>response = model.invoke(<span class="hljs-string">&quot;你是谁？&quot;</span>)<br><span class="hljs-built_in">print</span>(response.content)<br></code></pre></td></tr></table></figure>
+
+<center><img src="/img/langchain/03-model-wrapper.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" /></center>
+
+<p>&emsp;&emsp;这里需要注意的是 ChatTongyi 是 LangChain 专门为通义千问写的适配器，它内部已经把这些都硬编码好了，所以调用会更加方便，而 MiniMax 官方提供了 OpenAI 兼容协议，它在 LangChain 里没有专门的 ChatMinimax 类，所以只能用 ChatOpenAI 接口规范，并修改 url 和 model。</p>
+<p>&emsp;&emsp;目前模型包装器主要包含三部分内容：提示词、模型调用、输出解析。</p>
+<center><img src="/img/langchain/04-model-wrapper-parts.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" /></center>
+
+<p>&emsp;&emsp;在模型调用中，Langchain 目前支持的模型有三大类：</p>
+<ul>
+<li>非对话模型（LLM）包装器：也叫文本补全模型，基于 transformer 架构，通过大规模训练数据学习语言规律，只能一问一答，现在已经比较少用，OpenAI 的文本补全类 API 在 2023 年进行了最后一次更新，所以只需要知道即可</li>
+<li>对话聊天模型（Chat Model）包装器：主要代表 OpenAI 的 ChatGPT 系列模型。这些模型通常由语言模型支持，但它们的 API 更加结构化，基于 LLM 构建，通过特定优化（如对话历史管理、角色区分）来提升对话连贯性和上下文理解能力，常见的聊天模型包装器为 ChatOpenAI、BaseChatModel 等</li>
+<li>文本嵌入模型（Embedding Model）：将文本作为输入并返回词向量，后续 RAG 内容会使用到</li>
+</ul>
+<p>&emsp;&emsp;一个简单的模型调用实例：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> os<br><span class="hljs-keyword">from</span> langchain.chat_models <span class="hljs-keyword">import</span> init_chat_model<br><span class="hljs-keyword">from</span> langchain_openai <span class="hljs-keyword">import</span> ChatOpenAI<br><span class="hljs-keyword">from</span> langchain_community.chat_models <span class="hljs-keyword">import</span> ChatTongyi<br><br>MINI_API_KEY_OS_VAR_NAME = <span class="hljs-string">&quot;MINIMAX_API_KEY&quot;</span><br>MINI_URL = <span class="hljs-string">&quot;https://api.minimaxi.com/v1&quot;</span><br>MINI_CHAT_MODEL = <span class="hljs-string">&quot;MiniMax-M3&quot;</span><br><br><span class="hljs-comment">#1.1 创建模型客户端，访问基于openai规范的一类模型</span><br><span class="hljs-comment"># extra_body=&#123;&quot;enable_thinking&quot;: False&#125; 关闭思考过程输出</span><br><span class="hljs-comment">#model = ChatOpenAI(api_key=os.getenv(MINI_API_KEY_OS_VAR_NAME), base_url=MINI_URL, model=MINI_CHAT_MODEL)</span><br><br><span class="hljs-comment">#1.2 其他方式，不是基于openai规范的一类模型（需要Ctrl+左键查看下规范，使用的库需要单独安装）</span><br><span class="hljs-comment">#适用于多种模型切换</span><br><span class="hljs-comment">#MiniMax没有专门的provider包，但它提供OpenAI兼容接口，所以走&quot;openai&quot;provider并用base_url重定向</span><br>model = init_chat_model(model=<span class="hljs-string">&quot;MiniMax-M3&quot;</span>, model_provider=<span class="hljs-string">&quot;openai&quot;</span>,<br>                       api_key=os.getenv(MINI_API_KEY_OS_VAR_NAME), base_url=MINI_URL)<br><br><span class="hljs-comment">#1.3 基于某个平台模型单独封装</span><br><span class="hljs-comment">#model = ChatTongyi()</span><br><br><span class="hljs-comment">#2.构建提示词，访问模型</span><br>prompt = <span class="hljs-string">&quot;你是谁？&quot;</span><br><br><span class="hljs-comment">#直接一次性输出</span><br><span class="hljs-comment"># response = model.invoke(prompt)</span><br><span class="hljs-comment">#流式输出</span><br>response = model.stream(prompt)<br><br><span class="hljs-comment">#3.获取打印结果</span><br><span class="hljs-comment">#直接一次性输出</span><br><span class="hljs-comment">#print(response.content)</span><br><span class="hljs-comment">#流式输出（stream返回的是迭代器，每个chunk有.content；invoke返回的是完整AIMessage，不能这样迭代）</span><br><span class="hljs-keyword">for</span> chunk <span class="hljs-keyword">in</span> response:<br>    <span class="hljs-built_in">print</span>(chunk.content, end=<span class="hljs-string">&quot;&quot;</span>)<br></code></pre></td></tr></table></figure>
+
+<p>&emsp;</p>
+<h4 id="4-Langchain字符串提示词模版"><a href="#4-Langchain字符串提示词模版" class="headerlink" title="4.Langchain字符串提示词模版"></a>4.Langchain字符串提示词模版</h4><p>&emsp;&emsp;在 Langchain 中，prompt template 是一个模版化的字符串，可以用在生成特定的提示，我们可以将变量插入到模版中，从而创建出不同的提示。</p>
+<p>常见的提示词模版：</p>
+<h5 id="4-1-LLM提示模版-PromptTemplate"><a href="#4-1-LLM提示模版-PromptTemplate" class="headerlink" title="4.1 LLM提示模版 PromptTemplate"></a>4.1 LLM提示模版 PromptTemplate</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">from</span> langchain_core.prompts <span class="hljs-keyword">import</span> PromptTemplate<br><br>prompt_template = PromptTemplate.from_template(<span class="hljs-string">&quot;你是一个翻译助手，请将以下问题翻译为&#123;language&#125;:&#123;test&#125;&quot;</span>)<br>prompt = prompt_template.<span class="hljs-built_in">format</span>(language=<span class="hljs-string">&quot;中文&quot;</span>, test=<span class="hljs-string">&quot;i love you.&quot;</span>)<br></code></pre></td></tr></table></figure>
+
+<h5 id="4-2-聊天提示模版-ChatPromptTemplate"><a href="#4-2-聊天提示模版-ChatPromptTemplate" class="headerlink" title="4.2 聊天提示模版 ChatPromptTemplate"></a>4.2 聊天提示模版 ChatPromptTemplate</h5><p>&emsp;&emsp;常用的 Chat 提示模版，用于组合各种角色的消息模版，传入聊天模型。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">from</span> langchain_core.prompts <span class="hljs-keyword">import</span> PromptTemplate, ChatPromptTemplate, SystemMessagePromptTemplate, HumanMessagePromptTemplate, AIMessagePromptTemplate<br><br><br><span class="hljs-comment"># 2.2 对话提示词</span><br>prompt_template = ChatPromptTemplate.from_messages([<br>    <span class="hljs-comment">#(&quot;system&quot;, &quot;你是一个翻译助手，请将用户的问题翻译为&#123;language&#125;&quot;),</span><br>    <span class="hljs-comment">#除此以外，还提供了模版SystemMessagePromptTemplate</span><br>    SystemMessagePromptTemplate.from_template(<span class="hljs-string">&quot;你是一个翻译助手，请将用户的问题翻译为&#123;language&#125;&quot;</span>),<br>    <span class="hljs-comment">#(&quot;human&quot;, &quot;&#123;input&#125;&quot;),</span><br>    <span class="hljs-comment"># 同理还提供了模版HumanMessagePromptTemplate</span><br>    HumanMessagePromptTemplate.from_template(<span class="hljs-string">&quot;&#123;input&#125;&quot;</span>),<br>    <span class="hljs-comment"># ai的消息回复，一般是用来记录维持前面对话内容的</span><br>    <span class="hljs-comment"># AIMessagePromptTemplate.from_template(&quot;&#123;input&#125;&quot;),</span><br>])<br>prompt = prompt_template.<span class="hljs-built_in">format</span>(<span class="hljs-built_in">input</span>=<span class="hljs-string">&quot;i love you.&quot;</span>, language=<span class="hljs-string">&quot;中文&quot;</span>)<br></code></pre></td></tr></table></figure>
+
+<h5 id="4-3-少样本提示模版-FewShotPromptTemplate"><a href="#4-3-少样本提示模版-FewShotPromptTemplate" class="headerlink" title="4.3 少样本提示模版 FewShotPromptTemplate"></a>4.3 少样本提示模版 FewShotPromptTemplate</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">from</span> langchain_core.prompts <span class="hljs-keyword">import</span> PromptTemplate, ChatPromptTemplate, FewShotPromptTemplate, SystemMessagePromptTemplate, HumanMessagePromptTemplate, AIMessagePromptTemplate<br><br><br><span class="hljs-comment"># 少量样本提示词</span><br>example = [<br>    &#123;<span class="hljs-string">&quot;input&quot;</span>: <span class="hljs-string">&quot;如何重置密码？&quot;</span>, <span class="hljs-string">&quot;output&quot;</span>: <span class="hljs-string">&quot;密码重置可以通过绑定邮箱重置密码，也可以通过手机号重置密码&quot;</span>&#125;,<br>    &#123;<span class="hljs-string">&quot;input&quot;</span>: <span class="hljs-string">&quot;我的设备无法开机怎么办？&quot;</span>, <span class="hljs-string">&quot;output&quot;</span>: <span class="hljs-string">&quot;故障排除步骤：1.可能是遥控器电池没电，2.确认电源状态，3.确认设备是否被锁屏&quot;</span>&#125;,<br>    &#123;<span class="hljs-string">&quot;input&quot;</span>: <span class="hljs-string">&quot;这款产品是否有夜间模式？&quot;</span>, <span class="hljs-string">&quot;output&quot;</span>: <span class="hljs-string">&quot;这款不提供夜间模式，请选择xx款式的产品&quot;</span>&#125;,<br>]<br><br><span class="hljs-comment">#配置提示词模版，用来一个实例格式化</span><br>example_prompt_tmplt= <span class="hljs-string">&quot;用户问题： &#123;input&#125; 对应回答： &#123;output&#125;&quot;</span><br><br><br>prompt_sample = PromptTemplate.from_template(example_prompt_tmplt)<br><br>prompt = FewShotPromptTemplate(<br>    examples = example, <span class="hljs-comment">#实例样本</span><br>    example_prompt = prompt_sample, <span class="hljs-comment">#实例样本提示词</span><br>    prefix =<span class="hljs-string">&quot;你是一个智能客服, 能够根据用户问题给出答案，&quot;</span>,<br>    suffix=<span class="hljs-string">&quot;现在给你用户提问: &#123;input&#125; ，请告诉我对应的结果：&quot;</span>,<br>    input_variables = [<span class="hljs-string">&quot;input&quot;</span>]<br>)<br><br>prompts = prompt.<span class="hljs-built_in">format</span>(<span class="hljs-built_in">input</span>=<span class="hljs-string">&quot;这款产品有防水模式？&quot;</span>)<br><br><span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;-&#x27;</span>*<span class="hljs-number">50</span>)<br></code></pre></td></tr></table></figure>
+
+<h5 id="4-4-变量分段设置参数partial"><a href="#4-4-变量分段设置参数partial" class="headerlink" title="4.4 变量分段设置参数partial"></a>4.4 变量分段设置参数partial</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">from</span> langchain_core.prompts <span class="hljs-keyword">import</span> PromptTemplate, ChatPromptTemplate, FewShotPromptTemplate, SystemMessagePromptTemplate, HumanMessagePromptTemplate, AIMessagePromptTemplate<br><br><span class="hljs-comment"># 不同时间段设置参数</span><br><span class="hljs-comment"># 比如实现学习助手，在提问前先设置学科，再输入内容问题</span><br>prompt_test = <span class="hljs-string">&quot;请从知识库中的文章设置问题，要求文章时间在&#123;date&#125;之后的，问题为&#123;input&#125;&quot;</span><br><br>prompt = PromptTemplate.from_template(prompt_test)<br><br>half_prompt = prompt.partial(date=<span class="hljs-string">&quot;2008-08-08&quot;</span>)<br><br><span class="hljs-built_in">print</span>(half_prompt)<br><br><span class="hljs-comment">#直接一次性输出</span><br><span class="hljs-comment"># response = model.invoke(prompt)</span><br><span class="hljs-comment">#流式输出</span><br>response = model.stream(half_prompt.<span class="hljs-built_in">format</span>(<span class="hljs-built_in">input</span>=<span class="hljs-string">&quot;这款产品有防水模式？&quot;</span>))<br></code></pre></td></tr></table></figure>
+
+<p>&emsp;</p>
+<h4 id="5-Langchain的输出解析器"><a href="#5-Langchain的输出解析器" class="headerlink" title="5.Langchain的输出解析器"></a>5.Langchain的输出解析器</h4><p>&emsp;&emsp;Output Parser 是 LLM 链里”LLM 吐出来的文本”和”程序真正要用的结构化数据”之间的一层翻译/适配器。为什么需要它？因为 LLM 只认识字符串——你问它”提取姓名和年龄”，它给你一段 姓名：张三，年龄：25 的自然语言。但你的代码要做 if person.age &gt; 18:、要存数据库、要调 API，这些都吃不了裸文本。Output Parser 就是把”文本”可靠地变成 Person(name=”张三”, age=25) 这种对象。目前常见的解析器有：字符串解析器，CSV 解析器，json 解析器，日期解析等，我们也可以通过自定义去构造需要的解析器内容。</p>
+<h5 id="5-1-字符串解析器：StrOutputParser"><a href="#5-1-字符串解析器：StrOutputParser" class="headerlink" title="5.1 字符串解析器：StrOutputParser"></a>5.1 字符串解析器：StrOutputParser</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> os<br><span class="hljs-keyword">from</span> langchain_classic.output_parsers <span class="hljs-keyword">import</span> DatetimeOutputParser<br><span class="hljs-keyword">from</span> langchain_openai <span class="hljs-keyword">import</span> ChatOpenAI<br><span class="hljs-keyword">from</span> langchain_core.prompts <span class="hljs-keyword">import</span> PromptTemplate<br><span class="hljs-keyword">from</span> langchain_core.output_parsers <span class="hljs-keyword">import</span> CommaSeparatedListOutputParser, JsonOutputParser, StrOutputParser<br><span class="hljs-keyword">from</span> models <span class="hljs-keyword">import</span> get_minimax_model_client<br><br><br><br>model = get_minimax_model_client()<br><br><span class="hljs-comment">#2.构建提示词，访问模型</span><br><span class="hljs-comment"># 字符串提示词模板 &#123;text&#125;  占位符，通过text变量动态设置提示词内容</span><br>prompt = PromptTemplate(template=<span class="hljs-string">&quot;你是一个翻译助手，请讲以下内容翻译成&#123;language&#125;:&#123;text&#125;&quot;</span>)<br><br><br><span class="hljs-comment"># 3.获取打印结果</span><br><span class="hljs-comment"># 字符串结果解析器，将大模型返回的内容，获取到字符串内容进行返回</span><br>parser = StrOutputParser()<br><br><br><span class="hljs-comment">#在langchain当中 &quot;|&quot; 是一个链的调用符，将前一个组件的输出作为后一个组件的输入</span><br>chain = prompt | model | parser<br>result = chain.invoke(&#123;<span class="hljs-string">&quot;language&quot;</span>: <span class="hljs-string">&quot;中文&quot;</span>, <span class="hljs-string">&quot;text&quot;</span>: <span class="hljs-string">&quot;I am a programmer&quot;</span>&#125;)<br><span class="hljs-built_in">print</span>(result)<br></code></pre></td></tr></table></figure>
+
+<center><img src="/img/langchain/05-str-parser.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" /></center>
+
+<h5 id="5-2-CSV解析器：CommaSeparatedListOutputParser"><a href="#5-2-CSV解析器：CommaSeparatedListOutputParser" class="headerlink" title="5.2 CSV解析器：CommaSeparatedListOutputParser"></a>5.2 CSV解析器：CommaSeparatedListOutputParser</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> os<br><span class="hljs-keyword">from</span> langchain_openai <span class="hljs-keyword">import</span> ChatOpenAI<br><span class="hljs-keyword">from</span> langchain_core.prompts <span class="hljs-keyword">import</span> PromptTemplate, ChatPromptTemplate, FewShotPromptTemplate, SystemMessagePromptTemplate, HumanMessagePromptTemplate, AIMessagePromptTemplate<br><span class="hljs-keyword">from</span> langchain_core.output_parsers <span class="hljs-keyword">import</span> CommaSeparatedListOutputParser, JsonOutputParser, StrOutputParser<br><span class="hljs-keyword">from</span> models <span class="hljs-keyword">import</span> get_minimax_model_client<br><br><br><br>client = get_minimax_model_client()<br><br><span class="hljs-comment"># 创建解析器</span><br><span class="hljs-comment"># output_parser = StrOutputParser()</span><br><span class="hljs-comment"># 将返回结果列表返回，多个值用逗号分隔</span><br>output_parser = CommaSeparatedListOutputParser()<br><br><span class="hljs-comment"># 提示模板</span><br>prompt = ChatPromptTemplate.from_messages([<br>    (<span class="hljs-string">&quot;system&quot;</span>, <span class="hljs-string">&quot;你是一个专业的程序员&quot;</span>),<br>    (<span class="hljs-string">&quot;user&quot;</span>, <span class="hljs-string">&quot;&#123;input&#125;&quot;</span>)<br>])<br><br><span class="hljs-comment"># 将提示和模型合并以进行调用</span><br>chain = prompt | client | output_parser<br><br><span class="hljs-comment"># 示例调用</span><br><span class="hljs-comment">#明确告诉大模型用用逗号分隔返回，我们可以用CommaSeparatedListOutputParser获得内容后以</span><br><span class="hljs-comment"># 列表的形式获得以进行后续处理，否则返回一个字符串</span><br><span class="hljs-built_in">print</span>(chain.invoke(&#123;<span class="hljs-string">&quot;input&quot;</span>: <span class="hljs-string">&quot;列出Python的三个主要版本, 用逗号分隔&quot;</span>&#125;))<br><span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;=&quot;</span>*<span class="hljs-number">50</span>)<br><span class="hljs-built_in">print</span>(chain.invoke(&#123;<span class="hljs-string">&quot;input&quot;</span>: <span class="hljs-string">&quot;列举三个常见的机器学习框架, 用逗号分隔&quot;</span>&#125;))<br></code></pre></td></tr></table></figure>
+
+<center><img src="/img/langchain/06-csv-parser.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" /></center>
+
+<h5 id="5-3-json解析器：JsonOutputParser"><a href="#5-3-json解析器：JsonOutputParser" class="headerlink" title="5.3 json解析器：JsonOutputParser"></a>5.3 json解析器：JsonOutputParser</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">from</span> langchain_core.prompts <span class="hljs-keyword">import</span> ChatPromptTemplate<br><span class="hljs-comment"># 创建解析器</span><br><span class="hljs-keyword">from</span> langchain_core.output_parsers <span class="hljs-keyword">import</span> JsonOutputParser, StrOutputParser<br><br><span class="hljs-keyword">from</span> models <span class="hljs-keyword">import</span> get_minimax_model_client<br><br><span class="hljs-comment">#获得访问大模型客户端</span><br>client = get_minimax_model_client()<br><br><span class="hljs-comment"># 创建JSON输出解析器</span><br>output_parser = JsonOutputParser()<br><br><span class="hljs-comment"># 提示模板</span><br>prompt = ChatPromptTemplate.from_messages([<br>    (<span class="hljs-string">&quot;system&quot;</span>, <span class="hljs-string">&quot;你是一个专业的程序员&quot;</span>),<br>    (<span class="hljs-string">&quot;user&quot;</span>, <span class="hljs-string">&quot;&#123;input&#125;&quot;</span>)<br>])<br><br><span class="hljs-comment"># 将提示和模型合并以进行调用</span><br>chain = prompt | client | output_parser<br><br><br><span class="hljs-comment">#明确告诉大模型用JSON格式返回，我们可以用JSONOutputParser获得JSON格式的内容以进行后续处理，否则返回一个字符串</span><br>result = chain.invoke(&#123;<span class="hljs-string">&quot;input&quot;</span>: <span class="hljs-string">&quot;langchain是什么? 问题用question 回答用ans 返回一个JSON格式&quot;</span>&#125;)<br><span class="hljs-built_in">print</span>(<span class="hljs-built_in">type</span>(result))<br><span class="hljs-built_in">print</span>(result)<br></code></pre></td></tr></table></figure>
+
+<center><img src="/img/langchain/07-json-parser.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" /></center>
+
+<h5 id="5-4-日期时间解析器：DatetimeOutputParser"><a href="#5-4-日期时间解析器：DatetimeOutputParser" class="headerlink" title="5.4 日期时间解析器：DatetimeOutputParser"></a>5.4 日期时间解析器：DatetimeOutputParser</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># 0.3版本的时间解析</span><br><span class="hljs-comment"># from langchain.output_parsers import DatetimeOutputParser</span><br><span class="hljs-comment"># 1.0版本的中将原有的API都移入到langchain_classic包中</span><br><span class="hljs-keyword">import</span> re<br><br><span class="hljs-keyword">from</span> langchain_classic.output_parsers <span class="hljs-keyword">import</span> DatetimeOutputParser<br><span class="hljs-keyword">from</span> langchain_core.output_parsers <span class="hljs-keyword">import</span> StrOutputParser<br><span class="hljs-keyword">from</span> langchain_core.prompts <span class="hljs-keyword">import</span> PromptTemplate<br><span class="hljs-keyword">from</span> langchain_core.runnables <span class="hljs-keyword">import</span> RunnableLambda<br><br><span class="hljs-keyword">from</span> models <span class="hljs-keyword">import</span> get_minimax_model_client<br><br><span class="hljs-comment">#获得访问大模型客户端</span><br>client = get_minimax_model_client()<br><br><span class="hljs-comment"># 定义模板格式</span><br>template = <span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-string">回答用户的问题：&#123;question&#125;</span><br><span class="hljs-string"></span><br><span class="hljs-string">&#123;format_instructions&#125;</span><br><span class="hljs-string">&quot;&quot;&quot;</span><br><br><span class="hljs-comment"># 使用日期时间解析器</span><br>output_parser = DatetimeOutputParser()<br><br>prompt = PromptTemplate.from_template(<br>    template,<br>    <span class="hljs-comment"># partial 表示提前先置变量的值</span><br>    partial_variables=&#123;<span class="hljs-string">&quot;format_instructions&quot;</span>: output_parser.get_format_instructions()&#125;,<br>)<br><span class="hljs-built_in">print</span>(prompt)<br><span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;-&quot;</span>*<span class="hljs-number">30</span>)<br><span class="hljs-built_in">print</span>(output_parser.get_format_instructions())<br><span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;-&quot;</span>*<span class="hljs-number">30</span>)<br><br><br><span class="hljs-comment"># 模型真实输出格式是 &#x27;%Y-%m-%dT%H:%M:%S.%fZ&#x27;，且经常带 &lt;think&gt;...&lt;/think&gt; 思考块</span><br><span class="hljs-comment"># 这里先剥掉思考块，再匹配严格的日期时间字符串；没有匹配到再退回原文本</span><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">extract_datetime</span>(<span class="hljs-params">text: <span class="hljs-built_in">str</span></span>) -&gt; <span class="hljs-built_in">str</span>:<br>    cleaned = re.sub(<span class="hljs-string">r&quot;&lt;think&gt;.*?&lt;/think&gt;&quot;</span>, <span class="hljs-string">&quot;&quot;</span>, text, flags=re.DOTALL)<br>    match = re.search(<br>        <span class="hljs-string">r&quot;\d&#123;4&#125;-\d&#123;2&#125;-\d&#123;2&#125;T\d&#123;2&#125;:\d&#123;2&#125;:\d&#123;2&#125;\.\d+Z&quot;</span>,<br>        cleaned,<br>    )<br>    <span class="hljs-keyword">return</span> match.group(<span class="hljs-number">0</span>) <span class="hljs-keyword">if</span> match <span class="hljs-keyword">else</span> cleaned.strip()<br><br><br><span class="hljs-comment"># 链式调用</span><br>chain = (<br>    prompt<br>    | client<br>    | StrOutputParser()<br>    | RunnableLambda(extract_datetime)<br>    | output_parser<br>)<br><br>output = chain.invoke(&#123;<span class="hljs-string">&quot;question&quot;</span>: <span class="hljs-string">&quot;新中国是什么时候成立的？&quot;</span>&#125;)<br><span class="hljs-comment"># 打印输出</span><br><span class="hljs-built_in">print</span>(output)  <span class="hljs-comment"># 1949-10-01 00:00:00</span><br><br><span class="hljs-comment"># 个性化定制日期格式？ DatetimeOutputParser 不能自定义日期格式</span><br><br><span class="hljs-comment"># 执行</span><br><span class="hljs-comment"># output = model.invoke(prompt.format(question=&#x27;新中国成立的时间？&#x27;))</span><br><span class="hljs-comment"># datetime_parsed = output_parser.parse(output.content)</span><br><span class="hljs-comment"># # 打印输出</span><br><span class="hljs-comment"># print(datetime_parsed)  # 1949-10-01</span><br></code></pre></td></tr></table></figure>
+
+<center><img src="/img/langchain/08-datetime-parser.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" /></center>
+
+<p>&emsp;&emsp;这里需要注意，链里加一步清洗（先剥 <code>&lt;think&gt;...&lt;/think&gt;</code>，再用正则精确匹配 <code>%Y-%m-%dT%H:%M:%S.%fZ</code>），把纯时间串交给 <code>DatetimeOutputParser</code>。</p>
+<h5 id="5-5-自定义结果解析器"><a href="#5-5-自定义结果解析器" class="headerlink" title="5.5 自定义结果解析器"></a>5.5 自定义结果解析器</h5><p>&emsp;&emsp;这里以不同时间获取输出作为例子。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> re<br><span class="hljs-keyword">from</span> datetime <span class="hljs-keyword">import</span> datetime<br><span class="hljs-keyword">import</span> datetime<br><br><span class="hljs-keyword">from</span> langchain_core.exceptions <span class="hljs-keyword">import</span> OutputParserException<br><span class="hljs-keyword">from</span> langchain_core.output_parsers <span class="hljs-keyword">import</span> BaseOutputParser, StrOutputParser<br><span class="hljs-keyword">from</span> langchain_core.prompts <span class="hljs-keyword">import</span> PromptTemplate<br><br><span class="hljs-keyword">from</span> models <span class="hljs-keyword">import</span> get_minimax_model_client<br><br>client = get_minimax_model_client()<br><br><span class="hljs-comment"># --- 自定义日期字符串解析器 ---</span><br><span class="hljs-comment">#  1.要求通过提示词，规范大模型的返回结果：字符串类型的结果</span><br><span class="hljs-comment">#  2.将大模型返回的字符串结果，进行解析，解析成指定的格式</span><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">DateStringParser</span>(BaseOutputParser[<span class="hljs-built_in">str</span>]):<br>    <span class="hljs-comment"># 定义模型应该输出的字符串格式，也是默认返回的格式</span><br>    target_format: <span class="hljs-built_in">str</span> = <span class="hljs-string">&quot;%Y-%m-%d&quot;</span><br><br>    <span class="hljs-comment"># 解析：将大模型返回结果，按照要求解析成想要的格式</span><br>    <span class="hljs-comment"># 增强容错：先按 target_format 严格解析；失败则剥离 &lt;think&gt;...&lt;/think&gt;，</span><br>    <span class="hljs-comment"># 再从剩余文本里抽出第一个形似日期/时间的串，按 target_format 重试。</span><br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">parse</span>(<span class="hljs-params">self, text: <span class="hljs-built_in">str</span></span>) -&gt; <span class="hljs-built_in">str</span>:<br>        <span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-string">        接收模型的原始输出字符串，将其解析、验证并返回格式化后的字符串。</span><br><span class="hljs-string">        &quot;&quot;&quot;</span><br>        <span class="hljs-comment"># 先去掉首尾空格</span><br>        stripped_text = text.strip()<br><br>        <span class="hljs-keyword">try</span>:<br>            <span class="hljs-comment"># 1) 先按 target_format 严格解析</span><br>            <span class="hljs-comment">#print(&quot;尝试解析字符串:&quot;, stripped_text)</span><br>            dt_object = datetime.datetime.strptime(stripped_text, self.target_format)<br>            <span class="hljs-keyword">return</span> dt_object.strftime(self.target_format)<br><br>        <span class="hljs-keyword">except</span> ValueError <span class="hljs-keyword">as</span> e:<br>            <span class="hljs-comment"># 2) 失败：剥离 &lt;think&gt;...&lt;/think&gt; 思考块</span><br>            cleaned = re.sub(<span class="hljs-string">r&quot;&lt;think&gt;.*?&lt;/think&gt;&quot;</span>, <span class="hljs-string">&quot;&quot;</span>, stripped_text, flags=re.DOTALL)<br><br>            <span class="hljs-comment"># 3) 从清理后的文本里抽出第一个看起来像日期/时间的串</span><br>            <span class="hljs-comment">#    不限定年份位置：兼容 &#x27;YYYY-MM-DD&#x27; 与 &#x27;MM/DD/YYYY&#x27; 两种顺序；</span><br>            <span class="hljs-comment">#    也不限定分隔符是 &#x27;-&#x27; 还是 &#x27;/&#x27;。</span><br>            candidate = re.search(<br>                <span class="hljs-string">r&quot;\d&#123;1,4&#125;[-/]\d&#123;1,2&#125;[-/]\d&#123;1,4&#125;[T ]\d&#123;1,2&#125;:\d&#123;2&#125;:\d&#123;2&#125;(?:\.\d+)?Z?&quot;</span>,<br>                cleaned,<br>            )<br>            <span class="hljs-keyword">if</span> candidate:<br>                raw = candidate.group(<span class="hljs-number">0</span>)<br>                <span class="hljs-comment"># 把 ISO8601 的 &#x27;T&#x27;、&#x27;Z&#x27;、以及 &#x27;-&#x27; 都归一化掉，再用 target_format 解析</span><br>                normalized = raw.replace(<span class="hljs-string">&quot;T&quot;</span>, <span class="hljs-string">&quot; &quot;</span>).rstrip(<span class="hljs-string">&quot;Z&quot;</span>).replace(<span class="hljs-string">&quot;-&quot;</span>, <span class="hljs-string">&quot;/&quot;</span>)<br>                <span class="hljs-keyword">try</span>:<br>                    dt_object = datetime.datetime.strptime(normalized, self.target_format)<br>                    <span class="hljs-keyword">return</span> dt_object.strftime(self.target_format)<br>                <span class="hljs-keyword">except</span> ValueError:<br>                    <span class="hljs-keyword">pass</span><br><br>            <span class="hljs-comment"># 4) 实在救不回来，抛 LangChain 异常</span><br>            <span class="hljs-keyword">raise</span> OutputParserException(<br>                <span class="hljs-string">f&quot;模型输出的日期格式不正确。期望格式为 &#x27;<span class="hljs-subst">&#123;self.target_format&#125;</span>&#x27;，但收到了: &#x27;<span class="hljs-subst">&#123;stripped_text&#125;</span>&#x27;. 错误: <span class="hljs-subst">&#123;e&#125;</span>&quot;</span><br>            )<br><br>    <span class="hljs-comment"># 规范大模型的输出的格式，返回的是提示词</span><br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">get_format_instructions</span>(<span class="hljs-params">self</span>) -&gt; <span class="hljs-built_in">str</span>:<br>        <span class="hljs-string">&quot;&quot;&quot;返回给 LLM 的指令，要求它输出特定的日期格式。&quot;&quot;&quot;</span><br>        <span class="hljs-comment"># 使用当前日期作为示例，指导模型输出正确的格式</span><br>        example_date = datetime.datetime.now().strftime(self.target_format)<br>        <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;当前期望格式:&quot;</span>, self.target_format)<br>        <span class="hljs-keyword">return</span> (<br>            <span class="hljs-string">f&quot;请严格按照以下格式输出日期：&#x27;<span class="hljs-subst">&#123;self.target_format&#125;</span>&#x27;.\n&quot;</span><br>            <span class="hljs-string">f&quot;例如: <span class="hljs-subst">&#123;example_date&#125;</span>\n&quot;</span><br>            <span class="hljs-string">f&quot;只返回日期字符串，不要包含任何其他文本、空格或标点符号！&quot;</span><br>        )<br><br><br><span class="hljs-comment"># --- 3. 组装 LCEL 链,测试自定义结果解析器效果 ---</span><br><br><span class="hljs-comment"># 实例化自定义解析器 可以在这里指定不同的日期格式</span><br><span class="hljs-comment"># date_parser = DateStringParser(target_format=&quot;%Y-%m-%d&quot;)</span><br>date_parser = DateStringParser(target_format=<span class="hljs-string">&quot;%m/%d/%Y %H:%M:%S&quot;</span>)<br><span class="hljs-comment"># date_parser = DateStringParser(target_format=&quot;%d/%m/%Y&quot;)</span><br><br><span class="hljs-comment"># 定义模板</span><br>template = <span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-string">回答用户的问题：&#123;question&#125;</span><br><span class="hljs-string"></span><br><span class="hljs-string">&#123;format_instructions&#125;</span><br><span class="hljs-string">&quot;&quot;&quot;</span><br><br>prompt = PromptTemplate.from_template(<br>    template,<br>    partial_variables=&#123;<span class="hljs-string">&quot;format_instructions&quot;</span>: date_parser.get_format_instructions()&#125;,<br>)<br><br><span class="hljs-comment"># 链式调用：使用自定义解析器作为最后一个组件</span><br><span class="hljs-comment"># 中间加 StrOutputParser，把 AIMessage 转成纯字符串再交给自定义解析器</span><br>chain = prompt | client | StrOutputParser() | date_parser<br><br><span class="hljs-comment"># --- 4. 执行并打印输出 ---</span><br><span class="hljs-comment"># question = &quot;新中国是什么时候成立的？&quot;</span><br><br><br>question = <span class="hljs-string">&quot;北京夏季奥运会的开幕时间是？&quot;</span><br><br>output = chain.invoke(&#123;<span class="hljs-string">&quot;question&quot;</span>: question&#125;)<br><span class="hljs-built_in">print</span>(output)<br></code></pre></td></tr></table></figure>
+
+<center><img src="/img/langchain/09-custom-parser.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" /></center>
+
+<p>&emsp;&emsp;可以自己定义类进行操作，主要是定义其中的：</p>
+<ul>
+<li>parse（将大模型返回结果，按照要求解析成想要的格式）</li>
+<li>get_format_instructions（规范大模型的输出格式，返回的是提示词）</li>
+</ul>
+<p>&emsp;</p>
+<h4 id="6-Langchain的链式"><a href="#6-Langchain的链式" class="headerlink" title="6.Langchain的链式"></a>6.Langchain的链式</h4><p>&emsp;&emsp;链的作用是将提示词模版、模型包装器和输出解析器串联起来，利用了提示模版格式化输入，将格式化后的字符串传递给了 LLM 模型，并返回了 LLM 的输出。</p>
+<center><img src="/img/langchain/10-chain.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" /></center>
+
+<p>&emsp;&emsp;本质上就是单向线性的链表。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> os<br><span class="hljs-keyword">from</span> langchain_openai <span class="hljs-keyword">import</span> ChatOpenAI<br><span class="hljs-keyword">from</span> langchain_core.prompts <span class="hljs-keyword">import</span> PromptTemplate<br><span class="hljs-keyword">from</span> langchain_core.output_parsers <span class="hljs-keyword">import</span> StrOutputParser<br><br><span class="hljs-comment"># 1.创建模型客户端</span><br>MINI_API_KEY_OS_VAR_NAME = <span class="hljs-string">&quot;MINIMAX_API_KEY&quot;</span><br>MINI_URL = <span class="hljs-string">&quot;https://api.minimaxi.com/v1&quot;</span><br>MINI_CHAT_MODEL = <span class="hljs-string">&quot;MiniMax-M3&quot;</span><br><br>model = ChatOpenAI(api_key=os.getenv(MINI_API_KEY_OS_VAR_NAME), base_url=MINI_URL, model=MINI_CHAT_MODEL)<br><br><span class="hljs-comment">#2.构建提示词，访问模型</span><br><span class="hljs-comment"># 字符串提示词模板 &#123;text&#125;  占位符，通过text变量动态设置提示词内容</span><br>prompt = PromptTemplate(template=<span class="hljs-string">&quot;你是一个翻译助手，请讲以下内容翻译成&#123;language&#125;:&#123;text&#125;&quot;</span>)<br><br><br><span class="hljs-comment"># 3.获取打印结果</span><br><span class="hljs-comment"># 字符串结果解析器，将大模型返回的内容，获取到字符串内容进行返回</span><br>parser = StrOutputParser()<br><br><br><span class="hljs-comment">#在langchain当中 &quot;|&quot; 是一个链的调用符，将前一个组件的输出作为后一个组件的输入</span><br>chain = prompt | model | parser<br>result = chain.invoke(&#123;<span class="hljs-string">&quot;language&quot;</span>: <span class="hljs-string">&quot;中文&quot;</span>, <span class="hljs-string">&quot;text&quot;</span>: <span class="hljs-string">&quot;I am a programmer&quot;</span>&#125;)<br><span class="hljs-built_in">print</span>(result)<br></code></pre></td></tr></table></figure>
+
+<p>&emsp;&emsp;使得整个处理过程更加高效与便捷。</p>
+<p>&emsp;</p>
+<h4 id="7-Langchain的部署"><a href="#7-Langchain的部署" class="headerlink" title="7.Langchain的部署"></a>7.Langchain的部署</h4><p>&emsp;&emsp;在开发完一个大模型的应用程序后，如何让这个程序和其他的应用程序一起协同工作，完成企业的复杂业务呢。</p>
+<h5 id="7-0-开启Langchain应用程序的调试功能（非必须）"><a href="#7-0-开启Langchain应用程序的调试功能（非必须）" class="headerlink" title="7.0 开启Langchain应用程序的调试功能（非必须）"></a>7.0 开启Langchain应用程序的调试功能（非必须）</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">from</span> langchain_core.<span class="hljs-built_in">globals</span> <span class="hljs-keyword">import</span> set_debug<br><br>set_debug(<span class="hljs-literal">True</span>)<br></code></pre></td></tr></table></figure>
+
+<center><img src="/img/langchain/11-debug.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" /></center>
+
+<center><img src="/img/langchain/12-langsmith.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" /></center>
+
+<p>&emsp;&emsp;后续如果需要复杂和实时的监控可以借助 LangSmith 进行，但是这玩意收费。</p>
+<h5 id="7-1-发布我们的应用程序"><a href="#7-1-发布我们的应用程序" class="headerlink" title="7.1 发布我们的应用程序"></a>7.1 发布我们的应用程序</h5><p>&emsp;&emsp;FastAPI 是 python 中用于 web 开发的技术框架。add_routes 是 LangServer 当中的 api，LangServer 是 Langchain 中用于服务的内容。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment">#部署为服务  部署成web应用的框架</span><br>app = FastAPI(title=<span class="hljs-string">&quot;基于LangChain的服务&quot;</span>,version=<span class="hljs-string">&quot;V1.5&quot;</span>,description=<span class="hljs-string">&quot;翻译服务&quot;</span>)<br><span class="hljs-comment"># 函数和访问路径一一对应</span><br>add_routes(app, chain,path=<span class="hljs-string">&quot;/langchainServer&quot;</span>)<br><br><span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&quot;__main__&quot;</span>:<br>    <span class="hljs-keyword">import</span> uvicorn<br>    uvicorn.run(app, host=<span class="hljs-string">&quot;localhost&quot;</span>, port=<span class="hljs-number">8000</span>)<br></code></pre></td></tr></table></figure>
+
+<h5 id="7-2-访问我们的应用程序"><a href="#7-2-访问我们的应用程序" class="headerlink" title="7.2 访问我们的应用程序"></a>7.2 访问我们的应用程序</h5><p>&emsp;&emsp;通过 HTTP 访问、客户端访问。</p>
+<center><img src="/img/langchain/13-http-access.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" /></center>
+
+<p>&emsp;&emsp;我们也可以使用 langserver 中的 RemoteRunnable 进行访问：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment">#使用LangChain编写客户端访问我们基于LangServer的WEB服务</span><br><span class="hljs-comment">#对于其他编程语言来说，可以使用RESTful API来调用我们的服务</span><br><span class="hljs-comment">#等效于http访问</span><br><span class="hljs-string">&#x27;&#x27;&#x27;比如在postman或者apifox中访问http://localhost:8000/tslServer/invoke</span><br><span class="hljs-string">在body中选择json，然后输入</span><br><span class="hljs-string">&#123;</span><br><span class="hljs-string">    &quot;input&quot;:</span><br><span class="hljs-string">    &#123;</span><br><span class="hljs-string">        &quot;language&quot;:&quot;意大利文&quot;,</span><br><span class="hljs-string">        &quot;text&quot;:&quot;为了部落！&quot;</span><br><span class="hljs-string">    &#125;</span><br><span class="hljs-string">&#125;&#x27;&#x27;&#x27;</span><br><span class="hljs-keyword">from</span> langserve <span class="hljs-keyword">import</span> RemoteRunnable<br><br><span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&quot;__main__&quot;</span>:<br>    client = RemoteRunnable(<span class="hljs-string">&quot;http://localhost:8000/langchainServer&quot;</span>)<br>    <span class="hljs-built_in">print</span>(client.invoke(&#123;<span class="hljs-string">&#x27;language&#x27;</span>: <span class="hljs-string">&#x27;英文&#x27;</span>, <span class="hljs-string">&#x27;text&#x27;</span>: <span class="hljs-string">&#x27;今天天气如何&#x27;</span>&#125;))<br></code></pre></td></tr></table></figure>
+
+<center><img src="/img/langchain/14-client-access.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" /></center>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E6%99%BA%E6%B3%8AAI%E8%AF%BE%E7%A8%8B/" class="category-chain-item">智泊AI课程</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/%E6%99%BA%E6%B3%8AAI%E8%AF%BE%E7%A8%8B/Langchain/" class="category-chain-item">Langchain</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>智泊AI--Langchain（一）</div>
+      <div>https://one-null-pointer.github.io/2026/08/27/智泊AI--Langchain（一）/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>Author</div>
+          <div>liaoyue</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>Posted on</div>
+          <div>August 27, 2026</div>
+        </div>
+      
+      
+      <div class="license-meta-item">
+        <div>传送口</div>
+        <div>
+          
+            
+            
+              <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+              <span class="hint--top hint--rounded" aria-label="点击进行传送">
+                <i class="iconfont icon-by"></i>
+              </span>
+              </a>
+            
+          
+        </div>
+      </div>
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2026/09/01/%E6%99%BA%E6%B3%8AAI--Langchain%EF%BC%88%E4%BA%8C%EF%BC%89/" title="智泊AI--Langchain（二）">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">智泊AI--Langchain（二）</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2026/08/25/%E6%99%BA%E6%B3%8AAI--RAG%E5%AE%9E%E6%88%98%E8%AF%BE%E7%A8%8B/" title="智泊AI--RAG实战课程">
+                        <span class="hidden-mobile">智泊AI--RAG实战课程</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;Table of Contents</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">Keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://github.com/" target="_blank" rel="nofollow noopener"><span>pointer</span></a> <i class="iconfont icon-love"></i> <a href="https://mp.weixin.qq.com/s/6ncLUtaiJ9j_sMjZT5z-2w" target="_blank" rel="nofollow noopener"><span>一个爱学习的空指针</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      headingSelector : CONFIG.toc.headingSelector || 'h1,h2,h3,h4,h5,h6',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      collapseDepth   : CONFIG.toc.collapseDepth || 0,
+      scrollSmooth    : true,
+      headingsOffset  : -boardTop
+    });
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.10/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">Blog works best with JavaScript enabled</div>
+  </noscript>
+</body>
+</html>
