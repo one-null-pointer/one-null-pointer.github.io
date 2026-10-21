@@ -1,0 +1,710 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="liaoyue">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="智泊Python–Day2&amp;emsp;&amp;emsp;Day2 围绕「数据」展开：先学字符串格式化的三种写法（f-string、% 占位符、.format()），再系统过一遍 Python 基础数据类型，最后是四类运算符（算术 &#x2F; 赋值 &#x2F; 比较 &#x2F; 逻辑 + 成员与身份）以及运算优先级。运算符是写任何业务逻辑都离不开的零件，建议重点理解 and&#x2F;or 的短路求值。 &amp;emsp; 1.占位符&amp;emsp">
+<meta property="og:type" content="article">
+<meta property="og:title" content="智泊Python--Day2">
+<meta property="og:url" content="https://one-null-pointer.github.io/2026/07/21/%E6%99%BA%E6%B3%8APython--Day2/index.html">
+<meta property="og:site_name" content="one-null-poniter">
+<meta property="og:description" content="智泊Python–Day2&amp;emsp;&amp;emsp;Day2 围绕「数据」展开：先学字符串格式化的三种写法（f-string、% 占位符、.format()），再系统过一遍 Python 基础数据类型，最后是四类运算符（算术 &#x2F; 赋值 &#x2F; 比较 &#x2F; 逻辑 + 成员与身份）以及运算优先级。运算符是写任何业务逻辑都离不开的零件，建议重点理解 and&#x2F;or 的短路求值。 &amp;emsp; 1.占位符&amp;emsp">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://one-null-pointer.github.io/img/python.png">
+<meta property="article:published_time" content="2026-07-20T16:00:00.000Z">
+<meta property="article:modified_time" content="2026-09-14T11:13:37.316Z">
+<meta property="article:author" content="liaoyue">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://one-null-pointer.github.io/img/python.png">
+  
+  
+  
+  <title>智泊Python--Day2 - one-null-poniter</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"one-null-pointer.github.io","root":"/","version":"1.9.2","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 5.4.2"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>one null pointer</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                吾
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                學
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                類
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="智泊Python--Day2"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2026-07-21 00:00" pubdate>
+          July 21, 2026 am
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          5.4k words
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          45 mins
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">智泊Python--Day2</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="智泊Python–Day2"><a href="#智泊Python–Day2" class="headerlink" title="智泊Python–Day2"></a>智泊Python–Day2</h1><p>&emsp;&emsp;Day2 围绕「数据」展开：先学<strong>字符串格式化的三种写法</strong>（f-string、<code>%</code> 占位符、<code>.format()</code>），再系统过一遍 <strong>Python 基础数据类型</strong>，最后是<strong>四类运算符</strong>（算术 / 赋值 / 比较 / 逻辑 + 成员与身份）以及<strong>运算优先级</strong>。运算符是写任何业务逻辑都离不开的零件，建议重点理解 <code>and</code>/<code>or</code> 的短路求值。</p>
+<p>&emsp;</p>
+<h4 id="1-占位符"><a href="#1-占位符" class="headerlink" title="1.占位符"></a>1.占位符</h4><p>&emsp;&emsp;把变量塞进字符串有三种主流写法：</p>
+<ul>
+<li>① <strong>f-string</strong>（Python 3.6+ 推荐）：在字符串前加 <code>f</code>，用 <code>&#123;变量&#125;</code> 直接嵌入，最直观</li>
+<li>② <strong><code>%</code> 占位符</strong>：<code>%s</code> 字符串、<code>%d</code> 整数、<code>%f</code> 浮点数、<code>%%</code> 表示百分号本身，老代码里常见</li>
+<li>③ **<code>.format()</code>**：用 <code>&#123;&#125;</code> 占位，可按位置或按关键字传值</li>
+</ul>
+<p>&emsp;&emsp;三者都能完成拼接，新项目优先用 f-string。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># ① f-string：f&quot;&#123;变量&#125;&quot; 直接嵌入</span><br>a = <span class="hljs-built_in">input</span>(<span class="hljs-string">&quot;请输入招呼内容: &quot;</span>)<br>b = <span class="hljs-built_in">input</span>(<span class="hljs-string">&quot;请输入姓名: &quot;</span>)<br><span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;<span class="hljs-subst">&#123;a&#125;</span>,我是<span class="hljs-subst">&#123;b&#125;</span>&quot;</span>)<br><br><span class="hljs-comment"># ② 百分号占位符：%s 字符串 %d 整数 %f 浮点数 %% 百分号</span><br>a = <span class="hljs-built_in">input</span>(<span class="hljs-string">&quot;请输入招呼内容: &quot;</span>)<br>b = <span class="hljs-built_in">input</span>(<span class="hljs-string">&quot;请输入姓名: &quot;</span>)<br>o = <span class="hljs-built_in">input</span>(<span class="hljs-string">&quot;请输入年龄: &quot;</span>)<br><span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;%s，我的名字是%s,我今年%d岁&quot;</span> % (a, b, o))<br><br><span class="hljs-comment"># ③ .format()：&#123;&#125; 占位，按位置或按关键字传值</span><br>hello = <span class="hljs-built_in">input</span>(<span class="hljs-string">&quot;请输入招呼内容: &quot;</span>)<br>name = <span class="hljs-built_in">input</span>(<span class="hljs-string">&quot;请输入姓名: &quot;</span>)<br>age = <span class="hljs-built_in">input</span>(<span class="hljs-string">&quot;请输入年龄: &quot;</span>)<br><span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;&#123;&#125;,我是&#123;&#125;，我今年&#123;&#125;岁&quot;</span>.<span class="hljs-built_in">format</span>(hello, name, age))<br><span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;&#123;a&#125;,我是&#123;b&#125;，我今年&#123;c&#125;岁&quot;</span>.<span class="hljs-built_in">format</span>(a=hello, b=name, c=age))<br></code></pre></td></tr></table></figure>
+
+<p>&emsp;</p>
+<h4 id="2-数据类型"><a href="#2-数据类型" class="headerlink" title="2.数据类型"></a>2.数据类型</h4><p>&emsp;&emsp;Python 内置数据类型可分为「数字 / 文本 / 布尔 / 空 / 容器 / 二进制」几大类。用 <code>type()</code> 可随时查看任意值的类型，这是调试时最常用的函数之一。</p>
+<table>
+<thead>
+<tr>
+<th>类型</th>
+<th>名称</th>
+<th>字面量示例</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>int</code></td>
+<td>整数</td>
+<td><code>100</code></td>
+<td>不带小数</td>
+</tr>
+<tr>
+<td><code>float</code></td>
+<td>浮点数</td>
+<td><code>100.0</code></td>
+<td>含小数</td>
+</tr>
+<tr>
+<td><code>str</code></td>
+<td>字符串</td>
+<td><code>&quot;hello&quot;</code></td>
+<td>文本</td>
+</tr>
+<tr>
+<td><code>bool</code></td>
+<td>布尔</td>
+<td><code>True</code> / <code>False</code></td>
+<td>真/假，底层对应 1/0</td>
+</tr>
+<tr>
+<td><code>None</code></td>
+<td>空类型</td>
+<td><code>None</code></td>
+<td>表示「无值」</td>
+</tr>
+<tr>
+<td><code>list</code></td>
+<td>列表</td>
+<td><code>[1,2,3]</code></td>
+<td>可变有序序列（类似数组）</td>
+</tr>
+<tr>
+<td><code>tuple</code></td>
+<td>元组</td>
+<td><code>(1,2,3)</code></td>
+<td>不可变有序序列</td>
+</tr>
+<tr>
+<td><code>dict</code></td>
+<td>字典</td>
+<td><code>&#123;&quot;name&quot;:&quot;张三&quot;&#125;</code></td>
+<td>键值对</td>
+</tr>
+<tr>
+<td><code>set</code></td>
+<td>集合</td>
+<td><code>&#123;1,2,3&#125;</code></td>
+<td>自动去重，无序</td>
+</tr>
+<tr>
+<td><code>bytes</code></td>
+<td>字节</td>
+<td><code>b&quot;hello&quot;</code></td>
+<td>二进制数据</td>
+</tr>
+</tbody></table>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># int 整数</span><br>a = <span class="hljs-number">100</span><br><span class="hljs-built_in">print</span>(a); <span class="hljs-built_in">print</span>(<span class="hljs-built_in">type</span>(a))          <span class="hljs-comment"># 100  &lt;class &#x27;int&#x27;&gt;</span><br><span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;=&quot;</span>*<span class="hljs-number">20</span>)<br><br><span class="hljs-comment"># float 浮点数</span><br>a = <span class="hljs-number">100.0</span><br><span class="hljs-built_in">print</span>(a); <span class="hljs-built_in">print</span>(<span class="hljs-built_in">type</span>(a))          <span class="hljs-comment"># 100.0  &lt;class &#x27;float&#x27;&gt;</span><br><span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;=&quot;</span>*<span class="hljs-number">20</span>)<br><br><span class="hljs-comment"># str 字符串</span><br>a = <span class="hljs-string">&quot;hello&quot;</span><br><span class="hljs-built_in">print</span>(a); <span class="hljs-built_in">print</span>(<span class="hljs-built_in">type</span>(a))          <span class="hljs-comment"># hello  &lt;class &#x27;str&#x27;&gt;</span><br><span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;=&quot;</span>*<span class="hljs-number">20</span>)<br><br><span class="hljs-comment"># bool 布尔类型</span><br>a, b = <span class="hljs-literal">True</span>, <span class="hljs-literal">False</span><br><span class="hljs-built_in">print</span>(a, b); <span class="hljs-built_in">print</span>(<span class="hljs-built_in">type</span>(a)); <span class="hljs-built_in">print</span>(<span class="hljs-built_in">type</span>(b))<br><span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;=&quot;</span>*<span class="hljs-number">20</span>)<br><br><span class="hljs-comment"># None 空类型</span><br>a = <span class="hljs-literal">None</span><br><span class="hljs-built_in">print</span>(a); <span class="hljs-built_in">print</span>(<span class="hljs-built_in">type</span>(a))          <span class="hljs-comment"># None  &lt;class &#x27;NoneType&#x27;&gt;</span><br><span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;=&quot;</span>*<span class="hljs-number">20</span>)<br><br><span class="hljs-comment"># list 列表</span><br>a = [<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>,<span class="hljs-number">4</span>,<span class="hljs-number">5</span>]<br><span class="hljs-built_in">print</span>(a); <span class="hljs-built_in">print</span>(<span class="hljs-built_in">type</span>(a))          <span class="hljs-comment"># [1, 2, 3, 4, 5]  &lt;class &#x27;list&#x27;&gt;</span><br><span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;=&quot;</span>*<span class="hljs-number">20</span>)<br><br><span class="hljs-comment"># tuple 元组</span><br>a = (<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>,<span class="hljs-number">4</span>,<span class="hljs-number">5</span>)<br><span class="hljs-built_in">print</span>(a); <span class="hljs-built_in">print</span>(<span class="hljs-built_in">type</span>(a))          <span class="hljs-comment"># (1, 2, 3, 4, 5)  &lt;class &#x27;tuple&#x27;&gt;</span><br><span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;=&quot;</span>*<span class="hljs-number">20</span>)<br><br><span class="hljs-comment"># dict 字典：键值对</span><br>a = &#123;<span class="hljs-string">&quot;name&quot;</span>:<span class="hljs-string">&quot;张三&quot;</span>,<span class="hljs-string">&quot;age&quot;</span>:<span class="hljs-number">18</span>&#125;<br><span class="hljs-built_in">print</span>(a); <span class="hljs-built_in">print</span>(<span class="hljs-built_in">type</span>(a))          <span class="hljs-comment"># &#123;&#x27;name&#x27;: &#x27;张三&#x27;, &#x27;age&#x27;: 18&#125;  &lt;class &#x27;dict&#x27;&gt;</span><br><span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;=&quot;</span>*<span class="hljs-number">20</span>)<br><br><span class="hljs-comment"># set 集合：自动去重</span><br><span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;set 集合 无重复元素&quot;</span>)<br>a = &#123;<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>,<span class="hljs-number">4</span>,<span class="hljs-number">5</span>,<span class="hljs-number">2</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>,<span class="hljs-number">2</span>,<span class="hljs-number">5</span>&#125;<br><span class="hljs-built_in">print</span>(a); <span class="hljs-built_in">print</span>(<span class="hljs-built_in">type</span>(a))          <span class="hljs-comment"># &#123;1, 2, 3, 4, 5&#125;  &lt;class &#x27;set&#x27;&gt;</span><br><span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;=&quot;</span>*<span class="hljs-number">20</span>)<br><br><span class="hljs-comment"># bytes 字节二进制</span><br>a = <span class="hljs-string">b&quot;hello&quot;</span><br><span class="hljs-built_in">print</span>(a); <span class="hljs-built_in">print</span>(<span class="hljs-built_in">type</span>(a))          <span class="hljs-comment"># b&#x27;hello&#x27;  &lt;class &#x27;bytes&#x27;&gt;</span><br></code></pre></td></tr></table></figure>
+
+<p>&emsp;</p>
+<h4 id="3-算术运算"><a href="#3-算术运算" class="headerlink" title="3.算术运算"></a>3.算术运算</h4><p>&emsp;&emsp;七个算术运算符：<code>+ - * /</code> 是常规四则；<code>//</code> 是<strong>整除</strong>（向下取整，丢弃小数）、<code>%</code> 是<strong>取余</strong>、<code>**</code> 是<strong>幂</strong>。科学计数法 <code>3.14e4</code> 等价于 <code>3.14 * 10**4</code>。最后那个练习很经典：用 <code>%10</code> 取个位、<code>//10%10</code> 取十位、<code>//100</code> 取百位，是把数字「拆位」的基础技巧。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># 算术运算符</span><br>a, b = <span class="hljs-number">10</span>, <span class="hljs-number">4</span><br><span class="hljs-built_in">print</span>(a+b); <span class="hljs-built_in">print</span>(a-b); <span class="hljs-built_in">print</span>(a*b); <span class="hljs-built_in">print</span>(a/b)<br><span class="hljs-built_in">print</span>(a//b)    <span class="hljs-comment"># 2  整除</span><br><span class="hljs-built_in">print</span>(a%b)     <span class="hljs-comment"># 2  取余</span><br><span class="hljs-built_in">print</span>(a**b)    <span class="hljs-comment"># 10000  幂</span><br><br><span class="hljs-comment"># 科学计数法</span><br>a = <span class="hljs-number">3.14</span> * <span class="hljs-number">10</span>**<span class="hljs-number">4</span><br>b = <span class="hljs-number">3.14e4</span><br><span class="hljs-built_in">print</span>(a); <span class="hljs-built_in">print</span>(b)    <span class="hljs-comment"># 31400.0  31400.0</span><br><br><span class="hljs-comment"># 练习：输入三位数，拆分个位/十位/百位</span><br>num = <span class="hljs-built_in">int</span>(<span class="hljs-built_in">input</span>(<span class="hljs-string">&quot;请输入一个三位数：&quot;</span>))<br><span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;个位数为：&quot;</span>, num % <span class="hljs-number">10</span>)<br><span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;十位数为：&quot;</span>, num // <span class="hljs-number">10</span> % <span class="hljs-number">10</span>)<br><span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;百位数为：&quot;</span>, num // <span class="hljs-number">100</span>)<br></code></pre></td></tr></table></figure>
+
+<p>&emsp;</p>
+<h4 id="4-赋值运算"><a href="#4-赋值运算" class="headerlink" title="4.赋值运算"></a>4.赋值运算</h4><p>&emsp;&emsp;复合赋值运算符把「运算 + 赋值」合二为一：<code>a += 1</code> 等价于 <code>a = a + 1</code>，同理有 <code>-=</code>、<code>*=</code>、<code>//=</code> 等。注意等号右边<strong>先完整计算</strong>，再赋给左边。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs python">a, b, c = <span class="hljs-number">100</span>, <span class="hljs-number">200</span>, <span class="hljs-number">300</span><br>a += <span class="hljs-number">1</span>    <span class="hljs-comment"># a = a + 1</span><br>b -= <span class="hljs-number">1</span>    <span class="hljs-comment"># b = b - 1</span><br>c //= <span class="hljs-number">2</span>   <span class="hljs-comment"># c = c // 2</span><br><span class="hljs-built_in">print</span>(a)  <span class="hljs-comment"># 101</span><br><span class="hljs-built_in">print</span>(b)  <span class="hljs-comment"># 199</span><br><span class="hljs-built_in">print</span>(c)  <span class="hljs-comment"># 150</span><br></code></pre></td></tr></table></figure>
+
+<p>&emsp;</p>
+<h4 id="5-比较运算"><a href="#5-比较运算" class="headerlink" title="5.比较运算"></a>5.比较运算</h4><p>&emsp;&emsp;比较运算符 <code>&gt; &lt; &gt;= &lt;= == !=</code> 的返回值永远是<strong>布尔类型</strong>。字符串比较有两条规则：长度不同则短的更小；长度相同则按字符 ASCII 码逐位比。下面的 BMI 练习把比较和逻辑连起来用——<code>bmi &gt;= 18.5 and bmi &lt;= 25</code> 判断是否在正常区间。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># 数值比较</span><br>a, b = <span class="hljs-number">10</span>, <span class="hljs-number">20</span><br><span class="hljs-built_in">print</span>(a &gt; b)    <span class="hljs-comment"># False</span><br><span class="hljs-built_in">print</span>(a &lt; b)    <span class="hljs-comment"># True</span><br><span class="hljs-built_in">print</span>(a &gt;= b)   <span class="hljs-comment"># False</span><br><span class="hljs-built_in">print</span>(a &lt;= b)   <span class="hljs-comment"># True</span><br><span class="hljs-built_in">print</span>(a == b)   <span class="hljs-comment"># False</span><br><span class="hljs-built_in">print</span>(a != b)   <span class="hljs-comment"># True</span><br><br><span class="hljs-comment"># 字符串比较：长度不同则短的小；长度相同按 ASCII 逐位比</span><br>a, b = <span class="hljs-string">&quot;hello&quot;</span>, <span class="hljs-string">&quot;world&quot;</span><br><span class="hljs-built_in">print</span>(a &gt; b)    <span class="hljs-comment"># False</span><br><span class="hljs-built_in">print</span>(a &lt; b)    <span class="hljs-comment"># True</span><br><br><span class="hljs-comment"># 练习：BMI = 体重(kg) / 身高(m)^2，判断是否正常区间 18.5~25</span><br>height = <span class="hljs-built_in">float</span>(<span class="hljs-built_in">input</span>(<span class="hljs-string">&quot;请输入身高（米）: &quot;</span>))<br>weight = <span class="hljs-built_in">float</span>(<span class="hljs-built_in">input</span>(<span class="hljs-string">&quot;请输入体重（千克）: &quot;</span>))<br>bmi = weight / (height**<span class="hljs-number">2</span>)<br><span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;您的BMI值为: &quot;</span>, bmi)<br><span class="hljs-keyword">if</span> bmi &gt;= <span class="hljs-number">18.5</span> <span class="hljs-keyword">and</span> bmi &lt;= <span class="hljs-number">25</span>:<br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;您的体重正常&quot;</span>)<br><span class="hljs-keyword">else</span>:<br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;您的体重异常&quot;</span>)<br></code></pre></td></tr></table></figure>
+
+<p>&emsp;</p>
+<h4 id="6-成员运算符和身份运算符"><a href="#6-成员运算符和身份运算符" class="headerlink" title="6.成员运算符和身份运算符"></a>6.成员运算符和身份运算符</h4><p>&emsp;&emsp;<strong>成员运算符</strong> <code>in</code> / <code>not in</code> 判断元素是否在容器里（列表、字符串等都可用），日常最常用。<strong>身份运算符</strong> <code>is</code> / <code>is not</code> 判断两个变量是否指向<strong>同一个内存对象</strong>——这点常被和 <code>==</code> 混淆：<code>==</code> 比的是「值相等」，<code>is</code> 比的是「内存地址相同」。用 <code>id()</code> 可查看对象的内存地址。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># 成员运算符</span><br>a = [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>, <span class="hljs-number">5</span>]<br><span class="hljs-built_in">print</span>(<span class="hljs-number">1</span> <span class="hljs-keyword">in</span> a)    <span class="hljs-comment"># True</span><br><span class="hljs-built_in">print</span>(<span class="hljs-number">6</span> <span class="hljs-keyword">in</span> a)    <span class="hljs-comment"># False</span><br><br><span class="hljs-comment"># 身份运算符</span><br>b, c = <span class="hljs-number">10</span>, <span class="hljs-number">20</span><br><span class="hljs-built_in">print</span>(b <span class="hljs-keyword">is</span> c)      <span class="hljs-comment"># False</span><br><span class="hljs-built_in">print</span>(b <span class="hljs-keyword">is</span> <span class="hljs-keyword">not</span> c)  <span class="hljs-comment"># True</span><br><br><span class="hljs-comment"># == 比「值」，is 比「内存地址」</span><br><span class="hljs-built_in">print</span>(<span class="hljs-built_in">id</span>(a)); <span class="hljs-built_in">print</span>(<span class="hljs-built_in">id</span>(b)); <span class="hljs-built_in">print</span>(<span class="hljs-built_in">id</span>(c))<br></code></pre></td></tr></table></figure>
+
+<p>&emsp;</p>
+<h4 id="7-逻辑运算符"><a href="#7-逻辑运算符" class="headerlink" title="7.逻辑运算符"></a>7.逻辑运算符</h4><p>&emsp;&emsp;<code>and</code>（与）/ <code>or</code>（或）/ <code>not</code>（非）返回布尔。重点在<strong>隐式布尔值</strong>和<strong>短路求值</strong>：数字 <code>0</code>、空字符串、空容器、<code>None</code> 都被当作 <code>False</code>，其余为 <code>True</code>。短路是指 <code>and</code> 遇到第一个假值就直接返回它、<code>or</code> 遇到第一个真值就直接返回它，后续表达式不再执行——这常用来写「带默认值的取值」之类简洁逻辑。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><code class="hljs python">a, b, c = <span class="hljs-number">10</span>, <span class="hljs-number">20</span>, <span class="hljs-number">30</span><br><br><span class="hljs-comment"># and：都真返回最后一个真值；遇假返回第一个假值</span><br><span class="hljs-built_in">print</span>(a &gt; b <span class="hljs-keyword">and</span> b &gt; c)    <span class="hljs-comment"># False</span><br><span class="hljs-built_in">print</span>(a &lt; b <span class="hljs-keyword">and</span> b &lt; c)    <span class="hljs-comment"># True</span><br><br><span class="hljs-comment"># or：遇真返回第一个真值</span><br><span class="hljs-built_in">print</span>(a &gt; b <span class="hljs-keyword">or</span> b &gt; c)     <span class="hljs-comment"># False</span><br><span class="hljs-built_in">print</span>(a &lt; b <span class="hljs-keyword">or</span> b &lt; c)     <span class="hljs-comment"># True</span><br><br><span class="hljs-comment"># not：取反</span><br><span class="hljs-built_in">print</span>(<span class="hljs-keyword">not</span> a &lt; b)          <span class="hljs-comment"># False</span><br><br><span class="hljs-comment"># 隐式布尔值</span><br><span class="hljs-built_in">print</span>(<span class="hljs-built_in">bool</span>(<span class="hljs-number">0</span>))        <span class="hljs-comment"># False</span><br><span class="hljs-built_in">print</span>(<span class="hljs-built_in">bool</span>(<span class="hljs-number">1</span>))        <span class="hljs-comment"># True</span><br><span class="hljs-built_in">print</span>(<span class="hljs-built_in">bool</span>(<span class="hljs-string">&quot;&quot;</span>))      <span class="hljs-comment"># False</span><br><span class="hljs-built_in">print</span>(<span class="hljs-built_in">bool</span>(<span class="hljs-string">&quot;hello&quot;</span>)) <span class="hljs-comment"># True</span><br><span class="hljs-built_in">print</span>(<span class="hljs-built_in">bool</span>(<span class="hljs-literal">None</span>))    <span class="hljs-comment"># False</span><br><span class="hljs-built_in">print</span>(<span class="hljs-built_in">bool</span>([]))      <span class="hljs-comment"># False</span><br><span class="hljs-built_in">print</span>(<span class="hljs-built_in">bool</span>(()))      <span class="hljs-comment"># False</span><br><span class="hljs-built_in">print</span>(<span class="hljs-built_in">bool</span>(&#123;&#125;))      <span class="hljs-comment"># False  （注意 &#123;&#125; 是空字典，不是空集合）</span><br><br><span class="hljs-comment"># 短路运算</span><br><span class="hljs-built_in">print</span>(<span class="hljs-number">3</span> <span class="hljs-keyword">and</span> <span class="hljs-number">5</span>)              <span class="hljs-comment"># 5</span><br><span class="hljs-built_in">print</span>(<span class="hljs-number">3</span> <span class="hljs-keyword">and</span> <span class="hljs-number">0</span> <span class="hljs-keyword">and</span> <span class="hljs-number">5</span>)        <span class="hljs-comment"># 0</span><br><span class="hljs-built_in">print</span>(<span class="hljs-number">3</span> <span class="hljs-keyword">and</span> <span class="hljs-number">0</span> <span class="hljs-keyword">and</span> <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;hello&quot;</span>))   <span class="hljs-comment"># 0（print 不执行）</span><br><span class="hljs-built_in">print</span>(<span class="hljs-number">3</span> <span class="hljs-keyword">and</span> <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;hello&quot;</span>) <span class="hljs-keyword">and</span> <span class="hljs-number">6</span>)   <span class="hljs-comment"># 先打印 hello，返回 None</span><br><span class="hljs-built_in">print</span>(<span class="hljs-number">3</span> <span class="hljs-keyword">or</span> <span class="hljs-number">5</span> <span class="hljs-keyword">or</span> <span class="hljs-number">6</span>)          <span class="hljs-comment"># 3</span><br><span class="hljs-built_in">print</span>(<span class="hljs-number">0</span> <span class="hljs-keyword">or</span> <span class="hljs-number">3</span> <span class="hljs-keyword">or</span> <span class="hljs-number">5</span> <span class="hljs-keyword">or</span> <span class="hljs-number">6</span>)     <span class="hljs-comment"># 3</span><br></code></pre></td></tr></table></figure>
+
+<p>&emsp;</p>
+<h4 id="8-运算优先级"><a href="#8-运算优先级" class="headerlink" title="8.运算优先级"></a>8.运算优先级</h4><p>&emsp;&emsp;记不住优先级时<strong>加括号最稳妥</strong>。从高到低大致是：括号 <code>()</code> → 指数 <code>**</code> → 乘除 <code>*</code> <code>/</code> <code>//</code> <code>%</code> → 加减 <code>+</code> <code>-</code> → 比较 <code>&gt;</code> <code>&lt;</code> 等 → 逻辑 <code>and</code> <code>or</code> <code>not</code> → 赋值 <code>=</code>。下面这行综合了括号、指数、比较和逻辑，正是优先级规则的最佳练习。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># 优先级：括号 &gt; 指数 &gt; 乘除 &gt; 加减 &gt; 比较 &gt; 逻辑 &gt; 赋值</span><br>n = (<span class="hljs-number">4</span> + (<span class="hljs-number">3</span> * (<span class="hljs-number">2</span>**<span class="hljs-number">3</span>))) &gt; <span class="hljs-number">10</span> <span class="hljs-keyword">or</span> <span class="hljs-number">5</span> <span class="hljs-keyword">and</span> <span class="hljs-number">0</span><br><span class="hljs-built_in">print</span>(n)<br></code></pre></td></tr></table></figure>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E6%99%BA%E6%B3%8AAI%E8%AF%BE%E7%A8%8B/" class="category-chain-item">智泊AI课程</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/%E6%99%BA%E6%B3%8AAI%E8%AF%BE%E7%A8%8B/Python/" class="category-chain-item">Python</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>智泊Python--Day2</div>
+      <div>https://one-null-pointer.github.io/2026/07/21/智泊Python--Day2/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>Author</div>
+          <div>liaoyue</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>Posted on</div>
+          <div>July 21, 2026</div>
+        </div>
+      
+      
+      <div class="license-meta-item">
+        <div>传送口</div>
+        <div>
+          
+            
+            
+              <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+              <span class="hint--top hint--rounded" aria-label="点击进行传送">
+                <i class="iconfont icon-by"></i>
+              </span>
+              </a>
+            
+          
+        </div>
+      </div>
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2026/07/22/%E6%99%BA%E6%B3%8APython--Day3/" title="智泊Python--Day3">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">智泊Python--Day3</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2026/07/20/%E6%99%BA%E6%B3%8APython--Day1/" title="智泊Python--Day1">
+                        <span class="hidden-mobile">智泊Python--Day1</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;Table of Contents</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">Keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://github.com/" target="_blank" rel="nofollow noopener"><span>pointer</span></a> <i class="iconfont icon-love"></i> <a href="https://mp.weixin.qq.com/s/6ncLUtaiJ9j_sMjZT5z-2w" target="_blank" rel="nofollow noopener"><span>一个爱学习的空指针</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      headingSelector : CONFIG.toc.headingSelector || 'h1,h2,h3,h4,h5,h6',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      collapseDepth   : CONFIG.toc.collapseDepth || 0,
+      scrollSmooth    : true,
+      headingsOffset  : -boardTop
+    });
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.10/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">Blog works best with JavaScript enabled</div>
+  </noscript>
+</body>
+</html>

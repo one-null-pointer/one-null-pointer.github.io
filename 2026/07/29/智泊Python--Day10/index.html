@@ -1,0 +1,630 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="liaoyue">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="智泊Python–Day10&amp;emsp;&amp;emsp;Day10 是函数主题的收尾，并引出 Python 的「惰性计算」体系。先讲递归（函数自己调用自己，靠临界值收口），再讲列表 &#x2F; 字典 &#x2F; 集合推导式（一行 for 生成容器），然后重点是生成器和迭代器——这两者都「用到才生成」，能省内存；最后落到工程层面：第三方包怎么装、包 &#x2F; 模块 怎么组织与导入。记住一句话：生成器 ⊂ 迭代器 ⊂ 可迭代对">
+<meta property="og:type" content="article">
+<meta property="og:title" content="智泊Python--Day10">
+<meta property="og:url" content="https://one-null-pointer.github.io/2026/07/29/%E6%99%BA%E6%B3%8APython--Day10/index.html">
+<meta property="og:site_name" content="one-null-poniter">
+<meta property="og:description" content="智泊Python–Day10&amp;emsp;&amp;emsp;Day10 是函数主题的收尾，并引出 Python 的「惰性计算」体系。先讲递归（函数自己调用自己，靠临界值收口），再讲列表 &#x2F; 字典 &#x2F; 集合推导式（一行 for 生成容器），然后重点是生成器和迭代器——这两者都「用到才生成」，能省内存；最后落到工程层面：第三方包怎么装、包 &#x2F; 模块 怎么组织与导入。记住一句话：生成器 ⊂ 迭代器 ⊂ 可迭代对">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://one-null-pointer.github.io/img/python.png">
+<meta property="article:published_time" content="2026-07-28T16:00:00.000Z">
+<meta property="article:modified_time" content="2026-10-15T08:37:06.848Z">
+<meta property="article:author" content="liaoyue">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://one-null-pointer.github.io/img/python.png">
+  
+  
+  
+  <title>智泊Python--Day10 - one-null-poniter</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"one-null-pointer.github.io","root":"/","version":"1.9.2","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 5.4.2"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>one null pointer</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                吾
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                學
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                類
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="智泊Python--Day10"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2026-07-29 00:00" pubdate>
+          July 29, 2026 am
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          6.3k words
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          53 mins
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">智泊Python--Day10</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="智泊Python–Day10"><a href="#智泊Python–Day10" class="headerlink" title="智泊Python–Day10"></a>智泊Python–Day10</h1><p>&emsp;&emsp;Day10 是函数主题的收尾，并引出 Python 的「惰性计算」体系。先讲<strong>递归</strong>（函数自己调用自己，靠临界值收口），再讲<strong>列表 / 字典 / 集合推导式</strong>（一行 for 生成容器），然后重点是<strong>生成器</strong>和<strong>迭代器</strong>——这两者都「用到才生成」，能省内存；最后落到工程层面：第三方包怎么装、<code>包 / 模块</code> 怎么组织与导入。记住一句话：<strong>生成器 ⊂ 迭代器 ⊂ 可迭代对象</strong>。</p>
+<p>&emsp;</p>
+<h4 id="1-函数递归"><a href="#1-函数递归" class="headerlink" title="1.函数递归"></a>1.函数递归</h4><p>&emsp;&emsp;递归两大要素：<strong>找递推公式</strong> + <strong>设临界值（出口）</strong>。阶乘 <code>n! = n * (n-1)!</code>，临界值是 <code>n==1</code>；斐波那契 <code>fib(n)=fib(n-1)+fib(n-2)</code>，临界值是 <code>n==1 或 2</code>。下面那个「兔子繁衍」是变体：当月对数 = 上月对数 + 三个月前的新生对数，即 <code>f(n)=f(n-1)+f(n-3)</code>，临界 <code>n&lt;=3</code> 返回 1。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># 函数递归：再函数内部调用自己</span><br><br><span class="hljs-comment"># 找公式</span><br><span class="hljs-comment"># 设置临界值</span><br><br><span class="hljs-comment"># 需求 求5的阶乘</span><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">fn</span>(<span class="hljs-params">n</span>):<br>    <span class="hljs-keyword">if</span> n == <span class="hljs-number">1</span>:<br>        <span class="hljs-keyword">return</span> <span class="hljs-number">1</span><br>    <span class="hljs-keyword">else</span>:<br>        <span class="hljs-keyword">return</span> n * fn(n-<span class="hljs-number">1</span>)<br><br><span class="hljs-built_in">print</span>(fn(<span class="hljs-number">5</span>))<br><br><span class="hljs-comment"># 封住函数，存入m 得到第m个斐波那契数列的值</span><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">fib</span>(<span class="hljs-params">n</span>):<br>    <span class="hljs-keyword">if</span> n == <span class="hljs-number">1</span> <span class="hljs-keyword">or</span> n == <span class="hljs-number">2</span>:<br>        <span class="hljs-keyword">return</span> <span class="hljs-number">1</span><br>    <span class="hljs-keyword">else</span>:<br>        s = fib(n-<span class="hljs-number">1</span>) + fib(n-<span class="hljs-number">2</span>)<br>        <span class="hljs-keyword">return</span> s<br><span class="hljs-built_in">print</span>(fib(<span class="hljs-number">5</span>))<br><br><span class="hljs-comment"># 兔子繁衍问题，设有一对新生的兔子，从第4个月开始他们每个月月初都生一对新兔子，</span><br><span class="hljs-comment"># 新生的兔子从第4个月开始又每个月月初生一对兔子。按此规律，并假定兔子没有死亡，</span><br><span class="hljs-comment"># 20个月末共有多少对兔子</span><br><br><span class="hljs-comment"># 公式</span><br><span class="hljs-comment"># 当月兔子的对 = 上月兔子的对f(n-1) + 上月新生的对f(n-3)</span><br><span class="hljs-comment"># 新生的对 = 前三月有的兔子的对f(n-3)</span><br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">f</span>(<span class="hljs-params">n</span>):<br>    <span class="hljs-keyword">if</span> n &lt;= <span class="hljs-number">3</span>:<br>        <span class="hljs-keyword">return</span> <span class="hljs-number">1</span><br>    <span class="hljs-keyword">else</span>:<br>        s = f(n-<span class="hljs-number">1</span>) + f(n-<span class="hljs-number">3</span>)<br>        <span class="hljs-keyword">return</span> s<br><br><span class="hljs-built_in">print</span>(f(<span class="hljs-number">20</span>))<br></code></pre></td></tr></table></figure>
+
+<p>&emsp;</p>
+<h4 id="2-列表推导式"><a href="#2-列表推导式" class="headerlink" title="2.列表推导式"></a>2.列表推导式</h4><p>&emsp;&emsp;推导式是「用一行 for 生成容器」的语法糖，比先建空列表再 <code>append</code> 更简洁。<strong>列表</strong>用 <code>[]</code>、<strong>字典</strong>用 <code>&#123;&#125;</code> 配 <code>键:值</code>、<strong>集合</strong>用 <code>&#123;&#125;</code>。可以加 <code>if</code> 过滤，也支持多层 <code>for</code> 嵌套。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># 列表推导式(掌握)</span><br><span class="hljs-comment"># 使用for循环用一行来生成列表</span><br><br><span class="hljs-comment"># 创建一个列表</span><br>nums = [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>, <span class="hljs-number">5</span>]<br><span class="hljs-built_in">print</span>(nums)<br><span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;=&quot;</span>*<span class="hljs-number">20</span>)<br>nums1 = []<br><span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">1</span>, <span class="hljs-number">6</span>):<br>    nums1.append(i)<br>    i += <span class="hljs-number">1</span><br><span class="hljs-built_in">print</span>(nums1)<br><span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;=&quot;</span>*<span class="hljs-number">20</span>)<br><span class="hljs-comment"># 列表推导式</span><br>nums2 = [i <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">1</span>, <span class="hljs-number">6</span>)]<br><span class="hljs-built_in">print</span>(nums2)<br>nums3 = [i*<span class="hljs-number">2</span> <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">1</span>, <span class="hljs-number">6</span>)] <span class="hljs-comment"># 2倍</span><br><span class="hljs-built_in">print</span>(nums3)<br>nums4 = [i <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">1</span>, <span class="hljs-number">6</span>) <span class="hljs-keyword">if</span> i%<span class="hljs-number">2</span> == <span class="hljs-number">1</span>] <span class="hljs-comment"># 奇数</span><br><span class="hljs-built_in">print</span>(nums4)<br>nums5 = [i <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">1</span>, <span class="hljs-number">6</span>) <span class="hljs-keyword">if</span> i%<span class="hljs-number">2</span> == <span class="hljs-number">1</span> <span class="hljs-keyword">and</span> i != <span class="hljs-number">3</span>] <span class="hljs-comment"># 奇数且不包含3</span><br><span class="hljs-built_in">print</span>(nums5)<br><br><span class="hljs-comment"># if嵌套</span><br>nums6 = [i <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">1</span>, <span class="hljs-number">7</span>) <span class="hljs-keyword">if</span> i%<span class="hljs-number">2</span>==<span class="hljs-number">0</span> <span class="hljs-keyword">if</span> i%<span class="hljs-number">3</span> == <span class="hljs-number">0</span>] <span class="hljs-comment"># 偶数且是3的倍数</span><br><span class="hljs-built_in">print</span>(nums6)<br><br><span class="hljs-comment"># for循环嵌套</span><br>nums7 = [i+j <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">1</span>, <span class="hljs-number">6</span>) <span class="hljs-keyword">for</span> j <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">1</span>, <span class="hljs-number">6</span>)]<br><span class="hljs-built_in">print</span>(nums7)<br><span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;=&quot;</span>*<span class="hljs-number">20</span>)<br><br><span class="hljs-comment"># 字典推导式（用大括号 &#123;&#125;）（了解）</span><br>dict1 = &#123;<span class="hljs-string">f&#x27;key<span class="hljs-subst">&#123;i&#125;</span>&#x27;</span>: i*<span class="hljs-number">2</span> <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">1</span>, <span class="hljs-number">6</span>)&#125;<br><span class="hljs-built_in">print</span>(dict1)<br><br><span class="hljs-comment"># 集合推导式（用大括号 &#123;&#125;）（了解）</span><br>set1 = &#123;i <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">1</span>, <span class="hljs-number">6</span>)&#125;<br><span class="hljs-built_in">print</span>(set1)<br></code></pre></td></tr></table></figure>
+
+<p>&emsp;</p>
+<h4 id="3-生成器和生成器函数"><a href="#3-生成器和生成器函数" class="headerlink" title="3.生成器和生成器函数"></a>3.生成器和生成器函数</h4><p>&emsp;&emsp;生成器用 <code>()</code> 定义（区别于列表的 <code>[]</code>），<strong>不一次性算出所有值，而是用到才生成</strong>，所以只占一点内存。生成器函数则在函数体内用 <code>yield</code>：每调一次 <code>next()</code>，执行到 <code>yield</code> 就暂停并返回值，下次再从暂停处继续——<code>return</code> 会结束函数，<code>yield</code> 只是暂停。下面用 <code>while True: yield a; a,b=b,a+b</code> 优雅地实现了无限斐波那契序列。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># 生成器 generator</span><br><span class="hljs-comment"># 需要使用next或者for循环来调用</span><br><br><span class="hljs-comment"># 使用的是小括号 () 来定义生成器，大括号 &#123;&#125; 来定义字典，中括号 [] 来定义列表组</span><br>gen = (i <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">1</span>, <span class="hljs-number">6</span>)) <span class="hljs-comment"># 生成器</span><br><span class="hljs-built_in">print</span>(gen)   <span class="hljs-comment"># &lt;generator object &lt;genexpr&gt; at 0x0000024D0000&gt; 生成器对象</span><br><br><span class="hljs-comment"># for i in gen:</span><br><span class="hljs-comment">#     print(i)</span><br><br><span class="hljs-comment"># 只能next一次，不能重复next</span><br><span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">1</span>, <span class="hljs-number">6</span>):<br>    <span class="hljs-built_in">print</span>(<span class="hljs-built_in">next</span>(gen))<br><br><br><span class="hljs-comment">#生成器函数</span><br><span class="hljs-comment"># 函数内部要有yield</span><br><span class="hljs-comment"># 需要用next函数来调用</span><br><span class="hljs-comment"># 每个next函数都会在yield语句中暂停</span><br><span class="hljs-comment"># yield会暂停 ，可以返回值</span><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">gen_fn</span>():<br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;我是gen_fn, 你看我会执行吗&#x27;</span>),<br>    <span class="hljs-keyword">yield</span> <span class="hljs-number">666</span> <span class="hljs-comment"># 会暂停，并返回值，默认返回None，与return None效果相同但是不会结束函数</span><br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;我是gen_fn, 你看我会执行吗2&#x27;</span>),<br>    <span class="hljs-keyword">yield</span> <span class="hljs-number">777</span> <span class="hljs-comment"># 会暂停，并返回值，默认返回None，与return None效果相同但是不会结束函数</span><br><br>gen1 = gen_fn()<br><span class="hljs-built_in">print</span>(gen1) <span class="hljs-comment"># &lt;generator object gen_fn at 0x0000024D0000&gt;</span><br><span class="hljs-built_in">print</span>(<span class="hljs-built_in">next</span>(gen1)) <span class="hljs-comment"># 666</span><br><span class="hljs-built_in">print</span>(<span class="hljs-built_in">next</span>(gen1)) <span class="hljs-comment"># 777</span><br><br><br><span class="hljs-comment">#实例</span><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">gen_fn2</span>():<br>    g = (i <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">1</span>, <span class="hljs-number">10</span>**<span class="hljs-number">100</span>))<br>    <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> g:<br>        <span class="hljs-keyword">yield</span> i<br><br>gen2 = gen_fn2()<br><span class="hljs-built_in">print</span>(gen2) <span class="hljs-comment"># &lt;generator object gen_fn2 at 0x0000024D0000&gt;</span><br><span class="hljs-built_in">print</span>(<span class="hljs-built_in">next</span>(gen2)) <span class="hljs-comment"># 1</span><br><span class="hljs-built_in">print</span>(<span class="hljs-built_in">next</span>(gen2)) <span class="hljs-comment"># 2</span><br><span class="hljs-built_in">print</span>(<span class="hljs-built_in">next</span>(gen2)) <span class="hljs-comment"># 3</span><br><br><br><span class="hljs-comment">#练习</span><br><span class="hljs-comment">#1.请写一个生成器函数，得到前20个斐波那契数(难度:*****)</span><br><span class="hljs-comment"># 斐波那契数列如下:0,1，1，2,3，5,8,13，21，34，55...</span><br><span class="hljs-comment"># 提示:使用whileTrue，通过调用n次next来获取前20个数</span><br><br><span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;=&quot;</span>*<span class="hljs-number">20</span>)<br><span class="hljs-keyword">def</span> <span class="hljs-title function_">fib_fn</span>():<br>    a, b = <span class="hljs-number">0</span>, <span class="hljs-number">1</span><br>    <span class="hljs-keyword">while</span> <span class="hljs-literal">True</span>:<br>        <span class="hljs-keyword">yield</span> a<br>        a, b = b, a+b<br><br>fib = fib_fn()<br><span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">20</span>):<br>    <span class="hljs-built_in">print</span>(<span class="hljs-built_in">next</span>(fib))<br></code></pre></td></tr></table></figure>
+
+<p>&emsp;</p>
+<h4 id="4-迭代器"><a href="#4-迭代器" class="headerlink" title="4.迭代器"></a>4.迭代器</h4><p>&emsp;&emsp;三者的关系用一句话记：<strong>可迭代对象（能放 <code>for</code> 里遍历）⊃ 迭代器（记住遍历位置，能 <code>next</code>）⊃ 生成器（<code>yield</code> 写的迭代器）</strong>。注意 <code>list</code>/<code>str</code>/<code>dict</code>/<code>set</code>/生成器都是<strong>可迭代对象</strong>，但它们本身<strong>不是迭代器</strong>（<code>isinstance(..., Iterator)</code> 为 <code>False</code>）；只有生成器表达式 <code>(i for ...)</code> 才是迭代器。<code>iter()</code> 能把可迭代对象转成迭代器。下面已删除两行与主题无关的自动补全残留导入。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># isinstance() 函数</span><br><span class="hljs-comment"># 用于判断一个对象是否是某个类的实例</span><br><span class="hljs-built_in">print</span>(<span class="hljs-number">10</span>, <span class="hljs-built_in">type</span>(<span class="hljs-number">10</span>)) <span class="hljs-comment"># &lt;class &#x27;int&#x27;&gt;</span><br><span class="hljs-built_in">print</span>(<span class="hljs-built_in">isinstance</span>(<span class="hljs-number">10</span>, <span class="hljs-built_in">int</span>)) <span class="hljs-comment"># True</span><br><span class="hljs-built_in">print</span>(<span class="hljs-built_in">isinstance</span>(<span class="hljs-number">10</span>, (<span class="hljs-built_in">int</span> ,<span class="hljs-built_in">float</span>,<span class="hljs-built_in">list</span>))) <span class="hljs-comment"># 判断类型是否为整数、浮点数、列表中的一个</span><br><span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;=&quot;</span>*<span class="hljs-number">30</span>)<br><br><span class="hljs-comment"># 迭代器Iterator 是指一个可以记住遍历位置的对象，每次调用next()方法时，返回下一个值</span><br><span class="hljs-keyword">from</span> typing <span class="hljs-keyword">import</span> Iterator<br><br><span class="hljs-built_in">print</span>(<span class="hljs-built_in">isinstance</span>([<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>], Iterator)) <span class="hljs-comment"># False</span><br><span class="hljs-built_in">print</span>(<span class="hljs-built_in">isinstance</span>(&#123;<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>&#125;, Iterator)) <span class="hljs-comment"># False</span><br><span class="hljs-built_in">print</span>(<span class="hljs-built_in">isinstance</span>((<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>), Iterator)) <span class="hljs-comment"># False</span><br><span class="hljs-built_in">print</span>(<span class="hljs-built_in">isinstance</span>((i <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">10</span>)), Iterator)) <span class="hljs-comment"># True</span><br><span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;=&quot;</span>*<span class="hljs-number">30</span>)<br><br><br><span class="hljs-comment"># 可迭代对象Iterable 是指一个可以返回迭代器的对象</span><br><span class="hljs-comment"># 有 __iter__()：凡是能放进 for x in … 的东西</span><br><span class="hljs-comment"># 例：list / str / dict / set / 文件 / 生成器</span><br><span class="hljs-keyword">from</span> typing <span class="hljs-keyword">import</span> Iterable<br><span class="hljs-built_in">print</span>(<span class="hljs-built_in">isinstance</span>(<span class="hljs-number">3</span>, Iterable)) <span class="hljs-comment"># False</span><br><span class="hljs-built_in">print</span>(<span class="hljs-built_in">isinstance</span>(<span class="hljs-number">3.14</span>, Iterable)) <span class="hljs-comment"># False</span><br><span class="hljs-built_in">print</span>(<span class="hljs-built_in">isinstance</span>(<span class="hljs-string">&quot;hello&quot;</span>, Iterable)) <span class="hljs-comment"># True</span><br><span class="hljs-built_in">print</span>(<span class="hljs-built_in">isinstance</span>([<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>], Iterable)) <span class="hljs-comment"># True</span><br><span class="hljs-built_in">print</span>(<span class="hljs-built_in">isinstance</span>(&#123;<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>&#125;, Iterable)) <span class="hljs-comment"># True</span><br><span class="hljs-built_in">print</span>(<span class="hljs-built_in">isinstance</span>((<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>), Iterable)) <span class="hljs-comment"># True</span><br><span class="hljs-built_in">print</span>(<span class="hljs-built_in">isinstance</span>((i <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">10</span>)), Iterable)) <span class="hljs-comment"># True</span><br><br><span class="hljs-comment"># iter() 函数</span><br><span class="hljs-comment"># 用于将一个可迭代对象转换为迭代器</span><br><span class="hljs-built_in">print</span>(<span class="hljs-built_in">iter</span>([<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>])) <span class="hljs-comment"># &lt;list_iterator object at 0x0000022222222222&gt;</span><br><span class="hljs-built_in">print</span>(<span class="hljs-built_in">iter</span>(<span class="hljs-string">&quot;hello&quot;</span>)) <span class="hljs-comment"># &lt;str_iterator object at 0x0000022222222222&gt;</span><br><span class="hljs-built_in">print</span>(<span class="hljs-built_in">iter</span>(&#123;<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>&#125;)) <span class="hljs-comment"># &lt;dict_iterator object at 0x000x000002222</span><br><br><br><span class="hljs-comment"># 本质上 生成器 ⊂ 迭代器 ⊂ 可迭代对象</span><br><span class="hljs-comment"># 可迭代对象是一个装着数据的东西，可以被遍历</span><br><span class="hljs-comment"># 迭代器是一个翻看工具，它记住看到第几个了</span><br><span class="hljs-comment"># 生成器是迭代器的懒人写法（用 yield 关键字）</span><br></code></pre></td></tr></table></figure>
+
+<p>&emsp;</p>
+<h4 id="5-第三方包的安装"><a href="#5-第三方包的安装" class="headerlink" title="5.第三方包的安装"></a>5.第三方包的安装</h4><p>&emsp;&emsp;Python 的包分三类：官方内置、自己写的、别人写的第三方包。日常用 <code>pip</code> 管理第三方包，常用命令都列在下面。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># 1. Python内部提供的包或模块（官方）</span><br><span class="hljs-comment"># 2.我们直接写的包或模块（自己的）</span><br><span class="hljs-comment"># 3.别人写的 第三方包或模块（非官方）</span><br><br><br><span class="hljs-comment"># 第三方包的安装</span><br><span class="hljs-comment"># 1. PyCharm中python解释器配置软件包的功能</span><br><span class="hljs-comment"># 2. 先导入包名，鼠标悬停查看包的文档</span><br><span class="hljs-comment"># 3. 命令安装</span><br><span class="hljs-comment">#    pip install numpy 安装包</span><br><span class="hljs-comment">#    pip uninstall numpy 卸载包</span><br><span class="hljs-comment">#    pip show numpy 查看包的详细信息</span><br><span class="hljs-comment">#    pip list 查看所有安装的包</span><br><span class="hljs-comment">#    pip freeze 查看所安装的包的版本号</span><br><span class="hljs-comment">#    pip freeze &gt; requirements.txt 导出所有安装的包的版本号到文件</span><br><span class="hljs-comment">#    pip install -r requirements.txt 从文件中安装所有包</span><br></code></pre></td></tr></table></figure>
+
+<p>&emsp;</p>
+<h4 id="6-包和模块"><a href="#6-包和模块" class="headerlink" title="6.包和模块"></a>6.包和模块</h4><p>&emsp;&emsp;组织代码的层次是：<strong>项目 → 包（带 <code>__init__.py</code> 的文件夹）→ 模块（<code>.py</code> 文件）→ 类 → 函数</strong>。导入有几种姿势：<code>import 模块</code>、<code>from 模块 import 名字</code>、<code>from 模块 import *</code>、<code>as</code> 起别名（起名后只能用别名）。模块被导入时会自动执行一次其中的顶层代码，且是<strong>单例</strong>——多次导入只执行一遍。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># 包 package： 是一个有__init__.py文件的文件夹</span><br><span class="hljs-comment"># 模块 module  是一个.py文件</span><br><br><span class="hljs-comment"># 封装思路： 项目 ==》 包 ==》 模块（python文件） ==》 类 （class） ==》函数</span><br><br><span class="hljs-comment"># 创建包</span><br><span class="hljs-comment"># 创建模块</span><br><br><span class="hljs-comment"># 导入模块</span><br><span class="hljs-comment"># import 模块名</span><br><span class="hljs-comment"># from 模块名 import 函数名</span><br><span class="hljs-comment"># from 模块名 import *</span><br><br><span class="hljs-comment">#自定义模块</span><br><span class="hljs-comment"># 1. 创建一个.py文件</span><br><span class="hljs-comment"># 2. 在文件中定义函数</span><br><span class="hljs-comment"># 3. 导出函数</span><br><span class="hljs-comment"># 4. 导入模块</span><br><span class="hljs-comment"># 5. 调用函数</span><br><br><span class="hljs-comment"># import package1</span><br><br><span class="hljs-comment"># from package1 import module</span><br><span class="hljs-comment"># # 直接打印ikun 是因为导入的时候就会自动执行模块中的代码</span><br><span class="hljs-comment"># # 并且模块是单例模式，只会执行一次</span><br><span class="hljs-comment"># print(module.name)</span><br><span class="hljs-comment"># print(module.fn())</span><br><span class="hljs-keyword">from</span> package1.module <span class="hljs-keyword">import</span> name<br><span class="hljs-built_in">print</span>(name)<br><br><br><span class="hljs-comment"># 别名：as 改名后只能用别名</span><br><span class="hljs-comment"># from package1 import module as m1</span><br><span class="hljs-keyword">import</span> package1.module <span class="hljs-keyword">as</span> m1<br></code></pre></td></tr></table></figure>
+
+<p>&emsp;</p>
+<h4 id="7-作业"><a href="#7-作业" class="headerlink" title="7.作业"></a>7.作业</h4><p>&emsp;&emsp;两道大作业：①万年历——综合运用 Day8 的闰年 / 月天数判断，从 1900-01-01 算总天数再推算当月 1 号是星期几，格式化打印整月日历（依赖自定义模块 <code>package1.wnl</code>）；②写一个无限序列生成器，从 1 开始每次 +1，用 <code>while True</code> + <code>yield</code> 实现，外层 <code>next()</code> 取前 n 个（原笔记里那行 <code>numpy.f2py</code> 导入与本题无关，已删除）。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment">#1.实现万年历效果图，使用函数封装:</span><br><span class="hljs-comment">#</span><br><span class="hljs-comment"># A:先输出提示语句，并接受用户输入的年、月。</span><br><span class="hljs-comment"># B:根据用户输入的年，先判断是否是闰年。</span><br><span class="hljs-comment"># C:根据用户输入的月来判断月的天数。</span><br><span class="hljs-comment"># D:用循环计算用户输入的年份距1900年1月1日的总天数。</span><br><span class="hljs-comment"># E:用循环计算用户输入的月份距输入的年份的1月1日共有多少天，</span><br><span class="hljs-comment"># F:相加D与E的天数，得到总天数。</span><br><span class="hljs-comment"># G:用总天数来计算输入月的第一天的星期数</span><br><span class="hljs-comment"># H:根据G的值，格式化输出这个月的日历!</span><br><br><span class="hljs-comment"># from package1 import wnl</span><br><br><span class="hljs-comment"># wnl.FA()</span><br><br><br><span class="hljs-comment">#2.请写一个生成器函数，生成一个无限序列，从1开始可以不断往后取值，每次+1</span><br><span class="hljs-comment"># 提示:使用whileTrue，通过调用n次next来获取前n个数</span><br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">infinite_sequence</span>():<br>    i = <span class="hljs-number">1</span><br>    <span class="hljs-keyword">while</span> <span class="hljs-literal">True</span>:<br>        <span class="hljs-keyword">yield</span> i<br>        i += <span class="hljs-number">1</span><br><br><br>G2 = infinite_sequence()<br><br><span class="hljs-keyword">import</span> time<br><span class="hljs-keyword">while</span> <span class="hljs-literal">True</span>:<br>    <span class="hljs-built_in">print</span>(<span class="hljs-built_in">next</span>(G2))<br>    time.sleep(<span class="hljs-number">1</span>)<br></code></pre></td></tr></table></figure>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E6%99%BA%E6%B3%8AAI%E8%AF%BE%E7%A8%8B/" class="category-chain-item">智泊AI课程</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/%E6%99%BA%E6%B3%8AAI%E8%AF%BE%E7%A8%8B/Python/" class="category-chain-item">Python</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>智泊Python--Day10</div>
+      <div>https://one-null-pointer.github.io/2026/07/29/智泊Python--Day10/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>Author</div>
+          <div>liaoyue</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>Posted on</div>
+          <div>July 29, 2026</div>
+        </div>
+      
+      
+      <div class="license-meta-item">
+        <div>传送口</div>
+        <div>
+          
+            
+            
+              <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+              <span class="hint--top hint--rounded" aria-label="点击进行传送">
+                <i class="iconfont icon-by"></i>
+              </span>
+              </a>
+            
+          
+        </div>
+      </div>
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2026/07/30/%E6%99%BA%E6%B3%8APython--Day11/" title="智泊Python--Day11">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">智泊Python--Day11</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2026/07/28/%E6%99%BA%E6%B3%8APython--Day9/" title="智泊Python--Day9">
+                        <span class="hidden-mobile">智泊Python--Day9</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;Table of Contents</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">Keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://github.com/" target="_blank" rel="nofollow noopener"><span>pointer</span></a> <i class="iconfont icon-love"></i> <a href="https://mp.weixin.qq.com/s/6ncLUtaiJ9j_sMjZT5z-2w" target="_blank" rel="nofollow noopener"><span>一个爱学习的空指针</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      headingSelector : CONFIG.toc.headingSelector || 'h1,h2,h3,h4,h5,h6',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      collapseDepth   : CONFIG.toc.collapseDepth || 0,
+      scrollSmooth    : true,
+      headingsOffset  : -boardTop
+    });
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.10/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">Blog works best with JavaScript enabled</div>
+  </noscript>
+</body>
+</html>

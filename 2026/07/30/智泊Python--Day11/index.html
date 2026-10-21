@@ -1,0 +1,626 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="liaoyue">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="智泊Python–Day11&amp;emsp;&amp;emsp;Day11 转向「标准库实战」——不写业务，而是用 Python 自带模块搞定日常任务。os 管文件系统、json 管数据交换格式、time&#x2F;datetime 管时间、文件操作管读写磁盘。这四块是写脚本的刚需：配环境、读配置、记日志、存结果全都用得上。 &amp;emsp; 1.os模块&amp;emsp;&amp;emsp;os 用于和系统打交道、操作文件 &#x2F; 文件夹">
+<meta property="og:type" content="article">
+<meta property="og:title" content="智泊Python--Day11">
+<meta property="og:url" content="https://one-null-pointer.github.io/2026/07/30/%E6%99%BA%E6%B3%8APython--Day11/index.html">
+<meta property="og:site_name" content="one-null-poniter">
+<meta property="og:description" content="智泊Python–Day11&amp;emsp;&amp;emsp;Day11 转向「标准库实战」——不写业务，而是用 Python 自带模块搞定日常任务。os 管文件系统、json 管数据交换格式、time&#x2F;datetime 管时间、文件操作管读写磁盘。这四块是写脚本的刚需：配环境、读配置、记日志、存结果全都用得上。 &amp;emsp; 1.os模块&amp;emsp;&amp;emsp;os 用于和系统打交道、操作文件 &#x2F; 文件夹">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://one-null-pointer.github.io/img/python.png">
+<meta property="article:published_time" content="2026-07-29T16:00:00.000Z">
+<meta property="article:modified_time" content="2026-10-15T08:38:38.519Z">
+<meta property="article:author" content="liaoyue">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://one-null-pointer.github.io/img/python.png">
+  
+  
+  
+  <title>智泊Python--Day11 - one-null-poniter</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"one-null-pointer.github.io","root":"/","version":"1.9.2","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 5.4.2"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>one null pointer</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                吾
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                學
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                類
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="智泊Python--Day11"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2026-07-30 00:00" pubdate>
+          July 30, 2026 am
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          6.1k words
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          51 mins
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">智泊Python--Day11</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="智泊Python–Day11"><a href="#智泊Python–Day11" class="headerlink" title="智泊Python–Day11"></a>智泊Python–Day11</h1><p>&emsp;&emsp;Day11 转向「标准库实战」——不写业务，而是用 Python 自带模块搞定日常任务。<strong>os</strong> 管文件系统、<strong>json</strong> 管数据交换格式、<strong>time/datetime</strong> 管时间、<strong>文件操作</strong>管读写磁盘。这四块是写脚本的刚需：配环境、读配置、记日志、存结果全都用得上。</p>
+<p>&emsp;</p>
+<h4 id="1-os模块"><a href="#1-os模块" class="headerlink" title="1.os模块"></a>1.os模块</h4><p>&emsp;&emsp;<code>os</code> 用于和系统打交道、操作文件 / 文件夹。<code>os.mkdir</code> / <code>os.makedirs</code> 建目录（后者建多层），<code>os.remove</code> / <code>os.rmdir</code> 删文件 / 空目录，<code>os.rename</code> 重命名，<code>os.listdir</code> 列目录内容。真正的精华在 <strong><code>os.path</code></strong> 子模块：<code>exists</code> / <code>isdir</code> / <code>isfile</code> 判断存在性与类型，<code>join</code> 拼路径（跨平台安全），<code>split</code> / <code>splitext</code> 拆目录与扩展名，<code>abspath</code> 取绝对路径，<code>getsize</code> 取大小。路径里反斜杠多时，用 <strong><code>r&#39;...&#39;</code> 原始字符串</strong> 避免被当成转义。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> os<br><br><span class="hljs-comment"># os 模块主要用于获取系统的功能 主要用于操作文件或者文件夹</span><br><br><span class="hljs-built_in">print</span>(os.name)   <span class="hljs-comment"># 获取当前系统的类型</span><br><span class="hljs-built_in">print</span>(os.getcwd()) <span class="hljs-comment"># 获取当前工作目录</span><br><br><br><span class="hljs-comment"># 创建目录</span><br><span class="hljs-comment"># os.mkdir(&#x27;test&#x27;) # 创建目录 test 如果目录存在会报错</span><br><span class="hljs-comment"># 创建多层目录</span><br><span class="hljs-comment"># os.makedirs(&#x27;test1/test2/test3&#x27;) # 创建目录 test1/test2/test3 如果目录存在会报错</span><br><br><span class="hljs-comment"># 删除目录</span><br><span class="hljs-comment"># os.rmdir(&#x27;test&#x27;) # 删除目录 test 如果目录不存在会报错  不是空目录也会报错</span><br><span class="hljs-comment"># 删除多层目录</span><br><span class="hljs-comment"># os.removedirs(&#x27;test1/test2/test3&#x27;) # 删除目录 test1/test2/test3 如果目录不存在会报错</span><br><span class="hljs-comment"># 删除文件</span><br><span class="hljs-comment"># os.remove(&#x27;test.txt&#x27;) # 删除文件 test.txt 如果文件不存在会报错</span><br><br><span class="hljs-comment"># 重命名目录</span><br><span class="hljs-comment"># os.rename(&#x27;test&#x27;, &#x27;test11&#x27;) # 重命名目录 test1 为 test11</span><br><br><span class="hljs-comment"># 返回目录下的所有文件和子目录  返回的是一个列表</span><br><span class="hljs-comment"># print(os.listdir()) # 返回当前目录下的所有文件和子目录</span><br><span class="hljs-comment"># print(os.listdir(&#x27;test1&#x27;)) # 返回 test1 目录下的所有文件和子目录</span><br><br><br><span class="hljs-comment"># os.path</span><br><br><span class="hljs-comment"># r 表示原始字符串  不会转义特殊字符</span><br><span class="hljs-comment"># os.path.exists(r&#x27;C:\Users\Administrator\Desktop\test&#x27;) # 判断目录、文件是否存在</span><br><span class="hljs-comment"># os.path.isdir(r&#x27;C:\Users\Administrator\Desktop\test&#x27;) # 判断是否是目录</span><br><span class="hljs-comment"># os.path.isfile(r&#x27;C:\Users\Administrator\Desktop\test&#x27;) # 判断是否是文件</span><br><br><span class="hljs-comment"># 合并路径</span><br><span class="hljs-comment"># os.path.join(r&#x27;C:\Users\Administrator\Desktop\test&#x27;, &#x27;test1&#x27;)</span><br><span class="hljs-comment"># C:\Users\Administrator\Desktop\test\test1</span><br><br><br><span class="hljs-comment"># 需求，将指定目录下的子目录的绝对路径打印</span><br>path = <span class="hljs-string">r&#x27;d:\ZHIBOCODE\test1&#x27;</span><br><span class="hljs-built_in">print</span>(os.listdir(path))<br><span class="hljs-keyword">for</span> item <span class="hljs-keyword">in</span> os.listdir(path):<br>    <span class="hljs-built_in">print</span>(os.path.join(path, item))<br><br><br><span class="hljs-comment"># os.path.split() 用于将路径拆分成目录和文件名</span><br><span class="hljs-built_in">print</span>(os.path.split(os.path.join(path, item)))<br><span class="hljs-comment"># (&#x27;d:\\ZHIBOCODE\\test1&#x27;, &#x27;test1.txt&#x27;)</span><br><br><span class="hljs-comment"># os.path.splitext() 用于将文件名拆分成文件名和扩展名</span><br><span class="hljs-built_in">print</span>(os.path.splitext(os.path.join(path, item)))<br><span class="hljs-comment"># (&#x27;test1&#x27;, &#x27;.txt&#x27;)</span><br><br><span class="hljs-comment"># 文件大小</span><br>size = os.path.getsize(os.path.join(path, item))<br><span class="hljs-built_in">print</span>(size)<br><br><span class="hljs-comment">#绝对路径</span><br><span class="hljs-built_in">print</span>(os.path.abspath(os.path.join(path, item)))<br><span class="hljs-comment"># d:\\ZHIBOCODE\\test1\\test1.txt</span><br></code></pre></td></tr></table></figure>
+
+<p>&emsp;</p>
+<h4 id="2-json模块"><a href="#2-json模块" class="headerlink" title="2.json模块"></a>2.json模块</h4><p>&emsp;&emsp;JSON 是前后端 / 程序间最通用的数据格式。它有两种形态：<strong>JSON 字符串</strong>（带引号的文本）和 <strong>JSON 对象</strong>（Python 里就是字典）。核心两个函数：</p>
+<ul>
+<li><code>json.loads(字符串)</code>：<strong>反序列化</strong>，把 JSON 字符串解析成 Python 字典</li>
+<li><code>json.dumps(字典)</code>：<strong>序列化</strong>，把 Python 字典变回 JSON 字符串</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># json模块</span><br><span class="hljs-keyword">import</span> json<br><br><span class="hljs-comment"># json是一种表示数据的格式</span><br><span class="hljs-comment"># json的2种表现形式：</span><br><span class="hljs-comment"># 1. json字符串</span><br><span class="hljs-comment"># 2. json对象（字典）</span><br><br><span class="hljs-comment"># json解析（json反序列化）</span><br><span class="hljs-comment"># 字符串 -&gt; json对象（字典）</span><br>s = <span class="hljs-string">&#x27;&#123;&quot;name&quot;:&quot;邓超&quot;,&quot;age&quot;:18&#125;&#x27;</span><br>d = json.loads(s)<br><span class="hljs-built_in">print</span>(d)<br><span class="hljs-built_in">print</span>(<span class="hljs-built_in">type</span>(d))<br><br><br><span class="hljs-comment"># json序列化</span><br><span class="hljs-comment"># json对象（字典） -&gt; 字符串</span><br>s2 = json.dumps(d)<br><span class="hljs-built_in">print</span>(s2)<br><span class="hljs-built_in">print</span>(s2,<span class="hljs-built_in">type</span>(s2))<br></code></pre></td></tr></table></figure>
+
+<p>&emsp;</p>
+<h4 id="3-时间模块"><a href="#3-时间模块" class="headerlink" title="3.时间模块"></a>3.时间模块</h4><p>&emsp;&emsp;<code>time.time()</code> 返回<strong>时间戳</strong>（1970-01-01 00:00:00 到现在的秒数，浮点）；<code>time.sleep(n)</code> 让程序暂停 n 秒。<code>datetime</code> 是对 <code>time</code> 的封装，更人性化：<code>datetime(...)</code> 直接构造日期时间对象，对象上有 <code>.year/.month/...</code> 属性；<code>strftime(格式)</code> 把对象转成字符串，<code>strptime(字符串, 格式)</code> 反向解析；<code>timedelta(days=...)</code> 表示时间差，可以直接和日期对象做加减。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> time<br><br><span class="hljs-comment"># time模块</span><br><span class="hljs-comment"># time.time() 用于获取当前时间的秒数</span><br><span class="hljs-built_in">print</span>(time.time())  <span class="hljs-comment"># 1694502400.0。从1970年1月1日0时0分0秒开始到当前时间的秒数</span><br><br><span class="hljs-comment"># time.sleep() 用于暂停程序执行</span><br>time.sleep(<span class="hljs-number">1</span>)  <span class="hljs-comment"># 暂停1秒</span><br><span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;hello world&#x27;</span>)<br><span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;=&quot;</span>*<span class="hljs-number">20</span>)<br><br><span class="hljs-comment"># datetime模块</span><br><span class="hljs-comment"># 对time模块进行封装，提供了更方便的时间操作</span><br><span class="hljs-comment"># date：日期 表示年月日</span><br><span class="hljs-comment"># time：时间 表示时分秒</span><br><span class="hljs-keyword">import</span> datetime<br><br><span class="hljs-comment">#1  创建日期对象</span><br><span class="hljs-comment"># dt = datetime.datetime.now() # 2026-09-27 15:59:16.815036</span><br>dt = datetime.datetime(year=<span class="hljs-number">2023</span>, month=<span class="hljs-number">10</span>, day=<span class="hljs-number">10</span>, hour=<span class="hljs-number">12</span>, minute=<span class="hljs-number">30</span>, second=<span class="hljs-number">0</span>)  <span class="hljs-comment"># 2023-10-10 00:00:00</span><br><span class="hljs-built_in">print</span>(dt)<br><span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;=&quot;</span>*<span class="hljs-number">20</span>)<br><br><br><span class="hljs-comment"># 2 日期的属性</span><br><span class="hljs-built_in">print</span>(dt.year)   <span class="hljs-comment"># 年 2023</span><br><span class="hljs-built_in">print</span>(dt.month)  <span class="hljs-comment"># 月 10</span><br><span class="hljs-built_in">print</span>(dt.day)  <span class="hljs-comment"># 日 10</span><br><span class="hljs-built_in">print</span>(dt.hour)  <span class="hljs-comment"># 时 12</span><br><span class="hljs-built_in">print</span>(dt.minute)  <span class="hljs-comment"># 分 30</span><br><span class="hljs-built_in">print</span>(dt.second)  <span class="hljs-comment"># 秒 0</span><br><span class="hljs-built_in">print</span>(dt.date())  <span class="hljs-comment"># 2023-10-10</span><br><span class="hljs-built_in">print</span>(dt.time())  <span class="hljs-comment"># 12:30:00</span><br><span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;=&quot;</span>*<span class="hljs-number">20</span>)<br><br><br><span class="hljs-comment"># 3 日期的转换</span><br><span class="hljs-comment"># 日期对象：datetime对象</span><br><span class="hljs-comment"># 日期字符串：“2023-10-10 12:30:00”</span><br><span class="hljs-comment"># 时间戳：1694502400.0</span><br><br><span class="hljs-comment"># 日期对象转换为日期字符串</span><br><span class="hljs-comment"># strftime() 用于将日期对象转换为字符串格式</span><br>dfstr = dt.strftime(<span class="hljs-string">&#x27;%Y-%m-%d %H:%M:%S&#x27;</span>)<br><span class="hljs-built_in">print</span>(<span class="hljs-built_in">type</span>(dfstr))  <span class="hljs-comment"># &lt;class &#x27;str&#x27;&gt;</span><br><span class="hljs-built_in">print</span>(dfstr)  <span class="hljs-comment"># 2023-10-10 12:30:00</span><br><span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;=&quot;</span>*<span class="hljs-number">20</span>)<br><br><br><span class="hljs-comment"># 日期字符串转换为日期对象</span><br><span class="hljs-comment"># datetime.strptime() 用于将字符串转换为日期对象</span><br>dt = datetime.datetime.strptime(dfstr, <span class="hljs-string">&#x27;%Y-%m-%d %H:%M:%S&#x27;</span>)<br><span class="hljs-built_in">print</span>(<span class="hljs-built_in">type</span>(dt))  <span class="hljs-comment"># &lt;class &#x27;datetime.datetime&#x27;&gt;</span><br><span class="hljs-built_in">print</span>(dt)  <span class="hljs-comment"># 2023-10-10 12:30:00</span><br><span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;=&quot;</span>*<span class="hljs-number">20</span>)<br><br><br><span class="hljs-comment"># 时间差 timedelta</span><br><span class="hljs-comment"># 求七天后的日期</span><br>d1 = datetime.timedelta(days=<span class="hljs-number">25</span>)<br>addt = dt + d1<br>delt = dt - d1<br><span class="hljs-built_in">print</span>(dt)  <span class="hljs-comment"># &lt;class &#x27;datetime.datetime&#x27;&gt;</span><br><span class="hljs-built_in">print</span>(addt)  <span class="hljs-comment"># 2023-10-17 12:30:00</span><br><span class="hljs-built_in">print</span>(delt)  <span class="hljs-comment"># 2023-09-24 12:30:00</span><br><span class="hljs-built_in">print</span>(delt.day)  <span class="hljs-comment"># 25</span><br><span class="hljs-built_in">print</span>(delt.day // <span class="hljs-number">5</span>)  <span class="hljs-comment"># 5</span><br></code></pre></td></tr></table></figure>
+
+<p>&emsp;</p>
+<h4 id="4-文件操作"><a href="#4-文件操作" class="headerlink" title="4.文件操作"></a>4.文件操作</h4><p>&emsp;&emsp;读写文件靠内置 <code>open()</code>。模式要分清：**<code>r</code> 只读<strong>（不存在报错）、</strong><code>w</code> 清空写<strong>（不存在则新建）、</strong><code>a</code> 追加写**（不存在则新建）；带 <code>b</code> 的是二进制模式（图片、音视频）。<code>read()</code> 读全部、<code>read(n)</code> 读 n 个字符（第二次调用从上次位置继续）、<code>readline()</code> 读一行、<code>readlines()</code> 读全部成列表。最推荐 <strong><code>with open(...) as f:</code></strong> 写法——离开代码块自动 <code>close()</code>，不怕忘了关文件导致资源泄漏。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> os<br><br><br><span class="hljs-comment"># 1 文件操作</span><br><br><br><span class="hljs-comment"># 1.1 读取文件</span><br><span class="hljs-comment"># f = open(&quot;hello.txt&quot;, &quot;r&quot;)</span><br><span class="hljs-comment">#  r：只读read。如果文件不存在，会报错</span><br><span class="hljs-comment">#  rb：二进制只读read binary。如果文件不存在，会报错</span><br>f = <span class="hljs-built_in">open</span>(<span class="hljs-string">&quot;Python/Python_day11/hello.txt&quot;</span>, <span class="hljs-string">&quot;r&quot;</span>, encoding=<span class="hljs-string">&quot;utf-8&quot;</span>)  <span class="hljs-comment"># 不是二进制的文件，都需要指定编码方式</span><br><span class="hljs-built_in">print</span>(f.read()) <span class="hljs-comment"># 读取文件所有内容</span><br><span class="hljs-comment">#print(f.read(10)) # 读取文件前10个字符</span><br><span class="hljs-comment">#print(f.read(10)) # 继续往后读取10个字符</span><br><br><span class="hljs-comment"># print(f.readline()) # 一次读取文件第一行</span><br><span class="hljs-comment"># print(f.readline()) # 一次读取文件第二行</span><br><span class="hljs-comment"># print(f.readline()) # 一次读取文件第三行</span><br><span class="hljs-comment"># print(f.readline()) # 一次读取文件第四行</span><br><span class="hljs-comment"># print(f.readline()) # 一次读取文件第五行</span><br><br><span class="hljs-comment"># print(f.readlines()) # 一次读取文件所有行</span><br>f.close()<br><span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;=&quot;</span>*<span class="hljs-number">20</span>)<br><br><br><span class="hljs-comment"># 1.2 写入文件</span><br><span class="hljs-comment">#  w：清空写write。如果文件不存在，会创建新文件</span><br><span class="hljs-comment">#  wb：二进制只写write binary。如果文件不存在，会创建新文件</span><br><span class="hljs-comment">#  a：追加写append。如果文件不存在，会创建新文件</span><br><span class="hljs-comment">#  ab：二进制追加append binary。如果文件不存在，会创建新文件</span><br>f = <span class="hljs-built_in">open</span>(<span class="hljs-string">&quot;Python/Python_day11/hello.txt&quot;</span>, <span class="hljs-string">&quot;w&quot;</span>, encoding=<span class="hljs-string">&quot;utf-8&quot;</span>)  <span class="hljs-comment"># 不是二进制的文件，都需要指定编码方式</span><br>f.write(<span class="hljs-string">&quot;你好，空指针&quot;</span>)  <span class="hljs-comment"># 写入文件</span><br><span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;=&quot;</span>*<span class="hljs-number">20</span>)<br>f.close()<br><br><br><br><br><span class="hljs-comment"># 关闭文件</span><br><span class="hljs-comment"># with-as ：会自动关闭文件</span><br><span class="hljs-keyword">with</span> <span class="hljs-built_in">open</span>(<span class="hljs-string">&quot;Python/Python_day11/hello.txt&quot;</span>, <span class="hljs-string">&quot;r&quot;</span>, encoding=<span class="hljs-string">&quot;utf-8&quot;</span>) <span class="hljs-keyword">as</span> f:<br>    <span class="hljs-built_in">print</span>(f.read())<br><span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;=&quot;</span>*<span class="hljs-number">20</span>)<br></code></pre></td></tr></table></figure>
+
+<p>&emsp;</p>
+<h4 id="5-作业"><a href="#5-作业" class="headerlink" title="5.作业"></a>5.作业</h4><p>&emsp;&emsp;作业是把 Day10 的「包 / 模块」落进实战：自建一个 <code>test</code> 包，里面 <code>sort.py</code> 提供三个函数——<code>sort1</code> 降序（不改动原列表）、<code>sort2</code> 升序（不改动原列表）、<code>find_index</code> 返回指定元素所有下标组成的列表；再在另一个文件里 <code>from test import sort</code> 调用它们。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment">#1.自定义模块:</span><br><span class="hljs-comment"># a.建立一个包:test</span><br><span class="hljs-comment"># b.在包的下创建一个排序的模块 sort.py</span><br><span class="hljs-comment"># 模块下的功能</span><br><span class="hljs-comment"># 对列表进行降序排序(不修改原列表)def sort1(l) -&gt; list:</span><br><span class="hljs-comment"># 对列表进行升序排序(不修改原列表):def sort2(l) -&gt; list:</span><br><span class="hljs-comment"># def find_index(l, n) -&gt; list:</span><br><span class="hljs-comment"># 获取列表中所有与指定元素重复的元素下标，并返回这些下标所组成的列表</span><br><br><span class="hljs-comment"># c.在另外一个文件中 aa.py导入上述包中的模块sort.py，完成模块中功能的调用</span><br><span class="hljs-keyword">from</span> test <span class="hljs-keyword">import</span> sort<br><br>l = [<span class="hljs-number">1</span>, <span class="hljs-number">3</span>, <span class="hljs-number">2</span>, <span class="hljs-number">4</span>, <span class="hljs-number">5</span>]<br><span class="hljs-built_in">print</span>(sort.sort1(l))<br><span class="hljs-built_in">print</span>(sort.sort2(l))<br><span class="hljs-built_in">print</span>(sort.find_index(l, <span class="hljs-number">2</span>))<br></code></pre></td></tr></table></figure>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E6%99%BA%E6%B3%8AAI%E8%AF%BE%E7%A8%8B/" class="category-chain-item">智泊AI课程</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/%E6%99%BA%E6%B3%8AAI%E8%AF%BE%E7%A8%8B/Python/" class="category-chain-item">Python</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>智泊Python--Day11</div>
+      <div>https://one-null-pointer.github.io/2026/07/30/智泊Python--Day11/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>Author</div>
+          <div>liaoyue</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>Posted on</div>
+          <div>July 30, 2026</div>
+        </div>
+      
+      
+      <div class="license-meta-item">
+        <div>传送口</div>
+        <div>
+          
+            
+            
+              <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+              <span class="hint--top hint--rounded" aria-label="点击进行传送">
+                <i class="iconfont icon-by"></i>
+              </span>
+              </a>
+            
+          
+        </div>
+      </div>
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2026/07/31/%E6%99%BA%E6%B3%8APython--Day12/" title="智泊Python--Day12">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">智泊Python--Day12</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2026/07/29/%E6%99%BA%E6%B3%8APython--Day10/" title="智泊Python--Day10">
+                        <span class="hidden-mobile">智泊Python--Day10</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;Table of Contents</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">Keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://github.com/" target="_blank" rel="nofollow noopener"><span>pointer</span></a> <i class="iconfont icon-love"></i> <a href="https://mp.weixin.qq.com/s/6ncLUtaiJ9j_sMjZT5z-2w" target="_blank" rel="nofollow noopener"><span>一个爱学习的空指针</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      headingSelector : CONFIG.toc.headingSelector || 'h1,h2,h3,h4,h5,h6',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      collapseDepth   : CONFIG.toc.collapseDepth || 0,
+      scrollSmooth    : true,
+      headingsOffset  : -boardTop
+    });
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.10/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">Blog works best with JavaScript enabled</div>
+  </noscript>
+</body>
+</html>
