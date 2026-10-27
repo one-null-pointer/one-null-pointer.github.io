@@ -1,0 +1,946 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="liaoyue">
+  <meta name="keywords" content="">
+  
+    <meta property="og:type" content="website">
+<meta property="og:title" content="one-null-poniter">
+<meta property="og:url" content="https://one-null-pointer.github.io/blog/page/19/index.html">
+<meta property="og:site_name" content="one-null-poniter">
+<meta property="og:locale" content="en_US">
+<meta property="article:author" content="liaoyue">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  
+  <title>one-null-poniter</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"one-null-pointer.github.io","root":"/","version":"1.9.2","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 5.4.2"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 100vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>one null pointer</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                吾
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                類
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                學
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/blog/">
+                <i class="iconfont icon-cliplist"></i>
+                列
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="find what you love and follow it to glory"></span>
+          
+        </div>
+
+        
+      </div>
+
+      
+        <div class="scroll-down-bar">
+          <i class="iconfont icon-arrowdown"></i>
+        </div>
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      <div class="container nopadding-x-md">
+        <div id="board"
+          style="margin-top: 0">
+          
+          <div class="container">
+            <div class="row">
+              <div class="col-12 col-md-10 m-auto">
+                
+
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/2022/07/11/web%E5%89%8D%E8%A8%80/" target="_self">
+          <img src="/img/web1.png" srcset="/img/loading.gif" lazyload alt="web前言">
+        </a>
+      </div>
+    
+    <article class="col-12 col-md-8 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2022/07/11/web%E5%89%8D%E8%A8%80/" target="_self">
+          web前言
+        </a>
+      </h1>
+
+      
+      <a class="index-excerpt " href="/2022/07/11/web%E5%89%8D%E8%A8%80/" target="_self">
+        <div>
+          前言&amp;emsp;&amp;emsp;在之前所提到的中间件，网站源码等问题以外，攻击者还能够利用操作系统、数据库等不同的模板进行对应的攻击操作。
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2022-07-11 22:01" pubdate>
+              2022-07-11
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/web/" class="category-chain-item">web</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/2022/07/11/%E5%A4%95%E9%98%B3/" target="_self">
+          <img src="/img/sun.png" srcset="/img/loading.gif" lazyload alt="夕阳">
+        </a>
+      </div>
+    
+    <article class="col-12 col-md-8 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2022/07/11/%E5%A4%95%E9%98%B3/" target="_self">
+          夕阳
+        </a>
+      </h1>
+
+      
+      <a class="index-excerpt " href="/2022/07/11/%E5%A4%95%E9%98%B3/" target="_self">
+        <div>
+          夕阳&amp;emsp;&amp;emsp;跑完步后浅拍下夕阳，确实是个养老的好地方。在夕阳下，两个人坐在太师椅上，也不说话，就摇啊摇，多是一件美事啊  &amp;emsp;  &amp;emsp;
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2022-07-11 21:27" pubdate>
+              2022-07-11
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E6%97%A5%E8%AE%B0/" class="category-chain-item">日记</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/2022/07/11/%E5%8A%A0%E5%AF%86%E7%BC%96%E7%A0%81%E6%B8%97%E9%80%8F%E6%BC%94%E7%A4%BA%EF%BC%88sql%E6%B3%A8%E5%85%A5%E7%B1%BB%E5%9E%8B%EF%BC%89/" target="_self">
+          <img src="/img/web1.png" srcset="/img/loading.gif" lazyload alt="加密编码渗透演示（sql注入类型）">
+        </a>
+      </div>
+    
+    <article class="col-12 col-md-8 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2022/07/11/%E5%8A%A0%E5%AF%86%E7%BC%96%E7%A0%81%E6%B8%97%E9%80%8F%E6%BC%94%E7%A4%BA%EF%BC%88sql%E6%B3%A8%E5%85%A5%E7%B1%BB%E5%9E%8B%EF%BC%89/" target="_self">
+          加密编码渗透演示（sql注入类型）
+        </a>
+      </h1>
+
+      
+      <a class="index-excerpt " href="/2022/07/11/%E5%8A%A0%E5%AF%86%E7%BC%96%E7%A0%81%E6%B8%97%E9%80%8F%E6%BC%94%E7%A4%BA%EF%BC%88sql%E6%B3%A8%E5%85%A5%E7%B1%BB%E5%9E%8B%EF%BC%89/" target="_self">
+        <div>
+          加密编码渗透演示（sql注入类型）1.打开题目&amp;emsp;&amp;emsp;这里使用的是墨者学院的靶场（https:&#x2F;&#x2F;www.mozhe.cn&#x2F;） &amp;emsp;&amp;emsp;啥都好，就是要金币，太不友好了，不给白嫖！！！！  2.进入网页 3.查找切入点&amp;emsp;&amp;emsp;表面没啥，但是注意到下面有个维护通知，点开看看  &amp;emsp;&amp;emsp;可以看见为new&#x2F;php格式，我们尝试退回到new看看
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2022-07-11 11:15" pubdate>
+              2022-07-11
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/web/" class="category-chain-item">web</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/2022/07/10/%E5%8A%A0%E5%AF%86%E7%BC%96%E7%A0%81%E7%AE%97%E6%B3%95/" target="_self">
+          <img src="/img/web1.png" srcset="/img/loading.gif" lazyload alt="加密编码算法">
+        </a>
+      </div>
+    
+    <article class="col-12 col-md-8 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2022/07/10/%E5%8A%A0%E5%AF%86%E7%BC%96%E7%A0%81%E7%AE%97%E6%B3%95/" target="_self">
+          加密编码算法
+        </a>
+      </h1>
+
+      
+      <a class="index-excerpt " href="/2022/07/10/%E5%8A%A0%E5%AF%86%E7%BC%96%E7%A0%81%E7%AE%97%E6%B3%95/" target="_self">
+        <div>
+          加密编码算法1.前言&amp;emsp;&amp;emsp;在渗透测试中，一般的敏感信息都会采用加密编码的方式进行处理，所以需要我们了解到常用的一些加密方式。加密解密可以通过第三方平台、工具软件、自己代码编写等方式进行。 &amp;emsp;&amp;emsp;参考加解密网站：  https:&#x2F;&#x2F;www.sojson.com&#x2F;encrypt&#x2F; http:&#x2F;&#x2F;tool.chacuo.net&#x2F;cryptaes   2.常见加密编码解
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2022-07-10 18:40" pubdate>
+              2022-07-10
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/web/" class="category-chain-item">web</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/2022/07/05/ASP%E6%BC%94%E7%A4%BA%E6%94%BB%E5%87%BB/" target="_self">
+          <img src="/img/web1.png" srcset="/img/loading.gif" lazyload alt="ASP演示攻击">
+        </a>
+      </div>
+    
+    <article class="col-12 col-md-8 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2022/07/05/ASP%E6%BC%94%E7%A4%BA%E6%94%BB%E5%87%BB/" target="_self">
+          ASP演示攻击
+        </a>
+      </h1>
+
+      
+      <a class="index-excerpt " href="/2022/07/05/ASP%E6%BC%94%E7%A4%BA%E6%94%BB%E5%87%BB/" target="_self">
+        <div>
+          ASP演示攻击1.打开靶场，选择ASP注入 2.进入网站，打开任意界面，查看页面的后缀，根据后缀判断 3.查看网页底部，发现关键词XYCMS 4.搜索XYCMS源码，下载 5.打开文件夹，寻找关键数据库路径文件xydata，找到文件xycms.mdb(asp特有文件)  6.该文件存有管理员的账号密码 7.根据下载的源码路径，可以去尝试访问网站的目录： http:&#x2F;&#x2F;192.168.139.137
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2022-07-05 18:53" pubdate>
+              2022-07-05
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/web/" class="category-chain-item">web</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/2022/07/04/web%E6%BA%90%E7%A0%81%E6%89%A9%E5%B1%95/" target="_self">
+          <img src="/img/web1.png" srcset="/img/loading.gif" lazyload alt="web源码扩展">
+        </a>
+      </div>
+    
+    <article class="col-12 col-md-8 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2022/07/04/web%E6%BA%90%E7%A0%81%E6%89%A9%E5%B1%95/" target="_self">
+          web源码扩展
+        </a>
+      </h1>
+
+      
+      <a class="index-excerpt " href="/2022/07/04/web%E6%BA%90%E7%A0%81%E6%89%A9%E5%B1%95/" target="_self">
+        <div>
+          WEB源码一、前言&amp;emsp;&amp;emsp;Web源码在安全测试中是非常重要的信息来源，可以用来代码审计漏洞也可以用来做信息突破口，其中Web源码有很多技术需要简明分析。比如：获取某ASP源码后可以采用默认数据库下载为突破，获取某其他脚本源码漏洞可以进行代码审计挖掘或分析其业务逻辑等，总之源码的获取将为后期的安全测试提供了更多的思路。  二、web源码目录结构 据库配置文件  后台目录  模板目录
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2022-07-04 19:59" pubdate>
+              2022-07-04
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/web/" class="category-chain-item">web</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/2022/07/02/%E6%8A%93%E5%8C%85%E6%94%BB%E5%87%BB%E6%BC%94%E7%A4%BA/" target="_self">
+          <img src="/img/web1.png" srcset="/img/loading.gif" lazyload alt="抓包攻击演示">
+        </a>
+      </div>
+    
+    <article class="col-12 col-md-8 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2022/07/02/%E6%8A%93%E5%8C%85%E6%94%BB%E5%87%BB%E6%BC%94%E7%A4%BA/" target="_self">
+          抓包攻击演示
+        </a>
+      </h1>
+
+      
+      <a class="index-excerpt " href="/2022/07/02/%E6%8A%93%E5%8C%85%E6%94%BB%E5%87%BB%E6%BC%94%E7%A4%BA/" target="_self">
+        <div>
+          抓包攻击演示（Burp）1.进入投票系统，每个ip只能点击一次 2.使用burp进行抓包，增加X_FORWARDED_FOR 3.发送到intruder，设置变量 4.设置数值 5.开始攻击 6.完成任务
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2022-07-02 15:15" pubdate>
+              2022-07-02
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/web/" class="category-chain-item">web</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/2022/07/02/http%E5%92%8Chttps/" target="_self">
+          <img src="/img/web1.png" srcset="/img/loading.gif" lazyload alt="http和https">
+        </a>
+      </div>
+    
+    <article class="col-12 col-md-8 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2022/07/02/http%E5%92%8Chttps/" target="_self">
+          http和https
+        </a>
+      </h1>
+
+      
+      <a class="index-excerpt " href="/2022/07/02/http%E5%92%8Chttps/" target="_self">
+        <div>
+          1.HTTP&#x2F;S数据包种类 1）Request 请求数据包 2）Proxy 代理服务器 3）Response 返回数据包  2.协议结构  –HTTPS协议需要得到CA申请证书。 –HTTP是超文本传输协议，信息是明文传输，HTTPS则是具有安全性的SSL加密传输协议。 –HTTP和HTTPS使用的是完全不同的连接方式，用的端口也不一样，HTTP使用80端口，HTTPS使用443。 –HTTP的连
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2022-07-02 14:04" pubdate>
+              2022-07-02
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/web/" class="category-chain-item">web</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/2022/07/01/web%E4%B8%80%E4%BA%9B%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5/" target="_self">
+          <img src="/img/web1.png" srcset="/img/loading.gif" lazyload alt="web一些基本概念">
+        </a>
+      </div>
+    
+    <article class="col-12 col-md-8 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2022/07/01/web%E4%B8%80%E4%BA%9B%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5/" target="_self">
+          web一些基本概念
+        </a>
+      </h1>
+
+      
+      <a class="index-excerpt " href="/2022/07/01/web%E4%B8%80%E4%BA%9B%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5/" target="_self">
+        <div>
+          一、域名1.域名 ​        域名（Domain Name），又称网域，是由一串用点分隔的名字组成的Internet上某一台计算机或计算机组的名称，用于在数据传输时对计算机的定位标识。 ​       由于IP地址具有不方便记忆并且不能显示地址组织的名称和性质等缺点，人们设计出了域名，并通过网域名称系统（DNS，Domain Name System）来将域名和IP地址相互映射，使人更方便地访
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2022-07-01 15:29" pubdate>
+              2022-07-01
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/web/" class="category-chain-item">web</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/2021/12/18/%E5%AF%86%E7%A0%81%E5%AD%A6%E5%A4%8D%E4%B9%A0%E5%86%85%E5%AE%B9%EF%BC%88%E4%BA%8C%EF%BC%89/" target="_self">
+          <img src="/img/cryptography.png" srcset="/img/loading.gif" lazyload alt="密码学复习内容（二）">
+        </a>
+      </div>
+    
+    <article class="col-12 col-md-8 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2021/12/18/%E5%AF%86%E7%A0%81%E5%AD%A6%E5%A4%8D%E4%B9%A0%E5%86%85%E5%AE%B9%EF%BC%88%E4%BA%8C%EF%BC%89/" target="_self">
+          密码学复习内容（二）
+        </a>
+      </h1>
+
+      
+      <a class="index-excerpt " href="/2021/12/18/%E5%AF%86%E7%A0%81%E5%AD%A6%E5%A4%8D%E4%B9%A0%E5%86%85%E5%AE%B9%EF%BC%88%E4%BA%8C%EF%BC%89/" target="_self">
+        <div>
+          密码学复习内容（二）1.生日攻击的意义&amp;emsp;&amp;emsp;问题：有一个hash函数，265比特长，安全级别是多少，为什么       &amp;emsp; 2.Merkle-Damgard 转换&amp;emsp;&amp;emsp;单独作为一个考点，用一个md变换，带密钥，设计一个mac函数，为什么不安全 &amp;emsp;&amp;emsp;问题： &amp;emsp;&amp;emsp;4）作业题    &amp;emsp; 3.SPN结构的作用
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-12-18 18:03" pubdate>
+              2021-12-18
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E5%AF%86%E7%A0%81%E5%AD%A6%E7%AC%94%E8%AE%B0/" class="category-chain-item">密码学笔记</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+
+
+  <nav aria-label="navigation">
+    <span class="pagination" id="pagination">
+      <a class="extend prev" rel="prev" href="/blog/page/18/#board"><i class="iconfont icon-arrowleft"></i></a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/17/#board">17</a><a class="page-number" href="/blog/page/18/#board">18</a><span class="page-number current">19</span><a class="page-number" href="/blog/page/20/#board">20</a><a class="extend next" rel="next" href="/blog/page/20/#board"><i class="iconfont icon-arrowright"></i></a>
+    </span>
+  </nav>
+
+
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">Keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://github.com/" target="_blank" rel="nofollow noopener"><span>pointer</span></a> <i class="iconfont icon-love"></i> <a href="https://mp.weixin.qq.com/s/6ncLUtaiJ9j_sMjZT5z-2w" target="_blank" rel="nofollow noopener"><span>一个爱学习的空指针</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">Blog works best with JavaScript enabled</div>
+  </noscript>
+</body>
+</html>

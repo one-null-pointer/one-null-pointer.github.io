@@ -1,0 +1,1016 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="liaoyue">
+  <meta name="keywords" content="">
+  
+    <meta property="og:type" content="website">
+<meta property="og:title" content="one-null-poniter">
+<meta property="og:url" content="https://one-null-pointer.github.io/blog/page/2/index.html">
+<meta property="og:site_name" content="one-null-poniter">
+<meta property="og:locale" content="en_US">
+<meta property="article:author" content="liaoyue">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  
+  <title>one-null-poniter</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"one-null-pointer.github.io","root":"/","version":"1.9.2","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 5.4.2"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 100vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>one null pointer</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                吾
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                類
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                學
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/blog/">
+                <i class="iconfont icon-cliplist"></i>
+                列
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="find what you love and follow it to glory"></span>
+          
+        </div>
+
+        
+      </div>
+
+      
+        <div class="scroll-down-bar">
+          <i class="iconfont icon-arrowdown"></i>
+        </div>
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      <div class="container nopadding-x-md">
+        <div id="board"
+          style="margin-top: 0">
+          
+          <div class="container">
+            <div class="row">
+              <div class="col-12 col-md-10 m-auto">
+                
+
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/2026/08/07/%E6%99%BA%E6%B3%8AAI--%E6%8F%90%E7%A4%BA%E8%AF%8D%E6%A6%82%E5%BF%B5%E5%8F%8A%E4%BC%98%E5%8C%96/" target="_self">
+          <img src="/img/zhiboai.png" srcset="/img/loading.gif" lazyload alt="智泊AI--提示词概念及优化">
+        </a>
+      </div>
+    
+    <article class="col-12 col-md-8 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2026/08/07/%E6%99%BA%E6%B3%8AAI--%E6%8F%90%E7%A4%BA%E8%AF%8D%E6%A6%82%E5%BF%B5%E5%8F%8A%E4%BC%98%E5%8C%96/" target="_self">
+          智泊AI--提示词概念及优化
+        </a>
+      </h1>
+
+      
+      <a class="index-excerpt " href="/2026/08/07/%E6%99%BA%E6%B3%8AAI--%E6%8F%90%E7%A4%BA%E8%AF%8D%E6%A6%82%E5%BF%B5%E5%8F%8A%E4%BC%98%E5%8C%96/" target="_self">
+        <div>
+          智泊AI–提示词概念及优化0.前言&amp;emsp;&amp;emsp;这节课主要针对提示词工程以及相关优化。具体概念这里就不详细展开了，重点是看一些工程化和优化的技巧。 &amp;emsp; 1.什么是提示词&amp;emsp;&amp;emsp;简单来说，提示词是用户发送给大模型的文字，用于引导大模型生成特定的输出结果，可以包含指令、问题等各种内容，是用户与大模型沟通的途径。 &amp;emsp; 2.用户的概念区分&amp;emsp;&amp;emsp
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2026-08-07 00:00" pubdate>
+              2026-08-07
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E6%99%BA%E6%B3%8AAI%E8%AF%BE%E7%A8%8B/" class="category-chain-item">智泊AI课程</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/%E6%99%BA%E6%B3%8AAI%E8%AF%BE%E7%A8%8B/%E5%A4%A7%E6%A8%A1%E5%9E%8B%E5%9F%BA%E7%A1%80/" class="category-chain-item">大模型基础</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/2026/08/04/%E6%99%BA%E6%B3%8AAI--%E5%A4%A7%E6%A8%A1%E5%9E%8B%E5%9F%BA%E7%A1%80/" target="_self">
+          <img src="/img/zhiboai.png" srcset="/img/loading.gif" lazyload alt="智泊AI--大模型基础">
+        </a>
+      </div>
+    
+    <article class="col-12 col-md-8 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2026/08/04/%E6%99%BA%E6%B3%8AAI--%E5%A4%A7%E6%A8%A1%E5%9E%8B%E5%9F%BA%E7%A1%80/" target="_self">
+          智泊AI--大模型基础
+        </a>
+      </h1>
+
+      
+      <a class="index-excerpt " href="/2026/08/04/%E6%99%BA%E6%B3%8AAI--%E5%A4%A7%E6%A8%A1%E5%9E%8B%E5%9F%BA%E7%A1%80/" target="_self">
+        <div>
+          智泊AI–大模型基础0.前言&amp;emsp;&amp;emsp;之前一直在跟着 hello-agent 的 github 社区学习，但总觉得差点什么——没有完整的课程体系，也缺少专业的项目，总觉得差点意思。这次报了智泊的 AI 课程，一是巩固之前的知识，二是查清楚自己缺失的部分到底在哪里。 &amp;emsp; 1.AI时代的开启&amp;emsp;&amp;emsp;大模型并非凭空出现，以下几个标志性节点勾勒出 AI 从专用系统走
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2026-08-04 00:00" pubdate>
+              2026-08-04
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E6%99%BA%E6%B3%8AAI%E8%AF%BE%E7%A8%8B/" class="category-chain-item">智泊AI课程</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/%E6%99%BA%E6%B3%8AAI%E8%AF%BE%E7%A8%8B/%E5%A4%A7%E6%A8%A1%E5%9E%8B%E5%9F%BA%E7%A1%80/" class="category-chain-item">大模型基础</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/2026/08/02/%E6%99%BA%E6%B3%8APython--Day14/" target="_self">
+          <img src="/img/python.png" srcset="/img/loading.gif" lazyload alt="智泊Python--Day14">
+        </a>
+      </div>
+    
+    <article class="col-12 col-md-8 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2026/08/02/%E6%99%BA%E6%B3%8APython--Day14/" target="_self">
+          智泊Python--Day14
+        </a>
+      </h1>
+
+      
+      <a class="index-excerpt " href="/2026/08/02/%E6%99%BA%E6%B3%8APython--Day14/" target="_self">
+        <div>
+          智泊Python–Day14&amp;emsp;&amp;emsp;Day14 是 Python 基础部分的收官——异常处理。先分清两个概念：错误是代码还没运行就报（语法错、缩进错），异常是运行时才炸（除零、下标越界、键不存在）。异常处理的意义是：让程序遇到意外时不崩溃，而是优雅地捕获、提示、或走兜底逻辑。核心语法就是 try-except 家族，外加主动 raise 和 assert。 &amp;emsp; 1.异常错
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2026-08-02 00:00" pubdate>
+              2026-08-02
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E6%99%BA%E6%B3%8AAI%E8%AF%BE%E7%A8%8B/" class="category-chain-item">智泊AI课程</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/%E6%99%BA%E6%B3%8AAI%E8%AF%BE%E7%A8%8B/Python/" class="category-chain-item">Python</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/2026/08/01/%E6%99%BA%E6%B3%8APython--Day13/" target="_self">
+          <img src="/img/python.png" srcset="/img/loading.gif" lazyload alt="智泊Python--Day13">
+        </a>
+      </div>
+    
+    <article class="col-12 col-md-8 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2026/08/01/%E6%99%BA%E6%B3%8APython--Day13/" target="_self">
+          智泊Python--Day13
+        </a>
+      </h1>
+
+      
+      <a class="index-excerpt " href="/2026/08/01/%E6%99%BA%E6%B3%8APython--Day13/" target="_self">
+        <div>
+          智泊Python–Day13&amp;emsp;&amp;emsp;Day13 是面向对象的深水区，把 Day12 的「类与对象」往工程化方向推进。这一天的线索是封装的强化 → 属性的受控访问 → 方法的分类 → 继承与多态 → 特殊机制。重点掌握四个：私有属性&#x2F;方法（__ 前缀做信息隐藏）、**property（把方法当属性用、还能加校验）、类方法 &#x2F; 静态方法（不建对象就能调用、省内存）、以及继承 &#x2F; 重写
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2026-08-01 00:00" pubdate>
+              2026-08-01
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E6%99%BA%E6%B3%8AAI%E8%AF%BE%E7%A8%8B/" class="category-chain-item">智泊AI课程</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/%E6%99%BA%E6%B3%8AAI%E8%AF%BE%E7%A8%8B/Python/" class="category-chain-item">Python</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/2026/07/31/%E6%99%BA%E6%B3%8APython--Day12/" target="_self">
+          <img src="/img/python.png" srcset="/img/loading.gif" lazyload alt="智泊Python--Day12">
+        </a>
+      </div>
+    
+    <article class="col-12 col-md-8 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2026/07/31/%E6%99%BA%E6%B3%8APython--Day12/" target="_self">
+          智泊Python--Day12
+        </a>
+      </h1>
+
+      
+      <a class="index-excerpt " href="/2026/07/31/%E6%99%BA%E6%B3%8APython--Day12/" target="_self">
+        <div>
+          智泊Python–Day12&amp;emsp;&amp;emsp;Day12 进入 面向对象编程（OOP）——Python 从这一刻从「写函数」升级到「建模现实」。核心心法：类（class）是模板、对象（object）是实例；用类把「数据（属性）」和「行为（方法）」打包在一起。这一天的链条是：先对比面向过程 &#x2F; 面向对象的思想差异，再定义类与对象、理解 self、搞清构造 &#x2F; 析构方法，最后分清「类属性」与「对
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2026-07-31 00:00" pubdate>
+              2026-07-31
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E6%99%BA%E6%B3%8AAI%E8%AF%BE%E7%A8%8B/" class="category-chain-item">智泊AI课程</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/%E6%99%BA%E6%B3%8AAI%E8%AF%BE%E7%A8%8B/Python/" class="category-chain-item">Python</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/2026/07/30/%E6%99%BA%E6%B3%8APython--Day11/" target="_self">
+          <img src="/img/python.png" srcset="/img/loading.gif" lazyload alt="智泊Python--Day11">
+        </a>
+      </div>
+    
+    <article class="col-12 col-md-8 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2026/07/30/%E6%99%BA%E6%B3%8APython--Day11/" target="_self">
+          智泊Python--Day11
+        </a>
+      </h1>
+
+      
+      <a class="index-excerpt " href="/2026/07/30/%E6%99%BA%E6%B3%8APython--Day11/" target="_self">
+        <div>
+          智泊Python–Day11&amp;emsp;&amp;emsp;Day11 转向「标准库实战」——不写业务，而是用 Python 自带模块搞定日常任务。os 管文件系统、json 管数据交换格式、time&#x2F;datetime 管时间、文件操作管读写磁盘。这四块是写脚本的刚需：配环境、读配置、记日志、存结果全都用得上。 &amp;emsp; 1.os模块&amp;emsp;&amp;emsp;os 用于和系统打交道、操作文件 &#x2F; 文件夹
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2026-07-30 00:00" pubdate>
+              2026-07-30
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E6%99%BA%E6%B3%8AAI%E8%AF%BE%E7%A8%8B/" class="category-chain-item">智泊AI课程</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/%E6%99%BA%E6%B3%8AAI%E8%AF%BE%E7%A8%8B/Python/" class="category-chain-item">Python</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/2026/07/29/%E6%99%BA%E6%B3%8APython--Day10/" target="_self">
+          <img src="/img/python.png" srcset="/img/loading.gif" lazyload alt="智泊Python--Day10">
+        </a>
+      </div>
+    
+    <article class="col-12 col-md-8 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2026/07/29/%E6%99%BA%E6%B3%8APython--Day10/" target="_self">
+          智泊Python--Day10
+        </a>
+      </h1>
+
+      
+      <a class="index-excerpt " href="/2026/07/29/%E6%99%BA%E6%B3%8APython--Day10/" target="_self">
+        <div>
+          智泊Python–Day10&amp;emsp;&amp;emsp;Day10 是函数主题的收尾，并引出 Python 的「惰性计算」体系。先讲递归（函数自己调用自己，靠临界值收口），再讲列表 &#x2F; 字典 &#x2F; 集合推导式（一行 for 生成容器），然后重点是生成器和迭代器——这两者都「用到才生成」，能省内存；最后落到工程层面：第三方包怎么装、包 &#x2F; 模块 怎么组织与导入。记住一句话：生成器 ⊂ 迭代器 ⊂ 可迭代对
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2026-07-29 00:00" pubdate>
+              2026-07-29
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E6%99%BA%E6%B3%8AAI%E8%AF%BE%E7%A8%8B/" class="category-chain-item">智泊AI课程</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/%E6%99%BA%E6%B3%8AAI%E8%AF%BE%E7%A8%8B/Python/" class="category-chain-item">Python</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/2026/07/28/%E6%99%BA%E6%B3%8APython--Day9/" target="_self">
+          <img src="/img/python.png" srcset="/img/loading.gif" lazyload alt="智泊Python--Day9">
+        </a>
+      </div>
+    
+    <article class="col-12 col-md-8 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2026/07/28/%E6%99%BA%E6%B3%8APython--Day9/" target="_self">
+          智泊Python--Day9
+        </a>
+      </h1>
+
+      
+      <a class="index-excerpt " href="/2026/07/28/%E6%99%BA%E6%B3%8APython--Day9/" target="_self">
+        <div>
+          智泊Python–Day9&amp;emsp;&amp;emsp;Day9 继续函数主题，钻进「作用域」和「装饰器」。作用域决定了变量在哪能见到——Python 按 LEGB 顺序查找：Local（局部）→ Enclosing（外层函数）→ Global（全局）→ Built-in（内置）。global 声明要改全局变量，nonlocal 声明要改外层函数的变量。闭包是「函数返回函数、内层捕获外层变量」的自然产物
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2026-07-28 00:00" pubdate>
+              2026-07-28
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E6%99%BA%E6%B3%8AAI%E8%AF%BE%E7%A8%8B/" class="category-chain-item">智泊AI课程</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/%E6%99%BA%E6%B3%8AAI%E8%AF%BE%E7%A8%8B/Python/" class="category-chain-item">Python</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/2026/07/27/%E6%99%BA%E6%B3%8APython--Day8/" target="_self">
+          <img src="/img/python.png" srcset="/img/loading.gif" lazyload alt="智泊Python--Day8">
+        </a>
+      </div>
+    
+    <article class="col-12 col-md-8 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2026/07/27/%E6%99%BA%E6%B3%8APython--Day8/" target="_self">
+          智泊Python--Day8
+        </a>
+      </h1>
+
+      
+      <a class="index-excerpt " href="/2026/07/27/%E6%99%BA%E6%B3%8APython--Day8/" target="_self">
+        <div>
+          智泊Python–Day8&amp;emsp;&amp;emsp;Day8 进入函数进阶。函数是 Python 里最核心的封装单元——把重复逻辑包成名字，随时调用。这一天从函数的基本定义、参数、返回值讲起，到练习（闰年、月天数、季节、质数），再到函数嵌套与「函数名即变量」、匿名函数 lambda 与 map&#x2F;filter 高阶函数、回调函数，最后用回文 &#x2F; 最值 &#x2F; 水仙花数四道作业收尾。建议重点吃透参数顺序（位
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2026-07-27 00:00" pubdate>
+              2026-07-27
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E6%99%BA%E6%B3%8AAI%E8%AF%BE%E7%A8%8B/" class="category-chain-item">智泊AI课程</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/%E6%99%BA%E6%B3%8AAI%E8%AF%BE%E7%A8%8B/Python/" class="category-chain-item">Python</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/2026/07/26/%E6%99%BA%E6%B3%8APython--Day7/" target="_self">
+          <img src="/img/python.png" srcset="/img/loading.gif" lazyload alt="智泊Python--Day7">
+        </a>
+      </div>
+    
+    <article class="col-12 col-md-8 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2026/07/26/%E6%99%BA%E6%B3%8APython--Day7/" target="_self">
+          智泊Python--Day7
+        </a>
+      </h1>
+
+      
+      <a class="index-excerpt " href="/2026/07/26/%E6%99%BA%E6%B3%8APython--Day7/" target="_self">
+        <div>
+          智泊Python–Day7&amp;emsp;&amp;emsp;Day7 全部围绕字符串（str）展开。字符串是 Python 里最高频的数据类型，也是「不可变类型」的代表——一旦创建就不能改其中某个字符。这一天的重点是三块：  ① 字符串的基本操作（索引、切片、拼接、乘法、成员判断） ② 字符串的常用内置方法（统计、大小写、查找、拆分&#x2F;合并&#x2F;替换等） ③ 进阶的转义、编码解码、对齐、前后缀判断  &amp;emsp;
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2026-07-26 00:00" pubdate>
+              2026-07-26
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E6%99%BA%E6%B3%8AAI%E8%AF%BE%E7%A8%8B/" class="category-chain-item">智泊AI课程</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/%E6%99%BA%E6%B3%8AAI%E8%AF%BE%E7%A8%8B/Python/" class="category-chain-item">Python</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+
+
+  <nav aria-label="navigation">
+    <span class="pagination" id="pagination">
+      <a class="extend prev" rel="prev" href="/blog/"><i class="iconfont icon-arrowleft"></i></a><a class="page-number" href="/blog/">1</a><span class="page-number current">2</span><a class="page-number" href="/blog/page/3/#board">3</a><a class="page-number" href="/blog/page/4/#board">4</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/20/#board">20</a><a class="extend next" rel="next" href="/blog/page/3/#board"><i class="iconfont icon-arrowright"></i></a>
+    </span>
+  </nav>
+
+
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">Keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://github.com/" target="_blank" rel="nofollow noopener"><span>pointer</span></a> <i class="iconfont icon-love"></i> <a href="https://mp.weixin.qq.com/s/6ncLUtaiJ9j_sMjZT5z-2w" target="_blank" rel="nofollow noopener"><span>一个爱学习的空指针</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">Blog works best with JavaScript enabled</div>
+  </noscript>
+</body>
+</html>

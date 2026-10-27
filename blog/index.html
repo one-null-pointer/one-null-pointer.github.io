@@ -1,0 +1,1016 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="liaoyue">
+  <meta name="keywords" content="">
+  
+    <meta property="og:type" content="website">
+<meta property="og:title" content="one-null-poniter">
+<meta property="og:url" content="https://one-null-pointer.github.io/blog/index.html">
+<meta property="og:site_name" content="one-null-poniter">
+<meta property="og:locale" content="en_US">
+<meta property="article:author" content="liaoyue">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  
+  <title>one-null-poniter</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"one-null-pointer.github.io","root":"/","version":"1.9.2","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 5.4.2"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 100vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>one null pointer</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                吾
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                類
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                學
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/blog/">
+                <i class="iconfont icon-cliplist"></i>
+                列
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="find what you love and follow it to glory"></span>
+          
+        </div>
+
+        
+      </div>
+
+      
+        <div class="scroll-down-bar">
+          <i class="iconfont icon-arrowdown"></i>
+        </div>
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      <div class="container nopadding-x-md">
+        <div id="board"
+          style="margin-top: 0">
+          
+          <div class="container">
+            <div class="row">
+              <div class="col-12 col-md-10 m-auto">
+                
+
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/2026/09/29/%E6%99%BA%E6%B3%8AAgent--Agent%E7%94%9F%E6%80%81%E7%9A%84%E8%AE%A4%E7%9F%A5/" target="_self">
+          <img src="/img/zhiboai.png" srcset="/img/loading.gif" lazyload alt="智泊Agent--Agent生态的认知">
+        </a>
+      </div>
+    
+    <article class="col-12 col-md-8 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2026/09/29/%E6%99%BA%E6%B3%8AAgent--Agent%E7%94%9F%E6%80%81%E7%9A%84%E8%AE%A4%E7%9F%A5/" target="_self">
+          智泊Agent--Agent生态的认知
+        </a>
+      </h1>
+
+      
+      <a class="index-excerpt " href="/2026/09/29/%E6%99%BA%E6%B3%8AAgent--Agent%E7%94%9F%E6%80%81%E7%9A%84%E8%AE%A4%E7%9F%A5/" target="_self">
+        <div>
+          智泊Agent–Agent生态的认知&amp;emsp; 1.认知重构–Agent从诞生到出圈1.1 AI的改变 AI角色的改变 交互的深度改变 价值产出改变  &amp;emsp; 1.2 Agent需要具有的能力 规划能力 工具调用能力 记忆能力  &amp;emsp; 1.3 范式转移的本质 从被动响应到主动规划 从信息提供到任务执行 从单次交互到持续闭环 从辅助工具到执行主体  &amp;emsp; 1.4 范式转移的三
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2026-09-29 00:00" pubdate>
+              2026-09-29
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E6%99%BA%E6%B3%8AAI%E8%AF%BE%E7%A8%8B/" class="category-chain-item">智泊AI课程</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/%E6%99%BA%E6%B3%8AAI%E8%AF%BE%E7%A8%8B/Agent/" class="category-chain-item">Agent</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/2026/09/03/%E6%99%BA%E6%B3%8AAI--Langchain%EF%BC%88%E4%B8%89%EF%BC%89/" target="_self">
+          <img src="/img/zhiboai.png" srcset="/img/loading.gif" lazyload alt="智泊AI--Langchain（三）">
+        </a>
+      </div>
+    
+    <article class="col-12 col-md-8 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2026/09/03/%E6%99%BA%E6%B3%8AAI--Langchain%EF%BC%88%E4%B8%89%EF%BC%89/" target="_self">
+          智泊AI--Langchain（三）
+        </a>
+      </h1>
+
+      
+      <a class="index-excerpt " href="/2026/09/03/%E6%99%BA%E6%B3%8AAI--Langchain%EF%BC%88%E4%B8%89%EF%BC%89/" target="_self">
+        <div>
+          智泊AI–Langchain（三）&amp;emsp; 0.前言&amp;emsp;&amp;emsp;前面一章节通过代码了解了链的基本概念以及一些相关组件的使用，本章节主要是使用 LangChain 构建 RAG 和工具调用等操作。 &amp;emsp; 1.RAG的基本概念&amp;emsp;&amp;emsp;RAG 的基本概念前面已经有介绍，这里主要是将 LangChain 作为了中间层进行更好的调用与编排。   &amp;emsp; 2.文档
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2026-09-03 00:00" pubdate>
+              2026-09-03
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E6%99%BA%E6%B3%8AAI%E8%AF%BE%E7%A8%8B/" class="category-chain-item">智泊AI课程</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/%E6%99%BA%E6%B3%8AAI%E8%AF%BE%E7%A8%8B/Langchain/" class="category-chain-item">Langchain</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/2026/09/01/%E6%99%BA%E6%B3%8AAI--Langchain%EF%BC%88%E4%BA%8C%EF%BC%89/" target="_self">
+          <img src="/img/zhiboai.png" srcset="/img/loading.gif" lazyload alt="智泊AI--Langchain（二）">
+        </a>
+      </div>
+    
+    <article class="col-12 col-md-8 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2026/09/01/%E6%99%BA%E6%B3%8AAI--Langchain%EF%BC%88%E4%BA%8C%EF%BC%89/" target="_self">
+          智泊AI--Langchain（二）
+        </a>
+      </h1>
+
+      
+      <a class="index-excerpt " href="/2026/09/01/%E6%99%BA%E6%B3%8AAI--Langchain%EF%BC%88%E4%BA%8C%EF%BC%89/" target="_self">
+        <div>
+          智泊AI–Langchain（二）&amp;emsp; 0.前言&amp;emsp;&amp;emsp;本章节主要是针对链（Chain）相关知识点进行学习。 &amp;emsp; 1.什么是链&amp;emsp;&amp;emsp;本质上，LangChain 的名字源自于其框架的核心设计实录，用链（Chain）将大语言模型开发的各个组件链接起来，以构建复杂的应用程序。 &amp;emsp; 2.链的输出方式&amp;emsp;&amp;emsp;LCEL 被称为 La
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2026-09-01 00:00" pubdate>
+              2026-09-01
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E6%99%BA%E6%B3%8AAI%E8%AF%BE%E7%A8%8B/" class="category-chain-item">智泊AI课程</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/%E6%99%BA%E6%B3%8AAI%E8%AF%BE%E7%A8%8B/Langchain/" class="category-chain-item">Langchain</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/2026/08/27/%E6%99%BA%E6%B3%8AAI--Langchain%EF%BC%88%E4%B8%80%EF%BC%89/" target="_self">
+          <img src="/img/zhiboai.png" srcset="/img/loading.gif" lazyload alt="智泊AI--Langchain（一）">
+        </a>
+      </div>
+    
+    <article class="col-12 col-md-8 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2026/08/27/%E6%99%BA%E6%B3%8AAI--Langchain%EF%BC%88%E4%B8%80%EF%BC%89/" target="_self">
+          智泊AI--Langchain（一）
+        </a>
+      </h1>
+
+      
+      <a class="index-excerpt " href="/2026/08/27/%E6%99%BA%E6%B3%8AAI--Langchain%EF%BC%88%E4%B8%80%EF%BC%89/" target="_self">
+        <div>
+          智泊AI–Langchain（一）&amp;emsp; 0.安装环境变量&amp;emsp;&amp;emsp;这里使用的是 Langchain 1.0 版本，以下是涉及到的依赖版本，放到 requirements.txt 文件中，执行 pip install -r .\requirements.txt 即可安装。 12345678910111213141516171819202122232425262728293031
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2026-08-27 00:00" pubdate>
+              2026-08-27
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E6%99%BA%E6%B3%8AAI%E8%AF%BE%E7%A8%8B/" class="category-chain-item">智泊AI课程</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/%E6%99%BA%E6%B3%8AAI%E8%AF%BE%E7%A8%8B/Langchain/" class="category-chain-item">Langchain</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/2026/08/25/%E6%99%BA%E6%B3%8AAI--RAG%E5%AE%9E%E6%88%98%E8%AF%BE%E7%A8%8B/" target="_self">
+          <img src="/img/zhiboai.png" srcset="/img/loading.gif" lazyload alt="智泊AI--RAG实战课程">
+        </a>
+      </div>
+    
+    <article class="col-12 col-md-8 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2026/08/25/%E6%99%BA%E6%B3%8AAI--RAG%E5%AE%9E%E6%88%98%E8%AF%BE%E7%A8%8B/" target="_self">
+          智泊AI--RAG实战课程
+        </a>
+      </h1>
+
+      
+      <a class="index-excerpt " href="/2026/08/25/%E6%99%BA%E6%B3%8AAI--RAG%E5%AE%9E%E6%88%98%E8%AF%BE%E7%A8%8B/" target="_self">
+        <div>
+          智泊AI–RAG实战课程&amp;emsp; 1.检索技术概念&amp;emsp;&amp;emsp;关键词检索、全文检索，以及大模型中基于向量的相似度检索，是信息检索领域常用的三种技术：  关键词检索：在文本中查找特定关键字来进行检索； 全文检索：对文本所有词汇建立索引，能全面搜索文本内容。  &amp;emsp;&amp;emsp;稠密向量（基于词向量的相似度）vs 稀疏向量（全文检索）： &amp;emsp;&amp;emsp;全文检索基于关键词
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2026-08-25 00:00" pubdate>
+              2026-08-25
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E6%99%BA%E6%B3%8AAI%E8%AF%BE%E7%A8%8B/" class="category-chain-item">智泊AI课程</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/%E6%99%BA%E6%B3%8AAI%E8%AF%BE%E7%A8%8B/RAG/" class="category-chain-item">RAG</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/2026/08/23/%E6%99%BA%E6%B3%8AAI--Transformer%20%E7%AC%AC%E4%B8%80%E8%8A%82/" target="_self">
+          <img src="/img/zhiboai.png" srcset="/img/loading.gif" lazyload alt="智泊AI--Transformer 第一节">
+        </a>
+      </div>
+    
+    <article class="col-12 col-md-8 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2026/08/23/%E6%99%BA%E6%B3%8AAI--Transformer%20%E7%AC%AC%E4%B8%80%E8%8A%82/" target="_self">
+          智泊AI--Transformer 第一节
+        </a>
+      </h1>
+
+      
+      <a class="index-excerpt " href="/2026/08/23/%E6%99%BA%E6%B3%8AAI--Transformer%20%E7%AC%AC%E4%B8%80%E8%8A%82/" target="_self">
+        <div>
+          智泊AI–Transformer 第一节&amp;emsp; 1.transformer的整体架构  分词与词嵌入  位置编码  &amp;emsp;&amp;emsp;pos 是 token 在输入序列中的索引。i 由维度逆推得出——例如第 0 维对应 2i&#x3D;0，第 1 维对应 2i+1&#x3D;1，以此类推，且维度两两配对。   嵌入层  多头注意力机制&amp;emsp;&amp;emsp;注意力机制是深度学习中的一种技术，允许模型在处理
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2026-08-23 00:00" pubdate>
+              2026-08-23
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E6%99%BA%E6%B3%8AAI%E8%AF%BE%E7%A8%8B/" class="category-chain-item">智泊AI课程</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/%E6%99%BA%E6%B3%8AAI%E8%AF%BE%E7%A8%8B/Transformer/" class="category-chain-item">Transformer</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/2026/08/21/%E6%99%BA%E6%B3%8AAI--Naive%20RAG/" target="_self">
+          <img src="/img/zhiboai.png" srcset="/img/loading.gif" lazyload alt="智泊AI--Naive RAG">
+        </a>
+      </div>
+    
+    <article class="col-12 col-md-8 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2026/08/21/%E6%99%BA%E6%B3%8AAI--Naive%20RAG/" target="_self">
+          智泊AI--Naive RAG
+        </a>
+      </h1>
+
+      
+      <a class="index-excerpt " href="/2026/08/21/%E6%99%BA%E6%B3%8AAI--Naive%20RAG/" target="_self">
+        <div>
+          智泊AI–Naive RAG&amp;emsp; 1.Embeddings向量化&amp;emsp;&amp;emsp;向量检索：根据用户的输入，与向量数据库中存放的文本向量进行相似度匹配，返回最为相似的内容。 &amp;emsp;&amp;emsp;文本嵌入模型（向量模型）：将一个文本转换成一个「句向量」或「文本块向量」。   &amp;emsp;&amp;emsp;（向量检索的准确度，和向量模型本身存在很大的关系。） &amp;emsp;&amp;emsp;目前向
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2026-08-21 00:00" pubdate>
+              2026-08-21
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E6%99%BA%E6%B3%8AAI%E8%AF%BE%E7%A8%8B/" class="category-chain-item">智泊AI课程</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/%E6%99%BA%E6%B3%8AAI%E8%AF%BE%E7%A8%8B/RAG/" class="category-chain-item">RAG</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/2026/08/18/%E6%99%BA%E6%B3%8AAI--RAG%E6%9E%84%E5%BB%BA/" target="_self">
+          <img src="/img/zhiboai.png" srcset="/img/loading.gif" lazyload alt="智泊AI--RAG构建">
+        </a>
+      </div>
+    
+    <article class="col-12 col-md-8 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2026/08/18/%E6%99%BA%E6%B3%8AAI--RAG%E6%9E%84%E5%BB%BA/" target="_self">
+          智泊AI--RAG构建
+        </a>
+      </h1>
+
+      
+      <a class="index-excerpt " href="/2026/08/18/%E6%99%BA%E6%B3%8AAI--RAG%E6%9E%84%E5%BB%BA/" target="_self">
+        <div>
+          智泊AI–RAG构建1.为什么需要RAG&amp;emsp;&amp;emsp;由于大模型的训练机制导致，大模型是静态的知识库，导致了如下缺点：  知识的缺失：一般发生在垂直领域，大模型获取不到垂直领域的一些私有数据。 时效性：大模型对数据的训练是非实时的，对于一些时效性的数据或者场景无法命中实时的数据。  &amp;emsp; 2.什么是RAG&amp;emsp;&amp;emsp;所谓的 RAG 就是三个单词的组合——检索、增强、生
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2026-08-18 00:00" pubdate>
+              2026-08-18
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E6%99%BA%E6%B3%8AAI%E8%AF%BE%E7%A8%8B/" class="category-chain-item">智泊AI课程</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/%E6%99%BA%E6%B3%8AAI%E8%AF%BE%E7%A8%8B/RAG/" class="category-chain-item">RAG</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/2026/08/13/%E6%99%BA%E6%B3%8AAI--%E5%A4%A7%E6%A8%A1%E5%9E%8B%E5%BA%95%E5%B1%82%E9%80%BB%E8%BE%91/" target="_self">
+          <img src="/img/zhiboai.png" srcset="/img/loading.gif" lazyload alt="智泊AI--大模型底层逻辑">
+        </a>
+      </div>
+    
+    <article class="col-12 col-md-8 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2026/08/13/%E6%99%BA%E6%B3%8AAI--%E5%A4%A7%E6%A8%A1%E5%9E%8B%E5%BA%95%E5%B1%82%E9%80%BB%E8%BE%91/" target="_self">
+          智泊AI--大模型底层逻辑
+        </a>
+      </h1>
+
+      
+      <a class="index-excerpt " href="/2026/08/13/%E6%99%BA%E6%B3%8AAI--%E5%A4%A7%E6%A8%A1%E5%9E%8B%E5%BA%95%E5%B1%82%E9%80%BB%E8%BE%91/" target="_self">
+        <div>
+          智泊AI–大模型底层逻辑1.GPT的含义  &amp;emsp;&amp;emsp;深度学习：指基于深层神经网络模型的机器学习。 &amp;emsp;&amp;emsp;神经网络可视化：TensorFlow Playground &amp;emsp; 2.神经网络种类 卷积神经网络（CNN）：特别适合处理图像，广泛运用于计算机视觉领域。     &amp;emsp;&amp;emsp;这里以一张猫片为例： 123456789原图: 一整张猫的照片
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2026-08-13 00:00" pubdate>
+              2026-08-13
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E6%99%BA%E6%B3%8AAI%E8%AF%BE%E7%A8%8B/" class="category-chain-item">智泊AI课程</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/%E6%99%BA%E6%B3%8AAI%E8%AF%BE%E7%A8%8B/%E5%A4%A7%E6%A8%A1%E5%9E%8B%E5%9F%BA%E7%A1%80/" class="category-chain-item">大模型基础</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/2026/08/11/%E6%99%BA%E6%B3%8AAI--%E6%8F%90%E7%A4%BA%E8%AF%8D%E6%94%BB%E5%87%BB%E4%B8%8E%E9%98%B2%E8%8C%83/" target="_self">
+          <img src="/img/zhiboai.png" srcset="/img/loading.gif" lazyload alt="智泊AI--提示词攻击与防范">
+        </a>
+      </div>
+    
+    <article class="col-12 col-md-8 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2026/08/11/%E6%99%BA%E6%B3%8AAI--%E6%8F%90%E7%A4%BA%E8%AF%8D%E6%94%BB%E5%87%BB%E4%B8%8E%E9%98%B2%E8%8C%83/" target="_self">
+          智泊AI--提示词攻击与防范
+        </a>
+      </h1>
+
+      
+      <a class="index-excerpt " href="/2026/08/11/%E6%99%BA%E6%B3%8AAI--%E6%8F%90%E7%A4%BA%E8%AF%8D%E6%94%BB%E5%87%BB%E4%B8%8E%E9%98%B2%E8%8C%83/" target="_self">
+        <div>
+          智泊AI–提示词攻击与防范1.什么是提示词攻击&amp;emsp;&amp;emsp;提示词攻击是指通过精心设计的输入提示，诱导大模型生成攻击者预期的输出，从而操控模型的行为，或是让模型泄露敏感信息，例如：   &amp;emsp; 2.提示词注入&amp;emsp;&amp;emsp;提示词注入是一种劫持语言模型输出的技术，手法上通过非法的输入改变原有的输入方式，类似于 SQL 注入。常见三类如下： 2.1 提示词功能篡改&amp;emsp;
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2026-08-11 00:00" pubdate>
+              2026-08-11
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E6%99%BA%E6%B3%8AAI%E8%AF%BE%E7%A8%8B/" class="category-chain-item">智泊AI课程</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/%E6%99%BA%E6%B3%8AAI%E8%AF%BE%E7%A8%8B/%E5%A4%A7%E6%A8%A1%E5%9E%8B%E5%9F%BA%E7%A1%80/" class="category-chain-item">大模型基础</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+
+
+  <nav aria-label="navigation">
+    <span class="pagination" id="pagination">
+      <span class="page-number current">1</span><a class="page-number" href="/blog/page/2/#board">2</a><a class="page-number" href="/blog/page/3/#board">3</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/20/#board">20</a><a class="extend next" rel="next" href="/blog/page/2/#board"><i class="iconfont icon-arrowright"></i></a>
+    </span>
+  </nav>
+
+
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">Keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://github.com/" target="_blank" rel="nofollow noopener"><span>pointer</span></a> <i class="iconfont icon-love"></i> <a href="https://mp.weixin.qq.com/s/6ncLUtaiJ9j_sMjZT5z-2w" target="_blank" rel="nofollow noopener"><span>一个爱学习的空指针</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">Blog works best with JavaScript enabled</div>
+  </noscript>
+</body>
+</html>
